@@ -675,6 +675,17 @@ select.form-control optgroup{font-weight:800}
 .inclusion-detail-wrap[hidden]{display:none!important}
 .inclusion-adapt-note{margin-top:7px;padding:9px 10px;border-radius:11px;border:1px solid color-mix(in srgb,var(--accent3) 24%,var(--border));background:color-mix(in srgb,var(--accent3) 6%,var(--panel));font-size:9.5px;line-height:1.5;color:var(--muted)}
 .inclusion-adapt-note strong{color:var(--text)}
+.inclusion-picker{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin-top:4px}
+.inclusion-option{position:relative;display:flex;align-items:center;gap:9px;min-height:62px;padding:11px 12px;border:1px solid color-mix(in srgb,var(--accent2) 18%,var(--border));border-radius:14px;background:linear-gradient(145deg,color-mix(in srgb,var(--panel-solid) 58%,transparent),color-mix(in srgb,var(--panel2) 92%,transparent));cursor:pointer;transition:.17s ease;box-shadow:inset 0 1px 0 rgba(255,255,255,.08)}
+.inclusion-option:hover{transform:translateY(-1px);border-color:color-mix(in srgb,var(--accent2) 45%,var(--border));box-shadow:0 10px 25px color-mix(in srgb,var(--accent) 10%,transparent)}
+.inclusion-option input{width:17px;height:17px;flex:0 0 17px;accent-color:var(--accent2)}
+.inclusion-option span{display:grid;gap:2px;font-size:10.5px;font-weight:800;line-height:1.25;color:var(--text)}
+.inclusion-option span small{font-size:8.5px;font-weight:650;color:var(--muted);line-height:1.3}
+.inclusion-option:has(input:checked){border-color:color-mix(in srgb,var(--accent2) 62%,var(--border));background:linear-gradient(135deg,color-mix(in srgb,var(--accent3) 13%,var(--panel)),color-mix(in srgb,var(--accent2) 11%,var(--panel)));box-shadow:0 0 0 2px color-mix(in srgb,var(--accent2) 10%,transparent),0 12px 28px color-mix(in srgb,var(--accent) 12%,transparent)}
+.inclusion-section-label{display:flex;align-items:center;gap:8px;margin-bottom:3px}.inclusion-section-label .mini-badge{font-size:8px;font-weight:900;letter-spacing:.08em;color:#fff;background:linear-gradient(135deg,var(--accent3),var(--accent2));border-radius:999px;padding:4px 7px}
+@media(max-width:900px){.inclusion-picker{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){.inclusion-picker{grid-template-columns:1fr}.inclusion-option{min-height:54px}}
+
 .kko-note{margin-top:7px;padding:9px 10px;border-radius:11px;border:1px solid color-mix(in srgb,var(--success) 24%,var(--border));background:color-mix(in srgb,var(--success) 6%,var(--panel));font-size:9.5px;line-height:1.5;color:var(--muted)}
 .kko-note strong{color:var(--text)}
 
@@ -7133,8 +7144,14 @@ function renderGeneratorTemplate(){
   if(!isPackageMode()){
     const fields=[];const seen=new Set();ps.forEach(p=>extractPromptFields(p).forEach(f=>{if(!seen.has(f.token)){seen.add(f.token);fields.push(f);}}));
     if(!fields.length){els.genFields.innerHTML='<div class="no-fields span-2">Rangkaian ini tidak memiliki placeholder yang terdeteksi. Klik Generate untuk menampilkan prompt apa adanya.</div>'+referenceHintHtml();initSpecialGeneratorFields();updateGeneratorActionButton();return;}
-    const moduleNote=ps[0]?.categoryId==='modul-ajar-rpm'?'<div class="module-ai-note"><strong>💡 Tidak harus mengisi semuanya.</strong> Setiap kolom yang dibiarkan kosong akan ditentukan AI berdasarkan data yang sudah tersedia. Semakin banyak konteks yang diberikan, semakin spesifik hasil Modul Ajar/RPM.</div>':'';
-    els.genFields.innerHTML=moduleNote+fields.map((f,i)=>renderGeneratorField(f,`gf${i}`,false)).join('')+referenceHintHtml();initSpecialGeneratorFields();updateGeneratorActionButton();return;
+    const isModule=ps[0]?.categoryId==='modul-ajar-rpm';
+    const moduleNote=isModule?'<div class="module-ai-note"><strong>💡 Tidak harus mengisi semuanya.</strong> Setiap kolom yang dibiarkan kosong akan ditentukan AI berdasarkan data yang sudah tersedia. Semakin banyak konteks yang diberikan, semakin spesifik hasil Modul Ajar/RPM.</div>':'';
+    let renderFields=fields;
+    if(isModule){
+      const priority=['{{komposisi_siswa}}','{{deskripsi_siswa_inklusi}}'];
+      renderFields=[...priority.map(t=>fields.find(f=>f.token===t)).filter(Boolean),...fields.filter(f=>!priority.includes(f.token))];
+    }
+    els.genFields.innerHTML=moduleNote+renderFields.map((f,i)=>renderGeneratorField(f,`gf${i}`,false)).join('')+referenceHintHtml();initSpecialGeneratorFields();updateGeneratorActionButton();return;
   }
   renderPackageStageFields(ps);
 }
@@ -7173,12 +7190,21 @@ function initSpecialGeneratorFields(){
     const syncDimensions=()=>{dimensionHidden.value=dimensionChecks.filter(c=>c.checked).map(c=>c.value).join('; ');};
     dimensionChecks.forEach(c=>c.addEventListener('change',syncDimensions));syncDimensions();
   }
-  const inclusion=$('[data-module-inclusion-select]');
+  const inclusionHidden=$('[data-module-inclusion-hidden]');
+  const inclusionRadios=$$('[data-module-inclusion-radio]');
   const detailWrap=$('[data-module-inclusion-detail-wrap]');
   const detailInput=$('[data-module-inclusion-detail]');
-  if(inclusion&&detailWrap&&detailInput){
-    const syncInclusion=()=>{const needs=['Siswa inklusi','Campuran/heterogen'].includes(inclusion.value);detailWrap.hidden=!needs;detailInput.disabled=!needs;if(!needs)detailInput.value='';};
-    inclusion.addEventListener('change',syncInclusion);syncInclusion();
+  if(inclusionHidden&&inclusionRadios.length&&detailWrap&&detailInput){
+    const syncInclusion=()=>{
+      const checked=inclusionRadios.find(r=>r.checked);
+      const value=checked?.value||'';
+      inclusionHidden.value=value;
+      const needs=['Siswa inklusi','Campuran/heterogen'].includes(value);
+      detailWrap.hidden=!needs;
+      detailInput.disabled=!needs;
+      if(!needs)detailInput.value='';
+    };
+    inclusionRadios.forEach(r=>r.addEventListener('change',syncInclusion));syncInclusion();
   }
 }
 function renderGeneratorField(f,id,disabled){
@@ -7190,8 +7216,13 @@ function renderGeneratorField(f,id,disabled){
   if(cfg?.type==='select'){
     control=`<select class="form-control" id="${id}" data-token="${escapeHtml(f.token)}" ${disabled?'disabled':''}>${cfg.options.map(([v,l])=>`<option value="${escapeHtml(v)}">${escapeHtml(l)}</option>`).join('')}</select>`;
   }else if(cfg?.type==='inclusion'){
-    const opts=[['','— Biarkan AI menentukan —'],['Non inklusi','Non inklusi'],['Siswa inklusi','Siswa inklusi'],['Campuran/heterogen','Campuran / heterogen']];
-    control=`<select class="form-control" id="${id}" data-token="${escapeHtml(f.token)}" data-module-inclusion-select ${disabled?'disabled':''}>${opts.map(([v,l])=>`<option value="${escapeHtml(v)}">${escapeHtml(l)}</option>`).join('')}</select><div class="inclusion-adapt-note"><strong>Adaptasi otomatis:</strong> bila ada siswa inklusi, Prompt Modul Ajar meminta AI menurunkan kompleksitas TP, KKTP, dan level asesmen sesuai kebutuhan siswa. Untuk kelas campuran, target reguler tetap dipertahankan dan dibuat versi adaptif khusus siswa yang membutuhkan dukungan.</div>`;
+    const opts=[
+      ['', 'Ditentukan AI', 'Pilih otomatis dari konteks yang tersedia'],
+      ['Non inklusi','Non inklusi','Target TP, KKTP, dan asesmen sesuai fase/kelas'],
+      ['Siswa inklusi','Siswa inklusi','TP, KKTP, aktivitas, dan asesmen diadaptasi'],
+      ['Campuran/heterogen','Campuran / heterogen','Target reguler + versi adaptif untuk siswa yang membutuhkan']
+    ];
+    control=`<input type="hidden" id="${id}" data-token="${escapeHtml(f.token)}" data-module-inclusion-hidden value="" ${disabled?'disabled':''}/><div class="inclusion-section-label"><span class="mini-badge">WAJIB DIPERHATIKAN</span><strong>Pilih kondisi peserta didik</strong></div><div class="inclusion-picker">${opts.map(([v,l,s],idx)=>`<label class="inclusion-option"><input type="radio" name="module_inclusion_${id}" data-module-inclusion-radio value="${escapeHtml(v)}" ${idx===0?'checked':''} ${disabled?'disabled':''}/><span>${escapeHtml(l)}<small>${escapeHtml(s)}</small></span></label>`).join('')}</div><div class="inclusion-adapt-note"><strong>Adaptasi otomatis:</strong> jika memilih <em>Siswa inklusi</em>, AI menurunkan kompleksitas TP, KKTP, aktivitas, dan level asesmen secara proporsional. Jika memilih <em>Campuran/heterogen</em>, target reguler kelas tetap dipertahankan dan dibuat TP/KKTP/asesmen adaptif khusus siswa yang membutuhkan dukungan.</div>`;
   }else if(cfg?.type==='inclusionDetail'){
     const ph=cfg?.placeholder||'Jelaskan kondisi siswa...';
     control=`<textarea class="form-control" id="${id}" data-token="${escapeHtml(f.token)}" data-module-inclusion-detail placeholder="${escapeHtml(ph)}" disabled></textarea>`;
@@ -7219,7 +7250,8 @@ function renderGeneratorField(f,id,disabled){
   }
   const extra=f.token==='{{tujuan_pembelajaran}}'?`<div class="kko-note"><strong>Referensi KKO aktif:</strong> TP hanya boleh memakai KKO dari file “Daftar KKO Revisi 2”. Contoh: gunakan <em>menuliskan</em>, bukan “mencatat”.</div>`:'';
   const wrapAttrs=cfg?.type==='inclusionDetail'?' data-module-inclusion-detail-wrap hidden':'';
-  return `<div class="form-group ${long?'span-2':''}"${wrapAttrs}><label for="${id}">${escapeHtml(label)}</label>${control}${help}${extra}<span class="field-token">Jika kosong: AI akan menentukan • ${escapeHtml(f.token)}</span></div>`;
+  const fullWidth=long||cfg?.type==='inclusion'||cfg?.type==='inclusionDetail';
+  return `<div class="form-group ${fullWidth?'span-2':''}"${wrapAttrs}><label for="${id}">${escapeHtml(label)}</label>${control}${help}${extra}<span class="field-token">Jika kosong: AI akan menentukan • ${escapeHtml(f.token)}</span></div>`;
 }
 function referenceHintHtml(){
   if(!referenceHintTypes.has(state.generatorType))return '';
