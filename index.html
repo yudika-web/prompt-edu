@@ -668,6 +668,120 @@ select.form-control optgroup{font-weight:800}
 .dimension-option input{width:17px;height:17px;flex:0 0 17px;margin:0;accent-color:var(--accent)}
 .dimension-empty-note{font-size:9.5px;line-height:1.5;color:var(--muted);margin-top:3px}
 
+
+/* === Generator linear flow + always-visible copy controls === */
+.generator-layout{
+  display:block!important;
+}
+.gen-stack{
+  display:grid;
+  gap:16px;
+  max-width:none;
+}
+.generated-panel{
+  position:relative!important;
+  top:auto!important;
+  margin-top:18px;
+  scroll-margin-top:96px;
+}
+.generated-panel .gen-panel-head{
+  margin-bottom:10px;
+}
+.generated-result-toolbar{
+  position:sticky;
+  top:88px;
+  z-index:18;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
+  margin:0 -6px 14px;
+  padding:10px;
+  border:1px solid color-mix(in srgb,var(--accent2) 25%,var(--border));
+  border-radius:15px;
+  background:color-mix(in srgb,var(--panel-solid) 88%,transparent);
+  backdrop-filter:blur(20px) saturate(150%);
+  -webkit-backdrop-filter:blur(20px) saturate(150%);
+  box-shadow:0 12px 34px rgba(0,0,0,.10),inset 0 1px 0 rgba(255,255,255,.12);
+}
+.generated-result-toolbar-copy{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  min-width:0;
+}
+.generated-result-toolbar-copy strong{font-size:11px;display:block}
+.generated-result-toolbar-copy span{font-size:9px;color:var(--muted);display:block;margin-top:2px}
+.generated-actions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin:0!important;
+}
+.generated-actions #copyGeneratedBtn{
+  min-width:170px;
+}
+.generated-sections{
+  display:grid;
+  gap:16px;
+  overflow:visible;
+  padding-right:0;
+}
+.generated-section{
+  position:relative;
+  scroll-margin-top:160px;
+}
+.generated-section-head{
+  position:sticky;
+  top:154px;
+  z-index:8;
+  backdrop-filter:blur(18px) saturate(145%);
+  -webkit-backdrop-filter:blur(18px) saturate(145%);
+  background:color-mix(in srgb,var(--panel-solid) 91%,transparent)!important;
+}
+.generated-section-copy{
+  white-space:nowrap;
+  min-height:34px;
+  padding:7px 10px;
+  background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 11%,var(--panel)),color-mix(in srgb,var(--accent2) 9%,var(--panel)));
+  border-color:color-mix(in srgb,var(--accent2) 26%,var(--border));
+}
+.generator-result-hint{
+  margin:0 0 14px;
+  padding:10px 12px;
+  border-radius:13px;
+  background:color-mix(in srgb,var(--accent2) 7%,var(--panel));
+  border:1px solid color-mix(in srgb,var(--accent2) 20%,var(--border));
+  color:var(--muted);
+  font-size:10px;
+  line-height:1.55;
+}
+.generator-result-hint strong{color:var(--text)}
+@media(max-width:900px){
+  .generated-panel{scroll-margin-top:136px}
+  .generated-result-toolbar{top:124px}
+  .generated-section-head{top:192px}
+}
+@media(max-width:650px){
+  .generated-panel{margin-top:12px;scroll-margin-top:140px}
+  .generated-result-toolbar{
+    top:128px;
+    align-items:stretch;
+    padding:9px;
+  }
+  .generated-result-toolbar-copy{width:100%}
+  .generated-actions{display:grid!important;grid-template-columns:1fr 1fr;gap:7px;width:100%}
+  .generated-actions #copyGeneratedBtn{grid-column:1/-1;min-width:0}
+  .generated-actions button{width:100%}
+  .generated-section-head{top:248px;align-items:flex-start}
+  .generated-section-title strong{font-size:10px}
+  .generated-section-copy{font-size:9px;padding:7px 9px}
+}
+@media(max-width:420px){
+  .generated-section-head{top:258px}
+}
+
 </style>
 </head>
 <body class="auth-locked">
@@ -736,7 +850,7 @@ select.form-control optgroup{font-weight:800}
           <div class="template-info" id="generatorTemplateInfo"></div></section>
         <section class="gen-panel"><div class="gen-panel-head"><div class="step-no">3</div><h3>Isi data yang dibutuhkan</h3></div><div class="dynamic-fields" id="generatorFields"></div><div style="display:flex;gap:8px;margin-top:16px;flex-wrap:wrap"><button class="btn-primary asset-label-button" id="generatePromptBtn"><span class="control-asset asset-icon asset-right" aria-hidden="true"></span>Generate Prompt Siap Tempel</button><button class="btn-secondary asset-label-button" id="openTemplateBankBtn"><span class="control-asset asset-icon asset-bank" aria-hidden="true"></span>Lihat Template di Bank</button></div></section>
       </div>
-      <section class="gen-panel generated-panel"><div class="gen-panel-head"><div class="step-no">4</div><h3>Prompt siap tempel</h3></div><div id="generatorEmpty" class="gen-empty"><div><strong>Rangkaian prompt akan muncul di sini.</strong>Untuk MPI, Game, dan Lab Maya pilih Versi Biasa/PRO; hasil akan menampilkan semua prompt secara terpisah dari Prompt 0 sampai Prompt Akhir.</div></div><div id="generatorResult" hidden><textarea id="generatedPromptOutput" hidden></textarea><div class="generated-sections" id="generatedPromptSections"></div><div class="generated-actions"><button class="btn-primary" id="copyGeneratedBtn">📋 Salin Semua Prompt</button><button class="btn-secondary" id="downloadGeneratedBtn">⬇️ Unduh Semua TXT</button><button class="btn-secondary" id="clearGeneratedBtn">Bersihkan</button></div><p class="generated-status" id="generatedStatus"></p></div></section>
+      <section class="gen-panel generated-panel" id="generatorOutputPanel"><div class="gen-panel-head"><div class="step-no">4</div><h3>Prompt siap tempel</h3></div><div class="generator-result-hint"><strong>Hasil ada di sini.</strong> Setelah generate, halaman otomatis menuju Panel 4. Gunakan <strong>Salin Semua Prompt</strong> untuk menyalin seluruh rangkaian, atau <strong>Salin Prompt Ini</strong> pada tiap prompt.</div><div id="generatorEmpty" class="gen-empty"><div><strong>Rangkaian prompt akan muncul di sini.</strong>Untuk MPI, Game, dan Lab Maya pilih Versi Biasa/PRO; hasil akan menampilkan semua prompt secara terpisah dari Prompt 0 sampai Prompt Akhir.</div></div><div id="generatorResult" hidden><textarea id="generatedPromptOutput" hidden></textarea><div class="generated-result-toolbar"><div class="generated-result-toolbar-copy"><div><strong>Aksi Prompt</strong><span>Tombol ini tetap terlihat saat membaca hasil.</span></div></div><div class="generated-actions"><button class="btn-primary" id="copyGeneratedBtn">📋 Salin Semua Prompt</button><button class="btn-secondary" id="downloadGeneratedBtn">⬇️ Unduh TXT</button><button class="btn-secondary" id="clearGeneratedBtn">Bersihkan</button></div></div><div class="generated-sections" id="generatedPromptSections"></div><p class="generated-status" id="generatedStatus"></p></div></section>
     </div>
   </section>
 
@@ -7065,15 +7179,16 @@ function substitutionMap(){const vals=new Map();els.genFields.querySelectorAll('
 function applySubstitutions(text,vals){let out=text;vals.forEach((v,k)=>{out=out.split(k).join(v);});return out;}
 function finalizeGeneratedPrompt(prompt,text){if(prompt?.categoryId!=='modul-ajar-rpm')return text;let out=text;Object.entries(moduleGeneratorFieldConfig).forEach(([token,cfg])=>{if(out.includes(token))out=out.split(token).join(`[Ditentukan AI: ${cfg.auto}]`);});return out;}
 function renderGeneratedSections(items){
-  elsGen.sections.innerHTML=items.map((it,i)=>`<section class="generated-section"><div class="generated-section-head"><div class="generated-section-title"><strong>${escapeHtml(it.heading)}</strong><span>${escapeHtml(it.sourceTitle)}</span></div><button class="generated-section-copy" data-copy-section="${i}">📋 Salin Bagian</button></div><textarea class="form-control" data-generated-section="${i}" spellcheck="false">${escapeHtml(it.text)}</textarea></section>`).join('');
+  elsGen.sections.innerHTML=items.map((it,i)=>`<section class="generated-section"><div class="generated-section-head"><div class="generated-section-title"><strong>${escapeHtml(it.heading)}</strong><span>${escapeHtml(it.sourceTitle)}</span></div><button class="generated-section-copy" data-copy-section="${i}">📋 Salin Prompt Ini</button></div><textarea class="form-control" data-generated-section="${i}" spellcheck="false">${escapeHtml(it.text)}</textarea></section>`).join('');
   elsGen.sections.querySelectorAll('[data-copy-section]').forEach(b=>b.addEventListener('click',()=>{const ta=elsGen.sections.querySelector(`[data-generated-section="${b.dataset.copySection}"]`);if(ta)copyText(ta.value);}));
 }
+function scrollToGeneratorOutput(){const panel=$('#generatorOutputPanel');if(!panel)return;requestAnimationFrame(()=>setTimeout(()=>panel.scrollIntoView({behavior:'smooth',block:'start'}),60));}
 function generateFromForm(){
   const all=activeGeneratorPrompts();if(!all.length){toast('Pilih paket/template terlebih dahulu');return;}const vals=substitutionMap();let filled=vals.size;
   const ps=(isPackageMode()&&all.length>1&&!state.generatorPrompt0Confirmed)?[all[0]]:all;
   const items=ps.map((p,i)=>{const isFull=ps.length===all.length;const originalIndex=all.indexOf(p);const last=originalIndex===all.length-1;return{sourceTitle:p.title,heading:isPackageMode()?(last?`BAGIAN AKHIR — ${p.title}`:`BAGIAN ${originalIndex+1} — ${p.title}`):p.title,text:finalizeGeneratedPrompt(p,applySubstitutions(p.text,vals))};});
   renderGeneratedSections(items);
-  const combined=items.map(it=>`${'='.repeat(72)}\n${it.heading}\n${'='.repeat(72)}\n\n${it.text}`).join('\n\n\n');els.genOutput.value=combined;els.genEmpty.hidden=true;els.genResult.hidden=false;
+  const combined=items.map(it=>`${'='.repeat(72)}\n${it.heading}\n${'='.repeat(72)}\n\n${it.text}`).join('\n\n\n');els.genOutput.value=combined;els.genEmpty.hidden=true;els.genResult.hidden=false;scrollToGeneratorOutput();
   const unresolved=ps.reduce((n,p)=>n+extractPromptFields(p,applySubstitutions(p.text,vals)).length,0);
   if(isPackageMode()&&all.length>1&&!state.generatorPrompt0Confirmed){els.genStatus.textContent=`Prompt 0 siap ditempel • ${filled} field diisi${unresolved?` • ${unresolved} placeholder masih belum diisi`:''}. Jalankan Prompt 0 di AI, lalu centang konfirmasi pada Panel 3 untuk membuka Prompt 1.`;toast('Prompt 0 siap digunakan');return;}
   els.genStatus.textContent=`${items.length} bagian prompt • ${filled} field diisi${unresolved?` • ${unresolved} placeholder masih belum diisi`:' • semua placeholder terdeteksi sudah terisi'}.${isPackageMode()&&state.generatorVersion==='pro'?' Versi PRO: disarankan dijalankan pada AI paket Pro/berfitur lengkap.':''}`;toast(items.length>1?'Rangkaian prompt siap digunakan':'Prompt siap digunakan');
