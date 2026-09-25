@@ -669,6 +669,15 @@ select.form-control optgroup{font-weight:800}
 .dimension-empty-note{font-size:9.5px;line-height:1.5;color:var(--muted);margin-top:3px}
 
 
+
+/* === Modul Ajar inclusion profile === */
+.inclusion-detail-wrap{margin-top:9px;padding-top:9px;border-top:1px dashed color-mix(in srgb,var(--accent2) 25%,var(--border))}
+.inclusion-detail-wrap[hidden]{display:none!important}
+.inclusion-adapt-note{margin-top:7px;padding:9px 10px;border-radius:11px;border:1px solid color-mix(in srgb,var(--accent3) 24%,var(--border));background:color-mix(in srgb,var(--accent3) 6%,var(--panel));font-size:9.5px;line-height:1.5;color:var(--muted)}
+.inclusion-adapt-note strong{color:var(--text)}
+.kko-note{margin-top:7px;padding:9px 10px;border-radius:11px;border:1px solid color-mix(in srgb,var(--success) 24%,var(--border));background:color-mix(in srgb,var(--success) 6%,var(--panel));font-size:9.5px;line-height:1.5;color:var(--muted)}
+.kko-note strong{color:var(--text)}
+
 /* === Generator linear flow + always-visible copy controls === */
 .generator-layout{
   display:block!important;
@@ -6591,6 +6600,8 @@ BAGIAN 1 — KONTEKS & VARIABEL INPUT (isi/ganti sesuai kebutuhan)
 - Jumlah Pertemuan & Alokasi   : {{jumlah_pertemuan_alokasi}}
 - Model/Praktik Pedagogis      : {{model_praktik_pedagogis}}
 - Konteks Lokal/Sekolah        : {{konteks_lokal_sekolah}}
+- Komposisi/Kondisi Siswa      : {{komposisi_siswa}}
+- Deskripsi Siswa Inklusi/Heterogen : {{deskripsi_siswa_inklusi}}
 - Karakteristik/Kesiapan Murid : {{karakteristik_kesiapan_murid}}
 - Pemanfaatan Digital          : {{pemanfaatan_digital}}
 - Kemitraan Pembelajaran       : {{kemitraan_pembelajaran}}
@@ -6599,8 +6610,13 @@ BAGIAN 1 — KONTEKS & VARIABEL INPUT (isi/ganti sesuai kebutuhan)
 ATURAN DEFAULT INPUT:
 - Jika suatu input dibiarkan kosong, belum diketahui, atau masih bertanda "ditentukan AI", tentukan usulan yang paling masuk akal berdasarkan jenjang, fase/kelas, mata pelajaran, topik, CP, konteks sekolah, dan prinsip Pembelajaran Mendalam. Sebutkan asumsi yang Anda buat secara singkat di awal keluaran.
 - Untuk Nama Sekolah yang kosong, jangan mengarang nama sekolah nyata; gunakan identitas generik yang mudah diganti guru.
-- Untuk Tujuan Pembelajaran yang kosong, susun otomatis 2–4 TP yang terukur, selaras dengan CP dan topik.
-- Untuk Dimensi Profil Lulusan: jika guru memilih satu atau beberapa dimensi, gunakan pilihan tersebut sebagai prioritas dan pastikan bukti pencapaiannya nyata dalam aktivitas/asesmen. Jika tidak ada dimensi yang dipilih, AI WAJIB memilihkan 2–4 dimensi yang paling relevan berdasarkan TP, materi, aktivitas, dan karakteristik murid.
+- Untuk Tujuan Pembelajaran yang kosong, susun otomatis 2–4 TP yang terukur, selaras dengan CP dan topik, serta WAJIB memakai Kata Kerja Operasional (KKO) yang terdapat pada REFERENSI KKO di bawah. Jika TP dari guru memakai kata kerja yang tidak ada dalam referensi, audit dan ganti dengan KKO terdekat yang tersedia. Contoh: "mencatat" tidak digunakan; gunakan "menuliskan" bila maknanya sesuai.
+- Untuk Komposisi/Kondisi Siswa:
+  a. "Non inklusi" → gunakan TP, KKTP, aktivitas, dan level asesmen sesuai fase/kelas.
+  b. "Siswa inklusi" → berdasarkan deskripsi kebutuhan siswa, turunkan kompleksitas TP dan KKTP secara proporsional serta turunkan level asesmen ke tingkat yang lebih aksesibel; pertahankan esensi konsep, gunakan scaffolding, bentuk respons alternatif, dan indikator keberhasilan yang dapat diamati.
+  c. "Campuran/heterogen" → pertahankan TP/KKTP umum untuk kelas, lalu buat TP adaptif, KKTP adaptif, serta asesmen adaptif khusus siswa yang membutuhkan dukungan berdasarkan deskripsi kondisi siswa. Jangan menurunkan target seluruh kelas hanya karena sebagian siswa membutuhkan adaptasi.
+  d. Jika "Siswa inklusi" atau "Campuran/heterogen" dipilih tetapi deskripsi kondisi siswa kosong, buat asumsi konservatif dan tandai sebagai USULAN YANG WAJIB DIVERIFIKASI GURU sebelum digunakan.
+- Untuk Dimensi Profil Lulusan: jika guru memilih satu atau beberapa dimensi, gunakan HANYA dimensi yang dipilih tersebut dan pastikan bukti pencapaiannya nyata dalam aktivitas/asesmen. DILARANG menambahkan dimensi lain di luar pilihan guru. Jika tidak ada dimensi yang dipilih, AI WAJIB memilihkan 2–4 dimensi yang paling relevan berdasarkan TP, materi, aktivitas, dan karakteristik murid.
 - Untuk Model/Praktik Pedagogis yang kosong, rekomendasikan model yang paling sesuai dengan karakter topik dan aktivitas belajar.
 - Deskripsi Tambahan bersifat arahan prioritas guru. Jika diisi (misalnya wajib ada praktikum, proyek, demonstrasi, studi lapangan, presentasi produk, pemanfaatan lingkungan sekitar, atau aktivitas tertentu), integrasikan arahan tersebut secara nyata ke langkah pembelajaran, LKPD, asesmen, dan rubrik yang relevan.
 
@@ -6609,15 +6625,53 @@ Panduan pengisian variabel:
 - Fase & Kelas: contoh Fase D / Kelas VIII; lihat panduan pemetaan pada Bagian 3.
 - Capaian Pembelajaran (CP): tempel CP resmi dari mapel terkait, atau biarkan kosong agar AI menyusun/merujuk CP yang paling relevan untuk konteks modul.
 - Tujuan Pembelajaran (TP): isi jika guru sudah memiliki TP; jika kosong AI menyusun TP terukur berdasarkan CP, topik, jenjang, dan alokasi waktu.
-- Dimensi Profil Lulusan: guru boleh memilih satu atau beberapa dari 8 dimensi. Jika kosong/tidak dipilih, AI memilih 2–4 dimensi yang paling relevan dan menjelaskan bukti pencapaiannya.
+- Dimensi Profil Lulusan: guru boleh memilih satu atau beberapa dari 8 dimensi. Jika ada pilihan guru, keluaran hanya boleh memuat dimensi yang dipilih itu saja. Jika kosong/tidak dipilih, AI memilih 2–4 dimensi yang paling relevan dan menjelaskan bukti pencapaiannya.
 - Semester & Tahun Ajaran: contoh Ganjil, 2025/2026; jika kosong AI memberi usulan yang mudah diedit.
 - Jumlah Pertemuan & Alokasi: contoh 3 pertemuan x 2 JP @40 menit; jika kosong AI menentukan alokasi yang wajar sesuai keluasan materi.
 - Model/Praktik Pedagogis: pilih satu/lebih sesuai kebutuhan, misalnya Problem Based Learning (PBL), Project Based Learning (PjBL), Direct Instruction, Discovery Learning, Inquiry Learning, Contextual Teaching and Learning/Pembelajaran Kontekstual, Cooperative Learning/Pembelajaran Kooperatif, Diferensiasi, atau kombinasi lintas pertemuan. Guru boleh mendeskripsikan model/strategi sendiri; jika kosong AI merekomendasikan model paling sesuai dengan topik dan tujuan.
 - Konteks Lokal/Sekolah: lingkungan, budaya lokal, sarana-prasarana yang tersedia; jika kosong AI menggunakan konteks umum yang relevan dan mudah disesuaikan.
-- Karakteristik/Kesiapan Murid: opsional; hasil asesmen awal sebelumnya, gaya belajar, kebutuhan diferensiasi, murid berkebutuhan khusus jika ada.
+- Komposisi/Kondisi Siswa: pilih "Non inklusi", "Siswa inklusi", atau "Campuran/heterogen".
+- Deskripsi Siswa Inklusi/Heterogen: isi jika memilih "Siswa inklusi" atau "Campuran/heterogen", misalnya hambatan belajar, kebutuhan komunikasi, tingkat kemandirian, dukungan yang biasa dipakai, kemampuan membaca/numerasi, atau penyesuaian asesmen yang diperlukan.
+- Karakteristik/Kesiapan Murid: opsional; hasil asesmen awal sebelumnya, gaya belajar, kebutuhan diferensiasi, kesiapan akademik, dan informasi lain yang relevan.
 - Pemanfaatan Digital: opsional; alat/platform yang tersedia, mis. IFP, laptop, HP, Google Workspace, AI generatif, atau "tidak ada, luring penuh".
 - Kemitraan Pembelajaran: opsional; narasumber tamu, orang tua, dunia usaha, dll.; jika kosong AI menentukan apakah kemitraan memang perlu.
 - Deskripsi Tambahan: arahan khusus guru, misalnya "wajib ada praktikum pengamatan mikroskop", "buat proyek poster kampanye", "gunakan lingkungan sekolah sebagai sumber belajar", "ada presentasi kelompok", atau kebutuhan lain. Jika kosong AI melanjutkan tanpa persyaratan tambahan khusus.
+
+REFERENSI 8 DIMENSI PROFIL LULUSAN (DIGUNAKAN HANYA JIKA GURU TIDAK MEMILIH DIMENSI):
+1) Keimanan dan Ketakwaan terhadap Tuhan YME
+2) Kewargaan
+3) Penalaran Kritis
+4) Kreativitas
+5) Kolaborasi
+6) Kemandirian
+7) Kesehatan
+8) Komunikasi
+Jika guru sudah memilih satu atau beberapa dimensi pada input, ABAIKAN dan JANGAN tampilkan daftar referensi 8 dimensi ini pada keluaran.
+
+=====================================================================
+REFERENSI KKO WAJIB — BERDASARKAN FILE "DAFTAR KKO REVISI 2"
+=====================================================================
+Gunakan HANYA kata kerja operasional yang tercantum pada daftar berikut saat merumuskan Tujuan Pembelajaran (TP), indikator, dan kata kerja penilaian yang bersifat operasional. Jangan memakai sinonim di luar daftar walaupun lazim digunakan. Jika kata kerja input guru tidak ada dalam daftar, ganti dengan KKO terdekat yang tersedia dan pertahankan maksud kompetensinya.
+
+RANAH KOGNITIF:
+- C1 Mengingat: Mengenali; Mengingat kembali; Membaca; Menyebutkan; Melafalkan/melafazkan; Menuliskan; Menghafal.
+- C2 Memahami: Menjelaskan; Mengartikan; Menginterpretasikan; Menceritakan; Menampilkan; Memberi contoh; Merangkum; Menyimpulkan; Membandingkan; Mengklasifikasikan; Menunjukkan; Menguraikan; Membedakan; Mengidentifikasikan.
+- C3 Menerapkan: Melaksanakan; Mengimplementasikan; Menggunakan; Mengonsepkan; Menentukan; Memproseskan.
+- C4 Menganalisis: Mendiferensiasikan; Mengorganisasikan; Mengatribusikan; Mendiagnosis; Memerinci; Menelaah; Mendeteksi; Mengaitkan; Memecahkan; Menguraikan.
+- C5 Mengevaluasi: Mengcek; Mengkritik; Membuktikan; Mempertahankan; Memvalidasi; Mendukung; Memproyeksikan.
+- C6 Menciptakan: Membangun; Merencanakan; Memproduksi; Mengkombinasikan; Merangcang; Merekonstruksi; Membuat; Menciptakan; Mengabstraksi.
+
+RANAH AFEKTIF — gunakan bila TP/indikator memang mengukur sikap/nilai:
+Mengikuti; Menganut; Mematuhi; Meminati; Mengompromikan; Menyenangi; Menyambut; Mendukung; Menyetujui; Menampilkan; Mengasumsikan; Meyakini; Meyakinkan; Memperjelas; Memprakarsai; Mengimani; Mengubah; Menata; Mengklasifikasikan; Mengombinasikan; Mempertahankan; Membangun; Membiasakan; Mengubah perilaku; Berakhlak mulia; Mempengaruhi; Mengkualifikasi; Melayani; Melaporkan; Memilih; Mengatakan; Memilah; Menolak; Menekankan; Menyumbang; Membentuk pendapat; Memadukan; Mengelola; Menegosiasi; Merembuk; Membuktikan; Memecahkan.
+
+RANAH PSIKOMOTOR — gunakan bila TP/indikator mengukur keterampilan/praktik:
+Menyalin; Mengikuti; Mereplikasi; Mengulangi; Mematuhi; Kembali membuat; Membangun; Melakukan; Melaksanakan; Menerapkan; Menunjukkan; Melengkapi; Menyempurnakan; Mengkalibrasi; Mengendalikan; Mengatasi; Menggabungkan; Koordinat; Mengintegrasikan; Beradaptasi; Mengembangkan; Merumuskan; Memodifikasi; Master; Mendesain; Menentukan; Mengelola; Menciptakan.
+
+ATURAN AUDIT KKO:
+1. Setiap TP wajib memiliki minimal satu KKO dari daftar di atas.
+2. Jangan gunakan kata kerja yang tidak ada dalam referensi, misalnya "mencatat"; bila maksudnya menulis hasil, gunakan "menuliskan".
+3. Untuk siswa inklusi/adaptif, pilih KKO pada level yang lebih aksesibel sesuai kebutuhan. Contoh: TP reguler C4 "menelaah/mengaitkan" dapat diadaptasi menjadi C2–C3 seperti "menjelaskan/menunjukkan/menggunakan/menentukan" jika sesuai profil siswa.
+4. Untuk kelas campuran, tampilkan pasangan TP reguler dan TP adaptif bila diperlukan agar perbedaan target dapat ditelusuri.
 
 =====================================================================
 BAGIAN 2 — STRUKTUR MODUL AJAR YANG WAJIB DIIKUTI (KERANGKA "8334")
@@ -6638,27 +6692,19 @@ keluaran, jangan dihilangkan):
 A. IDENTITAS / IDENTIFIKASI [WAJIB]
    - Sekolah, mapel, fase/kelas, semester, alokasi waktu, jumlah pertemuan
    - Capaian Pembelajaran (CP) [WAJIB]
-   - Dimensi Profil Lulusan yang relevan [WAJIB] — gunakan pilihan guru dari {{dimensi_profil_lulusan}} jika tersedia. Jika guru tidak memilih dimensi apa pun, pilihkan 2-4 dimensi yang paling relevan. Dalam kedua kondisi, sertakan elemen & bukti nyata pencapaiannya dalam pembelajaran ini. Pilihan dimensi berasal dari daftar berikut:
-     1) Keimanan dan Ketakwaan terhadap Tuhan YME
-     2) Kewargaan
-     3) Penalaran Kritis
-     4) Kreativitas
-     5) Kolaborasi
-     6) Kemandirian
-     7) Kesehatan
-     8) Komunikasi
+   - Dimensi Profil Lulusan yang relevan [WAJIB] — gunakan {{dimensi_profil_lulusan}}. Jika input berisi pilihan guru, tampilkan dan gunakan HANYA dimensi yang dipilih tersebut; DILARANG menambah dimensi lain dan DILARANG melampirkan daftar 8 dimensi secara lengkap. Untuk setiap dimensi terpilih, sertakan elemen serta bukti nyata pencapaiannya dalam pembelajaran. Jika guru tidak memilih dimensi apa pun, pilihkan 2–4 dimensi paling relevan dari REFERENSI 8 DIMENSI PROFIL LULUSAN yang tercantum pada prompt ini.
    - Identifikasi kesiapan/karakteristik murid [OPSIONAL, tapi cantumkan jika data tersedia]
+   - Komposisi/kondisi siswa [WAJIB] — nyatakan Non inklusi / Siswa inklusi / Campuran-heterogen. Jika ada siswa inklusi, ringkas kebutuhan adaptasi berdasarkan {{deskripsi_siswa_inklusi}} tanpa menambahkan diagnosis yang tidak diberikan guru.
 
 B. DESAIN PEMBELAJARAN [WAJIB]
-   1. Tujuan Pembelajaran (TP) — gunakan {{tujuan_pembelajaran}} jika diberikan guru; jika kosong, susun otomatis rumusan kompetensi + konten dengan kata kerja
-      operasional yang terukur dan selaras dengan CP [WAJIB]
+   1. Tujuan Pembelajaran (TP) — gunakan {{tujuan_pembelajaran}} jika diberikan guru; jika kosong, susun otomatis rumusan kompetensi + konten dengan KKO yang HANYA berasal dari REFERENSI KKO WAJIB di atas dan selaras dengan CP [WAJIB]. Audit TP dari guru dan ganti kata kerja yang tidak ada pada referensi. Jika {{komposisi_siswa}} = Siswa inklusi, buat TP adaptif dengan kompleksitas/level KKO yang diturunkan secara proporsional berdasarkan {{deskripsi_siswa_inklusi}}. Jika Campuran/heterogen, sajikan TP reguler + TP adaptif khusus siswa yang membutuhkan dukungan.
    2. Kriteria Ketercapaian Tujuan Pembelajaran (KKTP) [WAJIB] — pilih salah satu atau
       kombinasi pendekatan berikut, jelaskan yang dipakai:
         a. Deskripsi kriteria kualitatif, atau
         b. Rubrik (skala 1-4 dengan deskriptor tiap level), atau
         c. Interval nilai/persentase ketercapaian
       Boleh memakai skema perkembangan taksonomi SOLO (Pre-structural → Uni-structural
-      → Multi-structural → Relational → Extended Abstract) bila cocok dengan topik.
+      → Multi-structural → Relational → Extended Abstract) bila cocok dengan topik. Jika ada siswa inklusi, turunkan kriteria/kompleksitas KKTP secara proporsional sesuai TP adaptif dan kebutuhan siswa. Untuk kelas campuran, pisahkan KKTP reguler dan KKTP adaptif agar target tidak tercampur.
    3. Ringkasan Materi Esensial [WAJIB] — rangkuman padat konsep inti yang perlu dikuasai
       guru & murid, ditulis dalam bahasa yang sesuai jenjang
    4. Pemahaman Bermakna & Pertanyaan Pemantik [WAJIB]
@@ -6684,6 +6730,8 @@ C. LANGKAH-LANGKAH KEGIATAN PEMBELAJARAN [WAJIB]
    - Sesuaikan kompleksitas aktivitas dengan jenjang (lihat Bagian 3).
 
 D. ASESMEN PEMBELAJARAN
+   ATURAN KETERKAITAN ASESMEN DENGAN TP [WAJIB]: seluruh instrumen asesmen, khususnya setiap butir soal, WAJIB disusun berdasarkan Tujuan Pembelajaran (TP) yang telah ditetapkan. Setiap butir harus dapat ditelusuri ke minimal satu TP dan indikator soal yang relevan. DILARANG membuat soal yang tidak mengukur TP. Pastikan keseluruhan perangkat soal secara kolektif mencakup TP yang memang perlu diasesmen. Untuk kelas campuran/inklusi, soal adaptif WAJIB mengacu pada TP adaptif dan KKTP adaptif, bukan sekadar dibuat lebih mudah tanpa target kompetensi yang jelas.
+   ATURAN ADAPTASI INKLUSI [WAJIB jika ada siswa inklusi]: level asesmen harus diturunkan secara proporsional terhadap TP/KKTP adaptif. Sederhanakan kompleksitas stimulus, jumlah langkah, tuntutan bahasa, dan level kognitif; gunakan lebih banyak LOTS/MOTS atau HOTS yang sangat terscaffold sesuai kemampuan aktual siswa. Izinkan bentuk respons alternatif (lisan, pilihan visual, praktik terstruktur, jawaban singkat) bila relevan. Untuk kelas campuran, sediakan versi asesmen reguler dan versi adaptif.
    1. Asesmen Formatif Awal / Diagnostik [OPSIONAL tapi sangat dianjurkan] — untuk memetakan
       kesiapan belajar (kognitif) dan kondisi psikososial (non-kognitif) murid sebelum unit
       dimulai; sertakan instrumen singkat + tindak lanjutnya.
@@ -6749,12 +6797,20 @@ Jika [Fase & Kelas] pada Bagian 1 sudah diisi, ikuti panduan fase tersebut secar
 =====================================================================
 BAGIAN 4 — SPESIFIKASI DETAIL LEMBAR ASESMEN & RUBRIK
 =====================================================================
+ATURAN UTAMA KETERKAITAN SOAL DENGAN TP [WAJIB]:
+- Mulai penyusunan soal dengan membaca dan memetakan TP terlebih dahulu.
+- Setiap soal WAJIB mengukur minimal satu TP; jangan membuat soal hanya karena sesuai materi tetapi tidak terkait TP.
+- Untuk setiap butir, tentukan TP yang diukur → indikator soal → level kognitif → bentuk soal → kunci/pedoman skor.
+- Distribusikan soal agar seluruh TP yang perlu dinilai mendapat cakupan yang memadai dan tidak ada TP penting yang terlewat.
+- Jika terdapat TP reguler dan TP adaptif, buat pemetaan terpisah: soal reguler mengacu TP reguler, soal adaptif mengacu TP adaptif.
+- Setelah soal selesai, lakukan audit akhir: cek kembali setiap nomor soal terhadap TP dan hapus/revisi butir yang tidak memiliki hubungan langsung dengan TP.
+
 1. VARIASI BENTUK SOAL — gunakan kombinasi sesuai jenjang & jenis materi:
    Pilihan Ganda • Pilihan Ganda Kompleks (jawaban lebih dari satu) • Benar-Salah/
    Ya-Tidak • Menjodohkan • Isian Singkat • Uraian/Esai • (untuk proyek/praktik)
    Unjuk Kerja atau Portofolio.
 
-2. VARIASI LEVEL KOGNITIF — pastikan soal sumatif kognitif berjenjang dan proporsional:
+2. VARIASI LEVEL KOGNITIF — pastikan soal sumatif kognitif berjenjang dan proporsional. Proporsi berikut berlaku untuk versi reguler; jika ada siswa inklusi, turunkan level sesuai TP/KKTP adaptif dan buat versi asesmen adaptif dengan dominasi level yang lebih aksesibel:
    - LOTS (C1-C2 Bloom: mengingat, memahami) — ± 30-40% soal
    - MOTS (C3 Bloom: menerapkan) — ± 25-30% soal
    - HOTS (C4-C6 Bloom: menganalisis, mengevaluasi, mencipta) — ± 30-40% soal
@@ -6763,8 +6819,8 @@ BAGIAN 4 — SPESIFIKASI DETAIL LEMBAR ASESMEN & RUBRIK
      (kombinasi bentuk soal), menguji literasi membaca dan/atau numerasi, bukan sekadar
      hafalan.
 
-3. KISI-KISI SOAL [WAJIB disertakan sebagai tabel] dengan kolom:
-   No | Tujuan Pembelajaran | Materi Esensial | Indikator Soal | Level Kognitif
+3. KISI-KISI SOAL [WAJIB disertakan sebagai tabel] — kisi-kisi menjadi bukti keterlacakan antara soal dan TP. Setiap nomor soal WAJIB memiliki TP yang jelas. Gunakan kolom:
+   No | Tujuan Pembelajaran (TP yang diukur) | Materi Esensial | Indikator Soal | Level Kognitif
    (LOTS/MOTS/HOTS) | Bentuk Soal | No. Soal | Kunci Jawaban/Pedoman Skor
 
 4. PEDOMAN PENSKORAN & KATEGORI PREDIKAT [WAJIB] — cantumkan rumus nilai akhir dan
@@ -6787,6 +6843,7 @@ BAGIAN 5 — FORMAT KELUARAN
 - Gunakan struktur A–J di atas secara berurutan, dengan sub-penomoran yang rapi.
 - Cantumkan label [WAJIB]/[OPSIONAL] persis di depan setiap judul komponen/sub-komponen.
 - Gunakan tabel untuk: KKTP, kisi-kisi soal, rubrik, dan interval nilai remedial/pengayaan.
+- Sebelum finalisasi, lakukan audit keterlacakan TP → KKTP → kegiatan → asesmen → nomor soal; pastikan tidak ada soal yang berdiri sendiri tanpa TP.
 - Tulis dalam Bahasa Indonesia baku, sesuai jenjang pembaca (guru sebagai pengguna utama).
 - Jika suatu variabel input di Bagian 1 tidak diisi, buat asumsi wajar dan sebutkan
   asumsi tersebut secara singkat di awal jawaban.
@@ -7089,12 +7146,14 @@ const moduleGeneratorFieldConfig={
   '{{topik_materi}}':{label:'Topik / Materi',placeholder:'Contoh: Sistem Pernapasan Manusia',help:'Tuliskan materi utama. Jika kosong, AI menentukan topik dari konteks lain yang tersedia.',auto:'tentukan topik/materi berdasarkan konteks yang tersedia'},
   '{{subtopik}}':{label:'Subtopik',placeholder:'Contoh: Mekanisme inspirasi dan ekspirasi',help:'Opsional. Jika kosong, AI memilih subtopik yang paling mendukung ketercapaian tujuan.',auto:'pilih subtopik yang relevan bila diperlukan'},
   '{{capaian_pembelajaran}}':{label:'Capaian Pembelajaran (CP)',placeholder:'Contoh: tempel CP resmi di sini, atau kosongkan',help:'Tempel CP resmi jika sudah tersedia. Jika kosong, AI menyusun/merujuk CP yang relevan dan menandainya sebagai usulan untuk diverifikasi guru.',auto:'susun/rujuk CP yang relevan sebagai usulan dan tandai agar diverifikasi guru'},
-  '{{tujuan_pembelajaran}}':{label:'Tujuan Pembelajaran (TP)',placeholder:'Contoh: Peserta didik mampu menganalisis mekanisme pernapasan...',help:'Isi jika TP sudah tersedia. Jika kosong, AI menyusun 2–4 TP terukur yang selaras dengan CP, topik, jenjang, dan alokasi waktu.',auto:'susun 2–4 tujuan pembelajaran terukur yang selaras dengan CP dan topik'},
-  '{{dimensi_profil_lulusan}}':{label:'8 Dimensi Profil Lulusan',type:'dimensions',help:'Centang dimensi yang ingin diprioritaskan (disarankan 2–4). Jika tidak ada yang dipilih, AI akan memilihkan 2–4 dimensi paling relevan berdasarkan TP, materi, aktivitas, dan karakteristik murid.',auto:'pilih 2–4 Dimensi Profil Lulusan yang paling relevan dan sertakan bukti nyata pencapaiannya'},
+  '{{tujuan_pembelajaran}}':{label:'Tujuan Pembelajaran (TP)',placeholder:'Contoh: Peserta didik mampu menjelaskan mekanisme pernapasan dan mengaitkan perubahan frekuensi napas dengan aktivitas fisik',help:'Gunakan KKO dari referensi PDF Daftar KKO Revisi 2 saja. Contoh KKO valid: menuliskan, menjelaskan, menentukan, menggunakan, mengaitkan, menelaah, memvalidasi, merencanakan, menciptakan. Kata seperti “mencatat” tidak digunakan; gunakan “menuliskan” bila sesuai. Jika kosong, AI menyusun 2–4 TP terukur dari KKO referensi. Jika ada siswa inklusi, AI menurunkan level KKO secara proporsional.',auto:'susun 2–4 tujuan pembelajaran terukur dengan KKO yang hanya berasal dari referensi Daftar KKO Revisi 2, dan adaptasikan levelnya bila ada siswa inklusi'},
+  '{{dimensi_profil_lulusan}}':{label:'8 Dimensi Profil Lulusan',type:'dimensions',help:'Centang dimensi yang ingin digunakan (disarankan 2–4). Jika Anda memilih, prompt final hanya akan memuat dimensi yang dicentang—AI tidak boleh menambah dimensi lain. Jika tidak ada yang dipilih, AI akan memilihkan 2–4 dimensi paling relevan.',auto:'pilih 2–4 Dimensi Profil Lulusan yang paling relevan dan sertakan bukti nyata pencapaiannya'},
   '{{semester_tahun_ajaran}}':{label:'Semester & Tahun Ajaran',placeholder:'Contoh: Ganjil, 2026/2027',help:'Jika kosong, AI memberikan usulan yang mudah diedit.',auto:'tentukan semester/tahun ajaran sebagai usulan yang mudah diedit'},
   '{{jumlah_pertemuan_alokasi}}':{label:'Jumlah Pertemuan & Alokasi',placeholder:'Contoh: 3 pertemuan × 2 JP @40 menit',help:'Jika kosong, AI menentukan jumlah pertemuan dan alokasi waktu yang wajar sesuai keluasan materi.',auto:'tentukan jumlah pertemuan dan alokasi waktu yang wajar'},
   '{{model_praktik_pedagogis}}':{label:'Model / Praktik Pedagogis',type:'model',help:'Pilih model yang diinginkan. Pilih “Ditentukan AI” jika ingin AI merekomendasikan. Untuk kombinasi/model lain, tulis detailnya pada kolom tambahan.',auto:'rekomendasikan model/praktik pedagogis paling sesuai dengan topik, tujuan, dan karakter aktivitas'},
   '{{konteks_lokal_sekolah}}':{label:'Konteks Lokal / Sekolah',placeholder:'Contoh: sekolah dekat sungai; tersedia laboratorium IPA dan halaman sekolah',help:'Jika kosong, AI menggunakan konteks umum yang relevan dan mudah disesuaikan guru.',auto:'gunakan konteks umum yang relevan dan mudah disesuaikan'},
+  '{{komposisi_siswa}}':{label:'Komposisi / Kondisi Siswa',type:'inclusion',help:'Pilih Non inklusi, Siswa inklusi, atau Campuran/heterogen. Jika ada siswa inklusi, TP, KKTP, dan level asesmen akan diadaptasi/diturunkan secara proporsional sesuai kebutuhan siswa.',auto:'anggap Non inklusi bila tidak ada informasi kebutuhan inklusi'},
+  '{{deskripsi_siswa_inklusi}}':{label:'Deskripsi Kondisi Siswa Inklusi / Heterogen',type:'inclusionDetail',placeholder:'Contoh: 2 siswa membutuhkan instruksi singkat dan visual; kemampuan membaca setara kelas VI; perlu waktu tambahan dan pilihan respons lisan',help:'Muncul saat memilih Siswa inklusi atau Campuran/heterogen. Jelaskan kemampuan aktual, hambatan belajar, bentuk dukungan, komunikasi, literasi/numerasi, kemandirian, atau penyesuaian asesmen yang diperlukan. Jika kosong, AI membuat asumsi konservatif dan menandainya untuk diverifikasi guru.',auto:'buat asumsi konservatif tentang kebutuhan adaptasi dan tandai sebagai usulan yang harus diverifikasi guru'},
   '{{karakteristik_kesiapan_murid}}':{label:'Karakteristik / Kesiapan Murid',placeholder:'Contoh: kemampuan heterogen; sebagian perlu scaffolding literasi',help:'Opsional. Jika kosong, AI mengasumsikan kelas heterogen dan merancang diferensiasi yang wajar.',auto:'asumsikan kelas heterogen dan rancang diferensiasi yang wajar'},
   '{{pemanfaatan_digital}}':{label:'Pemanfaatan Digital',placeholder:'Contoh: IFP, HP siswa, Google Workspace; atau luring penuh',help:'Jika kosong, AI memilih penggunaan digital seperlunya dan tetap menyediakan alternatif luring.',auto:'tentukan pemanfaatan digital seperlunya serta alternatif luring'},
   '{{kemitraan_pembelajaran}}':{label:'Kemitraan Pembelajaran',placeholder:'Contoh: orang tua, puskesmas, pelaku UMKM, narasumber lokal',help:'Opsional. Jika kosong, AI menentukan apakah kemitraan memang perlu; jangan dipaksakan.',auto:'tentukan kemitraan hanya jika relevan, jika tidak nyatakan tidak diperlukan'},
@@ -7114,18 +7173,31 @@ function initSpecialGeneratorFields(){
     const syncDimensions=()=>{dimensionHidden.value=dimensionChecks.filter(c=>c.checked).map(c=>c.value).join('; ');};
     dimensionChecks.forEach(c=>c.addEventListener('change',syncDimensions));syncDimensions();
   }
+  const inclusion=$('[data-module-inclusion-select]');
+  const detailWrap=$('[data-module-inclusion-detail-wrap]');
+  const detailInput=$('[data-module-inclusion-detail]');
+  if(inclusion&&detailWrap&&detailInput){
+    const syncInclusion=()=>{const needs=['Siswa inklusi','Campuran/heterogen'].includes(inclusion.value);detailWrap.hidden=!needs;detailInput.disabled=!needs;if(!needs)detailInput.value='';};
+    inclusion.addEventListener('change',syncInclusion);syncInclusion();
+  }
 }
 function renderGeneratorField(f,id,disabled){
   const cfg=moduleFieldConfig(f.token);
   const label=cfg?.label||f.label;
-  const long=cfg?['{{capaian_pembelajaran}}','{{tujuan_pembelajaran}}','{{konteks_lokal_sekolah}}','{{karakteristik_kesiapan_murid}}','{{pemanfaatan_digital}}','{{kemitraan_pembelajaran}}','{{deskripsi_tambahan}}'].includes(f.token):isLongField(label);
+  const long=cfg?['{{capaian_pembelajaran}}','{{tujuan_pembelajaran}}','{{konteks_lokal_sekolah}}','{{deskripsi_siswa_inklusi}}','{{karakteristik_kesiapan_murid}}','{{pemanfaatan_digital}}','{{kemitraan_pembelajaran}}','{{deskripsi_tambahan}}'].includes(f.token):isLongField(label);
   const help=cfg?.help?`<span class="generator-field-help"><strong>Contoh/panduan:</strong> ${escapeHtml(cfg.help)}</span>`:'';
   let control='';
   if(cfg?.type==='select'){
     control=`<select class="form-control" id="${id}" data-token="${escapeHtml(f.token)}" ${disabled?'disabled':''}>${cfg.options.map(([v,l])=>`<option value="${escapeHtml(v)}">${escapeHtml(l)}</option>`).join('')}</select>`;
+  }else if(cfg?.type==='inclusion'){
+    const opts=[['','— Biarkan AI menentukan —'],['Non inklusi','Non inklusi'],['Siswa inklusi','Siswa inklusi'],['Campuran/heterogen','Campuran / heterogen']];
+    control=`<select class="form-control" id="${id}" data-token="${escapeHtml(f.token)}" data-module-inclusion-select ${disabled?'disabled':''}>${opts.map(([v,l])=>`<option value="${escapeHtml(v)}">${escapeHtml(l)}</option>`).join('')}</select><div class="inclusion-adapt-note"><strong>Adaptasi otomatis:</strong> bila ada siswa inklusi, Prompt Modul Ajar meminta AI menurunkan kompleksitas TP, KKTP, dan level asesmen sesuai kebutuhan siswa. Untuk kelas campuran, target reguler tetap dipertahankan dan dibuat versi adaptif khusus siswa yang membutuhkan dukungan.</div>`;
+  }else if(cfg?.type==='inclusionDetail'){
+    const ph=cfg?.placeholder||'Jelaskan kondisi siswa...';
+    control=`<textarea class="form-control" id="${id}" data-token="${escapeHtml(f.token)}" data-module-inclusion-detail placeholder="${escapeHtml(ph)}" disabled></textarea>`;
   }else if(cfg?.type==='dimensions'){
     const dims=['Keimanan dan Ketakwaan terhadap Tuhan YME','Kewargaan','Penalaran Kritis','Kreativitas','Kolaborasi','Kemandirian','Kesehatan','Komunikasi'];
-    control=`<input type="hidden" id="${id}" data-token="${escapeHtml(f.token)}" data-dimension-hidden value="" ${disabled?'disabled':''}/><div class="dimension-picker">${dims.map((d,idx)=>`<label class="dimension-option"><input type="checkbox" data-dimension-value value="${escapeHtml(d)}" ${disabled?'disabled':''}/><span>${idx+1}. ${escapeHtml(d)}</span></label>`).join('')}</div><div class="dimension-empty-note">Disarankan memilih 2–4 dimensi. Tidak mencentang apa pun = AI memilihkan 2–4 dimensi yang paling relevan.</div>`;
+    control=`<input type="hidden" id="${id}" data-token="${escapeHtml(f.token)}" data-dimension-hidden value="" ${disabled?'disabled':''}/><div class="dimension-picker">${dims.map((d,idx)=>`<label class="dimension-option"><input type="checkbox" data-dimension-value value="${escapeHtml(d)}" ${disabled?'disabled':''}/><span>${idx+1}. ${escapeHtml(d)}</span></label>`).join('')}</div><div class="dimension-empty-note">Disarankan memilih 2–4 dimensi. Jika dicentang, hanya dimensi terpilih yang dimasukkan ke prompt. Tidak mencentang apa pun = AI memilihkan 2–4 dimensi yang paling relevan.</div>`;
   }else if(cfg?.type==='model'){
     const opts=[
       ['','— Ditentukan AI / rekomendasikan otomatis —'],
@@ -7145,7 +7217,9 @@ function renderGeneratorField(f,id,disabled){
     const ph=cfg?.placeholder||`Isi ${label.toLowerCase()}...`;
     control=long?`<textarea class="form-control" id="${id}" data-token="${escapeHtml(f.token)}" placeholder="${escapeHtml(ph)}" ${disabled?'disabled':''}></textarea>`:`<input class="form-control" id="${id}" data-token="${escapeHtml(f.token)}" placeholder="${escapeHtml(ph)}" ${disabled?'disabled':''}/>`;
   }
-  return `<div class="form-group ${long?'span-2':''}"><label for="${id}">${escapeHtml(label)}</label>${control}${help}<span class="field-token">Jika kosong: AI akan menentukan • ${escapeHtml(f.token)}</span></div>`;
+  const extra=f.token==='{{tujuan_pembelajaran}}'?`<div class="kko-note"><strong>Referensi KKO aktif:</strong> TP hanya boleh memakai KKO dari file “Daftar KKO Revisi 2”. Contoh: gunakan <em>menuliskan</em>, bukan “mencatat”.</div>`:'';
+  const wrapAttrs=cfg?.type==='inclusionDetail'?' data-module-inclusion-detail-wrap hidden':'';
+  return `<div class="form-group ${long?'span-2':''}"${wrapAttrs}><label for="${id}">${escapeHtml(label)}</label>${control}${help}${extra}<span class="field-token">Jika kosong: AI akan menentukan • ${escapeHtml(f.token)}</span></div>`;
 }
 function referenceHintHtml(){
   if(!referenceHintTypes.has(state.generatorType))return '';
@@ -7177,7 +7251,7 @@ function updateGeneratorActionButton(){
 }
 function substitutionMap(){const vals=new Map();els.genFields.querySelectorAll('[data-token]').forEach(input=>{let val=input.value.trim();if(input.hasAttribute('data-module-model-select')&&['custom','combo'].includes(val)){const custom=els.genFields.querySelector('[data-module-model-custom]')?.value.trim()||'';if(custom)val=val==='combo'?`Kombinasi model: ${custom}`:custom;else val='';}if(val)vals.set(input.dataset.token,val);});return vals;}
 function applySubstitutions(text,vals){let out=text;vals.forEach((v,k)=>{out=out.split(k).join(v);});return out;}
-function finalizeGeneratedPrompt(prompt,text){if(prompt?.categoryId!=='modul-ajar-rpm')return text;let out=text;Object.entries(moduleGeneratorFieldConfig).forEach(([token,cfg])=>{if(out.includes(token))out=out.split(token).join(`[Ditentukan AI: ${cfg.auto}]`);});return out;}
+function finalizeGeneratedPrompt(prompt,text,vals){if(prompt?.categoryId!=='modul-ajar-rpm')return text;let out=text;const selectedDims=vals?.get('{{dimensi_profil_lulusan}}')||'';if(selectedDims){out=out.replace(/REFERENSI 8 DIMENSI PROFIL LULUSAN \(DIGUNAKAN HANYA JIKA GURU TIDAK MEMILIH DIMENSI\):[\s\S]*?Jika guru sudah memilih satu atau beberapa dimensi pada input, ABAIKAN dan JANGAN tampilkan daftar referensi 8 dimensi ini pada keluaran\.\n\n/,'');}Object.entries(moduleGeneratorFieldConfig).forEach(([token,cfg])=>{if(out.includes(token))out=out.split(token).join(`[Ditentukan AI: ${cfg.auto}]`);});return out;}
 function renderGeneratedSections(items){
   elsGen.sections.innerHTML=items.map((it,i)=>`<section class="generated-section"><div class="generated-section-head"><div class="generated-section-title"><strong>${escapeHtml(it.heading)}</strong><span>${escapeHtml(it.sourceTitle)}</span></div><button class="generated-section-copy" data-copy-section="${i}">📋 Salin Prompt Ini</button></div><textarea class="form-control" data-generated-section="${i}" spellcheck="false">${escapeHtml(it.text)}</textarea></section>`).join('');
   elsGen.sections.querySelectorAll('[data-copy-section]').forEach(b=>b.addEventListener('click',()=>{const ta=elsGen.sections.querySelector(`[data-generated-section="${b.dataset.copySection}"]`);if(ta)copyText(ta.value);}));
@@ -7186,7 +7260,7 @@ function scrollToGeneratorOutput(){const panel=$('#generatorOutputPanel');if(!pa
 function generateFromForm(){
   const all=activeGeneratorPrompts();if(!all.length){toast('Pilih paket/template terlebih dahulu');return;}const vals=substitutionMap();let filled=vals.size;
   const ps=(isPackageMode()&&all.length>1&&!state.generatorPrompt0Confirmed)?[all[0]]:all;
-  const items=ps.map((p,i)=>{const isFull=ps.length===all.length;const originalIndex=all.indexOf(p);const last=originalIndex===all.length-1;return{sourceTitle:p.title,heading:isPackageMode()?(last?`BAGIAN AKHIR — ${p.title}`:`BAGIAN ${originalIndex+1} — ${p.title}`):p.title,text:finalizeGeneratedPrompt(p,applySubstitutions(p.text,vals))};});
+  const items=ps.map((p,i)=>{const isFull=ps.length===all.length;const originalIndex=all.indexOf(p);const last=originalIndex===all.length-1;return{sourceTitle:p.title,heading:isPackageMode()?(last?`BAGIAN AKHIR — ${p.title}`:`BAGIAN ${originalIndex+1} — ${p.title}`):p.title,text:finalizeGeneratedPrompt(p,applySubstitutions(p.text,vals),vals)};});
   renderGeneratedSections(items);
   const combined=items.map(it=>`${'='.repeat(72)}\n${it.heading}\n${'='.repeat(72)}\n\n${it.text}`).join('\n\n\n');els.genOutput.value=combined;els.genEmpty.hidden=true;els.genResult.hidden=false;scrollToGeneratorOutput();
   const unresolved=ps.reduce((n,p)=>n+extractPromptFields(p,applySubstitutions(p.text,vals)).length,0);
