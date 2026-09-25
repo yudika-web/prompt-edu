@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="theme-color" content="#6d5dfc" />
 <title>Prompt EDU — AI Prompt Studio untuk Guru</title>
-<meta name="bank-prompt-build" content="2026-09-25-modul-ajar-rpm-piko-audio-1" />
+<meta name="bank-prompt-build" content="2026-09-25-reference-note-no-upload-1" />
 <style>
 :root{
   --bg:#f4f7fb;
@@ -658,6 +658,15 @@ select.form-control optgroup{font-weight:800}
 .model-custom-wrap[hidden]{display:none!important}
 .module-ai-note{grid-column:1/-1;border:1px solid color-mix(in srgb,var(--accent2) 28%,var(--border));background:color-mix(in srgb,var(--accent2) 7%,var(--panel));border-radius:14px;padding:11px 13px;font-size:10px;line-height:1.55;color:var(--muted)}
 .module-ai-note strong{color:var(--text)}
+
+
+
+/* === Modul Ajar dimensions + reference files === */
+.dimension-picker{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:2px}
+.dimension-option{display:flex;align-items:flex-start;gap:8px;padding:9px 10px;border:1px solid var(--border);border-radius:12px;background:color-mix(in srgb,var(--panel2) 88%,transparent);font-size:10px;line-height:1.35;color:var(--text);cursor:pointer;transition:.15s ease}
+.dimension-option:hover{border-color:color-mix(in srgb,var(--accent2) 38%,var(--border));background:color-mix(in srgb,var(--accent2) 7%,var(--panel2))}
+.dimension-option input{width:17px;height:17px;flex:0 0 17px;margin:0;accent-color:var(--accent)}
+.dimension-empty-note{font-size:9.5px;line-height:1.5;color:var(--muted);margin-top:3px}
 
 </style>
 </head>
@@ -6463,6 +6472,7 @@ BAGIAN 1 — KONTEKS & VARIABEL INPUT (isi/ganti sesuai kebutuhan)
 - Subtopik (jika ada)          : {{subtopik}}
 - Capaian Pembelajaran (CP)    : {{capaian_pembelajaran}}
 - Tujuan Pembelajaran (TP)     : {{tujuan_pembelajaran}}
+- Dimensi Profil Lulusan       : {{dimensi_profil_lulusan}}
 - Semester & Tahun Ajaran      : {{semester_tahun_ajaran}}
 - Jumlah Pertemuan & Alokasi   : {{jumlah_pertemuan_alokasi}}
 - Model/Praktik Pedagogis      : {{model_praktik_pedagogis}}
@@ -6476,6 +6486,7 @@ ATURAN DEFAULT INPUT:
 - Jika suatu input dibiarkan kosong, belum diketahui, atau masih bertanda "ditentukan AI", tentukan usulan yang paling masuk akal berdasarkan jenjang, fase/kelas, mata pelajaran, topik, CP, konteks sekolah, dan prinsip Pembelajaran Mendalam. Sebutkan asumsi yang Anda buat secara singkat di awal keluaran.
 - Untuk Nama Sekolah yang kosong, jangan mengarang nama sekolah nyata; gunakan identitas generik yang mudah diganti guru.
 - Untuk Tujuan Pembelajaran yang kosong, susun otomatis 2–4 TP yang terukur, selaras dengan CP dan topik.
+- Untuk Dimensi Profil Lulusan: jika guru memilih satu atau beberapa dimensi, gunakan pilihan tersebut sebagai prioritas dan pastikan bukti pencapaiannya nyata dalam aktivitas/asesmen. Jika tidak ada dimensi yang dipilih, AI WAJIB memilihkan 2–4 dimensi yang paling relevan berdasarkan TP, materi, aktivitas, dan karakteristik murid.
 - Untuk Model/Praktik Pedagogis yang kosong, rekomendasikan model yang paling sesuai dengan karakter topik dan aktivitas belajar.
 - Deskripsi Tambahan bersifat arahan prioritas guru. Jika diisi (misalnya wajib ada praktikum, proyek, demonstrasi, studi lapangan, presentasi produk, pemanfaatan lingkungan sekitar, atau aktivitas tertentu), integrasikan arahan tersebut secara nyata ke langkah pembelajaran, LKPD, asesmen, dan rubrik yang relevan.
 
@@ -6484,6 +6495,7 @@ Panduan pengisian variabel:
 - Fase & Kelas: contoh Fase D / Kelas VIII; lihat panduan pemetaan pada Bagian 3.
 - Capaian Pembelajaran (CP): tempel CP resmi dari mapel terkait, atau biarkan kosong agar AI menyusun/merujuk CP yang paling relevan untuk konteks modul.
 - Tujuan Pembelajaran (TP): isi jika guru sudah memiliki TP; jika kosong AI menyusun TP terukur berdasarkan CP, topik, jenjang, dan alokasi waktu.
+- Dimensi Profil Lulusan: guru boleh memilih satu atau beberapa dari 8 dimensi. Jika kosong/tidak dipilih, AI memilih 2–4 dimensi yang paling relevan dan menjelaskan bukti pencapaiannya.
 - Semester & Tahun Ajaran: contoh Ganjil, 2025/2026; jika kosong AI memberi usulan yang mudah diedit.
 - Jumlah Pertemuan & Alokasi: contoh 3 pertemuan x 2 JP @40 menit; jika kosong AI menentukan alokasi yang wajar sesuai keluasan materi.
 - Model/Praktik Pedagogis: pilih satu/lebih sesuai kebutuhan, misalnya Problem Based Learning (PBL), Project Based Learning (PjBL), Direct Instruction, Discovery Learning, Inquiry Learning, Contextual Teaching and Learning/Pembelajaran Kontekstual, Cooperative Learning/Pembelajaran Kooperatif, Diferensiasi, atau kombinasi lintas pertemuan. Guru boleh mendeskripsikan model/strategi sendiri; jika kosong AI merekomendasikan model paling sesuai dengan topik dan tujuan.
@@ -6512,8 +6524,7 @@ keluaran, jangan dihilangkan):
 A. IDENTITAS / IDENTIFIKASI [WAJIB]
    - Sekolah, mapel, fase/kelas, semester, alokasi waktu, jumlah pertemuan
    - Capaian Pembelajaran (CP) [WAJIB]
-   - Dimensi Profil Lulusan yang relevan [WAJIB — pilih 2-4 dari 8 dimensi berikut, sertakan
-     elemen & bukti nyata pencapaiannya dalam pembelajaran ini]:
+   - Dimensi Profil Lulusan yang relevan [WAJIB] — gunakan pilihan guru dari {{dimensi_profil_lulusan}} jika tersedia. Jika guru tidak memilih dimensi apa pun, pilihkan 2-4 dimensi yang paling relevan. Dalam kedua kondisi, sertakan elemen & bukti nyata pencapaiannya dalam pembelajaran ini. Pilihan dimensi berasal dari daftar berikut:
      1) Keimanan dan Ketakwaan terhadap Tuhan YME
      2) Kewargaan
      3) Penalaran Kritis
@@ -6864,6 +6875,7 @@ const generatorTypes=[
   {id:'game',icon:'🎮',name:'Game Edukasi',match:p=>/game|skill|luck|mekanik|skor|level|reward/i.test(`${p.title} ${p.categoryName}`)},
   {id:'mpi',icon:'🧩',name:'MPI',match:p=>/\bMPI\b|multimedia pembelajaran/i.test(`${p.title} ${p.categoryName} ${p.text.slice(0,240)}`)},
   {id:'lab',icon:'🔬',name:'Lab Maya / Simulasi',match:p=>/simulasi|lab maya|laboratorium virtual/i.test(`${p.title} ${p.categoryName}`)},
+  {id:'app',icon:'💻',name:'Aplikasi',match:p=>p.categoryId==='biasa-aplikasi'||/\baplikasi\b|web app|administrasi/i.test(`${p.title} ${p.categoryName} ${p.text.slice(0,500)}`)},
   {id:'comic',icon:'💬',name:'Komik Edukasi',match:p=>/komik edukasi/i.test(p.title)},
   {id:'lkpd',icon:'📝',name:'LKPD',match:p=>/\bLKPD\b/i.test(p.title)},
   {id:'journal',icon:'📘',name:'E-Jurnal Guru',match:p=>/jurnal guru/i.test(p.title)},
@@ -6872,6 +6884,7 @@ const generatorTypes=[
 state.generatorVersion=state.generatorVersion||'';
 state.generatorPackage=state.generatorPackage||'';
 state.generatorPrompt0Confirmed=Boolean(state.generatorPrompt0Confirmed);
+const referenceHintTypes=new Set(['game','mpi','lab','module','lkpd','comic','app','journal']);
 const elsGen={
   packageMode:$('#generatorPackageMode'),singleMode:$('#generatorSingleMode'),version:$('#generatorVersionSelect'),package:$('#generatorPackageSelect'),proNote:$('#generatorProNote'),sections:$('#generatedPromptSections')
 };
@@ -6948,9 +6961,9 @@ function renderGeneratorTemplate(){
   }
   if(!isPackageMode()){
     const fields=[];const seen=new Set();ps.forEach(p=>extractPromptFields(p).forEach(f=>{if(!seen.has(f.token)){seen.add(f.token);fields.push(f);}}));
-    if(!fields.length){els.genFields.innerHTML='<div class="no-fields span-2">Rangkaian ini tidak memiliki placeholder yang terdeteksi. Klik Generate untuk menampilkan prompt apa adanya.</div>';updateGeneratorActionButton();return;}
+    if(!fields.length){els.genFields.innerHTML='<div class="no-fields span-2">Rangkaian ini tidak memiliki placeholder yang terdeteksi. Klik Generate untuk menampilkan prompt apa adanya.</div>'+referenceHintHtml();initSpecialGeneratorFields();updateGeneratorActionButton();return;}
     const moduleNote=ps[0]?.categoryId==='modul-ajar-rpm'?'<div class="module-ai-note"><strong>💡 Tidak harus mengisi semuanya.</strong> Setiap kolom yang dibiarkan kosong akan ditentukan AI berdasarkan data yang sudah tersedia. Semakin banyak konteks yang diberikan, semakin spesifik hasil Modul Ajar/RPM.</div>':'';
-    els.genFields.innerHTML=moduleNote+fields.map((f,i)=>renderGeneratorField(f,`gf${i}`,false)).join('');initSpecialGeneratorFields();updateGeneratorActionButton();return;
+    els.genFields.innerHTML=moduleNote+fields.map((f,i)=>renderGeneratorField(f,`gf${i}`,false)).join('')+referenceHintHtml();initSpecialGeneratorFields();updateGeneratorActionButton();return;
   }
   renderPackageStageFields(ps);
 }
@@ -6963,6 +6976,7 @@ const moduleGeneratorFieldConfig={
   '{{subtopik}}':{label:'Subtopik',placeholder:'Contoh: Mekanisme inspirasi dan ekspirasi',help:'Opsional. Jika kosong, AI memilih subtopik yang paling mendukung ketercapaian tujuan.',auto:'pilih subtopik yang relevan bila diperlukan'},
   '{{capaian_pembelajaran}}':{label:'Capaian Pembelajaran (CP)',placeholder:'Contoh: tempel CP resmi di sini, atau kosongkan',help:'Tempel CP resmi jika sudah tersedia. Jika kosong, AI menyusun/merujuk CP yang relevan dan menandainya sebagai usulan untuk diverifikasi guru.',auto:'susun/rujuk CP yang relevan sebagai usulan dan tandai agar diverifikasi guru'},
   '{{tujuan_pembelajaran}}':{label:'Tujuan Pembelajaran (TP)',placeholder:'Contoh: Peserta didik mampu menganalisis mekanisme pernapasan...',help:'Isi jika TP sudah tersedia. Jika kosong, AI menyusun 2–4 TP terukur yang selaras dengan CP, topik, jenjang, dan alokasi waktu.',auto:'susun 2–4 tujuan pembelajaran terukur yang selaras dengan CP dan topik'},
+  '{{dimensi_profil_lulusan}}':{label:'8 Dimensi Profil Lulusan',type:'dimensions',help:'Centang dimensi yang ingin diprioritaskan (disarankan 2–4). Jika tidak ada yang dipilih, AI akan memilihkan 2–4 dimensi paling relevan berdasarkan TP, materi, aktivitas, dan karakteristik murid.',auto:'pilih 2–4 Dimensi Profil Lulusan yang paling relevan dan sertakan bukti nyata pencapaiannya'},
   '{{semester_tahun_ajaran}}':{label:'Semester & Tahun Ajaran',placeholder:'Contoh: Ganjil, 2026/2027',help:'Jika kosong, AI memberikan usulan yang mudah diedit.',auto:'tentukan semester/tahun ajaran sebagai usulan yang mudah diedit'},
   '{{jumlah_pertemuan_alokasi}}':{label:'Jumlah Pertemuan & Alokasi',placeholder:'Contoh: 3 pertemuan × 2 JP @40 menit',help:'Jika kosong, AI menentukan jumlah pertemuan dan alokasi waktu yang wajar sesuai keluasan materi.',auto:'tentukan jumlah pertemuan dan alokasi waktu yang wajar'},
   '{{model_praktik_pedagogis}}':{label:'Model / Praktik Pedagogis',type:'model',help:'Pilih model yang diinginkan. Pilih “Ditentukan AI” jika ingin AI merekomendasikan. Untuk kombinasi/model lain, tulis detailnya pada kolom tambahan.',auto:'rekomendasikan model/praktik pedagogis paling sesuai dengan topik, tujuan, dan karakter aktivitas'},
@@ -6976,9 +6990,16 @@ function moduleFieldConfig(token){return moduleGeneratorFieldConfig[token]||null
 function initSpecialGeneratorFields(){
   const model=$('[data-module-model-select]');
   const custom=$('[data-module-model-custom-wrap]');
-  if(!model||!custom)return;
-  const sync=()=>{const needs=['custom','combo'].includes(model.value);custom.hidden=!needs;const inp=custom.querySelector('input');if(inp)inp.disabled=!needs;};
-  model.addEventListener('change',sync);sync();
+  if(model&&custom){
+    const sync=()=>{const needs=['custom','combo'].includes(model.value);custom.hidden=!needs;const inp=custom.querySelector('input');if(inp)inp.disabled=!needs;};
+    model.addEventListener('change',sync);sync();
+  }
+  const dimensionHidden=$('[data-dimension-hidden]');
+  const dimensionChecks=$$('[data-dimension-value]');
+  if(dimensionHidden&&dimensionChecks.length){
+    const syncDimensions=()=>{dimensionHidden.value=dimensionChecks.filter(c=>c.checked).map(c=>c.value).join('; ');};
+    dimensionChecks.forEach(c=>c.addEventListener('change',syncDimensions));syncDimensions();
+  }
 }
 function renderGeneratorField(f,id,disabled){
   const cfg=moduleFieldConfig(f.token);
@@ -6988,6 +7009,9 @@ function renderGeneratorField(f,id,disabled){
   let control='';
   if(cfg?.type==='select'){
     control=`<select class="form-control" id="${id}" data-token="${escapeHtml(f.token)}" ${disabled?'disabled':''}>${cfg.options.map(([v,l])=>`<option value="${escapeHtml(v)}">${escapeHtml(l)}</option>`).join('')}</select>`;
+  }else if(cfg?.type==='dimensions'){
+    const dims=['Keimanan dan Ketakwaan terhadap Tuhan YME','Kewargaan','Penalaran Kritis','Kreativitas','Kolaborasi','Kemandirian','Kesehatan','Komunikasi'];
+    control=`<input type="hidden" id="${id}" data-token="${escapeHtml(f.token)}" data-dimension-hidden value="" ${disabled?'disabled':''}/><div class="dimension-picker">${dims.map((d,idx)=>`<label class="dimension-option"><input type="checkbox" data-dimension-value value="${escapeHtml(d)}" ${disabled?'disabled':''}/><span>${idx+1}. ${escapeHtml(d)}</span></label>`).join('')}</div><div class="dimension-empty-note">Disarankan memilih 2–4 dimensi. Tidak mencentang apa pun = AI memilihkan 2–4 dimensi yang paling relevan.</div>`;
   }else if(cfg?.type==='model'){
     const opts=[
       ['','— Ditentukan AI / rekomendasikan otomatis —'],
@@ -7009,6 +7033,22 @@ function renderGeneratorField(f,id,disabled){
   }
   return `<div class="form-group ${long?'span-2':''}"><label for="${id}">${escapeHtml(label)}</label>${control}${help}<span class="field-token">Jika kosong: AI akan menentukan • ${escapeHtml(f.token)}</span></div>`;
 }
+function referenceHintHtml(){
+  if(!referenceHintTypes.has(state.generatorType))return '';
+  return `<div class="reference-ai-note"><strong>📎 Punya file referensi?</strong>Jika Anda memiliki PDF, DOCX, PPTX, XLSX, gambar, atau file lain sebagai acuan, silakan unggah file tersebut langsung saat menjalankan prompt ini di AI yang akan digunakan (misalnya ChatGPT/Claude), lalu minta AI memakai file itu sebagai referensi utama.</div>`;
+}
+function renderPackageStageFields(ps){
+  const firstFields=extractPromptFields(ps[0]);
+  const firstTokens=new Set(firstFields.map(f=>f.token));
+  const laterFields=[];const seen=new Set(firstTokens);
+  ps.slice(1).forEach(p=>extractPromptFields(p).forEach(f=>{if(!seen.has(f.token)){seen.add(f.token);laterFields.push(f);}}));
+  const firstHtml=firstFields.length?firstFields.map((f,i)=>renderGeneratorField(f,`gp0_${i}`,false)).join(''):'<div class="no-fields span-2">Prompt 0 tidak memiliki placeholder yang terdeteksi.</div>';
+  const laterHtml=laterFields.length?laterFields.map((f,i)=>renderGeneratorField(f,`gp1_${i}`,!state.generatorPrompt0Confirmed)).join(''):'<div class="no-fields span-2">Tidak ada field baru pada Prompt 1 dan tahap lanjutan. Konteks berasal dari Prompt 0 dan hasil percakapan AI.</div>';
+  els.genFields.innerHTML=`<div class="generator-flow-note">Alur yang disarankan: isi Prompt 0 → Generate Prompt 0 → jalankan di AI → kembali ke Prompt EDU dan konfirmasi → isi data Prompt 1/lanjutan → Generate Semua Prompt.</div><section class="generator-stage-group" data-stage-group="0"><div class="generator-stage-head"><div class="generator-stage-title"><div class="generator-stage-badge">P0</div><div><strong>${escapeHtml(ps[0].title)}</strong><span>Isi data awal proyek. Bagian ini aktif terlebih dahulu.</span></div></div></div><div class="generator-stage-fields">${firstHtml}</div></section><label class="prompt0-confirm ${state.generatorPrompt0Confirmed?'ready':''}" id="prompt0ConfirmWrap"><input type="checkbox" id="prompt0DoneCheck" ${state.generatorPrompt0Confirmed?'checked':''}/><div><strong>Saya sudah menjalankan Prompt 0 di ChatGPT/Claude</strong><span>Centang setelah Prompt 0 benar-benar dijalankan. Isian Prompt 1 dan tahap lanjutan akan dibuka.</span></div></label><section class="generator-stage-group ${state.generatorPrompt0Confirmed?'':'is-locked'}" data-stage-group="1"><div class="generator-stage-head"><div class="generator-stage-title"><div class="generator-stage-badge">P1+</div><div><strong>Prompt 1 & Data Tahap Lanjutan</strong><span>Field baru dari Prompt 1 sampai Prompt Akhir, tanpa mengulang data Prompt 0.</span></div></div><div class="generator-stage-lock">🔒 Jalankan Prompt 0 dulu</div></div><div class="generator-stage-fields">${laterHtml}</div></section>${referenceHintHtml()}`;
+  const confirm=$('#prompt0DoneCheck');if(confirm)confirm.addEventListener('change',()=>setPrompt0Confirmed(confirm.checked));
+  initSpecialGeneratorFields();updateGeneratorActionButton();
+}
+
 function setPrompt0Confirmed(confirmed){
   state.generatorPrompt0Confirmed=confirmed;
   const wrap=$('#prompt0ConfirmWrap');if(wrap)wrap.classList.toggle('ready',confirmed);
