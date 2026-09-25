@@ -6672,7 +6672,7 @@ ATURAN DEFAULT INPUT:
 - Untuk Dimensi Profil Lulusan: jika guru memilih satu atau beberapa dimensi, gunakan HANYA dimensi yang dipilih tersebut dan pastikan bukti pencapaiannya nyata dalam aktivitas/asesmen. DILARANG menambahkan dimensi lain di luar pilihan guru. Jika tidak ada dimensi yang dipilih, AI WAJIB memilihkan 2–4 dimensi yang paling relevan berdasarkan TP, materi, aktivitas, dan karakteristik murid.
 - Untuk Model/Praktik Pedagogis yang kosong, rekomendasikan model yang paling sesuai dengan karakter topik dan aktivitas belajar.
 - Deskripsi Tambahan bersifat arahan prioritas guru. Jika diisi (misalnya wajib ada praktikum, proyek, demonstrasi, studi lapangan, presentasi produk, pemanfaatan lingkungan sekitar, atau aktivitas tertentu), integrasikan arahan tersebut secara nyata ke langkah pembelajaran, LKPD, asesmen, dan rubrik yang relevan.
-- Konfigurasi Asesmen dari guru adalah instruksi WAJIB. Minimal harus ada Asesmen Formatif. Asesmen Formatif Awal dan Asesmen Sumatif hanya dibuat jika dipilih guru. Setiap asesmen yang dipilih dapat memuat Kognitif dan/atau Non-Kognitif sesuai pilihan guru. Jika guru memilih tipe soal, tipe penilaian, atau proporsi level, ikuti persis konfigurasi tersebut. Rincian yang kosong dilengkapi AI berdasarkan TP, KKTP, jenjang, dan kondisi siswa.
+- Konfigurasi Asesmen dari guru adalah instruksi WAJIB. Minimal harus ada Asesmen Formatif. Asesmen Formatif Awal dan Asesmen Sumatif hanya dibuat jika dipilih guru. Setiap asesmen yang dipilih dapat memuat Kognitif dan/atau Non-Kognitif/Kinerja & Sikap sesuai pilihan guru. Jika guru memilih tipe soal, teknik penilaian, keterampilan/aspek yang dinilai, atau proporsi level, ikuti persis konfigurasi tersebut. Rincian yang kosong dilengkapi AI berdasarkan TP, KKTP, aktivitas, jenjang, dan kondisi siswa. Rubrik WAJIB dibuat otomatis mengikuti teknik asesmen yang benar-benar dipilih; jangan membuat rubrik generik atau rubrik untuk teknik yang tidak digunakan.
 - Jika persentase LOTS/MOTS/HOTS/AKM-PISA diisi, total wajib 100%. Jika seluruh persentase kosong, AI menentukan proporsi paling sesuai.
 
 Panduan pengisian variabel:
@@ -6691,7 +6691,7 @@ Panduan pengisian variabel:
 - Pemanfaatan Digital: opsional; alat/platform yang tersedia, mis. IFP, laptop, HP, Google Workspace, AI generatif, atau "tidak ada, luring penuh".
 - Kemitraan Pembelajaran: opsional; narasumber tamu, orang tua, dunia usaha, dll.; jika kosong AI menentukan apakah kemitraan memang perlu.
 - Deskripsi Tambahan: arahan khusus guru, misalnya "wajib ada praktikum pengamatan mikroskop", "buat proyek poster kampanye", "gunakan lingkungan sekolah sebagai sumber belajar", "ada presentasi kelompok", atau kebutuhan lain. Jika kosong AI melanjutkan tanpa persyaratan tambahan khusus.
-- Konfigurasi Asesmen: Asesmen Formatif adalah minimum WAJIB. Asesmen Formatif Awal dan Asesmen Sumatif opsional. Untuk tiap asesmen, guru dapat memilih Kognitif, Non-Kognitif, atau keduanya; tipe soal/penilaian; dan proporsi LOTS/MOTS/HOTS/AKM-PISA.
+- Konfigurasi Asesmen: Asesmen Formatif adalah minimum WAJIB. Asesmen Formatif Awal dan Asesmen Sumatif opsional. Untuk tiap asesmen, guru dapat memilih Kognitif, Non-Kognitif/Kinerja & Sikap, atau keduanya; tipe soal/teknik penilaian; keterampilan/aspek yang dinilai; dan proporsi LOTS/MOTS/HOTS/AKM-PISA.
 - Deskripsi Asesmen Tambahan: ketentuan khusus seperti jumlah soal, durasi, bentuk stimulus, asesmen lisan, adaptasi siswa, atau aturan penskoran. Jika kosong, AI menentukan detail teknis yang wajar sesuai TP/KKTP.
 
 REFERENSI 8 DIMENSI PROFIL LULUSAN (DIGUNAKAN HANYA JIKA GURU TIDAK MEMILIH DIMENSI):
@@ -6791,19 +6791,28 @@ D. ASESMEN PEMBELAJARAN [WAJIB — mengikuti {{konfigurasi_asesmen}}]
 
    PRINSIP TIGA JENIS ASESMEN:
    1. Asesmen Formatif Awal / Diagnostik [OPSIONAL — hanya jika dipilih guru] — untuk melihat kemampuan/kesiapan AWAL peserta didik sebelum pembelajaran. Kognitif digunakan untuk prasyarat/miskonsepsi; Non-Kognitif untuk kesiapan, minat, kondisi psikososial, kebiasaan belajar, atau kebutuhan dukungan secara proporsional. Hasilnya menjadi dasar diferensiasi/tindak lanjut, bukan nilai akhir.
-   2. Asesmen Formatif [WAJIB — minimal satu kali] — dapat dilakukan di tengah pembelajaran dan/atau di akhir pembelajaran untuk memberi umpan balik, memantau perkembangan terhadap TP, dan menentukan tindak lanjut. Gunakan Kognitif dan/atau Non-Kognitif sesuai konfigurasi guru.
+   2. Asesmen Formatif [WAJIB — minimal satu kali] — dapat dilakukan di tengah pembelajaran dan/atau di akhir pembelajaran untuk memberi umpan balik, memantau perkembangan terhadap TP, dan menentukan tindak lanjut. Gunakan Kognitif dan/atau Non-Kognitif/Kinerja & Sikap sesuai konfigurasi guru.
    3. Asesmen Sumatif [OPSIONAL — hanya jika dipilih guru] — untuk mengukur ketercapaian TP/KKTP pada akhir unit/lingkup materi. Setiap butir/instrumen wajib memiliki keterlacakan ke TP dan KKTP.
 
    DOMAIN ASESMEN — TERAPKAN HANYA JIKA DIPILIH DALAM {{konfigurasi_asesmen}}:
    a. Kognitif — gunakan tipe soal yang dipilih guru: PG, PG Kompleks, Uraian, Isian Singkat, Menjodohkan, Mengurutkan, Benar-Salah, dan/atau SJT. Gunakan proporsi LOTS/MOTS/HOTS/AKM-Standar PISA sesuai konfigurasi. Jika proporsi kosong, AI menentukan berdasarkan TP, jenjang, tujuan asesmen, dan kondisi siswa.
-   b. Non-Kognitif — gunakan tipe penilaian yang dipilih guru: Keterampilan, Unjuk Kerja, Presentasi, Portofolio, dan/atau bentuk lainnya. Sertakan rubrik/lembar observasi yang relevan dengan TP dan aktivitas.
+   b. Non-Kognitif / Kinerja & Sikap — "keterampilan" adalah aspek/kompetensi yang dinilai, BUKAN teknik asesmen. Gunakan HANYA teknik penilaian yang dipilih guru: Unjuk Kerja/Praktik, Presentasi, Proyek, Produk, Portofolio, Observasi, Penilaian Diri, Penilaian Antarteman, dan/atau Lainnya. Nyatakan secara terpisah keterampilan/aspek yang dinilai (mis. penggunaan alat, komunikasi, kolaborasi, ketelitian, proses eksperimen, kreativitas produk, atau aspek sikap yang relevan). Sertakan instrumen/rubrik yang relevan dengan TP dan aktivitas.
 
    ATURAN ADAPTASI INKLUSI [WAJIB jika ada siswa inklusi]: turunkan level asesmen secara proporsional terhadap TP/KKTP adaptif. Sederhanakan stimulus, jumlah langkah, tuntutan bahasa, dan level kognitif; gunakan scaffolding dan bentuk respons alternatif bila relevan. Untuk kelas campuran, sediakan versi reguler dan adaptif.
 
    KETENTUAN INSTRUMEN:
    - Untuk setiap asesmen yang dipilih, jelaskan tujuan, waktu pelaksanaan, domain, bentuk instrumen, keterkaitan dengan TP/KKTP, cara penskoran, dan tindak lanjut.
-   - Untuk instrumen non-tes, sertakan rubrik minimal 4 skala capaian dengan deskriptor teramati.
-   - Jika model = PjBL dan proyek digunakan sebagai bukti TP, sertakan rubrik proyek.
+   - RUBRIK OTOMATIS MENYESUAIKAN ASESMEN: buat rubrik HANYA untuk asesmen yang memang dipilih dan memerlukan rubrik. Jangan membuat satu rubrik generik untuk semua asesmen.
+   - Untuk PG/PG Kompleks/Benar-Salah/Menjodohkan/Isian objektif, gunakan kunci jawaban + pedoman skor; rubrik tidak wajib kecuali ada alasan khusus.
+   - Untuk Uraian/Esai atau SJT yang membutuhkan kualitas respons bertingkat, buat rubrik/pedoman skor analitik sesuai indikator dan TP yang diukur.
+   - Untuk Unjuk Kerja/Praktik, rubrik menilai aspek yang relevan seperti ketepatan prosedur, penggunaan alat/bahan, keselamatan, ketelitian hasil, dan kemandirian—sesuaikan dengan keterampilan yang dipilih.
+   - Untuk Presentasi, rubrik menilai penguasaan isi, ketepatan konsep/bukti, komunikasi, organisasi penyajian, respons terhadap pertanyaan, dan aspek lain yang relevan.
+   - Untuk Proyek, rubrik menilai perencanaan, proses/kolaborasi, kualitas produk/hasil, pengelolaan waktu, serta presentasi/komunikasi bila memang menjadi bagian proyek.
+   - Untuk Produk, rubrik menilai ketepatan terhadap kriteria, fungsi/kualitas, akurasi konsep, kerapian/ketuntasan, kreativitas bila relevan, dan aspek spesifik produk.
+   - Untuk Portofolio, rubrik menilai kelengkapan bukti, kualitas karya, perkembangan/progres, refleksi, dan keterkaitan bukti dengan TP.
+   - Untuk Observasi, gunakan lembar observasi/rubrik berbasis indikator perilaku/kinerja yang konkret dan dapat diamati.
+   - Untuk Penilaian Diri dan Penilaian Antarteman, gunakan skala/rubrik sederhana dengan indikator jelas, bukti/refleksi singkat, serta petunjuk agar penilaian tidak sekadar subjektif.
+   - Jika model = PjBL dan Proyek dipilih sebagai bukti TP, rubrik proyek wajib dibuat mengikuti aspek proyek yang benar-benar dirancang.
    - Terapkan {{deskripsi_asesmen}} sebagai ketentuan tambahan.
 
 E. LEMBAR KERJA PESERTA DIDIK (LKPD) [WAJIB — minimal satu LKPD per aktivitas inti/
@@ -6862,7 +6871,7 @@ ATURAN UTAMA KETERKAITAN SOAL DENGAN TP [WAJIB]:
 - Jika terdapat TP reguler dan TP adaptif, buat pemetaan terpisah: soal reguler mengacu TP reguler, soal adaptif mengacu TP adaptif.
 - Setelah soal selesai, lakukan audit akhir: cek kembali setiap nomor soal terhadap TP dan hapus/revisi butir yang tidak memiliki hubungan langsung dengan TP.
 
-1. VARIASI BENTUK SOAL — gunakan HANYA tipe soal Kognitif yang dipilih guru dalam {{konfigurasi_asesmen}}: PG • PG Kompleks • Uraian • Isian Singkat • Menjodohkan • Mengurutkan • Benar-Salah • SJT. Jika asesmen Kognitif aktif tetapi tipe soal tidak dipilih, AI menentukan kombinasi yang paling sesuai dengan TP dan jenjang. Untuk Non-Kognitif, gunakan HANYA tipe penilaian yang dipilih guru: Keterampilan • Unjuk Kerja • Presentasi • Portofolio • atau lainnya.
+1. VARIASI BENTUK SOAL — gunakan HANYA tipe soal Kognitif yang dipilih guru dalam {{konfigurasi_asesmen}}: PG • PG Kompleks • Uraian • Isian Singkat • Menjodohkan • Mengurutkan • Benar-Salah • SJT. Jika asesmen Kognitif aktif tetapi tipe soal tidak dipilih, AI menentukan kombinasi yang paling sesuai dengan TP dan jenjang. Untuk Non-Kognitif/Kinerja & Sikap, gunakan HANYA teknik yang dipilih guru: Unjuk Kerja/Praktik • Presentasi • Proyek • Produk • Portofolio • Observasi • Penilaian Diri • Penilaian Antarteman • atau Lainnya. Keterampilan/aspek yang dinilai ditulis terpisah dan harus selaras dengan TP serta aktivitas.
 
 2. VARIASI LEVEL KOGNITIF — ikuti persentase LOTS/MOTS/HOTS/AKM-Standar PISA yang ditetapkan guru pada masing-masing asesmen Kognitif. LOTS = C1-C2, MOTS = C3, HOTS = C4-C6. AKM/Standar PISA menggunakan stimulus otentik/kontekstual dan menguji literasi/numerasi/penalaran sesuai TP. Jika persentase kosong, AI menentukan komposisi proporsional berdasarkan TP, jenjang, tujuan asesmen, dan kebutuhan adaptasi siswa.
 
@@ -6874,15 +6883,19 @@ ATURAN UTAMA KETERKAITAN SOAL DENGAN TP [WAJIB]:
    kategori predikat (mis. 90-100 Sangat Baik, 75-89 Baik, 60-74 Cukup, <60 Perlu
    Bimbingan), atau memakai interval ketercapaian pada Bagian 2.H.
 
-5. FORMAT RUBRIK PENILAIAN [WAJIB untuk tiap instrumen non-tes: LKPD, kinerja, proyek,
-   sikap] — tabel dengan kolom: Aspek Penilaian | Skala 1 (Belum Berkembang) | Skala 2
-   (Mulai Berkembang) | Skala 3 (Berkembang Sesuai Harapan) | Skala 4 (Sangat
-   Berkembang/Mahir), masing-masing dengan deskriptor perilaku/hasil kerja yang jelas
-   dan dapat diamati.
+5. RUBRIK & PEDOMAN SKOR ADAPTIF [WAJIB SESUAI ASESMEN YANG DIPILIH] — jangan membuat rubrik yang tidak relevan. Untuk setiap asesmen aktif, tentukan otomatis bentuk penskoran yang tepat:
+   - Soal objektif (PG, PG Kompleks, Benar-Salah, Menjodohkan, Isian objektif): kunci jawaban + pedoman skor.
+   - Uraian/SJT: rubrik atau pedoman skor analitik berdasarkan indikator jawaban dan TP.
+   - Unjuk Kerja/Praktik: rubrik proses/kinerja sesuai keterampilan yang dinilai.
+   - Presentasi: rubrik presentasi sesuai tujuan dan indikator.
+   - Proyek: rubrik proyek sesuai tahap dan produk proyek.
+   - Produk: rubrik kualitas produk sesuai kriteria keberhasilan.
+   - Portofolio: rubrik portofolio sesuai bukti belajar dan progres.
+   - Observasi: lembar observasi/rubrik indikator teramati.
+   - Penilaian Diri/Antarteman: skala/rubrik reflektif sederhana dengan indikator jelas.
+   Format rubrik standar dapat menggunakan tabel: Aspek/Indikator | Skala 1 | Skala 2 | Skala 3 | Skala 4, tetapi NAMA ASPEK dan DESKRIPTOR tiap skala WAJIB disesuaikan dengan asesmen, keterampilan/aspek, TP, KKTP, dan kondisi siswa. Untuk siswa inklusi, sediakan rubrik adaptif yang selaras dengan TP/KKTP adaptif.
 
-6. RUBRIK PENILAIAN PROYEK (jika ada) [WAJIB jika model = PjBL] — minimal mencakup
-   aspek: perencanaan, proses kerja/kolaborasi, kualitas produk, dan
-   presentasi/komunikasi hasil, masing-masing dengan 4 skala capaian.
+6. ATURAN PEMILIHAN RUBRIK [WAJIB] — keluaran hanya menampilkan rubrik yang dibutuhkan oleh konfigurasi asesmen guru. Jika guru memilih beberapa teknik, buat rubrik terpisah untuk masing-masing teknik. Jika suatu teknik tidak dipilih, jangan membuat rubriknya. Jika LKPD dinilai sebagai bukti TP, buat rubrik LKPD; jika LKPD hanya sebagai aktivitas latihan tanpa penilaian, tidak perlu memaksakan rubrik khusus.
 
 =====================================================================
 BAGIAN 5 — FORMAT KELUARAN
@@ -7277,15 +7290,15 @@ function initSpecialGeneratorFields(){
           domains.push(`Kognitif | Tipe soal: ${qs.length?qs.join(', '):'ditentukan AI'} | Level: ${any?lv.join(', '):'ditentukan AI'}${desc?` | Arahan: ${desc}`:''}`);
         }
         if(non?.checked){
-          const ns=$$(`[data-assessment-ntype="${key}"]`).filter(x=>x.checked).map(x=>x.value);const other=$(`[data-assessment-non-other="${key}"]`)?.value.trim()||'';const desc=$(`[data-assessment-nonkognitif-desc="${key}"]`)?.value.trim()||'';const types=ns.map(x=>x==='Lainnya'&&other?`Lainnya: ${other}`:x);
-          domains.push(`Non-Kognitif | Tipe penilaian: ${types.length?types.join(', '):'ditentukan AI'}${desc?` | Arahan: ${desc}`:''}`);
+          const ns=$$(`[data-assessment-ntype="${key}"]`).filter(x=>x.checked).map(x=>x.value);const other=$(`[data-assessment-non-other="${key}"]`)?.value.trim()||'';const skill=$(`[data-assessment-skill="${key}"]`)?.value.trim()||'';const desc=$(`[data-assessment-nonkognitif-desc="${key}"]`)?.value.trim()||'';const types=ns.map(x=>x==='Lainnya'&&other?`Lainnya: ${other}`:x);
+          domains.push(`Non-Kognitif/Kinerja & Sikap | Teknik penilaian: ${types.length?types.join(', '):'ditentukan AI'} | Keterampilan/aspek: ${skill||'ditentukan AI sesuai TP/aktivitas'}${desc?` | Arahan: ${desc}`:''}`);
         }
         lines.push(`${labels[key]}: ${domains.length?domains.join(' || '):'domain dan instrumen ditentukan AI sesuai TP/KKTP'}`);
       });
       assessmentHidden.value=lines.join('\n');
     };
     $$('[data-assessment-enable],[data-assessment-domain],[data-assessment-qtype],[data-assessment-ntype]').forEach(el=>el.addEventListener('change',syncAssessment));
-    $$('[data-assessment-level],[data-assessment-kognitif-desc],[data-assessment-nonkognitif-desc],[data-assessment-non-other]').forEach(el=>el.addEventListener('input',syncAssessment));
+    $$('[data-assessment-level],[data-assessment-kognitif-desc],[data-assessment-nonkognitif-desc],[data-assessment-non-other],[data-assessment-skill]').forEach(el=>el.addEventListener('input',syncAssessment));
     $$('[data-assessment-ntype]').forEach(el=>el.addEventListener('change',()=>{const key=el.dataset.assessmentNtype;const other=$(`[data-assessment-non-other="${key}"]`);if(other){const show=$$(`[data-assessment-ntype="${key}"]`).some(x=>x.checked&&x.value==='Lainnya');other.hidden=!show;other.disabled=!show;if(!show)other.value='';}syncAssessment();}));
     syncAssessment();
   }
@@ -7316,9 +7329,9 @@ function renderGeneratorField(f,id,disabled){
       {key:'sumatif',label:'Asesmen Sumatif',desc:'Opsional • mengukur ketercapaian TP/KKTP pada akhir unit',required:false}
     ];
     const qtypes=['PG','PG Kompleks','Uraian','Isian Singkat','Menjodohkan','Mengurutkan','Benar Salah','SJT'];
-    const ntypes=['Keterampilan','Unjuk Kerja','Presentasi','Portofolio','Lainnya'];
-    const rows=defs.map(a=>`<section class="assessment-kind"><label class="assessment-kind-head"><input type="checkbox" data-assessment-enable="${a.key}" ${a.required?'checked disabled':''} ${disabled?'disabled':''}/><span class="assessment-kind-title"><strong>${a.label}${a.required?'<span class="assessment-required">WAJIB</span>':''}</strong><small>${a.desc}</small></span></label><div class="assessment-kind-body" data-assessment-body="${a.key}" ${a.required?'':'hidden'}><div class="assessment-domain-row"><label class="assessment-domain-toggle"><input type="checkbox" data-assessment-domain="${a.key}:kognitif" ${disabled?'disabled':''}/>Kognitif</label><label class="assessment-domain-toggle"><input type="checkbox" data-assessment-domain="${a.key}:nonkognitif" ${disabled?'disabled':''}/>Non-Kognitif</label></div><div class="assessment-domain-panel" data-assessment-panel="${a.key}:kognitif" hidden><div class="assessment-subtitle">Kognitif — tipe soal</div><div class="assessment-choice-grid">${qtypes.map(q=>`<label class="assessment-choice"><input type="checkbox" data-assessment-qtype="${a.key}" value="${q}" ${disabled?'disabled':''}/>${q}</label>`).join('')}</div><textarea class="form-control assessment-desc" data-assessment-kognitif-desc="${a.key}" placeholder="Jelaskan bentuk asesmen kognitif yang diinginkan (opsional)..." ${disabled?'disabled':''}></textarea><div class="assessment-subtitle">Proporsi level kognitif (%)</div><div class="assessment-level-grid">${['LOTS','MOTS','HOTS','AKM/PISA'].map(l=>`<label class="assessment-level">${l}<input type="number" min="0" max="100" step="1" inputmode="numeric" data-assessment-level="${a.key}:${l}" placeholder="0" ${disabled?'disabled':''}/></label>`).join('')}</div><div class="assessment-level-total" data-assessment-total="${a.key}">Kosong = AI menentukan • jika diisi total harus 100%</div></div><div class="assessment-domain-panel" data-assessment-panel="${a.key}:nonkognitif" hidden><div class="assessment-subtitle">Non-Kognitif — tipe penilaian</div><div class="assessment-choice-grid">${ntypes.map(n=>`<label class="assessment-choice"><input type="checkbox" data-assessment-ntype="${a.key}" value="${n}" ${disabled?'disabled':''}/>${n}</label>`).join('')}</div><input class="form-control assessment-custom-non" data-assessment-non-other="${a.key}" placeholder="Jika memilih Lainnya, jelaskan..." hidden disabled/><textarea class="form-control assessment-desc" data-assessment-nonkognitif-desc="${a.key}" placeholder="Jelaskan bentuk asesmen non-kognitif yang diinginkan (opsional)..." ${disabled?'disabled':''}></textarea></div></div></section>`).join('');
-    control=`<input type="hidden" id="${id}" data-token="${escapeHtml(f.token)}" data-assessment-hidden value="" ${disabled?'disabled':''}/><div class="assessment-config"><div class="assessment-intro"><strong>Atur asesmen sesuai kebutuhan.</strong> Asesmen Formatif wajib dan selalu aktif. Formatif Awal dan Sumatif opsional. Pada tiap jenis asesmen, pilih Kognitif, Non-Kognitif, atau keduanya.</div>${rows}<div class="assessment-note-final">Jika seluruh rincian suatu domain dibiarkan kosong, AI menentukan instrumen yang sesuai TP/KKTP.</div></div>`;
+    const ntypes=['Unjuk Kerja/Praktik','Presentasi','Proyek','Produk','Portofolio','Observasi','Penilaian Diri','Penilaian Antarteman','Lainnya'];
+    const rows=defs.map(a=>`<section class="assessment-kind"><label class="assessment-kind-head"><input type="checkbox" data-assessment-enable="${a.key}" ${a.required?'checked disabled':''} ${disabled?'disabled':''}/><span class="assessment-kind-title"><strong>${a.label}${a.required?'<span class="assessment-required">WAJIB</span>':''}</strong><small>${a.desc}</small></span></label><div class="assessment-kind-body" data-assessment-body="${a.key}" ${a.required?'':'hidden'}><div class="assessment-domain-row"><label class="assessment-domain-toggle"><input type="checkbox" data-assessment-domain="${a.key}:kognitif" ${disabled?'disabled':''}/>Kognitif</label><label class="assessment-domain-toggle"><input type="checkbox" data-assessment-domain="${a.key}:nonkognitif" ${disabled?'disabled':''}/>Non-Kognitif</label></div><div class="assessment-domain-panel" data-assessment-panel="${a.key}:kognitif" hidden><div class="assessment-subtitle">Kognitif — tipe soal</div><div class="assessment-choice-grid">${qtypes.map(q=>`<label class="assessment-choice"><input type="checkbox" data-assessment-qtype="${a.key}" value="${q}" ${disabled?'disabled':''}/>${q}</label>`).join('')}</div><textarea class="form-control assessment-desc" data-assessment-kognitif-desc="${a.key}" placeholder="Jelaskan bentuk asesmen kognitif yang diinginkan (opsional)..." ${disabled?'disabled':''}></textarea><div class="assessment-subtitle">Proporsi level kognitif (%)</div><div class="assessment-level-grid">${['LOTS','MOTS','HOTS','AKM/PISA'].map(l=>`<label class="assessment-level">${l}<input type="number" min="0" max="100" step="1" inputmode="numeric" data-assessment-level="${a.key}:${l}" placeholder="0" ${disabled?'disabled':''}/></label>`).join('')}</div><div class="assessment-level-total" data-assessment-total="${a.key}">Kosong = AI menentukan • jika diisi total harus 100%</div></div><div class="assessment-domain-panel" data-assessment-panel="${a.key}:nonkognitif" hidden><div class="assessment-subtitle">Non-Kognitif / Kinerja & Sikap — teknik penilaian</div><div class="assessment-choice-grid">${ntypes.map(n=>`<label class="assessment-choice"><input type="checkbox" data-assessment-ntype="${a.key}" value="${n}" ${disabled?'disabled':''}/>${n}</label>`).join('')}</div><input class="form-control assessment-custom-non" data-assessment-non-other="${a.key}" placeholder="Jika memilih Lainnya, jelaskan..." hidden disabled/><input class="form-control" data-assessment-skill="${a.key}" placeholder="Keterampilan/aspek yang dinilai, mis. penggunaan alat, komunikasi, kolaborasi, ketelitian..." ${disabled?'disabled':''}/><textarea class="form-control assessment-desc" data-assessment-nonkognitif-desc="${a.key}" placeholder="Jelaskan bentuk asesmen kinerja/sikap yang diinginkan (opsional)..." ${disabled?'disabled':''}></textarea></div></div></section>`).join('');
+    control=`<input type="hidden" id="${id}" data-token="${escapeHtml(f.token)}" data-assessment-hidden value="" ${disabled?'disabled':''}/><div class="assessment-config"><div class="assessment-intro"><strong>Atur asesmen sesuai kebutuhan.</strong> Asesmen Formatif wajib dan selalu aktif. Formatif Awal dan Sumatif opsional. Pada tiap jenis asesmen, pilih Kognitif, Non-Kognitif/Kinerja & Sikap, atau keduanya. Rubrik akan dibuat otomatis sesuai teknik yang dipilih.</div>${rows}<div class="assessment-note-final">Jika rincian dibiarkan kosong, AI menentukan instrumen yang sesuai TP/KKTP. Rubrik hanya dibuat untuk teknik asesmen yang membutuhkan dan dipilih.</div></div>`;
   }else if(cfg?.type==='dimensions'){
     const dims=['Keimanan dan Ketakwaan terhadap Tuhan YME','Kewargaan','Penalaran Kritis','Kreativitas','Kolaborasi','Kemandirian','Kesehatan','Komunikasi'];
     control=`<input type="hidden" id="${id}" data-token="${escapeHtml(f.token)}" data-dimension-hidden value="" ${disabled?'disabled':''}/><div class="dimension-picker">${dims.map((d,idx)=>`<label class="dimension-option"><input type="checkbox" data-dimension-value value="${escapeHtml(d)}" ${disabled?'disabled':''}/><span>${idx+1}. ${escapeHtml(d)}</span></label>`).join('')}</div><div class="dimension-empty-note">Disarankan memilih 2–4 dimensi. Jika dicentang, hanya dimensi terpilih yang dimasukkan ke prompt. Tidak mencentang apa pun = AI memilihkan 2–4 dimensi yang paling relevan.</div>`;
