@@ -6617,12 +6617,12 @@ const biasaCategories = [
 const modulAjarCategories = [
   {
     id: "modul-ajar-rpm",
-    name: "Modul Ajar / RPM — Deep Learning 8334",
+    name: "Modul Ajar / RPM — Pembelajaran Mendalam",
     icon: "📚",
-    keywords: "modul ajar RPM rencana pembelajaran mendalam deep learning pembelajaran mendalam 8334 BSKAP kurikulum merdeka perangkat ajar asesmen LKPD rubrik guru",
+    keywords: "modul ajar RPM rencana pembelajaran mendalam deep learning pembelajaran mendalam BSKAP kurikulum merdeka perangkat ajar asesmen LKPD rubrik guru",
     prompts: [
       {
-        title: "Prompt Modul Ajar / Rencana Pembelajaran Mendalam (RPM) 8334",
+        title: "Prompt Modul Ajar / Rencana Pembelajaran Mendalam (RPM)",
         generatorCurlyOnly: true,
         text: `Anda adalah pengembang kurikulum dan asesmen berpengalaman di Indonesia, ahli dalam
 Kurikulum Merdeka dengan pendekatan Pembelajaran Mendalam (deep learning) sesuai
@@ -6632,8 +6632,8 @@ TUGAS ANDA
 Susun sebuah MODUL AJAR / RENCANA PEMBELAJARAN MENDALAM (RPM) yang LENGKAP dan SIAP
 PAKAI untuk satu unit pembelajaran, mengikuti struktur resmi RPM (bukan format RPP lama),
 serta menyertakan seluruh perangkat pendukung (LKPD, lembar asesmen, rubrik, dst.) sesuai
-rincian di bawah. Tandai secara eksplisit setiap komponen dengan label [WAJIB] atau
-[OPSIONAL] tepat di depan judul komponen tersebut.
+rincian di bawah. Sajikan sebagai dokumen profesional yang natural dan siap digunakan.
+JANGAN menampilkan label atau pada judul maupun isi keluaran.
 
 =====================================================================
 BAGIAN 1 — KONTEKS & VARIABEL INPUT (isi/ganti sesuai kebutuhan)
@@ -6731,68 +6731,64 @@ ATURAN AUDIT KKO:
 4. Untuk kelas campuran, tampilkan pasangan TP reguler dan TP adaptif bila diperlukan agar perbedaan target dapat ditelusuri.
 
 =====================================================================
-BAGIAN 2 — STRUKTUR MODUL AJAR YANG WAJIB DIIKUTI (KERANGKA "8334")
+BAGIAN 2 — STRUKTUR MODUL AJAR YANG HARUS DIIKUTI
 =====================================================================
-Seluruh modul ajar WAJIB mengikuti kerangka kerja RPM Deep Learning "8334" berikut, dan
-keempat unsurnya harus dapat ditelusuri secara eksplisit di dalam dokumen yang Anda susun:
-  - 8 = 8 Dimensi Profil Lulusan            -> termuat di Bagian A
-  - 3 = 3 Prinsip Pembelajaran (Berkesadaran, Bermakna, Menggembirakan)
-                                             -> menjiwai & ditandai eksplisit di Bagian C
-  - 3 = 3 Pengalaman Belajar (Memahami, Mengaplikasi, Merefleksi)
-                                             -> menjadi struktur siklus Bagian C
-  - 4 = 4 Kerangka Penopang (Praktik Pedagogis, Kemitraan Pembelajaran, Lingkungan
-        Pembelajaran, Pemanfaatan Digital)   -> termuat di Bagian B
+Seluruh modul ajar harus menerapkan secara terpadu Dimensi Profil Lulusan, prinsip Pembelajaran Mendalam
+(Berkesadaran, Bermakna, Menggembirakan), pengalaman belajar Memahami → Mengaplikasi → Merefleksi,
+serta praktik pedagogis, kemitraan pembelajaran, lingkungan pembelajaran, dan pemanfaatan digital.
+Prinsip-prinsip tersebut harus tampak melalui rancangan kegiatan dan asesmen secara natural tanpa
+menyebut angka atau nama kerangka khusus pada dokumen keluaran.
 
 Susun dengan urutan dan penanda berikut (label wajib/opsional WAJIB Anda cantumkan di
 keluaran, jangan dihilangkan):
 
-A. IDENTITAS / IDENTIFIKASI [WAJIB]
+A. IDENTITAS / IDENTIFIKASI
    - Sekolah, mapel, fase/kelas, semester, alokasi waktu, jumlah pertemuan
-   - Capaian Pembelajaran (CP) [WAJIB]
-   - Dimensi Profil Lulusan yang relevan [WAJIB] — gunakan {{dimensi_profil_lulusan}}. Jika input berisi pilihan guru, tampilkan dan gunakan HANYA dimensi yang dipilih tersebut; DILARANG menambah dimensi lain dan DILARANG melampirkan daftar 8 dimensi secara lengkap. Untuk setiap dimensi terpilih, sertakan elemen serta bukti nyata pencapaiannya dalam pembelajaran. Jika guru tidak memilih dimensi apa pun, pilihkan 2–4 dimensi paling relevan dari REFERENSI 8 DIMENSI PROFIL LULUSAN yang tercantum pada prompt ini.
+   - Capaian Pembelajaran (CP)
+   - Dimensi Profil Lulusan yang relevan — gunakan {{dimensi_profil_lulusan}}. Jika input berisi pilihan guru, tampilkan dan gunakan HANYA dimensi yang dipilih tersebut; DILARANG menambah dimensi lain dan DILARANG melampirkan daftar 8 dimensi secara lengkap. Untuk setiap dimensi terpilih, sertakan elemen serta bukti nyata pencapaiannya dalam pembelajaran. Jika guru tidak memilih dimensi apa pun, pilihkan 2–4 dimensi paling relevan dari REFERENSI 8 DIMENSI PROFIL LULUSAN yang tercantum pada prompt ini.
    - Identifikasi kesiapan/karakteristik murid [OPSIONAL, tapi cantumkan jika data tersedia]
-   - Komposisi/kondisi siswa [WAJIB] — nyatakan Non inklusi / Siswa inklusi / Campuran-heterogen. Jika ada siswa inklusi, ringkas kebutuhan adaptasi berdasarkan {{deskripsi_siswa_inklusi}} tanpa menambahkan diagnosis yang tidak diberikan guru.
+   - Komposisi/kondisi siswa — nyatakan Non inklusi / Siswa inklusi / Campuran-heterogen. Jika ada siswa inklusi, ringkas kebutuhan adaptasi berdasarkan {{deskripsi_siswa_inklusi}} tanpa menambahkan diagnosis yang tidak diberikan guru.
 
-B. DESAIN PEMBELAJARAN [WAJIB]
-   1. Tujuan Pembelajaran (TP) — gunakan {{tujuan_pembelajaran}} jika diberikan guru; jika kosong, susun otomatis rumusan kompetensi + konten dengan KKO yang HANYA berasal dari REFERENSI KKO WAJIB di atas dan selaras dengan CP [WAJIB]. Audit TP dari guru dan ganti kata kerja yang tidak ada pada referensi. Jika {{komposisi_siswa}} = Siswa inklusi, buat TP adaptif dengan kompleksitas/level KKO yang diturunkan secara proporsional berdasarkan {{deskripsi_siswa_inklusi}}. Jika Campuran/heterogen, sajikan TP reguler + TP adaptif khusus siswa yang membutuhkan dukungan.
-   2. Kriteria Ketercapaian Tujuan Pembelajaran (KKTP) [WAJIB] — pilih salah satu atau
+B. DESAIN PEMBELAJARAN
+   1. Tujuan Pembelajaran (TP) — gunakan {{tujuan_pembelajaran}} jika diberikan guru; jika kosong, susun otomatis rumusan kompetensi + konten dengan KKO yang HANYA berasal dari REFERENSI KKO WAJIB di atas dan selaras dengan CP. Audit TP dari guru dan ganti kata kerja yang tidak ada pada referensi. Jika {{komposisi_siswa}} = Siswa inklusi, buat TP adaptif dengan kompleksitas/level KKO yang diturunkan secara proporsional berdasarkan {{deskripsi_siswa_inklusi}}. Jika Campuran/heterogen, sajikan TP reguler + TP adaptif khusus siswa yang membutuhkan dukungan.
+   2. Kriteria Ketercapaian Tujuan Pembelajaran (KKTP) — pilih salah satu atau
       kombinasi pendekatan berikut, jelaskan yang dipakai:
         a. Deskripsi kriteria kualitatif, atau
         b. Rubrik (skala 1-4 dengan deskriptor tiap level), atau
         c. Interval nilai/persentase ketercapaian
       Boleh memakai skema perkembangan taksonomi SOLO (Pre-structural → Uni-structural
       → Multi-structural → Relational → Extended Abstract) bila cocok dengan topik. Jika ada siswa inklusi, turunkan kriteria/kompleksitas KKTP secara proporsional sesuai TP adaptif dan kebutuhan siswa. Untuk kelas campuran, pisahkan KKTP reguler dan KKTP adaptif agar target tidak tercampur.
-   3. Ringkasan Materi Esensial [WAJIB] — rangkuman padat konsep inti yang perlu dikuasai
+   3. Ringkasan Materi Esensial — rangkuman padat konsep inti yang perlu dikuasai
       guru & murid, ditulis dalam bahasa yang sesuai jenjang
-   4. Pemahaman Bermakna & Pertanyaan Pemantik [WAJIB]
-   5. EMPAT KERANGKA PENOPANG (unsur "4" dalam Kerangka 8334) — tulis sebagai satu
+   4. Pemahaman Bermakna & Pertanyaan Pemantik
+   5. KERANGKA PEMBELAJARAN — tulis sebagai satu
       kelompok, masing-masing dengan status:
-        a. Praktik Pedagogis / Model Pembelajaran [WAJIB] — jelaskan model yang dipakai
+        a. Praktik Pedagogis / Model Pembelajaran — jelaskan model yang dipakai
            per pertemuan dan alasannya
-        b. Kemitraan Pembelajaran [OPSIONAL] — narasumber/kolaborasi internal-eksternal
-        c. Lingkungan Pembelajaran [WAJIB] — budaya belajar, ruang fisik/virtual
-        d. Pemanfaatan Digital [OPSIONAL] — alat/platform yang digunakan
-   6. Lintas Disiplin Ilmu [OPSIONAL] — elemen tambahan, di luar 4 Kerangka Penopang inti
+        b. Kemitraan Pembelajaran — narasumber/kolaborasi internal-eksternal
+        c. Lingkungan Pembelajaran — budaya belajar, ruang fisik/virtual
+        d. Pemanfaatan Digital — alat/platform yang digunakan
+   6. Lintas Disiplin Ilmu — elemen tambahan, di luar 4 Kerangka Pembelajaran inti
 
-C. LANGKAH-LANGKAH KEGIATAN PEMBELAJARAN [WAJIB]
+C. LANGKAH-LANGKAH KEGIATAN PEMBELAJARAN
    - Susun per pertemuan, mengikuti siklus 3 Pengalaman Belajar Pembelajaran Mendalam:
-     MEMAHAMI → MENGAPLIKASI → MEREFLEKSI (unsur "3" kedua dalam Kerangka 8334).
+     MEMAHAMI → MENGAPLIKASI → MEREFLEKSI.
    - Untuk SETIAP tahap/aktivitas, cantumkan secara eksplisit label:
        "Pengalaman Belajar: [Memahami/Mengaplikasi/Merefleksi]"
        "Prinsip Pembelajaran: [Berkesadaran/Bermakna/Menggembirakan — boleh lebih dari satu]"
-     (unsur "3" pertama dalam Kerangka 8334), mengikuti pola pada contoh resmi Panduan
+     mengikuti pola pada contoh resmi Panduan
      BSKAP, bukan hanya disebut sekali di awal.
    - Tiap pertemuan berisi Kegiatan Awal, Kegiatan Inti (sesuai sintaks model pembelajaran
      yang dipilih), dan Kegiatan Penutup, lengkap dengan estimasi waktu.
    - Sesuaikan kompleksitas aktivitas dengan jenjang (lihat Bagian 3).
 
-D. ASESMEN PEMBELAJARAN [WAJIB — mengikuti {{konfigurasi_asesmen}}]
-   ATURAN KETERKAITAN ASESMEN DENGAN TP [WAJIB]: seluruh instrumen asesmen, khususnya setiap butir soal, WAJIB disusun berdasarkan Tujuan Pembelajaran (TP). Setiap butir harus dapat ditelusuri ke minimal satu TP dan indikator yang relevan. DILARANG membuat soal yang tidak mengukur TP. Untuk kelas campuran/inklusi, instrumen adaptif WAJIB mengacu pada TP adaptif dan KKTP adaptif.
+D. ASESMEN PEMBELAJARAN — mengikuti {{konfigurasi_asesmen}}]
+   ATURAN KETERKAITAN ASESMEN DENGAN TP: seluruh instrumen asesmen, khususnya setiap butir soal, WAJIB disusun berdasarkan Tujuan Pembelajaran (TP). Setiap butir harus dapat ditelusuri ke minimal satu TP dan indikator yang relevan. DILARANG membuat soal yang tidak mengukur TP. Untuk kelas campuran/inklusi, instrumen adaptif WAJIB mengacu pada TP adaptif dan KKTP adaptif.
 
    PRINSIP TIGA JENIS ASESMEN:
-   1. Asesmen Formatif Awal / Diagnostik [OPSIONAL — hanya jika dipilih guru] — untuk melihat kemampuan/kesiapan AWAL peserta didik sebelum pembelajaran. Kognitif digunakan untuk prasyarat/miskonsepsi; Non-Kognitif untuk kesiapan, minat, kondisi psikososial, kebiasaan belajar, atau kebutuhan dukungan secara proporsional. Hasilnya menjadi dasar diferensiasi/tindak lanjut, bukan nilai akhir.
-   2. Asesmen Formatif [WAJIB — minimal satu kali] — dapat dilakukan di tengah pembelajaran dan/atau di akhir pembelajaran untuk memberi umpan balik, memantau perkembangan terhadap TP, dan menentukan tindak lanjut. Gunakan Kognitif dan/atau Non-Kognitif/Kinerja & Sikap sesuai konfigurasi guru.
-   3. Asesmen Sumatif [OPSIONAL — hanya jika dipilih guru] — untuk mengukur ketercapaian TP/KKTP pada akhir unit/lingkup materi. Setiap butir/instrumen wajib memiliki keterlacakan ke TP dan KKTP.
+   1. Asesmen Formatif Awal / Diagnostik — hanya jika dipilih guru] — untuk melihat kemampuan/kesiapan AWAL peserta didik sebelum pembelajaran. Kognitif digunakan untuk prasyarat/miskonsepsi; Non-Kognitif untuk kesiapan, minat, kondisi psikososial, kebiasaan belajar, atau kebutuhan dukungan secara proporsional. Hasilnya menjadi dasar diferensiasi/tindak lanjut, bukan nilai akhir.
+   2. Asesmen Formatif — minimal satu kali] — dapat dilakukan di tengah pembelajaran dan/atau di akhir pembelajaran untuk memberi umpan balik, memantau perkembangan terhadap TP, dan menentukan tindak lanjut. Gunakan Kognitif dan/atau Non-Kognitif/Kinerja & Sikap sesuai konfigurasi guru.
+   3. Asesmen Sumatif — hanya jika dipilih guru] — untuk mengukur ketercapaian TP/KKTP pada akhir unit/lingkup materi. Setiap butir/instrumen wajib memiliki keterlacakan ke TP dan KKTP.
 
    DOMAIN ASESMEN — TERAPKAN HANYA JIKA DIPILIH DALAM {{konfigurasi_asesmen}}:
    a. Kognitif — gunakan tipe soal yang dipilih guru: PG, PG Kompleks, Uraian, Isian Singkat, Menjodohkan, Mengurutkan, Benar-Salah, dan/atau SJT. Gunakan proporsi LOTS/MOTS/HOTS/AKM-Standar PISA sesuai konfigurasi. Jika proporsi kosong, AI menentukan berdasarkan TP, jenjang, tujuan asesmen, dan kondisi siswa.
@@ -6815,17 +6811,17 @@ D. ASESMEN PEMBELAJARAN [WAJIB — mengikuti {{konfigurasi_asesmen}}]
    - Jika model = PjBL dan Proyek dipilih sebagai bukti TP, rubrik proyek wajib dibuat mengikuti aspek proyek yang benar-benar dirancang.
    - Terapkan {{deskripsi_asesmen}} sebagai ketentuan tambahan.
 
-E. LEMBAR KERJA PESERTA DIDIK (LKPD) [WAJIB — minimal satu LKPD per aktivitas inti/
+E. LEMBAR KERJA PESERTA DIDIK (LKPD) — minimal satu LKPD per aktivitas inti/
    pertemuan] — memuat: judul kegiatan, tujuan, alat/bahan (jika ada), langkah kerja,
    tabel/ruang kerja untuk mencatat data atau jawaban, dan pertanyaan simpulan.
 
-F. LEMBAR REFLEKSI SISWA [WAJIB] — pertanyaan reflektif metakognitif (pengalaman belajar,
+F. LEMBAR REFLEKSI SISWA — pertanyaan reflektif metakognitif (pengalaman belajar,
    pemahaman baru, tantangan, rencana tindak lanjut pribadi).
 
-G. LEMBAR REFLEKSI GURU [WAJIB] — evaluasi keterlaksanaan rencana, efektivitas strategi,
+G. LEMBAR REFLEKSI GURU — evaluasi keterlaksanaan rencana, efektivitas strategi,
    kendala, dan rencana perbaikan untuk pembelajaran berikutnya.
 
-H. RENCANA TINDAK LANJUT: REMEDIAL & PENGAYAAN [WAJIB] — gunakan pedoman interval
+H. RENCANA TINDAK LANJUT: REMEDIAL & PENGAYAAN — gunakan pedoman interval
    ketercapaian berikut (sesuai Panduan BSKAP 2025) sebagai dasar, lalu rancang aktivitas
    konkretnya:
      - 0–20   : belum mencapai TP → remedial penuh, ulangi seluruh kriteria/materi
@@ -6837,9 +6833,9 @@ H. RENCANA TINDAK LANJUT: REMEDIAL & PENGAYAAN [WAJIB] — gunakan pedoman inter
    pendekatan berbeda) dan aktivitas pengayaan (mis. studi kasus lanjutan, proyek mini,
    tutor sebaya) yang konkret dan sesuai topik.
 
-I. DAFTAR PUSTAKA / SUMBER BELAJAR [OPSIONAL]
+I. DAFTAR PUSTAKA / SUMBER BELAJAR
 
-J. LAMPIRAN TAMBAHAN [OPSIONAL] — mis. glosarium istilah, media/tautan pembelajaran,
+J. LAMPIRAN TAMBAHAN — mis. glosarium istilah, media/tautan pembelajaran,
    instrumen sikap tambahan.
 
 =====================================================================
@@ -6863,7 +6859,7 @@ Jika [Fase & Kelas] pada Bagian 1 sudah diisi, ikuti panduan fase tersebut secar
 =====================================================================
 BAGIAN 4 — SPESIFIKASI DETAIL LEMBAR ASESMEN & RUBRIK
 =====================================================================
-ATURAN UTAMA KETERKAITAN SOAL DENGAN TP [WAJIB]:
+ATURAN UTAMA KETERKAITAN SOAL DENGAN TP:
 - Mulai penyusunan soal dengan membaca dan memetakan TP terlebih dahulu.
 - Setiap soal WAJIB mengukur minimal satu TP; jangan membuat soal hanya karena sesuai materi tetapi tidak terkait TP.
 - Untuk setiap butir, tentukan TP yang diukur → indikator soal → level kognitif → bentuk soal → kunci/pedoman skor.
@@ -6879,11 +6875,11 @@ ATURAN UTAMA KETERKAITAN SOAL DENGAN TP [WAJIB]:
    No | Tujuan Pembelajaran (TP yang diukur) | Materi Esensial | Indikator Soal | Level Kognitif
    (LOTS/MOTS/HOTS) | Bentuk Soal | No. Soal | Kunci Jawaban/Pedoman Skor
 
-4. PEDOMAN PENSKORAN & KATEGORI PREDIKAT [WAJIB] — cantumkan rumus nilai akhir dan
+4. PEDOMAN PENSKORAN & KATEGORI PREDIKAT — cantumkan rumus nilai akhir dan
    kategori predikat (mis. 90-100 Sangat Baik, 75-89 Baik, 60-74 Cukup, <60 Perlu
    Bimbingan), atau memakai interval ketercapaian pada Bagian 2.H.
 
-5. RUBRIK & PEDOMAN SKOR ADAPTIF [WAJIB SESUAI ASESMEN YANG DIPILIH] — jangan membuat rubrik yang tidak relevan. Untuk setiap asesmen aktif, tentukan otomatis bentuk penskoran yang tepat:
+5. RUBRIK & PEDOMAN SKOR ADAPTIF — jangan membuat rubrik yang tidak relevan. Untuk setiap asesmen aktif, tentukan otomatis bentuk penskoran yang tepat:
    - Soal objektif (PG, PG Kompleks, Benar-Salah, Menjodohkan, Isian objektif): kunci jawaban + pedoman skor.
    - Uraian/SJT: rubrik atau pedoman skor analitik berdasarkan indikator jawaban dan TP.
    - Unjuk Kerja/Praktik: rubrik proses/kinerja sesuai keterampilan yang dinilai.
@@ -6895,20 +6891,21 @@ ATURAN UTAMA KETERKAITAN SOAL DENGAN TP [WAJIB]:
    - Penilaian Diri/Antarteman: skala/rubrik reflektif sederhana dengan indikator jelas.
    Format rubrik standar dapat menggunakan tabel: Aspek/Indikator | Skala 1 | Skala 2 | Skala 3 | Skala 4, tetapi NAMA ASPEK dan DESKRIPTOR tiap skala WAJIB disesuaikan dengan asesmen, keterampilan/aspek, TP, KKTP, dan kondisi siswa. Untuk siswa inklusi, sediakan rubrik adaptif yang selaras dengan TP/KKTP adaptif.
 
-6. ATURAN PEMILIHAN RUBRIK [WAJIB] — keluaran hanya menampilkan rubrik yang dibutuhkan oleh konfigurasi asesmen guru. Jika guru memilih beberapa teknik, buat rubrik terpisah untuk masing-masing teknik. Jika suatu teknik tidak dipilih, jangan membuat rubriknya. Jika LKPD dinilai sebagai bukti TP, buat rubrik LKPD; jika LKPD hanya sebagai aktivitas latihan tanpa penilaian, tidak perlu memaksakan rubrik khusus.
+6. ATURAN PEMILIHAN RUBRIK — keluaran hanya menampilkan rubrik yang dibutuhkan oleh konfigurasi asesmen guru. Jika guru memilih beberapa teknik, buat rubrik terpisah untuk masing-masing teknik. Jika suatu teknik tidak dipilih, jangan membuat rubriknya. Jika LKPD dinilai sebagai bukti TP, buat rubrik LKPD; jika LKPD hanya sebagai aktivitas latihan tanpa penilaian, tidak perlu memaksakan rubrik khusus.
 
 =====================================================================
 BAGIAN 5 — FORMAT KELUARAN
 =====================================================================
 - Gunakan struktur A–J di atas secara berurutan, dengan sub-penomoran yang rapi.
-- Cantumkan label [WAJIB]/[OPSIONAL] persis di depan setiap judul komponen/sub-komponen.
+- JANGAN mencantumkan label [WAJIB] atau [OPSIONAL] pada judul maupun sub-komponen. Gunakan judul natural dan profesional.
 - Gunakan tabel untuk: KKTP, kisi-kisi soal, rubrik, dan interval nilai remedial/pengayaan.
 - Sebelum finalisasi, lakukan audit keterlacakan TP → KKTP → kegiatan → asesmen → nomor soal; pastikan tidak ada soal yang berdiri sendiri tanpa TP.
+- Jangan menyebut angka/nama kerangka khusus untuk struktur Pembelajaran Mendalam; tampilkan prinsip-prinsipnya secara natural melalui isi modul.
 - Tulis dalam Bahasa Indonesia baku, sesuai jenjang pembaca (guru sebagai pengguna utama).
 - Jika suatu variabel input di Bagian 1 tidak diisi, buat asumsi wajar dan sebutkan
   asumsi tersebut secara singkat di awal jawaban.
-- Jika materi/topik sangat luas untuk satu kali jawaban, prioritaskan komponen [WAJIB]
-  lebih dulu, lalu tawarkan untuk melanjutkan komponen [OPSIONAL] atau lampiran pada
+- Jika materi/topik sangat luas untuk satu kali jawaban, prioritaskan komponen
+  lebih dulu, lalu tawarkan untuk melanjutkan komponen atau lampiran pada
   giliran berikutnya.`
       }
     ]
