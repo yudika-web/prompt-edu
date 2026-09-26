@@ -949,6 +949,46 @@ select.form-control optgroup{font-weight:800}
   .piko-footer-actions button:first-child{grid-column:1/-1}
 }
 
+
+/* === Saran & Masukan === */
+.feedback-backdrop{position:fixed;inset:0;z-index:1690;background:rgba(4,8,18,.52);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+.feedback-backdrop[hidden],.feedback-panel[hidden]{display:none!important}
+.feedback-panel{position:fixed;z-index:1700;left:50%;top:50%;transform:translate(-50%,-50%);width:min(620px,calc(100vw - 28px));max-height:min(84vh,720px);overflow:auto;border:1px solid var(--glass-edge);border-radius:24px;background:color-mix(in srgb,var(--panel-solid) 94%,transparent);box-shadow:0 28px 90px rgba(0,0,0,.32);backdrop-filter:blur(24px) saturate(150%);-webkit-backdrop-filter:blur(24px) saturate(150%)}
+.feedback-head{position:sticky;top:0;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:15px 17px;border-bottom:1px solid var(--border);background:color-mix(in srgb,var(--panel-solid) 96%,transparent)}
+.feedback-head-copy{display:grid;gap:3px}.feedback-head-copy strong{font-size:13px}.feedback-head-copy span{font-size:8.7px;color:var(--muted)}
+.feedback-close{width:34px;height:34px;border:1px solid var(--border);border-radius:11px;background:var(--panel2);color:var(--text);cursor:pointer}
+.feedback-body{padding:16px 17px;display:grid;gap:13px}.feedback-note{padding:10px 11px;border:1px solid color-mix(in srgb,var(--accent2) 28%,var(--border));border-radius:12px;background:color-mix(in srgb,var(--accent2) 6%,var(--panel));font-size:8.7px;line-height:1.5;color:var(--muted)}.feedback-note strong{color:var(--text)}
+.feedback-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.feedback-grid .span-2{grid-column:1/-1}.feedback-grid label{display:grid;gap:6px;font-size:9px;font-weight:800;color:var(--text)}
+.feedback-grid input,.feedback-grid select,.feedback-grid textarea{width:100%;min-width:0;border:1px solid var(--border);border-radius:12px;background:var(--panel2);color:var(--text);padding:10px 11px;font:inherit;font-size:10px;outline:none}.feedback-grid textarea{min-height:128px;resize:vertical;line-height:1.5}.feedback-grid input:focus,.feedback-grid select:focus,.feedback-grid textarea:focus{border-color:color-mix(in srgb,var(--accent2) 58%,var(--border));box-shadow:0 0 0 3px color-mix(in srgb,var(--accent2) 9%,transparent)}
+.feedback-rating{display:flex;gap:6px;flex-wrap:wrap}.feedback-rating label{display:block}.feedback-rating input{position:absolute;opacity:0;pointer-events:none}.feedback-rating span{display:grid;place-items:center;min-width:38px;height:38px;padding:0 8px;border:1px solid var(--border);border-radius:11px;background:var(--panel2);font-size:14px;cursor:pointer}.feedback-rating input:checked+span{border-color:color-mix(in srgb,var(--accent2) 58%,var(--border));background:color-mix(in srgb,var(--accent2) 12%,var(--panel2));box-shadow:0 0 0 2px color-mix(in srgb,var(--accent2) 8%,transparent)}
+.feedback-status{font-size:8.6px;color:var(--muted);min-height:14px}.feedback-actions{position:sticky;bottom:0;display:flex;gap:7px;justify-content:flex-end;flex-wrap:wrap;padding:12px 17px max(12px,env(safe-area-inset-bottom));border-top:1px solid var(--border);background:color-mix(in srgb,var(--panel-solid) 96%,transparent)}
+.feedback-actions button{min-height:38px}.feedback-trigger{position:relative}.feedback-trigger::after{content:"";position:absolute;right:5px;top:5px;width:6px;height:6px;border-radius:50%;background:var(--accent2);box-shadow:0 0 8px color-mix(in srgb,var(--accent2) 72%,transparent)}
+@media(max-width:650px){
+  .feedback-panel{left:0;right:0;top:auto;bottom:0;transform:none;width:100%;max-height:88dvh;border-radius:22px 22px 0 0;overflow-x:hidden}
+  .feedback-grid{grid-template-columns:1fr}.feedback-grid .span-2{grid-column:auto}.feedback-body{padding:14px 12px}.feedback-head{padding:13px 12px}.feedback-actions{display:grid;grid-template-columns:1fr 1fr;padding-left:12px;padding-right:12px}.feedback-actions button{width:100%}.feedback-actions .feedback-primary{grid-column:1/-1}.feedback-grid input,.feedback-grid select,.feedback-grid textarea{font-size:16px}.feedback-rating span{min-width:42px;height:42px}
+}
+
+
+/* === Feedback Google Sheet integration === */
+.feedback-required{color:var(--danger);font-weight:950;margin-left:3px}
+.feedback-grid input:invalid,.feedback-grid textarea:invalid{box-shadow:none}
+.feedback-grid .field-error{border-color:var(--danger)!important;box-shadow:0 0 0 3px color-mix(in srgb,var(--danger) 10%,transparent)!important}
+.feedback-send-status{display:inline-flex;align-items:center;gap:6px}.feedback-send-status.sending{color:var(--accent2)}.feedback-send-status.ok{color:var(--success)}.feedback-send-status.bad{color:var(--danger)}
+.feedback-actions .feedback-send{background:linear-gradient(135deg,var(--accent2),var(--accent));color:#fff;border-color:transparent}
+
+
+/* === Papan Saran Publik (moderasi Google Sheet) === */
+.feedback-tabs{display:grid;grid-template-columns:1fr 1fr;gap:7px;padding:10px 17px 0;background:color-mix(in srgb,var(--panel-solid) 96%,transparent)}
+.feedback-tab{min-height:38px;border:1px solid var(--border);border-radius:12px;background:var(--panel2);color:var(--muted);font:inherit;font-size:9px;font-weight:900;cursor:pointer}
+.feedback-tab.active{color:var(--text);border-color:color-mix(in srgb,var(--accent2) 48%,var(--border));background:linear-gradient(135deg,color-mix(in srgb,var(--accent2) 10%,var(--panel2)),color-mix(in srgb,var(--accent) 8%,var(--panel2)));box-shadow:0 0 0 2px color-mix(in srgb,var(--accent2) 6%,transparent)}
+.feedback-pane[hidden]{display:none!important}.feedback-public-pane{padding:14px 17px 17px;display:grid;gap:12px}.feedback-public-toolbar{display:flex;align-items:center;justify-content:space-between;gap:9px}.feedback-public-toolbar div{display:grid;gap:2px;min-width:0}.feedback-public-toolbar strong{font-size:11px}.feedback-public-toolbar span{font-size:8.5px;color:var(--muted);line-height:1.4}.feedback-public-refresh{min-height:36px;white-space:nowrap}
+.feedback-public-status{padding:10px 11px;border:1px solid var(--border);border-radius:12px;background:var(--panel2);font-size:8.8px;line-height:1.45;color:var(--muted)}.feedback-public-status.ok{color:var(--success)}.feedback-public-status.bad{color:var(--danger)}
+.feedback-public-list{display:grid;gap:9px}.feedback-public-empty{padding:22px 14px;text-align:center;border:1px dashed var(--border);border-radius:14px;color:var(--muted);font-size:9px;line-height:1.5}
+.feedback-public-card{display:grid;gap:8px;padding:12px;border:1px solid var(--border);border-radius:15px;background:linear-gradient(145deg,color-mix(in srgb,var(--panel-solid) 62%,transparent),color-mix(in srgb,var(--panel2) 95%,transparent));box-shadow:0 10px 24px rgba(0,0,0,.05);overflow:hidden;min-width:0}
+.feedback-public-meta{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;min-width:0}.feedback-public-person{display:grid;gap:2px;min-width:0}.feedback-public-person strong{font-size:10px;overflow-wrap:anywhere}.feedback-public-person span{font-size:8.2px;color:var(--muted);overflow-wrap:anywhere}.feedback-public-tags{display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-end}.feedback-chip{display:inline-flex;align-items:center;min-height:22px;padding:3px 7px;border-radius:999px;border:1px solid var(--border);background:var(--panel2);font-size:7.5px;font-weight:850;color:var(--muted);white-space:nowrap}.feedback-chip.status{color:var(--accent2);border-color:color-mix(in srgb,var(--accent2) 30%,var(--border))}.feedback-chip.done{color:var(--success);border-color:color-mix(in srgb,var(--success) 34%,var(--border))}
+.feedback-public-message{font-size:9.3px;line-height:1.55;color:var(--text);white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word}.feedback-public-foot{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:7.8px;color:var(--muted)}.feedback-public-stars{letter-spacing:.04em;color:#f6b73c}
+@media(max-width:650px){.feedback-tabs{padding:9px 12px 0}.feedback-public-pane{padding:12px}.feedback-public-toolbar{align-items:stretch}.feedback-public-toolbar{display:grid;grid-template-columns:1fr auto}.feedback-public-meta{display:grid;gap:7px}.feedback-public-tags{justify-content:flex-start}.feedback-public-card{padding:11px}.feedback-public-message{font-size:13px}.feedback-public-person strong{font-size:13px}.feedback-public-person span,.feedback-public-toolbar span,.feedback-public-status{font-size:11px}.feedback-tab{font-size:12px}}
+
 </style>
 </head>
 <body class="auth-locked">
@@ -985,7 +1025,7 @@ select.form-control optgroup{font-weight:800}
       <button data-view="generator"><span class="nav-icon asset-icon asset-generator" aria-hidden="true"></span><span>Generator Prompt</span></button>
       <button data-view="bank"><span class="nav-icon asset-icon asset-bank" aria-hidden="true"></span><span>Bank Prompt</span></button>
     </nav>
-    <div class="global-actions"><div class="audio-control-wrap"><button class="icon-btn audio-settings-btn audio-live asset-button" id="audioSettingsBtn" title="Pengaturan audio" aria-expanded="false" aria-controls="audioPanel"><span class="control-asset asset-icon asset-speaker" aria-hidden="true"></span></button><div class="audio-panel" id="audioPanel" hidden><div class="audio-panel-head"><div class="audio-panel-brand"><span class="audio-panel-brand-icon asset-icon asset-gear" aria-hidden="true"></span><div><span>Sound Center</span><strong>Pengaturan Audio</strong></div></div><button class="icon-btn" id="audioPanelClose" type="button" title="Tutup" style="min-width:32px;min-height:32px;padding:5px">✕</button></div><div class="audio-row"><div class="audio-row-icon">🗣️</div><div class="audio-row-copy"><strong>Narasi / Audio</strong><small>Voice-over sesuai menu aktif</small><input class="audio-slider" id="narrationVolume" type="range" min="0" max="100" step="1" value="100" /></div><div><div class="audio-value" id="narrationVolumeValue">100%</div><button class="audio-toggle on" id="narrationToggle" type="button">ON</button></div></div><div class="audio-row"><div class="audio-row-icon asset-icon asset-speaker" aria-hidden="true"></div><div class="audio-row-copy"><strong>Musik Latar</strong><small>Bouncy Learning Groove • loop</small><input class="audio-slider" id="musicVolume" type="range" min="0" max="100" step="1" value="10" /></div><div><div class="audio-value" id="musicVolumeValue">10%</div><button class="audio-toggle on" id="musicToggle" type="button">ON</button></div></div><div class="audio-panel-actions"><button class="btn-secondary asset-label-button" id="replayNarrationBtn" type="button"><span class="control-asset asset-icon asset-refresh" aria-hidden="true"></span>Putar Narasi</button><button class="btn-secondary" id="masterMuteBtn" type="button">🔇 Mute Semua</button></div><div class="audio-now" id="audioNow"><strong>Audio aktif.</strong> Musik latar dibuat lebih pelan daripada narasi.</div></div></div><button class="icon-btn" id="themeBtn" title="Ganti tema">🌙</button><button class="icon-btn asset-button" id="logoutBtn" title="Keluar"><span class="control-asset asset-icon asset-logout" aria-hidden="true"></span></button></div>
+    <div class="global-actions"><div class="audio-control-wrap"><button class="icon-btn audio-settings-btn audio-live asset-button" id="audioSettingsBtn" title="Pengaturan audio" aria-expanded="false" aria-controls="audioPanel"><span class="control-asset asset-icon asset-speaker" aria-hidden="true"></span></button><div class="audio-panel" id="audioPanel" hidden><div class="audio-panel-head"><div class="audio-panel-brand"><span class="audio-panel-brand-icon asset-icon asset-gear" aria-hidden="true"></span><div><span>Sound Center</span><strong>Pengaturan Audio</strong></div></div><button class="icon-btn" id="audioPanelClose" type="button" title="Tutup" style="min-width:32px;min-height:32px;padding:5px">✕</button></div><div class="audio-row"><div class="audio-row-icon">🗣️</div><div class="audio-row-copy"><strong>Narasi / Audio</strong><small>Voice-over sesuai menu aktif</small><input class="audio-slider" id="narrationVolume" type="range" min="0" max="100" step="1" value="100" /></div><div><div class="audio-value" id="narrationVolumeValue">100%</div><button class="audio-toggle on" id="narrationToggle" type="button">ON</button></div></div><div class="audio-row"><div class="audio-row-icon asset-icon asset-speaker" aria-hidden="true"></div><div class="audio-row-copy"><strong>Musik Latar</strong><small>Bouncy Learning Groove • loop</small><input class="audio-slider" id="musicVolume" type="range" min="0" max="100" step="1" value="10" /></div><div><div class="audio-value" id="musicVolumeValue">10%</div><button class="audio-toggle on" id="musicToggle" type="button">ON</button></div></div><div class="audio-panel-actions"><button class="btn-secondary asset-label-button" id="replayNarrationBtn" type="button"><span class="control-asset asset-icon asset-refresh" aria-hidden="true"></span>Putar Narasi</button><button class="btn-secondary" id="masterMuteBtn" type="button">🔇 Mute Semua</button></div><div class="audio-now" id="audioNow"><strong>Audio aktif.</strong> Musik latar dibuat lebih pelan daripada narasi.</div></div></div><button class="icon-btn" id="themeBtn" title="Ganti tema">🌙</button><button class="icon-btn feedback-trigger" id="feedbackBtn" type="button" title="Saran & Masukan" aria-label="Buka Saran dan Masukan">💬</button><button class="icon-btn asset-button" id="logoutBtn" title="Keluar"><span class="control-asset asset-icon asset-logout" aria-hidden="true"></span></button></div>
   </header>
 
   <section class="view-shell home-view" id="homeView">
@@ -1072,6 +1112,31 @@ select.form-control optgroup{font-weight:800}
     <header class="enhancement-modal-head"><div><strong id="qualityCheckTitle">Quality Check Generator</strong><span>Audit lokal sebelum prompt dibuat. Tidak mengubah template prompt.</span></div><button id="qualityCheckClose" type="button" aria-label="Tutup">✕</button></header>
     <div class="enhancement-modal-body"><div class="quality-summary" id="qualityCheckSummary"></div><div class="quality-list" id="qualityCheckList"></div></div>
     <div class="quality-actions"><button class="btn-secondary" id="qualityCheckFix" type="button">Kembali Perbaiki</button><button class="btn-primary" id="qualityCheckContinue" type="button">Lanjut ke Preview</button></div>
+  </section>
+  <div class="feedback-backdrop" id="feedbackBackdrop" hidden></div>
+  <section class="feedback-panel" id="feedbackPanel" hidden role="dialog" aria-modal="true" aria-labelledby="feedbackTitle">
+    <header class="feedback-head"><div class="feedback-head-copy"><strong id="feedbackTitle">💬 Saran & Masukan</strong><span>Kirim masukan atau lihat saran pengguna yang sudah disetujui admin</span></div><button class="feedback-close" id="feedbackClose" type="button" aria-label="Tutup">✕</button></header>
+    <div class="feedback-tabs" role="tablist" aria-label="Saran dan masukan"><button class="feedback-tab active" id="feedbackTabSubmit" type="button" role="tab" aria-selected="true" data-feedback-tab="submit">✍️ Kirim Saran</button><button class="feedback-tab" id="feedbackTabPublic" type="button" role="tab" aria-selected="false" data-feedback-tab="public">📣 Saran Pengguna</button></div>
+    <div class="feedback-pane" id="feedbackSubmitPane" data-feedback-pane="submit">
+      <div class="feedback-body">
+        <div class="feedback-note"><strong>Moderasi:</strong> Nama Guru, Sekolah/Instansi, dan Saran/Masukan wajib diisi. Kiriman baru <strong>tidak langsung tampil publik</strong>; pengelola meninjau dan mengaktifkan kolom <strong>Tampilkan = YA</strong> di Google Sheet. Kontak tidak pernah ditampilkan di papan publik.</div>
+        <div class="feedback-grid">
+          <label>Kategori<select id="feedbackCategory"><option value="Saran Fitur">Saran Fitur</option><option value="Masalah / Bug">Masalah / Bug</option><option value="Prompt / Konten">Prompt / Konten</option><option value="Tampilan / UX">Tampilan / UX</option><option value="Performa">Performa</option><option value="HERA Assistant">HERA Assistant</option><option value="Lainnya">Lainnya</option></select></label>
+          <label>Nama Guru <span class="feedback-required">*</span><input id="feedbackName" type="text" placeholder="Contoh: Budi Santoso" autocomplete="name" required /></label>
+          <label>Sekolah/Instansi <span class="feedback-required">*</span><input id="feedbackSchool" type="text" placeholder="Contoh: SMP Negeri ..." required /></label>
+          <label>Kontak (opsional)<input id="feedbackContact" type="text" placeholder="Email/nomor jika ingin dihubungi" /></label>
+          <div class="span-2"><label>Pengalaman menggunakan Prompt EDU</label><div class="feedback-rating" id="feedbackRating"><label><input type="radio" name="feedbackRating" value="1"><span>1</span></label><label><input type="radio" name="feedbackRating" value="2"><span>2</span></label><label><input type="radio" name="feedbackRating" value="3"><span>3</span></label><label><input type="radio" name="feedbackRating" value="4"><span>4</span></label><label><input type="radio" name="feedbackRating" value="5"><span>5</span></label></div></div>
+          <label class="span-2">Saran & Masukan <span class="feedback-required">*</span><textarea id="feedbackMessage" placeholder="Tuliskan saran, masalah yang ditemukan, fitur yang diinginkan, atau pengalaman penggunaan..." required></textarea></label>
+        </div>
+        <div class="feedback-status feedback-send-status" id="feedbackStatus">Draft akan tersimpan lokal hanya jika Anda menekan “Simpan Draft”.</div>
+      </div>
+      <footer class="feedback-actions"><button class="btn-secondary" id="feedbackSaveDraft" type="button">💾 Simpan Draft</button><button class="btn-secondary" id="feedbackDownload" type="button">⬇️ Unduh TXT</button><button class="btn-secondary" id="feedbackCopy" type="button">📋 Salin</button><button class="btn-primary feedback-primary feedback-send" id="feedbackSend" type="button">📨 Kirim ke Google Sheet</button></footer>
+    </div>
+    <div class="feedback-pane feedback-public-pane" id="feedbackPublicPane" data-feedback-pane="public" hidden>
+      <div class="feedback-public-toolbar"><div><strong>📣 Saran Pengguna</strong><span>Hanya masukan yang sudah disetujui pengelola. Kontak pribadi tidak ditampilkan.</span></div><button class="btn-secondary feedback-public-refresh" id="feedbackPublicRefresh" type="button">↻ Segarkan</button></div>
+      <div class="feedback-public-status" id="feedbackPublicStatus">Buka tab ini untuk memuat saran publik.</div>
+      <div class="feedback-public-list" id="feedbackPublicList"><div class="feedback-public-empty">Belum ada data yang dimuat.</div></div>
+    </div>
   </section>
   <div class="piko-assistant-backdrop" id="pikoAssistantBackdrop" hidden></div>
   <button class="piko-assistant-launcher" id="pikoAssistantLauncher" type="button" aria-label="Buka HERA Assistant" title="Buka HERA Assistant">
@@ -8156,6 +8221,73 @@ $('#generatePromptBtn').addEventListener('click',generateFromForm);$('#copyGener
 
 
 /* ===== HERA ASSISTANT v1 — LOCAL RULE ENGINE, TANPA API ===== */
+
+/* ===== SARAN & MASUKAN — GOOGLE SHEET VIA APPS SCRIPT + DRAFT LOKAL ===== */
+const feedbackEls={
+  btn:$('#feedbackBtn'),panel:$('#feedbackPanel'),backdrop:$('#feedbackBackdrop'),close:$('#feedbackClose'),category:$('#feedbackCategory'),name:$('#feedbackName'),school:$('#feedbackSchool'),contact:$('#feedbackContact'),message:$('#feedbackMessage'),status:$('#feedbackStatus'),save:$('#feedbackSaveDraft'),copy:$('#feedbackCopy'),download:$('#feedbackDownload'),send:$('#feedbackSend'),
+  tabSubmit:$('#feedbackTabSubmit'),tabPublic:$('#feedbackTabPublic'),submitPane:$('#feedbackSubmitPane'),publicPane:$('#feedbackPublicPane'),publicRefresh:$('#feedbackPublicRefresh'),publicStatus:$('#feedbackPublicStatus'),publicList:$('#feedbackPublicList')
+};
+const FEEDBACK_DRAFT_KEY='promptEduFeedbackDraftV1';
+// Setelah Apps Script dideploy sebagai Web App, tempel URL /exec di bawah ini.
+// Contoh: https://script.google.com/macros/s/AKfycb.../exec
+const FEEDBACK_WEB_APP_URL='https://script.google.com/macros/s/AKfycbyqaTgq7uSdubEpyW7Mjv6vIJy__FmWc2X1QD1dlG7o4YcDsW1pHue7jX4Y_1A4cBk/exec';
+const FEEDBACK_SPREADSHEET_ID='1PC05bWwu25ZRXKuSVBmUWwHGRdb1yUy7mvrXzdPqank';
+let feedbackPublicLoaded=false;
+function feedbackSetPublicStatus(message,type=''){if(!feedbackEls.publicStatus)return;feedbackEls.publicStatus.textContent=message;feedbackEls.publicStatus.classList.remove('ok','bad');if(type)feedbackEls.publicStatus.classList.add(type);}
+function feedbackStatusClass(status=''){return /selesai|done|completed/i.test(status)?'done':'';}
+function feedbackFormatDate(value){if(!value)return'';const d=new Date(value);return Number.isNaN(d.getTime())?String(value):d.toLocaleString('id-ID',{dateStyle:'medium',timeStyle:'short'});}
+function feedbackRenderPublic(items=[]){if(!feedbackEls.publicList)return;if(!items.length){feedbackEls.publicList.innerHTML='<div class="feedback-public-empty">Belum ada saran yang dipublikasikan. Kiriman baru harus disetujui pengelola terlebih dahulu.</div>';return;}feedbackEls.publicList.innerHTML=items.map(item=>{const rating=Math.max(0,Math.min(5,Number(item.rating)||0));const stars=rating?'★'.repeat(rating)+'☆'.repeat(5-rating):'Belum diberi rating';const status=item.status||'Baru';return `<article class="feedback-public-card"><div class="feedback-public-meta"><div class="feedback-public-person"><strong>${escapeHtml(item.name||'Guru')}</strong><span>${escapeHtml(item.school||'Sekolah/Instansi')}</span></div><div class="feedback-public-tags"><span class="feedback-chip">${escapeHtml(item.category||'Saran')}</span><span class="feedback-chip status ${feedbackStatusClass(status)}">${escapeHtml(status)}</span></div></div><div class="feedback-public-message">${escapeHtml(item.message||'')}</div><div class="feedback-public-foot"><span class="feedback-public-stars">${escapeHtml(stars)}</span><span>${escapeHtml(feedbackFormatDate(item.timestamp))}</span></div></article>`;}).join('');}
+function feedbackJsonpPublic(){return new Promise((resolve,reject)=>{const callback=`promptEduFeedbackCb_${Date.now()}_${Math.random().toString(36).slice(2,8)}`;const sep=FEEDBACK_WEB_APP_URL.includes('?')?'&':'?';const script=document.createElement('script');let done=false;const cleanup=()=>{if(done)return;done=true;clearTimeout(timer);try{delete window[callback]}catch{}script.remove();};const timer=setTimeout(()=>{cleanup();reject(new Error('Timeout membaca papan publik'))},10000);window[callback]=data=>{cleanup();resolve(data)};script.onerror=()=>{cleanup();reject(new Error('JSONP tidak tersedia pada deployment Apps Script ini'))};script.src=`${FEEDBACK_WEB_APP_URL}${sep}action=public&callback=${encodeURIComponent(callback)}&t=${Date.now()}`;document.head.appendChild(script);});}
+async function feedbackLoadPublic({force=false}={}){if(feedbackPublicLoaded&&!force)return;if(!FEEDBACK_WEB_APP_URL){feedbackSetPublicStatus('Papan publik siap, tetapi Google Apps Script belum dihubungkan. Setelah URL /exec dimasukkan, data yang Tampilkan = YA akan muncul di sini.','bad');feedbackRenderPublic([]);return;}feedbackSetPublicStatus('Memuat saran pengguna…');if(feedbackEls.publicRefresh)feedbackEls.publicRefresh.disabled=true;try{let data=null;try{const sep=FEEDBACK_WEB_APP_URL.includes('?')?'&':'?';const res=await fetch(`${FEEDBACK_WEB_APP_URL}${sep}action=public&t=${Date.now()}`,{method:'GET',redirect:'follow',cache:'no-store'});const raw=await res.text();try{data=JSON.parse(raw)}catch{}if(!res.ok||data?.ok===false||!Array.isArray(data?.items))throw new Error(data?.error||`HTTP ${res.status}`);}catch(fetchErr){data=await feedbackJsonpPublic();}if(data?.ok===false||!Array.isArray(data?.items))throw new Error(data?.error||'Respons papan publik tidak valid');feedbackRenderPublic(data.items);feedbackPublicLoaded=true;feedbackSetPublicStatus(`${data.items.length} saran publik dimuat. Hanya data yang sudah dimoderasi pengelola.`, 'ok');}catch(err){feedbackSetPublicStatus(`Gagal memuat papan saran: ${err.message}`, 'bad');feedbackRenderPublic([]);}finally{if(feedbackEls.publicRefresh)feedbackEls.publicRefresh.disabled=false;}}
+function feedbackSetTab(tab='submit'){const isPublic=tab==='public';feedbackEls.submitPane.hidden=isPublic;feedbackEls.publicPane.hidden=!isPublic;feedbackEls.tabSubmit.classList.toggle('active',!isPublic);feedbackEls.tabPublic.classList.toggle('active',isPublic);feedbackEls.tabSubmit.setAttribute('aria-selected',String(!isPublic));feedbackEls.tabPublic.setAttribute('aria-selected',String(isPublic));if(isPublic)feedbackLoadPublic();}
+function feedbackSetStatus(message,type=''){if(!feedbackEls.status)return;feedbackEls.status.textContent=message;feedbackEls.status.classList.remove('sending','ok','bad');if(type)feedbackEls.status.classList.add(type);}
+function feedbackValidate({focus=true}={}){
+  const req=[
+    [feedbackEls.name,'Nama Guru wajib diisi.'],
+    [feedbackEls.school,'Sekolah/Instansi wajib diisi.'],
+    [feedbackEls.message,'Saran & Masukan wajib diisi.']
+  ];
+  req.forEach(([el])=>el?.classList.remove('field-error'));
+  for(const [el,msg] of req){if(!el?.value.trim()){el?.classList.add('field-error');feedbackSetStatus(msg,'bad');if(focus)el?.focus();return false;}}
+  return true;
+}
+
+function feedbackDraft(){try{return JSON.parse(localStorage.getItem(FEEDBACK_DRAFT_KEY)||'{}')}catch{return {}}}
+function feedbackLoadDraft(){const d=feedbackDraft();if(!feedbackEls.panel)return;feedbackEls.category.value=d.category||'Saran Fitur';feedbackEls.name.value=d.name||'';feedbackEls.school.value=d.school||'';feedbackEls.contact.value=d.contact||'';feedbackEls.message.value=d.message||'';$$('input[name="feedbackRating"]').forEach(r=>r.checked=String(d.rating||'')===r.value);feedbackSetStatus(d.savedAt?`Draft lokal terakhir: ${new Date(d.savedAt).toLocaleString('id-ID')}`:'Nama Guru, Sekolah/Instansi, dan Saran/Masukan wajib untuk pengiriman.');}
+function feedbackOpen(){if(!feedbackEls.panel||els.appRoot.hidden)return;feedbackLoadDraft();feedbackSetTab('submit');feedbackEls.panel.hidden=false;feedbackEls.backdrop.hidden=false;setTimeout(()=>feedbackEls.message.focus(),80)}
+function feedbackClose(){if(!feedbackEls.panel)return;feedbackEls.panel.hidden=true;feedbackEls.backdrop.hidden=true;feedbackEls.btn?.focus()}
+function feedbackData(){return {category:feedbackEls.category.value,name:feedbackEls.name.value.trim(),school:feedbackEls.school.value.trim(),contact:feedbackEls.contact.value.trim(),rating:document.querySelector('input[name="feedbackRating"]:checked')?.value||'',message:feedbackEls.message.value.trim(),activeView:state.view||'',appName:'Prompt EDU',source:'Prompt EDU Web App',clientTime:new Date().toISOString(),savedAt:new Date().toISOString()}}
+function feedbackText(){const d=feedbackData();return [`SARAN & MASUKAN — PROMPT EDU`,``,`Kategori: ${d.category}`,`Rating pengalaman: ${d.rating?d.rating+'/5':'Tidak diisi'}`,`Nama: ${d.name}`,`Sekolah/Instansi: ${d.school}`,`Kontak: ${d.contact||'Tidak diisi'}`,`Halaman aktif: ${state.view||'tidak diketahui'}`,`Tanggal: ${new Date().toLocaleString('id-ID')}`,``,`Saran / Masukan:`,d.message||'(belum diisi)'].join('\n')}
+feedbackEls.btn?.addEventListener('click',feedbackOpen);feedbackEls.close?.addEventListener('click',feedbackClose);feedbackEls.backdrop?.addEventListener('click',feedbackClose);
+feedbackEls.tabSubmit?.addEventListener('click',()=>feedbackSetTab('submit'));feedbackEls.tabPublic?.addEventListener('click',()=>feedbackSetTab('public'));feedbackEls.publicRefresh?.addEventListener('click',()=>feedbackLoadPublic({force:true}));
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!feedbackEls.panel?.hidden)feedbackClose()});
+feedbackEls.save?.addEventListener('click',()=>{const d=feedbackData();localStorage.setItem(FEEDBACK_DRAFT_KEY,JSON.stringify(d));feedbackSetStatus(`Draft disimpan lokal: ${new Date(d.savedAt).toLocaleString('id-ID')}`,'ok');toast('Draft saran disimpan lokal')});
+feedbackEls.copy?.addEventListener('click',async()=>{if(!feedbackValidate())return;await copyText(feedbackText());feedbackSetStatus('Masukan sudah disalin.','ok');});
+feedbackEls.download?.addEventListener('click',()=>{if(!feedbackValidate())return;downloadText(`Prompt_EDU_Saran_${new Date().toISOString().slice(0,10)}.txt`,feedbackText());feedbackSetStatus('File TXT masukan sudah dibuat.','ok');});
+feedbackEls.send?.addEventListener('click',async()=>{
+  if(!feedbackValidate())return;
+  if(!FEEDBACK_WEB_APP_URL){feedbackSetStatus('Google Sheet belum terhubung. Deploy Code.gs sebagai Web App, lalu tempel URL /exec ke FEEDBACK_WEB_APP_URL pada file HTML.','bad');return;}
+  const payload=feedbackData();
+  feedbackEls.send.disabled=true;feedbackSetStatus('Mengirim masukan ke Google Sheet…','sending');
+  try{
+    let confirmed=false;
+    try{
+      // Coba mode normal terlebih dahulu agar respons server dapat divalidasi bila CORS diizinkan browser.
+      const res=await fetch(FEEDBACK_WEB_APP_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload),redirect:'follow'});
+      const raw=await res.text();let data={};try{data=JSON.parse(raw)}catch{}
+      if(!res.ok||data.ok===false)throw new Error(data.error||`HTTP ${res.status}`);
+      confirmed=true;
+    }catch(firstErr){
+      // Fallback Apps Script lintas-domain: kirim tanpa membaca respons. Request tetap mencapai Web App.
+      await fetch(FEEDBACK_WEB_APP_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=UTF-8'},body:JSON.stringify(payload),redirect:'follow'});
+    }
+    localStorage.removeItem(FEEDBACK_DRAFT_KEY);feedbackPublicLoaded=false;
+    feedbackSetStatus(confirmed?'Terima kasih. Masukan berhasil dikirim dan menunggu moderasi pengelola sebelum dapat tampil di Saran Pengguna.':'Permintaan pengiriman sudah diteruskan ke Google Sheet. Karena pembatasan browser lintas-domain, konfirmasi server tidak dapat dibaca; silakan cek Sheet bila diperlukan.','ok');toast('Masukan dikirim ke Google Sheet');
+  }catch(err){feedbackSetStatus(`Gagal mengirim: ${err.message}. Gunakan Salin/Unduh sebagai cadangan.`, 'bad');}
+  finally{feedbackEls.send.disabled=false;}
+});
+[feedbackEls.name,feedbackEls.school,feedbackEls.message].forEach(el=>el?.addEventListener('input',()=>{if(el.value.trim())el.classList.remove('field-error');}));
+
 const pikoEls={
   panel:$('#pikoAssistant'),backdrop:$('#pikoAssistantBackdrop'),launcher:$('#pikoAssistantLauncher'),close:$('#pikoAssistantClose'),messages:$('#pikoMessages'),input:$('#pikoInput'),composer:$('#pikoComposer'),quick:$('#pikoQuickActions'),voice:$('#pikoVoiceGuideBtn'),copy:$('#pikoCopyAiBtn'),chatgpt:$('#pikoOpenChatGPTBtn'),claude:$('#pikoOpenClaudeBtn'),launcherAvatar:$('#pikoLauncherAvatar'),chatAvatar:$('#pikoChatAvatar')
 };
