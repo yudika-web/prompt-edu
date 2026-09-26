@@ -5221,6 +5221,128 @@ TAHAP 2 — GENERATE GAMBAR (hanya jika guru mengetik "Lanjut"):
 Sekarang buatkan rancangannya sesuai data dan pilihan di atas. Jika ada isi pada kolom "Deskripsi Tambahan/Permintaan Khusus", prioritaskan penyesuaian tersebut tanpa menghilangkan struktur inti yang wajib ada.`
       },
       {
+        title: "Prompt Video Pembelajaran",
+        generatorCurlyOnly: true,
+        text: `Kamu adalah asisten pembuat storyboard & prompt video pembelajaran berbasis AI. Buatkan RANCANGAN VIDEO PEMBELAJARAN INTERAKTIF sesuai data berikut, lalu ubah menjadi prompt siap tempel ke tools pembuat video AI (ChatGPT+Flow, Sora, Runway, Pika, Kling, dll).
+
+CATATAN UMUM: Jika ada kolom/bagian di bawah ini yang TIDAK DIISI oleh guru, AI HARUS menentukan sendiri isian yang paling sesuai dan logis berdasarkan topik, jenjang, dan tujuan pembelajaran — bukan dikosongkan atau ditanyakan balik. Tandai setiap bagian yang diisi otomatis oleh AI dengan label "(otomatis oleh AI)" agar guru tahu mana yang perlu dicek ulang.
+
+=== BATASAN KEAMANAN KONTEN (WAJIB, TIDAK BOLEH DILANGGAR) ===
+Seluruh isi video — narasi, dialog, visual, aksi karakter, maupun elemen latar — TIDAK BOLEH mengandung:
+- Kekerasan, perkelahian, senjata, darah, atau adegan menyakiti diri/orang lain
+- Konten seksual, sugestif, atau ketelanjangan dalam bentuk apa pun
+- Adegan berbahaya yang berpotensi ditiru siswa (memanjat tanpa pengaman, bermain api/listrik/benda tajam secara tidak aman, konsumsi zat berbahaya, dll)
+- Ujaran kebencian, diskriminasi (SARA), bullying, atau perundungan
+- Ketakutan/horor berlebihan, gore, atau citra yang menakutkan/mengganggu psikologis anak
+- Promosi produk, merek, tokoh publik nyata, atau karakter berhak cipta/IP milik pihak lain
+- Informasi yang menyesatkan, hoaks, atau bertentangan dengan konsensus ilmiah (kecuali memang berupa fiksi/fabel yang jelas ditandai sebagai fiksi)
+Jika suatu bagian materi berpotensi menyentuh tema sensitif (misalnya: sistem reproduksi, kecelakaan, bencana, sejarah kelam/perang), AI WAJIB menyampaikannya dengan pendekatan edukatif, sopan, sesuai jenjang usia, dan tanpa visual eksplisit/grafis.
+Tandai bagian mana pun dalam storyboard yang memerlukan kehati-hatian ekstra dengan label "(⚠️ tema sensitif — sudah disesuaikan agar aman untuk siswa)".
+
+=== DATA GURU & KELAS ===
+- Nama guru: {{nama_guru_video}}
+- Jenjang & kelas: {{jenjang_kelas_video}}
+- Mata pelajaran: {{mata_pelajaran_video}}
+- Durasi total video yang diinginkan: {{durasi_total_video}}
+- Tools video AI yang dipakai: {{tools_video_ai}}
+
+=== TOPIK / MATERI ===
+- Topik utama: {{topik_utama_video}}
+- Sub-topik/cakupan materi: {{subtopik_video}}
+- Konsep kunci yang WAJIB muncul di video: {{konsep_kunci_video}}
+- Tingkat kedalaman materi: {{kedalaman_materi_video}}
+- Miskonsepsi umum yang perlu diluruskan: {{miskonsepsi_video}}
+
+=== JENIS KONTEN ===
+Pilihan guru: {{jenis_konten_video}}
+- A. Faktual/Ilmiah — seluruh isi HARUS sesuai kajian ilmiah/fakta/kurikulum. Dilarang mengarang data. Tandai "[perlu verifikasi]" jika tidak pasti akurat.
+- B. Fantasi/Fabel/Dongeng — boleh imajinatif, namun pesan pembelajaran tetap jelas dan tetap tunduk pada Batasan Keamanan Konten.
+(Jika tidak dipilih, AI tentukan jenis yang sesuai dan sebutkan alasannya.)
+
+=== KARAKTER DALAM VIDEO ===
+- Apakah video butuh karakter? {{butuh_karakter_video}}
+- Deskripsi karakter dari guru: {{deskripsi_karakter_video}}
+
+Jika Ya, gunakan deskripsi guru untuk SETIAP karakter dan lengkapi:
+- Nama panggilan/tag karakter
+- Peran dalam video
+- Jenis (manusia/hewan/animasi/robot/dll)
+- Usia & ciri fisik
+- Pakaian/atribut tetap yang sopan & sesuai usia siswa
+- Gaya visual/model rendering (contoh: 3D animasi Pixar-style / 2D flat vector / semi-realistis / claymation)
+- Palet warna dominan
+- Ekspresi/kepribadian umum
+
+JIKA KARAKTER TIDAK DIISI SAMA SEKALI:
+- Jika video membutuhkan karakter atau guru tidak menentukan Ya/Tidak, AI WAJIB membuat set karakter default yang aman untuk anak, misalnya: 1 karakter guru/pemandu + 2 karakter murid, ATAU karakter tunggal sebagai narator.
+- AI tetap menuliskan deskripsi lengkap karakter default tersebut selengkap seolah diisi guru, LENGKAP DENGAN TAG-nya (misal @bu_ana, @sinta, @budi).
+- Beri label "(karakter otomatis oleh AI — silakan sesuaikan jika perlu)".
+- Jika guru memilih Tidak, jangan memaksakan karakter; gunakan visual materi/objek/diagram/lingkungan/narasi saja.
+
+ATURAN TAG KARAKTER (WAJIB):
+- Setiap karakter (baik isian guru maupun otomatis AI) HARUS diberi TAG unik berformat @namakarakter (huruf kecil, tanpa spasi, gunakan underscore jika nama terdiri dari dua kata, contoh: @bu_ana, @sinta, @budi).
+- Tag ini WAJIB digunakan secara konsisten di seluruh bagian storyboard dan prompt (Prompt Karakter Referensi maupun Prompt Scene) sebagai penanda cepat karakter mana yang tampil/beraksi/berdialog di suatu scene.
+
+=== STRUKTUR ISI VIDEO ===
+1. Hook/pembuka (5-10 detik pertama)
+2. Pengenalan konsep/masalah
+3. Penjelasan inti materi (mengacu pada Topik/Sub-topik/Konsep kunci)
+4. Contoh nyata/ilustrasi konsep
+5. Pertanyaan interaktif untuk siswa
+6. Kesimpulan/rangkuman
+7. Ajakan refleksi/tindak lanjut
+
+=== ATURAN OUTPUT PROMPT (WAJIB 2 JENIS PROMPT TERPISAH) ===
+Output akhir HARUS terdiri dari dua jenis prompt siap tempel:
+
+1) PROMPT KARAKTER REFERENSI (dibuat SATU KALI per karakter, digunakan lebih dulu):
+   - Judul blok: "PROMPT KARAKTER — @[tag]"
+   - Isi:
+     a. Nama & tag karakter (contoh: Sinta / @sinta), peran dalam video
+     b. Deskripsi fisik lengkap (usia, bentuk wajah, warna kulit/bulu, rambut, mata, tinggi/proporsi tubuh)
+     c. Pakaian & atribut tetap (detail warna, model, aksesoris)
+     d. Gaya visual/model rendering (tegaskan jenisnya, misal "3D animated Pixar-style character")
+     e. Palet warna dominan
+     f. Pose standar untuk referensi: "netral, berdiri tegak menghadap depan, ekspresi ramah tersenyum, pencahayaan studio rata, latar polos"
+     g. Catatan format: "Gunakan hasil gambar ini sebagai referensi/reference image untuk karakter @[tag] pada setiap prompt scene berikutnya."
+   - Jika lebih dari satu karakter, buat blok terpisah per karakter, masing-masing berjudul "PROMPT KARAKTER — @[tag]".
+
+2) PROMPT SCENE (dibuat berurutan setelah semua Prompt Karakter Referensi ditampilkan):
+   - Di AWAL setiap prompt scene, WAJIB cantumkan baris "Karakter yang tampil di scene ini: @[tag1], @[tag2], ...". Jika tidak ada karakter sama sekali dalam scene tertentu, tulis "Tidak ada karakter (hanya visual/narasi)".
+   - Setiap kali karakter disebut dalam deskripsi aksi maupun dialog di dalam scene, gunakan tag @[nama] di depan namanya agar jelas siapa yang beraksi/berbicara.
+   - Sertakan juga komponen berikut per scene:
+     a. Nomor & judul scene
+     b. Durasi scene (detik)
+     c. Deskripsi visual latar/setting
+     d. Deskripsi karakter LENGKAP untuk tiap tag yang tampil di scene ini (disalin identik dari Prompt Karakter Referensi terkait — kata per kata, jangan diparafrasekan)
+     e. Instruksi tambahan: "Gunakan reference image karakter @[tag] yang sudah digenerate sebelumnya agar wajah/gaya visual tetap konsisten"
+     f. Aksi/gerakan tiap karakter bertag (sesuai Batasan Keamanan Konten)
+     g. Dialog/narasi bertag (tulis persis kalimat yang diucapkan, didahului tag pembicara)
+     h. Teks/caption di layar (jika perlu)
+     i. Transisi ke scene berikutnya
+     j. Catatan continuity dengan scene sebelumnya (termasuk konsistensi tiap tag karakter)
+
+=== VALIDASI SEBELUM LANJUT ===
+Setelah rancangan (storyboard + pembagian scene) selesai, JANGAN langsung tampilkan prompt final siap-tempel. Lakukan dua tahap:
+
+TAHAP 1 — TAMPILKAN STORYBOARD RINGKAS:
+- Tampilkan ringkasan tiap scene (nomor, judul, durasi, karakter bertag yang tampil, inti visual, inti dialog) dalam tabel/daftar.
+- Tampilkan daftar seluruh karakter beserta tag-nya (contoh: @sinta = murid perempuan, @bu_ana = guru pemandu).
+- Tampilkan rekap bagian yang diisi otomatis oleh AI dan bagian bertanda "(⚠️ tema sensitif)" jika ada.
+- Akhiri dengan pertanyaan: "Apakah storyboard, daftar karakter/tag, dan rancangan di atas sudah sesuai? Jika ya, ketik 'Lanjut' untuk membuat Prompt Karakter Referensi dan Prompt Scene lengkap siap tempel ke tools video AI yang dipilih. Jika belum, beri tahu bagian yang perlu direvisi."
+
+TAHAP 2 — GENERATE PROMPT LENGKAP (hanya setelah guru mengetik "Lanjut"):
+- Tampilkan LEBIH DULU seluruh blok "PROMPT KARAKTER — @[tag]" (satu blok kode per karakter).
+- Setelah itu, tampilkan "PROMPT SCENE 1", "PROMPT SCENE 2", dst secara berurutan, masing-masing dalam blok kode terpisah, dan PASTIKAN setiap blok scene diawali baris "Karakter yang tampil di scene ini: @..." serta menandai tag di setiap aksi/dialog karakter sesuai aturan di atas.
+- Ingatkan guru: "Generate dulu gambar referensi tiap karakter menggunakan Prompt Karakter Referensi di atas (@[tag] masing-masing), simpan/upload sebagai reference image, baru lanjutkan generate video per scene secara berurutan. Perhatikan tag @[nama] di tiap scene untuk memastikan reference image yang benar dipasangkan ke karakter yang tepat."
+
+=== DESKRIPSI TAMBAHAN / PERMINTAAN KHUSUS ===
+(Isi jika ada kebutuhan spesifik: gaya bahasa narator, musik/BGM, voice over, bahasa video, subtitle, dll — kosongkan jika tidak ada)
+- Catatan guru: {{deskripsi_tambahan_video}}
+
+Sekarang buatkan rancangan storyboard sesuai data dan aturan di atas.`
+      },
+      {
         title: "Prompt LKPD",
         generatorCurlyOnly: true,
         text: `Anda adalah seorang guru berpengalaman yang ahli menyusun LKPD (Lembar Kerja Peserta Didik) sesuai Kurikulum Merdeka, dengan struktur yang jelas, aktivitas yang bermakna, asesmen yang terukur, dan hasil yang langsung siap digunakan di kelas.
@@ -7341,6 +7463,7 @@ const generatorTypes=[
   {id:'all',icon:'◈',name:'Semua',match:()=>true},
   {id:'module',icon:'📚',name:'Modul Ajar / RPM',match:p=>p.categoryId==='modul-ajar-rpm'||/modul ajar|rencana pembelajaran mendalam|\bRPM\b|8334/i.test(`${p.title} ${p.categoryName}`)},
   {id:'presentation',icon:'🖥️',name:'Presentasi Pembelajaran',match:p=>/presentasi pembelajaran|slide pembelajaran|notebooklm/i.test(`${p.title} ${p.categoryName} ${p.text.slice(0,320)}`)},
+  {id:'video',icon:'🎬',name:'Video Pembelajaran',match:p=>/video pembelajaran|storyboard.*video|prompt scene|prompt karakter/i.test(`${p.title} ${p.categoryName} ${p.text.slice(0,520)}`)},
   {id:'game',icon:'🎮',name:'Game Edukasi',match:p=>/game|skill|luck|mekanik|skor|level|reward/i.test(`${p.title} ${p.categoryName}`)},
   {id:'mpi',icon:'🧩',name:'MPI',match:p=>/\bMPI\b|multimedia pembelajaran/i.test(`${p.title} ${p.categoryName} ${p.text.slice(0,240)}`)},
   {id:'lab',icon:'🔬',name:'Lab Maya / Simulasi',match:p=>/simulasi|lab maya|laboratorium virtual/i.test(`${p.title} ${p.categoryName}`)},
@@ -7353,7 +7476,7 @@ const generatorTypes=[
 state.generatorVersion=state.generatorVersion||'';
 state.generatorPackage=state.generatorPackage||'';
 state.generatorPrompt0Confirmed=Boolean(state.generatorPrompt0Confirmed);
-const referenceHintTypes=new Set(['game','mpi','lab','module','presentation','lkpd','comic','app','journal']);
+const referenceHintTypes=new Set(['game','mpi','lab','module','presentation','video','lkpd','comic','app','journal']);
 const elsGen={
   packageMode:$('#generatorPackageMode'),singleMode:$('#generatorSingleMode'),version:$('#generatorVersionSelect'),package:$('#generatorPackageSelect'),proNote:$('#generatorProNote'),sections:$('#generatedPromptSections')
 };
@@ -7433,8 +7556,9 @@ function renderGeneratorTemplate(){
     if(!fields.length){els.genFields.innerHTML='<div class="no-fields span-2">Rangkaian ini tidak memiliki placeholder yang terdeteksi. Klik Generate untuk menampilkan prompt apa adanya.</div>'+referenceHintHtml();initSpecialGeneratorFields();updateGeneratorActionButton();return;}
     const isModule=ps[0]?.categoryId==='modul-ajar-rpm';
     const isPresentation=ps[0]?.title==='Prompt Presentasi Pembelajaran';
+    const isVideo=ps[0]?.title==='Prompt Video Pembelajaran';
     const isLKPD=ps[0]?.title==='Prompt LKPD';
-    const moduleNote=isModule?'<div class="module-ai-note"><strong>💡 Tidak harus mengisi semuanya.</strong> Setiap kolom yang dibiarkan kosong akan ditentukan AI berdasarkan data yang sudah tersedia. Semakin banyak konteks yang diberikan, semakin spesifik hasil Modul Ajar/RPM.</div>':(isPresentation?'<div class="module-ai-note"><strong>🖥️ Panduan Presentasi Pembelajaran.</strong> Isi data utama yang Anda ketahui. Jika memiliki modul ajar/RPP/silabus, unggah file tersebut saat menjalankan prompt di AI. Untuk <strong>Format Output B</strong>, AI harus menampilkan <strong>outline slide dulu</strong> dan baru membuat gambar setelah guru mengetik <strong>"Lanjut"</strong>.</div>':(isLKPD?'<div class="module-ai-note"><strong>📝 Panduan LKPD.</strong> Isi data yang Anda ketahui. Setiap input memiliki contoh/panduan. <strong>Format Output Akhir wajib dipilih</strong>; field lain yang kosong akan dilengkapi AI secara wajar berdasarkan TP, topik, dan jenjang.</div>':''));
+    const moduleNote=isModule?'<div class="module-ai-note"><strong>💡 Tidak harus mengisi semuanya.</strong> Setiap kolom yang dibiarkan kosong akan ditentukan AI berdasarkan data yang sudah tersedia. Semakin banyak konteks yang diberikan, semakin spesifik hasil Modul Ajar/RPM.</div>':(isPresentation?'<div class="module-ai-note"><strong>🖥️ Panduan Presentasi Pembelajaran.</strong> Isi data utama yang Anda ketahui. Jika memiliki modul ajar/RPP/silabus, unggah file tersebut saat menjalankan prompt di AI. Untuk <strong>Format Output B</strong>, AI harus menampilkan <strong>outline slide dulu</strong> dan baru membuat gambar setelah guru mengetik <strong>"Lanjut"</strong>.</div>':(isVideo?'<div class="module-ai-note"><strong>🎬 Panduan Video Pembelajaran.</strong> Isi data yang Anda ketahui; kolom kosong akan ditentukan AI dan ditandai otomatis. Alurnya wajib <strong>Storyboard dulu → konfirmasi guru → Prompt Karakter → Prompt Scene</strong>. Jika memakai karakter, gunakan tag @nama dan reference image secara konsisten.</div>':(isLKPD?'<div class="module-ai-note"><strong>📝 Panduan LKPD.</strong> Isi data yang Anda ketahui. Setiap input memiliki contoh/panduan. <strong>Format Output Akhir wajib dipilih</strong>; field lain yang kosong akan dilengkapi AI secara wajar berdasarkan TP, topik, dan jenjang.</div>':'')));
     let renderFields=fields;
     if(isModule){
       const priority=['{{komposisi_siswa}}','{{deskripsi_siswa_inklusi}}'];
@@ -7504,10 +7628,27 @@ const presentationGeneratorFieldConfig={
   '{{deskripsi_tambahan_presentasi}}':{label:'Deskripsi Tambahan / Permintaan Khusus',placeholder:'Contoh: batasi maksimal 10 slide; gunakan bahasa semi formal; ada penyesuaian untuk siswa low vision',help:'Gunakan untuk hal khusus seperti jumlah slide, gaya bahasa, integrasi teknologi, muatan lokal, kebutuhan siswa inklusif, atau penekanan tertentu.',auto:'tidak ada permintaan khusus tambahan'},
   '{{format_output_presentasi}}':{label:'Format Output',type:'select',options:[['','— Pilih format output —'],['A. Draft ringkas untuk NotebookLM','A. Draft ringkas untuk NotebookLM'],['B. Draft presentasi siap pakai untuk generator gambar','B. Draft presentasi siap pakai untuk generator gambar']],help:'Pilih apakah hasil akhirnya berupa draft ringkas untuk NotebookLM atau outline/generate slide gambar satu per satu.',auto:'pilih format output yang paling sesuai dengan kebutuhan guru'}
 };
+const videoGeneratorFieldConfig={
+  '{{nama_guru_video}}':{label:'Nama Guru',placeholder:'Contoh: Pak Andi, S.Pd.',help:'Nama guru/pengajar. Jika kosong, AI menggunakan identitas guru generik dan menandainya otomatis.',auto:'gunakan identitas guru generik yang mudah diganti'},
+  '{{jenjang_kelas_video}}':{label:'Jenjang & Kelas',placeholder:'Contoh: SMP Kelas VIII',help:'Menentukan bahasa, kedalaman materi, karakter, dan keamanan visual. Jika kosong, AI menentukan berdasarkan konteks.',auto:'tentukan jenjang dan kelas paling sesuai dengan topik'},
+  '{{mata_pelajaran_video}}':{label:'Mata Pelajaran',placeholder:'Contoh: IPA',help:'Mapel utama video. Jika kosong, AI menentukan dari topik.',auto:'tentukan mata pelajaran paling relevan dari topik'},
+  '{{durasi_total_video}}':{label:'Durasi Total Video',placeholder:'Contoh: 3 menit',help:'Durasi target keseluruhan. Jika kosong, AI menentukan durasi ideal dan membagi scene sesuai kemampuan tool.',auto:'tentukan durasi ideal berdasarkan topik dan jenjang'},
+  '{{tools_video_ai}}':{label:'Tools Video AI',placeholder:'Contoh: Sora / Runway / Pika / Kling / ChatGPT + Flow',help:'Isi tool yang digunakan agar panjang scene dan prompt disesuaikan. Jika kosong, AI mengasumsikan tool umum dengan batas ±8 detik per scene.',auto:'asumsikan tools video AI umum dengan batas sekitar 8 detik per scene'},
+  '{{topik_utama_video}}':{label:'Topik Utama',placeholder:'Contoh: Fotosintesis',help:'Konsep utama video. Jika kosong, AI menentukan topik dari konteks lain.',auto:'tentukan topik utama dari konteks yang tersedia'},
+  '{{subtopik_video}}':{label:'Sub-topik / Cakupan Materi',placeholder:'Contoh: bahan fotosintesis, proses, hasil, faktor yang memengaruhi',help:'Batas materi yang dibahas. Jika kosong, AI menentukan cakupan yang relevan dan proporsional terhadap durasi.',auto:'tentukan cakupan materi yang relevan dan proporsional'},
+  '{{konsep_kunci_video}}':{label:'Konsep Kunci Wajib',placeholder:'Contoh: klorofil, cahaya, CO₂, air, glukosa, oksigen',help:'Konsep yang tidak boleh terlewat. Jika kosong, AI mengambil konsep kunci dari kompetensi/capaian umum.',auto:'tentukan konsep kunci yang wajib muncul berdasarkan materi dan jenjang'},
+  '{{kedalaman_materi_video}}':{label:'Tingkat Kedalaman Materi',type:'select',options:[['','— Ditentukan AI —'],['Pengenalan dasar','Pengenalan dasar'],['Menengah','Menengah'],['Mendalam/analitis','Mendalam / analitis']],help:'Pilih seberapa dalam materi dijelaskan. Jika kosong, AI menyesuaikan dengan jenjang dan durasi.',auto:'tentukan tingkat kedalaman yang sesuai dengan jenjang dan durasi'},
+  '{{miskonsepsi_video}}':{label:'Miskonsepsi yang Perlu Diluruskan',placeholder:'Contoh: tanaman memperoleh makanan langsung dari tanah',help:'Isi miskonsepsi umum yang ingin dikoreksi. Jika kosong, AI mengecek dan menyisipkan bila relevan.',auto:'identifikasi miskonsepsi umum yang relevan dan luruskan bila perlu'},
+  '{{jenis_konten_video}}':{label:'Jenis Konten',type:'select',options:[['','— Ditentukan AI —'],['A. Faktual/Ilmiah','A. Faktual/Ilmiah — sesuai fakta/kurikulum'],['B. Fantasi/Fabel/Dongeng','B. Fantasi/Fabel/Dongeng — imajinatif, pesan belajar tetap jelas']],help:'Faktual/Ilmiah wajib akurat. Fantasi/Fabel boleh kreatif tetapi tidak boleh mengaburkan fakta atau melanggar keamanan siswa.',auto:'tentukan jenis konten paling sesuai dan jelaskan alasannya'},
+  '{{butuh_karakter_video}}':{label:'Apakah Video Membutuhkan Karakter?',type:'videoCharactersToggle',help:'Pilih Ya bila memakai karakter visual. Pilih Tidak untuk video berbasis objek/diagram/visual materi/narasi. Jika kosong, AI menentukan.',auto:'tentukan apakah karakter dibutuhkan berdasarkan format video'},
+  '{{deskripsi_karakter_video}}':{label:'Deskripsi Karakter',type:'videoCharactersDetail',placeholder:'Contoh: Sinta — murid 13 tahun, rambut hitam sebahu, seragam putih-biru, ingin tahu; Bu Ana — guru IPA, hijab biru, jas lab putih, tenang dan suportif',help:'Tulis seluruh karakter dalam satu kolom. AI membuat tag unik @nama dan Prompt Karakter Referensi per karakter. Jika kosong tetapi karakter diperlukan, AI membuat karakter default yang aman.',auto:'buat karakter default yang aman untuk siswa lengkap dengan tag @nama dan deskripsi konsisten'},
+  '{{deskripsi_tambahan_video}}':{label:'Deskripsi Tambahan / Permintaan Khusus',placeholder:'Contoh: narator perempuan Bahasa Indonesia; subtitle aktif; BGM ceria lembut; tanpa dialog; gaya semi-realistis',help:'Untuk gaya bahasa narator, musik/BGM, voice over, bahasa video, subtitle, gaya visual, tempo, kebutuhan inklusi, atau ketentuan lainnya.',auto:'tentukan bahasa, narasi, audio, subtitle, dan gaya visual yang paling sesuai'}
+};
 function currentGeneratorFieldConfig(token){
   const p=activeGeneratorPrompts()[0];
   if(p?.categoryId==='modul-ajar-rpm')return moduleGeneratorFieldConfig[token]||null;
   if(p?.title==='Prompt Presentasi Pembelajaran')return presentationGeneratorFieldConfig[token]||null;
+  if(p?.title==='Prompt Video Pembelajaran')return videoGeneratorFieldConfig[token]||null;
   if(p?.title==='Prompt LKPD')return lkpdGeneratorFieldConfig[token]||null;
   return null;
 }
@@ -7540,6 +7681,13 @@ function initSpecialGeneratorFields(){
       if(!needs)detailInput.value='';
     };
     inclusionRadios.forEach(r=>r.addEventListener('change',syncInclusion));syncInclusion();
+  }
+  const videoCharacterToggle=$('[data-video-character-toggle]');
+  const videoCharacterDetail=$('[data-video-character-detail]');
+  if(videoCharacterToggle&&videoCharacterDetail){
+    const detailWrap=videoCharacterDetail.closest('.form-group');
+    const syncVideoCharacters=()=>{const hide=videoCharacterToggle.value==='Tidak';if(detailWrap)detailWrap.hidden=hide;videoCharacterDetail.disabled=hide;if(hide)videoCharacterDetail.value='';};
+    videoCharacterToggle.addEventListener('change',syncVideoCharacters);syncVideoCharacters();
   }
   const assessmentHidden=$('[data-assessment-hidden]');
   if(assessmentHidden){
@@ -7587,7 +7735,7 @@ function initSpecialGeneratorFields(){
 function renderGeneratorField(f,id,disabled){
   const cfg=moduleFieldConfig(f.token);
   const label=cfg?.label||f.label;
-  const long=cfg?['{{capaian_pembelajaran}}','{{tujuan_pembelajaran}}','{{konteks_lokal_sekolah}}','{{deskripsi_siswa_inklusi}}','{{karakteristik_kesiapan_murid}}','{{pemanfaatan_digital}}','{{kemitraan_pembelajaran}}','{{deskripsi_tambahan}}','{{deskripsi_asesmen}}','{{tujuan}}','{{deskripsi_asesmen_lkpd}}','{{catatan}}','{{tujuan_pembelajaran_presentasi}}','{{referensi_tambahan_presentasi}}','{{aktivitas_siswa_presentasi}}','{{kebutuhan_visual_presentasi}}','{{tema_lainnya_presentasi}}','{{deskripsi_tambahan_presentasi}}'].includes(f.token):isLongField(label);
+  const long=cfg?['{{capaian_pembelajaran}}','{{tujuan_pembelajaran}}','{{konteks_lokal_sekolah}}','{{deskripsi_siswa_inklusi}}','{{karakteristik_kesiapan_murid}}','{{pemanfaatan_digital}}','{{kemitraan_pembelajaran}}','{{deskripsi_tambahan}}','{{deskripsi_asesmen}}','{{tujuan}}','{{deskripsi_asesmen_lkpd}}','{{catatan}}','{{tujuan_pembelajaran_presentasi}}','{{referensi_tambahan_presentasi}}','{{aktivitas_siswa_presentasi}}','{{kebutuhan_visual_presentasi}}','{{tema_lainnya_presentasi}}','{{deskripsi_tambahan_presentasi}}','{{subtopik_video}}','{{konsep_kunci_video}}','{{miskonsepsi_video}}','{{deskripsi_karakter_video}}','{{deskripsi_tambahan_video}}'].includes(f.token):isLongField(label);
   const help=cfg?.help?`<span class="generator-field-help"><strong>Contoh/panduan:</strong> ${escapeHtml(cfg.help)}</span>`:'';
   let control='';
   if(cfg?.type==='select'){
@@ -7603,6 +7751,12 @@ function renderGeneratorField(f,id,disabled){
   }else if(cfg?.type==='inclusionDetail'){
     const ph=cfg?.placeholder||'Jelaskan kondisi siswa...';
     control=`<textarea class="form-control" id="${id}" data-token="${escapeHtml(f.token)}" data-module-inclusion-detail placeholder="${escapeHtml(ph)}" disabled></textarea>`;
+  }else if(cfg?.type==='videoCharactersToggle'){
+    const opts=[['','— Ditentukan AI —'],['Ya','Ya — gunakan karakter'],['Tidak','Tidak — hanya visual/narasi tanpa karakter']];
+    control=`<select class="form-control" id="${id}" data-token="${escapeHtml(f.token)}" data-video-character-toggle ${disabled?'disabled':''}>${opts.map(([v,l])=>`<option value="${escapeHtml(v)}">${escapeHtml(l)}</option>`).join('')}</select>`;
+  }else if(cfg?.type==='videoCharactersDetail'){
+    const ph=cfg?.placeholder||'Jelaskan karakter...';
+    control=`<textarea class="form-control" id="${id}" data-token="${escapeHtml(f.token)}" data-video-character-detail placeholder="${escapeHtml(ph)}" ${disabled?'disabled':''}></textarea>`;
   }else if(cfg?.type==='assessment'){
     const defs=[
       {key:'awal',label:'Asesmen Formatif Awal',desc:'Opsional • melihat kemampuan/kesiapan awal sebelum pembelajaran',required:false},
@@ -7646,7 +7800,7 @@ function renderGeneratorField(f,id,disabled){
   }
   const extra=f.token==='{{tujuan_pembelajaran}}'?`<div class="kko-note"><strong>Referensi KKO aktif:</strong> TP hanya boleh memakai KKO dari file “Daftar KKO Revisi 2”. Contoh: gunakan <em>menuliskan</em>, bukan “mencatat”.</div>`:'';
   const wrapAttrs=cfg?.type==='inclusionDetail'?' data-module-inclusion-detail-wrap hidden':'';
-  const fullWidth=long||cfg?.type==='inclusion'||cfg?.type==='inclusionDetail'||cfg?.type==='assessment'||cfg?.type==='dimensions';
+  const fullWidth=long||cfg?.type==='inclusion'||cfg?.type==='inclusionDetail'||cfg?.type==='assessment'||cfg?.type==='dimensions'||cfg?.type==='videoCharactersToggle'||cfg?.type==='videoCharactersDetail';
   return `<div class="form-group ${fullWidth?'span-2':''}"${wrapAttrs}><label for="${id}">${escapeHtml(label)}</label>${control}${help}${extra}<span class="field-token">Jika kosong: AI akan menentukan • ${escapeHtml(f.token)}</span></div>`;
 }
 function referenceHintHtml(){
@@ -7679,7 +7833,7 @@ function updateGeneratorActionButton(){
 }
 function substitutionMap(){const vals=new Map();els.genFields.querySelectorAll('[data-token]').forEach(input=>{let val=input.value.trim();if(input.hasAttribute('data-module-model-select')&&['custom','combo'].includes(val)){const custom=els.genFields.querySelector('[data-module-model-custom]')?.value.trim()||'';if(custom)val=val==='combo'?`Kombinasi model: ${custom}`:custom;else val='';}if(val)vals.set(input.dataset.token,val);});return vals;}
 function applySubstitutions(text,vals){let out=text;vals.forEach((v,k)=>{out=out.split(k).join(v);});return out;}
-function finalizeGeneratedPrompt(prompt,text,vals){let out=text;if(prompt?.categoryId==='modul-ajar-rpm'){const selectedDims=vals?.get('{{dimensi_profil_lulusan}}')||'';if(selectedDims){out=out.replace(/REFERENSI 8 DIMENSI PROFIL LULUSAN \(DIGUNAKAN HANYA JIKA GURU TIDAK MEMILIH DIMENSI\):[\s\S]*?Jika guru sudah memilih satu atau beberapa dimensi pada input, ABAIKAN dan JANGAN tampilkan daftar referensi 8 dimensi ini pada keluaran\.\n\n/,'');}Object.entries(moduleGeneratorFieldConfig).forEach(([token,cfg])=>{if(out.includes(token))out=out.split(token).join(`[Ditentukan AI: ${cfg.auto}]`);});return out;}if(prompt?.title==='Prompt LKPD'){const fmt=vals?.get('{{format_output}}')||'';if(fmt&&fmt!=='Gambar per Halaman'){out=out.replace(/14\. Jika output = Gambar per Halaman:\n    - Format Kertas & Orientasi : \{\{kertas_gambar\}\}\n    - Format File Gambar        : \{\{format_file_gambar\}\}\n/,'14. Pengaturan gambar per halaman tidak berlaku karena output yang dipilih adalah '+fmt+'.\n');}Object.entries(lkpdGeneratorFieldConfig).forEach(([token,cfg])=>{if(out.includes(token))out=out.split(token).join(`[Ditentukan AI: ${cfg.auto}]`);});return out;}return out;}
+function finalizeGeneratedPrompt(prompt,text,vals){let out=text;if(prompt?.categoryId==='modul-ajar-rpm'){const selectedDims=vals?.get('{{dimensi_profil_lulusan}}')||'';if(selectedDims){out=out.replace(/REFERENSI 8 DIMENSI PROFIL LULUSAN \(DIGUNAKAN HANYA JIKA GURU TIDAK MEMILIH DIMENSI\):[\s\S]*?Jika guru sudah memilih satu atau beberapa dimensi pada input, ABAIKAN dan JANGAN tampilkan daftar referensi 8 dimensi ini pada keluaran\.\n\n/,'');}Object.entries(moduleGeneratorFieldConfig).forEach(([token,cfg])=>{if(out.includes(token))out=out.split(token).join(`[Ditentukan AI: ${cfg.auto}]`);});return out;}if(prompt?.title==='Prompt LKPD'){const fmt=vals?.get('{{format_output}}')||'';if(fmt&&fmt!=='Gambar per Halaman'){out=out.replace(/14\. Jika output = Gambar per Halaman:\n    - Format Kertas & Orientasi : \{\{kertas_gambar\}\}\n    - Format File Gambar        : \{\{format_file_gambar\}\}\n/,'14. Pengaturan gambar per halaman tidak berlaku karena output yang dipilih adalah '+fmt+'.\n');}Object.entries(lkpdGeneratorFieldConfig).forEach(([token,cfg])=>{if(out.includes(token))out=out.split(token).join(`[Ditentukan AI: ${cfg.auto}]`);});return out;}if(prompt?.title==='Prompt Video Pembelajaran'){const needChar=vals?.get('{{butuh_karakter_video}}')||'';if(needChar==='Tidak'&&out.includes('{{deskripsi_karakter_video}}'))out=out.split('{{deskripsi_karakter_video}}').join('Tidak berlaku — video dipilih tanpa karakter.');Object.entries(videoGeneratorFieldConfig).forEach(([token,cfg])=>{if(out.includes(token))out=out.split(token).join(`(otomatis oleh AI: ${cfg.auto})`);});return out;}return out;}
 function renderGeneratedSections(items){
   elsGen.sections.innerHTML=items.map((it,i)=>`<section class="generated-section"><div class="generated-section-head"><div class="generated-section-title"><strong>${escapeHtml(it.heading)}</strong><span>${escapeHtml(it.sourceTitle)}</span></div><button class="generated-section-copy" data-copy-section="${i}">📋 Salin Prompt Ini</button></div><textarea class="form-control" data-generated-section="${i}" spellcheck="false">${escapeHtml(it.text)}</textarea></section>`).join('');
   elsGen.sections.querySelectorAll('[data-copy-section]').forEach(b=>b.addEventListener('click',()=>{const ta=elsGen.sections.querySelector(`[data-generated-section="${b.dataset.copySection}"]`);if(ta)copyText(ta.value);}));
