@@ -4933,7 +4933,7 @@ const teacherContentCategories = [
     id: "guru-konten-produktivitas",
     name: "Prompt Guru & Konten Edukasi",
     icon: "🧑‍🏫",
-    keywords: "guru komik edukasi comic AI image generator character style bible e jurnal guru e-jurnal LMS google apps script google sheet localstorage LKPD lembar kerja peserta didik kurikulum merdeka HOTS MOTS LOTS",
+    keywords: "guru komik edukasi comic AI image generator character style bible e jurnal guru e-jurnal LMS google apps script google sheet localstorage LKPD lembar kerja peserta didik kurikulum merdeka HOTS MOTS LOTS presentasi pembelajaran slide powerpoint notebooklm canva ai",
     prompts: [
       {
         title: "Prompt Komik Edukasi",
@@ -5140,6 +5140,85 @@ B. Tanpa database eksternal (single file HTML, localStorage)
 - Sertakan petunjuk singkat cara memakai/deploy di bagian akhir.
 
 Sebelum mulai membangun, jika ada bagian yang belum jelas (misalnya skema database, jumlah kelas, atau kebutuhan khusus sekolah), tanyakan dulu ke saya.`
+      },
+      {
+        title: "Prompt Presentasi Pembelajaran",
+        generatorCurlyOnly: true,
+        text: `Kamu adalah asisten pembuat bahan ajar. Buatkan RANCANGAN PRESENTASI PEMBELAJARAN berdasarkan data berikut. Gunakan bahasa yang jelas, sesuai jenjang siswa, dan berbasis fakta ilmiah/kurikulum yang berlaku (jangan mengarang data, gambar, atau statistik).
+
+=== DATA GURU & KELAS ===
+- Nama guru: {{nama_guru}}
+- Jenjang & kelas: {{jenjang_kelas_presentasi}}
+- Mata pelajaran: {{mata_pelajaran_presentasi}}
+- Topik/materi: {{topik_materi_presentasi}}
+- Alokasi waktu: {{alokasi_waktu_presentasi}}
+- Tujuan pembelajaran: {{tujuan_pembelajaran_presentasi}}
+
+=== REFERENSI (opsional) ===
+- Jika ada file modul ajar/RPP/silabus/bahan referensi lain yang saya lampirkan saat menjalankan prompt di AI, sesuaikan seluruh isi presentasi dengan file tersebut (tujuan, urutan materi, istilah, dan penilaian mengikuti file).
+- Jika tidak ada file, gunakan kurikulum/acuan berikut: {{kurikulum_acuan_presentasi}}
+- Catatan referensi tambahan: {{referensi_tambahan_presentasi}}
+
+=== STRUKTUR YANG HARUS DIBUAT ===
+1. Tujuan Pembelajaran (rumusan capaian, terukur, sesuai taksonomi Bloom)
+2. Apersepsi (pertanyaan pemantik/kaitan dengan pengetahuan awal siswa)
+3. Manfaat mempelajari materi ini (relevansi dengan kehidupan siswa)
+4. Inti Materi — pilih salah satu mode:
+   - Mode Detail = penjelasan lengkap tiap subtopik + definisi + contoh
+   - Mode Poin Penting = ringkasan poin-poin kunci saja (untuk tampilan slide)
+   Pilihan mode: {{mode_inti_materi_presentasi}}
+5. Contoh Soal Kontekstual (soal yang dikaitkan dengan situasi nyata/sehari-hari)
+6. Permasalahan Kontekstual (studi kasus/isu nyata untuk didiskusikan siswa)
+7. Latihan Soal
+   - Jumlah: {{jumlah_latihan_presentasi}}
+   - Tingkat kesulitan: {{tingkat_kesulitan_presentasi}}
+8. Aktivitas Siswa
+   - Pola aktivitas: {{mode_aktivitas_siswa_presentasi}}
+   - Instruksi/kebutuhan khusus aktivitas: {{aktivitas_siswa_presentasi}}
+9. Refleksi Pembelajaran (pertanyaan reflektif untuk menutup pembelajaran)
+10. Daftar Pustaka (sumber kredibel: buku teks, jurnal, situs resmi — sertakan tahun & penulis)
+
+=== VISUAL / GAMBAR & GRAFIK ===
+- Kebutuhan gambar/diagram per slide (jika relevan): {{kebutuhan_visual_presentasi}}
+- Syarat visual ilmiah: gambar/diagram ilmiah harus akurat secara keilmuan (bukan hasil karangan AI), merujuk sumber sains/anatomi/data resmi. Jika AI tidak yakin akurasinya, tandai dengan "[perlu verifikasi gambar referensi]" agar guru mengecek sebelum dipakai.
+- Grafik/data numerik harus berbasis data nyata atau ditandai sebagai ilustrasi konsep (bukan data riil) jika tidak ada sumber pasti.
+
+=== TEMA / STYLE PRESENTASI ===
+Pilih salah satu:
+- Profesional (formal, warna netral, tipografi tegas)
+- Modern (minimalis, warna kontras, ikon flat)
+- Elegan (warna gelap/emas, tipografi serif)
+- Ceria/Interaktif (warna cerah, ilustrasi kartun — cocok jenjang SD)
+- Sains/Teknis (grid, diagram, warna biru-hijau)
+- Lainnya: {{tema_lainnya_presentasi}}
+Pilihan guru: {{tema_presentasi}}
+
+=== DESKRIPSI TAMBAHAN / PERMINTAAN KHUSUS ===
+(Isi jika ada hal spesifik yang ingin ditambahkan, diubah, atau ditekankan di luar struktur baku di atas — kosongkan jika tidak ada)
+- Contoh yang bisa diisi: penekanan pada nilai karakter tertentu, integrasi teknologi/alat tertentu, gaya bahasa (formal/santai), muatan lokal, kaitan dengan mata pelajaran lain, batasan jumlah slide, kebutuhan siswa berkebutuhan khusus, dll.
+- Catatan guru: {{deskripsi_tambahan_presentasi}}
+
+=== FORMAT OUTPUT (pilih satu) ===
+- A. Draft ringkas untuk NotebookLM — maksimal 700 kata, terstruktur per bagian di atas, siap ditempel ke NotebookLM untuk diolah lebih lanjut.
+- B. Draft presentasi siap pakai untuk generator gambar (ChatGPT/Claude/Canva AI) — SATU LAMAN PRESENTASI = SATU FILE GAMBAR.
+Pilihan output: {{format_output_presentasi}}
+
+=== KHUSUS JIKA MEMILIH FORMAT B ===
+Ikuti alur dua tahap berikut, JANGAN langsung generate gambar:
+
+TAHAP 1 — TAMPILKAN OUTLINE DULU:
+- Tampilkan rancangan lengkap dalam bentuk daftar slide bernomor (Slide 1, Slide 2, dst).
+- Untuk setiap slide, tampilkan: judul slide, poin teks yang akan muncul di slide, dan deskripsi visual/gambar pendukung untuk slide tersebut.
+- Setelah seluruh outline slide ditampilkan, akhiri dengan pertanyaan konfirmasi:
+  "Apakah format dan isi slide di atas sudah sesuai? Jika ya, ketik 'Lanjut' untuk mulai generate laman presentasi dalam bentuk gambar (1 slide = 1 file gambar). Jika belum, beritahu bagian yang perlu direvisi."
+
+TAHAP 2 — GENERATE GAMBAR (hanya jika guru mengetik "Lanjut"):
+- Generate gambar satu per satu sesuai urutan slide pada outline yang sudah disetujui.
+- Beri nama/nomor file berurutan (contoh: Slide_01, Slide_02, dst).
+- Jangan mengubah isi/urutan slide dari outline yang sudah dikonfirmasi, kecuali guru meminta revisi di tahap ini.
+- Jika format output B dipilih, satu slide = satu file gambar. Jangan menggabungkan beberapa slide dalam satu file.
+
+Sekarang buatkan rancangannya sesuai data dan pilihan di atas. Jika ada isi pada kolom "Deskripsi Tambahan/Permintaan Khusus", prioritaskan penyesuaian tersebut tanpa menghilangkan struktur inti yang wajib ada.`
       },
       {
         title: "Prompt LKPD",
@@ -7261,6 +7340,7 @@ $('#randomBtn').addEventListener('click',()=>{const list=filtered();if(list.leng
 const generatorTypes=[
   {id:'all',icon:'◈',name:'Semua',match:()=>true},
   {id:'module',icon:'📚',name:'Modul Ajar / RPM',match:p=>p.categoryId==='modul-ajar-rpm'||/modul ajar|rencana pembelajaran mendalam|\bRPM\b|8334/i.test(`${p.title} ${p.categoryName}`)},
+  {id:'presentation',icon:'🖥️',name:'Presentasi Pembelajaran',match:p=>/presentasi pembelajaran|slide pembelajaran|notebooklm/i.test(`${p.title} ${p.categoryName} ${p.text.slice(0,320)}`)},
   {id:'game',icon:'🎮',name:'Game Edukasi',match:p=>/game|skill|luck|mekanik|skor|level|reward/i.test(`${p.title} ${p.categoryName}`)},
   {id:'mpi',icon:'🧩',name:'MPI',match:p=>/\bMPI\b|multimedia pembelajaran/i.test(`${p.title} ${p.categoryName} ${p.text.slice(0,240)}`)},
   {id:'lab',icon:'🔬',name:'Lab Maya / Simulasi',match:p=>/simulasi|lab maya|laboratorium virtual/i.test(`${p.title} ${p.categoryName}`)},
@@ -7273,7 +7353,7 @@ const generatorTypes=[
 state.generatorVersion=state.generatorVersion||'';
 state.generatorPackage=state.generatorPackage||'';
 state.generatorPrompt0Confirmed=Boolean(state.generatorPrompt0Confirmed);
-const referenceHintTypes=new Set(['game','mpi','lab','module','lkpd','comic','app','journal']);
+const referenceHintTypes=new Set(['game','mpi','lab','module','presentation','lkpd','comic','app','journal']);
 const elsGen={
   packageMode:$('#generatorPackageMode'),singleMode:$('#generatorSingleMode'),version:$('#generatorVersionSelect'),package:$('#generatorPackageSelect'),proNote:$('#generatorProNote'),sections:$('#generatedPromptSections')
 };
@@ -7352,8 +7432,9 @@ function renderGeneratorTemplate(){
     const fields=[];const seen=new Set();ps.forEach(p=>extractPromptFields(p).forEach(f=>{if(!seen.has(f.token)){seen.add(f.token);fields.push(f);}}));
     if(!fields.length){els.genFields.innerHTML='<div class="no-fields span-2">Rangkaian ini tidak memiliki placeholder yang terdeteksi. Klik Generate untuk menampilkan prompt apa adanya.</div>'+referenceHintHtml();initSpecialGeneratorFields();updateGeneratorActionButton();return;}
     const isModule=ps[0]?.categoryId==='modul-ajar-rpm';
+    const isPresentation=ps[0]?.title==='Prompt Presentasi Pembelajaran';
     const isLKPD=ps[0]?.title==='Prompt LKPD';
-    const moduleNote=isModule?'<div class="module-ai-note"><strong>💡 Tidak harus mengisi semuanya.</strong> Setiap kolom yang dibiarkan kosong akan ditentukan AI berdasarkan data yang sudah tersedia. Semakin banyak konteks yang diberikan, semakin spesifik hasil Modul Ajar/RPM.</div>':(isLKPD?'<div class="module-ai-note"><strong>📝 Panduan LKPD.</strong> Isi data yang Anda ketahui. Setiap input memiliki contoh/panduan. <strong>Format Output Akhir wajib dipilih</strong>; field lain yang kosong akan dilengkapi AI secara wajar berdasarkan TP, topik, dan jenjang.</div>':'');
+    const moduleNote=isModule?'<div class="module-ai-note"><strong>💡 Tidak harus mengisi semuanya.</strong> Setiap kolom yang dibiarkan kosong akan ditentukan AI berdasarkan data yang sudah tersedia. Semakin banyak konteks yang diberikan, semakin spesifik hasil Modul Ajar/RPM.</div>':(isPresentation?'<div class="module-ai-note"><strong>🖥️ Panduan Presentasi Pembelajaran.</strong> Isi data utama yang Anda ketahui. Jika memiliki modul ajar/RPP/silabus, unggah file tersebut saat menjalankan prompt di AI. Untuk <strong>Format Output B</strong>, AI harus menampilkan <strong>outline slide dulu</strong> dan baru membuat gambar setelah guru mengetik <strong>'Lanjut'</strong>.</div>':(isLKPD?'<div class="module-ai-note"><strong>📝 Panduan LKPD.</strong> Isi data yang Anda ketahui. Setiap input memiliki contoh/panduan. <strong>Format Output Akhir wajib dipilih</strong>; field lain yang kosong akan dilengkapi AI secara wajar berdasarkan TP, topik, dan jenjang.</div>':''));
     let renderFields=fields;
     if(isModule){
       const priority=['{{komposisi_siswa}}','{{deskripsi_siswa_inklusi}}'];
@@ -7403,9 +7484,30 @@ const lkpdGeneratorFieldConfig={
   '{{kertas_gambar}}':{label:'Format Kertas & Orientasi',type:'lkpdImageConditional',placeholder:'Contoh: A4 Potret',help:'Hanya digunakan jika output Gambar per Halaman. Contoh: A4 Potret, A4 Lanskap, F4 Potret.',auto:'gunakan A4 Potret'},
   '{{format_file_gambar}}':{label:'Format File Gambar',type:'lkpdImageFile',help:'Hanya digunakan jika output Gambar per Halaman. Pilih PNG atau WebP kualitas tinggi.',auto:'gunakan PNG atau WebP kualitas tinggi'}
 };
+const presentationGeneratorFieldConfig={
+  '{{nama_guru}}':{label:'Nama Guru',placeholder:'Contoh: Ibu Rina Sari, S.Pd.',help:'Nama guru yang akan menggunakan presentasi. Jika kosong, AI dapat memakai sapaan guru secara generik.',auto:'gunakan identitas guru generik yang mudah disesuaikan'},
+  '{{jenjang_kelas_presentasi}}':{label:'Jenjang & Kelas',placeholder:'Contoh: SMA Kelas XI',help:'Menentukan kedalaman materi dan gaya bahasa slide. Jika kosong, AI menentukan jenjang/kelas paling konsisten dengan konteks.',auto:'tentukan jenjang dan kelas yang paling sesuai dengan topik'},
+  '{{mata_pelajaran_presentasi}}':{label:'Mata Pelajaran',placeholder:'Contoh: Biologi',help:'Isi mapel utama presentasi. Jika kosong, AI menentukan mapel dari topik yang diberikan.',auto:'tentukan mata pelajaran paling relevan dari topik'},
+  '{{topik_materi_presentasi}}':{label:'Topik / Materi',placeholder:'Contoh: Sistem Ekskresi Manusia',help:'Materi utama yang akan dijelaskan dalam slide. Jika kosong, AI menentukan topik dari konteks yang tersedia.',auto:'tentukan topik atau materi utama berdasarkan konteks'},
+  '{{alokasi_waktu_presentasi}}':{label:'Alokasi Waktu',placeholder:'Contoh: 2 × 45 menit',help:'Durasi pembelajaran yang ingin dicakup presentasi. Jika kosong, AI menentukan alokasi waktu yang wajar.',auto:'tentukan alokasi waktu yang wajar'},
+  '{{tujuan_pembelajaran_presentasi}}':{label:'Tujuan Pembelajaran',placeholder:'Contoh: Peserta didik mampu menjelaskan proses pembentukan urine dan menganalisis gangguan sistem ekskresi',help:'Tujuan menjadi dasar urutan isi slide. Jika kosong, AI menyusun tujuan terukur sesuai taksonomi Bloom dan jenjang.',auto:'susun tujuan pembelajaran terukur sesuai topik dan jenjang'},
+  '{{kurikulum_acuan_presentasi}}':{label:'Kurikulum / Acuan',placeholder:'Contoh: Kurikulum Merdeka',help:'Digunakan bila tidak ada file referensi yang diunggah ke AI. Jika kosong, AI memakai acuan kurikulum yang paling relevan.',auto:'gunakan kurikulum atau acuan yang paling relevan'},
+  '{{referensi_tambahan_presentasi}}':{label:'Catatan Referensi Tambahan',placeholder:'Contoh: sesuaikan istilah dengan modul ajar sekolah; gunakan contoh lokal pesisir',help:'Gunakan jika ada preferensi istilah, urutan materi, atau penyesuaian lain dari referensi guru. Jika kosong, AI mengikuti acuan umum.',auto:'tidak ada referensi tambahan khusus'},
+  '{{mode_inti_materi_presentasi}}':{label:'Mode Inti Materi',type:'select',options:[['','— Ditentukan AI —'],['Mode Detail','Mode Detail — penjelasan lengkap tiap subtopik + definisi + contoh'],['Mode Poin Penting','Mode Poin Penting — ringkasan inti untuk tampilan slide']],help:'Pilih tingkat kerincian isi materi. Mode Detail cocok untuk presentasi belajar penuh, sedangkan Mode Poin Penting cocok untuk slide singkat.',auto:'pilih mode inti materi yang paling sesuai dengan tujuan presentasi'},
+  '{{jumlah_latihan_presentasi}}':{label:'Jumlah Latihan Soal',placeholder:'Contoh: 5 soal',help:'Jumlah latihan yang ingin dimasukkan pada slide. Jika kosong, AI menentukan jumlah yang proporsional.',auto:'tentukan jumlah latihan yang proporsional'},
+  '{{tingkat_kesulitan_presentasi}}':{label:'Tingkat Kesulitan Latihan',placeholder:'Contoh: C2–C4 / mudah–sedang',help:'Bisa diisi level Bloom (C1–C6) atau kategori mudah-sedang-sulit. Jika kosong, AI menyesuaikan dengan jenjang siswa.',auto:'tentukan tingkat kesulitan yang sesuai dengan jenjang'},
+  '{{mode_aktivitas_siswa_presentasi}}':{label:'Mode Aktivitas Siswa',type:'select',options:[['','— Ditentukan AI —'],['Individu','Individu'],['Kelompok','Kelompok'],['Campuran','Campuran (individu + kelompok)']],help:'Menjelaskan pola aktivitas siswa yang akan muncul di slide. Jika kosong, AI memilih mode aktivitas yang paling sesuai.',auto:'pilih mode aktivitas siswa yang paling sesuai'},
+  '{{aktivitas_siswa_presentasi}}':{label:'Instruksi / Kebutuhan Aktivitas Siswa',placeholder:'Contoh: diskusi kelompok 4 orang, analisis studi kasus, lalu presentasi singkat',help:'Isi langkah atau kebutuhan khusus aktivitas siswa. Jika kosong, AI menyusun aktivitas langkah demi langkah yang sesuai.',auto:'susun aktivitas siswa langkah demi langkah yang relevan'},
+  '{{kebutuhan_visual_presentasi}}':{label:'Kebutuhan Visual / Gambar',placeholder:'Contoh: diagram nefron, gambar ginjal, grafik volume urine',help:'Tuliskan kebutuhan gambar/diagram/grafik per slide jika sudah ada gambaran. Jika kosong, AI menentukan visual pendukung yang relevan dan aman secara ilmiah.',auto:'tentukan kebutuhan visual yang relevan dan akurat'},
+  '{{tema_presentasi}}':{label:'Tema / Style Presentasi',type:'select',options:[['','— Ditentukan AI —'],['Profesional','Profesional — formal, warna netral, tipografi tegas'],['Modern','Modern — minimalis, warna kontras, ikon flat'],['Elegan','Elegan — warna gelap/emas, tipografi serif'],['Ceria/Interaktif','Ceria/Interaktif — warna cerah, ilustrasi kartun'],['Sains/Teknis','Sains/Teknis — grid, diagram, warna biru-hijau'],['Lainnya','Lainnya — jelaskan sendiri']],help:'Pilih tampilan visual presentasi. Jika memilih Lainnya, jelaskan detailnya pada kolom Tema Lainnya.',auto:'pilih tema visual yang paling sesuai dengan jenjang dan materi'},
+  '{{tema_lainnya_presentasi}}':{label:'Tema Lainnya (jika dipilih)',placeholder:'Contoh: tema maritim modern dengan aksen biru-putih',help:'Isi hanya jika ingin style khusus di luar pilihan yang tersedia. Jika kosong, AI mengabaikan kolom ini kecuali tema Lainnya dipilih.',auto:'tidak ada tema tambahan di luar pilihan utama'},
+  '{{deskripsi_tambahan_presentasi}}':{label:'Deskripsi Tambahan / Permintaan Khusus',placeholder:'Contoh: batasi maksimal 10 slide; gunakan bahasa semi formal; ada penyesuaian untuk siswa low vision',help:'Gunakan untuk hal khusus seperti jumlah slide, gaya bahasa, integrasi teknologi, muatan lokal, kebutuhan siswa inklusif, atau penekanan tertentu.',auto:'tidak ada permintaan khusus tambahan'},
+  '{{format_output_presentasi}}':{label:'Format Output',type:'select',options:[['','— Pilih format output —'],['A. Draft ringkas untuk NotebookLM','A. Draft ringkas untuk NotebookLM'],['B. Draft presentasi siap pakai untuk generator gambar','B. Draft presentasi siap pakai untuk generator gambar']],help:'Pilih apakah hasil akhirnya berupa draft ringkas untuk NotebookLM atau outline/generate slide gambar satu per satu.',auto:'pilih format output yang paling sesuai dengan kebutuhan guru'}
+};
 function currentGeneratorFieldConfig(token){
   const p=activeGeneratorPrompts()[0];
   if(p?.categoryId==='modul-ajar-rpm')return moduleGeneratorFieldConfig[token]||null;
+  if(p?.title==='Prompt Presentasi Pembelajaran')return presentationGeneratorFieldConfig[token]||null;
   if(p?.title==='Prompt LKPD')return lkpdGeneratorFieldConfig[token]||null;
   return null;
 }
@@ -7485,7 +7587,7 @@ function initSpecialGeneratorFields(){
 function renderGeneratorField(f,id,disabled){
   const cfg=moduleFieldConfig(f.token);
   const label=cfg?.label||f.label;
-  const long=cfg?['{{capaian_pembelajaran}}','{{tujuan_pembelajaran}}','{{konteks_lokal_sekolah}}','{{deskripsi_siswa_inklusi}}','{{karakteristik_kesiapan_murid}}','{{pemanfaatan_digital}}','{{kemitraan_pembelajaran}}','{{deskripsi_tambahan}}','{{deskripsi_asesmen}}','{{tujuan}}','{{deskripsi_asesmen_lkpd}}','{{catatan}}'].includes(f.token):isLongField(label);
+  const long=cfg?['{{capaian_pembelajaran}}','{{tujuan_pembelajaran}}','{{konteks_lokal_sekolah}}','{{deskripsi_siswa_inklusi}}','{{karakteristik_kesiapan_murid}}','{{pemanfaatan_digital}}','{{kemitraan_pembelajaran}}','{{deskripsi_tambahan}}','{{deskripsi_asesmen}}','{{tujuan}}','{{deskripsi_asesmen_lkpd}}','{{catatan}}','{{tujuan_pembelajaran_presentasi}}','{{referensi_tambahan_presentasi}}','{{aktivitas_siswa_presentasi}}','{{kebutuhan_visual_presentasi}}','{{tema_lainnya_presentasi}}','{{deskripsi_tambahan_presentasi}}'].includes(f.token):isLongField(label);
   const help=cfg?.help?`<span class="generator-field-help"><strong>Contoh/panduan:</strong> ${escapeHtml(cfg.help)}</span>`:'';
   let control='';
   if(cfg?.type==='select'){
