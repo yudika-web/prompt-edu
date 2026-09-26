@@ -5143,69 +5143,121 @@ Sebelum mulai membangun, jika ada bagian yang belum jelas (misalnya skema databa
       },
       {
         title: "Prompt LKPD",
-        text: `Anda adalah seorang guru berpengalaman yang ahli menyusun LKPD (Lembar Kerja Peserta Didik) sesuai Kurikulum Merdeka, dengan struktur yang jelas, terukur levelnya, dan langsung siap pakai di kelas.
+        generatorCurlyOnly: true,
+        text: `Anda adalah seorang guru berpengalaman yang ahli menyusun LKPD (Lembar Kerja Peserta Didik) sesuai Kurikulum Merdeka, dengan struktur yang jelas, aktivitas yang bermakna, asesmen yang terukur, dan hasil yang langsung siap digunakan di kelas.
 
-=== INPUT DARI GURU (isi terlebih dahulu) ===
+=== INPUT DARI GURU ===
 1. Nama Sekolah              : {{nama_sekolah}}
 2. Mata Pelajaran            : {{mapel}}
-3. Topik/Materi              : {{topik}}
+3. Topik / Materi Utama      : {{topik}}
 4. Jenjang & Kelas           : {{jenjang_kelas}}
-5. Mode Pengerjaan           : {{mode}}  → "Individu" atau "Kelompok"
-6. Tujuan Pembelajaran       : {{tujuan}}  (boleh diisi guru, atau minta AI menyusunkan berdasarkan topik & fase capaian)
-7. Alokasi Waktu             : {{alokasi_waktu}}  (contoh: 2 x 40 menit)
-8. Estimasi Jumlah Halaman   : {{jumlah_halaman}}  (maks. 2 halaman jika komponen banyak — jika lebih, padatkan/prioritaskan komponen wajib, kecuali guru eksplisit minta lebih)
-9. Proporsi Level Kognitif Soal : {{proporsi_level}}  (default jika kosong: LOTS 30% : MOTS 40% : HOTS 30%)
-10. Tipe Soal yang Diinginkan : {{tipe_soal}}  (pilih satu atau beberapa: Pilihan Ganda, Uraian, Isian Singkat, Menjodohkan, Mengurutkan, Benar-Salah, SJT/Situational Judgment Test, atau lainnya)
-11. Kebutuhan Gambar          : {{gambar}}  → "Tidak perlu" / "Ilmiah-Faktual" / "Fantasi/Ilustratif (khusus jika diminta eksplisit)"
-12. Catatan Tambahan          : {{catatan}}  (opsional: model pembelajaran yang dipakai, alat/bahan praktikum, dsb.)
-13. Format Output Akhir       : {{format_output}}  → WAJIB pilih salah satu: "Dokumen (DOCX)" / "Dokumen (PDF)" / "Gambar per Halaman". Jika kosong, jelaskan singkat perbedaannya lalu tanyakan ke guru:
-    - Dokumen (DOCX/PDF): lebih akurat untuk teks panjang, mudah diedit dan dicetak ulang, direkomendasikan sebagai default LKPD.
-    - Gambar per Halaman: cocok jika ingin dibagikan sebagai file visual siap tayang/tempel (mis. poster, slide, media sosial), tapi berisiko pada rendering teks panjang (bisa buram/gibberish) karena LKPD padat teks.
-14. (Isi HANYA jika Format Output = "Gambar per Halaman")
-    - Format Kertas & Orientasi : {{kertas_gambar}} → default A4 Potret
-    - Format File Gambar        : {{format_file_gambar}} → default PNG (atau WebP jika platform mendukung)
+5. Mode Pengerjaan           : {{mode}}
+   Arti Mode Pengerjaan:
+   - Individu = setiap siswa mengerjakan LKPD sendiri dan memiliki ruang jawaban masing-masing.
+   - Kelompok = LKPD dikerjakan bersama; petunjuk harus mengatur pembagian peran, diskusi, pencatatan hasil kelompok, dan simpulan bersama.
+6. Tujuan Pembelajaran (TP)  : {{tujuan}}
+7. Alokasi Waktu             : {{alokasi_waktu}}
+8. Estimasi Jumlah Halaman   : {{jumlah_halaman}}
+9. Konfigurasi Asesmen       : {{konfigurasi_asesmen_lkpd}}
+10. Deskripsi Asesmen Tambahan : {{deskripsi_asesmen_lkpd}}
+11. Kebutuhan Gambar         : {{gambar}}
+12. Catatan Tambahan         : {{catatan}}
+13. Format Output Akhir      : {{format_output}}
+14. Jika output = Gambar per Halaman:
+    - Format Kertas & Orientasi : {{kertas_gambar}}
+    - Format File Gambar        : {{format_file_gambar}}
 
-Jika ada input yang belum diisi guru, termasuk Format Output Akhir, tanyakan dulu sebelum menyusun LKPD — jangan mengasumsikan sendiri, termasuk untuk setiap komponen yang wajib tampil di output (seperti nama sekolah, alokasi waktu, dll).
+CATATAN INPUT:
+- Gunakan hanya satu field Topik/Materi Utama. Jangan membuat field topik kedua.
+- Jika TP kosong, susun TP yang terukur berdasarkan topik, jenjang/kelas, dan konteks aktivitas.
+- Jika rincian asesmen kosong, tentukan instrumen yang paling sesuai dengan TP dan aktivitas LKPD.
+- Jika jumlah halaman kosong, utamakan LKPD ringkas dan terbaca; target awal 1–2 halaman kecuali konten memang membutuhkan lebih.
+- Jika Mode Pengerjaan kosong, tentukan mode yang paling sesuai dengan aktivitas dan jelaskan asumsi singkat.
 
-=== STRUKTUR WAJIB LKPD (susun berurutan) ===
-1. **Kop/Identitas** — {{nama_sekolah}}, mata pelajaran {{mapel}}, kelas/fase {{jenjang_kelas}}, topik {{topik}}, alokasi waktu {{alokasi_waktu}}, kolom kosong untuk nama siswa/kelompok & tanggal (diisi saat dikerjakan).
-2. **Tujuan Pembelajaran** — rumusan jelas & terukur (gunakan kata kerja operasional sesuai taksonomi Bloom).
-3. **Petunjuk Pengerjaan** — sesuaikan dengan mode {{mode}} (instruksi kerja individu vs pembagian peran dalam kelompok).
-4. **Ringkasan Materi** — singkat, padat, hanya inti konsep yang relevan dengan tujuan pembelajaran (bukan uraian buku teks penuh).
-5. **Kegiatan/Aktivitas Siswa** — aktivitas konkret (mengamati, bereksperimen, berdiskusi, mengisi tabel/diagram, dsb.) yang mendorong siswa aktif, bukan hanya membaca.
-6. **Soal Evaluasi** — susun sesuai {{proporsi_level}} dan {{tipe_soal}}, dengan aturan:
-   - LOTS: mengingat & memahami konsep dasar.
-   - MOTS: menerapkan konsep pada situasi baru/sederhana.
-   - HOTS: menganalisis, mengevaluasi, atau mencipta (soal kontekstual/studi kasus).
-   - Untuk tipe SJT: buat skenario situasi nyata yang relevan dengan topik, siswa memilih tindakan paling tepat.
-   - Beri nomor soal berurutan dan tandai level (LOTS/MOTS/HOTS) di setiap soal agar guru mudah mengecek sebaran level.
-7. **Refleksi Siswa** — 2–3 pertanyaan reflektif akhir (apa yang dipelajari, bagian tersulit, keterkaitan dengan kehidupan sehari-hari).
-8. (Opsional, di halaman/lampiran terpisah) **Kunci Jawaban & Rubrik Penilaian** singkat.
+=====================================================================
+KONFIGURASI ASESMEN LKPD
+=====================================================================
+LKPD harus memiliki hubungan yang jelas dengan Tujuan Pembelajaran. Penyusunan soal, tugas, aktivitas terukur, dan rubrik WAJIB melihat TP terlebih dahulu. Jangan membuat soal hanya karena sesuai materi tetapi tidak mengukur TP.
 
-=== ATURAN GAMBAR (konten ilustrasi) ===
-- Jika {{gambar}} = "Ilmiah-Faktual": deskripsikan gambar/diagram yang akurat secara keilmuan (struktur, proses, atau fenomena nyata sesuai topik), hindari elemen yang menyesatkan secara konsep.
-- Jika {{gambar}} = "Fantasi/Ilustratif": boleh digambarkan bergaya kreatif/ilustratif, tapi tetap harus diminta eksplisit oleh guru — jangan otomatis dibuat fantasi tanpa permintaan.
-- Jika {{gambar}} = "Tidak perlu": jangan sertakan instruksi gambar sama sekali.
+Jenis asesmen yang dapat digunakan:
+1. Asesmen Formatif Awal — opsional; bertujuan memetakan kemampuan/kesiapan awal sebelum aktivitas utama.
+2. Asesmen Formatif — WAJIB minimal satu; dapat dilakukan selama proses atau di akhir aktivitas LKPD untuk memberikan umpan balik dan memantau perkembangan menuju TP.
+3. Asesmen Sumatif — opsional; digunakan bila LKPD memang menjadi bagian penilaian akhir untuk mengukur ketercapaian TP/KKTP.
 
-=== ATURAN OUTPUT — SANGAT PENTING (bercabang sesuai {{format_output}}) ===
+Untuk setiap jenis asesmen yang dipilih, ikuti konfigurasi guru:
+A. Kognitif
+- Tipe soal yang dapat dipilih: PG, PG Kompleks, Uraian, Isian Singkat, Menjodohkan, Mengurutkan, Benar-Salah, SJT.
+- Level dapat diatur dalam persentase LOTS, MOTS, HOTS, dan AKM/PISA. Jika guru mengisi persentase, total harus 100%. Jika kosong, tentukan proporsi berdasarkan TP, jenjang, dan kompleksitas aktivitas.
+- Soal AKM/PISA wajib menggunakan stimulus kontekstual/otentik yang relevan, bukan sekadar soal hafalan yang diberi label AKM.
 
-A. JIKA FORMAT OUTPUT = "Dokumen (DOCX)" atau "Dokumen (PDF)"
-1. Susun LKPD sebagai satu dokumen terstruktur: heading/subheading jelas per bagian (1–8), tabel bila diperlukan (mis. tabel pengamatan), dan kolom/kotak isian kosong untuk jawaban siswa (garis titik-titik atau kotak, bukan teks contoh jawaban).
-2. Panjang halaman mengikuti isi konten secara alami. Tetap upayakan komponen inti (poin 1–7) padat, maksimal 2 halaman, kecuali guru eksplisit meminta lebih. Kunci Jawaban & Rubrik (poin 8, opsional) diletakkan di halaman/lampiran terpisah dengan page break, tetap dalam SATU file dokumen yang sama (bukan file terpisah); boleh diberi label "Halaman Guru" agar mudah dipisah sebelum dibagikan ke siswa.
-3. Jika platform yang digunakan memiliki kemampuan membuat file .docx atau .pdf secara langsung, gunakan kemampuan tersebut dan hasilkan file sesuai sub-format yang dipilih guru.
-4. Jika platform tidak dapat menghasilkan file dokumen secara langsung, susun output sebagai teks terformat rapi (heading, tabel dalam format markdown, dsb.) yang siap disalin ke Word/Google Docs oleh guru, dan sebutkan jelas: "salin ke Word/Google Docs, lalu simpan sebagai .docx atau ekspor sebagai .pdf".
-5. Jika ada instruksi gambar sesuai Aturan Gambar, sisipkan sebagai deskripsi/placeholder di posisi yang sesuai dalam dokumen (mis. "[Gambar: deskripsi]"), kecuali platform dapat langsung menyisipkan gambar nyata ke dalam dokumen.
-6. LKPD tetap disusun utuh dalam satu proses (tidak perlu dipecah per halaman untuk mode dokumen ini, karena dokumen mendukung multi-halaman secara native dalam satu file).
+B. Non-Kognitif / Kinerja & Sikap
+- Teknik dapat berupa Unjuk Kerja/Praktik, Presentasi, Proyek, Produk, Portofolio, Observasi, Penilaian Diri, Penilaian Antarteman, atau teknik lain yang dijelaskan guru.
+- Keterampilan/aspek yang dinilai harus disebutkan secara spesifik, misalnya penggunaan alat, ketelitian, komunikasi, kolaborasi, kualitas produk, keselamatan kerja, atau aspek lain sesuai aktivitas.
 
-B. JIKA FORMAT OUTPUT = "Gambar per Halaman"
-1. Sebelum generate, sampaikan peringatan singkat ke guru: LKPD berisi banyak teks (identitas, tujuan, soal, dsb.), sedangkan AI image generator berisiko menghasilkan teks buram/acak (gibberish) untuk paragraf panjang. Tawarkan pilihan: (a) tetap lanjutkan apa adanya dengan risiko teks perlu diperiksa ulang per halaman, (b) persingkat konten per halaman jadi poin-poin pendek agar teks lebih mungkin terbaca jelas, atau (c) jika platform mendukung rendering HTML/CSS ke gambar, gunakan cara itu agar teks presisi. Tunggu jawaban guru sebelum lanjut generate.
-2. Satu halaman LKPD = satu file gambar terpisah. Nama file berurutan, mis. LKPD_[topik]_h1, LKPD_[topik]_h2, dst., sesuai {{format_file_gambar}}.
-3. Format kertas & orientasi WAJIB disebutkan jelas di setiap file, sesuai {{kertas_gambar}} (default A4 Potret; opsi lain: A4 Lanskap, A5, A3, F4/Folio, Letter, potret/lanskap), lengkap dengan rasio dan margin aman minimal 10 mm dari tepi untuk keperluan cetak.
-4. Layout worksheet per halaman: kop/identitas di bagian atas, lalu bagian-bagian (tujuan, petunjuk, ringkasan materi, aktivitas, soal, refleksi) tersusun rapi dalam blok/section dengan jarak antar-section jelas dan konsisten antar-halaman. Kolom/kotak kosong untuk jawaban siswa digambarkan sebagai garis atau kotak kosong. Gunakan font sederhana dan tegas (sans-serif, bukan dekoratif/kursif), ukuran teks cukup besar agar mudah terbaca saat dicetak.
-5. Background WAJIB putih polos (bukan transparan) dan konsisten di semua halaman, karena ini dokumen cetak/isian, bukan aset UI lepas.
-6. Jika ada gambar ilustrasi sesuai Aturan Gambar, gambar tersebut ditata rapi di dalam layout halaman (tidak menimpa teks) dan digambar ilmiah-akurat bila jenisnya "Ilmiah-Faktual", tanpa mengubah proporsi atau keterbacaan komponen lain di halaman tersebut.
-7. GENERATE PER HALAMAN, SATU PER SATU — jangan digabung dalam satu respons dan jangan generate banyak halaman sekaligus tanpa konfirmasi, karena worksheet butuh ketelitian tinggi per halaman. Setelah satu file selesai: tampilkan hasilnya, beri status Selesai/Perlu Ulang (cek: semua teks terbaca jelas dan sesuai naskah, layout rapi, tidak ada elemen gibberish, format kertas & margin sesuai), lalu tanyakan ke guru apakah lanjut ke halaman berikutnya sebelum melanjutkan.
-8. Jika platform tidak dapat menghasilkan file gambar secara langsung: tetap susun paket prompt final per halaman sesuai urutan, lengkap dengan nama file, format kertas/orientasi/rasio, layout, seluruh teks final yang harus tampil, instruksi ilustrasi, dan catatan keterbacaan; tandai jelas "perlu dieksekusi pada generator gambar".`
+ATURAN RUBRIK:
+- Rubrik dan pedoman skor otomatis menyesuaikan asesmen yang dipilih.
+- PG/PG Kompleks/Benar-Salah/Menjodohkan/Isian objektif menggunakan kunci jawaban + pedoman skor; jangan memaksakan rubrik.
+- Uraian/SJT menggunakan pedoman skor atau rubrik analitik sesuai kebutuhan.
+- Unjuk Kerja/Praktik, Presentasi, Proyek, Produk, Portofolio, Observasi, Penilaian Diri, dan Penilaian Antarteman menggunakan rubrik/lembar penilaian yang sesuai tekniknya.
+- Jika beberapa teknik dipilih, buat rubrik terpisah untuk tiap teknik. Jangan membuat rubrik untuk teknik yang tidak dipilih.
+- Setiap butir/indikator asesmen harus dapat ditelusuri ke TP yang diukur.
+
+=====================================================================
+STRUKTUR LKPD
+=====================================================================
+Susun berurutan:
+1. Kop/Identitas — nama sekolah, mata pelajaran, jenjang/kelas, topik, alokasi waktu, serta ruang kosong untuk nama siswa/kelompok dan tanggal.
+2. Tujuan Pembelajaran — jelas dan terukur.
+3. Petunjuk Pengerjaan — sesuaikan dengan Mode Pengerjaan. Untuk Kelompok, cantumkan pembagian peran dan aturan kerja kolaboratif; untuk Individu, instruksi diarahkan pada tanggung jawab tiap siswa.
+4. Ringkasan Materi — singkat, padat, hanya konsep yang benar-benar diperlukan untuk aktivitas.
+5. Kegiatan/Aktivitas Siswa — aktivitas konkret seperti mengamati, bereksperimen, menganalisis data, berdiskusi, mengisi tabel/diagram, memecahkan kasus, membuat produk, atau aktivitas lain sesuai TP.
+6. Asesmen/Soal — hanya asesmen yang dipilih guru; susun sesuai konfigurasi asesmen dan TP.
+7. Refleksi Siswa — 2–3 pertanyaan metakognitif tentang hal yang dipelajari, tantangan, dan penerapan dalam kehidupan.
+8. Halaman Guru/Lampiran — jika diperlukan, berisi kunci jawaban, pedoman skor, dan rubrik yang sesuai asesmen terpilih.
+
+=====================================================================
+ATURAN GAMBAR
+=====================================================================
+- Jika kebutuhan gambar = Ilmiah-Faktual: visual/diagram harus akurat secara keilmuan, proporsional, jelas, dan tidak menyesatkan konsep.
+- Jika Fantasi/Ilustratif: gunakan hanya karena guru memilihnya; kreativitas tidak boleh merusak konsep materi.
+- Jika Tidak perlu: jangan memaksakan gambar.
+- Gambar tidak boleh menutupi teks, ruang jawaban, tabel, atau elemen penting LKPD.
+
+=====================================================================
+FORMAT OUTPUT AKHIR
+=====================================================================
+A. Jika Format Output = Dokumen (DOCX)
+- Hasilkan satu file DOCX terstruktur bila platform mendukung pembuatan DOCX.
+- Gunakan heading, tabel, ruang jawaban, page break, serta layout siap edit dan cetak.
+- Kunci jawaban/rubrik dapat ditempatkan pada halaman guru dalam file yang sama.
+- Jika platform tidak dapat membuat DOCX langsung, keluarkan teks terformat yang siap disalin ke Word/Google Docs.
+
+B. Jika Format Output = Dokumen (PDF)
+- Hasilkan satu PDF siap cetak bila platform mendukung pembuatan PDF.
+- Pastikan margin, tabel, teks, ruang jawaban, dan pemisahan halaman rapi.
+- Kunci jawaban/rubrik dapat ditempatkan sebagai halaman guru di bagian akhir.
+- Jika platform tidak dapat membuat PDF langsung, buat dokumen terformat siap ekspor ke PDF.
+
+C. Jika Format Output = Gambar per Halaman
+1. Ingatkan guru bahwa AI image generator berisiko membuat teks panjang buram/gibberish. Bila memungkinkan, prioritaskan rendering dokumen/HTML ke gambar agar teks presisi.
+2. Satu halaman LKPD = satu file gambar terpisah. Jangan menggabungkan beberapa halaman dalam satu file.
+3. Gunakan format kertas/orientasi yang dipilih, margin aman minimal 10 mm, background putih polos, tipografi sans-serif yang jelas, dan layout konsisten.
+4. Generate satu halaman satu per satu dan periksa keterbacaan seluruh teks, tabel, ruang jawaban, ilustrasi, margin, serta konsistensi halaman sebelum lanjut.
+5. Jika image generation tidak tersedia, susun prompt final per halaman dan tandai sebagai perlu dieksekusi pada generator gambar.
+
+=====================================================================
+PEMERIKSAAN AKHIR
+=====================================================================
+Sebelum menyatakan LKPD selesai, periksa:
+- seluruh aktivitas dan asesmen konsisten dengan TP;
+- tidak ada soal yang tidak mengukur TP;
+- asesmen yang dibuat hanya yang dipilih/diperlukan;
+- level kognitif dan jenis instrumen sesuai konfigurasi;
+- kunci jawaban/pedoman skor/rubrik sesuai jenis asesmen;
+- petunjuk Mode Individu/Kelompok tidak tertukar;
+- tidak ada duplikasi Topik/Materi;
+- layout, tabel, ruang jawaban, dan gambar terbaca serta siap digunakan siswa;
+- format output benar-benar mengikuti pilihan DOCX, PDF, atau Gambar per Halaman.\``
       }
     ]
   }
@@ -7300,7 +7352,8 @@ function renderGeneratorTemplate(){
     const fields=[];const seen=new Set();ps.forEach(p=>extractPromptFields(p).forEach(f=>{if(!seen.has(f.token)){seen.add(f.token);fields.push(f);}}));
     if(!fields.length){els.genFields.innerHTML='<div class="no-fields span-2">Rangkaian ini tidak memiliki placeholder yang terdeteksi. Klik Generate untuk menampilkan prompt apa adanya.</div>'+referenceHintHtml();initSpecialGeneratorFields();updateGeneratorActionButton();return;}
     const isModule=ps[0]?.categoryId==='modul-ajar-rpm';
-    const moduleNote=isModule?'<div class="module-ai-note"><strong>💡 Tidak harus mengisi semuanya.</strong> Setiap kolom yang dibiarkan kosong akan ditentukan AI berdasarkan data yang sudah tersedia. Semakin banyak konteks yang diberikan, semakin spesifik hasil Modul Ajar/RPM.</div>':'';
+    const isLKPD=ps[0]?.title==='Prompt LKPD';
+    const moduleNote=isModule?'<div class="module-ai-note"><strong>💡 Tidak harus mengisi semuanya.</strong> Setiap kolom yang dibiarkan kosong akan ditentukan AI berdasarkan data yang sudah tersedia. Semakin banyak konteks yang diberikan, semakin spesifik hasil Modul Ajar/RPM.</div>':(isLKPD?'<div class="module-ai-note"><strong>📝 Panduan LKPD.</strong> Isi data yang Anda ketahui. Setiap input memiliki contoh/panduan. <strong>Format Output Akhir wajib dipilih</strong>; field lain yang kosong akan dilengkapi AI secara wajar berdasarkan TP, topik, dan jenjang.</div>':'');
     let renderFields=fields;
     if(isModule){
       const priority=['{{komposisi_siswa}}','{{deskripsi_siswa_inklusi}}'];
@@ -7332,8 +7385,31 @@ const moduleGeneratorFieldConfig={
   '{{deskripsi_tambahan}}':{label:'Deskripsi Tambahan',placeholder:'Contoh: wajib ada praktikum, proyek mini, presentasi kelompok, studi lapangan, atau ketentuan khusus lain',help:'Gunakan untuk kebutuhan khusus guru. Jika kosong, AI menyusun modul tanpa persyaratan tambahan khusus.',auto:'tidak ada persyaratan tambahan khusus; susun aktivitas terbaik berdasarkan konteks'},
   '{{konfigurasi_asesmen}}':{label:'Konfigurasi Asesmen',type:'assessment',help:'Asesmen Formatif wajib minimal satu. Formatif Awal dan Sumatif opsional. Untuk setiap asesmen, pilih Kognitif/Non-Kognitif, tipe instrumen, dan proporsi level. Jika rincian kosong, AI melengkapi berdasarkan TP/KKTP.',auto:'gunakan minimal Asesmen Formatif dan tentukan domain, instrumen, serta proporsi level paling sesuai dengan TP/KKTP'},
   '{{deskripsi_asesmen}}':{label:'Deskripsi Asesmen Tambahan',placeholder:'Contoh: formatif setelah praktikum; sumatif 20 soal; sediakan versi lisan untuk siswa tertentu; gunakan stimulus data lokal',help:'Opsional. Isi ketentuan asesmen yang belum tercakup. Jika kosong, AI menentukan detail teknis asesmen yang wajar berdasarkan TP, KKTP, jenjang, dan kondisi siswa.',auto:'tidak ada ketentuan tambahan; tentukan detail asesmen yang wajar berdasarkan TP, KKTP, jenjang, dan kondisi siswa'}
+ };
+const lkpdGeneratorFieldConfig={
+  '{{nama_sekolah}}':{label:'Nama Sekolah',placeholder:'Contoh: SMP Negeri 3 Segedong',help:'Nama sekolah yang akan tampil di kop LKPD. Jika kosong, AI memakai identitas sekolah generik yang mudah diganti.',auto:'gunakan identitas sekolah generik yang mudah diganti'},
+  '{{mapel}}':{label:'Mata Pelajaran',placeholder:'Contoh: IPA',help:'Contoh: IPA, Matematika, Bahasa Indonesia. Jika kosong, AI menentukan mapel dari topik yang diberikan.',auto:'tentukan mata pelajaran paling relevan dari topik'},
+  '{{topik}}':{label:'Topik / Materi Utama',placeholder:'Contoh: Sistem Pernapasan Manusia',help:'Isi hanya materi utama LKPD. Ini adalah satu-satunya field Topik; tidak ada field topik kedua.',auto:'tentukan topik/materi utama berdasarkan konteks yang tersedia'},
+  '{{jenjang_kelas}}':{label:'Jenjang & Kelas',placeholder:'Contoh: SMP / Kelas VIII / Fase D',help:'Menentukan tingkat bahasa, kompleksitas aktivitas, dan asesmen. Jika kosong, AI menentukan tingkat yang paling konsisten dengan konteks.',auto:'tentukan jenjang/kelas yang sesuai'},
+  '{{mode}}':{label:'Mode Pengerjaan',type:'select',options:[['','— Ditentukan AI —'],['Individu','Individu — setiap siswa mengerjakan sendiri'],['Kelompok','Kelompok — dikerjakan kolaboratif dengan pembagian peran']],help:'Mode berarti cara siswa mengerjakan LKPD. Individu = jawaban per siswa. Kelompok = kerja kolaboratif dengan pembagian peran dan hasil kelompok.',auto:'pilih Individu atau Kelompok yang paling sesuai dengan aktivitas'},
+  '{{tujuan}}':{label:'Tujuan Pembelajaran (TP)',placeholder:'Contoh: Peserta didik mampu menjelaskan mekanisme pernapasan dan mengaitkannya dengan aktivitas fisik',help:'TP menjadi dasar kegiatan dan seluruh asesmen LKPD. Jika kosong, AI menyusun TP terukur berdasarkan topik dan jenjang/kelas.',auto:'susun tujuan pembelajaran terukur yang menjadi dasar aktivitas dan asesmen LKPD'},
+  '{{alokasi_waktu}}':{label:'Alokasi Waktu',placeholder:'Contoh: 2 × 40 menit',help:'Durasi yang tersedia untuk mengerjakan LKPD. Jika kosong, AI menentukan alokasi yang wajar.',auto:'tentukan alokasi waktu yang wajar'},
+  '{{jumlah_halaman}}':{label:'Estimasi Jumlah Halaman',placeholder:'Contoh: 2 halaman',help:'Jumlah halaman yang diharapkan. Jika kosong, AI mengutamakan 1–2 halaman yang padat tetapi tetap mudah dibaca.',auto:'tentukan jumlah halaman yang efektif, utamakan 1–2 halaman'},
+  '{{konfigurasi_asesmen_lkpd}}':{label:'Konfigurasi Asesmen LKPD',type:'assessment',help:'Asesmen Formatif wajib minimal satu. Formatif Awal dan Sumatif opsional. Pilih Kognitif dan/atau Non-Kognitif, tipe instrumen, teknik penilaian, dan proporsi level sesuai kebutuhan.',auto:'gunakan minimal Asesmen Formatif dan tentukan domain, instrumen, teknik, serta level yang paling sesuai dengan TP'},
+  '{{deskripsi_asesmen_lkpd}}':{label:'Deskripsi Asesmen Tambahan',placeholder:'Contoh: formatif setelah praktikum; 10 soal; gunakan stimulus data lokal; presentasi kelompok dinilai dengan rubrik',help:'Isi aturan asesmen yang belum tercakup pada checkbox. Jika kosong, AI menentukan detail teknis berdasarkan TP dan aktivitas.',auto:'tentukan detail asesmen yang wajar berdasarkan TP dan aktivitas LKPD'},
+  '{{gambar}}':{label:'Kebutuhan Gambar',type:'select',options:[['','— Ditentukan AI —'],['Tidak perlu','Tidak perlu gambar'],['Ilmiah-Faktual','Ilmiah-Faktual — akurat sesuai konsep nyata'],['Fantasi/Ilustratif','Fantasi/Ilustratif — hanya bila sesuai kebutuhan']],help:'Pilih apakah LKPD membutuhkan ilustrasi. Untuk IPA/sains, Ilmiah-Faktual berarti visual harus benar secara konsep dan tidak menyesatkan.',auto:'tentukan kebutuhan gambar berdasarkan topik dan aktivitas'},
+  '{{catatan}}':{label:'Catatan Tambahan',placeholder:'Contoh: wajib ada praktikum sederhana menggunakan alat rumah tangga; sertakan tabel pengamatan',help:'Gunakan untuk kebutuhan khusus seperti praktikum, proyek mini, konteks lokal, alat/bahan tertentu, atau ketentuan lain. Jika kosong, AI menentukan aktivitas terbaik.',auto:'tidak ada ketentuan tambahan khusus; pilih aktivitas paling sesuai'},
+  '{{format_output}}':{label:'Format Output Akhir',type:'lkpdOutput',help:'Pilih hasil akhir LKPD: DOCX untuk mudah diedit, PDF untuk siap cetak, atau Gambar per Halaman untuk distribusi visual. Pilihan ini wajib sebelum generate.',auto:'pilih format output yang paling sesuai'},
+  '{{kertas_gambar}}':{label:'Format Kertas & Orientasi',type:'lkpdImageConditional',placeholder:'Contoh: A4 Potret',help:'Hanya digunakan jika output Gambar per Halaman. Contoh: A4 Potret, A4 Lanskap, F4 Potret.',auto:'gunakan A4 Potret'},
+  '{{format_file_gambar}}':{label:'Format File Gambar',type:'lkpdImageFile',help:'Hanya digunakan jika output Gambar per Halaman. Pilih PNG atau WebP kualitas tinggi.',auto:'gunakan PNG atau WebP kualitas tinggi'}
 };
-function moduleFieldConfig(token){return moduleGeneratorFieldConfig[token]||null;}
+function currentGeneratorFieldConfig(token){
+  const p=activeGeneratorPrompts()[0];
+  if(p?.categoryId==='modul-ajar-rpm')return moduleGeneratorFieldConfig[token]||null;
+  if(p?.title==='Prompt LKPD')return lkpdGeneratorFieldConfig[token]||null;
+  return null;
+}
+function moduleFieldConfig(token){return currentGeneratorFieldConfig(token);}
 function initSpecialGeneratorFields(){
   const model=$('[data-module-model-select]');
   const custom=$('[data-module-model-custom-wrap]');
@@ -7395,11 +7471,21 @@ function initSpecialGeneratorFields(){
     $$('[data-assessment-ntype]').forEach(el=>el.addEventListener('change',()=>{const key=el.dataset.assessmentNtype;const other=$(`[data-assessment-non-other="${key}"]`);if(other){const show=$$(`[data-assessment-ntype="${key}"]`).some(x=>x.checked&&x.value==='Lainnya');other.hidden=!show;other.disabled=!show;if(!show)other.value='';}syncAssessment();}));
     syncAssessment();
   }
+  const lkpdOutput=$('[data-lkpd-output-select]');
+  const lkpdImageOpts=$$('[data-lkpd-image-option]');
+  if(lkpdOutput&&lkpdImageOpts.length){
+    const syncLKPDOutput=()=>{
+      const show=lkpdOutput.value==='Gambar per Halaman';
+      lkpdImageOpts.forEach(el=>{el.disabled=!show;const wrap=el.closest('.form-group');if(wrap)wrap.hidden=!show;if(!show)el.value='';});
+    };
+    lkpdOutput.addEventListener('change',syncLKPDOutput);syncLKPDOutput();
+  }
+
 }
 function renderGeneratorField(f,id,disabled){
   const cfg=moduleFieldConfig(f.token);
   const label=cfg?.label||f.label;
-  const long=cfg?['{{capaian_pembelajaran}}','{{tujuan_pembelajaran}}','{{konteks_lokal_sekolah}}','{{deskripsi_siswa_inklusi}}','{{karakteristik_kesiapan_murid}}','{{pemanfaatan_digital}}','{{kemitraan_pembelajaran}}','{{deskripsi_tambahan}}','{{deskripsi_asesmen}}'].includes(f.token):isLongField(label);
+  const long=cfg?['{{capaian_pembelajaran}}','{{tujuan_pembelajaran}}','{{konteks_lokal_sekolah}}','{{deskripsi_siswa_inklusi}}','{{karakteristik_kesiapan_murid}}','{{pemanfaatan_digital}}','{{kemitraan_pembelajaran}}','{{deskripsi_tambahan}}','{{deskripsi_asesmen}}','{{tujuan}}','{{deskripsi_asesmen_lkpd}}','{{catatan}}'].includes(f.token):isLongField(label);
   const help=cfg?.help?`<span class="generator-field-help"><strong>Contoh/panduan:</strong> ${escapeHtml(cfg.help)}</span>`:'';
   let control='';
   if(cfg?.type==='select'){
@@ -7425,6 +7511,15 @@ function renderGeneratorField(f,id,disabled){
     const ntypes=['Unjuk Kerja/Praktik','Presentasi','Proyek','Produk','Portofolio','Observasi','Penilaian Diri','Penilaian Antarteman','Lainnya'];
     const rows=defs.map(a=>`<section class="assessment-kind"><label class="assessment-kind-head"><input type="checkbox" data-assessment-enable="${a.key}" ${a.required?'checked disabled':''} ${disabled?'disabled':''}/><span class="assessment-kind-title"><strong>${a.label}${a.required?'<span class="assessment-required">WAJIB</span>':''}</strong><small>${a.desc}</small></span></label><div class="assessment-kind-body" data-assessment-body="${a.key}" ${a.required?'':'hidden'}><div class="assessment-domain-row"><label class="assessment-domain-toggle"><input type="checkbox" data-assessment-domain="${a.key}:kognitif" ${disabled?'disabled':''}/>Kognitif</label><label class="assessment-domain-toggle"><input type="checkbox" data-assessment-domain="${a.key}:nonkognitif" ${disabled?'disabled':''}/>Non-Kognitif</label></div><div class="assessment-domain-panel" data-assessment-panel="${a.key}:kognitif" hidden><div class="assessment-subtitle">Kognitif — tipe soal</div><div class="assessment-choice-grid">${qtypes.map(q=>`<label class="assessment-choice"><input type="checkbox" data-assessment-qtype="${a.key}" value="${q}" ${disabled?'disabled':''}/>${q}</label>`).join('')}</div><textarea class="form-control assessment-desc" data-assessment-kognitif-desc="${a.key}" placeholder="Jelaskan bentuk asesmen kognitif yang diinginkan (opsional)..." ${disabled?'disabled':''}></textarea><div class="assessment-subtitle">Proporsi level kognitif (%)</div><div class="assessment-level-grid">${['LOTS','MOTS','HOTS','AKM/PISA'].map(l=>`<label class="assessment-level">${l}<input type="number" min="0" max="100" step="1" inputmode="numeric" data-assessment-level="${a.key}:${l}" placeholder="0" ${disabled?'disabled':''}/></label>`).join('')}</div><div class="assessment-level-total" data-assessment-total="${a.key}">Kosong = AI menentukan • jika diisi total harus 100%</div></div><div class="assessment-domain-panel" data-assessment-panel="${a.key}:nonkognitif" hidden><div class="assessment-subtitle">Non-Kognitif / Kinerja & Sikap — teknik penilaian</div><div class="assessment-choice-grid">${ntypes.map(n=>`<label class="assessment-choice"><input type="checkbox" data-assessment-ntype="${a.key}" value="${n}" ${disabled?'disabled':''}/>${n}</label>`).join('')}</div><input class="form-control assessment-custom-non" data-assessment-non-other="${a.key}" placeholder="Jika memilih Lainnya, jelaskan..." hidden disabled/><input class="form-control" data-assessment-skill="${a.key}" placeholder="Keterampilan/aspek yang dinilai, mis. penggunaan alat, komunikasi, kolaborasi, ketelitian..." ${disabled?'disabled':''}/><textarea class="form-control assessment-desc" data-assessment-nonkognitif-desc="${a.key}" placeholder="Jelaskan bentuk asesmen kinerja/sikap yang diinginkan (opsional)..." ${disabled?'disabled':''}></textarea></div></div></section>`).join('');
     control=`<input type="hidden" id="${id}" data-token="${escapeHtml(f.token)}" data-assessment-hidden value="" ${disabled?'disabled':''}/><div class="assessment-config"><div class="assessment-intro"><strong>Atur asesmen sesuai kebutuhan.</strong> Asesmen Formatif wajib dan selalu aktif. Formatif Awal dan Sumatif opsional. Pada tiap jenis asesmen, pilih Kognitif, Non-Kognitif/Kinerja & Sikap, atau keduanya. Rubrik akan dibuat otomatis sesuai teknik yang dipilih.</div>${rows}<div class="assessment-note-final">Jika rincian dibiarkan kosong, AI menentukan instrumen yang sesuai TP/KKTP. Rubrik hanya dibuat untuk teknik asesmen yang membutuhkan dan dipilih.</div></div>`;
+  }else if(cfg?.type==='lkpdOutput'){
+    const opts=[['','— Pilih format output —'],['Dokumen (DOCX)','Dokumen (DOCX) — mudah diedit'],['Dokumen (PDF)','Dokumen (PDF) — siap cetak'],['Gambar per Halaman','Gambar per Halaman — satu file gambar untuk tiap halaman']];
+    control=`<select class="form-control" id="${id}" data-token="${escapeHtml(f.token)}" data-lkpd-output-select ${disabled?'disabled':''}>${opts.map(([v,l])=>`<option value="${escapeHtml(v)}">${escapeHtml(l)}</option>`).join('')}</select>`;
+  }else if(cfg?.type==='lkpdImageConditional'){
+    const ph=cfg?.placeholder||'Contoh: A4 Potret';
+    control=`<input class="form-control" id="${id}" data-token="${escapeHtml(f.token)}" data-lkpd-image-option placeholder="${escapeHtml(ph)}" disabled />`;
+  }else if(cfg?.type==='lkpdImageFile'){
+    const opts=[['','— Pilih format —'],['PNG','PNG'],['WebP','WebP kualitas tinggi']];
+    control=`<select class="form-control" id="${id}" data-token="${escapeHtml(f.token)}" data-lkpd-image-option disabled>${opts.map(([v,l])=>`<option value="${escapeHtml(v)}">${escapeHtml(l)}</option>`).join('')}</select>`;
   }else if(cfg?.type==='dimensions'){
     const dims=['Keimanan dan Ketakwaan terhadap Tuhan YME','Kewargaan','Penalaran Kritis','Kreativitas','Kolaborasi','Kemandirian','Kesehatan','Komunikasi'];
     control=`<input type="hidden" id="${id}" data-token="${escapeHtml(f.token)}" data-dimension-hidden value="" ${disabled?'disabled':''}/><div class="dimension-picker">${dims.map((d,idx)=>`<label class="dimension-option"><input type="checkbox" data-dimension-value value="${escapeHtml(d)}" ${disabled?'disabled':''}/><span>${idx+1}. ${escapeHtml(d)}</span></label>`).join('')}</div><div class="dimension-empty-note">Disarankan memilih 2–4 dimensi. Jika dicentang, hanya dimensi terpilih yang dimasukkan ke prompt. Tidak mencentang apa pun = AI memilihkan 2–4 dimensi yang paling relevan.</div>`;
@@ -7482,14 +7577,14 @@ function updateGeneratorActionButton(){
 }
 function substitutionMap(){const vals=new Map();els.genFields.querySelectorAll('[data-token]').forEach(input=>{let val=input.value.trim();if(input.hasAttribute('data-module-model-select')&&['custom','combo'].includes(val)){const custom=els.genFields.querySelector('[data-module-model-custom]')?.value.trim()||'';if(custom)val=val==='combo'?`Kombinasi model: ${custom}`:custom;else val='';}if(val)vals.set(input.dataset.token,val);});return vals;}
 function applySubstitutions(text,vals){let out=text;vals.forEach((v,k)=>{out=out.split(k).join(v);});return out;}
-function finalizeGeneratedPrompt(prompt,text,vals){if(prompt?.categoryId!=='modul-ajar-rpm')return text;let out=text;const selectedDims=vals?.get('{{dimensi_profil_lulusan}}')||'';if(selectedDims){out=out.replace(/REFERENSI 8 DIMENSI PROFIL LULUSAN \(DIGUNAKAN HANYA JIKA GURU TIDAK MEMILIH DIMENSI\):[\s\S]*?Jika guru sudah memilih satu atau beberapa dimensi pada input, ABAIKAN dan JANGAN tampilkan daftar referensi 8 dimensi ini pada keluaran\.\n\n/,'');}Object.entries(moduleGeneratorFieldConfig).forEach(([token,cfg])=>{if(out.includes(token))out=out.split(token).join(`[Ditentukan AI: ${cfg.auto}]`);});return out;}
+function finalizeGeneratedPrompt(prompt,text,vals){let out=text;if(prompt?.categoryId==='modul-ajar-rpm'){const selectedDims=vals?.get('{{dimensi_profil_lulusan}}')||'';if(selectedDims){out=out.replace(/REFERENSI 8 DIMENSI PROFIL LULUSAN \(DIGUNAKAN HANYA JIKA GURU TIDAK MEMILIH DIMENSI\):[\s\S]*?Jika guru sudah memilih satu atau beberapa dimensi pada input, ABAIKAN dan JANGAN tampilkan daftar referensi 8 dimensi ini pada keluaran\.\n\n/,'');}Object.entries(moduleGeneratorFieldConfig).forEach(([token,cfg])=>{if(out.includes(token))out=out.split(token).join(`[Ditentukan AI: ${cfg.auto}]`);});return out;}if(prompt?.title==='Prompt LKPD'){const fmt=vals?.get('{{format_output}}')||'';if(fmt&&fmt!=='Gambar per Halaman'){out=out.replace(/14\. Jika output = Gambar per Halaman:\n    - Format Kertas & Orientasi : \{\{kertas_gambar\}\}\n    - Format File Gambar        : \{\{format_file_gambar\}\}\n/,'14. Pengaturan gambar per halaman tidak berlaku karena output yang dipilih adalah '+fmt+'.\n');}Object.entries(lkpdGeneratorFieldConfig).forEach(([token,cfg])=>{if(out.includes(token))out=out.split(token).join(`[Ditentukan AI: ${cfg.auto}]`);});return out;}return out;}
 function renderGeneratedSections(items){
   elsGen.sections.innerHTML=items.map((it,i)=>`<section class="generated-section"><div class="generated-section-head"><div class="generated-section-title"><strong>${escapeHtml(it.heading)}</strong><span>${escapeHtml(it.sourceTitle)}</span></div><button class="generated-section-copy" data-copy-section="${i}">📋 Salin Prompt Ini</button></div><textarea class="form-control" data-generated-section="${i}" spellcheck="false">${escapeHtml(it.text)}</textarea></section>`).join('');
   elsGen.sections.querySelectorAll('[data-copy-section]').forEach(b=>b.addEventListener('click',()=>{const ta=elsGen.sections.querySelector(`[data-generated-section="${b.dataset.copySection}"]`);if(ta)copyText(ta.value);}));
 }
 function scrollToGeneratorOutput(){const panel=$('#generatorOutputPanel');if(!panel)return;requestAnimationFrame(()=>setTimeout(()=>panel.scrollIntoView({behavior:'smooth',block:'start'}),60));}
 function validateModuleAssessmentPercentages(){
-  if(activeGeneratorPrompts()[0]?.categoryId!=='modul-ajar-rpm')return true;
+  if(!(activeGeneratorPrompts()[0]?.categoryId==='modul-ajar-rpm'||activeGeneratorPrompts()[0]?.title==='Prompt LKPD'))return true;
   for(const key of ['awal','formatif','sumatif']){
     const enable=$(`[data-assessment-enable="${key}"]`);if(key!=='formatif'&&!enable?.checked)continue;
     const cog=$(`[data-assessment-domain="${key}:kognitif"]`);if(!cog?.checked)continue;
@@ -7498,8 +7593,10 @@ function validateModuleAssessmentPercentages(){
   }
   return true;
 }
+function validateLKPDOutput(){const p=activeGeneratorPrompts()[0];if(p?.title!=='Prompt LKPD')return true;const sel=$('[data-lkpd-output-select]');if(sel&&!sel.value){sel.scrollIntoView({behavior:'smooth',block:'center'});toast('Pilih Format Output Akhir: DOCX, PDF, atau Gambar per Halaman');return false;}return true;}
 function generateFromForm(){
   if(!validateModuleAssessmentPercentages())return;
+  if(!validateLKPDOutput())return;
   const all=activeGeneratorPrompts();if(!all.length){toast('Pilih paket/template terlebih dahulu');return;}const vals=substitutionMap();let filled=vals.size;
   const ps=(isPackageMode()&&all.length>1&&!state.generatorPrompt0Confirmed)?[all[0]]:all;
   const items=ps.map((p,i)=>{const isFull=ps.length===all.length;const originalIndex=all.indexOf(p);const last=originalIndex===all.length-1;return{sourceTitle:p.title,heading:isPackageMode()?(last?`BAGIAN AKHIR — ${p.title}`:`BAGIAN ${originalIndex+1} — ${p.title}`):p.title,text:finalizeGeneratedPrompt(p,applySubstitutions(p.text,vals),vals)};});
