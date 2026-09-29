@@ -2300,23 +2300,25 @@ Game Pembelajaran: [Ada / Tidak Ada]
 Jenis Game jika Ada: [Spin Game / Flip Card / Make a Match / Quiz Challenge / Susun Urutan / Drag & Drop / Tebak Gambar / True–False Challenge / Memory Game / Disesuaikan oleh AI]
 Jumlah Game jika Ada: [1 / 2 / Disesuaikan oleh AI]
 
-MPI wajib memuat 6 menu inti berikut (jangan dikurangi):
-1. Halaman Pembuka — sapaan; input Nama dan Kelas wajib jika Canva Sheet = Ya, dan boleh opsional jika Canva Sheet = Tidak; setelah identitas selesai, WAJIB tampilkan layar Panduan & Alur Penggunaan MPI sebelum masuk ke apersepsi
-2. Tujuan Pembelajaran — ditulis jelas dan terukur
-3. Materi Pembelajaran — disajikan bertahap, bukan satu halaman penuh teks
-4. Pembelajaran/Submateri — materi dipecah per sub-topik dengan navigasi maju/mundur
-5. Refleksi Pembelajaran — siswa merefleksikan apa yang sudah dipahami, bagian yang masih sulit/membingungkan, dan rencana agar lebih paham; bentuk dapat disesuaikan dengan jenjang
-6. Evaluasi Akhir — variasi bentuk soal, bukan hanya pilihan ganda (lihat Prompt Kuis Interaktif Multi-Tipe untuk daftar lengkap tipe soal)
-
-Menu opsional:
-7. Game Pembelajaran — hanya dibuat jika Game Pembelajaran = Ada; berfungsi sebagai latihan/pengayaan dan tidak menjadi syarat ketuntasan maupun komponen Nilai Evaluasi Akhir.
+STRUKTUR LAYAR & MUATAN MENU UTAMA — WAJIB:
+- Halaman Pembuka, input Nama/Kelas bila digunakan, Panduan & Alur Penggunaan, dan Apersepsi adalah layar onboarding/pengantar sebelum Menu Utama; layar-layar ini bukan kartu inti Menu Utama.
+- Setelah onboarding, Menu Utama/Dashboard WAJIB memuat kartu berikut:
+  1. Tujuan Pembelajaran — menampilkan tujuan yang jelas dan terukur.
+  2. Materi Pembelajaran — membuka indeks/daftar pilihan materi atau submateri (Materi 1, Materi 2, dst.), bukan satu halaman teks panjang. Pada mode Berurutan, indeks Materi tetap dapat dibuka dan semua pilihan tetap terlihat, tetapi submateri berikutnya dapat berstatus terkunci.
+  3. Mini Game/Kuis Latihan — hanya tampil jika Game Pembelajaran = Ada atau bentuk latihan tersebut memang dipilih pada rancangan. Berfungsi sebagai latihan/pengayaan; bukan syarat ketuntasan dan bukan komponen Nilai Evaluasi Akhir.
+  4. Evaluasi — evaluasi akhir dengan variasi bentuk soal, bukan hanya pilihan ganda (lihat Prompt Kuis Interaktif Multi-Tipe untuk daftar lengkap tipe soal).
+  5. Lihat Hasil — kartu selalu terlihat; sebelum Evaluasi selesai tampil dalam status belum tersedia/terkunci, setelah Evaluasi selesai membuka Nilai Akhir, Kategori Hasil, Bagian Perlu Penguatan, saran penguatan, dan ringkasan Refleksi.
+  6. Refleksi — siswa merefleksikan apa yang sudah dipahami, bagian yang masih sulit/membingungkan, dan rencana agar lebih paham; bentuk disesuaikan dengan jenjang.
+- Boleh tambahkan menu lain sesuai kebutuhan pedagogis materi (misalnya Simulasi, Galeri, Eksperimen, Tantangan, Ringkasan, atau Referensi) jika memang relevan. Menu tambahan tidak boleh menggantikan Tujuan, Materi, Evaluasi, Lihat Hasil, atau Refleksi, dan tidak boleh dibuat hanya untuk meramaikan tampilan.
 
 ALUR AWAL, PANDUAN, DAN MENU UTAMA — WAJIB:
 - Alur awal: Halaman Pembuka → input Nama/Kelas bila digunakan → Panduan & Alur Penggunaan MPI → Apersepsi Kontekstual/Pertanyaan Pemantik → Menu Utama/Dashboard → aktivitas belajar sesuai mode akses.
 - Layar Panduan & Alur Penggunaan wajib menjelaskan secara singkat: cara menggunakan Menu Utama; arti status terkunci/terbuka/sedang dipelajari/perlu ulang/selesai; fungsi tombol Home/Menu Utama, Lanjut, Kembali, dan Petunjuk; cara membaca progress; alur Cek Pemahaman bila aktif; posisi Game bila ada; serta syarat membuka Evaluasi sesuai mode akses. Akhiri dengan tombol jelas seperti "Mulai Belajar".
-- Panduan bukan menu inti tambahan dan tidak boleh menggantikan 6 menu inti. Setelah pernah dilewati, panduan tetap dapat dibuka kembali kapan saja melalui tombol Petunjuk pada header atau Menu Utama.
+- Panduan adalah layar pendukung, bukan pengganti kartu Menu Utama. Setelah pernah dilewati, panduan tetap dapat dibuka kembali kapan saja melalui tombol Petunjuk pada header atau Menu Utama.
 - Menu Utama/Dashboard WAJIB selalu tersedia setelah alur awal dan dapat dibuka kembali dari setiap layar melalui tombol Home/Menu Utama. Jangan membuat mode terkunci yang menghilangkan atau menutup akses ke dashboard.
-- Menu Utama WAJIB menampilkan SEMUA kartu menu inti sekaligus (dan Game bila aktif), termasuk menu yang belum boleh dimasuki. Menu yang terkunci tetap terlihat dengan ikon/badge gembok, status, dan keterangan singkat syarat membukanya; jangan menyembunyikan kartu menu yang terkunci.
+- Menu Utama WAJIB menampilkan semua kartu yang relevan sekaligus: Tujuan Pembelajaran, Materi Pembelajaran, Evaluasi, Lihat Hasil, Refleksi, Mini Game/Kuis bila dipilih, serta menu tambahan yang memang diperlukan. Menu yang belum boleh dimasuki tetap terlihat dengan ikon/badge gembok atau status belum tersedia dan keterangan singkat syarat membukanya; jangan menyembunyikannya.
+- Kartu Materi Pembelajaran harus tetap dapat membuka indeks/list materi. Penguncian mode Berurutan diterapkan pada pilihan submateri di dalamnya, sehingga siswa tetap dapat melihat peta materi secara utuh.
+- Kartu Lihat Hasil selalu terlihat. Sebelum Evaluasi selesai, jangan tampilkan hasil kosong/palsu; beri status "Selesaikan Evaluasi terlebih dahulu". Setelah Evaluasi dikirim, kartu aktif dan membuka hasil terbaru sesi.
 - Saat kartu yang masih terkunci ditekan, jangan masuk ke konten terlarang; tampilkan pesan ramah yang menjelaskan apa yang harus diselesaikan terlebih dahulu.
 
 KETENTUAN OPSI — WAJIB DIPATUHI:
@@ -2324,7 +2326,7 @@ KETENTUAN OPSI — WAJIB DIPATUHI:
 - Jika Canva Sheet = Tidak, jangan memaksakan integrasi spreadsheet; hasil cukup dikelola di dalam MPI sesuai kebutuhan.
 - Jika Akses menu = Berurutan, Menu Utama tetap dapat dibuka dan seluruh kartu menu tetap terlihat. Kartu/tahap yang belum memenuhi syarat berstatus terkunci, bukan disembunyikan. Pada menu Materi/Pembelajaran, tampilkan daftar semua submateri (Materi 1, Materi 2, dst.) sekaligus; hanya submateri pertama/current yang terbuka, lalu submateri berikutnya terbuka satu per satu setelah submateri sebelumnya tuntas. Siswa boleh kembali ke menu/submateri yang sudah terbuka atau selesai, tetapi tidak boleh melompati item yang masih terkunci.
 - Jika Akses menu = Evaluasi Terkunci, Menu Utama tetap menampilkan seluruh kartu menu. Seluruh materi/submateri dapat dipilih dalam urutan apa pun; kartu Evaluasi tetap terlihat tetapi berstatus terkunci sampai syarat seluruh materi terpenuhi.
-- Jika Akses menu = Bebas, Menu Utama tetap menjadi dashboard pusat dan semua kartu menu utama termasuk Evaluasi aktif sejak awal; progress hanya sebagai penanda dan tidak boleh menjadi pengunci.
+- Jika Akses menu = Bebas, Menu Utama tetap menjadi dashboard pusat dan semua kartu menu utama yang bersifat konten termasuk Evaluasi aktif sejak awal; Lihat Hasil tetap menunggu Evaluasi selesai; progress hanya sebagai penanda dan tidak boleh menjadi pengunci.
 - Jika Cek Pemahaman Setelah Materi = Ya, setelah setiap materi/submateri utama tampilkan pertanyaan formatif singkat. Jika jawaban salah, berikan umpan balik konstruktif tanpa langsung membocorkan jawaban lengkap, arahkan siswa kembali membaca materi terkait, dan baru izinkan mencoba lagi setelah materi tersebut dibuka/dipelajari ulang. Cek pemahaman tidak menambah atau mengurangi Nilai Evaluasi Akhir.
 - Jika Cek Pemahaman Setelah Materi = Tidak, jangan membuat checkpoint kuis wajib setelah materi.
 - Pada mode Berurutan + Cek Pemahaman = Ya, materi/tahap berikutnya baru terbuka setelah cek pemahaman materi aktif berhasil dijawab benar.
@@ -2339,7 +2341,7 @@ KETENTUAN OPSI — WAJIB DIPATUHI:
 Buatkan minimal 3 alternatif pendekatan pengemasan MPI untuk materi ini (berbeda dari gaya penyajian atau elemen interaktif utamanya), dengan format tiap alternatif:
 1. Judul MPI
 2. Alur Awal & Panduan Penggunaan — jelaskan urutan Pembuka/Identitas → Panduan → Apersepsi → Menu Utama, isi petunjuk singkat, dan tombol Petunjuk yang dapat dibuka kembali
-3. Peta Menu — daftar 6 menu inti dan menu Game hanya jika dipilih; semua kartu harus tetap tampak di Menu Utama walau sebagian terkunci
+3. Peta Menu Utama — wajib memuat Tujuan Pembelajaran, Materi Pembelajaran, Evaluasi, Lihat Hasil, Refleksi; tambahkan Mini Game/Kuis hanya jika dipilih serta menu lain jika benar-benar dibutuhkan. Jelaskan fungsi, status akses, dan syarat tiap kartu; semua kartu yang relevan tetap tampak walau sebagian belum tersedia/terkunci
 4. Peta Status & Urutan Materi — jelaskan menu/submateri mana yang awalnya terbuka/terkunci serta aturan unlock; untuk mode Berurutan tampilkan Materi 1 → Materi 2 → dst. sebagai pilihan yang semuanya terlihat
 5. Ringkasan Konten per Menu — 2–3 kalimat isi tiap menu
 6. Ide Elemen Interaktif — minimal 3 elemen yang cocok untuk materi
@@ -2401,7 +2403,7 @@ ATURAN KONSISTENSI DENGAN PROMPT 0 PRO:
    - Kartu Evaluasi tetap terlihat tetapi terkunci. Jika Cek Pemahaman = Tidak, unlock setelah semua materi wajib pernah diakses; jika Cek Pemahaman = Ya, unlock setelah semua materi wajib lulus cek pemahaman.
    - Gunakan status materi seperti belum dikunjungi / sedang dipelajari / perlu ulang / tuntas sesuai fitur yang dipilih.
 5. Jika Akses menu = Bebas:
-   - Menu Utama tetap menjadi dashboard pusat; semua kartu menu utama termasuk Evaluasi aktif sejak awal.
+   - Menu Utama tetap menjadi dashboard pusat; semua kartu menu utama yang bersifat konten termasuk Evaluasi aktif sejak awal; Lihat Hasil tetap menunggu Evaluasi selesai.
    - Jangan menerapkan lock/unlock yang menghalangi perpindahan menu. Cek Pemahaman jika aktif tetap bersifat formatif dan tidak mengunci menu lain.
 6. Refleksi Pembelajaran wajib menjadi bagian eksplisit. Minimal tampung: apa yang sudah dipahami, bagian yang masih sulit/membingungkan, dan rencana agar lebih paham. Sesuaikan bentuk input dengan jenjang.
 7. Cek Pemahaman jika aktif bersifat formatif, bukan bagian nilai akhir. Setiap item harus terkait langsung dengan submateri yang baru dipelajari dan memiliki feedback konstruktif benar/salah serta aturan baca ulang sebelum retry setelah jawaban salah.
@@ -2418,9 +2420,9 @@ Buatkan rancangan dengan format:
 1. Judul & Identitas MPI (mapel, kelas, materi)
 2. Ringkasan Keputusan Prompt 0 PRO — tuliskan semua pilihan konfigurasi di atas dan jadikan aturan desain tetap
 3. Alur Awal & Panduan Penggunaan — detail Pembuka/Identitas → Panduan → Apersepsi → Menu Utama, isi petunjuk, tombol Mulai Belajar, serta cara membuka Petunjuk kembali
-4. Dashboard Menu Utama — tampilkan semua kartu menu dan statusnya; jelaskan tampilan kartu aktif/terkunci/sedang dipelajari/perlu ulang/selesai dan respons ketika kartu terkunci ditekan
+4. Dashboard Menu Utama — tampilkan kartu Tujuan Pembelajaran, Materi Pembelajaran, Evaluasi, Lihat Hasil, Refleksi, Mini Game/Kuis jika dipilih, serta menu tambahan hanya bila relevan. Jelaskan fungsi dan status setiap kartu (aktif/terkunci/belum tersedia/sedang dipelajari/perlu ulang/selesai). Materi harus tetap dapat membuka indeks submateri; Lihat Hasil tetap terlihat tetapi baru aktif setelah Evaluasi selesai; jelaskan respons ketika kartu yang belum tersedia ditekan
 5. Peta Status & Logika Akses — jelaskan state tiap menu/submateri dan syarat transisinya sesuai mode akses serta Cek Pemahaman; mode Berurutan wajib memetakan Materi 1 → Materi 2 → dst. dengan semua pilihan tetap terlihat
-6. Storyboard / Alur Halaman Lengkap — 6 menu inti + Game hanya jika dipilih; pecah materi menjadi sub-halaman; untuk tiap halaman sebutkan nomor, nama, tujuan, elemen, aksi, status akses, dan halaman tujuan berikutnya
+6. Storyboard / Alur Halaman Lengkap — gunakan struktur Menu Utama: Tujuan Pembelajaran, Materi Pembelajaran (berisi indeks submateri), Evaluasi, Lihat Hasil, Refleksi, Mini Game/Kuis jika dipilih, dan menu tambahan bila relevan; pecah materi menjadi sub-halaman; untuk tiap halaman sebutkan nomor, nama, tujuan, elemen, aksi, status akses, dan halaman tujuan berikutnya
 7. Detail Tiap Sub-Materi — poin kunci, contoh/ilustrasi, cara penyajian singkat dan mendalam
 8. Database Cek Pemahaman — hanya jika aktif; minimal 1 pertanyaan representatif per submateri utama, berisi submateri sumber, pertanyaan, opsi jika ada, jawaban benar, feedback benar, feedback salah/petunjuk, dan aturan kembali membaca sebelum retry
 9. Rancangan Refleksi Pembelajaran — komponen input, contoh pertanyaan refleksi, validasi seperlunya, dan cara data disimpan/ditampilkan kembali
@@ -2431,7 +2433,7 @@ Buatkan rancangan dengan format:
 14. Integrasi Canva Sheet (kondisional) — jika Ya jelaskan input identitas, payload minimal Nama/Kelas/Nilai/Kategori/Bagian Perlu Penguatan/Refleksi, waktu kirim, status, retry; jika Tidak tulis tegas tidak menggunakan Canva Sheet
 15. Desain Halaman Hasil — Nilai Akhir, Kategori Hasil, Bagian Perlu Penguatan, Saran Penguatan singkat, dan Refleksi Siswa; pembahasan per soal hanya jika sesuai mode Feedback Evaluasi
 16. Desain Visual/UI — palet HEX, tipografi, tombol/kartu/panel/ikon, layout pembuka/panduan/menu utama/materi/refleksi/game/evaluasi/hasil, karakter/maskot jika ada, mood keseluruhan
-17. Checklist Kualitas MPI — semua pilihan Prompt 0 dipatuhi; 6 menu inti tersedia; dashboard tetap tampak dan dapat kembali diakses; menu terkunci tetap terlihat; urutan submateri benar bila Berurutan; game hanya jika dipilih; logika akses benar; reread gate bekerja bila Cek Pemahaman aktif; refleksi tersimpan; penguatan diturunkan dari metadata evaluasi; feedback evaluasi sesuai mode; data Canva Sheet lengkap bila digunakan; navigasi mudah; siap dibuat kode
+17. Checklist Kualitas MPI — semua pilihan Prompt 0 dipatuhi; Menu Utama memuat Tujuan, Materi, Evaluasi, Lihat Hasil, Refleksi, Mini Game/Kuis jika dipilih, dan menu tambahan hanya bila relevan; dashboard tetap tampak dan dapat kembali diakses; kartu yang belum tersedia tetap terlihat; indeks materi tetap dapat dibuka dan urutan submateri benar bila Berurutan; Lihat Hasil baru aktif setelah Evaluasi selesai; game hanya jika dipilih; logika akses benar; reread gate bekerja bila Cek Pemahaman aktif; refleksi tersimpan; penguatan diturunkan dari metadata evaluasi; feedback evaluasi sesuai mode; data Canva Sheet lengkap bila digunakan; navigasi mudah; siap dibuat kode
 
 Jangan mengubah keputusan Prompt 0 PRO saat menyusun rancangan.
 
@@ -2663,8 +2665,10 @@ ALUR AWAL & DASHBOARD MENU UTAMA — WAJIB:
 - Alur pertama: Pembuka → Input Nama/Kelas bila digunakan → Panduan & Alur Penggunaan → Apersepsi Kontekstual/Pertanyaan Pemantik → Menu Utama/Dashboard → aktivitas belajar.
 - Layar Panduan menjelaskan cara menggunakan MPI, arti ikon/status gembok, Home/Menu Utama, Lanjut/Kembali, progress, Cek Pemahaman, Game bila ada, dan syarat Evaluasi. Sediakan tombol "Mulai Belajar" dan tombol Petunjuk untuk membuka panduan kembali kapan saja setelah onboarding.
 - Setelah onboarding, tombol Home/Menu Utama harus selalu berfungsi dari layar konten dan membawa siswa ke dashboard tanpa mereset progres.
-- Dashboard Menu Utama harus menampilkan SEMUA kartu menu yang relevan secara bersamaan. Kartu yang terkunci tetap terlihat dengan status/gembok dan syarat singkat; penguncian tidak boleh diwujudkan dengan menyembunyikan, menghapus, atau membuat kartu tidak diketahui keberadaannya.
-- Jika kartu terkunci diklik, tampilkan pesan/toast/modal ringan tentang syarat unlock dan tetap berada di dashboard.
+- Dashboard Menu Utama harus menampilkan SEMUA kartu yang relevan secara bersamaan: Tujuan Pembelajaran, Materi Pembelajaran, Evaluasi, Lihat Hasil, Refleksi, Mini Game/Kuis jika dipilih, serta menu tambahan hanya bila dibutuhkan. Kartu yang terkunci/belum tersedia tetap terlihat dengan status/gembok dan syarat singkat; penguncian tidak boleh diwujudkan dengan menyembunyikan, menghapus, atau membuat kartu tidak diketahui keberadaannya.
+- Kartu Materi Pembelajaran tetap membuka indeks seluruh materi/submateri. Pada mode Berurutan, pembatasan diterapkan pada submateri di dalam indeks, bukan menutup kartu Materi.
+- Kartu Lihat Hasil selalu terlihat. Sebelum Evaluasi selesai statusnya belum tersedia/terkunci; setelah Evaluasi disubmit status berubah aktif dan membuka hasil terbaru sesi.
+- Jika kartu terkunci/belum tersedia diklik, tampilkan pesan/toast/modal ringan tentang syarat unlock dan tetap berada di dashboard.
 
 STRUKTUR DATA/STATE — WAJIB:
 8. Simpan status kunjungan/tuntas setiap materi atau submateri secara terpisah.
@@ -2695,7 +2699,7 @@ ATURAN AKSES MENU — KONDISIONAL:
    - Jika Cek Pemahaman = Tidak, Evaluasi unlock saat semua materi wajib pernah diakses/dikunjungi.
    - Jika Cek Pemahaman = Ya, Evaluasi unlock hanya saat seluruh materi wajib berstatus lulus cek pemahaman.
 16. Jika Akses menu = Bebas:
-   - Menu Utama tetap menjadi dashboard pusat dan semua menu termasuk Evaluasi aktif sejak awal.
+   - Menu Utama tetap menjadi dashboard pusat dan semua menu konten termasuk Evaluasi aktif sejak awal; Lihat Hasil tetap aktif setelah Evaluasi selesai.
    - Jangan menggunakan lock/unlock untuk membatasi navigasi.
    - Cek Pemahaman bila aktif tetap berjalan sebagai latihan formatif tetapi tidak mengunci menu lain atau Evaluasi.
 
@@ -2727,11 +2731,13 @@ INTEGRASI ASET:
 33. Jika aset belum tersedia, gunakan bentuk/warna sederhana sebagai placeholder dengan komentar TODO; jangan mengubah logika fitur.
 34. Pastikan visual state akses, refleksi, game, dan Canva Sheet hanya muncul bila relevan dengan konfigurasi.
 
-Struktur MPI: [ikuti Peta Menu & Storyboard Prompt 1 PRO — layar pendukung wajib: Panduan & Alur Penggunaan + Dashboard Menu Utama; 6 menu inti tetap: Pembuka, Tujuan, Materi, Pembelajaran/Submateri, Refleksi, Evaluasi; Game hanya jika dipilih. Panduan/Dashboard bukan pengganti menu inti]
+Struktur MPI: [ikuti Peta Menu & Storyboard Prompt 1 PRO — layar onboarding/pengantar: Pembuka → Identitas bila digunakan → Panduan → Apersepsi; setelah itu Dashboard Menu Utama wajib memuat Tujuan Pembelajaran, Materi Pembelajaran (indeks submateri), Evaluasi, Lihat Hasil, Refleksi, Mini Game/Kuis jika dipilih, serta menu tambahan hanya bila relevan. Lihat Hasil selalu terlihat tetapi baru aktif setelah Evaluasi selesai. Panduan dan onboarding bukan kartu pengganti Menu Utama]
 
 Testing & Revisi — WAJIB:
 - Tes alur awal Pembuka/Identitas → Panduan → Apersepsi → Menu Utama, tombol Petunjuk, dan tombol Home/Menu Utama dari setiap layar tanpa mereset progres.
-- Tes bahwa seluruh kartu menu tetap terlihat di dashboard meski terkunci; klik kartu terkunci hanya menampilkan syarat unlock.
+- Tes bahwa seluruh kartu Menu Utama yang relevan tetap terlihat: Tujuan, Materi, Evaluasi, Lihat Hasil, Refleksi, Mini Game/Kuis jika dipilih, dan menu tambahan bila ada. Klik kartu terkunci hanya menampilkan syarat unlock.
+- Tes bahwa kartu Materi selalu dapat membuka indeks semua submateri; pada mode Berurutan hanya submateri yang belum memenuhi syarat yang terkunci.
+- Tes bahwa Lihat Hasil terlihat sejak awal, tidak membuka data kosong sebelum Evaluasi, lalu aktif dan menampilkan hasil yang benar setelah Evaluasi selesai.
 - Tes mode akses yang dipilih dan setiap syarat unlock terkait Cek Pemahaman; pada mode Berurutan uji Materi 1 → Materi 2 → dst. serta larangan melompati submateri.
 - Bila Cek Pemahaman aktif, uji skenario salah → lanjut terblokir sesuai mode → kembali baca materi → retry aktif → benar → status tuntas.
 - Tes bahwa mode Bebas tidak ikut terkunci karena Cek Pemahaman.
@@ -2771,7 +2777,7 @@ TAHAP 2 — UJI NAVIGASI & MODE AKSES:
 6. Pastikan Dashboard Menu Utama dapat dibuka kembali dari setiap layar setelah onboarding, menampilkan seluruh kartu menu yang relevan, dan TIDAK menyembunyikan kartu yang terkunci. Kartu terkunci harus menampilkan status/gembok/syarat dan kliknya tidak boleh membuka konten terlarang.
 7. Jika mode Berurutan: pastikan urutan berlaku pada hak akses konten, bukan pada visibilitas dashboard. Uji indeks Materi/Pembelajaran menampilkan Materi 1, 2, 3, dst. sekaligus; hanya item sesuai urutan yang aktif; tahap berikutnya tidak dapat dilompati; item selesai dapat dibuka ulang; state terkunci/terbuka/perlu ulang/tuntas konsisten.
 8. Jika mode Evaluasi Terkunci: pastikan semua kartu tetap terlihat, materi dapat dibuka tidak berurutan, dan hanya kartu Evaluasi yang terkunci; jika Cek Pemahaman Tidak, unlock setelah seluruh materi wajib pernah diakses; jika Ya, unlock hanya setelah seluruh materi lulus cek pemahaman.
-9. Jika mode Bebas: pastikan semua menu termasuk Evaluasi aktif sejak awal dan tidak ada logika lock tersembunyi.
+9. Jika mode Bebas: pastikan semua menu konten termasuk Evaluasi aktif sejak awal; Lihat Hasil tetap aktif setelah Evaluasi selesai dan tidak ada logika lock tersembunyi.
 10. Pastikan progress mencerminkan state sebenarnya, bukan dekorasi.
 
 TAHAP 3 — UJI CEK PEMAHAMAN:
@@ -3903,28 +3909,30 @@ Game Pembelajaran: [Ada / Tidak Ada]
 Jenis Game jika Ada: [Spin Game / Flip Card / Make a Match / Quiz Challenge / Susun Urutan / Drag & Drop / Tebak Gambar / True–False Challenge / Memory Game / Disesuaikan oleh AI]
 Jumlah Game jika Ada: [1 / 2 / Disesuaikan oleh AI]
 
-MPI wajib memuat 6 menu inti berikut:
-1. Halaman Pembuka — sapaan; input Nama dan Kelas wajib jika Canva Sheet = Ya, boleh opsional jika Tidak; setelah identitas selesai WAJIB tampilkan Panduan & Alur Penggunaan sebelum Apersepsi
-2. Tujuan Pembelajaran — jelas dan terukur
-3. Materi Pembelajaran — mendalam dan disajikan bertahap
-4. Pembelajaran/Submateri — materi dipecah per sub-topik dengan navigasi maju/mundur
-5. Refleksi Pembelajaran — minimal apa yang sudah dipahami, bagian yang masih sulit/membingungkan, dan rencana agar lebih paham; bentuk disesuaikan jenjang
-6. Evaluasi Akhir — variasi bentuk soal, bukan hanya pilihan ganda
-
-Menu opsional:
-7. Game Pembelajaran — hanya jika Game = Ada; berfungsi sebagai pengayaan/latihan, bukan syarat ketuntasan dan bukan bagian Nilai Evaluasi Akhir.
+STRUKTUR LAYAR & MUATAN MENU UTAMA — WAJIB:
+- Halaman Pembuka, Nama/Kelas bila digunakan, Panduan & Alur Penggunaan, dan Apersepsi adalah layar onboarding/pengantar sebelum Dashboard, bukan kartu inti Menu Utama.
+- Setelah onboarding, Menu Utama/Dashboard WAJIB memuat:
+  1. Tujuan Pembelajaran — tujuan jelas dan terukur.
+  2. Materi Pembelajaran — membuka indeks seluruh pilihan materi/submateri (Materi 1, Materi 2, dst.); materi mendalam dan disajikan bertahap. Pada mode Berurutan, semua pilihan tetap terlihat dan penguncian diterapkan per submateri.
+  3. Mini Game/Kuis Latihan — hanya jika Game = Ada atau latihan/kuis tersebut dipilih pada rancangan; sebagai pengayaan/latihan, bukan syarat ketuntasan dan bukan bagian Nilai Evaluasi Akhir.
+  4. Evaluasi — evaluasi akhir dengan variasi bentuk soal.
+  5. Lihat Hasil — selalu terlihat; sebelum Evaluasi selesai berstatus belum tersedia/terkunci, setelah selesai membuka Nilai, Kategori, Bagian Perlu Penguatan, saran penguatan, dan ringkasan Refleksi.
+  6. Refleksi — minimal apa yang sudah dipahami, bagian yang masih sulit/membingungkan, dan rencana agar lebih paham; bentuk disesuaikan jenjang.
+- Boleh tambahkan menu lain sesuai kebutuhan materi (misalnya Simulasi, Galeri, Eksperimen, Tantangan, Ringkasan, Referensi) bila memiliki fungsi pedagogis yang jelas. Jangan menambah menu sekadar dekorasi dan jangan menggantikan menu wajib di atas.
 
 ALUR AWAL, PANDUAN, DAN MENU UTAMA — WAJIB:
 - Alur awal: Pembuka → Nama/Kelas bila digunakan → Panduan & Alur Penggunaan → Apersepsi/Pertanyaan Pemantik → Menu Utama/Dashboard → aktivitas belajar sesuai mode.
 - Panduan menjelaskan cara memakai Menu Utama, arti status terkunci/terbuka/selesai/perlu ulang, Home/Menu Utama, Lanjut/Kembali, progress, Cek Pemahaman, Game bila ada, dan syarat Evaluasi. Sediakan tombol "Mulai Belajar"; panduan dapat dibuka lagi lewat tombol Petunjuk.
-- Setelah onboarding, Menu Utama/Dashboard harus selalu dapat dibuka kembali dari setiap layar. Semua kartu 6 menu inti (+ Game bila aktif) harus tetap terlihat. Kartu terkunci diberi gembok/status/syarat unlock dan tidak boleh disembunyikan.
-- Klik kartu terkunci tidak membuka konten; tampilkan pesan singkat apa yang harus diselesaikan lebih dahulu.
+- Setelah onboarding, Menu Utama/Dashboard harus selalu dapat dibuka kembali dari setiap layar. Semua kartu yang relevan harus tetap terlihat: Tujuan, Materi, Evaluasi, Lihat Hasil, Refleksi, Mini Game/Kuis bila aktif, dan menu tambahan bila diperlukan. Kartu yang belum tersedia diberi gembok/status/syarat unlock dan tidak boleh disembunyikan.
+- Kartu Materi tetap boleh dibuka untuk melihat indeks seluruh submateri; pada mode Berurutan yang dikunci adalah submateri yang belum memenuhi syarat, bukan akses ke indeks Materi.
+- Kartu Lihat Hasil selalu terlihat dan hanya aktif setelah Evaluasi selesai. Sebelum itu tampilkan pesan singkat agar siswa menyelesaikan Evaluasi terlebih dahulu.
+- Klik kartu lain yang terkunci tidak membuka konten; tampilkan pesan singkat apa yang harus diselesaikan lebih dahulu.
 
 KETENTUAN INTEGRASI, NAVIGASI, DAN PEDAGOGI:
 - Canva Sheet = Ya: catat minimal Nama, Kelas, Nilai, Kategori Hasil, Bagian Perlu Penguatan, Refleksi Siswa, dan status pengiriman. Jika Tidak: jangan buat integrasi spreadsheet.
 - Akses Berurutan: Menu Utama tetap terlihat dan dapat diakses; semua kartu menu tetap ditampilkan walau sebagian terkunci. Pada menu Materi/Pembelajaran, tampilkan semua pilihan Materi 1, Materi 2, dst.; hanya Materi 1/current yang aktif dan berikutnya terbuka satu per satu setelah sebelumnya tuntas. Item yang sudah terbuka/selesai dapat dikunjungi kembali. Jika Cek Pemahaman = Ya, materi dianggap tuntas setelah cek pemahaman dijawab benar.
 - Akses Evaluasi Terkunci: Menu Utama tetap menampilkan seluruh kartu; materi boleh dibuka tidak berurutan dan kartu Evaluasi tetap terlihat tetapi terkunci. Jika Cek Pemahaman = Tidak, Evaluasi terbuka setelah semua materi wajib pernah diakses; jika Ya, Evaluasi terbuka setelah semua materi wajib lulus cek pemahaman.
-- Akses Bebas: Menu Utama tetap menjadi dashboard pusat dan semua menu termasuk Evaluasi aktif sejak awal; Cek Pemahaman jika aktif tidak boleh mengunci menu lain.
+- Akses Bebas: Menu Utama tetap menjadi dashboard pusat dan semua menu konten termasuk Evaluasi aktif sejak awal; Lihat Hasil tetap aktif setelah Evaluasi selesai; Cek Pemahaman jika aktif tidak boleh mengunci menu lain.
 - Cek Pemahaman = Ya: setelah tiap materi/submateri utama berikan pertanyaan formatif. Jika salah, beri umpan balik konstruktif, wajibkan siswa kembali membaca materi terkait, dan baru izinkan retry setelah materi dibuka/dipelajari ulang. Cek ini tidak memengaruhi Nilai Evaluasi Akhir. Jika Tidak: jangan buat checkpoint wajib.
 - Feedback Evaluasi = Konstruktif: tampilkan feedback bermakna untuk jawaban benar dan salah. Tanpa Feedback: jangan tampilkan benar/salah/pembahasan/petunjuk selama evaluasi; tetap hitung skor dan penguatan secara internal.
 - Bagian Perlu Penguatan harus berasal dari soal evaluasi yang salah dan metadata submateri/indikator, bukan tebakan umum.
@@ -3943,7 +3951,7 @@ Untuk SETIAP ide, berikan:
 1. Judul MPI
 2. Tema Tampilan — nama tema, palet 3–4 warna + alasan, gaya ikon/ilustrasi, mood
 3. Alur Awal & Panduan Penggunaan — Pembuka/Identitas → Panduan → Apersepsi → Menu Utama; isi petunjuk dan tombol Petunjuk yang dapat dibuka kembali
-4. Peta Menu — 6 menu inti + Game hanya jika dipilih; semua kartu tetap terlihat di Menu Utama walau terkunci
+4. Peta Menu Utama — Tujuan Pembelajaran, Materi Pembelajaran, Evaluasi, Lihat Hasil, Refleksi; Mini Game/Kuis hanya jika dipilih; menu tambahan hanya bila relevan. Semua kartu yang relevan tetap terlihat di Menu Utama walau belum tersedia/terkunci
 5. Peta Status & Urutan Materi — khusus mode Berurutan jelaskan Materi 1 → Materi 2 → dst. dengan semua pilihan terlihat dan unlock bertahap
 6. Ringkasan Konten per Menu
 7. Ide Elemen Interaktif — minimal 3
@@ -3993,7 +4001,7 @@ ATURAN KONSISTENSI DENGAN PROMPT 0:
 1. Canva Sheet = Ya: Nama/Kelas wajib; setelah validasi identitas tampilkan Panduan & Alur Penggunaan sebelum Apersepsi. Setelah Evaluasi, siapkan pengiriman minimal Nama, Kelas, Nilai, Kategori Hasil, Bagian Perlu Penguatan, Refleksi Siswa, status pengiriman. Jika Tidak: jangan buat integrasi Sheet; bila identitas tidak digunakan, Panduan tetap tampil setelah Pembuka.
 2. Akses Berurutan: Menu Utama tetap dapat dibuka dan semua kartu menu tetap terlihat; yang belum memenuhi syarat diberi status terkunci, bukan disembunyikan. Di dalam Materi/Pembelajaran tampilkan semua pilihan Materi 1, Materi 2, dst.; hanya Materi 1/current yang aktif dan berikutnya terbuka satu per satu setelah sebelumnya tuntas. Item selesai boleh dibuka ulang. Jika Cek Pemahaman = Ya, ketuntasan materi membutuhkan jawaban benar setelah proses reread bila sebelumnya salah.
 3. Akses Evaluasi Terkunci: Menu Utama tetap menampilkan semua kartu; semua materi aktif dan dapat dipilih tidak berurutan, tetapi kartu Evaluasi tetap terlihat dalam keadaan terkunci. Cek Pemahaman Tidak → unlock setelah semua materi dikunjungi. Cek Pemahaman Ya → unlock setelah semua materi lulus cek.
-4. Akses Bebas: Menu Utama tetap menjadi dashboard pusat; semua menu termasuk Evaluasi aktif sejak awal; progress tidak mengunci. Cek Pemahaman jika aktif tetap formatif.
+4. Akses Bebas: Menu Utama tetap menjadi dashboard pusat; semua menu konten termasuk Evaluasi aktif sejak awal; Lihat Hasil tetap aktif setelah Evaluasi selesai; progress tidak mengunci. Cek Pemahaman jika aktif tetap formatif.
 5. Cek Pemahaman = Ya: buat minimal satu pertanyaan representatif per submateri utama; salah → feedback konstruktif → kembali baca materi → baru retry. Tidak masuk nilai akhir.
 6. Refleksi wajib: tampung sudah dipahami, masih sulit/membingungkan, dan rencana perbaikan; bentuk menyesuaikan jenjang.
 7. Evaluasi: setiap soal wajib dipetakan ke submateri/topik dan indikator/tujuan untuk menentukan Bagian Perlu Penguatan.
@@ -4012,9 +4020,9 @@ Buatkan rancangan dengan format:
 3. Gerbang Identitas & Pencatatan Hasil (kondisional Canva Sheet)
 4. Alur Awal & Panduan Penggunaan — detail Pembuka/Identitas → Panduan → Apersepsi → Menu Utama, isi petunjuk, dan tombol Petunjuk
 5. Tema Tampilan Terpilih
-6. Dashboard Menu Utama — semua kartu menu dan state aktif/terkunci/sedang dipelajari/perlu ulang/selesai tetap terlihat
+6. Dashboard Menu Utama — kartu wajib: Tujuan Pembelajaran, Materi Pembelajaran, Evaluasi, Lihat Hasil, Refleksi; Mini Game/Kuis hanya jika dipilih; menu tambahan hanya bila relevan. Semua kartu dan state aktif/terkunci/belum tersedia/sedang dipelajari/perlu ulang/selesai tetap terlihat. Materi membuka indeks submateri; Lihat Hasil baru aktif setelah Evaluasi selesai
 7. Peta Status & Logika Akses — state serta syarat transisi untuk mode yang dipilih; Berurutan wajib memetakan Materi 1 → Materi 2 → dst. tanpa menyembunyikan pilihan
-8. Alur Halaman Lengkap — 6 menu inti + Game jika aktif; pecah materi menjadi sub-halaman
+8. Alur Halaman Lengkap — gunakan Menu Utama berisi Tujuan, Materi (indeks submateri), Evaluasi, Lihat Hasil, Refleksi, Mini Game/Kuis jika aktif, dan menu tambahan bila relevan; pecah materi menjadi sub-halaman
 9. Detail Tiap Sub-Materi — poin kunci, contoh/ilustrasi, penyajian singkat; teks Arab bila ada disertai transliterasi/terjemahan sesuai kebutuhan
 10. Database Cek Pemahaman — hanya jika aktif; submateri sumber, pertanyaan, pilihan jika ada, jawaban benar, feedback benar, feedback salah/petunjuk, dan aturan reread sebelum retry
 11. Rancangan Refleksi — komponen input dan cara menyimpan/menampilkan ringkasannya
@@ -4070,7 +4078,9 @@ ALUR AWAL & DASHBOARD MENU UTAMA — WAJIB:
 - Alur awal: Pembuka → Nama/Kelas bila digunakan → Panduan & Alur Penggunaan → Apersepsi/Pertanyaan Pemantik → Menu Utama/Dashboard → aktivitas belajar.
 - Panduan menjelaskan cara menggunakan MPI, Home/Menu Utama, Petunjuk, Lanjut/Kembali, arti status gembok, progress, Cek Pemahaman, Game bila ada, dan syarat Evaluasi. Akhiri dengan tombol "Mulai Belajar" dan izinkan panduan dibuka kembali lewat Petunjuk.
 - Setelah onboarding, tombol Home/Menu Utama harus selalu membawa siswa ke dashboard tanpa menghapus progress.
-- Dashboard harus menampilkan semua kartu menu yang relevan. Item terkunci tetap terlihat dengan gembok/status/syarat; klik item terkunci hanya menampilkan pesan syarat, tidak masuk ke konten.
+- Dashboard harus menampilkan semua kartu menu yang relevan: Tujuan Pembelajaran, Materi Pembelajaran, Evaluasi, Lihat Hasil, Refleksi, Mini Game/Kuis jika aktif, serta menu tambahan hanya bila relevan. Item terkunci/belum tersedia tetap terlihat dengan gembok/status/syarat; klik item tersebut hanya menampilkan pesan syarat, tidak masuk ke konten.
+- Kartu Materi Pembelajaran selalu dapat membuka indeks seluruh submateri. Mode Berurutan mengunci submateri yang belum memenuhi syarat di dalam indeks, bukan mengunci akses ke indeks Materi.
+- Kartu Lihat Hasil selalu terlihat tetapi berstatus belum tersedia sampai Evaluasi selesai; setelah Evaluasi disubmit, kartu aktif dan membuka hasil sesi terbaru.
 
 STATE & DATA — WAJIB:
 9. Simpan status kunjungan/tuntas setiap materi/submateri.
@@ -4085,7 +4095,7 @@ ATURAN CANVA SHEET — KONDISIONAL:
 ATURAN AKSES MENU — KONDISIONAL:
 15. Berurutan: Menu Utama tetap dapat diakses dan semua kartu menu tetap terlihat; yang belum memenuhi syarat diberi status terkunci. Di dalam Materi/Pembelajaran tampilkan semua pilihan Materi 1, Materi 2, dst.; hanya Materi 1/current yang aktif, berikutnya unlock satu per satu setelah sebelumnya tuntas, dan item selesai dapat dibuka ulang. Jika Cek Pemahaman aktif, jawaban salah menonaktifkan lanjut ke submateri berikutnya, mengarahkan baca ulang, dan jawaban benar setelah retry menandai materi tuntas.
 16. Evaluasi Terkunci: Menu Utama tetap menampilkan semua kartu; semua materi aktif tidak berurutan; kartu Evaluasi tetap terlihat tetapi terkunci. Cek Tidak → unlock setelah semua materi pernah diakses. Cek Ya → unlock setelah semua materi lulus cek.
-17. Bebas: Menu Utama tetap menjadi dashboard pusat; semua menu termasuk Evaluasi aktif sejak awal; jangan jalankan lock/unlock. Cek Pemahaman jika aktif tidak boleh mengunci menu lain.
+17. Bebas: Menu Utama tetap menjadi dashboard pusat; semua menu konten termasuk Evaluasi aktif sejak awal; Lihat Hasil tetap aktif setelah Evaluasi selesai; jangan jalankan lock/unlock. Cek Pemahaman jika aktif tidak boleh mengunci menu lain.
 
 CEK PEMAHAMAN:
 18. Jika aktif, pertanyaan formatif muncul setelah materi/submateri; feedback benar menguatkan konsep, feedback salah memberi petunjuk konstruktif tanpa langsung membocorkan jawaban lengkap; wajib reread sebelum retry.
@@ -4108,13 +4118,15 @@ GAME — KONDISIONAL:
 29. Jika Jenis = Disesuaikan oleh AI, gunakan keputusan jenis game dari rancangan, bukan memilih ulang secara acak saat coding.
 30. Jika Tidak Ada, jangan buat menu/state/aset/skor game.
 
-Struktur MPI: [ikuti Peta Menu — layar pendukung wajib Panduan & Alur Penggunaan + Dashboard Menu Utama; 6 menu inti tetap Pembuka, Tujuan, Materi, Pembelajaran/Submateri, Refleksi, Evaluasi; Game hanya jika aktif. Panduan/Dashboard bukan pengganti menu inti]
+Struktur MPI: [ikuti Peta Menu — layar onboarding/pengantar: Pembuka → Identitas bila digunakan → Panduan → Apersepsi; Dashboard Menu Utama wajib berisi Tujuan Pembelajaran, Materi Pembelajaran (indeks submateri), Evaluasi, Lihat Hasil, Refleksi, Mini Game/Kuis jika aktif, serta menu tambahan bila relevan. Lihat Hasil selalu terlihat tetapi baru aktif setelah Evaluasi selesai]
 
 Desain visual: modern, bersih, nyaman lama di IFP, sesuai tema rancangan.
 
 SEBELUM OUTPUT FINAL, WAJIB UJI:
 - Alur awal Pembuka/Identitas → Panduan → Apersepsi → Menu Utama berjalan; Petunjuk dapat dibuka lagi; Home/Menu Utama dapat dipakai dari layar konten tanpa mereset progres.
-- Seluruh kartu menu tetap terlihat pada dashboard meski terkunci; klik kartu terkunci hanya memberi informasi syarat.
+- Seluruh kartu Menu Utama yang relevan tetap terlihat: Tujuan, Materi, Evaluasi, Lihat Hasil, Refleksi, Mini Game/Kuis jika aktif, serta menu tambahan bila ada; klik kartu terkunci hanya memberi informasi syarat.
+- Kartu Materi selalu dapat membuka indeks semua submateri; pada mode Berurutan hanya submateri yang belum memenuhi syarat yang terkunci.
+- Lihat Hasil terlihat sejak awal, tidak membuka hasil kosong sebelum Evaluasi, lalu aktif dan menampilkan hasil yang benar setelah Evaluasi selesai.
 - Mode akses yang dipilih bekerja sesuai aturan; khusus Berurutan uji Materi 1 → Materi 2 → dst. dan pastikan submateri yang belum waktunya tidak dapat dilompati.
 - Jika Cek aktif: salah → lanjut terblokir sesuai mode → baca ulang → retry → benar → tuntas; Bebas tidak ikut terkunci.
 - Feedback Evaluasi sesuai pilihan dan mode Tanpa Feedback tidak membocorkan hasil per soal.
