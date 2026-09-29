@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="theme-color" content="#6d5dfc" />
 <title>Prompt EDU — AI Prompt Studio untuk Guru</title>
-<meta name="bank-prompt-build" content="2026-09-25-reference-note-no-upload-1" />
+<meta name="bank-prompt-build" content="2026-09-29-master-merged-complete-latest-features-1" />
 <style>
 :root{
   --bg:#f4f7fb;
@@ -2281,31 +2281,53 @@ const pro2026Categories = [
 Kurikulum: [Kurikulum Merdeka/lainnya]
 Perangkat: [HP/laptop/IFP]
 Estimasi waktu penggunaan: [1 JP/lebih]
-Tautkan Canva Sheet untuk mencatat hasil evaluasi: [Ya / Tidak]
-Akses menu: [Bertahap — menu berikutnya terbuka setelah tahap sebelumnya selesai / Bebas — semua menu dapat dipilih dari menu utama]
+Tautkan Canva Sheet untuk mencatat hasil belajar: [Ya / Tidak]
+Akses menu: [Berurutan — siswa wajib mengikuti urutan materi / Evaluasi Terkunci — materi boleh diakses tidak berurutan, tetapi Evaluasi baru terbuka setelah seluruh materi wajib tuntas / Bebas — semua menu termasuk Evaluasi dapat dipilih sejak awal]
+Cek Pemahaman Setelah Materi: [Ya / Tidak]
+Feedback Evaluasi Akhir: [Konstruktif — tampilkan feedback untuk jawaban benar maupun salah / Tanpa Feedback — penilaian mutlak, jangan tampilkan benar-salah/pembahasan selama evaluasi]
+Game Pembelajaran: [Ada / Tidak Ada]
+Jenis Game jika Ada: [Spin Game / Flip Card / Make a Match / Quiz Challenge / Susun Urutan / Drag & Drop / Tebak Gambar / True–False Challenge / Memory Game / Disesuaikan oleh AI]
+Jumlah Game jika Ada: [1 / 2 / Disesuaikan oleh AI]
 
-MPI wajib memuat menu berikut (jangan dikurangi):
+MPI wajib memuat 6 menu inti berikut (jangan dikurangi):
 1. Halaman Pembuka — sapaan; input Nama dan Kelas wajib jika Canva Sheet = Ya, dan boleh opsional jika Canva Sheet = Tidak
 2. Tujuan Pembelajaran — ditulis jelas dan terukur
 3. Materi Pembelajaran — disajikan bertahap, bukan satu halaman penuh teks
-4. Pembelajaran Bertahap — materi dipecah per sub-topik dengan navigasi maju/mundur
-5. Evaluasi (Kuis) — variasi bentuk soal, bukan hanya pilihan ganda (lihat Prompt Kuis Interaktif Multi-Tipe untuk daftar lengkap tipe soal)
-6. Simulasi/Games (opsional) — elemen interaktif ringan untuk memperkuat pemahaman konsep
+4. Pembelajaran/Submateri — materi dipecah per sub-topik dengan navigasi maju/mundur
+5. Refleksi Pembelajaran — siswa merefleksikan apa yang sudah dipahami, bagian yang masih sulit/membingungkan, dan rencana agar lebih paham; bentuk dapat disesuaikan dengan jenjang
+6. Evaluasi Akhir — variasi bentuk soal, bukan hanya pilihan ganda (lihat Prompt Kuis Interaktif Multi-Tipe untuk daftar lengkap tipe soal)
 
-Ketentuan opsi:
-- Jika Canva Sheet = Ya, sertakan alur pencatatan Nama, Kelas, nilai/hasil evaluasi, dan status pengiriman data ke Canva Sheet.
+Menu opsional:
+7. Game Pembelajaran — hanya dibuat jika Game Pembelajaran = Ada; berfungsi sebagai latihan/pengayaan dan tidak menjadi syarat ketuntasan maupun komponen Nilai Evaluasi Akhir.
+
+KETENTUAN OPSI — WAJIB DIPATUHI:
+- Jika Canva Sheet = Ya, sertakan alur pencatatan minimal Nama, Kelas, Nilai Evaluasi, Kategori Hasil, Bagian Perlu Penguatan, Refleksi Siswa, dan status pengiriman data.
 - Jika Canva Sheet = Tidak, jangan memaksakan integrasi spreadsheet; hasil cukup dikelola di dalam MPI sesuai kebutuhan.
-- Jika Akses menu = Bertahap, jelaskan aturan progres/unlock menu agar pengguna mengikuti urutan pembelajaran.
-- Jika Akses menu = Bebas, semua menu utama dapat dipilih langsung tanpa harus menyelesaikan menu sebelumnya.
+- Jika Akses menu = Berurutan, tahap berikutnya terkunci sampai tahap sebelumnya selesai. Siswa boleh kembali ke tahap yang sudah terbuka tetapi tidak boleh melompati tahap yang masih terkunci.
+- Jika Akses menu = Evaluasi Terkunci, seluruh materi/submateri dapat dipilih dalam urutan apa pun. Evaluasi tetap terkunci sampai syarat seluruh materi terpenuhi.
+- Jika Akses menu = Bebas, semua menu utama termasuk Evaluasi dapat dipilih sejak awal; progress hanya sebagai penanda dan tidak boleh menjadi pengunci.
+- Jika Cek Pemahaman Setelah Materi = Ya, setelah setiap materi/submateri utama tampilkan pertanyaan formatif singkat. Jika jawaban salah, berikan umpan balik konstruktif tanpa langsung membocorkan jawaban lengkap, arahkan siswa kembali membaca materi terkait, dan baru izinkan mencoba lagi setelah materi tersebut dibuka/dipelajari ulang. Cek pemahaman tidak menambah atau mengurangi Nilai Evaluasi Akhir.
+- Jika Cek Pemahaman Setelah Materi = Tidak, jangan membuat checkpoint kuis wajib setelah materi.
+- Pada mode Berurutan + Cek Pemahaman = Ya, materi/tahap berikutnya baru terbuka setelah cek pemahaman materi aktif berhasil dijawab benar.
+- Pada mode Evaluasi Terkunci + Cek Pemahaman = Ya, Evaluasi baru terbuka setelah semua materi wajib lulus cek pemahaman. Jika Cek Pemahaman = Tidak, Evaluasi terbuka setelah semua materi wajib pernah diakses/dikunjungi.
+- Pada mode Bebas, Cek Pemahaman boleh tetap muncul jika dipilih, tetapi tidak boleh mengunci menu lain atau Evaluasi.
+- Jika Feedback Evaluasi Akhir = Konstruktif, berikan feedback bermakna untuk jawaban benar dan salah sesuai konsep. Jika = Tanpa Feedback, selama evaluasi jangan tampilkan status benar/salah, pembahasan, petunjuk, atau jawaban benar; sistem tetap boleh menganalisis jawaban secara internal untuk skor dan Bagian Perlu Penguatan.
+- Bagian Perlu Penguatan harus diturunkan dari soal Evaluasi Akhir yang salah dan metadata submateri/indikator yang diukur, bukan ditebak secara umum. Riwayat cek pemahaman boleh dipakai sebagai informasi pendukung, tetapi tidak mengubah nilai akhir.
+- Jika Game Pembelajaran = Ada, game harus berkaitan langsung dengan materi, memberi feedback latihan, tidak menyalin persis soal Cek Pemahaman/Evaluasi, dan skor game tidak dicampur dengan Nilai Evaluasi Akhir.
+- Jika Jenis Game = Disesuaikan oleh AI, pilih game paling relevan berdasarkan tujuan pembelajaran, karakter materi, jenjang siswa, dan jenis interaksi yang bermakna; jangan memilih hanya karena menarik secara visual. Contoh: proses/kronologi → Susun Urutan; pasangan konsep-fungsi/kosakata → Make a Match atau Flip Card; klasifikasi → Drag & Drop; materi visual → Tebak Gambar; latihan konsep umum → Quiz Challenge/Spin Game.
+- Jika Game Pembelajaran = Tidak Ada, jangan membuat menu, aset, state, skor, atau kode game.
 
 Buatkan minimal 3 alternatif pendekatan pengemasan MPI untuk materi ini (berbeda dari gaya penyajian atau elemen interaktif utamanya), dengan format tiap alternatif:
-7. Judul MPI
-8. Peta Menu — daftar semua halaman/menu sesuai daftar wajib di atas
-9. Ringkasan Konten per Menu — 2-3 kalimat isi tiap menu
-10. Ide Elemen Interaktif — minimal 3 elemen berbeda (drag-drop, simulasi klik, animasi bertahap, dsb) yang cocok untuk materi ini
-11. Rencana Evaluasi — variasi bentuk soal yang akan dipakai, serta Opsi Feedback Jawaban Benar/Salah (opsional — bisa dihapus/diubah jadi hanya skor, cocok untuk evaluasi/asesmen yang lebih serius tanpa feedback langsung)
-12. Pengaturan Canva Sheet & Navigasi — jelaskan penerapan pilihan Canva Sheet dan mode akses menu pada alternatif tersebut
-13. Gaya Visual — modern, minim scroll, sesuai jenjang [SD/SMP/SMA]
+1. Judul MPI
+2. Peta Menu — daftar 6 menu inti dan menu Game hanya jika dipilih
+3. Ringkasan Konten per Menu — 2–3 kalimat isi tiap menu
+4. Ide Elemen Interaktif — minimal 3 elemen yang cocok untuk materi
+5. Rencana Cek Pemahaman — hanya jika diaktifkan; jelaskan bentuk pertanyaan dan alur baca ulang jika salah
+6. Rencana Refleksi Siswa — bentuk refleksi yang sesuai jenjang
+7. Rencana Evaluasi — variasi bentuk soal, mode Feedback Evaluasi yang dipilih, serta cara memetakan soal ke submateri/indikator untuk menentukan Bagian Perlu Penguatan
+8. Rencana Game — hanya jika Game = Ada; sebutkan jenis, alasan pedagogis, mekanisme, dan posisi game. Jika Disesuaikan oleh AI, tuliskan game yang dipilih dan alasan pemilihannya
+9. Pengaturan Canva Sheet & Navigasi — jelaskan penerapan pilihan Canva Sheet, tiga mode akses, dan hubungan dengan Cek Pemahaman
+10. Gaya Visual — modern, minim scroll, sesuai jenjang [SD/SMP/SMA]
 
 [Tempel/lampirkan silabus, modul ajar, atau buku materi di sini jika ada]
 
@@ -2323,58 +2345,65 @@ STANDAR MUATAN MATERI MPI — WAJIB:
         text: `Saya memilih alternatif nomor [tulis nomor] dengan judul "[tulis judul MPI]".
 Kembangkan alternatif tersebut menjadi rancangan (desain) lengkap yang mencakup storyboard alur halaman DAN desain visual/UI, siap dilanjutkan ke tahap penentuan aset.
 
-WAJIB PERTAHANKAN keputusan yang sudah dipilih pada Prompt 0 PRO, jangan diubah atau diasumsikan ulang:
-- Tautkan Canva Sheet: [Ya / Tidak — isi sesuai pilihan di Prompt 0 PRO]
-- Akses menu: [Bertahap / Bebas — isi sesuai pilihan di Prompt 0 PRO]
+WAJIB PERTAHANKAN seluruh keputusan yang sudah dipilih pada Prompt 0 PRO, jangan diubah atau diasumsikan ulang:
+- Tautkan Canva Sheet: [Ya / Tidak — isi sesuai Prompt 0 PRO]
+- Akses menu: [Berurutan / Evaluasi Terkunci / Bebas — isi sesuai Prompt 0 PRO]
+- Cek Pemahaman Setelah Materi: [Ya / Tidak — isi sesuai Prompt 0 PRO]
+- Feedback Evaluasi Akhir: [Konstruktif / Tanpa Feedback — isi sesuai Prompt 0 PRO]
+- Game Pembelajaran: [Ada / Tidak Ada — isi sesuai Prompt 0 PRO]
+- Jenis & Jumlah Game: [isi sesuai Prompt 0 PRO; abaikan jika Game = Tidak Ada]
 
 Data MPI:
 - Mata pelajaran: [isi]
 - Kelas: [isi]
 - Materi: [isi, boleh mengacu ke lampiran]
-- Tujuan Pembelajaran: [isi 2-3 tujuan terukur]
+- Tujuan Pembelajaran: [isi 2–3 tujuan terukur]
 - Perangkat: [HP/laptop/IFP]
 
 ATURAN KONSISTENSI DENGAN PROMPT 0 PRO:
 1. Jika Canva Sheet = Ya:
    - Halaman Pembuka wajib meminta Nama dan Kelas sebelum siswa masuk ke pembelajaran.
-   - Rancang data yang dicatat minimal: Nama, Kelas, Nilai/Hasil Evaluasi, Kategori Hasil, dan status pengiriman.
-   - Setelah evaluasi selesai, sediakan alur pengiriman data ke Canva Sheet.
+   - Rancang data minimal: Nama, Kelas, Nilai Evaluasi, Kategori Hasil, Bagian Perlu Penguatan, Refleksi Siswa, dan status pengiriman.
+   - Pengiriman dilakukan setelah data hasil, penguatan, dan refleksi tersedia; sediakan status mengirim/berhasil/gagal/coba lagi.
 2. Jika Canva Sheet = Tidak:
    - Jangan membuat integrasi Canva Sheet/spreadsheet atau form pengiriman nilai.
-   - Nama dan Kelas boleh dibuat opsional sesuai kebutuhan desain.
-   - Hasil evaluasi cukup dikelola dan ditampilkan di dalam sesi MPI.
-3. Jika Akses menu = Bertahap:
-   - Menu berikutnya terkunci sampai tahap sebelumnya selesai.
-   - Tampilkan status progres: belum dibuka / sedang dipelajari / selesai.
-   - Siswa boleh kembali ke tahap yang sudah terbuka, tetapi tidak boleh melompati tahap yang masih terkunci.
-4. Jika Akses menu = Bebas:
-   - Semua menu utama langsung dapat dipilih sejak awal.
-   - Jangan menerapkan lock/unlock yang menghalangi siswa berpindah menu.
+   - Nama dan Kelas boleh opsional sesuai kebutuhan desain.
+   - Hasil evaluasi, penguatan, dan refleksi cukup dikelola di dalam sesi MPI.
+3. Jika Akses menu = Berurutan:
+   - Tahap berikutnya terkunci sampai tahap sebelumnya tuntas.
+   - Tampilkan status progres: terkunci / terbuka / sedang dipelajari / selesai.
+   - Jika Cek Pemahaman = Ya, ketuntasan materi/submateri mensyaratkan jawaban cek pemahaman benar setelah proses belajar; jika salah, siswa wajib kembali membaca materi sebelum mencoba lagi.
+4. Jika Akses menu = Evaluasi Terkunci:
+   - Semua materi/submateri dapat dipilih dalam urutan apa pun.
+   - Evaluasi tetap terkunci. Jika Cek Pemahaman = Tidak, unlock setelah semua materi wajib pernah diakses; jika Cek Pemahaman = Ya, unlock setelah semua materi wajib lulus cek pemahaman.
+   - Gunakan status materi seperti belum dikunjungi / sedang dipelajari / perlu ulang / tuntas sesuai fitur yang dipilih.
+5. Jika Akses menu = Bebas:
+   - Semua menu utama termasuk Evaluasi aktif sejak awal.
+   - Jangan menerapkan lock/unlock yang menghalangi perpindahan menu. Cek Pemahaman jika aktif tetap bersifat formatif dan tidak mengunci menu lain.
+6. Refleksi Pembelajaran wajib menjadi bagian eksplisit. Minimal tampung: apa yang sudah dipahami, bagian yang masih sulit/membingungkan, dan rencana agar lebih paham. Sesuaikan bentuk input dengan jenjang.
+7. Cek Pemahaman jika aktif bersifat formatif, bukan bagian nilai akhir. Setiap item harus terkait langsung dengan submateri yang baru dipelajari dan memiliki feedback konstruktif benar/salah serta aturan baca ulang sebelum retry setelah jawaban salah.
+8. Evaluasi Akhir harus memetakan setiap soal ke submateri/topik dan indikator/tujuan yang diukur. Pemetaan jawaban salah digunakan untuk menghasilkan Bagian Perlu Penguatan.
+9. Jika Feedback Evaluasi = Konstruktif, siapkan feedback untuk jawaban benar dan salah. Jika = Tanpa Feedback, jangan menampilkan benar/salah/pembahasan selama evaluasi; hanya simpan analisis internal untuk skor dan penguatan.
+10. Jika Game = Ada, game adalah pengayaan: tidak menjadi syarat unlock Evaluasi, tidak memengaruhi Nilai Evaluasi Akhir, tidak menyalin persis soal Cek Pemahaman/Evaluasi, dan selalu memberi feedback latihan. Jika Jenis Game = Disesuaikan oleh AI, gunakan jenis yang sudah dipilih/direkomendasikan di Prompt 0 atau tetapkan secara eksplisit berdasarkan tujuan, materi, dan jenjang.
 
 Buatkan rancangan dengan format:
 1. Judul & Identitas MPI (mapel, kelas, materi)
-2. Ringkasan Keputusan Prompt 0 PRO — tuliskan dengan jelas pilihan Canva Sheet dan mode akses menu yang sedang dipakai, lalu jadikan keduanya sebagai aturan desain tetap
-3. Storyboard / Alur Halaman Lengkap — sesuai 6 menu wajib; pecah tiap menu menjadi sub-halaman jika materi panjang; untuk tiap halaman sebutkan nomor, nama, tujuan, elemen yang tampil, aksi yang tersedia, status akses (jika mode Bertahap), dan halaman tujuan berikutnya
-4. Detail Tiap Sub-Materi — poin kunci, contoh/ilustrasi, cara penyajian (teks singkat + gambar/animasi, bukan paragraf panjang)
-5. Rancangan Elemen Interaktif — apa yang dilakukan pengguna, apa yang terjadi setelah berinteraksi, bagaimana ini memperkuat pemahaman konsep
-6. Database Soal Evaluasi — minimal [5/10] soal, variasi bentuk (pilihan ganda, benar/salah, menjodohkan, mengurutkan, isian singkat — lihat Prompt Kuis Interaktif untuk variasi lebih lengkap); tiap soal berisi pertanyaan, pilihan (jika ada), jawaban benar, serta Opsi Feedback Benar & Salah (opsional — bisa dihapus/diubah jadi hanya skor, cocok untuk evaluasi/asesmen yang lebih serius tanpa feedback langsung)
-7. Sistem Navigasi & Progres:
-   - Tombol menu utama, lanjut, dan kembali harus mudah dijangkau.
-   - Jika mode Bertahap, jelaskan aturan unlock setiap tahap dan kondisi kapan tombol/menu berikutnya aktif.
-   - Jika mode Bebas, semua menu utama aktif sejak awal dan progress hanya berfungsi sebagai penanda, bukan pengunci.
-8. Integrasi Canva Sheet (kondisional):
-   - Jika Ya: jelaskan titik input identitas, data yang dikirim, waktu pengiriman, tampilan status berhasil/gagal, dan perilaku jika pengiriman perlu diulang.
-   - Jika Tidak: tulis tegas "Tidak menggunakan Canva Sheet" dan jangan menambahkan alur pengiriman data.
-9. Desain Visual/UI:
-   - Palet warna: warna utama, sekunder, aksen beserta kode HEX
-   - Tipografi: jenis font judul & isi, ukuran relatif tiap elemen
-   - Gaya komponen: bentuk tombol, kartu, panel, ikon
-   - Layout tiap jenis halaman (pembuka, materi, evaluasi, hasil)
-   - Karakter/maskot pemandu (jika ada): deskripsi visual singkat
-   - Mood/gaya visual keseluruhan
-10. Checklist Kualitas MPI — semua 6 menu wajib tersedia; pilihan Canva Sheet dipatuhi; mode akses menu dipatuhi; materi disajikan bertahap; evaluasi bervariasi & sesuai materi; navigasi mudah dipahami; tampilan modern & minim scroll; siap dibuat kode
+2. Ringkasan Keputusan Prompt 0 PRO — tuliskan semua pilihan konfigurasi di atas dan jadikan aturan desain tetap
+3. Peta Status & Logika Akses — jelaskan state tiap menu/material dan syarat transisinya sesuai mode akses serta Cek Pemahaman
+4. Storyboard / Alur Halaman Lengkap — 6 menu inti + Game hanya jika dipilih; pecah materi menjadi sub-halaman; untuk tiap halaman sebutkan nomor, nama, tujuan, elemen, aksi, status akses, dan halaman tujuan berikutnya
+5. Detail Tiap Sub-Materi — poin kunci, contoh/ilustrasi, cara penyajian singkat dan mendalam
+6. Database Cek Pemahaman — hanya jika aktif; minimal 1 pertanyaan representatif per submateri utama, berisi submateri sumber, pertanyaan, opsi jika ada, jawaban benar, feedback benar, feedback salah/petunjuk, dan aturan kembali membaca sebelum retry
+7. Rancangan Refleksi Pembelajaran — komponen input, contoh pertanyaan refleksi, validasi seperlunya, dan cara data disimpan/ditampilkan kembali
+8. Database Soal Evaluasi — minimal [5/10] soal bervariasi; tiap soal berisi pertanyaan, pilihan jika ada, jawaban benar, submateri/topik, indikator/tujuan yang diukur, serta feedback benar/salah hanya jika mode Konstruktif
+9. Logika Bagian Perlu Penguatan — kelompokkan soal salah berdasarkan submateri/indikator; tampilkan area prioritas yang benar-benar didukung jawaban siswa. Riwayat cek pemahaman boleh menjadi catatan pendukung, bukan penentu nilai
+10. Rancangan Game — hanya jika aktif; jenis game, tujuan pedagogis, mekanisme, konten game, feedback, skor/poin motivasional, dan posisi dalam alur; skor game terpisah dari nilai evaluasi
+11. Sistem Navigasi & Progres — tombol menu utama, lanjut, kembali; uraikan perilaku spesifik Berurutan, Evaluasi Terkunci, atau Bebas
+12. Integrasi Canva Sheet (kondisional) — jika Ya jelaskan input identitas, payload minimal Nama/Kelas/Nilai/Kategori/Bagian Perlu Penguatan/Refleksi, waktu kirim, status, retry; jika Tidak tulis tegas tidak menggunakan Canva Sheet
+13. Desain Halaman Hasil — Nilai Akhir, Kategori Hasil, Bagian Perlu Penguatan, Saran Penguatan singkat, dan Refleksi Siswa; pembahasan per soal hanya jika sesuai mode Feedback Evaluasi
+14. Desain Visual/UI — palet HEX, tipografi, tombol/kartu/panel/ikon, layout pembuka/materi/refleksi/game/evaluasi/hasil, karakter/maskot jika ada, mood keseluruhan
+15. Checklist Kualitas MPI — semua pilihan Prompt 0 dipatuhi; 6 menu inti tersedia; game hanya jika dipilih; logika akses benar; reread gate bekerja bila Cek Pemahaman aktif; refleksi tersimpan; penguatan diturunkan dari metadata evaluasi; feedback evaluasi sesuai mode; data Canva Sheet lengkap bila digunakan; navigasi mudah; siap dibuat kode
 
-Jangan mengubah pilihan Canva Sheet atau mode akses menu dari Prompt 0 PRO saat menyusun rancangan.
+Jangan mengubah keputusan Prompt 0 PRO saat menyusun rancangan.
 
 [Tempel silabus/modul ajar/materi di sini jika belum dilampirkan di Prompt 0 PRO]
 
@@ -2389,48 +2418,61 @@ STANDAR MUATAN MATERI MPI — WAJIB:
       },
       {
         title: "Prompt 2 PRO Asset Inventory MPI",
-        text: `Berdasarkan rancangan desain MPI di atas (Prompt 1 PRO), buatkan Daftar Inventaris Aset (Asset Inventory) khusus untuk MPI ini — semua aset visual dan audio yang benar-benar dibutuhkan.
+        text: `Berdasarkan rancangan desain MPI di atas (Prompt 1 PRO), buatkan Daftar Inventaris Aset (Asset Inventory) khusus untuk MPI ini — hanya aset visual dan audio yang benar-benar dibutuhkan.
 
-WAJIB mengacu pada keputusan yang sudah dikunci sejak Prompt 0 PRO dan dirinci di Prompt 1 PRO:
+WAJIB mengacu pada seluruh keputusan yang sudah dikunci sejak Prompt 0 PRO dan dirinci di Prompt 1 PRO:
 - Tautkan Canva Sheet: [Ya / Tidak]
-- Akses menu: [Bertahap / Bebas]
+- Akses menu: [Berurutan / Evaluasi Terkunci / Bebas]
+- Cek Pemahaman Setelah Materi: [Ya / Tidak]
+- Feedback Evaluasi Akhir: [Konstruktif / Tanpa Feedback]
+- Game Pembelajaran: [Ada / Tidak Ada]
+- Jenis & Jumlah Game: [sesuai keputusan; abaikan jika Game = Tidak Ada]
 
-Jangan membuat aset untuk fitur yang tidak dipilih.
+Jangan membuat aset untuk fitur yang tidak dipilih. Jangan mengubah jenis game atau logika akses yang sudah ditetapkan.
 
 Kelompokkan aset berdasarkan kategori:
 1. Maskot/Karakter Pemandu (jika ada)
 2. Background per Menu/Halaman
 3. Ikon Menu & Navigasi
 4. Ilustrasi/Diagram Pendukung Materi
-5. Ikon/Ilustrasi Soal Evaluasi
-6. Aset Status Progres/Navigasi — sesuaikan dengan mode akses menu
-7. Aset Canva Sheet/Identitas — hanya jika Canva Sheet = Ya
-8. Aset Audio — narasi, backsound, efek interaksi (jika diperlukan)
+5. Aset Cek Pemahaman — hanya jika fitur aktif dan benar-benar membutuhkan aset gambar
+6. Aset Refleksi Pembelajaran — hanya yang diperlukan oleh desain
+7. Ikon/Ilustrasi Soal Evaluasi
+8. Aset Status Progres/Navigasi — sesuaikan dengan mode akses dan state materi
+9. Aset Game — hanya jika Game = Ada; sesuaikan dengan jenis game yang dipilih
+10. Aset Canva Sheet/Identitas — hanya jika Canva Sheet = Ya
+11. Aset Audio — narasi, backsound, efek interaksi (jika diperlukan)
 
 Ketentuan kondisional:
-- Jika Akses menu = Bertahap, inventaris wajib mencakup kebutuhan visual untuk status terkunci, terbuka, sedang dipelajari, selesai, dan indikator progres bila memang menggunakan aset gambar/ikon.
-- Jika Akses menu = Bebas, jangan membuat aset status terkunci; cukup aset menu aktif/terpilih dan indikator progres jika dibutuhkan.
-- Jika Canva Sheet = Ya, sertakan aset pendukung yang relevan untuk input Nama/Kelas dan status pengiriman data (misalnya ikon kirim, berhasil, gagal, coba lagi) hanya bila diperlukan oleh desain.
-- Jika Canva Sheet = Tidak, jangan membuat aset khusus Canva Sheet, spreadsheet, kirim nilai, atau status sinkronisasi.
+- Mode Berurutan: inventaris status visual boleh mencakup terkunci, terbuka, sedang dipelajari, perlu ulang (jika Cek Pemahaman aktif), dan selesai/tuntas.
+- Mode Evaluasi Terkunci: materi tidak perlu aset lock; fokus pada belum dikunjungi/sedang dipelajari/perlu ulang/tuntas, sedangkan Evaluasi membutuhkan state terkunci dan siap dikerjakan.
+- Mode Bebas: jangan membuat aset status terkunci; cukup aktif/terpilih/progres dan state cek pemahaman bila digunakan.
+- Jika Cek Pemahaman = Tidak, jangan membuat aset khusus checkpoint, retry, atau perlu membaca ulang.
+- Jika Feedback Evaluasi = Tanpa Feedback, jangan membuat aset UI yang mengungkap benar/salah/pembahasan selama evaluasi.
+- Jika Game = Ada, inventaris aset harus sesuai jenis game. Spin Game dapat memerlukan roda/penanda; Flip Card/Memory memerlukan kartu depan-belakang; Make a Match memerlukan pasangan elemen; Susun Urutan/Drag & Drop memerlukan item yang bisa dipindah; Tebak Gambar memerlukan visual materi; jenis lain mengikuti desain. Hindari aset dekoratif berlebihan.
+- Jika Game = Tidak Ada, jangan membuat aset game.
+- Jika Canva Sheet = Ya, sertakan aset pendukung input Nama/Kelas dan status kirim hanya bila desain benar-benar membutuhkannya.
+- Jika Canva Sheet = Tidak, jangan membuat aset khusus spreadsheet/kirim nilai/status sinkronisasi.
 
-Untuk setiap aset, sajikan dalam bentuk tabel dengan kolom:
-- Nama Aset (gunakan nama file konsisten, misal: bg_pembuka.webp, ikon_menu_materi.webp)
+Untuk setiap aset, sajikan tabel dengan kolom:
+- Nama Aset (nama file konsisten, misal bg_pembuka.webp, ikon_refleksi.webp)
 - Digunakan di Menu/Halaman mana
-- Kondisi Pemakaian (Selalu / hanya Canva Sheet=Ya / hanya mode Bertahap / hanya mode Bebas)
+- Kondisi Pemakaian (Selalu / fitur tertentu / mode tertentu)
 - Deskripsi Visual singkat
-- Gaya (sesuai arahan visual Prompt 1 PRO)
-- Format file disarankan (WebP transparan untuk gambar / MP3 atau format audio sesuai kebutuhan)
+- Fungsi edukatif/interaktif
+- Gaya sesuai Prompt 1 PRO
+- Format file disarankan (WebP transparan untuk gambar / MP3 atau audio sesuai kebutuhan)
 - Ukuran/dimensi disarankan
 - Prioritas (Wajib/Opsional)
 
-Tambahkan Ringkasan Jumlah Aset di akhir (total gambar, total audio, total keseluruhan), serta cek bahwa tidak ada aset yang bertentangan dengan pilihan Prompt 0 PRO.
+Tambahkan Ringkasan Jumlah Aset di akhir (total gambar, audio, keseluruhan), serta cek bahwa tidak ada aset yang bertentangan dengan pilihan Prompt 0 PRO.
 
-Output harus dalam bentuk tabel rapi, siap dijadikan checklist produksi maupun bahan untuk Prompt 3 PRO.
+Output harus berupa tabel rapi, siap dijadikan checklist produksi maupun bahan Prompt 3 PRO.
 
 ATURAN INVENTARIS FILE GAMBAR — WAJIB:
 - Satu file gambar = satu aset/gambar saja. Jangan merencanakan sprite sheet, contact sheet, collage, atau file berisi beberapa aset.
-- Setiap pose/state/variasi yang diperlukan dicatat sebagai aset dan nama file .webp yang terpisah.
-- Untuk aset materi/objek nyata, arahkan visual ke bentuk konkret, faktual, jelas, realistis/semi-realistis; maskot, ikon, dan navigasi boleh menyesuaikan gaya UI selama tetap jelas.`
+- Setiap pose/state/variasi yang diperlukan dicatat sebagai aset dan nama file .webp terpisah.
+- Untuk aset materi/objek nyata, arahkan visual ke bentuk konkret, faktual, jelas, realistis/semi-realistis; maskot, ikon, navigasi, dan elemen game boleh menyesuaikan gaya UI selama tetap jelas.`
       },
       {
         title: "Prompt 3 PRO Generate Prompt Aset MPI",
@@ -2563,69 +2605,103 @@ Mulai dari Batch 1 berisi aset prioritas tertinggi yang paling berhubungan denga
       },
       {
         title: "Prompt 5 PRO Coding MPI (Gabungkan Semua Aset ke Desain)",
-        text: `Ubah rancangan desain MPI (Prompt 1 PRO) dan aset yang sudah dibuat/digenerate (hasil Prompt 4 PRO; mengacu Prompt 2-3 PRO) menjadi kode MPI interaktif yang bisa langsung dijalankan, dalam satu file HTML lengkap (HTML, CSS, JavaScript).
+        text: `Ubah rancangan desain MPI (Prompt 1 PRO) dan aset yang sudah dibuat/digenerate (hasil Prompt 4 PRO; mengacu Prompt 2–3 PRO) menjadi kode MPI interaktif yang bisa langsung dijalankan, dalam satu file HTML lengkap (HTML, CSS, JavaScript).
 
 Engine/Platform tujuan: [pilih satu — Canva Code / dikerjakan bersama Claude / Gemini / ChatGPT]
 
-WAJIB mempertahankan keputusan proyek dari Prompt 0 PRO dan Prompt 1 PRO:
-- Tautkan Canva Sheet: [Ya / Tidak — isi sesuai pilihan sebelumnya]
-- Akses menu: [Bertahap / Bebas — isi sesuai pilihan sebelumnya]
+WAJIB mempertahankan seluruh keputusan proyek dari Prompt 0 PRO dan Prompt 1 PRO:
+- Tautkan Canva Sheet: [Ya / Tidak]
+- Akses menu: [Berurutan / Evaluasi Terkunci / Bebas]
+- Cek Pemahaman Setelah Materi: [Ya / Tidak]
+- Feedback Evaluasi Akhir: [Konstruktif / Tanpa Feedback]
+- Game Pembelajaran: [Ada / Tidak Ada]
+- Jenis & Jumlah Game: [sesuai pilihan sebelumnya]
 
-Jangan mengubah dua pilihan tersebut saat membuat kode.
+Jangan mengubah keputusan tersebut saat membuat kode.
 
 Ketentuan umum:
 1. Harus langsung bisa dijalankan di [Canva Code/browser].
-2. Jangan gunakan library atau database eksternal yang tidak diminta. Gunakan penyimpanan sesi berbasis variabel/array JavaScript untuk state MPI.
+2. Jangan gunakan library/database eksternal yang tidak diminta. Gunakan state sesi berbasis variabel/array JavaScript.
 3. Semua teks antarmuka berbahasa Indonesia.
 4. Tampilan responsif HP, laptop, dan IFP; minim scroll per halaman.
 5. Tombol navigasi besar, jelas, selalu mudah dijangkau (menu utama, lanjut, kembali).
 6. Kode rapi dan diberi komentar singkat.
 7. Satu layar dinamis (single page app), bukan banyak file terpisah.
 
-Aturan Canva Sheet — KONDISIONAL:
-8. Jika Canva Sheet = Ya:
-   - Halaman Pembuka wajib meminta Nama dan Kelas sebelum siswa masuk ke pembelajaran.
-   - Validasi Nama/Kelas tidak boleh kosong.
-   - Setelah evaluasi selesai, siapkan alur pengiriman Nama, Kelas, Nilai/Hasil Evaluasi, Kategori Hasil, dan status pengiriman ke Canva Sheet sesuai mekanisme yang digunakan pada rancangan.
-   - Tampilkan status pengiriman: mengirim, berhasil, gagal, dan tombol coba lagi jika diperlukan.
-9. Jika Canva Sheet = Tidak:
-   - Jangan membuat integrasi Canva Sheet/spreadsheet, endpoint, form kirim nilai, atau status sinkronisasi.
-   - Nama dan Kelas boleh opsional sesuai rancangan.
-   - Hasil evaluasi cukup ditampilkan/dikelola di dalam sesi MPI.
+STRUKTUR DATA/STATE — WAJIB:
+8. Simpan status kunjungan/tuntas setiap materi atau submateri secara terpisah.
+9. Jika Cek Pemahaman = Ya, simpan status cek per materi (belum mencoba / benar / salah-perlu-baca-ulang / siap-coba-lagi), jumlah percobaan bila diperlukan untuk analitik, dan pastikan percobaan ulang baru aktif setelah siswa kembali membuka materi terkait.
+10. Simpan Refleksi Siswa minimal untuk: sudah dipahami, bagian masih sulit/membingungkan, dan rencana agar lebih paham. Bentuk UI boleh menyesuaikan jenjang, tetapi datanya harus dapat dirangkum.
+11. Database Evaluasi wajib memuat metadata submateri/topik dan indikator/tujuan yang diukur pada setiap soal agar Bagian Perlu Penguatan dapat dihitung dari jawaban yang salah.
 
-Aturan Akses Menu — KONDISIONAL:
-10. Jika Akses menu = Bertahap:
-   - Menu berikutnya terkunci sampai tahap sebelumnya selesai.
-   - Tampilkan status belum dibuka / terbuka / selesai.
-   - Siswa boleh kembali ke menu yang sudah terbuka, tetapi tidak dapat melompati menu yang terkunci.
-   - Progress bar/indikator harus terhubung dengan logika unlock sebenarnya, bukan dekorasi saja.
-11. Jika Akses menu = Bebas:
-   - Semua menu utama aktif sejak awal.
-   - Jangan menjalankan logika lock/unlock.
-   - Progress boleh ditampilkan sebagai penanda halaman yang pernah dipelajari, tetapi tidak membatasi perpindahan menu.
+ATURAN CANVA SHEET — KONDISIONAL:
+12. Jika Canva Sheet = Ya:
+   - Halaman Pembuka wajib meminta Nama dan Kelas; validasi tidak boleh kosong.
+   - Setelah Evaluasi selesai dan data refleksi tersedia, kirim minimal Nama, Kelas, Nilai Evaluasi, Kategori Hasil, Bagian Perlu Penguatan, dan Refleksi Siswa.
+   - Tampilkan status mengirim, berhasil, gagal, dan tombol coba lagi tanpa menggandakan pengiriman yang sudah sukses bila mekanisme memungkinkan.
+13. Jika Canva Sheet = Tidak:
+   - Jangan membuat integrasi spreadsheet, endpoint, form kirim nilai, atau status sinkronisasi.
+   - Hasil, penguatan, dan refleksi cukup dikelola selama sesi.
 
-Integrasi Aset:
-12. Sebutkan daftar nama file aset (sesuai Prompt 2/3/4 PRO) beserta tempat pemakaiannya di kode.
-13. Gunakan path placeholder yang jelas untuk gambar (misal "assets/nama_file.png"), ATAU sertakan base64 jika file sudah tersedia dan berukuran kecil.
-14. Jika aset belum tersedia, gunakan bentuk/warna sederhana (CSS shape/emoji) sebagai penanda sementara, diberi komentar "// TODO: ganti dengan aset asli".
-15. Pastikan warna, font, posisi elemen, aset status menu, dan aset Canva Sheet (jika ada) konsisten dengan Desain Visual/UI pada Prompt 1 PRO.
+ATURAN AKSES MENU — KONDISIONAL:
+14. Jika Akses menu = Berurutan:
+   - Hanya tahap awal yang aktif saat mulai; tahap berikutnya unlock sesuai urutan.
+   - Jika Cek Pemahaman = Ya, materi/submateri belum tuntas sampai cek pemahaman dijawab benar. Jawaban salah mengubah state menjadi perlu-baca-ulang, menonaktifkan lanjut, mengarahkan kembali ke materi, dan baru membuka retry setelah materi dibuka ulang.
+   - Jika Cek Pemahaman = Tidak, ketuntasan mengikuti penyelesaian/kunjungan tahap sesuai rancangan.
+   - Tampilkan state terkunci / terbuka / sedang dipelajari / perlu ulang bila relevan / selesai.
+15. Jika Akses menu = Evaluasi Terkunci:
+   - Semua materi/submateri aktif sejak awal dan dapat dipilih tidak berurutan.
+   - Evaluasi terkunci.
+   - Jika Cek Pemahaman = Tidak, Evaluasi unlock saat semua materi wajib pernah diakses/dikunjungi.
+   - Jika Cek Pemahaman = Ya, Evaluasi unlock hanya saat seluruh materi wajib berstatus lulus cek pemahaman.
+16. Jika Akses menu = Bebas:
+   - Semua menu termasuk Evaluasi aktif sejak awal.
+   - Jangan menggunakan lock/unlock untuk membatasi navigasi.
+   - Cek Pemahaman bila aktif tetap berjalan sebagai latihan formatif tetapi tidak mengunci menu lain atau Evaluasi.
 
-Struktur MPI: [ikuti Peta Menu & Storyboard dari Prompt 1 PRO — Pembuka, Tujuan Pembelajaran, Materi Bertahap, Evaluasi, Simulasi/Games opsional]
+CEK PEMAHAMAN — KONDISIONAL:
+17. Jika aktif, tampilkan pertanyaan formatif setelah materi/submateri utama. Feedback benar menguatkan konsep; feedback salah memberi petunjuk konstruktif tanpa langsung membocorkan jawaban lengkap dan mewajibkan reread sebelum retry.
+18. Cek Pemahaman tidak masuk Nilai Evaluasi Akhir dan tidak mengurangi nilai karena banyaknya percobaan.
+19. Jika fitur tidak aktif, jangan sisakan checkpoint wajib, state retry, atau UI baca ulang.
 
-Fitur wajib:
-16. Menu utama dapat diakses kembali dari halaman manapun; pada mode Bertahap, item yang belum terbuka tetap terkunci di menu utama.
-17. Progress/penanda halaman yang sudah dipelajari sesuai mode akses menu yang dipilih.
-18. Skor otomatis untuk evaluasi + kategori hasil akhir.
-19. Opsi Feedback benar/salah yang menjelaskan alasan (opsional — bisa dihapus/diubah jadi hanya skor, cocok untuk evaluasi/asesmen yang lebih serius tanpa feedback langsung).
-20. Tombol ulang evaluasi.
+REFLEKSI PEMBELAJARAN — WAJIB:
+20. Sediakan menu/halaman Refleksi yang jelas dan ramah jenjang. Simpan dan tampilkan kembali ringkasan refleksi pada halaman hasil.
+21. Refleksi tidak menjadi syarat teknis unlock Evaluasi kecuali rancangan secara eksplisit menyatakan demikian; default mengikuti keputusan review: syarat Evaluasi ditentukan oleh mode akses dan status materi/cek pemahaman.
 
-Testing & Revisi:
-- Tes mode akses menu sesuai pilihan: pastikan mode Bertahap benar-benar mengunci tahap berikutnya, atau mode Bebas benar-benar membuka semua menu.
-- Tes pilihan Canva Sheet: jika Ya, pastikan identitas dan alur pengiriman bekerja; jika Tidak, pastikan tidak ada komponen/integrasi Sheet yang tersisa.
-- Tes responsivitas di HP, laptop, dan IFP serta keterbacaan warna.
+EVALUASI AKHIR & PENGUATAN:
+22. Hitung skor otomatis dan kategori hasil akhir.
+23. Jika Feedback Evaluasi = Konstruktif, tampilkan feedback untuk jawaban benar dan salah yang menjelaskan konsep secara singkat.
+24. Jika Feedback Evaluasi = Tanpa Feedback, selama pengerjaan jangan tampilkan benar/salah, pembahasan, petunjuk, atau jawaban benar. Setelah selesai boleh tampilkan nilai, kategori, dan area penguatan tanpa wajib membuka kunci jawaban per soal.
+25. Hitung Bagian Perlu Penguatan dari soal yang salah dengan mengelompokkan metadata submateri/indikator. Jangan membuat diagnosis umum yang tidak didukung data. Riwayat cek pemahaman boleh ditampilkan sebagai indikasi tambahan, tetapi tidak memengaruhi nilai.
+26. Halaman hasil minimal memuat Nilai Akhir, Kategori Hasil, Bagian Perlu Penguatan, Saran Penguatan singkat, dan Refleksi Siswa.
+
+GAME PEMBELAJARAN — KONDISIONAL:
+27. Jika Game = Ada, implementasikan jenis dan jumlah game sesuai rancangan. Game berfungsi sebagai latihan/pengayaan, tidak menjadi syarat unlock Evaluasi, dan skornya terpisah dari Nilai Evaluasi Akhir.
+28. Konten game tidak boleh menyalin persis soal Cek Pemahaman atau Evaluasi. Game harus memberi feedback latihan langsung.
+29. Jika Jenis Game = Disesuaikan oleh AI, gunakan jenis yang sudah diputuskan pada rancangan; jangan mengganti secara acak pada tahap coding.
+30. Jika Game = Tidak Ada, jangan sisakan menu, state, aset, skor, atau kode game.
+
+INTEGRASI ASET:
+31. Sebutkan daftar nama file aset sesuai Prompt 2/3/4 PRO dan tempat pemakaiannya.
+32. Gunakan path placeholder yang jelas atau base64 bila file benar-benar tersedia dan sesuai.
+33. Jika aset belum tersedia, gunakan bentuk/warna sederhana sebagai placeholder dengan komentar TODO; jangan mengubah logika fitur.
+34. Pastikan visual state akses, refleksi, game, dan Canva Sheet hanya muncul bila relevan dengan konfigurasi.
+
+Struktur MPI: [ikuti Peta Menu & Storyboard Prompt 1 PRO — 6 menu inti: Pembuka, Tujuan, Materi, Pembelajaran/Submateri, Refleksi, Evaluasi; Game hanya jika dipilih]
+
+Testing & Revisi — WAJIB:
+- Tes mode akses yang dipilih dan setiap syarat unlock terkait Cek Pemahaman.
+- Bila Cek Pemahaman aktif, uji skenario salah → lanjut terblokir sesuai mode → kembali baca materi → retry aktif → benar → status tuntas.
+- Tes bahwa mode Bebas tidak ikut terkunci karena Cek Pemahaman.
+- Tes Feedback Evaluasi sesuai pilihan: Konstruktif benar-benar memberi feedback; Tanpa Feedback benar-benar tidak membocorkan hasil per soal selama evaluasi.
+- Tes Refleksi tersimpan dan muncul pada hasil/payload.
+- Tes Bagian Perlu Penguatan berasal dari metadata soal salah.
+- Tes Game jika aktif: mekanisme, feedback, skor terpisah, dan tidak memengaruhi unlock/nilai; jika tidak aktif, pastikan tidak ada sisa game.
+- Tes Canva Sheet: jika Ya, payload mencakup Nama, Kelas, Nilai, Kategori, Bagian Perlu Penguatan, Refleksi; jika Tidak, tidak ada integrasi.
+- Tes responsivitas HP, laptop, IFP, keterbacaan, dan seluruh tombol.
 
 Deploy:
-Jika akan di-deploy ke Vercel/GitHub Pages/Netlify, sertakan langkah singkat mengunggah file HTML tunggal ke platform tersebut.
+Jika akan di-deploy ke Vercel/GitHub Pages/Netlify, sertakan langkah singkat mengunggah file HTML tunggal.
 
 Output: Kode siap copy dalam satu blok HTML.
 
@@ -2640,52 +2716,65 @@ STANDAR MUATAN MATERI MPI — WAJIB:
       },
       {
         title: "Prompt 6 PRO Final Check MPI",
-        text: `Aplikasi MPI sudah selesai dibuat dari Prompt 0–5 PRO. Sekarang lakukan FINAL CHECK menyeluruh sebagai QA engineer, instructional designer, dan penguji aplikasi edukasi. Jangan langsung menulis ulang aplikasi dari nol. Audit versi yang ada, uji fungsi, temukan masalah, lalu PERBAIKI masalah yang benar-benar ditemukan tanpa merusak fitur yang sudah benar.
+        text: `Aplikasi MPI sudah selesai dibuat dari Prompt 0–5 PRO. Sekarang lakukan FINAL CHECK menyeluruh sebagai QA engineer, instructional designer, dan penguji aplikasi edukasi. Jangan menulis ulang aplikasi dari nol. Audit versi yang ada, uji fungsi, temukan masalah, lalu PERBAIKI masalah yang benar-benar ditemukan tanpa merusak fitur yang sudah benar.
 
-TAHAP 1 — INVENTARIS & PETA UJI:
-1. Ringkas struktur aplikasi: halaman/menu, fitur inti, data/state, aset, evaluasi, penyimpanan/integrasi, dan alur pengguna.
-2. Buat checklist pengujian dengan status awal: Belum Diuji.
-3. Identifikasi fitur kritis yang jika gagal akan membuat aplikasi tidak dapat digunakan.
+TAHAP 1 — INVENTARIS KONFIGURASI & PETA UJI:
+1. Ringkas konfigurasi aktual: Canva Sheet, mode Akses Menu, Cek Pemahaman, Feedback Evaluasi, Game (ada/tidak + jenis/jumlah), halaman/menu, data/state, aset, evaluasi, refleksi, dan alur pengguna.
+2. Cocokkan konfigurasi tersebut dengan keputusan Prompt 0/1 PRO. Jangan menguji fitur yang memang dipilih Tidak Ada seolah-olah wajib ada; justru pastikan tidak ada sisa fitur yang dinonaktifkan.
+3. Buat checklist pengujian dengan status awal Belum Diuji dan tandai fitur kritis.
 
-TAHAP 2 — UJI FUNGSIONAL:
-4. Klik/uji seluruh tombol, link, menu, modal, form, input, slider, drag/drop, reset, home/back/next, start/restart, dan kontrol lain yang tersedia.
-5. Uji semua jalur navigasi, termasuk kembali ke menu, mengulang aktivitas, reload halaman, dan kondisi input kosong/salah.
-6. Uji state aplikasi agar tidak ada data lama yang bocor ke sesi/percobaan berikutnya.
-7. Uji evaluasi/soal: kunci, skor, nilai, timer, feedback, pembahasan, progress, status tuntas, dan rekap bila ada.
-8. Pastikan tidak ada tombol mati, event ganda, halaman buntu, fungsi undefined, error console, asset path rusak, atau request yang gagal tanpa penanganan.
+TAHAP 2 — UJI NAVIGASI & MODE AKSES:
+4. Uji seluruh tombol, link, menu, modal, form, input, drag/drop, reset, home/back/next, start/restart, dan kontrol lain.
+5. Jika mode Berurutan: pastikan tahap berikutnya tidak dapat dilompati; state terkunci/terbuka/perlu ulang/tuntas konsisten; siswa tetap dapat kembali ke tahap yang sudah terbuka.
+6. Jika mode Evaluasi Terkunci: pastikan materi dapat dibuka tidak berurutan dan hanya Evaluasi yang terkunci; jika Cek Pemahaman Tidak, unlock setelah seluruh materi wajib pernah diakses; jika Ya, unlock hanya setelah seluruh materi lulus cek pemahaman.
+7. Jika mode Bebas: pastikan semua menu termasuk Evaluasi aktif sejak awal dan tidak ada logika lock tersembunyi.
+8. Pastikan progress mencerminkan state sebenarnya, bukan dekorasi.
 
-TAHAP 3 — UJI RESPONSIVE, UX, DAN AKSESIBILITAS:
-9. Uji minimal pada lebar HP kecil, HP besar, tablet, laptop, desktop, dan IFP/layar sentuh.
-10. Pastikan tidak ada horizontal scroll yang tidak perlu, teks terpotong, elemen keluar layar, tombol terlalu kecil, atau panel menutupi konten.
-11. Pastikan target klik cukup besar, fokus keyboard terlihat, warna memiliki kontras memadai, dan aplikasi tetap dapat digunakan dengan reduced motion bila relevan.
-12. Pastikan loading/transisi tidak membuat pengguna bingung dan instruksi mudah dipahami siswa.
+TAHAP 3 — UJI CEK PEMAHAMAN:
+9. Jika fitur aktif, uji tiap submateri representatif: jawaban benar, jawaban salah, feedback konstruktif, state perlu membaca ulang, tombol lanjut sesuai mode akses, kembali ke materi, aktivasi retry setelah reread, lalu jawaban benar dan status tuntas.
+10. Pastikan siswa tidak dapat spam retry langsung setelah salah tanpa membuka kembali materi terkait.
+11. Pastikan jumlah percobaan Cek Pemahaman tidak mengubah Nilai Evaluasi Akhir.
+12. Jika fitur tidak aktif, pastikan tidak ada checkpoint wajib/state retry yang tersisa.
 
-TAHAP 4 — UJI KONTEN & ASET:
-13. Periksa akurasi materi, istilah, contoh, gambar, diagram, dan hubungan antara aktivitas dengan tujuan pembelajaran.
-14. Pastikan aset WebP tampil pada ukuran yang benar, tidak blur, tidak terpotong, tidak tertukar, dan fallback aman jika aset gagal dimuat.
-15. Pastikan gambar materi konkret/faktual sesuai konteks; maskot/ikon/navigasi boleh stylized tetapi tetap konsisten dan jelas.
-16. Pastikan tidak ada teks placeholder, lorem ipsum, gibberish, data dummy yang seharusnya dihapus, atau kredensial rahasia yang tertanam di kode produksi.
+TAHAP 4 — UJI REFLEKSI, EVALUASI, PENGUATAN, DAN HASIL:
+13. Uji input Refleksi: data tersimpan, tidak hilang saat berpindah halaman dalam sesi, dan muncul di hasil/payload sesuai rancangan.
+14. Uji Evaluasi: kunci jawaban internal, skor, kategori, variasi soal, progress, reset/ulang bila ada, dan mapping submateri/indikator.
+15. Jika Feedback Evaluasi = Konstruktif, pastikan jawaban benar dan salah menerima feedback bermakna dan tidak sekadar label.
+16. Jika Feedback Evaluasi = Tanpa Feedback, pastikan selama evaluasi tidak ada benar/salah, pembahasan, petunjuk, atau bocoran jawaban; analisis internal tetap menghasilkan skor dan penguatan.
+17. Verifikasi Bagian Perlu Penguatan benar-benar berasal dari soal salah dan metadata submateri/indikator. Uji juga kondisi semua benar agar aplikasi tidak mengarang kelemahan.
+18. Pastikan halaman hasil minimal menampilkan Nilai, Kategori, Bagian Perlu Penguatan, Saran Penguatan singkat, dan Refleksi Siswa.
 
-VALIDASI KHUSUS MPI:
-- Pastikan materi benar-benar mendalam dan kontekstual, bukan hanya ringkasan dangkal.
-- Pastikan ada apersepsi kontekstual, pertanyaan pemantik, penjelasan jelas "mengapa materi ini penting dipelajari", serta contoh kontekstual yang relevan.
-- Uji alur materi bertahap, interaksi, simulasi/game pendukung, evaluasi, feedback, akses menu, dan integrasi Canva Sheet bila digunakan.
-- Pastikan contoh, ilustrasi, istilah, dan evaluasi konsisten dengan tujuan pembelajaran dan tidak mengandung miskonsepsi.
+TAHAP 5 — UJI GAME PEMBELAJARAN:
+19. Jika Game = Ada, uji mekanisme sesuai jenisnya (Spin/Flip/Match/Quiz/Susun/Drag/Tebak/True-False/Memory/jenis AI), feedback, reset, kondisi menang/selesai bila relevan, dan responsivitas sentuh.
+20. Pastikan game terkait materi, tidak menyalin persis soal Cek Pemahaman/Evaluasi, skor game terpisah dari nilai akhir, dan game tidak menjadi syarat unlock Evaluasi.
+21. Jika Game = Tidak Ada, pastikan menu/aset/state/skor/kode game tidak muncul.
 
-TAHAP 5 — UJI TEKNIS & PERFORMA:
-17. Periksa HTML/CSS/JavaScript untuk syntax error, selector/ID ganda yang bermasalah, variabel tidak terpakai yang kritis, listener berulang, dan potensi memory leak sederhana.
-18. Pastikan aplikasi tetap dapat dijalankan setelah refresh dan aset/path relatif cocok untuk deployment.
-19. Optimalkan hanya jika perlu: ukuran gambar, lazy loading, animasi, DOM berlebihan, dan operasi yang menghambat perangkat siswa.
-20. Jangan menambah library/dependency baru kecuali benar-benar dibutuhkan dan dijelaskan alasannya.
+TAHAP 6 — UJI CANVA SHEET:
+22. Jika Canva Sheet = Ya, uji validasi Nama/Kelas, pengiriman minimal Nama, Kelas, Nilai, Kategori, Bagian Perlu Penguatan, Refleksi Siswa, status mengirim/berhasil/gagal, dan retry. Pastikan tidak ada field inti yang kosong akibat salah mapping.
+23. Jika Canva Sheet = Tidak, pastikan tidak ada endpoint/form/status sinkronisasi yang tersisa.
 
-TAHAP 6 — LAPORAN & PERBAIKAN:
-21. Tampilkan tabel temuan: No | Area | Skenario Uji | Hasil | Masalah | Tingkat Dampak | Perbaikan.
-22. Klasifikasikan masalah: Kritis / Tinggi / Sedang / Rendah. Jangan melebih-lebihkan temuan kosmetik.
-23. Perbaiki seluruh masalah Kritis dan Tinggi, serta Sedang yang dapat diperbaiki tanpa mengubah konsep proyek.
-24. Setelah perbaikan, lakukan REGRESSION TEST pada fitur terkait dan ubah status menjadi Lulus/Gagal.
-25. Tampilkan ringkasan akhir: jumlah uji, jumlah lulus, jumlah diperbaiki, sisa masalah, dan checklist "Siap Digunakan".
+TAHAP 7 — UJI RESPONSIVE, UX, AKSESIBILITAS, KONTEN, DAN ASET:
+24. Uji minimal HP kecil, HP besar, tablet, laptop, desktop, dan IFP/layar sentuh.
+25. Pastikan tidak ada horizontal scroll tidak perlu, teks terpotong, elemen keluar layar, tombol terlalu kecil, panel menutupi konten, atau navigasi hilang.
+26. Pastikan fokus keyboard terlihat, kontras memadai, target klik cukup besar, dan reduced motion tidak merusak fungsi bila relevan.
+27. Periksa akurasi materi, istilah, contoh, gambar, diagram, apersepsi, pertanyaan pemantik, alasan pentingnya materi, serta kesesuaian aktivitas dengan tujuan pembelajaran.
+28. Pastikan aset WebP tampil tajam, proporsi benar, tidak tertukar, dan fallback aman. Pastikan tidak ada placeholder/gibberish/data dummy/kredensial rahasia di produksi.
 
-TAHAP 7 — PILIHAN KONVERSI DEPLOYMENT (WAJIB DITAWARKAN DI AKHIR):
+TAHAP 8 — UJI TEKNIS & PERFORMA:
+29. Periksa HTML/CSS/JavaScript untuk syntax error, ID/selector konflik, fungsi undefined, listener ganda, state bocor, asset path rusak, request gagal tanpa penanganan, dan potensi memory leak sederhana.
+30. Uji refresh/reload sesuai batas desain sesi dan pastikan aplikasi tetap dapat dijalankan untuk deployment.
+31. Optimalkan hanya jika perlu tanpa menambah dependency baru yang tidak dibutuhkan.
+
+TAHAP 9 — LAPORAN, PERBAIKAN, REGRESSION:
+32. Tampilkan tabel temuan: No | Area | Skenario Uji | Hasil | Masalah | Tingkat Dampak | Perbaikan.
+33. Klasifikasikan Kritis / Tinggi / Sedang / Rendah secara proporsional.
+34. Perbaiki seluruh masalah Kritis dan Tinggi serta Sedang yang aman diperbaiki tanpa mengubah konsep proyek.
+35. Lakukan regression test pada fitur terkait sampai status Lulus/Gagal jelas.
+36. Tampilkan ringkasan akhir: jumlah uji, lulus, diperbaiki, sisa masalah, dan checklist Siap Digunakan.
+
+Hanya nyatakan SIAP DIGUNAKAN jika logika akses, Cek Pemahaman, Refleksi, Evaluasi/Feedback, Penguatan, Game kondisional, Canva Sheet kondisional, responsivitas, dan fungsi utama semuanya sesuai konfigurasi proyek.
+
+TAHAP 10 — PILIHAN KONVERSI DEPLOYMENT (WAJIB DITAWARKAN DI AKHIR):
 Setelah Final Check selesai, JANGAN langsung mengonversi sebelum saya memilih. Tawarkan dua pilihan berikut:
 
 A. GITHUB — SINGLE FILE
@@ -2695,7 +2784,7 @@ A. GITHUB — SINGLE FILE
 
 B. GITHUB + GOOGLE APPS SCRIPT + GOOGLE SHEETS
 - Frontend siap GitHub Pages, backend Google Apps Script sebagai Web App/API, dan Google Sheets sebagai database/rekap.
-- Gunakan opsi ini jika perlu menyimpan hasil evaluasi siswa, absensi/identitas, leaderboard, progress, log aktivitas, atau data lain secara terpusat.
+- Gunakan opsi ini jika perlu menyimpan hasil evaluasi siswa, identitas, Bagian Perlu Penguatan, Refleksi Siswa, progress, log aktivitas, atau data lain secara terpusat.
 - Susun struktur Sheet, endpoint Apps Script, validasi payload, penanganan error/CORS sesuai kebutuhan, dan jangan menaruh secret sensitif di frontend.
 
 Akhiri dengan pertanyaan singkat:
@@ -3762,42 +3851,58 @@ Kurikulum: [Kurikulum Merdeka/lainnya]
 Perangkat: [HP/laptop/IFP]
 Estimasi waktu penggunaan: [1 JP/lebih]
 Bahasa Konten: [Bahasa Indonesia saja / Bahasa Indonesia + Inggris (mapel Bahasa Inggris) / Bahasa Indonesia + Arab untuk ayat Al-Qur'an (mapel PAI/Tahfiz/Bahasa Arab)]
-Tautkan Canva Sheet untuk mencatat hasil evaluasi: [Ya / Tidak]
-Akses menu: [Bertahap — menu berikutnya terbuka setelah tahap sebelumnya selesai / Bebas — semua menu dapat dipilih dari menu utama]
+Tautkan Canva Sheet untuk mencatat hasil belajar: [Ya / Tidak]
+Akses menu: [Berurutan — siswa wajib mengikuti urutan materi / Evaluasi Terkunci — materi boleh diakses tidak berurutan tetapi Evaluasi baru terbuka setelah seluruh materi wajib tuntas / Bebas — semua menu termasuk Evaluasi dapat dipilih sejak awal]
+Cek Pemahaman Setelah Materi: [Ya / Tidak]
+Feedback Evaluasi Akhir: [Konstruktif — feedback benar dan salah / Tanpa Feedback — penilaian mutlak tanpa benar-salah/pembahasan selama evaluasi]
+Game Pembelajaran: [Ada / Tidak Ada]
+Jenis Game jika Ada: [Spin Game / Flip Card / Make a Match / Quiz Challenge / Susun Urutan / Drag & Drop / Tebak Gambar / True–False Challenge / Memory Game / Disesuaikan oleh AI]
+Jumlah Game jika Ada: [1 / 2 / Disesuaikan oleh AI]
 
-MPI wajib memuat menu berikut (jangan dikurangi):
+MPI wajib memuat 6 menu inti berikut:
+1. Halaman Pembuka — sapaan; input Nama dan Kelas wajib jika Canva Sheet = Ya, boleh opsional jika Tidak
+2. Tujuan Pembelajaran — jelas dan terukur
+3. Materi Pembelajaran — mendalam dan disajikan bertahap
+4. Pembelajaran/Submateri — materi dipecah per sub-topik dengan navigasi maju/mundur
+5. Refleksi Pembelajaran — minimal apa yang sudah dipahami, bagian yang masih sulit/membingungkan, dan rencana agar lebih paham; bentuk disesuaikan jenjang
+6. Evaluasi Akhir — variasi bentuk soal, bukan hanya pilihan ganda
 
-1. Halaman Pembuka — sapaan; input Nama dan Kelas wajib jika Canva Sheet = Ya, dan boleh opsional jika Canva Sheet = Tidak
-2. Tujuan Pembelajaran — ditulis jelas dan terukur
-3. Materi Pembelajaran — disajikan bertahap, bukan satu halaman penuh teks
-4. Pembelajaran Bertahap — materi dipecah per sub-topik dengan navigasi maju/mundur
-5. Evaluasi (Kuis) — variasi bentuk soal, bukan hanya pilihan ganda
-6. Simulasi/Games (opsional) — elemen interaktif ringan untuk memperkuat pemahaman konsep
+Menu opsional:
+7. Game Pembelajaran — hanya jika Game = Ada; berfungsi sebagai pengayaan/latihan, bukan syarat ketuntasan dan bukan bagian Nilai Evaluasi Akhir.
 
-Ketentuan Integrasi & Navigasi:
-- Jika Canva Sheet = Ya, sertakan alur pencatatan Nama, Kelas, nilai/hasil evaluasi, dan status pengiriman data ke Canva Sheet.
-- Jika Canva Sheet = Tidak, jangan memaksakan integrasi spreadsheet; hasil cukup dikelola di dalam MPI sesuai kebutuhan.
-- Jika Akses menu = Bertahap, jelaskan aturan progres/unlock agar siswa mengikuti urutan pembelajaran.
-- Jika Akses menu = Bebas, semua menu utama dapat dipilih langsung tanpa harus menyelesaikan menu sebelumnya.
+KETENTUAN INTEGRASI, NAVIGASI, DAN PEDAGOGI:
+- Canva Sheet = Ya: catat minimal Nama, Kelas, Nilai, Kategori Hasil, Bagian Perlu Penguatan, Refleksi Siswa, dan status pengiriman. Jika Tidak: jangan buat integrasi spreadsheet.
+- Akses Berurutan: tahap berikutnya terkunci sampai tahap sebelumnya tuntas. Jika Cek Pemahaman = Ya, materi dianggap tuntas setelah cek pemahaman dijawab benar.
+- Akses Evaluasi Terkunci: materi boleh dibuka tidak berurutan, hanya Evaluasi yang terkunci. Jika Cek Pemahaman = Tidak, Evaluasi terbuka setelah semua materi wajib pernah diakses; jika Ya, Evaluasi terbuka setelah semua materi wajib lulus cek pemahaman.
+- Akses Bebas: semua menu termasuk Evaluasi aktif sejak awal; Cek Pemahaman jika aktif tidak boleh mengunci menu lain.
+- Cek Pemahaman = Ya: setelah tiap materi/submateri utama berikan pertanyaan formatif. Jika salah, beri umpan balik konstruktif, wajibkan siswa kembali membaca materi terkait, dan baru izinkan retry setelah materi dibuka/dipelajari ulang. Cek ini tidak memengaruhi Nilai Evaluasi Akhir. Jika Tidak: jangan buat checkpoint wajib.
+- Feedback Evaluasi = Konstruktif: tampilkan feedback bermakna untuk jawaban benar dan salah. Tanpa Feedback: jangan tampilkan benar/salah/pembahasan/petunjuk selama evaluasi; tetap hitung skor dan penguatan secara internal.
+- Bagian Perlu Penguatan harus berasal dari soal evaluasi yang salah dan metadata submateri/indikator, bukan tebakan umum.
+- Game = Ada: konten terkait materi, feedback langsung, tidak menyalin persis soal cek/evaluasi, skor game terpisah dari nilai akhir, dan tidak menjadi syarat membuka Evaluasi.
+- Jenis Game = Disesuaikan oleh AI: AI memilih berdasarkan tujuan, karakter materi, jenjang, dan interaksi pedagogis. Contoh: proses/kronologi → Susun Urutan; pasangan konsep/fungsi → Make a Match/Flip Card; klasifikasi → Drag & Drop; visual → Tebak Gambar; latihan umum → Quiz Challenge/Spin.
+- Game = Tidak Ada: jangan buat menu/aset/state/skor game.
 
 Ketentuan Bahasa:
-- Teks navigasi, instruksi, dan antarmuka (menu, tombol, label) WAJIB Bahasa Indonesia agar mudah dipahami semua siswa.
-- Materi/konten mengikuti Bahasa Konten di atas: gunakan Bahasa Inggris untuk istilah/materi jika mapel Bahasa Inggris; gunakan teks Arab (font Arab yang jelas) untuk ayat Al-Qur'an/hadits/materi Bahasa Arab, disertai terjemahan Bahasa Indonesia di sampingnya.
-- Jangan mencampur bahasa dalam satu kalimat kecuali memang bagian dari materi (misalnya istilah asing yang dicetak miring).
+- Navigasi, instruksi, dan antarmuka WAJIB Bahasa Indonesia.
+- Materi/konten mengikuti Bahasa Konten di atas; teks Arab harus memakai font jelas, RTL yang benar, dan terjemahan Bahasa Indonesia.
+- Jangan mencampur bahasa dalam satu kalimat kecuali memang bagian materi.
 
-Buatkan 3 ide MPI yang berbeda untuk materi ini. Ketiga ide harus punya TEMA TAMPILAN yang berbeda satu sama lain (misalnya: tema petualangan/eksplorasi, tema laboratorium/sains, tema papan permainan, tema luar angkasa, tema kerajaan, dst — sesuaikan dengan mapel dan jenjang [SD/SMP/SMA]) supaya guru bisa membandingkan dan memilih.
+Buatkan 3 ide MPI yang berbeda untuk materi ini. Ketiganya harus punya TEMA TAMPILAN berbeda agar guru dapat membandingkan.
 
-Untuk SETIAP ide (total 3 ide), berikan dalam format:
-
+Untuk SETIAP ide, berikan:
 1. Judul MPI
-2. Tema Tampilan — nama tema, palet warna utama (3-4 warna + alasan pemilihan), gaya ikon/ilustrasi, kesan/mood visual yang ingin ditimbulkan
-3. Peta Menu — daftar semua halaman/menu sesuai daftar wajib di atas
-4. Ringkasan Konten per Menu — 2-3 kalimat isi tiap menu
-5. Ide Elemen Interaktif — minimal 3 elemen berbeda (drag-drop, simulasi klik, animasi bertahap, dsb) yang cocok untuk materi ini dan sesuai tema tampilan
-6. Pengaturan Canva Sheet & Navigasi — jelaskan penerapan pilihan Canva Sheet dan mode akses menu pada ide tersebut
-7. Catatan Bahasa Konten — jelaskan bagian mana (jika ada) yang akan ditampilkan dalam Bahasa Inggris/Arab sesuai mapel
+2. Tema Tampilan — nama tema, palet 3–4 warna + alasan, gaya ikon/ilustrasi, mood
+3. Peta Menu — 6 menu inti + Game hanya jika dipilih
+4. Ringkasan Konten per Menu
+5. Ide Elemen Interaktif — minimal 3
+6. Rencana Cek Pemahaman — hanya jika aktif, termasuk alur salah → baca ulang → retry
+7. Rencana Refleksi Siswa
+8. Rencana Evaluasi — variasi soal, mode feedback, serta metadata submateri/indikator untuk penguatan
+9. Rencana Game — jika aktif; jenis, mekanisme, alasan pedagogis, posisi; jika Disesuaikan oleh AI sebutkan pilihan AI dan alasannya
+10. Pengaturan Canva Sheet & Navigasi — jelaskan penerapan semua pilihan
+11. Catatan Bahasa Konten
 
-Setelah 3 ide ditampilkan, beri rekomendasi singkat: ide mana yang paling mudah dieksekusi di Canva Code dan alasannya.
+Setelah 3 ide ditampilkan, beri rekomendasi singkat ide yang paling mudah dieksekusi di Canva Code dan alasannya.
 
 [Tempel Modul D1 di sini jika ingin melampirkan silabus/modul ajar/buku materi]
 
@@ -3816,56 +3921,53 @@ STANDAR MUATAN MATERI MPI — WAJIB:
 
 Kembangkan ide tersebut menjadi rancangan MPI lengkap yang siap dibuat di Canva Code.
 
-WAJIB PERTAHANKAN keputusan dari Prompt 0, jangan diubah:
-- Tautkan Canva Sheet: [Ya / Tidak — isi sesuai pilihan di Prompt 0]
-- Akses menu: [Bertahap / Bebas — isi sesuai pilihan di Prompt 0]
+WAJIB PERTAHANKAN seluruh keputusan dari Prompt 0, jangan diubah:
+- Tautkan Canva Sheet: [Ya / Tidak]
+- Akses menu: [Berurutan / Evaluasi Terkunci / Bebas]
+- Cek Pemahaman Setelah Materi: [Ya / Tidak]
+- Feedback Evaluasi Akhir: [Konstruktif / Tanpa Feedback]
+- Game Pembelajaran: [Ada / Tidak Ada]
+- Jenis & Jumlah Game: [sesuai Prompt 0]
 
 Data MPI:
 - Mata pelajaran: [isi]
 - Kelas: [isi]
 - Materi: [isi, boleh mengacu ke lampiran]
-- Tujuan Pembelajaran: [isi 2-3 tujuan terukur]
+- Tujuan Pembelajaran: [isi 2–3 tujuan terukur]
 - Perangkat: [HP/laptop/IFP]
 - Bahasa Konten: [Bahasa Indonesia saja / + Bahasa Inggris / + Bahasa Arab untuk ayat Al-Qur'an]
 
 ATURAN KONSISTENSI DENGAN PROMPT 0:
-1. Jika Canva Sheet = Ya:
-   - Nama dan Kelas WAJIB diisi pada Halaman Pembuka sebelum siswa melanjutkan.
-   - Setelah Evaluasi selesai, rancang pengiriman minimal Nama, Kelas, Nilai, Kategori Hasil, dan status pengiriman ke Canva Sheet.
-2. Jika Canva Sheet = Tidak:
-   - Jangan membuat integrasi Canva Sheet/spreadsheet atau form pengiriman nilai.
-   - Nama dan Kelas boleh opsional sesuai kebutuhan MPI.
-   - Nilai cukup ditampilkan/dikelola di dalam sesi MPI.
-3. Jika Akses menu = Bertahap:
-   - Menu berikutnya hanya terbuka setelah tahap sebelumnya selesai.
-   - Tampilkan status menu: terkunci / terbuka / selesai.
-   - Siswa boleh kembali ke tahap yang sudah terbuka, tetapi tidak boleh melompati tahap yang masih terkunci.
-4. Jika Akses menu = Bebas:
-   - Semua menu utama langsung aktif dan dapat dipilih sejak awal.
-   - Progress boleh menjadi penanda, tetapi tidak mengunci menu.
+1. Canva Sheet = Ya: Nama/Kelas wajib; setelah Evaluasi, siapkan pengiriman minimal Nama, Kelas, Nilai, Kategori Hasil, Bagian Perlu Penguatan, Refleksi Siswa, status pengiriman. Jika Tidak: jangan buat integrasi Sheet.
+2. Akses Berurutan: menu berikutnya hanya terbuka setelah tahap sebelumnya tuntas; tampilkan terkunci/terbuka/sedang dipelajari/perlu ulang jika relevan/selesai. Jika Cek Pemahaman = Ya, ketuntasan materi membutuhkan jawaban benar setelah proses reread bila sebelumnya salah.
+3. Akses Evaluasi Terkunci: semua materi aktif dan dapat dipilih tidak berurutan, tetapi Evaluasi terkunci. Cek Pemahaman Tidak → unlock setelah semua materi dikunjungi. Cek Pemahaman Ya → unlock setelah semua materi lulus cek.
+4. Akses Bebas: semua menu termasuk Evaluasi aktif sejak awal; progress tidak mengunci. Cek Pemahaman jika aktif tetap formatif.
+5. Cek Pemahaman = Ya: buat minimal satu pertanyaan representatif per submateri utama; salah → feedback konstruktif → kembali baca materi → baru retry. Tidak masuk nilai akhir.
+6. Refleksi wajib: tampung sudah dipahami, masih sulit/membingungkan, dan rencana perbaikan; bentuk menyesuaikan jenjang.
+7. Evaluasi: setiap soal wajib dipetakan ke submateri/topik dan indikator/tujuan untuk menentukan Bagian Perlu Penguatan.
+8. Feedback Evaluasi Konstruktif → feedback benar/salah. Tanpa Feedback → jangan bocorkan benar/salah/pembahasan selama pengerjaan.
+9. Game jika Ada → pengayaan, skor terpisah, tidak menjadi syarat unlock/nilai, tidak menyalin persis soal cek/evaluasi. Jika Tidak Ada → jangan rancang game.
 
 Buatkan rancangan dengan format:
+1. Judul & Identitas MPI
+2. Ringkasan seluruh keputusan Prompt 0 sebagai aturan tetap
+3. Gerbang Identitas & Pencatatan Hasil (kondisional Canva Sheet)
+4. Tema Tampilan Terpilih
+5. Peta Status & Logika Akses — state serta syarat transisi untuk mode yang dipilih
+6. Alur Halaman Lengkap — 6 menu inti + Game jika aktif; pecah materi menjadi sub-halaman
+7. Detail Tiap Sub-Materi — poin kunci, contoh/ilustrasi, penyajian singkat; teks Arab bila ada disertai transliterasi/terjemahan sesuai kebutuhan
+8. Database Cek Pemahaman — hanya jika aktif; submateri sumber, pertanyaan, pilihan jika ada, jawaban benar, feedback benar, feedback salah/petunjuk, dan aturan reread sebelum retry
+9. Rancangan Refleksi — komponen input dan cara menyimpan/menampilkan ringkasannya
+10. Database Soal Evaluasi — minimal [5/10] soal bervariasi; pertanyaan, pilihan jika ada, jawaban benar, submateri/topik, indikator/tujuan, feedback benar/salah hanya jika mode Konstruktif
+11. Logika Bagian Perlu Penguatan — kelompokkan soal salah berdasarkan submateri/indikator; jangan membuat penguatan tanpa bukti jawaban
+12. Rancangan Game — hanya jika aktif; jenis, alasan pedagogis, mekanisme, feedback, skor motivasional, posisi dalam alur
+13. Sistem Navigasi — menu utama/lanjut/kembali fixed atau sticky; jika konten panjang, area konten yang scroll; jelaskan perilaku mode akses yang dipilih
+14. Integrasi Canva Sheet — jika Ya: payload, waktu kirim, status, retry; jika Tidak: tegas tidak menggunakan Sheet
+15. Halaman Hasil — Nilai, Kategori, Bagian Perlu Penguatan, Saran Penguatan singkat, Refleksi Siswa; pembahasan sesuai mode feedback
+16. Arahan Visual Canva — warna, maskot jika ada, tombol, ikon, font Arab jika relevan
+17. Checklist Kualitas — semua opsi dipatuhi, reread gate benar bila aktif, refleksi tersimpan, penguatan berbasis data, feedback sesuai mode, game kondisional, navigasi mudah, siap dibuat Canva Code
 
-1. Judul & Identitas MPI (mapel, kelas, materi)
-2. Ringkasan Keputusan Prompt 0 — tuliskan pilihan Canva Sheet dan mode akses menu yang dipakai, lalu jadikan sebagai aturan tetap sepanjang rancangan
-3. Gerbang Identitas & Pencatatan Nilai (kondisional):
-   - Jika Canva Sheet = Ya: Nama/Kelas wajib, validasi sebelum lanjut, serta alur pengiriman hasil evaluasi ke Canva Sheet.
-   - Jika Canva Sheet = Tidak: identitas boleh opsional dan tidak ada pengiriman ke Sheet.
-4. Tema Tampilan Terpilih — ringkas ulang nama tema, palet warna, gaya ikon dari Prompt 0
-5. Alur Halaman Lengkap — sesuai 6 menu wajib; pecah tiap menu jadi sub-halaman jika materi panjang; beri keterangan status akses tiap menu jika mode Bertahap
-6. Detail Tiap Sub-Materi — poin kunci, contoh/ilustrasi, cara penyajian (teks singkat + gambar/animasi, bukan paragraf panjang); jika ada teks Arab (ayat/istilah), sertakan transliterasi dan terjemahan Indonesia di bagian yang sama
-7. Rancangan Elemen Interaktif — apa yang dilakukan pengguna, apa yang terjadi setelah berinteraksi, bagaimana ini memperkuat pemahaman konsep
-8. Database Soal Evaluasi — minimal [5/10] soal, variasi bentuk (pilihan ganda, benar/salah, menjodohkan, mengurutkan, isian singkat); tiap soal berisi pertanyaan, pilihan (jika ada), jawaban benar, feedback benar, feedback salah; jika soal memuat teks Arab/Inggris, tulis dengan jelas bahasa mana yang dipakai
-9. Sistem Navigasi — WAJIB dijelaskan sebagai berikut:
-   - Tombol menu utama, lanjut, dan kembali diletakkan pada posisi TETAP (fixed/sticky) di layar sehingga selalu terlihat dan bisa dijangkau tanpa perlu scroll dulu.
-   - Jika isi satu halaman cukup panjang, hanya AREA KONTEN yang boleh scroll secara internal; tombol navigasi tidak boleh ikut bergeser bersama konten.
-   - Jika mode Bertahap, jelaskan aturan unlock dan kapan tombol/menu berikutnya aktif.
-   - Jika mode Bebas, semua menu aktif sejak awal dan tidak ada lock/unlock.
-   - Ukuran tombol cukup besar untuk layar sentuh IFP.
-10. Arahan Visual Canva — tema warna, karakter/maskot (jika ada), gaya tombol, ikon per menu, font Arab (jika ada teks Arab) yang jelas dan mudah dibaca
-11. Checklist Kualitas MPI — semua 6 menu wajib tersedia; pilihan Canva Sheet dipatuhi; pilihan akses menu dipatuhi; materi disajikan bertahap; evaluasi bervariasi & sesuai materi; navigasi mudah dipahami dan selalu mudah dijangkau; tampilan modern; bahasa konten sesuai mapel; siap dibuat di Canva Code
-
-Pastikan hasilnya rapi, mudah dipahami guru pemula, dan jangan mengubah pilihan Canva Sheet atau mode akses menu dari Prompt 0.
+Pastikan hasil rapi, mudah dipahami guru pemula, dan jangan mengubah keputusan Prompt 0.
 
 [Tempel Modul D1 di sini jika belum dilampirkan di Prompt 0]
 
@@ -3884,62 +3986,75 @@ STANDAR MUATAN MATERI MPI — WAJIB:
 
 Tugas: buat prompt untuk membangun MPI dalam satu file HTML lengkap (HTML, CSS, JavaScript).
 
-WAJIB mempertahankan keputusan dari Prompt 0 dan Prompt 1:
-- Tautkan Canva Sheet: [Ya / Tidak — sesuai pilihan sebelumnya]
-- Akses menu: [Bertahap / Bebas — sesuai pilihan sebelumnya]
+WAJIB mempertahankan seluruh keputusan dari Prompt 0 dan Prompt 1:
+- Tautkan Canva Sheet: [Ya / Tidak]
+- Akses menu: [Berurutan / Evaluasi Terkunci / Bebas]
+- Cek Pemahaman Setelah Materi: [Ya / Tidak]
+- Feedback Evaluasi Akhir: [Konstruktif / Tanpa Feedback]
+- Game Pembelajaran: [Ada / Tidak Ada]
+- Jenis & Jumlah Game: [sesuai pilihan sebelumnya]
 
-Jangan mengubah dua pilihan tersebut saat membuat kode.
+Jangan mengubah pilihan tersebut saat membuat kode.
 
 Ketentuan umum:
 1. Harus langsung bisa dijalankan di Canva Code.
 2. Jangan gunakan library atau database eksternal buatan sendiri.
-3. Bahasa teks navigasi/instruksi/antarmuka (menu, tombol, label sistem): Bahasa Indonesia. Bahasa materi/konten mengikuti mata pelajaran — gunakan Bahasa Inggris untuk materi Bahasa Inggris, dan sertakan teks Arab (font Arab yang jelas, arah teks kanan-ke-kiri/RTL yang benar) untuk ayat Al-Qur'an/hadits/materi Bahasa Arab, selalu disertai terjemahan Bahasa Indonesia.
-4. Tampilan responsif HP, laptop, dan IFP. Konten utama dirancang ringkas; jika materi panjang, buat AREA KONTEN saja yang scroll secara internal, bukan seluruh halaman.
-5. Tombol navigasi (menu utama, lanjut, kembali) HARUS berada pada posisi fixed/sticky dengan z-index tinggi sehingga selalu terlihat dan bisa diklik tanpa perlu scroll dulu. Beri ruang pada area konten agar tidak tertutup bar navigasi.
-6. Tombol besar, jelas, dan mudah diklik/disentuh di layar IFP.
-7. Kode rapi dan diberi komentar singkat.
-8. Gunakan satu layar dinamis (single page app), bukan banyak file terpisah.
+3. Bahasa navigasi/instruksi/antarmuka: Bahasa Indonesia. Bahasa materi mengikuti mapel; Bahasa Inggris untuk mapel Inggris; teks Arab menggunakan font jelas, RTL benar, dan terjemahan Indonesia.
+4. Responsif HP, laptop, IFP. Jika konten panjang, buat AREA KONTEN yang scroll internal, bukan seluruh halaman.
+5. Tombol menu utama, lanjut, kembali HARUS fixed/sticky dengan z-index tinggi dan area konten tidak tertutup.
+6. Tombol besar dan touch-friendly.
+7. Kode rapi dengan komentar singkat.
+8. Single page app.
+
+STATE & DATA — WAJIB:
+9. Simpan status kunjungan/tuntas setiap materi/submateri.
+10. Jika Cek Pemahaman = Ya, simpan state belum mencoba / benar / salah-perlu-baca-ulang / siap-retry; setelah salah, retry baru aktif setelah siswa membuka kembali materi terkait.
+11. Simpan Refleksi Siswa minimal: sudah dipahami, masih sulit/membingungkan, rencana agar lebih paham.
+12. Setiap soal Evaluasi memiliki metadata submateri/topik dan indikator/tujuan untuk analisis penguatan.
 
 ATURAN CANVA SHEET — KONDISIONAL:
-9. Jika Canva Sheet = Ya:
-   - Sebelum siswa mengakses pembelajaran, wajib mengisi Nama dan Kelas; validasi tidak boleh kosong.
-   - Simpan Nama dan Kelas di variabel sepanjang sesi.
-   - Setelah evaluasi selesai, kirim Nama, Kelas, Nilai, dan Kategori Hasil melalui mekanisme form Canva Sheet yang dipakai pada rancangan; tampilkan status mengirim/berhasil/gagal dan opsi coba lagi jika diperlukan.
-10. Jika Canva Sheet = Tidak:
-   - Jangan membuat form pengiriman nilai, integrasi spreadsheet, endpoint, atau status sinkronisasi.
-   - Nama dan Kelas boleh opsional sesuai rancangan.
-   - Hasil evaluasi cukup tampil di halaman hasil dan dikelola selama sesi berjalan.
+13. Jika Ya: Nama/Kelas wajib; setelah hasil lengkap tersedia, kirim Nama, Kelas, Nilai, Kategori Hasil, Bagian Perlu Penguatan, Refleksi Siswa; tampilkan mengirim/berhasil/gagal/coba lagi.
+14. Jika Tidak: jangan buat form/endpoint/status sinkronisasi; hasil dikelola dalam sesi.
 
 ATURAN AKSES MENU — KONDISIONAL:
-11. Jika Akses menu = Bertahap:
-   - Hanya Halaman Pembuka yang aktif saat mulai.
-   - Menu/tahap berikutnya terbuka setelah syarat tahap sebelumnya selesai.
-   - Tampilkan state terkunci / terbuka / selesai secara visual.
-   - Siswa boleh kembali ke tahap yang sudah terbuka, tetapi tidak boleh melompati tahap terkunci.
-   - Progress bar/indikator harus mencerminkan logika unlock sebenarnya.
-12. Jika Akses menu = Bebas:
-   - Semua menu utama aktif sejak awal.
-   - Jangan menggunakan logika lock/unlock.
-   - Progress hanya sebagai penanda halaman yang sudah dipelajari, bukan pengunci akses.
+15. Berurutan: hanya tahap awal aktif; tahap berikutnya unlock berurutan. Jika Cek Pemahaman aktif, jawaban salah menonaktifkan lanjut, mengarahkan baca ulang, dan jawaban benar setelah retry menandai materi tuntas.
+16. Evaluasi Terkunci: semua materi aktif tidak berurutan; Evaluasi terkunci. Cek Tidak → unlock setelah semua materi pernah diakses. Cek Ya → unlock setelah semua materi lulus cek.
+17. Bebas: semua menu termasuk Evaluasi aktif sejak awal; jangan jalankan lock/unlock. Cek Pemahaman jika aktif tidak boleh mengunci menu lain.
 
-Struktur MPI: [ikuti Peta Menu dari rancangan — Pembuka, Tujuan Pembelajaran, Materi Bertahap, Evaluasi, Simulasi/Games]
+CEK PEMAHAMAN:
+18. Jika aktif, pertanyaan formatif muncul setelah materi/submateri; feedback benar menguatkan konsep, feedback salah memberi petunjuk konstruktif tanpa langsung membocorkan jawaban lengkap; wajib reread sebelum retry.
+19. Cek Pemahaman tidak memengaruhi Nilai Evaluasi Akhir.
+20. Jika tidak aktif, jangan sisakan checkpoint/state retry.
 
-Fitur wajib:
-1. Menu utama selalu bisa diakses kembali; pada mode Bertahap, menu yang belum terbuka tetap tampil terkunci.
-2. Progress/penanda halaman yang sudah dipelajari sesuai mode akses yang dipilih.
-3. Skor otomatis untuk evaluasi + kategori hasil akhir.
-4. Feedback benar/salah yang menjelaskan alasan, bukan sekadar "benar/salah".
-5. Tombol ulang evaluasi.
-6. Jika ada teks Arab: gunakan font yang mendukung huruf Arab dan pastikan arah teks benar (RTL) tanpa merusak tata letak tombol.
-7. Jika Canva Sheet = Ya, pastikan nilai benar-benar dikirim sesuai mekanisme form pada rancangan. Jika Canva Sheet = Tidak, pastikan tidak ada komponen Canva Sheet tersisa di kode.
+REFLEKSI:
+21. Sediakan menu Refleksi yang sesuai jenjang, simpan datanya, dan tampilkan ringkasan pada halaman hasil.
+22. Secara default Refleksi tidak menjadi syarat unlock Evaluasi; syarat Evaluasi mengikuti mode akses dan status materi/cek pemahaman.
 
-Desain visual: modern, bersih, warna nyaman untuk ditampilkan lama di IFP, sesuai arahan visual dan tema tampilan pada rancangan sebelumnya.
+EVALUASI & PENGUATAN:
+23. Skor otomatis + kategori hasil.
+24. Feedback Konstruktif: tampilkan feedback benar/salah yang menjelaskan alasan. Tanpa Feedback: selama evaluasi jangan tampilkan benar/salah, pembahasan, petunjuk, atau jawaban benar.
+25. Bagian Perlu Penguatan dihitung dari soal salah dengan mengelompokkan metadata submateri/indikator. Riwayat cek pemahaman boleh menjadi informasi pendukung tetapi tidak mengubah nilai.
+26. Halaman hasil minimal: Nilai, Kategori, Bagian Perlu Penguatan, Saran Penguatan singkat, Refleksi Siswa.
+27. Tombol ulang evaluasi sesuai rancangan; reset harus membersihkan state evaluasi tanpa merusak identitas/refleksi kecuali memang memilih mulai sesi baru.
 
-Sebelum output final, cek ulang:
-- Apakah pilihan Canva Sheet sama dengan Prompt 0/1 dan diterapkan secara konsisten?
-- Apakah mode akses menu sama dengan Prompt 0/1 dan logikanya benar-benar bekerja?
-- Apakah tombol navigasi selalu terlihat dan bisa diklik di setiap halaman?
-- Apakah teks Arab (jika ada) tampil dengan arah yang benar dan tidak terpotong?
+GAME — KONDISIONAL:
+28. Jika Ada, implementasikan jenis/jumlah yang dipilih. Game terkait materi, memberi feedback latihan, skor game terpisah, tidak menjadi syarat unlock, tidak memengaruhi nilai, dan tidak menyalin persis soal cek/evaluasi.
+29. Jika Jenis = Disesuaikan oleh AI, gunakan keputusan jenis game dari rancangan, bukan memilih ulang secara acak saat coding.
+30. Jika Tidak Ada, jangan buat menu/state/aset/skor game.
+
+Struktur MPI: [ikuti Peta Menu — 6 menu inti: Pembuka, Tujuan, Materi, Pembelajaran/Submateri, Refleksi, Evaluasi; Game hanya jika aktif]
+
+Desain visual: modern, bersih, nyaman lama di IFP, sesuai tema rancangan.
+
+SEBELUM OUTPUT FINAL, WAJIB UJI:
+- Mode akses yang dipilih bekerja sesuai aturan.
+- Jika Cek aktif: salah → lanjut terblokir sesuai mode → baca ulang → retry → benar → tuntas; Bebas tidak ikut terkunci.
+- Feedback Evaluasi sesuai pilihan dan mode Tanpa Feedback tidak membocorkan hasil per soal.
+- Refleksi tersimpan dan muncul di hasil/payload.
+- Penguatan berasal dari metadata soal salah.
+- Game sesuai konfigurasi, skor terpisah, tidak memengaruhi unlock/nilai; jika Game Tidak Ada tidak ada sisa kode.
+- Canva Sheet Ya mengirim semua field inti; Tidak benar-benar tanpa integrasi.
+- Tombol navigasi selalu terlihat; responsif; teks Arab bila ada benar dan tidak terpotong.
 
 Output: Prompt siap copy.
 
@@ -3955,20 +4070,22 @@ STANDAR MUATAN MATERI MPI — WAJIB:
 7. Kedalaman materi tetap disesuaikan dengan jenjang; jangan mengorbankan akurasi demi terlalu singkat. Jika konsep kompleks, pecah menjadi beberapa subbagian/kartu/layar yang mudah dipelajari.
 
 FINAL TESTING DI CANVA — WAJIB DILAKUKAN SEBELUM MENYATAKAN SELESAI:
-Setelah aplikasi/MPI/game/simulasi/lab maya selesai dibuat di Canva, JANGAN langsung menyatakan pekerjaan selesai. WAJIB uji hasil yang benar-benar sudah dibuat dan lakukan perbaikan bila ada masalah.
-1. Uji SEMUA tombol satu per satu: tombol menu, Mulai, Lanjut, Kembali, Home, Reset, Submit/Kirim, navigasi, kontrol permainan/simulasi, serta tombol lain yang tersedia. Pastikan tidak ada tombol mati, salah tujuan, perlu diklik berulang, atau menghasilkan error.
-2. Uji SEMUA menu/halaman/scene dan seluruh fitur/interaksi dari awal sampai akhir. Pastikan alur bisa diselesaikan tanpa buntu dan state/progress/skor/data berubah sesuai rancangan.
-3. Uji input, form, slider, pilihan jawaban, drag-drop, kontrol gerak, timer, skor, evaluasi, simulasi, reset, dan fitur kondisional yang memang digunakan. Uji juga kondisi kosong, salah input, batas minimum/maksimum, dan penggunaan berulang.
-4. Periksa responsivitas nyata pada HP potret, HP landscape, laptop/desktop, dan IFP bila relevan. Tidak boleh ada horizontal scroll yang tidak diperlukan, elemen terpotong, tombol keluar layar, atau area sentuh terlalu kecil.
-5. Periksa seluruh teks: tidak boleh ada tulisan saling menumpuk, tertutup elemen lain, keluar dari kartu/panel, terpotong, terlalu kecil, atau memiliki kontras buruk.
-6. Periksa susunan layer/z-index: modal, dropdown, tooltip, menu, karakter, obstacle, kontrol, teks, tombol, dan panel harus berada pada layer yang benar; tidak boleh saling menutupi secara keliru.
-7. Periksa visual: tidak boleh ada gambar/ikon/shape pecah, blur berlebihan, posisi bergeser, rasio terdistorsi, elemen hilang, animasi patah, atau aset yang menutupi konten penting.
-8. Periksa layout dan spacing: alignment, margin, padding, grid, card, header/footer, dan jarak antarelemen harus konsisten dan rapi pada semua ukuran layar.
-9. Periksa console/runtime jika tersedia: tidak boleh ada error JavaScript yang mengganggu fungsi utama.
-10. Setelah menemukan masalah, PERBAIKI langsung lalu lakukan regression test pada fitur terkait sampai lulus. Jangan hanya melaporkan masalah tanpa memperbaikinya.
-11. Di akhir, tampilkan checklist singkat hasil uji dengan status LULUS/PERLU PERBAIKAN untuk: Tombol, Menu/Navigasi, Fitur Utama, Input/Interaksi, Responsivitas, Teks/Overlap, Layer/Z-index, Visual/Aset, dan Error Runtime.
-12. Hanya nyatakan "SIAP DIGUNAKAN" jika seluruh fungsi utama berjalan, tidak ada overlap teks/layer bermasalah, responsivitas terjaga, dan tidak ada visual kritis yang rusak.
-`
+Setelah aplikasi/MPI selesai dibuat di Canva, JANGAN langsung menyatakan pekerjaan selesai. WAJIB uji hasil yang benar-benar sudah dibuat dan lakukan perbaikan bila ada masalah.
+1. Uji SEMUA tombol satu per satu: menu, Mulai, Lanjut, Kembali, Home, Reset, Submit/Kirim, navigasi, kontrol game, dan tombol lain. Pastikan tidak ada tombol mati, salah tujuan, event ganda, perlu diklik berulang, atau error.
+2. Uji SEMUA menu/halaman dan seluruh fitur/interaksi dari awal sampai akhir. Pastikan alur dapat diselesaikan tanpa buntu dan state/progress/skor/data berubah sesuai rancangan.
+3. Uji mode akses yang DIPILIH: Berurutan harus mengunci sesuai urutan; Evaluasi Terkunci harus membebaskan urutan materi tetapi mengunci Evaluasi sesuai syarat; Bebas harus membuka semua menu termasuk Evaluasi sejak awal.
+4. Jika Cek Pemahaman aktif, uji jawaban salah → feedback konstruktif → lanjut terblokir sesuai mode → kembali membuka materi → retry aktif → jawaban benar → status tuntas. Pastikan siswa tidak dapat spam retry tanpa reread dan percobaan cek tidak mengubah Nilai Evaluasi Akhir. Jika fitur tidak aktif, pastikan tidak ada sisa checkpoint wajib.
+5. Uji Refleksi: input tersimpan selama sesi, dapat ditampilkan kembali, dan masuk ke halaman hasil serta payload Canva Sheet bila digunakan.
+6. Uji Evaluasi: skor, kategori, metadata submateri/indikator, reset/ulang, dan mode Feedback. Konstruktif harus memberi feedback benar/salah yang bermakna; Tanpa Feedback tidak boleh membocorkan benar/salah/pembahasan/petunjuk selama pengerjaan.
+7. Verifikasi Bagian Perlu Penguatan benar-benar berasal dari soal Evaluasi yang salah dan metadata submateri/indikator. Uji kondisi semua benar agar aplikasi tidak mengarang area lemah.
+8. Jika Game aktif, uji mekanisme sesuai jenis, feedback, reset/selesai, skor game terpisah, dan pastikan game tidak memengaruhi Nilai Evaluasi Akhir maupun syarat unlock Evaluasi. Jika Game Tidak Ada, pastikan tidak ada menu/state/skor game tersisa.
+9. Jika Canva Sheet = Ya, uji validasi Nama/Kelas dan pengiriman Nama, Kelas, Nilai, Kategori, Bagian Perlu Penguatan, Refleksi Siswa, status mengirim/berhasil/gagal, dan retry. Jika Tidak, pastikan tidak ada integrasi Sheet/endpoint/status sinkronisasi.
+10. Uji input, form, pilihan jawaban, drag-drop, timer, skor, dan fitur kondisional lain; termasuk kondisi kosong, salah input, batas minimum/maksimum, dan penggunaan berulang.
+11. Periksa responsivitas nyata pada HP potret, HP landscape, laptop/desktop, dan IFP. Tidak boleh ada horizontal scroll yang tidak diperlukan, elemen terpotong, tombol keluar layar, atau area sentuh terlalu kecil.
+12. Periksa seluruh teks: tidak menumpuk, tidak tertutup, tidak keluar kartu/panel, tidak terpotong, ukuran dan kontras memadai; teks Arab bila ada harus RTL dan terbaca benar.
+13. Periksa layer/z-index, visual/aset, layout, spacing, dan rasio gambar agar tidak ada modal/menu/karakter/kontrol yang saling menutupi secara keliru atau visual rusak.
+14. Periksa console/runtime jika tersedia: tidak boleh ada error JavaScript yang mengganggu fungsi utama, fungsi undefined, path aset rusak, atau request gagal tanpa penanganan.
+15. Setelah menemukan masalah, PERBAIKI langsung lalu lakukan regression test pada fitur terkait sampai lulus. Di akhir tampilkan checklist LULUS/PERLU PERBAIKAN untuk Tombol, Menu/Navigasi, Mode Akses, Cek Pemahaman, Refleksi, Evaluasi/Feedback, Penguatan, Game, Canva Sheet, Responsivitas, Teks/Overlap, Layer/Z-index, Visual/Aset, dan Error Runtime. Hanya nyatakan "SIAP DIGUNAKAN" jika seluruh fungsi utama sesuai konfigurasi dan tidak ada masalah kritis.`
       },
       {
         title: "Prompt 0 — Ideasi Game Sederhana",
@@ -5563,7 +5680,7 @@ Sekarang buatkan rancangan storyboard sesuai data dan aturan di atas.`
       {
         title: "Prompt LKPD",
         generatorCurlyOnly: true,
-        text: `Anda adalah seorang guru berpengalaman yang ahli menyusun LKPD (Lembar Kerja Peserta Didik) sesuai Kurikulum Merdeka, dengan struktur yang jelas, aktivitas yang bermakna, asesmen yang terukur, dan hasil yang langsung siap digunakan di kelas.
+        text: `Anda adalah seorang guru berpengalaman yang ahli menyusun LKPD (Lembar Kerja Peserta Didik) sesuai Kurikulum Merdeka, dengan struktur yang jelas, aktivitas yang bermakna, asesmen yang terukur, level kognitif yang dapat ditelusuri, dan hasil yang langsung siap digunakan di kelas.
 
 === INPUT DARI GURU ===
 1. Nama Sekolah              : {{nama_sekolah}}
@@ -5592,11 +5709,13 @@ CATATAN INPUT:
 - Jika rincian asesmen kosong, tentukan instrumen yang paling sesuai dengan TP dan aktivitas LKPD.
 - Jika jumlah halaman kosong, utamakan LKPD ringkas dan terbaca; target awal 1–2 halaman kecuali konten memang membutuhkan lebih.
 - Jika Mode Pengerjaan kosong, tentukan mode yang paling sesuai dengan aktivitas dan jelaskan asumsi singkat.
+- Format Output Akhir wajib ditentukan. Jika prompt ini dijalankan di luar generator dan format output masih kosong, jelaskan singkat perbedaan DOCX, PDF, dan Gambar per Halaman lalu minta guru memilih sebelum membuat keluaran final.
+- Untuk input lain yang kosong, buat asumsi wajar yang paling konsisten dengan TP, jenjang, waktu, dan konteks; sebutkan asumsi penting secara singkat di awal hasil agar mudah diverifikasi guru.
 
 =====================================================================
 KONFIGURASI ASESMEN LKPD
 =====================================================================
-LKPD harus memiliki hubungan yang jelas dengan Tujuan Pembelajaran. Penyusunan soal, tugas, aktivitas terukur, dan rubrik WAJIB melihat TP terlebih dahulu. Jangan membuat soal hanya karena sesuai materi tetapi tidak mengukur TP.
+LKPD harus memiliki hubungan yang jelas dengan Tujuan Pembelajaran. Penyusunan soal, tugas, aktivitas terukur, feedback, pedoman skor, dan rubrik WAJIB melihat TP terlebih dahulu. Jangan membuat soal hanya karena sesuai materi tetapi tidak mengukur TP.
 
 Jenis asesmen yang dapat digunakan:
 1. Asesmen Formatif Awal — opsional; bertujuan memetakan kemampuan/kesiapan awal sebelum aktivitas utama.
@@ -5606,63 +5725,79 @@ Jenis asesmen yang dapat digunakan:
 Untuk setiap jenis asesmen yang dipilih, ikuti konfigurasi guru:
 A. Kognitif
 - Tipe soal yang dapat dipilih: PG, PG Kompleks, Uraian, Isian Singkat, Menjodohkan, Mengurutkan, Benar-Salah, SJT.
-- Level dapat diatur dalam persentase LOTS, MOTS, HOTS, dan AKM/PISA. Jika guru mengisi persentase, total harus 100%. Jika kosong, tentukan proporsi berdasarkan TP, jenjang, dan kompleksitas aktivitas.
-- Soal AKM/PISA wajib menggunakan stimulus kontekstual/otentik yang relevan, bukan sekadar soal hafalan yang diberi label AKM.
+- Level dapat diatur dalam persentase LOTS, MOTS, HOTS, dan AKM/PISA. Jika guru mengisi persentase, total harus 100%. Jika kosong, tentukan proporsi berdasarkan TP, jenjang, kompleksitas aktivitas, dan alokasi waktu.
+- LOTS berfokus pada mengingat/memahami konsep dasar; MOTS pada menerapkan konsep; HOTS pada menganalisis, mengevaluasi, atau mencipta secara kontekstual.
+- Soal AKM/PISA wajib menggunakan stimulus kontekstual/otentik yang relevan, data/informasi yang cukup, dan tuntutan bernalar; jangan sekadar memberi label AKM/PISA pada soal hafalan.
+- Untuk SJT, buat skenario realistis yang relevan dengan topik/kehidupan siswa, pilihan tindakan yang masuk akal, serta pedoman penilaian atau alasan respons terbaik.
+- Beri nomor soal berurutan. Untuk setiap butir, cantumkan penanda TP/indikator yang diukur dan level kognitifnya agar guru dapat mengecek pemerataan dan keterlacakan asesmen.
+- Pada asesmen formatif, feedback harus konstruktif dan membantu siswa mengetahui konsep yang perlu diperbaiki tanpa sekadar menyatakan benar/salah.
 
 B. Non-Kognitif / Kinerja & Sikap
 - Teknik dapat berupa Unjuk Kerja/Praktik, Presentasi, Proyek, Produk, Portofolio, Observasi, Penilaian Diri, Penilaian Antarteman, atau teknik lain yang dijelaskan guru.
 - Keterampilan/aspek yang dinilai harus disebutkan secara spesifik, misalnya penggunaan alat, ketelitian, komunikasi, kolaborasi, kualitas produk, keselamatan kerja, atau aspek lain sesuai aktivitas.
+- Indikator penilaian harus dapat diamati dan menggunakan bahasa operasional yang sesuai jenjang.
 
-ATURAN RUBRIK:
+ATURAN RUBRIK & PENSKORAN:
 - Rubrik dan pedoman skor otomatis menyesuaikan asesmen yang dipilih.
-- PG/PG Kompleks/Benar-Salah/Menjodohkan/Isian objektif menggunakan kunci jawaban + pedoman skor; jangan memaksakan rubrik.
+- PG/PG Kompleks/Benar-Salah/Menjodohkan/Isian objektif menggunakan kunci jawaban + pedoman skor; jangan memaksakan rubrik analitik.
 - Uraian/SJT menggunakan pedoman skor atau rubrik analitik sesuai kebutuhan.
 - Unjuk Kerja/Praktik, Presentasi, Proyek, Produk, Portofolio, Observasi, Penilaian Diri, dan Penilaian Antarteman menggunakan rubrik/lembar penilaian yang sesuai tekniknya.
 - Jika beberapa teknik dipilih, buat rubrik terpisah untuk tiap teknik. Jangan membuat rubrik untuk teknik yang tidak dipilih.
 - Setiap butir/indikator asesmen harus dapat ditelusuri ke TP yang diukur.
+- Jangan menampilkan kunci jawaban atau contoh jawaban di area LKPD siswa. Letakkan kunci/pedoman skor/rubrik pada Halaman Guru/Lampiran bila diperlukan.
 
 =====================================================================
 STRUKTUR LKPD
 =====================================================================
 Susun berurutan:
 1. Kop/Identitas — nama sekolah, mata pelajaran, jenjang/kelas, topik, alokasi waktu, serta ruang kosong untuk nama siswa/kelompok dan tanggal.
-2. Tujuan Pembelajaran — jelas dan terukur.
-3. Petunjuk Pengerjaan — sesuaikan dengan Mode Pengerjaan. Untuk Kelompok, cantumkan pembagian peran dan aturan kerja kolaboratif; untuk Individu, instruksi diarahkan pada tanggung jawab tiap siswa.
-4. Ringkasan Materi — singkat, padat, hanya konsep yang benar-benar diperlukan untuk aktivitas.
-5. Kegiatan/Aktivitas Siswa — aktivitas konkret seperti mengamati, bereksperimen, menganalisis data, berdiskusi, mengisi tabel/diagram, memecahkan kasus, membuat produk, atau aktivitas lain sesuai TP.
-6. Asesmen/Soal — hanya asesmen yang dipilih guru; susun sesuai konfigurasi asesmen dan TP.
-7. Refleksi Siswa — 2–3 pertanyaan metakognitif tentang hal yang dipelajari, tantangan, dan penerapan dalam kehidupan.
-8. Halaman Guru/Lampiran — jika diperlukan, berisi kunci jawaban, pedoman skor, dan rubrik yang sesuai asesmen terpilih.
+2. Tujuan Pembelajaran — jelas, terukur, dan konsisten dengan aktivitas serta asesmen.
+3. Petunjuk Pengerjaan — sesuaikan dengan Mode Pengerjaan. Untuk Kelompok, cantumkan pembagian peran, aturan diskusi, pencatatan hasil, dan simpulan bersama; untuk Individu, instruksi diarahkan pada tanggung jawab tiap siswa.
+4. Ringkasan Materi — singkat, padat, faktual, hanya konsep yang benar-benar diperlukan untuk aktivitas; bukan uraian buku teks penuh.
+5. Kegiatan/Aktivitas Siswa — aktivitas konkret seperti mengamati, bereksperimen, menganalisis data, berdiskusi, mengisi tabel/diagram, memecahkan kasus, membuat produk, atau aktivitas lain sesuai TP. Bila relevan, sertakan alat/bahan, langkah kerja, tabel pengamatan, pertanyaan analisis, dan simpulan.
+6. Asesmen/Soal — hanya asesmen yang dipilih guru; susun sesuai konfigurasi asesmen, TP, level kognitif, waktu, dan ruang halaman.
+7. Refleksi Siswa — 2–3 pertanyaan metakognitif tentang hal yang dipelajari, bagian/tantangan tersulit, strategi perbaikan, dan/atau penerapan dalam kehidupan sehari-hari.
+8. Halaman Guru/Lampiran — jika diperlukan, berisi kunci jawaban, pedoman skor, rubrik, pemetaan butir ke TP/indikator, dan catatan tindak lanjut. Letakkan terpisah dari halaman siswa, tetapi tetap dalam satu dokumen keluaran bila formatnya DOCX/PDF.
+
+RUANG JAWABAN SISWA:
+- Sediakan garis, kotak, tabel, diagram kosong, atau ruang kerja yang proporsional dengan tuntutan jawaban.
+- Jangan mengisi ruang jawaban dengan contoh jawaban yang dapat membocorkan respons.
+- Pastikan ukuran ruang jawaban realistis terhadap panjang jawaban dan jumlah halaman yang dipilih.
 
 =====================================================================
-ATURAN GAMBAR
+ATURAN GAMBAR & KEAKURATAN KONTEN
 =====================================================================
 - Jika kebutuhan gambar = Ilmiah-Faktual: visual/diagram harus akurat secara keilmuan, proporsional, jelas, dan tidak menyesatkan konsep.
-- Jika Fantasi/Ilustratif: gunakan hanya karena guru memilihnya; kreativitas tidak boleh merusak konsep materi.
+- Jika Fantasi/Ilustratif: gunakan hanya karena guru memilihnya; kreativitas tidak boleh merusak fakta atau konsep materi.
 - Jika Tidak perlu: jangan memaksakan gambar.
 - Gambar tidak boleh menutupi teks, ruang jawaban, tabel, atau elemen penting LKPD.
+- Jangan mengarang data, statistik, kutipan, sumber, hasil eksperimen, atau fakta spesifik. Jika stimulus membutuhkan data yang tidak tersedia, gunakan data contoh yang jelas diberi label sebagai simulasi/contoh atau minta sumber dari guru bila data autentik wajib digunakan.
 
 =====================================================================
 FORMAT OUTPUT AKHIR
 =====================================================================
 A. Jika Format Output = Dokumen (DOCX)
 - Hasilkan satu file DOCX terstruktur bila platform mendukung pembuatan DOCX.
-- Gunakan heading, tabel, ruang jawaban, page break, serta layout siap edit dan cetak.
-- Kunci jawaban/rubrik dapat ditempatkan pada halaman guru dalam file yang sama.
-- Jika platform tidak dapat membuat DOCX langsung, keluarkan teks terformat yang siap disalin ke Word/Google Docs.
+- Gunakan heading/subheading yang jelas, tabel bila diperlukan, ruang jawaban kosong, page break, nomor halaman bila sesuai, serta layout siap edit dan cetak.
+- Upayakan jumlah halaman mengikuti input guru. Jika isi terlalu padat untuk batas halaman, prioritaskan komponen wajib dan beri catatan singkat bagian yang dipadatkan; jangan mengecilkan teks sampai sulit dibaca.
+- Kunci jawaban/rubrik ditempatkan pada Halaman Guru di bagian akhir dengan page break, tetap dalam file yang sama.
+- Jika platform tidak dapat membuat DOCX langsung, keluarkan teks terformat rapi yang siap disalin ke Word/Google Docs dan jelaskan langkah simpan sebagai DOCX secara singkat.
 
 B. Jika Format Output = Dokumen (PDF)
 - Hasilkan satu PDF siap cetak bila platform mendukung pembuatan PDF.
-- Pastikan margin, tabel, teks, ruang jawaban, dan pemisahan halaman rapi.
-- Kunci jawaban/rubrik dapat ditempatkan sebagai halaman guru di bagian akhir.
-- Jika platform tidak dapat membuat PDF langsung, buat dokumen terformat siap ekspor ke PDF.
+- Pastikan margin, tabel, teks, ruang jawaban, pemisahan halaman, dan keterbacaan konsisten.
+- Upayakan jumlah halaman mengikuti input guru; bila isi tidak muat secara layak, prioritaskan komponen wajib dan jelaskan kebutuhan halaman tambahan tanpa memadatkan secara berlebihan.
+- Kunci jawaban/rubrik ditempatkan sebagai Halaman Guru di bagian akhir dengan pemisahan halaman yang jelas.
+- Jika platform tidak dapat membuat PDF langsung, buat dokumen terformat siap ekspor ke PDF dan sebutkan langkah ekspornya secara singkat.
 
 C. Jika Format Output = Gambar per Halaman
-1. Ingatkan guru bahwa AI image generator berisiko membuat teks panjang buram/gibberish. Bila memungkinkan, prioritaskan rendering dokumen/HTML ke gambar agar teks presisi.
-2. Satu halaman LKPD = satu file gambar terpisah. Jangan menggabungkan beberapa halaman dalam satu file.
-3. Gunakan format kertas/orientasi yang dipilih, margin aman minimal 10 mm, background putih polos, tipografi sans-serif yang jelas, dan layout konsisten.
-4. Generate satu halaman satu per satu dan periksa keterbacaan seluruh teks, tabel, ruang jawaban, ilustrasi, margin, serta konsistensi halaman sebelum lanjut.
-5. Jika image generation tidak tersedia, susun prompt final per halaman dan tandai sebagai perlu dieksekusi pada generator gambar.
+1. Ingatkan bahwa AI image generator dapat membuat teks panjang buram/gibberish. Jika tersedia, prioritaskan rendering dokumen/HTML/CSS ke gambar agar teks presisi; gunakan generator gambar murni hanya bila sesuai kebutuhan.
+2. Satu halaman LKPD = satu file gambar terpisah. Jangan menggabungkan beberapa halaman ke dalam satu gambar.
+3. Gunakan format kertas/orientasi yang dipilih, margin aman minimal 10 mm, background putih polos (bukan transparan), tipografi sans-serif yang jelas, ukuran teks nyaman dibaca saat dicetak, dan layout konsisten antarhalaman.
+4. Nama file dibuat berurutan dan konsisten, misalnya LKPD_[topik]_h1, LKPD_[topik]_h2, dan seterusnya, menggunakan format file yang dipilih guru.
+5. Kop/identitas ditempatkan konsisten; bagian tujuan, petunjuk, materi, aktivitas, asesmen, dan refleksi ditata dalam blok yang jelas. Gambar tidak boleh menimpa teks atau ruang jawaban.
+6. Generate/render satu halaman satu per satu. Setelah setiap halaman, periksa status Selesai/Perlu Ulang berdasarkan keterbacaan teks, ketepatan isi, margin, tabel, ruang jawaban, ilustrasi, dan konsistensi visual sebelum melanjutkan halaman berikutnya.
+7. Jika image generation/rendering tidak tersedia, susun paket prompt final per halaman yang memuat nama file, format kertas/orientasi, layout, seluruh teks final, instruksi ilustrasi, dan catatan keterbacaan; tandai jelas bahwa prompt tersebut perlu dieksekusi pada generator gambar.
 
 =====================================================================
 PEMERIKSAAN AKHIR
@@ -5670,13 +5805,20 @@ PEMERIKSAAN AKHIR
 Sebelum menyatakan LKPD selesai, periksa:
 - seluruh aktivitas dan asesmen konsisten dengan TP;
 - tidak ada soal yang tidak mengukur TP;
+- setiap butir memiliki pemetaan TP/indikator dan level yang relevan;
 - asesmen yang dibuat hanya yang dipilih/diperlukan;
+- persentase level kognitif (jika ditentukan guru) berjumlah 100%;
+- soal AKM/PISA benar-benar berbasis stimulus dan penalaran;
+- SJT menggunakan skenario realistis serta pedoman penilaian yang jelas;
 - level kognitif dan jenis instrumen sesuai konfigurasi;
 - kunci jawaban/pedoman skor/rubrik sesuai jenis asesmen;
 - petunjuk Mode Individu/Kelompok tidak tertukar;
+- ruang jawaban siswa cukup dan tidak berisi bocoran jawaban;
 - tidak ada duplikasi Topik/Materi;
+- tidak ada fakta/data/sumber yang dikarang;
 - layout, tabel, ruang jawaban, dan gambar terbaca serta siap digunakan siswa;
-- format output benar-benar mengikuti pilihan DOCX, PDF, atau Gambar per Halaman.\``
+- jumlah halaman tetap realistis terhadap input guru dan keterbacaan;
+- format output benar-benar mengikuti pilihan DOCX, PDF, atau Gambar per Halaman.`
       }
     ]
   }
