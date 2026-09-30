@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="theme-color" content="#6d5dfc" />
 <title>Prompt EDU — AI Prompt Studio untuk Guru</title>
-<meta name="bank-prompt-build" content="2026-09-30-mpi-external-visual-ready-url-2" />
+<meta name="bank-prompt-build" content="2026-09-30-ux-feedback-mpi-akm-idea-optional-1" />
 <style>
 :root{
   --bg:#f4f7fb;
@@ -134,6 +134,8 @@ body.auth-locked{overflow:hidden}
 .gen-choice-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.gen-choice-grid .form-group{margin:0}.pro-ai-note{margin:10px 0 0;padding:12px 13px;border-radius:14px;border:1px solid color-mix(in srgb,#f59e0b 38%,var(--border));background:color-mix(in srgb,#f59e0b 9%,var(--panel));display:grid;gap:4px}.pro-ai-note strong{font-size:calc(10.5px * var(--font-scale));color:#d97706}.pro-ai-note span{font-size:calc(10px * var(--font-scale));line-height:1.55;color:var(--muted)}.generated-sections{display:grid;gap:12px;overflow:visible;padding-right:3px}.generated-section{border:1px solid var(--border);border-radius:16px;background:var(--panel2);overflow:hidden}.generated-section-head{display:flex;gap:8px;align-items:center;justify-content:space-between;padding:10px 11px;border-bottom:1px solid var(--border);background:color-mix(in srgb,var(--panel-solid) 78%,transparent)}.generated-section-title{min-width:0}.generated-section-title strong{display:block;font-size:calc(10.5px * var(--font-scale))}.generated-section-title span{display:block;margin-top:2px;font-size:calc(8.5px * var(--font-scale));color:var(--muted)}.generated-section-copy{border:1px solid var(--border);border-radius:9px;background:var(--panel);color:var(--text);padding:6px 8px;font-size:calc(8.5px * var(--font-scale));font-weight:800}.generated-section textarea{border:0!important;border-radius:0!important;box-shadow:none!important;min-height:260px;background:transparent!important;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:calc(10px * var(--font-scale));line-height:1.55}.package-sequence{margin-top:9px;font-size:calc(9.5px * var(--font-scale));color:var(--muted);line-height:1.55}.package-sequence strong{color:var(--text)}@media(max-width:620px){.gen-choice-grid{grid-template-columns:1fr}.generated-sections{max-height:none}}
 .bank-view{position:relative}.bank-view .sidebar{top:74px;height:calc(100vh - 74px);height:calc(100dvh - 74px)}.bank-view .topbar{top:74px}.bank-view .brand h1{font-size:calc(17px * var(--font-scale))}.bank-view .brand p{font-size:calc(10px * var(--font-scale))}
 .mini-home-btn{display:grid}
+.feedback-home-card{width:100%;margin-top:18px;min-height:0;display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:14px;text-align:left;border:1px solid color-mix(in srgb,var(--accent2) 30%,var(--border));background:linear-gradient(135deg,color-mix(in srgb,var(--accent2) 8%,var(--panel-solid)),color-mix(in srgb,var(--accent) 7%,var(--panel)));color:var(--text);border-radius:20px;padding:16px 18px;box-shadow:var(--shadow-soft);transition:.18s ease}.feedback-home-card:hover{transform:translateY(-2px);border-color:color-mix(in srgb,var(--accent2) 52%,var(--border));box-shadow:var(--shadow)}.feedback-home-icon{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;font-size:calc(20px * var(--font-scale));background:color-mix(in srgb,var(--accent2) 10%,var(--panel2));border:1px solid var(--border)}.feedback-home-copy{min-width:0}.feedback-home-copy strong{display:block;font-size:calc(13px * var(--font-scale));margin-bottom:3px}.feedback-home-copy small{display:block;color:var(--muted);font-size:calc(10px * var(--font-scale));line-height:1.45}.feedback-home-action{font-size:calc(10px * var(--font-scale));font-weight:850;color:var(--accent2);white-space:nowrap}
+@media(max-width:650px){.feedback-home-card{grid-template-columns:auto minmax(0,1fr);padding:14px}.feedback-home-action{display:none}}
 @media(max-width:1000px){.login-card{grid-template-columns:1fr}.login-brand{min-height:300px;padding:32px}.generator-layout{grid-template-columns:1fr}.generated-panel{position:relative;top:auto}.generator-type-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.home-hero{grid-template-columns:1fr auto}}
 @media(max-width:900px){.global-brand{min-width:0}.global-brand-copy{display:none}.global-nav button span{display:none}.portal-grid{grid-template-columns:1fr}.bank-view .sidebar{top:74px}.bank-view .topbar{top:74px}}
 @media(max-width:650px){.login-screen{padding:10px}.login-form-wrap{padding:30px 22px}.login-brand{padding:28px 24px}.login-brand h1{font-size:calc(39px * var(--font-scale))}.global-header{height:66px;padding:8px 10px}.view-shell{min-height:calc(100vh - 66px)}.bank-view .sidebar{top:66px;height:calc(100dvh - 66px)}.bank-view .topbar{top:66px}.global-nav{gap:2px}.global-nav button{padding:8px 9px}.home-view,.generator-view{padding:18px 12px}.home-hero{grid-template-columns:1fr;padding:24px 20px}.home-mascot{display:none}.portal-card{min-height:220px}.generator-type-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.dynamic-fields{grid-template-columns:1fr}.dynamic-fields .span-2{grid-column:auto}.generator-head{align-items:flex-start;flex-direction:column}.generated-output{min-height:350px}}
@@ -879,6 +881,11 @@ select.form-control optgroup{font-weight:800}
 .generator-progress{display:grid;gap:9px;margin:0 0 16px}.generator-progress[hidden]{display:none!important}.generator-progress-track{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}.generator-progress-step{border:1px solid var(--border);background:var(--panel2);color:var(--muted);border-radius:12px;padding:9px 8px;text-align:left;display:grid;gap:3px;min-width:0}.generator-progress-step b{font-size:calc(9px * var(--font-scale));color:inherit}.generator-progress-step span{font-size:calc(8px * var(--font-scale));white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.generator-progress-step.active{border-color:color-mix(in srgb,var(--accent2) 58%,var(--border));background:color-mix(in srgb,var(--accent2) 10%,var(--panel));color:var(--text);box-shadow:0 8px 24px color-mix(in srgb,var(--accent2) 10%,transparent)}
 .generator-progress-footer{display:flex;align-items:center;justify-content:space-between;gap:8px}.generator-progress-footer small{font-size:calc(8.5px * var(--font-scale));color:var(--muted)}.generator-progress-footer div{display:flex;gap:7px}.generator-progress-footer button{padding:8px 11px;font-size:calc(9px * var(--font-scale))}.progress-hidden,.progress-stage-empty{display:none!important}
 .generator-preset-note{font-size:calc(8.5px * var(--font-scale));color:var(--muted);margin-top:5px}.generator-preset-note strong{color:var(--text)}
+.generator-step-actions{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px;align-items:center;margin-top:16px;padding:14px;border:1px solid color-mix(in srgb,var(--accent2) 22%,var(--border));border-radius:17px;background:linear-gradient(135deg,color-mix(in srgb,var(--accent2) 6%,var(--panel)),color-mix(in srgb,var(--panel2) 92%,transparent));box-shadow:inset 0 1px 0 rgba(255,255,255,.08)}
+.generator-step-action-copy{display:grid;gap:4px;min-width:0}.generator-step-action-copy strong{font-size:calc(10.5px * var(--font-scale));color:var(--text)}.generator-step-action-copy span{font-size:calc(8.8px * var(--font-scale));line-height:1.5;color:var(--muted)}
+.generator-step-buttons{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}.generator-step-buttons #generatePromptBtn{min-width:220px}.generator-step-buttons #generatePromptBtn[data-action="next"]{box-shadow:0 12px 28px color-mix(in srgb,var(--accent2) 19%,transparent)}
+.generator-progress-step.visited:not(.active){border-color:color-mix(in srgb,var(--success) 26%,var(--border));color:var(--text)}.generator-progress-step.visited:not(.active)::after{content:"✓";justify-self:end;margin-top:-18px;font-size:calc(8px * var(--font-scale));font-weight:900;color:var(--success)}
+@media(max-width:720px){.generator-step-actions{grid-template-columns:1fr;align-items:stretch}.generator-step-buttons{display:grid;grid-template-columns:1fr}.generator-step-buttons #generatePromptBtn{min-width:0;width:100%;min-height:48px}.generator-step-buttons #openTemplateBankBtn{width:100%}}
 .enhancement-backdrop{position:fixed;inset:0;background:rgba(4,8,18,.58);z-index:430;backdrop-filter:blur(5px)}.enhancement-backdrop[hidden]{display:none!important}
 .teacher-preset-modal,.generator-preview-modal{position:fixed;z-index:440;left:50%;top:50%;transform:translate(-50%,-50%);width:min(760px,calc(100vw - 28px));max-height:min(82vh,760px);overflow:auto;border:1px solid var(--border);border-radius:22px;background:color-mix(in srgb,var(--panel-solid) 96%,transparent);box-shadow:0 28px 90px rgba(0,0,0,.34)}
 .teacher-preset-modal[hidden],.generator-preview-modal[hidden]{display:none!important}.enhancement-modal-head{position:sticky;top:0;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 18px;border-bottom:1px solid var(--border);background:color-mix(in srgb,var(--panel-solid) 96%,transparent)}.enhancement-modal-head div{display:grid;gap:3px}.enhancement-modal-head strong{font-size:calc(14px * var(--font-scale))}.enhancement-modal-head span{font-size:calc(9px * var(--font-scale));color:var(--muted)}.enhancement-modal-head button{min-width:34px;min-height:34px;border:1px solid var(--border);border-radius:11px;background:var(--panel2);color:var(--text)}
@@ -1056,7 +1063,7 @@ html.low-power .card:hover,html.low-power .portal-card:hover{transform:none!impo
       <button data-view="generator"><span class="nav-icon asset-icon asset-generator" aria-hidden="true"></span><span>Generator Prompt</span></button>
       <button data-view="bank"><span class="nav-icon asset-icon asset-bank" aria-hidden="true"></span><span>Bank Prompt</span></button>
     </nav>
-    <div class="global-actions"><div class="audio-control-wrap"><button class="icon-btn audio-settings-btn audio-live asset-button" id="audioSettingsBtn" title="Pengaturan audio" aria-expanded="false" aria-controls="audioPanel"><span class="control-asset asset-icon asset-speaker" aria-hidden="true"></span></button><div class="audio-panel" id="audioPanel" hidden><div class="audio-panel-head"><div class="audio-panel-brand"><span class="audio-panel-brand-icon asset-icon asset-gear" aria-hidden="true"></span><div><span>Sound Center</span><strong>Pengaturan Audio</strong></div></div><button class="icon-btn" id="audioPanelClose" type="button" title="Tutup" style="min-width:32px;min-height:32px;padding:5px">✕</button></div><div class="audio-row"><div class="audio-row-icon">🗣️</div><div class="audio-row-copy"><strong>Narasi / Audio</strong><small>Voice-over sesuai menu aktif</small><input class="audio-slider" id="narrationVolume" type="range" min="0" max="100" step="1" value="100" /></div><div><div class="audio-value" id="narrationVolumeValue">100%</div><button class="audio-toggle on" id="narrationToggle" type="button">ON</button></div></div><div class="audio-row"><div class="audio-row-icon asset-icon asset-speaker" aria-hidden="true"></div><div class="audio-row-copy"><strong>Musik Latar</strong><small>Bouncy Learning Groove • loop</small><input class="audio-slider" id="musicVolume" type="range" min="0" max="100" step="1" value="10" /></div><div><div class="audio-value" id="musicVolumeValue">10%</div><button class="audio-toggle on" id="musicToggle" type="button">ON</button></div></div><div class="audio-panel-actions"><button class="btn-secondary asset-label-button" id="replayNarrationBtn" type="button"><span class="control-asset asset-icon asset-refresh" aria-hidden="true"></span>Putar Narasi</button><button class="btn-secondary" id="masterMuteBtn" type="button">🔇 Mute Semua</button></div><div class="audio-now" id="audioNow"><strong>Audio aktif.</strong> Musik latar dibuat lebih pelan daripada narasi.</div></div></div><div class="app-settings-wrap"><button class="icon-btn app-settings-btn" id="appSettingsBtn" type="button" title="Pengaturan aplikasi" aria-label="Pengaturan aplikasi dan ukuran tulisan" aria-expanded="false" aria-controls="appSettingsPanel">⚙️</button><div class="app-settings-panel" id="appSettingsPanel" hidden><div class="app-settings-head"><div class="app-settings-head-copy"><strong>Pengaturan Aplikasi</strong><span>Atur tampilan agar lebih nyaman dibaca guru.</span></div><button class="icon-btn" id="appSettingsClose" type="button" title="Tutup" style="min-width:32px;min-height:32px;padding:5px">✕</button></div><div class="app-settings-row"><div class="app-settings-row-head"><div class="app-settings-row-copy"><strong>Tema Tampilan</strong><small>Ganti mode terang/gelap.</small></div><button class="btn-secondary theme-setting-btn" id="themeBtn" type="button" title="Ganti tema">🌙</button></div></div><div class="app-settings-row"><div class="app-settings-row-head"><div class="app-settings-row-copy"><strong>Ukuran Tulisan Aplikasi</strong><small>Menaikkan ukuran teks keterangan, label, tombol, form, kartu, dan panel tanpa mengubah isi prompt.</small></div><span class="font-scale-value" id="fontScaleValue">115%</span></div><input class="font-scale-slider" id="fontScaleSlider" type="range" min="100" max="140" step="5" value="115" aria-label="Ukuran tulisan aplikasi"/><div class="font-scale-presets" id="fontScalePresets"><button type="button" data-font-scale="100">Normal</button><button type="button" data-font-scale="115">Nyaman</button><button type="button" data-font-scale="125">Besar</button><button type="button" data-font-scale="140">Sangat Besar</button></div><div class="font-preview"><strong>Contoh keterbacaan</strong>Teks keterangan ini mengikuti ukuran yang dipilih. Pengaturan tersimpan otomatis di browser ini.</div></div></div></div><button class="icon-btn feedback-trigger" id="feedbackBtn" type="button" title="Saran & Masukan" aria-label="Buka Saran dan Masukan">💬</button><button class="icon-btn asset-button" id="logoutBtn" title="Keluar"><span class="control-asset asset-icon asset-logout" aria-hidden="true"></span></button></div>
+    <div class="global-actions"><div class="audio-control-wrap"><button class="icon-btn audio-settings-btn audio-live asset-button" id="audioSettingsBtn" title="Pengaturan audio" aria-expanded="false" aria-controls="audioPanel"><span class="control-asset asset-icon asset-speaker" aria-hidden="true"></span></button><div class="audio-panel" id="audioPanel" hidden><div class="audio-panel-head"><div class="audio-panel-brand"><span class="audio-panel-brand-icon asset-icon asset-gear" aria-hidden="true"></span><div><span>Sound Center</span><strong>Pengaturan Audio</strong></div></div><button class="icon-btn" id="audioPanelClose" type="button" title="Tutup" style="min-width:32px;min-height:32px;padding:5px">✕</button></div><div class="audio-row"><div class="audio-row-icon">🗣️</div><div class="audio-row-copy"><strong>Narasi / Audio</strong><small>Voice-over sesuai menu aktif</small><input class="audio-slider" id="narrationVolume" type="range" min="0" max="100" step="1" value="100" /></div><div><div class="audio-value" id="narrationVolumeValue">100%</div><button class="audio-toggle on" id="narrationToggle" type="button">ON</button></div></div><div class="audio-row"><div class="audio-row-icon asset-icon asset-speaker" aria-hidden="true"></div><div class="audio-row-copy"><strong>Musik Latar</strong><small>Bouncy Learning Groove • loop</small><input class="audio-slider" id="musicVolume" type="range" min="0" max="100" step="1" value="10" /></div><div><div class="audio-value" id="musicVolumeValue">10%</div><button class="audio-toggle on" id="musicToggle" type="button">ON</button></div></div><div class="audio-panel-actions"><button class="btn-secondary asset-label-button" id="replayNarrationBtn" type="button"><span class="control-asset asset-icon asset-refresh" aria-hidden="true"></span>Putar Narasi</button><button class="btn-secondary" id="masterMuteBtn" type="button">🔇 Mute Semua</button></div><div class="audio-now" id="audioNow"><strong>Audio aktif.</strong> Musik latar dibuat lebih pelan daripada narasi.</div></div></div><div class="app-settings-wrap"><button class="icon-btn app-settings-btn" id="appSettingsBtn" type="button" title="Pengaturan aplikasi" aria-label="Pengaturan aplikasi dan ukuran tulisan" aria-expanded="false" aria-controls="appSettingsPanel">⚙️</button><div class="app-settings-panel" id="appSettingsPanel" hidden><div class="app-settings-head"><div class="app-settings-head-copy"><strong>Pengaturan Aplikasi</strong><span>Atur tampilan agar lebih nyaman dibaca guru.</span></div><button class="icon-btn" id="appSettingsClose" type="button" title="Tutup" style="min-width:32px;min-height:32px;padding:5px">✕</button></div><div class="app-settings-row"><div class="app-settings-row-head"><div class="app-settings-row-copy"><strong>Tema Tampilan</strong><small>Ganti mode terang/gelap.</small></div><button class="btn-secondary theme-setting-btn" id="themeBtn" type="button" title="Ganti tema">🌙</button></div></div><div class="app-settings-row"><div class="app-settings-row-head"><div class="app-settings-row-copy"><strong>Ukuran Tulisan Aplikasi</strong><small>Menaikkan ukuran teks keterangan, label, tombol, form, kartu, dan panel tanpa mengubah isi prompt.</small></div><span class="font-scale-value" id="fontScaleValue">115%</span></div><input class="font-scale-slider" id="fontScaleSlider" type="range" min="100" max="140" step="5" value="115" aria-label="Ukuran tulisan aplikasi"/><div class="font-scale-presets" id="fontScalePresets"><button type="button" data-font-scale="100">Normal</button><button type="button" data-font-scale="115">Nyaman</button><button type="button" data-font-scale="125">Besar</button><button type="button" data-font-scale="140">Sangat Besar</button></div><div class="font-preview"><strong>Contoh keterbacaan</strong>Teks keterangan ini mengikuti ukuran yang dipilih. Pengaturan tersimpan otomatis di browser ini.</div></div></div></div><button class="icon-btn asset-button" id="logoutBtn" title="Keluar"><span class="control-asset asset-icon asset-logout" aria-hidden="true"></span></button></div>
   </header>
 
   <section class="view-shell home-view" id="homeView">
@@ -1068,6 +1075,7 @@ html.low-power .card:hover,html.low-power .portal-card:hover{transform:none!impo
       <button class="portal-card" data-open-view="generator"><div class="portal-icon asset-icon asset-generator" aria-hidden="true"></div><div class="futuristic-sub">AI Creator Module</div><h3>Generator Prompt</h3><p>Pilih apa yang ingin dibuat, pilih template dari Bank Prompt, isi data yang dibutuhkan, lalu generate prompt final yang siap ditempel ke ChatGPT, Claude, Canva Code, atau AI lain.</p><div class="portal-meta"><span>Form dinamis</span><span>Template Bank Prompt</span><span>Siap salin</span></div><span class="portal-arrow asset-icon asset-right" aria-hidden="true"></span></button>
       <button class="portal-card" data-open-view="bank"><div class="portal-icon asset-icon asset-bank" aria-hidden="true"></div><div class="futuristic-sub">Prompt Vault</div><h3>Bank Prompt</h3><p>Buka koleksi prompt yang sudah ada saat ini—lengkap dengan pencarian, kategori, favorit, salin cepat, prompt acak, dan unduh TXT.</p><div class="portal-meta"><span id="homeCatCount">0 kategori</span><span id="homePromptCount">0 prompt</span><span>Favorit</span></div><span class="portal-arrow asset-icon asset-right" aria-hidden="true"></span></button>
     </div>
+    <button class="feedback-home-card" id="feedbackBtn" type="button" title="Saran & Masukan" aria-label="Buka Saran dan Masukan"><span class="feedback-home-icon" aria-hidden="true">💬</span><span class="feedback-home-copy"><strong>Saran & Masukan</strong><small>Kirim masukan atau lihat saran pengguna yang sudah dipublikasikan.</small></span><span class="feedback-home-action">Buka →</span></button>
     <footer class="creator-credit" aria-label="Kredit pembuat">Dibuat oleh <strong>Yudi Kurniawan</strong> • Guru IPA SMP N 3 Segedong • <span class="credit-year">2026</span></footer>
   </section>
 
@@ -1086,7 +1094,7 @@ html.low-power .card:hover,html.low-power .portal-card:hover{transform:none!impo
           </div>
           <div id="generatorSingleMode"><div class="template-tools"><input class="form-control" id="generatorTemplateSearch" type="search" placeholder="Cari template, mis. Komik, LKPD, E-Jurnal..." /><select class="form-control" id="generatorTemplateSelect"></select></div></div>
           <div class="template-info" id="generatorTemplateInfo"></div></section>
-        <section class="gen-panel generator-data-panel" id="generatorDataPanel"><div class="gen-panel-head"><div class="step-no">3</div><h3>Isi data yang dibutuhkan</h3></div><div class="generator-helper-toolbar"><div class="generator-helper-copy"><strong>Preset Guru + Form Bertahap</strong><span>Preset hanya mengisi data umum. Field proyek/materi tetap diperiksa setiap kali agar kualitas prompt tidak berkurang.</span></div><div class="generator-preset-actions"><div class="generator-mode-switch" id="generatorModeSwitch"><button type="button" data-form-mode="quick">Mode Cepat</button><button type="button" data-form-mode="full">Mode Lengkap</button></div><select class="form-control" id="teacherPresetSelect" aria-label="Pilih Preset Guru"><option value="">— Tanpa Preset —</option></select><button class="btn-secondary" id="applyTeacherPresetBtn" type="button">Gunakan Preset</button><button class="btn-secondary" id="manageTeacherPresetBtn" type="button">Kelola Preset</button><button class="btn-secondary project-center-btn" id="projectCenterBtn" type="button">🗂 Proyek Saya</button><button class="btn-secondary quality-check-btn" id="qualityCheckBtn" type="button">✓ Quality Check</button></div></div><div class="quick-mode-note" id="quickModeNote"><strong>Mode Cepat:</strong> hanya input utama ditampilkan. Field lanjutan tetap ada di template dan akan mengikuti nilai yang sudah tersimpan atau ditentukan AI sesuai aturan prompt.</div><div class="generator-progress" id="generatorProgressNav" hidden></div><div class="dynamic-fields" id="generatorFields"></div><div class="generator-preset-note"><strong>Data preset disimpan lokal di browser perangkat ini.</strong> Tidak ada profil guru yang ditanam ke file HTML atau dikirim ke server.</div><div style="display:flex;gap:8px;margin-top:16px;flex-wrap:wrap"><button class="btn-primary asset-label-button" id="generatePromptBtn"><span class="control-asset asset-icon asset-right" aria-hidden="true"></span>Review & Generate</button><button class="btn-secondary asset-label-button" id="openTemplateBankBtn"><span class="control-asset asset-icon asset-bank" aria-hidden="true"></span>Lihat Template di Bank</button></div></section>
+        <section class="gen-panel generator-data-panel" id="generatorDataPanel"><div class="gen-panel-head"><div class="step-no">3</div><h3>Isi data yang dibutuhkan</h3></div><div class="generator-helper-toolbar"><div class="generator-helper-copy"><strong>Preset Guru + Form Bertahap</strong><span>Preset hanya mengisi data umum. Field proyek/materi tetap diperiksa setiap kali agar kualitas prompt tidak berkurang.</span></div><div class="generator-preset-actions"><div class="generator-mode-switch" id="generatorModeSwitch"><button type="button" data-form-mode="quick">Mode Cepat</button><button type="button" data-form-mode="full">Mode Lengkap</button></div><select class="form-control" id="teacherPresetSelect" aria-label="Pilih Preset Guru"><option value="">— Tanpa Preset —</option></select><button class="btn-secondary" id="applyTeacherPresetBtn" type="button">Gunakan Preset</button><button class="btn-secondary" id="manageTeacherPresetBtn" type="button">Kelola Preset</button><button class="btn-secondary project-center-btn" id="projectCenterBtn" type="button">🗂 Proyek Saya</button><button class="btn-secondary quality-check-btn" id="qualityCheckBtn" type="button">✓ Quality Check</button></div></div><div class="quick-mode-note" id="quickModeNote"><strong>Mode Cepat:</strong> hanya input utama ditampilkan. Field lanjutan tetap ada di template dan akan mengikuti nilai yang sudah tersimpan atau ditentukan AI sesuai aturan prompt.</div><div class="generator-progress" id="generatorProgressNav" hidden></div><div class="dynamic-fields" id="generatorFields"></div><div class="generator-preset-note"><strong>Data preset disimpan lokal di browser perangkat ini.</strong> Tidak ada profil guru yang ditanam ke file HTML atau dikirim ke server.</div><div class="generator-step-actions" id="generatorStepActions"><div class="generator-step-action-copy" id="generatorStepActionCopy"><strong>Isi tahap ini sesuai kebutuhan.</strong><span>Field yang boleh kosong tetap dapat dilewati dan akan mengikuti aturan AI/template.</span></div><div class="generator-step-buttons"><button class="btn-primary asset-label-button" id="generatePromptBtn" data-action="generate"><span class="control-asset asset-icon asset-right" aria-hidden="true"></span>Review & Generate</button><button class="btn-secondary asset-label-button" id="openTemplateBankBtn"><span class="control-asset asset-icon asset-bank" aria-hidden="true"></span>Lihat Template di Bank</button></div></div></section>
       </div>
       <section class="gen-panel generated-panel" id="generatorOutputPanel"><div class="gen-panel-head"><div class="step-no">4</div><h3>Prompt siap tempel</h3></div><div class="generator-result-hint"><strong>Hasil ada di sini.</strong> Setelah generate, halaman otomatis menuju Panel 4. Gunakan <strong>Salin Semua Prompt</strong> untuk menyalin seluruh rangkaian, atau <strong>Salin Prompt Ini</strong> pada tiap prompt.</div><div id="generatorEmpty" class="gen-empty"><div><strong>Rangkaian prompt akan muncul di sini.</strong>Untuk MPI, Game, dan Lab Maya pilih Versi Biasa/PRO; hasil akan menampilkan semua prompt secara terpisah dari Prompt 0 sampai Prompt Akhir.</div></div><div id="generatorResult" hidden><textarea id="generatedPromptOutput" hidden></textarea><div class="generated-result-toolbar"><div class="generated-result-toolbar-copy"><div><strong>Aksi Prompt</strong><span>Tombol ini tetap terlihat saat membaca hasil.</span></div></div><div class="generated-actions"><button class="btn-primary" id="copyGeneratedBtn">📋 Salin Semua Prompt</button><button class="btn-secondary" id="saveCurrentProjectBtn">💾 Simpan Proyek</button><button class="btn-secondary" id="downloadGeneratedBtn">⬇️ Unduh TXT</button><button class="btn-secondary" id="clearGeneratedBtn">Bersihkan</button></div></div><div class="generated-sections" id="generatedPromptSections"></div><p class="generated-status" id="generatedStatus"></p></div></section>
     </div>
@@ -2322,7 +2330,7 @@ Cek Pemahaman Setelah Materi: [Ya / Tidak]
 Feedback Evaluasi Akhir: [Konstruktif — tampilkan feedback untuk jawaban benar maupun salah / Tanpa Feedback — penilaian mutlak, jangan tampilkan benar-salah/pembahasan selama evaluasi]
 Kedalaman Materi: [Disesuaikan oleh AI / Sederhana / Sedang / Mendetail]
 Sisipkan Gambar/Visual dari Link Eksternal: [Ya / Tidak]
-Konfigurasi Evaluasi Akhir (Kognitif): [Atur tipe soal, jumlah soal, dan proporsi LOTS/MOTS/HOTS pada Generator Prompt / Disesuaikan oleh AI]
+Konfigurasi Evaluasi Akhir (Kognitif): [Atur tipe soal, jumlah soal, dan proporsi LOTS/MOTS/HOTS/AKM-PISA pada Generator Prompt / Disesuaikan oleh AI]
 Game Pembelajaran: [Ada / Tidak Ada]
 Jenis Game jika Ada: [Spin Game / Flip Card / Make a Match / Quiz Challenge / Susun Urutan / Drag & Drop / Tebak Gambar / True–False Challenge / Memory Game / Disesuaikan oleh AI]
 Jumlah Game jika Ada: [1 / 2 / Disesuaikan oleh AI]
@@ -2365,7 +2373,7 @@ KETENTUAN OPSI — WAJIB DIPATUHI:
 - Pada mode Evaluasi Terkunci + Cek Pemahaman = Ya, Evaluasi baru terbuka setelah semua materi wajib lulus cek pemahaman. Jika Cek Pemahaman = Tidak, Evaluasi terbuka setelah semua materi wajib pernah diakses/dikunjungi.
 - Pada mode Bebas, Cek Pemahaman boleh tetap muncul jika dipilih, tetapi tidak boleh mengunci menu lain atau Evaluasi.
 - Jika Feedback Evaluasi Akhir = Konstruktif, berikan feedback bermakna untuk jawaban benar dan salah sesuai konsep. Jika = Tanpa Feedback, selama evaluasi jangan tampilkan status benar/salah, pembahasan, petunjuk, atau jawaban benar; sistem tetap boleh menganalisis jawaban secara internal untuk skor dan Bagian Perlu Penguatan.
-- Evaluasi Akhir HANYA ranah kognitif. Ikuti Konfigurasi Evaluasi Akhir untuk tipe soal, jumlah soal, dan proporsi LOTS/MOTS/HOTS. Jika rincian ditetapkan guru, patuhi tepat; jika dibiarkan Disesuaikan oleh AI, tentukan berdasarkan jenjang, tujuan pembelajaran, keluasan materi, dan estimasi waktu. Setiap soal wajib diberi metadata tipe soal, level kognitif (LOTS/MOTS/HOTS), submateri/topik, dan indikator/tujuan yang diukur.
+- Evaluasi Akhir HANYA ranah kognitif. Ikuti Konfigurasi Evaluasi Akhir untuk tipe soal, jumlah soal, dan proporsi LOTS/MOTS/HOTS/AKM-PISA. Jika rincian ditetapkan guru, patuhi tepat; jika dibiarkan Disesuaikan oleh AI, tentukan berdasarkan jenjang, tujuan pembelajaran, keluasan materi, dan estimasi waktu. Setiap soal wajib diberi metadata tipe soal, level kognitif (LOTS/MOTS/HOTS/AKM-PISA), submateri/topik, dan indikator/tujuan yang diukur.
 - Kedalaman Materi wajib mengikuti pilihan guru dan tetap sesuai jenjang: Sederhana = fokus konsep esensial + contoh inti; Sedang = penjelasan proporsional + hubungan konsep + contoh + miskonsepsi utama; Mendetail = uraian lebih lengkap + hubungan sebab-akibat/proses + penerapan + variasi contoh + miskonsepsi penting. Disesuaikan oleh AI = pilih tingkat kedalaman yang paling efektif berdasarkan jenjang, tujuan, durasi, dan kompleksitas materi.
 - Jika Sisipkan Gambar/Visual dari Link Eksternal = Ya, CHATGPT/AI yang menerima prompt ini WAJIB menjadi pihak yang MENCARI dan MENYIAPKAN link visual melalui pencarian web sebelum memberi jawaban. JANGAN meminta Canva/Canva Code mencari gambar dan jangan menyerahkan pencarian aset ke pengguna.
   Aturan URL visual:
@@ -2395,7 +2403,7 @@ Buatkan minimal 3 alternatif pendekatan pengemasan MPI untuk materi ini (berbeda
 6. Ide Elemen Interaktif — minimal 3 elemen yang cocok untuk materi
 7. Rencana Cek Pemahaman — hanya jika diaktifkan; jelaskan bentuk pertanyaan dan alur baca ulang jika salah
 8. Rencana Refleksi Siswa — bentuk refleksi yang sesuai jenjang
-9. Rencana Evaluasi — khusus kognitif; ikuti tipe soal, jumlah soal, dan proporsi LOTS/MOTS/HOTS dari konfigurasi; jelaskan mode Feedback Evaluasi serta pemetaan tiap soal ke level kognitif, submateri, dan indikator untuk menentukan Bagian Perlu Penguatan
+9. Rencana Evaluasi — khusus kognitif; ikuti tipe soal, jumlah soal, dan proporsi LOTS/MOTS/HOTS/AKM-PISA dari konfigurasi; jelaskan mode Feedback Evaluasi serta pemetaan tiap soal ke level kognitif, submateri, dan indikator untuk menentukan Bagian Perlu Penguatan
 10. Rencana Game — hanya jika Game = Ada; sebutkan jenis, alasan pedagogis, mekanisme, dan posisi game. Jika Disesuaikan oleh AI, tuliskan game yang dipilih dan alasan pemilihannya
 11. Pengaturan Canva Sheet & Navigasi — jelaskan penerapan pilihan Canva Sheet, tiga mode akses, hubungan dengan Cek Pemahaman, serta jaminan tombol Home/Menu Utama selalu dapat digunakan
 12. Gaya Visual — modern, minim scroll, sesuai jenjang/kelas sasaran
@@ -2415,12 +2423,13 @@ STANDAR MUATAN MATERI MPI — WAJIB:
       },
       {
         title: "Prompt 1 PRO Desain MPI — Kembangkan Ide Terpilih",
-        text: `Nomor Ide Pilihan: [nomor ide]
+        text: `Nomor Ide Pilihan (Opsional): [nomor ide]
+Jika bagian ini masih kosong/berupa placeholder, prompt tetap boleh disiapkan dan disalin. Isi atau sesuaikan nomor ide nanti sebelum Prompt 1 benar-benar dijalankan. Jangan mengarang nomor ide.
 
-Gunakan jawaban Prompt 0 PRO yang sudah ada di percakapan ini sebagai sumber konteks utama. Saya hanya memilih nomor ide; JANGAN meminta ulang judul, mata pelajaran, jenjang/kelas, materi, Tujuan Pembelajaran, kurikulum, perangkat, JP, konfigurasi evaluasi, game, Canva Sheet, akses menu, kedalaman materi, atau pilihan visual eksternal.
+Gunakan jawaban Prompt 0 PRO yang sudah ada di percakapan ini sebagai sumber konteks utama. Jika nomor ide sudah diisi, gunakan pilihan tersebut; JANGAN meminta ulang judul, mata pelajaran, jenjang/kelas, materi, Tujuan Pembelajaran, kurikulum, perangkat, JP, konfigurasi evaluasi, game, Canva Sheet, akses menu, kedalaman materi, atau pilihan visual eksternal.
 
 ATURAN WARISAN DARI PROMPT 0 PRO — WAJIB:
-1. Pilih tepat ide sesuai Nomor Ide Pilihan di atas.
+1. Jika Nomor Ide Pilihan sudah diisi, pilih tepat ide tersebut. Jika masih kosong saat prompt dijalankan, minta pengguna memilih salah satu ide hasil Prompt 0; jangan menentukan nomor secara sepihak.
 2. Warisi TUJUAN PEMBELAJARAN FINAL dari Prompt 0 PRO. Jika TP awal dikosongkan guru, gunakan TP yang sudah disusun AI pada Prompt 0 PRO; jangan menyusun TP baru yang berbeda pada tahap ini.
 3. Warisi seluruh keputusan Prompt 0 PRO yang berlaku pada ide terpilih: kurikulum/acuan, perangkat, estimasi JP, Canva Sheet, mode akses, Cek Pemahaman, Feedback Evaluasi, Kedalaman Materi, visual eksternal, konfigurasi Evaluasi Akhir, Game Pembelajaran, bahasa/terminologi, serta keputusan lain yang sudah ditetapkan.
 4. STRUKTUR MPI WAJIB mengikuti bagian "Struktur MPI yang Diusulkan" dari ide terpilih pada Prompt 0 PRO. Pertahankan urutan, hierarki layar/menu, pembagian materi/submateri, posisi interaksi, cek pemahaman, refleksi, evaluasi, game bila aktif, hasil, dan visual eksternal yang sudah dirancang. JANGAN menggantinya dengan template struktur generik yang berbeda.
@@ -2438,7 +2447,7 @@ CARA MENGEMBANGKAN IDE TERPILIH:
 - Perinci Materi sesuai Kedalaman Materi dan jenjang, dengan apersepsi kontekstual, manfaat mempelajari materi, contoh konkret, aktivitas/interaksi, dan pembagian submateri yang konsisten dengan struktur Prompt 0 PRO.
 - Jika Cek Pemahaman aktif, buat database item formatif per submateri beserta jawaban, feedback, serta alur salah → baca ulang → retry sesuai mode akses.
 - Rancang Refleksi sesuai struktur ide dan jenjang; minimal mencakup yang sudah dipahami, yang masih sulit, dan rencana perbaikan.
-- Evaluasi Akhir hanya kognitif. Jumlah soal, tipe soal, dan proporsi LOTS/MOTS/HOTS harus persis mengikuti konfigurasi Prompt 0 PRO. Tiap item memuat tipe, level, pertanyaan, pilihan bila ada, jawaban benar, submateri/topik, indikator/tujuan yang diukur, serta feedback hanya bila mode Konstruktif.
+- Evaluasi Akhir hanya kognitif. Jumlah soal, tipe soal, dan proporsi LOTS/MOTS/HOTS/AKM-PISA harus persis mengikuti konfigurasi Prompt 0 PRO. Tiap item memuat tipe, level, pertanyaan, pilihan bila ada, jawaban benar, submateri/topik, indikator/tujuan yang diukur, serta feedback hanya bila mode Konstruktif.
 - Bagian Perlu Penguatan harus berasal dari jawaban Evaluasi yang salah dan metadata submateri/indikator.
 - Game hanya dirancang jika aktif pada Prompt 0 PRO; skor game terpisah dari Nilai Evaluasi Akhir dan game tidak menjadi syarat ketuntasan kecuali Prompt 0 PRO secara eksplisit menetapkannya.
 - Jika Canva Sheet aktif, rincikan payload, waktu kirim, status berhasil/gagal, dan retry sesuai keputusan Prompt 0 PRO.
@@ -2663,7 +2672,7 @@ WAJIB mempertahankan seluruh keputusan proyek dari Prompt 0 PRO dan Prompt 1 PRO
 - Feedback Evaluasi Akhir: [Konstruktif / Tanpa Feedback]
 - Kedalaman Materi: [ikuti sesuai Prompt 0 PRO]
 - Sisipkan Gambar/Visual dari Link Eksternal: [Ya / Tidak]
-- Konfigurasi Evaluasi Akhir (Kognitif): [ikuti tipe soal, jumlah soal, dan proporsi LOTS/MOTS/HOTS sesuai Prompt 0 PRO]
+- Konfigurasi Evaluasi Akhir (Kognitif): [ikuti tipe soal, jumlah soal, dan proporsi LOTS/MOTS/HOTS/AKM-PISA sesuai Prompt 0 PRO]
 - Game Pembelajaran: [Ada / Tidak Ada]
 - Jenis & Jumlah Game: [sesuai pilihan sebelumnya]
 
@@ -2697,7 +2706,7 @@ AKSES ULANG MATERI — PRINSIP WAJIB:
 - Tombol Kembali dari topik materi harus dapat mengarah ke Hub Materi/daftar topik agar siswa mudah memilih topik lama yang ingin diulas.
 9. Jika Cek Pemahaman = Ya, simpan status cek per materi (belum mencoba / benar / salah-perlu-baca-ulang / siap-coba-lagi), jumlah percobaan bila diperlukan untuk analitik, dan pastikan percobaan ulang baru aktif setelah siswa kembali membuka materi terkait.
 10. Simpan Refleksi Siswa minimal untuk: sudah dipahami, bagian masih sulit/membingungkan, dan rencana agar lebih paham. Bentuk UI boleh menyesuaikan jenjang, tetapi datanya harus dapat dirangkum.
-11. Database Evaluasi wajib hanya berisi soal kognitif dan mengikuti konfigurasi Prompt 0 PRO: jumlah soal tepat, hanya tipe soal terpilih, serta distribusi LOTS/MOTS/HOTS sesuai proporsi. Setiap soal wajib memuat metadata tipe soal, level kognitif, submateri/topik, dan indikator/tujuan agar Bagian Perlu Penguatan dapat dihitung dari jawaban yang salah.
+11. Database Evaluasi wajib hanya berisi soal kognitif dan mengikuti konfigurasi Prompt 0 PRO: jumlah soal tepat, hanya tipe soal terpilih, serta distribusi LOTS/MOTS/HOTS/AKM-PISA sesuai proporsi. Setiap soal wajib memuat metadata tipe soal, level kognitif, submateri/topik, dan indikator/tujuan agar Bagian Perlu Penguatan dapat dihitung dari jawaban yang salah.
 
 ATURAN CANVA SHEET — KONDISIONAL:
 12. Jika Canva Sheet = Ya:
@@ -2736,7 +2745,7 @@ REFLEKSI PEMBELAJARAN — WAJIB:
 21. Refleksi tidak menjadi syarat teknis unlock Evaluasi kecuali rancangan secara eksplisit menyatakan demikian; default mengikuti keputusan review: syarat Evaluasi ditentukan oleh mode akses dan status materi/cek pemahaman.
 
 EVALUASI AKHIR & PENGUATAN:
-- Evaluasi hanya kognitif. Implementasikan jumlah soal, tipe soal, dan distribusi LOTS/MOTS/HOTS tepat sesuai Konfigurasi Evaluasi Akhir Prompt 0 PRO; jangan menambah ranah non-kognitif pada Evaluasi Akhir.
+- Evaluasi hanya kognitif. Implementasikan jumlah soal, tipe soal, dan distribusi LOTS/MOTS/HOTS/AKM-PISA tepat sesuai Konfigurasi Evaluasi Akhir Prompt 0 PRO; jangan menambah ranah non-kognitif pada Evaluasi Akhir.
 22. Hitung skor otomatis dan kategori hasil akhir.
 23. Jika Feedback Evaluasi = Konstruktif, tampilkan feedback untuk jawaban benar dan salah yang menjelaskan konsep secara singkat.
 24. Jika Feedback Evaluasi = Tanpa Feedback, selama pengerjaan jangan tampilkan benar/salah, pembahasan, petunjuk, atau jawaban benar. Setelah selesai boleh tampilkan nilai, kategori, dan area penguatan tanpa wajib membuka kunci jawaban per soal.
@@ -2765,7 +2774,7 @@ Testing & Revisi — WAJIB:
 - Tes mode akses yang dipilih dan setiap syarat unlock terkait Cek Pemahaman; pada mode Berurutan uji Materi 1 → Materi 2 → Materi 3, larangan melompati submateri masa depan, serta akses balik Materi 3 → Materi 2 → Materi 1 untuk review tanpa mengunci kembali topik yang sudah selesai.
 - Bila Cek Pemahaman aktif, uji skenario salah → lanjut terblokir sesuai mode → kembali baca materi → retry aktif → benar → status tuntas.
 - Tes bahwa mode Bebas tidak ikut terkunci karena Cek Pemahaman.
-- Tes konfigurasi Evaluasi Akhir: hanya kognitif, jumlah soal tepat, semua tipe soal sesuai pilihan, dan distribusi LOTS/MOTS/HOTS sesuai konfigurasi.
+- Tes konfigurasi Evaluasi Akhir: hanya kognitif, jumlah soal tepat, semua tipe soal sesuai pilihan, dan distribusi LOTS/MOTS/HOTS/AKM-PISA sesuai konfigurasi.
 - Tes Feedback Evaluasi sesuai pilihan: Konstruktif benar-benar memberi feedback; Tanpa Feedback benar-benar tidak membocorkan hasil per soal selama evaluasi.
 - Tes Refleksi tersimpan dan muncul pada hasil/payload.
 - Tes Bagian Perlu Penguatan berasal dari metadata soal salah.
@@ -2792,7 +2801,7 @@ STANDAR MUATAN MATERI MPI — WAJIB:
         text: `Aplikasi MPI sudah selesai dibuat dari Prompt 0–5 PRO. Sekarang lakukan FINAL CHECK menyeluruh sebagai QA engineer, instructional designer, dan penguji aplikasi edukasi. Jangan menulis ulang aplikasi dari nol. Audit versi yang ada, uji fungsi, temukan masalah, lalu PERBAIKI masalah yang benar-benar ditemukan tanpa merusak fitur yang sudah benar.
 
 TAHAP 1 — INVENTARIS KONFIGURASI & PETA UJI:
-1. Ringkas konfigurasi aktual: Canva Sheet, mode Akses Menu, Cek Pemahaman, Feedback Evaluasi, Kedalaman Materi, Konfigurasi Evaluasi Akhir (tipe soal, jumlah soal, proporsi LOTS/MOTS/HOTS), Game (ada/tidak + jenis/jumlah), alur awal Pembuka/Identitas → Panduan → Apersepsi, Dashboard Menu Utama, halaman/menu, data/state, aset, evaluasi, refleksi, dan alur pengguna.
+1. Ringkas konfigurasi aktual: Canva Sheet, mode Akses Menu, Cek Pemahaman, Feedback Evaluasi, Kedalaman Materi, Konfigurasi Evaluasi Akhir (tipe soal, jumlah soal, proporsi LOTS/MOTS/HOTS/AKM-PISA), Game (ada/tidak + jenis/jumlah), alur awal Pembuka/Identitas → Panduan → Apersepsi, Dashboard Menu Utama, halaman/menu, data/state, aset, evaluasi, refleksi, dan alur pengguna.
 2. Cocokkan konfigurasi tersebut dengan keputusan Prompt 0/1 PRO. Jangan menguji fitur yang memang dipilih Tidak Ada seolah-olah wajib ada; justru pastikan tidak ada sisa fitur yang dinonaktifkan.
 3. Buat checklist pengujian dengan status awal Belum Diuji dan tandai fitur kritis.
 
@@ -2813,7 +2822,7 @@ TAHAP 3 — UJI CEK PEMAHAMAN:
 
 TAHAP 4 — UJI REFLEKSI, EVALUASI, PENGUATAN, DAN HASIL:
 13. Uji input Refleksi: data tersimpan, tidak hilang saat berpindah halaman dalam sesi, dan muncul di hasil/payload sesuai rancangan.
-14. Uji Evaluasi: pastikan hanya kognitif, jumlah soal tepat, seluruh tipe soal sesuai konfigurasi, distribusi LOTS/MOTS/HOTS sesuai proporsi, kunci jawaban internal, skor, kategori, progress, reset/ulang bila ada, dan metadata tipe/level/submateri/indikator.
+14. Uji Evaluasi: pastikan hanya kognitif, jumlah soal tepat, seluruh tipe soal sesuai konfigurasi, distribusi LOTS/MOTS/HOTS/AKM-PISA sesuai proporsi, kunci jawaban internal, skor, kategori, progress, reset/ulang bila ada, dan metadata tipe/level/submateri/indikator.
 15. Jika Feedback Evaluasi = Konstruktif, pastikan jawaban benar dan salah menerima feedback bermakna dan tidak sekadar label.
 16. Jika Feedback Evaluasi = Tanpa Feedback, pastikan selama evaluasi tidak ada benar/salah, pembahasan, petunjuk, atau bocoran jawaban; analisis internal tetap menghasilkan skor dan penguatan.
 17. Verifikasi Bagian Perlu Penguatan benar-benar berasal dari soal salah dan metadata submateri/indikator. Uji juga kondisi semua benar agar aplikasi tidak mengarang kelemahan.
@@ -2903,7 +2912,7 @@ Gaya game: sederhana, ramah anak, bisa dimainkan di perangkat di atas, dan tidak
       },
       {
         title: "Prompt 1 PRO Desain Game Edukasi Sederhana (Game Flow/Storyboard + Visual UI)",
-        text: `Saya memilih ide nomor [tulis nomor] dengan judul "[tulis judul game]".
+        text: `Pilihan ide (opsional saat menyiapkan prompt): nomor [tulis nomor] dengan judul "[tulis judul game]". Jika belum dipilih, biarkan placeholder dan sesuaikan nanti sebelum Prompt 1 dijalankan.
 Kembangkan ide tersebut menjadi rancangan (desain) lengkap yang mencakup storyboard alur halaman DAN desain visual/UI.
 
 Data game:
@@ -3221,7 +3230,7 @@ Gaya game: sederhana, ramah anak, bisa dimainkan di perangkat di atas, dan membu
       },
       {
         title: "Prompt 1 PRO Desain Game Edukasi Critical Thinking (Game Flow/Storyboard + Visual UI)",
-        text: `Saya memilih ide nomor [tulis nomor] dengan judul "[tulis judul game]".
+        text: `Pilihan ide (opsional saat menyiapkan prompt): nomor [tulis nomor] dengan judul "[tulis judul game]". Jika belum dipilih, biarkan placeholder dan sesuaikan nanti sebelum Prompt 1 dijalankan.
 Kembangkan ide tersebut menjadi rancangan (desain) lengkap dengan penekanan berpikir kritis, mencakup storyboard alur halaman DAN desain visual/UI.
 
 Data game: (sama seperti varian Sederhana — jenjang, mapel, materi, perangkat, jumlah tantangan)
@@ -3521,7 +3530,7 @@ Pastikan ide mudah dipahami guru pemula dan cocok dikembangkan menjadi game.
       },
       {
         title: "Prompt 1 PRO Desain Game Edukasi Skill & Luck (Game Flow/Storyboard + Visual UI)",
-        text: `Saya memilih ide nomor [tulis nomor] dengan judul "[tulis judul game]".
+        text: `Pilihan ide (opsional saat menyiapkan prompt): nomor [tulis nomor] dengan judul "[tulis judul game]". Jika belum dipilih, biarkan placeholder dan sesuaikan nanti sebelum Prompt 1 dijalankan.
 Kembangkan ide tersebut menjadi rancangan (desain) lengkap yang mencakup storyboard alur halaman DAN desain visual/UI.
 
 Data game:
@@ -3843,11 +3852,11 @@ ATURAN LOCK KEBUTUHAN:
 
 Gaya aplikasi: bersih, profesional, mudah dipahami pengguna awam, dan efisien digunakan berulang kali.
 
-[Tempel Modul D1 di sini jika ingin melampirkan contoh format laporan/data yang sudah ada]`
+[Pastekan isi modul atau contoh format laporan/data di sini jika ada]`
       },
       {
         title: "Prompt 1 — Rancangan Aplikasi Lengkap",
-        text: `Saya memilih ide aplikasi nomor [tulis nomor] dengan nama "[tulis nama aplikasi]".
+        text: `Pilihan ide aplikasi (opsional saat menyiapkan prompt): nomor [tulis nomor] dengan nama "[tulis nama aplikasi]". Jika belum dipilih, biarkan placeholder dan sesuaikan nanti sebelum Prompt 1 dijalankan.
 Kembangkan ide tersebut menjadi rancangan aplikasi lengkap yang siap dibuat di Canva Code.
 
 Data aplikasi:
@@ -3873,7 +3882,7 @@ Buatkan rancangan dengan format berikut:
 
 Pastikan hasilnya rapi, mudah dipahami pengguna non-teknis, dan siap dilanjutkan menjadi prompt Canva Code.
 
-[Tempel Modul D1 di sini jika belum dilampirkan di Prompt 0]`
+[Pastekan isi modul/materi di sini jika belum dilampirkan pada Prompt 0]`
       },
       {
         title: "Prompt 2 — Kode Aplikasi Canva Code",
@@ -3901,7 +3910,6 @@ Desain visual: gunakan gaya sesuai arahan visual pada rancangan sebelumnya — b
 
 Output: Prompt siap copy.
 
-[Modul D2 disimpan terpisah, dipakai saat hasil bermasalah]
 
 FINAL TESTING DI CANVA — WAJIB DILAKUKAN SEBELUM MENYATAKAN SELESAI:
 Setelah aplikasi/MPI/game/simulasi/lab maya selesai dibuat di Canva, JANGAN langsung menyatakan pekerjaan selesai. WAJIB uji hasil yang benar-benar sudah dibuat dan lakukan perbaikan bila ada masalah.
@@ -3935,7 +3943,7 @@ Cek Pemahaman Setelah Materi: [Ya / Tidak]
 Feedback Evaluasi Akhir: [Konstruktif — feedback benar dan salah / Tanpa Feedback — penilaian mutlak tanpa benar-salah/pembahasan selama evaluasi]
 Kedalaman Materi: [Disesuaikan oleh AI / Sederhana / Sedang / Mendetail]
 Sisipkan Gambar/Visual dari Link Eksternal: [Ya / Tidak]
-Konfigurasi Evaluasi Akhir (Kognitif): [Atur tipe soal, jumlah soal, dan proporsi LOTS/MOTS/HOTS pada Generator Prompt / Disesuaikan oleh AI]
+Konfigurasi Evaluasi Akhir (Kognitif): [Atur tipe soal, jumlah soal, dan proporsi LOTS/MOTS/HOTS/AKM-PISA pada Generator Prompt / Disesuaikan oleh AI]
 Game Pembelajaran: [Ada / Tidak Ada]
 Jenis Game jika Ada: [Spin Game / Flip Card / Make a Match / Quiz Challenge / Susun Urutan / Drag & Drop / Tebak Gambar / True–False Challenge / Memory Game / Disesuaikan oleh AI]
 Jumlah Game jika Ada: [1 / 2 / Disesuaikan oleh AI]
@@ -3971,7 +3979,7 @@ KETENTUAN INTEGRASI, NAVIGASI, DAN PEDAGOGI:
 - Akses Bebas: Menu Utama tetap menjadi dashboard pusat dan semua menu konten termasuk Evaluasi aktif sejak awal; Lihat Hasil tetap aktif setelah Evaluasi selesai; Cek Pemahaman jika aktif tidak boleh mengunci menu lain.
 - Cek Pemahaman = Ya: setelah tiap materi/submateri utama berikan pertanyaan formatif. Jika salah, beri umpan balik konstruktif, wajibkan siswa kembali membaca materi terkait, dan baru izinkan retry setelah materi dibuka/dipelajari ulang. Cek ini tidak memengaruhi Nilai Evaluasi Akhir. Jika Tidak: jangan buat checkpoint wajib.
 - Feedback Evaluasi = Konstruktif: tampilkan feedback bermakna untuk jawaban benar dan salah. Tanpa Feedback: jangan tampilkan benar/salah/pembahasan/petunjuk selama evaluasi; tetap hitung skor dan penguatan secara internal.
-- Evaluasi Akhir HANYA ranah kognitif. Ikuti Konfigurasi Evaluasi Akhir untuk tipe soal, jumlah soal, dan proporsi LOTS/MOTS/HOTS. Jika rincian ditetapkan guru, patuhi tepat; jika Disesuaikan oleh AI, tentukan berdasarkan jenjang, tujuan pembelajaran, keluasan materi, dan waktu. Setiap soal wajib memuat metadata tipe soal, level kognitif (LOTS/MOTS/HOTS), submateri/topik, dan indikator/tujuan.
+- Evaluasi Akhir HANYA ranah kognitif. Ikuti Konfigurasi Evaluasi Akhir untuk tipe soal, jumlah soal, dan proporsi LOTS/MOTS/HOTS/AKM-PISA. Jika rincian ditetapkan guru, patuhi tepat; jika Disesuaikan oleh AI, tentukan berdasarkan jenjang, tujuan pembelajaran, keluasan materi, dan waktu. Setiap soal wajib memuat metadata tipe soal, level kognitif (LOTS/MOTS/HOTS/AKM-PISA), submateri/topik, dan indikator/tujuan.
 - Kedalaman Materi wajib mengikuti pilihan guru dan tetap sesuai jenjang: Sederhana = konsep esensial + contoh inti; Sedang = penjelasan proporsional + hubungan konsep + contoh + miskonsepsi utama; Mendetail = uraian lebih lengkap + proses/sebab-akibat + penerapan + variasi contoh + miskonsepsi penting. Disesuaikan oleh AI = pilih kedalaman paling efektif dari jenjang, tujuan, durasi, dan kompleksitas.
 - Jika Sisipkan Gambar/Visual dari Link Eksternal = Ya, CHATGPT/AI yang menerima prompt ini WAJIB menjadi pihak yang MENCARI dan MENYIAPKAN link visual melalui pencarian web sebelum memberi jawaban. JANGAN meminta Canva/Canva Code mencari gambar dan jangan menyerahkan pencarian aset ke pengguna.
   Aturan URL visual:
@@ -4009,7 +4017,7 @@ Untuk SETIAP ide, berikan:
 7. Ide Elemen Interaktif — minimal 3
 8. Rencana Cek Pemahaman — hanya jika aktif, termasuk alur salah → baca ulang → retry
 9. Rencana Refleksi Siswa
-10. Rencana Evaluasi — khusus kognitif; ikuti tipe soal, jumlah soal, dan proporsi LOTS/MOTS/HOTS dari konfigurasi; sertakan mode feedback serta metadata tipe, level kognitif, submateri, dan indikator untuk penguatan
+10. Rencana Evaluasi — khusus kognitif; ikuti tipe soal, jumlah soal, dan proporsi LOTS/MOTS/HOTS/AKM-PISA dari konfigurasi; sertakan mode feedback serta metadata tipe, level kognitif, submateri, dan indikator untuk penguatan
 11. Rencana Game — jika aktif; jenis, mekanisme, alasan pedagogis, posisi; jika Disesuaikan oleh AI sebutkan pilihan AI dan alasannya
 12. Pengaturan Canva Sheet & Navigasi — jelaskan penerapan semua pilihan dan jaminan Home/Menu Utama selalu tersedia
 13. Rekomendasi Gambar/Visual Eksternal — hanya jika opsi ini diaktifkan; CHATGPT/AI wajib mencari web terlebih dahulu dengan PRIORITAS SUMBER INDONESIA dan visual berlabel Bahasa Indonesia, lalu tampilkan tabel: Bagian MPI/No. Soal | Fungsi Pedagogis | Deskripsi + Alt Text Bahasa Indonesia | Asal Referensi (Indonesia/Internasional) | Bahasa Label di Gambar | Format | Halaman Sumber | Lisensi/Akses (jika tersedia) | DIRECT_IMAGE_URL_READY_FOR_CANVA. Kolom terakhir wajib berupa URL HTTPS langsung yang siap ditempel ke src di Canva Code, bukan halaman pencarian/sumber. Jika pilihan bukan dari Indonesia atau label di dalam gambar bukan Bahasa Indonesia, jelaskan singkat alasannya.
@@ -4018,7 +4026,7 @@ Untuk SETIAP ide, berikan:
 
 Setelah 3 ide ditampilkan, beri rekomendasi singkat ide yang paling mudah dieksekusi di Canva Code dan alasannya.
 
-[Tempel Modul D1 di sini jika ingin melampirkan silabus/modul ajar/buku materi]
+[Pastekan isi modul, silabus, modul ajar, atau materi buku di sini jika ingin digunakan sebagai referensi]
 
 STANDAR MUATAN MATERI MPI — WAJIB:
 1. Materi wajib mengikuti pilihan Kedalaman Materi dari Prompt 0 dan tetap sesuai jenjang. Sederhana = fokus pada konsep esensial, penjelasan ringkas yang utuh, dan contoh inti; Sedang = penjelasan proporsional, hubungan antarkonsep, contoh penerapan, dan miskonsepsi utama; Mendetail = uraian lebih lengkap tentang konsep, proses/sebab-akibat, hubungan antarkonsep, penerapan, variasi contoh, dan miskonsepsi penting. Jika Disesuaikan oleh AI, tentukan kedalaman berdasarkan jenjang, tujuan pembelajaran, estimasi waktu, keluasan, dan kompleksitas materi.
@@ -4031,12 +4039,13 @@ STANDAR MUATAN MATERI MPI — WAJIB:
       },
       {
         title: "Prompt 1 — Kembangkan Ide MPI Terpilih",
-        text: `Nomor Ide Pilihan: [nomor ide]
+        text: `Nomor Ide Pilihan (Opsional): [nomor ide]
+Jika bagian ini masih kosong/berupa placeholder, prompt tetap boleh disiapkan dan disalin. Isi atau sesuaikan nomor ide nanti sebelum Prompt 1 benar-benar dijalankan. Jangan mengarang nomor ide.
 
-Gunakan jawaban Prompt 0 yang sudah ada di percakapan ini sebagai sumber konteks utama. Saya hanya memilih nomor ide; JANGAN meminta ulang judul, tema, mata pelajaran, jenjang/kelas, materi, Tujuan Pembelajaran, kurikulum, perangkat, JP, Bahasa Konten, konfigurasi evaluasi, game, Canva Sheet, akses menu, kedalaman materi, atau pilihan visual eksternal.
+Gunakan jawaban Prompt 0 yang sudah ada di percakapan ini sebagai sumber konteks utama. Jika nomor ide sudah diisi, gunakan pilihan tersebut; JANGAN meminta ulang judul, tema, mata pelajaran, jenjang/kelas, materi, Tujuan Pembelajaran, kurikulum, perangkat, JP, Bahasa Konten, konfigurasi evaluasi, game, Canva Sheet, akses menu, kedalaman materi, atau pilihan visual eksternal.
 
 ATURAN WARISAN DARI PROMPT 0 — WAJIB:
-1. Pilih tepat ide sesuai Nomor Ide Pilihan di atas.
+1. Jika Nomor Ide Pilihan sudah diisi, pilih tepat ide tersebut. Jika masih kosong saat prompt dijalankan, minta pengguna memilih salah satu ide hasil Prompt 0; jangan menentukan nomor secara sepihak.
 2. Warisi TUJUAN PEMBELAJARAN FINAL dari Prompt 0. Jika TP awal dikosongkan guru, gunakan TP yang sudah disusun AI pada Prompt 0; jangan menyusun TP baru yang berbeda pada tahap ini.
 3. Warisi seluruh keputusan Prompt 0 yang berlaku pada ide terpilih: kurikulum/acuan, perangkat, estimasi JP, Bahasa Konten, Canva Sheet, mode akses, Cek Pemahaman, Feedback Evaluasi, Kedalaman Materi, visual eksternal, konfigurasi Evaluasi Akhir, Game Pembelajaran, serta keputusan lain yang sudah ditetapkan.
 4. STRUKTUR MPI WAJIB mengikuti bagian "Struktur MPI yang Diusulkan" dari ide terpilih pada Prompt 0. Pertahankan urutan, hierarki layar/menu, pembagian materi/submateri, posisi interaksi, cek pemahaman, refleksi, evaluasi, game bila aktif, hasil, dan visual eksternal yang sudah dirancang. JANGAN menggantinya dengan template struktur generik yang berbeda.
@@ -4054,7 +4063,7 @@ CARA MENGEMBANGKAN IDE TERPILIH:
 - Perinci Materi sesuai Kedalaman Materi dan jenjang, dengan apersepsi kontekstual, manfaat mempelajari materi, contoh konkret, aktivitas/interaksi, dan pembagian submateri yang konsisten dengan struktur Prompt 0.
 - Jika Cek Pemahaman aktif, buat database item formatif per submateri beserta jawaban, feedback, serta alur salah → baca ulang → retry sesuai mode akses.
 - Rancang Refleksi sesuai struktur ide dan jenjang; minimal mencakup yang sudah dipahami, yang masih sulit, dan rencana perbaikan.
-- Evaluasi Akhir hanya kognitif. Jumlah soal, tipe soal, dan proporsi LOTS/MOTS/HOTS harus persis mengikuti konfigurasi Prompt 0. Tiap item memuat tipe, level, pertanyaan, pilihan bila ada, jawaban benar, submateri/topik, indikator/tujuan yang diukur, serta feedback hanya bila mode Konstruktif.
+- Evaluasi Akhir hanya kognitif. Jumlah soal, tipe soal, dan proporsi LOTS/MOTS/HOTS/AKM-PISA harus persis mengikuti konfigurasi Prompt 0. Tiap item memuat tipe, level, pertanyaan, pilihan bila ada, jawaban benar, submateri/topik, indikator/tujuan yang diukur, serta feedback hanya bila mode Konstruktif.
 - Bagian Perlu Penguatan harus berasal dari jawaban Evaluasi yang salah dan metadata submateri/indikator.
 - Game hanya dirancang jika aktif pada Prompt 0; skor game terpisah dari Nilai Evaluasi Akhir dan game tidak menjadi syarat ketuntasan kecuali Prompt 0 secara eksplisit menetapkannya.
 - Jika Canva Sheet aktif, rincikan payload, waktu kirim, status berhasil/gagal, dan retry sesuai keputusan Prompt 0.
@@ -4084,7 +4093,7 @@ WAJIB mempertahankan seluruh keputusan dari Prompt 0 dan Prompt 1:
 - Feedback Evaluasi Akhir: [Konstruktif / Tanpa Feedback]
 - Kedalaman Materi: [ikuti sesuai Prompt 0]
 - Sisipkan Gambar/Visual dari Link Eksternal: [Ya / Tidak]
-- Konfigurasi Evaluasi Akhir (Kognitif): [ikuti tipe soal, jumlah soal, dan proporsi LOTS/MOTS/HOTS sesuai Prompt 0]
+- Konfigurasi Evaluasi Akhir (Kognitif): [ikuti tipe soal, jumlah soal, dan proporsi LOTS/MOTS/HOTS/AKM-PISA sesuai Prompt 0]
 - Game Pembelajaran: [Ada / Tidak Ada]
 - Jenis & Jumlah Game: [sesuai pilihan sebelumnya]
 
@@ -4114,7 +4123,7 @@ STATE & DATA — WAJIB:
 10. Terapkan prinsip akses kumulatif/monotonic untuk mode Berurutan: topik yang sudah unlock tidak boleh terkunci kembali hanya karena siswa maju. Membuka ulang topik lama adalah review dan tidak boleh mereset progress atau status topik lain.
 11. Jika Cek Pemahaman = Ya, simpan state belum mencoba / benar / salah-perlu-baca-ulang / siap-retry; setelah salah, retry baru aktif setelah siswa membuka kembali materi terkait.
 12. Simpan Refleksi Siswa minimal: sudah dipahami, masih sulit/membingungkan, rencana agar lebih paham.
-14. Database Evaluasi hanya berisi soal kognitif dan wajib mengikuti konfigurasi Prompt 0: jumlah soal tepat, hanya tipe soal terpilih, serta distribusi LOTS/MOTS/HOTS sesuai proporsi. Setiap soal memiliki metadata tipe soal, level kognitif, submateri/topik, dan indikator/tujuan untuk analisis penguatan.
+14. Database Evaluasi hanya berisi soal kognitif dan wajib mengikuti konfigurasi Prompt 0: jumlah soal tepat, hanya tipe soal terpilih, serta distribusi LOTS/MOTS/HOTS/AKM-PISA sesuai proporsi. Setiap soal memiliki metadata tipe soal, level kognitif, submateri/topik, dan indikator/tujuan untuk analisis penguatan.
 
 ATURAN CANVA SHEET — KONDISIONAL:
 14. Jika Ya: Nama/Kelas wajib; setelah hasil lengkap tersedia, kirim Nama, Kelas, Nilai, Kategori Hasil, Bagian Perlu Penguatan, Refleksi Siswa; tampilkan mengirim/berhasil/gagal/coba lagi.
@@ -4135,7 +4144,7 @@ REFLEKSI:
 23. Secara default Refleksi tidak menjadi syarat unlock Evaluasi; syarat Evaluasi mengikuti mode akses dan status materi/cek pemahaman.
 
 EVALUASI & PENGUATAN:
-- Evaluasi hanya kognitif. Implementasikan jumlah soal, tipe soal, dan distribusi LOTS/MOTS/HOTS tepat sesuai Konfigurasi Evaluasi Akhir Prompt 0; jangan menambah ranah non-kognitif pada Evaluasi Akhir.
+- Evaluasi hanya kognitif. Implementasikan jumlah soal, tipe soal, dan distribusi LOTS/MOTS/HOTS/AKM-PISA tepat sesuai Konfigurasi Evaluasi Akhir Prompt 0; jangan menambah ranah non-kognitif pada Evaluasi Akhir.
 24. Skor otomatis + kategori hasil.
 25. Feedback Konstruktif: tampilkan feedback benar/salah yang menjelaskan alasan. Tanpa Feedback: selama evaluasi jangan tampilkan benar/salah, pembahasan, petunjuk, atau jawaban benar.
 26. Bagian Perlu Penguatan dihitung dari soal salah dengan mengelompokkan metadata submateri/indikator. Riwayat cek pemahaman boleh menjadi informasi pendukung tetapi tidak mengubah nilai.
@@ -4158,7 +4167,7 @@ SEBELUM OUTPUT FINAL, WAJIB UJI:
 - Lihat Hasil terlihat sejak awal, tidak membuka hasil kosong sebelum Evaluasi, lalu aktif dan menampilkan hasil yang benar setelah Evaluasi selesai.
 - Mode akses yang dipilih bekerja sesuai aturan; khusus Berurutan uji Materi 1 → Materi 2 → Materi 3, pastikan submateri masa depan tidak dapat dilompati, lalu uji navigasi balik Materi 3 → Materi 2 → Materi 1 untuk memastikan semua topik yang sudah unlock tetap dapat diulas tanpa mengubah progres.
 - Jika Cek aktif: salah → lanjut terblokir sesuai mode → baca ulang → retry → benar → tuntas; Bebas tidak ikut terkunci.
-- Konfigurasi Evaluasi Akhir sesuai Prompt 0: hanya kognitif, jumlah soal tepat, tipe soal sesuai pilihan, dan distribusi LOTS/MOTS/HOTS sesuai konfigurasi.
+- Konfigurasi Evaluasi Akhir sesuai Prompt 0: hanya kognitif, jumlah soal tepat, tipe soal sesuai pilihan, dan distribusi LOTS/MOTS/HOTS/AKM-PISA sesuai konfigurasi.
 - Feedback Evaluasi sesuai pilihan dan mode Tanpa Feedback tidak membocorkan hasil per soal.
 - Refleksi tersimpan dan muncul di hasil/payload.
 - Penguatan berasal dari metadata soal salah.
@@ -4168,7 +4177,6 @@ SEBELUM OUTPUT FINAL, WAJIB UJI:
 
 Output: Prompt siap copy.
 
-[Modul D2 disimpan terpisah, dipakai saat hasil bermasalah]
 
 STANDAR MUATAN MATERI MPI — WAJIB:
 1. Materi wajib mengikuti pilihan Kedalaman Materi dari Prompt 0 dan tetap sesuai jenjang. Sederhana = fokus pada konsep esensial, penjelasan ringkas yang utuh, dan contoh inti; Sedang = penjelasan proporsional, hubungan antarkonsep, contoh penerapan, dan miskonsepsi utama; Mendetail = uraian lebih lengkap tentang konsep, proses/sebab-akibat, hubungan antarkonsep, penerapan, variasi contoh, dan miskonsepsi penting. Jika Disesuaikan oleh AI, tentukan kedalaman berdasarkan jenjang, tujuan pembelajaran, estimasi waktu, keluasan, dan kompleksitas materi.
@@ -4187,7 +4195,7 @@ Setelah aplikasi/MPI selesai dibuat di Canva, JANGAN langsung menyatakan pekerja
 4. Uji mode akses yang DIPILIH: Berurutan harus menampilkan semua Materi 1, 2, dst. dan membuka topik baru sesuai urutan secara kumulatif—topik yang sudah terbuka/tuntas tetap dapat dibuka ulang untuk review, sementara topik masa depan tetap terkunci; Evaluasi Terkunci harus membebaskan urutan materi tetapi menampilkan Evaluasi dalam state terkunci sesuai syarat; Bebas harus membuka semua menu termasuk Evaluasi sejak awal.
 5. Jika Cek Pemahaman aktif, uji jawaban salah → feedback konstruktif → lanjut terblokir sesuai mode → kembali membuka materi → retry aktif → jawaban benar → status tuntas. Pastikan siswa tidak dapat spam retry tanpa reread dan percobaan cek tidak mengubah Nilai Evaluasi Akhir. Jika fitur tidak aktif, pastikan tidak ada sisa checkpoint wajib.
 6. Uji Refleksi: input tersimpan selama sesi, dapat ditampilkan kembali, dan masuk ke halaman hasil serta payload Canva Sheet bila digunakan.
-7. Uji Evaluasi: pastikan hanya kognitif, jumlah soal tepat, tipe soal sesuai pilihan, distribusi LOTS/MOTS/HOTS sesuai konfigurasi, metadata tipe/level/submateri/indikator lengkap, skor, kategori, reset/ulang, dan mode Feedback. Konstruktif harus memberi feedback benar/salah yang bermakna; Tanpa Feedback tidak boleh membocorkan benar/salah/pembahasan/petunjuk selama pengerjaan.
+7. Uji Evaluasi: pastikan hanya kognitif, jumlah soal tepat, tipe soal sesuai pilihan, distribusi LOTS/MOTS/HOTS/AKM-PISA sesuai konfigurasi, metadata tipe/level/submateri/indikator lengkap, skor, kategori, reset/ulang, dan mode Feedback. Konstruktif harus memberi feedback benar/salah yang bermakna; Tanpa Feedback tidak boleh membocorkan benar/salah/pembahasan/petunjuk selama pengerjaan.
 8. Verifikasi Bagian Perlu Penguatan benar-benar berasal dari soal Evaluasi yang salah dan metadata submateri/indikator. Uji kondisi semua benar agar aplikasi tidak mengarang area lemah.
 9. Jika Game aktif, uji mekanisme sesuai jenis, feedback, reset/selesai, skor game terpisah, dan pastikan game tidak memengaruhi Nilai Evaluasi Akhir maupun syarat unlock Evaluasi. Jika Game Tidak Ada, pastikan tidak ada menu/state/skor game tersisa.
 10. Jika Canva Sheet = Ya, uji validasi Nama/Kelas dan pengiriman Nama, Kelas, Nilai, Kategori, Bagian Perlu Penguatan, Refleksi Siswa, status mengirim/berhasil/gagal, dan retry. Jika Tidak, pastikan tidak ada integrasi Sheet/endpoint/status sinkronisasi.
@@ -4231,12 +4239,12 @@ Berikan setiap ide dengan format:
 
 Gaya game: sederhana, ramah anak, bisa dimainkan di [HP/laptop/IFP], dan tidak hanya fun tapi membuat siswa berpikir.
 
-[Tempel Modul D1 di sini jika ingin melampirkan materi]`
+[Pastekan isi modul/materi di sini jika ada]`
       },
       {
         title: "Prompt 1 — Rancangan Lengkap Game Sederhana",
         updatedAt: "15 September 2026",
-        text: `Saya memilih ide game nomor [tulis nomor] dengan judul "[tulis judul game]".
+        text: `Pilihan ide game (opsional saat menyiapkan prompt): nomor [tulis nomor] dengan judul "[tulis judul game]". Jika belum dipilih, biarkan placeholder dan sesuaikan nanti sebelum Prompt 1 dijalankan.
 Kembangkan ide tersebut menjadi rancangan game edukasi lengkap yang siap dibuat di Canva Code.
 
 Data game:
@@ -4261,7 +4269,7 @@ Buatkan rancangan dengan format berikut:
 
 Pastikan hasilnya rapi, mudah dipahami guru pemula, dan siap dilanjutkan menjadi prompt Canva Code.
 
-[Tempel Modul D1 di sini jika belum dilampirkan di Prompt 0]`
+[Pastekan isi modul/materi di sini jika belum dilampirkan pada Prompt 0]`
       },
       {
         title: "Prompt 2 — Kode Canva Code Game Sederhana",
@@ -4288,7 +4296,6 @@ Desain visual: sesuai tema rancangan sebelumnya — menarik, ramah anak, bersih,
 
 Output: Prompt siap copy.
 
-[Modul D2 disimpan terpisah, dipakai saat hasil bermasalah]
 
 FINAL TESTING DI CANVA — WAJIB DILAKUKAN SEBELUM MENYATAKAN SELESAI:
 Setelah aplikasi/MPI/game/simulasi/lab maya selesai dibuat di Canva, JANGAN langsung menyatakan pekerjaan selesai. WAJIB uji hasil yang benar-benar sudah dibuat dan lakukan perbaikan bila ada masalah.
@@ -4340,12 +4347,12 @@ Berikan setiap ide dengan format:
 
 Gaya game: sederhana, ramah anak, bisa dimainkan di [HP/laptop/IFP], dan membuat siswa berpikir, bukan hanya fun.
 
-[Tempel Modul D1 di sini jika ingin melampirkan materi]`
+[Pastekan isi modul/materi di sini jika ada]`
       },
       {
         title: "Prompt 1 — Rancangan Lengkap Game Critical Thinking",
         updatedAt: "15 September 2026",
-        text: `Saya memilih ide game nomor [tulis nomor] dengan judul "[tulis judul game]".
+        text: `Pilihan ide game (opsional saat menyiapkan prompt): nomor [tulis nomor] dengan judul "[tulis judul game]". Jika belum dipilih, biarkan placeholder dan sesuaikan nanti sebelum Prompt 1 dijalankan.
 Kembangkan ide tersebut menjadi rancangan game edukasi lengkap dengan penekanan berpikir kritis, siap dibuat di Canva Code.
 
 Data game: (sama seperti varian Sederhana — jenjang, mapel, materi, perangkat, jumlah tantangan)
@@ -4362,7 +4369,7 @@ Buatkan rancangan dengan format berikut:
 
 Pastikan hasilnya rapi, mudah dipahami guru pemula, dan siap dilanjutkan menjadi prompt Canva Code.
 
-[Tempel Modul D1 di sini jika belum dilampirkan di Prompt 0]`
+[Pastekan isi modul/materi di sini jika belum dilampirkan pada Prompt 0]`
       },
       {
         title: "Prompt 2 — Kode Canva Code Game Critical Thinking",
@@ -4383,7 +4390,6 @@ Tambahan khusus critical thinking:
 
 Output: Prompt siap copy.
 
-[Modul D2 disimpan terpisah, dipakai saat hasil bermasalah]
 
 FINAL TESTING DI CANVA — WAJIB DILAKUKAN SEBELUM MENYATAKAN SELESAI:
 Setelah aplikasi/MPI/game/simulasi/lab maya selesai dibuat di Canva, JANGAN langsung menyatakan pekerjaan selesai. WAJIB uji hasil yang benar-benar sudah dibuat dan lakukan perbaikan bila ada masalah.
@@ -4444,12 +4450,12 @@ Rumus: Nilai Murni = (skor jawaban benar ÷ skor maksimal) × 100
 
 Pastikan ide mudah dipahami guru pemula dan cocok dikembangkan menjadi game Canva Code.
 
-[Tempel Modul D1 di sini jika ingin melampirkan materi]`
+[Pastekan isi modul/materi di sini jika ada]`
       },
       {
         title: "Prompt 1 — Rancangan Lengkap Game Luck & Skill",
         updatedAt: "15 September 2026",
-        text: `Saya memilih ide game nomor [tulis nomor ide] dengan judul “[tulis judul game]”.
+        text: `Pilihan ide game (opsional saat menyiapkan prompt): nomor [tulis nomor ide] dengan judul “[tulis judul game]”. Jika belum dipilih, biarkan placeholder dan sesuaikan nanti sebelum Prompt 1 dijalankan.
 Kembangkan ide tersebut menjadi rancangan game edukasi lengkap yang siap dibuat di Canva Code.
 
 Data game:
@@ -5322,13 +5328,13 @@ Hasil akhir harus menjadi: Game edukasi + asesmen interaktif, bukan hanya game d
     id: "paket-prompt",
     name: "Paket Prompt Canva AI",
     icon: "📘",
-    keywords: "paket prompt ideasi rancangan kode aplikasi MPI game sederhana critical thinking luck skill modul referensi lock genre",
+    keywords: "paket prompt ideasi rancangan kode aplikasi MPI game sederhana critical thinking luck skill materi referensi lock genre",
     prompts: [
       {
-        title: "Modul D1 — Lampiran Referensi Materi",
-        text: `Tempel blok ini di akhir Prompt 0 atau Prompt 1.
+        title: "Paste Isi Modul / Materi Referensi",
+        text: `Gunakan bagian ini bila Anda memiliki modul atau materi referensi. Pastekan isinya di akhir Prompt 0 atau Prompt 1.
 
-Cara pakai: sebelum mengirim prompt, lampirkan file (PDF/gambar/dokumen) langsung di kolom chat Canva AI, ATAU tempelkan teks materi — termasuk hasil obrolan dengan AI lain seperti ChatGPT/Gemini — menggantikan bagian bertanda kurung siku.
+Cara pakai: sebelum mengirim prompt, lampirkan file (PDF/gambar/dokumen) langsung di kolom chat Canva AI, ATAU pastekan teks isi modul/materi — termasuk hasil obrolan dengan AI lain seperti ChatGPT/Gemini — menggantikan bagian bertanda kurung siku.
 
 ---
 
@@ -5336,24 +5342,6 @@ Berikut materi referensi yang harus menjadi dasar produk:
 [tempel teks materi di sini]
 
 Jika materi terlampir sebagai file, gunakan isi file tersebut sebagai acuan utama. Jangan menambahkan materi di luar referensi kecuali saya minta.`
-      },
-      {
-        title: "Modul D2 — Prompt Perbaikan / Debug",
-        text: `Gunakan prompt ini kapan saja hasil di Canva Code error atau macet.
-
----
-
-Hasil game saya di Canva Code bermasalah. Jangan menulis ulang seluruh kode.
-
-Perbaiki hanya bagian yang bermasalah: [jelaskan error atau masalah yang terjadi]
-
-Ketentuan:
-1. Tanpa mengubah struktur, alur, soal, dan fitur lain yang sudah berjalan baik.
-2. Perbaiki langsung di bagian yang error saja.
-3. Setelah perbaikan, pastikan semua tombol tetap berfungsi dan tidak muncul error baru.
-4. Kode tetap dalam satu file HTML, CSS, dan JavaScript.
-
-Jika masalah tidak bisa diperbaiki tanpa mengubah struktur, jelaskan dulu perubahan yang Anda rencanakan dan tunggu persetujuan saya.`
       },
       {
         title: "Modul D3 — Aturan Lock Konsep Genre",
@@ -8119,7 +8107,7 @@ function prioritizeEducationLevelFields(fields=[]){
 function renderGeneratorTemplate(){
   const ps=activeGeneratorPrompts();if(!ps.length){els.genInfo.innerHTML=isPackageMode()&&!state.generatorVersion?'<strong>Pilih Versi Biasa atau PRO.</strong><p>Pilihan versi wajib sebelum data proyek dan rangkaian prompt ditampilkan.</p>':'<strong>Belum ada template.</strong><p>Pilih jenis/versi lain atau hapus kata pencarian.</p>';els.genFields.innerHTML='<div class="no-fields">Pilih versi/paket terlebih dahulu untuk menampilkan form data.</div>';updateGeneratorActionButton();return;}
   if(isPackageMode()){
-    const d=currentPackageDef();const first=ps[0],last=ps[ps.length-1];const mpiInfo=state.generatorType==='mpi'?` Isi <strong>Prompt 0</strong> terlebih dahulu dan jalankan di AI. Setelah dikonfirmasi, <strong>Prompt 1 hanya meminta Nomor Ide Pilihan</strong>; perubahan isi/struktur dilakukan langsung pada teks Prompt 1 yang sudah disalin, bukan lewat form Generator Prompt.`:` Isi <strong>Prompt 0</strong> terlebih dahulu, jalankan di AI, lalu konfirmasi untuk membuka isian <strong>Prompt 1 dan data lanjutan</strong>.`;els.genInfo.innerHTML=`<strong>${first.icon} ${escapeHtml(d?.label||first.categoryName)}</strong><p>${ps.length} prompt tersedia sebagai rangkaian bertahap.${mpiInfo} Setelah dikonfirmasi, Panel 4 dapat menampilkan seluruh rangkaian sampai <strong>${escapeHtml(last.title)}</strong>.</p><div class="package-sequence"><strong>Urutan:</strong> ${ps.map((p,i)=>`${i===ps.length-1?'Prompt Akhir':`Prompt ${promptSequenceOrder(p)}`}`).join(' → ')}</div>`;
+    const d=currentPackageDef();const first=ps[0],last=ps[ps.length-1];const mpiInfo=state.generatorType==='mpi'?` Isi <strong>Prompt 0</strong> terlebih dahulu dan jalankan di AI. Setelah dikonfirmasi, <strong>Nomor Ide Pilihan di Prompt 1 bersifat opsional saat menyiapkan prompt</strong>; perubahan isi/struktur dilakukan langsung pada teks Prompt 1 yang sudah disalin, bukan lewat form Generator Prompt.`:` Isi <strong>Prompt 0</strong> terlebih dahulu, jalankan di AI, lalu konfirmasi untuk membuka isian <strong>Prompt 1 dan data lanjutan</strong>.`;els.genInfo.innerHTML=`<strong>${first.icon} ${escapeHtml(d?.label||first.categoryName)}</strong><p>${ps.length} prompt tersedia sebagai rangkaian bertahap.${mpiInfo} Setelah dikonfirmasi, Panel 4 dapat menampilkan seluruh rangkaian sampai <strong>${escapeHtml(last.title)}</strong>.</p><div class="package-sequence"><strong>Urutan:</strong> ${ps.map((p,i)=>`${i===ps.length-1?'Prompt Akhir':`Prompt ${promptSequenceOrder(p)}`}`).join(' → ')}</div>`;
   }else{
     const p=ps[0];els.genInfo.innerHTML=`<strong>${p.icon} ${escapeHtml(p.title)}</strong><p>${escapeHtml(p.categoryName)} • ${escapeHtml(truncate(p.text.replace(/\s+/g,' '),180))}</p>`;
   }
@@ -8240,9 +8228,9 @@ const videoGeneratorFieldConfig={
 };
 const mpiGeneratorFieldConfig={
   'tujuan-pembelajaran':{label:'Tujuan Pembelajaran (Opsional)',type:'textarea',placeholder:'Contoh: Peserta didik mampu menganalisis hubungan gaya dan gerak melalui contoh kontekstual.',help:'Isi jika sudah memiliki Tujuan Pembelajaran. Jika kosong, AI menyusun otomatis sesuai kurikulum/acuan, jenjang/kelas, mata pelajaran, topik, kedalaman materi, dan estimasi waktu. TP final diputuskan di Prompt 0 dan tidak diminta lagi pada Prompt 1.'},
-  'idea-choice':{label:'Nomor Ide Pilihan',type:'ideaNumber',help:'Setelah menjalankan Prompt 0 dan membaca ide yang dihasilkan, masukkan nomor ide yang ingin dikembangkan. Prompt 1 hanya membutuhkan nomor ini; modifikasi isi/struktur dilakukan langsung pada teks Prompt 1 setelah disalin.'},
+  'idea-choice':{label:'Nomor Ide Pilihan (Opsional)',type:'ideaNumber',help:'Boleh dikosongkan saat menyiapkan prompt. Isi nomor ide setelah Prompt 0 menghasilkan pilihan, atau sesuaikan langsung nanti pada teks Prompt 1 sebelum dijalankan. Modifikasi isi/struktur tetap dapat dilakukan pada teks hasil salin.'},
   'material-depth':{label:'Kedalaman Materi',type:'select',options:[['Disesuaikan oleh AI','Disesuaikan oleh AI — berdasarkan jenjang, tujuan, waktu, dan kompleksitas'],['Sederhana','Sederhana — konsep esensial, ringkas tetapi utuh, contoh inti'],['Sedang','Sedang — proporsional, hubungan konsep, contoh, dan miskonsepsi utama'],['Mendetail','Mendetail — lebih lengkap, proses/sebab-akibat, penerapan, variasi contoh, dan miskonsepsi']],help:'Kedalaman selalu tetap menyesuaikan jenjang. “Sederhana” berarti lebih fokus dan ringkas, bukan mengurangi akurasi konsep.'},
-  'mpi-evaluation':{label:'Evaluasi Akhir — Kognitif',type:'mpiEvaluation',help:'Sama seperti konfigurasi asesmen formatif pada Modul Ajar, tetapi khusus kognitif: pilih tipe soal, jumlah soal, dan proporsi LOTS/MOTS/HOTS. Kosongkan rincian tertentu jika ingin AI menentukannya.'},
+  'mpi-evaluation':{label:'Evaluasi Akhir — Kognitif',type:'mpiEvaluation',help:'Sama seperti konfigurasi asesmen formatif pada Modul Ajar, tetapi khusus kognitif: pilih tipe soal, jumlah soal, dan proporsi LOTS/MOTS/HOTS/AKM-PISA. Kosongkan rincian tertentu jika ingin AI menentukannya.'},
   'external-visual-links':{label:'Sisipkan Gambar/Visual dari Link Eksternal',type:'select',options:[['','— Pilih Ya atau Tidak —'],['Ya','Ya — ChatGPT carikan URL gambar siap Canva Code'],['Tidak','Tidak — tanpa gambar/visual eksternal']],help:'Jika Ya, ChatGPT/AI yang menerima prompt wajib mencari web dan menyiapkan URL HTTPS langsung yang publik, stabil, relevan, dan siap dipakai pada src di Canva Code. Utamakan referensi Indonesia dan gambar yang judul/label/legenda/nama bagiannya memakai Bahasa Indonesia. Jika tidak tersedia, pilih visual Indonesia tanpa teks lalu visual internasional yang netral tanpa teks; visual berlabel bahasa asing hanya sebagai pilihan terakhir. Canva/Canva Code tidak diminta mencari gambar. Prioritaskan PNG, JPG/JPEG, WEBP, SVG, atau GIF bila relevan; jangan mengarang link yang belum diverifikasi.'}
 };
 const generalGeneratorFieldConfig={
@@ -8326,7 +8314,7 @@ function initSpecialGeneratorFields(){
       let sum=0,any=false;const lv=[];
       $$('[data-mpi-eval-level]').forEach(inp=>{if(inp.value.trim()!==''){const v=Number(inp.value)||0;sum+=v;any=true;lv.push(`${inp.dataset.mpiEvalLevel} ${v}%`);}});
       const total=$('[data-mpi-eval-total]');if(total){total.classList.toggle('ok',any&&sum===100);total.classList.toggle('bad',any&&sum!==100);total.textContent=any?`Total: ${sum}%${sum===100?' ✓':' — harus 100%'}`:'Kosong = AI menentukan • jika diisi total harus 100%';}
-      mpiEvaluationHidden.value=`Hanya kognitif | Tipe soal: ${qs.length?qs.join(', '):'ditentukan AI'} | Jumlah soal: ${count||'ditentukan AI'} | Level LOTS/MOTS/HOTS: ${any?lv.join(', '):'ditentukan AI sesuai jenjang dan tujuan'}`;
+      mpiEvaluationHidden.value=`Hanya kognitif | Tipe soal: ${qs.length?qs.join(', '):'ditentukan AI'} | Jumlah soal: ${count||'ditentukan AI'} | Level LOTS/MOTS/HOTS/AKM-PISA: ${any?lv.join(', '):'ditentukan AI sesuai jenjang dan tujuan'}`;
     };
     $$('[data-mpi-eval-qtype]').forEach(el=>el.addEventListener('change',syncMpiEvaluation));
     $$('[data-mpi-eval-count],[data-mpi-eval-level]').forEach(el=>el.addEventListener('input',syncMpiEvaluation));
@@ -8373,7 +8361,7 @@ function initSpecialGeneratorFields(){
     };
     lkpdOutput.addEventListener('change',syncLKPDOutput);syncLKPDOutput();
   }
-  if(typeof applyGeneratorFormMode==='function')applyGeneratorFormMode(localStorage.getItem('promptEduGeneratorFormModeV1')||'full',false);
+  if(typeof applyGeneratorFormMode==='function')applyGeneratorFormMode(localStorage.getItem('promptEduGeneratorFormModeV1')||'quick',false);
   initGeneratorProgressive();
 }
 function generatorProgressGroup(f,cfg,label){
@@ -8419,7 +8407,7 @@ function renderGeneratorField(f,id,disabled){
     control=`<textarea class="form-control" id="${id}" data-token="${escapeHtml(f.token)}" data-video-character-detail placeholder="${escapeHtml(ph)}" ${disabled?'disabled':''}></textarea>`;
   }else if(cfg?.type==='mpiEvaluation'){
     const qtypes=['PG','PG Kompleks','Uraian','Isian Singkat','Menjodohkan','Mengurutkan','Benar Salah','SJT'];
-    control=`<input type="hidden" id="${id}" data-token="${escapeHtml(f.token)}" data-mpi-evaluation-hidden value="" ${disabled?'disabled':''}/><div class="assessment-config"><div class="assessment-intro"><strong>Evaluasi Akhir khusus kognitif.</strong> Pilih tipe soal, jumlah soal, dan proporsi LOTS/MOTS/HOTS. Sama seperti pola asesmen formatif, tetapi tanpa ranah non-kognitif.</div><div class="assessment-domain-panel"><div class="assessment-subtitle">Tipe soal</div><div class="assessment-choice-grid">${qtypes.map(q=>`<label class="assessment-choice"><input type="checkbox" data-mpi-eval-qtype value="${q}" ${disabled?'disabled':''}/>${q}</label>`).join('')}</div><div class="assessment-subtitle">Jumlah soal</div><input class="form-control" type="number" min="1" max="100" step="1" inputmode="numeric" data-mpi-eval-count placeholder="Kosong = ditentukan AI" ${disabled?'disabled':''}/><div class="assessment-subtitle">Proporsi level kognitif (%)</div><div class="assessment-level-grid">${['LOTS','MOTS','HOTS'].map(l=>`<label class="assessment-level">${l}<input type="number" min="0" max="100" step="1" inputmode="numeric" data-mpi-eval-level="${l}" placeholder="0" ${disabled?'disabled':''}/></label>`).join('')}</div><div class="assessment-level-total" data-mpi-eval-total>Kosong = AI menentukan • jika diisi total harus 100%</div></div><div class="assessment-note-final">Jika hanya memilih satu level, isi level tersebut 100%. Jika semua level kosong, AI menentukan komposisi sesuai jenjang, TP, materi, dan waktu.</div></div>`;
+    control=`<input type="hidden" id="${id}" data-token="${escapeHtml(f.token)}" data-mpi-evaluation-hidden value="" ${disabled?'disabled':''}/><div class="assessment-config"><div class="assessment-intro"><strong>Evaluasi Akhir khusus kognitif.</strong> Pilih tipe soal, jumlah soal, dan proporsi LOTS/MOTS/HOTS/AKM-PISA. Sama seperti pola asesmen formatif, tetapi tanpa ranah non-kognitif.</div><div class="assessment-domain-panel"><div class="assessment-subtitle">Tipe soal</div><div class="assessment-choice-grid">${qtypes.map(q=>`<label class="assessment-choice"><input type="checkbox" data-mpi-eval-qtype value="${q}" ${disabled?'disabled':''}/>${q}</label>`).join('')}</div><div class="assessment-subtitle">Jumlah soal</div><input class="form-control" type="number" min="1" max="100" step="1" inputmode="numeric" data-mpi-eval-count placeholder="Kosong = ditentukan AI" ${disabled?'disabled':''}/><div class="assessment-subtitle">Proporsi level kognitif (%)</div><div class="assessment-level-grid">${['LOTS','MOTS','HOTS','AKM/PISA'].map(l=>`<label class="assessment-level">${l}<input type="number" min="0" max="100" step="1" inputmode="numeric" data-mpi-eval-level="${l}" placeholder="0" ${disabled?'disabled':''}/></label>`).join('')}</div><div class="assessment-level-total" data-mpi-eval-total>Kosong = AI menentukan • jika diisi total harus 100%</div></div><div class="assessment-note-final">Jika hanya memilih satu level, isi level tersebut 100%. AKM/PISA digunakan untuk soal berbasis stimulus kontekstual dan penalaran. Jika semua level kosong, AI menentukan komposisi sesuai jenjang, TP, materi, dan waktu.</div></div>`;
   }else if(cfg?.type==='assessment'){
     const defs=[
       {key:'awal',label:'Asesmen Formatif Awal',desc:'Opsional • melihat kemampuan/kesiapan awal sebelum pembelajaran',required:false},
@@ -8489,7 +8477,7 @@ function renderPackageStageFields(ps){
   const prompt1Html=prompt1Fields.length?prompt1Fields.map((f,i)=>renderGeneratorField(f,`gp1_${i}`,!state.generatorPrompt0Confirmed)).join(''):'<div class="no-fields span-2">Prompt 1 tidak membutuhkan data baru selain konteks dari Prompt 0.</div>';
   const laterHtml=laterFields.length?laterFields.map((f,i)=>renderGeneratorField(f,`gpl_${i}`,!state.generatorPrompt0Confirmed)).join(''):'<div class="no-fields span-2">Tidak ada pengaturan tambahan untuk tahap setelah Prompt 1.</div>';
   if(isMpiFlow){
-    els.genFields.innerHTML=`<div class="generator-flow-note"><strong>Alur MPI:</strong> isi Prompt 0 → Generate Prompt 0 → jalankan di AI → kembali dan konfirmasi → pilih <strong>Nomor Ide</strong> pada Prompt 1. Jika ingin memodifikasi struktur/isi ide, edit langsung bagian MODIFIKASI OPSIONAL pada teks Prompt 1 setelah disalin; jangan menambahkannya melalui form Generator Prompt.</div><section class="generator-stage-group" data-stage-group="0"><div class="generator-stage-head"><div class="generator-stage-title"><div class="generator-stage-badge">P0</div><div><strong>${escapeHtml(ps[0].title)}</strong><span>Semua data awal proyek, termasuk Tujuan Pembelajaran, ditetapkan di sini.</span></div></div></div><div class="generator-stage-fields">${firstHtml}</div></section><label class="prompt0-confirm ${state.generatorPrompt0Confirmed?'ready':''}" id="prompt0ConfirmWrap"><input type="checkbox" id="prompt0DoneCheck" ${state.generatorPrompt0Confirmed?'checked':''}/><div><strong>Saya sudah menjalankan Prompt 0 di ChatGPT/Claude</strong><span>Centang setelah Prompt 0 menghasilkan ide dan Tujuan Pembelajaran Final. Prompt 1 kemudian hanya meminta nomor ide.</span></div></label><section class="generator-stage-group ${state.generatorPrompt0Confirmed?'':'is-locked'}" data-stage-group="1"><div class="generator-stage-head"><div class="generator-stage-title"><div class="generator-stage-badge">P1</div><div><strong>${escapeHtml(ps[1]?.title||'Prompt 1 — Pilih Ide')}</strong><span>Pilih nomor ide hasil Prompt 0. Struktur mengikuti ide tersebut; modifikasi dilakukan pada teks hasil copy.</span></div></div><div class="generator-stage-lock">🔒 Jalankan Prompt 0 dulu</div></div><div class="generator-stage-fields">${prompt1Html}</div></section>${laterFields.length?`<section class="generator-stage-group ${state.generatorPrompt0Confirmed?'':'is-locked'}" data-stage-group="2"><div class="generator-stage-head"><div class="generator-stage-title"><div class="generator-stage-badge">P2+</div><div><strong>Pengaturan Tahap Lanjutan</strong><span>Hanya field unik untuk Prompt 2 dan seterusnya; ini bukan modifikasi struktur Prompt 1.</span></div></div><div class="generator-stage-lock">🔒 Jalankan Prompt 0 dulu</div></div><div class="generator-stage-fields">${laterHtml}</div></section>`:''}${referenceHintHtml()}`;
+    els.genFields.innerHTML=`<div class="generator-flow-note"><strong>Alur MPI:</strong> isi Prompt 0 → Generate Prompt 0 → jalankan di AI → kembali dan konfirmasi → isi <strong>Nomor Ide</strong> pada Prompt 1 bila sudah siap (opsional saat menyiapkan prompt). Jika ingin memodifikasi struktur/isi ide, edit langsung bagian MODIFIKASI OPSIONAL pada teks Prompt 1 setelah disalin; jangan menambahkannya melalui form Generator Prompt.</div><section class="generator-stage-group" data-stage-group="0"><div class="generator-stage-head"><div class="generator-stage-title"><div class="generator-stage-badge">P0</div><div><strong>${escapeHtml(ps[0].title)}</strong><span>Semua data awal proyek, termasuk Tujuan Pembelajaran, ditetapkan di sini.</span></div></div></div><div class="generator-stage-fields">${firstHtml}</div></section><label class="prompt0-confirm ${state.generatorPrompt0Confirmed?'ready':''}" id="prompt0ConfirmWrap"><input type="checkbox" id="prompt0DoneCheck" ${state.generatorPrompt0Confirmed?'checked':''}/><div><strong>Saya sudah menjalankan Prompt 0 di ChatGPT/Claude</strong><span>Centang setelah Prompt 0 menghasilkan ide dan Tujuan Pembelajaran Final. Prompt 1 kemudian menyediakan Nomor Ide sebagai input opsional yang dapat diisi atau disesuaikan nanti.</span></div></label><section class="generator-stage-group ${state.generatorPrompt0Confirmed?'':'is-locked'}" data-stage-group="1"><div class="generator-stage-head"><div class="generator-stage-title"><div class="generator-stage-badge">P1</div><div><strong>${escapeHtml(ps[1]?.title||'Prompt 1 — Pilih Ide')}</strong><span>Nomor ide boleh dikosongkan saat menyiapkan prompt dan diisi/disesuaikan nanti sebelum Prompt 1 dijalankan. Struktur mengikuti ide yang akhirnya dipilih.</span></div></div><div class="generator-stage-lock">🔒 Jalankan Prompt 0 dulu</div></div><div class="generator-stage-fields">${prompt1Html}</div></section>${laterFields.length?`<section class="generator-stage-group ${state.generatorPrompt0Confirmed?'':'is-locked'}" data-stage-group="2"><div class="generator-stage-head"><div class="generator-stage-title"><div class="generator-stage-badge">P2+</div><div><strong>Pengaturan Tahap Lanjutan</strong><span>Hanya field unik untuk Prompt 2 dan seterusnya; ini bukan modifikasi struktur Prompt 1.</span></div></div><div class="generator-stage-lock">🔒 Jalankan Prompt 0 dulu</div></div><div class="generator-stage-fields">${laterHtml}</div></section>`:''}${referenceHintHtml()}`;
   }else{
     els.genFields.innerHTML=`<div class="generator-flow-note">Alur yang disarankan: isi Prompt 0 → Generate Prompt 0 → jalankan di AI → kembali ke Prompt EDU dan konfirmasi → isi data Prompt 1/lanjutan → Generate Semua Prompt.</div><section class="generator-stage-group" data-stage-group="0"><div class="generator-stage-head"><div class="generator-stage-title"><div class="generator-stage-badge">P0</div><div><strong>${escapeHtml(ps[0].title)}</strong><span>Isi data awal proyek. Bagian ini aktif terlebih dahulu.</span></div></div></div><div class="generator-stage-fields">${firstHtml}</div></section><label class="prompt0-confirm ${state.generatorPrompt0Confirmed?'ready':''}" id="prompt0ConfirmWrap"><input type="checkbox" id="prompt0DoneCheck" ${state.generatorPrompt0Confirmed?'checked':''}/><div><strong>Saya sudah menjalankan Prompt 0 di ChatGPT/Claude</strong><span>Centang setelah Prompt 0 benar-benar dijalankan. Isian Prompt 1 dan tahap lanjutan akan dibuka.</span></div></label><section class="generator-stage-group ${state.generatorPrompt0Confirmed?'':'is-locked'}" data-stage-group="1"><div class="generator-stage-head"><div class="generator-stage-title"><div class="generator-stage-badge">P1+</div><div><strong>Prompt 1 & Data Tahap Lanjutan</strong><span>Field baru dari Prompt 1 sampai Prompt Akhir, tanpa mengulang data Prompt 0.</span></div></div><div class="generator-stage-lock">🔒 Jalankan Prompt 0 dulu</div></div><div class="generator-stage-fields">${laterHtml}</div></section>${referenceHintHtml()}`;
   }
@@ -8501,13 +8489,25 @@ function setPrompt0Confirmed(confirmed){
   state.generatorPrompt0Confirmed=confirmed;
   const wrap=$('#prompt0ConfirmWrap');if(wrap)wrap.classList.toggle('ready',confirmed);
   els.genFields.querySelectorAll('[data-stage-group]').forEach(group=>{const idx=Number(group.dataset.stageGroup);if(idx===0)return;group.classList.toggle('is-locked',!confirmed);group.querySelectorAll('input,textarea,select').forEach(el=>{el.disabled=!confirmed;});});
-  updateGeneratorActionButton();clearGeneratorResult();if(confirmed&&typeof pikoTryFillGenerator==='function')setTimeout(pikoTryFillGenerator,30);toast(confirmed?'Prompt 1 dan tahap lanjutan sudah dibuka':'Prompt 1 dikunci kembali');
+  initGeneratorProgressive();updateGeneratorActionButton();clearGeneratorResult();if(confirmed&&typeof pikoTryFillGenerator==='function')setTimeout(pikoTryFillGenerator,30);toast(confirmed?'Prompt 1 dan tahap lanjutan sudah dibuka':'Prompt 1 dikunci kembali');
 }
 function updateGeneratorActionButton(){
   const btn=$('#generatePromptBtn');if(!btn)return;
-  if(isPackageMode()&&activeGeneratorPrompts().length>1&&!state.generatorPrompt0Confirmed){btn.innerHTML='<span class="control-asset asset-icon asset-right" aria-hidden="true"></span>Review Prompt 0';}
-  else if(isPackageMode()){btn.innerHTML='<span class="control-asset asset-icon asset-right" aria-hidden="true"></span>Review & Generate Semua Prompt';}
-  else{btn.innerHTML='<span class="control-asset asset-icon asset-right" aria-hidden="true"></span>Review & Generate Prompt';}
+  const copy=$('#generatorStepActionCopy');
+  const ctx=typeof getGeneratorProgressContext==='function'?getGeneratorProgressContext():{groups:[]};
+  const groups=ctx.groups||[];
+  const idx=Math.max(0,Math.min(Number(generatorProgressIndex)||0,Math.max(0,groups.length-1)));
+  const hasNext=groups.length>1&&idx<groups.length-1;
+  if(hasNext){
+    const next=groups[idx+1],nextLabel=progressGroupMeta[next]?.[0]||'Tahap berikutnya';
+    btn.dataset.action='next';
+    btn.innerHTML=`<span class="control-asset asset-icon asset-right" aria-hidden="true"></span>Berikutnya: ${escapeHtml(nextLabel)} →`;
+    if(copy)copy.innerHTML=`<strong>Langkah ${idx+1} dari ${groups.length} — isi seperlunya.</strong><span>Setelah siap, lanjut ke <strong>${escapeHtml(nextLabel)}</strong>. Field opsional boleh dikosongkan dan dapat ditentukan AI sesuai aturan template.</span>`;
+  }else{
+    btn.dataset.action='generate';
+    btn.innerHTML=`<span class="control-asset asset-icon asset-right" aria-hidden="true"></span>${generatorFinalActionLabel()}`;
+    if(copy)copy.innerHTML=`<strong>${groups.length>1?`Langkah ${groups.length} dari ${groups.length} — tahap terakhir.`:'Data siap diperiksa.'}</strong><span>Review akan menampilkan ringkasan sebelum prompt dibuat. Anda masih dapat kembali memperbaiki data bila diperlukan.</span>`;
+  }
 }
 function substitutionMap(){const vals=new Map();vals.semantic=new Map();vals.supplemental=new Map();els.genFields.querySelectorAll('[data-token]').forEach(input=>{let val=input.value.trim();if(input.hasAttribute('data-jp-input')&&val)val=`${val} JP`;if(input.hasAttribute('data-module-model-select')&&['custom','combo'].includes(val)){const custom=els.genFields.querySelector('[data-module-model-custom]')?.value.trim()||'';if(custom)val=val==='combo'?`Kombinasi model: ${custom}`:custom;else val='';}if(!val)return;const group=input.closest('.form-group');const semantic=group?.dataset.semanticKey||'';vals.set(input.dataset.token,val);if(semantic)vals.semantic.set(semantic,val);if(group?.dataset.supplemental==='1')vals.supplemental.set(input.dataset.token,val);});return vals;}
 function applySubstitutions(text,vals){let out=text;vals.forEach((v,k)=>{if(k.startsWith(SUPPLEMENTAL_FIELD_PREFIX))return;if(k.startsWith(LABELED_FIELD_PREFIX)){const original=k.slice(LABELED_FIELD_PREFIX.length);const replaced=original.replace(/\[[^\]\n]+\]/,v);out=out.split(original).join(replaced);return;}out=out.split(k).join(v);});if(vals.semantic?.size){out=out.replace(/^([ \t]*[-•]?[ \t]*([^:\n]{2,110}?))[ \t]*:[ \t]*(\[[^\]\n]{1,420}\])[ \t]*$/gm,(full,prefix,label,token)=>{const normalizedLabel=normalize(friendlyLabel(label));let value='';if(/jenis.*jumlah.*game|jumlah.*jenis.*game/.test(normalizedLabel)){const jenis=vals.semantic.get('jenis-game')||'';const jumlah=vals.semantic.get('jumlah-game')||'';value=[jenis?`Jenis: ${jenis}`:'',jumlah?`Jumlah: ${jumlah}`:''].filter(Boolean).join('; ');}else value=vals.semantic.get(fieldSemanticKey(label))||'';return value?full.replace(token,value):full;});const engine=vals.semantic.get('engine-platform')||'';if(engine&&out.includes('[Canva Code/browser]'))out=out.split('[Canva Code/browser]').join(/canva code/i.test(engine)?'Canva Code':'browser');}return out;}
@@ -8557,18 +8557,46 @@ function scrollToGeneratorOutput(){const panel=$('#generatorOutputPanel');if(!pa
 const TEACHER_PRESET_KEY='promptEduTeacherPresetsV1';
 const TEACHER_PRESET_ACTIVE_KEY='promptEduTeacherPresetActiveV1';
 const progressGroupMeta={identity:['Identitas & Konteks','Data umum guru/kelas'],content:['Materi / Proyek','Isi utama & tujuan'],media:['Media / Visual','Tema, aset, warna, keterbacaan'],settings:['Pengaturan Lanjutan','Akses menu, mode, asesmen, game'],output:['Output & Tambahan','Catatan & hasil akhir']};
-let generatorProgressIndex=0;let generatorProgressSignature='';
+var generatorProgressIndex=0;var generatorProgressSignature='';
 function currentGeneratorSignature(){const ps=activeGeneratorPrompts();return`${state.generatorType}|${state.generatorVersion||''}|${state.generatorPackage||''}|${ps.map(p=>p.key).join(',')}|${state.generatorPrompt0Confirmed?'1':'0'}`;}
+function getGeneratorProgressContext(){
+  const fields=$$('.form-group[data-progress-group]').filter(x=>els.genFields?.contains(x)&&!x.classList.contains('quick-hidden')&&!x.closest('.generator-stage-group.is-locked'));
+  const order=['identity','content','media','settings','output'];
+  const groups=order.filter(g=>fields.some(f=>f.dataset.progressGroup===g));
+  return{fields,groups};
+}
+function generatorFinalActionLabel(){
+  if(isPackageMode()&&activeGeneratorPrompts().length>1&&!state.generatorPrompt0Confirmed)return'Review Prompt 0';
+  if(isPackageMode())return'Review & Generate Semua Prompt';
+  return'Review & Generate Prompt';
+}
+function advanceGeneratorProgress(){
+  const {groups}=getGeneratorProgressContext();
+  if(groups.length<=1||generatorProgressIndex>=groups.length-1){generateFromForm();return;}
+  generatorProgressIndex++;
+  initGeneratorProgressive();
+  const active=groups[generatorProgressIndex];
+  toast(`Lanjut ke ${progressGroupMeta[active]?.[0]||'tahap berikutnya'}`);
+  $('#generatorDataPanel')?.scrollIntoView({behavior:'smooth',block:'start'});
+}
 function initGeneratorProgressive(){
   const nav=$('#generatorProgressNav');if(!nav||!els.genFields)return;
-  const fields=$$('.form-group[data-progress-group]').filter(x=>els.genFields.contains(x)&&!x.classList.contains('quick-hidden'));
-  const order=['identity','content','media','settings','output'];const groups=order.filter(g=>fields.some(f=>f.dataset.progressGroup===g));
-  if(groups.length<=1){nav.hidden=true;fields.forEach(f=>f.classList.remove('progress-hidden'));$$('.generator-stage-group').forEach(x=>x.classList.remove('progress-stage-empty'));return;}
+  const {fields,groups}=getGeneratorProgressContext();
+  if(groups.length<=1){nav.hidden=true;generatorProgressIndex=0;fields.forEach(f=>f.classList.remove('progress-hidden'));$$('.generator-stage-group').forEach(x=>x.classList.remove('progress-stage-empty'));updateGeneratorActionButton();return;}
   const sig=currentGeneratorSignature();if(sig!==generatorProgressSignature){generatorProgressSignature=sig;generatorProgressIndex=0;}generatorProgressIndex=Math.min(generatorProgressIndex,groups.length-1);
-  nav.hidden=false;nav.innerHTML=`<div class="generator-progress-track">${groups.map((g,i)=>`<button class="generator-progress-step ${i===generatorProgressIndex?'active':''}" type="button" data-progress-index="${i}"><b>${i+1}. ${progressGroupMeta[g][0]}</b><span>${progressGroupMeta[g][1]}</span></button>`).join('')}</div><div class="generator-progress-footer"><small id="generatorProgressStatus"></small><div><button class="btn-secondary" type="button" id="generatorProgressPrev">← Sebelumnya</button><button class="btn-secondary" type="button" id="generatorProgressNext">Berikutnya →</button></div></div>`;
-  const apply=()=>{const active=groups[generatorProgressIndex];fields.forEach(f=>f.classList.toggle('progress-hidden',f.dataset.progressGroup!==active));$$('.generator-stage-group').filter(x=>els.genFields.contains(x)).forEach(sec=>{const fs=$$('.form-group[data-progress-group]').filter(x=>sec.contains(x)&&!x.classList.contains('quick-hidden'));sec.classList.toggle('progress-stage-empty',fs.length>0&&!fs.some(f=>!f.classList.contains('progress-hidden')));});nav.querySelectorAll('[data-progress-index]').forEach(b=>b.classList.toggle('active',Number(b.dataset.progressIndex)===generatorProgressIndex));const st=$('#generatorProgressStatus');if(st)st.textContent=`Langkah ${generatorProgressIndex+1} dari ${groups.length} • ${progressGroupMeta[active][0]}`;const prev=$('#generatorProgressPrev'),next=$('#generatorProgressNext');if(prev)prev.disabled=generatorProgressIndex===0;if(next)next.disabled=generatorProgressIndex===groups.length-1;};
+  nav.hidden=false;nav.innerHTML=`<div class="generator-progress-track">${groups.map((g,i)=>`<button class="generator-progress-step ${i===generatorProgressIndex?'active':''} ${i<generatorProgressIndex?'visited':''}" type="button" data-progress-index="${i}"><b>${i+1}. ${progressGroupMeta[g][0]}</b><span>${progressGroupMeta[g][1]}</span></button>`).join('')}</div><div class="generator-progress-footer"><small id="generatorProgressStatus"></small><div><button class="btn-secondary" type="button" id="generatorProgressPrev">← Tahap sebelumnya</button></div></div>`;
+  const apply=()=>{
+    const active=groups[generatorProgressIndex];
+    fields.forEach(f=>f.classList.toggle('progress-hidden',f.dataset.progressGroup!==active));
+    $$('.generator-stage-group').filter(x=>els.genFields.contains(x)).forEach(sec=>{const fs=$$('.form-group[data-progress-group]').filter(x=>sec.contains(x)&&!x.classList.contains('quick-hidden')&&!sec.classList.contains('is-locked'));sec.classList.toggle('progress-stage-empty',fs.length>0&&!fs.some(f=>!f.classList.contains('progress-hidden')));});
+    nav.querySelectorAll('[data-progress-index]').forEach(b=>{const i=Number(b.dataset.progressIndex);b.classList.toggle('active',i===generatorProgressIndex);b.classList.toggle('visited',i<generatorProgressIndex);});
+    const st=$('#generatorProgressStatus');if(st)st.textContent=`Langkah ${generatorProgressIndex+1} dari ${groups.length} • ${progressGroupMeta[active][0]} • field opsional boleh dilewati`;
+    const prev=$('#generatorProgressPrev');if(prev)prev.disabled=generatorProgressIndex===0;
+    updateGeneratorActionButton();
+  };
   nav.querySelectorAll('[data-progress-index]').forEach(b=>b.addEventListener('click',()=>{generatorProgressIndex=Number(b.dataset.progressIndex);apply();$('#generatorDataPanel')?.scrollIntoView({behavior:'smooth',block:'start'});}));
-  $('#generatorProgressPrev')?.addEventListener('click',()=>{if(generatorProgressIndex>0){generatorProgressIndex--;apply();$('#generatorDataPanel')?.scrollIntoView({behavior:'smooth',block:'start'});}});$('#generatorProgressNext')?.addEventListener('click',()=>{if(generatorProgressIndex<groups.length-1){generatorProgressIndex++;apply();$('#generatorDataPanel')?.scrollIntoView({behavior:'smooth',block:'start'});}});apply();
+  $('#generatorProgressPrev')?.addEventListener('click',()=>{if(generatorProgressIndex>0){generatorProgressIndex--;apply();$('#generatorDataPanel')?.scrollIntoView({behavior:'smooth',block:'start'});}});
+  apply();
 }
 function quickEssentialField(group,index){
   const input=group.querySelector('[data-token]');const label=group.querySelector('label')?.textContent||'';const t=normalize(`${input?.dataset.token||''} ${label}`);
@@ -8582,7 +8610,7 @@ function applyGeneratorFormMode(mode='full',rebuild=true){
   $$('[data-form-mode]').forEach(b=>b.classList.toggle('active',b.dataset.formMode===mode));if(rebuild)initGeneratorProgressive();
 }
 $('#generatorModeSwitch')?.addEventListener('click',e=>{const b=e.target.closest('[data-form-mode]');if(!b)return;applyGeneratorFormMode(b.dataset.formMode,true);toast(b.dataset.formMode==='quick'?'Mode Cepat aktif':'Mode Lengkap aktif');});
-applyGeneratorFormMode(localStorage.getItem('promptEduGeneratorFormModeV1')||'full',false);
+applyGeneratorFormMode(localStorage.getItem('promptEduGeneratorFormModeV1')||'quick',false);
 
 function loadTeacherPresets(){try{const v=JSON.parse(localStorage.getItem(TEACHER_PRESET_KEY)||'[]');return Array.isArray(v)?v:[];}catch{return[];}}
 function saveTeacherPresets(list){localStorage.setItem(TEACHER_PRESET_KEY,JSON.stringify(list));renderTeacherPresetSelect();}
@@ -8631,7 +8659,7 @@ function collectGeneratorQualityIssues(){
   if(p?.title==='Prompt Video Pembelajaran'){
     const char=[...els.genFields.querySelectorAll('[data-token]')].find(x=>x.dataset.token==='{{butuh_karakter_video}}');const detail=[...els.genFields.querySelectorAll('[data-token]')].find(x=>x.dataset.token==='{{deskripsi_karakter_video}}');if(char?.value==='Ya'&&!detail?.value.trim())add('warning','Karakter dipilih tetapi belum dideskripsikan','AI akan membuat karakter default yang aman. Isi deskripsi jika guru membutuhkan karakter tertentu.');
   }
-  if(state.generatorType==='mpi'&&isPackageMode()&&state.generatorPrompt0Confirmed){const idea=$('[data-mpi-idea-number]');if(idea&&!idea.value.trim())add('blocker','Nomor Ide Prompt 1 belum dipilih','Setelah Prompt 0 dijalankan, isi Nomor Ide Pilihan yang ingin dikembangkan pada Prompt 1. Modifikasi lain tidak perlu diisi di Generator Prompt.');}
+  if(state.generatorType==='mpi'&&isPackageMode()&&state.generatorPrompt0Confirmed){const idea=$('[data-mpi-idea-number]');if(idea&&!idea.value.trim())add('info','Nomor Ide Prompt 1 belum diisi','Tidak masalah. Nomor Ide bersifat opsional saat menyiapkan prompt dan dapat diisi/disesuaikan nanti pada teks Prompt 1 sebelum dijalankan.');}
   if(isPackageMode()&&state.generatorVersion==='pro')add('info','Paket PRO aktif','Disarankan menjalankan rangkaian prompt pada AI berfitur Pro karena konteks dan tahapnya lebih panjang.');
   if(!issues.some(x=>x.severity==='blocker'||x.severity==='warning'))add('pass','Konfigurasi siap','Tidak ditemukan masalah penting pada pemeriksaan lokal.');
   return issues;
@@ -8659,7 +8687,7 @@ let projectCenterTab='projects';
 function localList(key){try{const x=JSON.parse(localStorage.getItem(key)||'[]');return Array.isArray(x)?x:[];}catch{return[];}}
 function saveLocalList(key,list){localStorage.setItem(key,JSON.stringify(list));}
 function generatorDisplayTitle(){const all=activeGeneratorPrompts();if(!all.length)return'Proyek Prompt EDU';const d=currentPackageDef();return isPackageMode()?(d?.label||all[0].categoryName):all[0].title;}
-function captureGeneratorSnapshot(){const controls=[...els.genFields.querySelectorAll('input,select,textarea')].map(el=>({tag:el.tagName,type:el.type||'',value:el.value||'',checked:!!el.checked}));return{generatorType:state.generatorType,generatorVersion:state.generatorVersion||'',generatorPackage:state.generatorPackage||'',generatorPrompt0Confirmed:!!state.generatorPrompt0Confirmed,generatorTemplateKey:state.generatorTemplateKey||'',presetId:activeTeacherPresetId(),controls,mode:localStorage.getItem('promptEduGeneratorFormModeV1')||'full'};}
+function captureGeneratorSnapshot(){const controls=[...els.genFields.querySelectorAll('input,select,textarea')].map(el=>({tag:el.tagName,type:el.type||'',value:el.value||'',checked:!!el.checked}));return{generatorType:state.generatorType,generatorVersion:state.generatorVersion||'',generatorPackage:state.generatorPackage||'',generatorPrompt0Confirmed:!!state.generatorPrompt0Confirmed,generatorTemplateKey:state.generatorTemplateKey||'',presetId:activeTeacherPresetId(),controls,mode:localStorage.getItem('promptEduGeneratorFormModeV1')||'quick'};}
 function restoreGeneratorSnapshot(snap,promptText=''){
   if(!snap)return;state.generatorType=snap.generatorType||'all';state.generatorVersion=snap.generatorVersion||'';state.generatorPackage=snap.generatorPackage||'';state.generatorPrompt0Confirmed=!!snap.generatorPrompt0Confirmed;state.generatorTemplateKey=snap.generatorTemplateKey||null;if(snap.presetId)setActiveTeacherPresetId(snap.presetId);switchView('generator');
   setTimeout(()=>{const controls=[...els.genFields.querySelectorAll('input,select,textarea')];(snap.controls||[]).forEach((v,i)=>{const el=controls[i];if(!el)return;if(el.type==='checkbox'||el.type==='radio')el.checked=!!v.checked;else el.value=v.value??'';});controls.forEach(el=>{el.dispatchEvent(new Event('input',{bubbles:true}));el.dispatchEvent(new Event('change',{bubbles:true}));});if(typeof applyGeneratorFormMode==='function')applyGeneratorFormMode(snap.mode||'full');if(promptText){els.genOutput.value=promptText;renderGeneratedSections([{heading:'HASIL TERSIMPAN',sourceTitle:generatorDisplayTitle(),text:promptText}]);els.genEmpty.hidden=true;els.genResult.hidden=false;}toast('Konfigurasi proyek dipulihkan');},80);closeProjectCenter();
@@ -8692,10 +8720,10 @@ function validateMpiEvaluationConfig(){
   if(count?.value.trim()){const n=Number(count.value);if(!Number.isInteger(n)||n<1||n>100){count.scrollIntoView({behavior:'smooth',block:'center'});toast('Jumlah soal Evaluasi Akhir harus bilangan bulat 1–100');return false;}}
   const inputs=$$('[data-mpi-eval-level]');
   const filled=inputs.filter(x=>x.value.trim()!=='');
-  for(const x of filled){const v=Number(x.value);if(!Number.isFinite(v)||v<0||v>100){x.scrollIntoView({behavior:'smooth',block:'center'});toast('Persentase LOTS/MOTS/HOTS harus berada pada rentang 0–100%');return false;}}
+  for(const x of filled){const v=Number(x.value);if(!Number.isFinite(v)||v<0||v>100){x.scrollIntoView({behavior:'smooth',block:'center'});toast('Persentase LOTS/MOTS/HOTS/AKM-PISA harus berada pada rentang 0–100%');return false;}}
   if(!filled.length)return true;
   const sum=inputs.reduce((total,x)=>total+(x.value.trim()===''?0:Number(x.value)),0);
-  if(sum!==100){$('[data-mpi-eval-total]')?.scrollIntoView({behavior:'smooth',block:'center'});toast('Total persentase LOTS/MOTS/HOTS untuk Evaluasi Akhir harus 100%');return false;}
+  if(sum!==100){$('[data-mpi-eval-total]')?.scrollIntoView({behavior:'smooth',block:'center'});toast('Total persentase LOTS/MOTS/HOTS/AKM-PISA untuk Evaluasi Akhir harus 100%');return false;}
   return true;
 }
 function validateLKPDOutput(){const p=activeGeneratorPrompts()[0];if(p?.title!=='Prompt LKPD')return true;const sel=$('[data-lkpd-output-select]');if(sel&&!sel.value){sel.scrollIntoView({behavior:'smooth',block:'center'});toast('Pilih Format Output Akhir: DOCX, PDF, atau Gambar per Halaman');return false;}return true;}
@@ -8716,7 +8744,7 @@ function clearGeneratorResult(){els.genOutput.value='';elsGen.sections.innerHTML
 function resetGenerator(){state.generatorType='all';state.generatorVersion='';state.generatorPackage='';state.generatorPrompt0Confirmed=false;state.generatorTemplateKey=null;generatorProgressIndex=0;generatorProgressSignature='';els.genSearch.value='';clearGeneratorResult();renderGeneratorTypes();refreshGeneratorTemplates();}
 els.genSearch.addEventListener('input',()=>{if(!isPackageMode())refreshGeneratorTemplates();});els.genSelect.addEventListener('change',()=>{if(isPackageMode())return;state.generatorTemplateKey=els.genSelect.value||null;clearGeneratorResult();renderGeneratorTemplate();});
 elsGen.version.addEventListener('change',()=>{state.generatorVersion=elsGen.version.value;state.generatorPackage='';state.generatorPrompt0Confirmed=false;clearGeneratorResult();refreshGeneratorTemplates();setTimeout(()=>{if(typeof pikoTryFillGenerator==='function')pikoTryFillGenerator();},30);});elsGen.package.addEventListener('change',()=>{state.generatorPackage=elsGen.package.value;state.generatorPrompt0Confirmed=false;clearGeneratorResult();renderGeneratorTemplate();setTimeout(()=>{if(typeof pikoTryFillGenerator==='function')pikoTryFillGenerator();},30);});
-$('#generatePromptBtn').addEventListener('click',generateFromForm);$('#copyGeneratedBtn').addEventListener('click',()=>els.genOutput.value&&copyText(els.genOutput.value));$('#downloadGeneratedBtn').addEventListener('click',()=>{if(!els.genOutput.value)return;const d=currentPackageDef();const p=activeGeneratorPrompts()[0];downloadText(`Prompt_EDU_${(isPackageMode()?(d?.label||'paket'):(p?.title||'prompt')).replace(/[^a-z0-9\- _]/gi,'').trim()}_SEMUA.txt`,els.genOutput.value)});$('#clearGeneratedBtn').addEventListener('click',clearGeneratorResult);$('#resetGeneratorBtn').addEventListener('click',resetGenerator);$('#openTemplateBankBtn').addEventListener('click',()=>{const p=activeGeneratorPrompts()[0];if(!p)return;state.category=p.categoryId;state.favoritesOnly=false;state.query='';els.search.value='';switchView('bank');openPrompt(p.key);});
+$('#generatePromptBtn').addEventListener('click',()=>{const btn=$('#generatePromptBtn');if(btn?.dataset.action==='next'){advanceGeneratorProgress();return;}generateFromForm();});$('#copyGeneratedBtn').addEventListener('click',()=>els.genOutput.value&&copyText(els.genOutput.value));$('#downloadGeneratedBtn').addEventListener('click',()=>{if(!els.genOutput.value)return;const d=currentPackageDef();const p=activeGeneratorPrompts()[0];downloadText(`Prompt_EDU_${(isPackageMode()?(d?.label||'paket'):(p?.title||'prompt')).replace(/[^a-z0-9\- _]/gi,'').trim()}_SEMUA.txt`,els.genOutput.value)});$('#clearGeneratedBtn').addEventListener('click',clearGeneratorResult);$('#resetGeneratorBtn').addEventListener('click',resetGenerator);$('#openTemplateBankBtn').addEventListener('click',()=>{const p=activeGeneratorPrompts()[0];if(!p)return;state.category=p.categoryId;state.favoritesOnly=false;state.query='';els.search.value='';switchView('bank');openPrompt(p.key);});
 
 
 /* ===== HERA ASSISTANT v1 — LOCAL RULE ENGINE, TANPA API ===== */
@@ -8835,7 +8863,7 @@ function pikoSetInputValue(input,value,overwrite=false){if(!input||input.disable
 function pikoApplyDataToCurrentGenerator(data,overwrite=false){if(!data||state.view!=='generator')return 0;let n=0;els.genFields.querySelectorAll('[data-token]').forEach(input=>{const value=pikoDataValueForInput(input,data);if(pikoSetInputValue(input,value,overwrite))n++;});if(n){initGeneratorProgressive();toast(`HERA memperbarui ${n} field Generator`);}return n;}
 function pikoTryFillGenerator(){return pikoApplyDataToCurrentGenerator(pikoState.pendingData,false);}
 function pikoClearCurrentForm(){if(state.view!=='generator'){pikoAppendBot('Buka Generator terlebih dahulu agar saya bisa mengosongkan form aktif.');return;}els.genFields.querySelectorAll('input,textarea,select').forEach(el=>{if(el.disabled)return;if(el.type==='checkbox'||el.type==='radio')el.checked=false;else el.value='';el.dispatchEvent(new Event('input',{bubbles:true}));el.dispatchEvent(new Event('change',{bubbles:true}));});initGeneratorProgressive();clearGeneratorResult();pikoAppendBot('Form Generator aktif sudah dikosongkan. Template prompt tidak berubah.');}
-function pikoCurrentContextHtml(){const p=activeGeneratorPrompts()[0];const rows=[];rows.push(['Halaman',state.view==='generator'?'Generator Prompt':state.view==='bank'?'Bank Prompt':'Beranda']);if(state.view==='generator'&&p){rows.push(['Template/Paket',generatorDisplayTitle()]);if(state.generatorVersion)rows.push(['Versi',state.generatorVersion.toUpperCase()]);rows.push(['Mode Form',(localStorage.getItem('promptEduGeneratorFormModeV1')||'full')==='quick'?'Cepat':'Lengkap']);rows.push(['Field terisi',String(generatorFieldSummary().length)]);}return `<div class="piko-context-card">${rows.map(([k,v])=>`<span><b>${escapeHtml(k)}:</b> ${escapeHtml(v)}</span>`).join('')}</div>`;}
+function pikoCurrentContextHtml(){const p=activeGeneratorPrompts()[0];const rows=[];rows.push(['Halaman',state.view==='generator'?'Generator Prompt':state.view==='bank'?'Bank Prompt':'Beranda']);if(state.view==='generator'&&p){rows.push(['Template/Paket',generatorDisplayTitle()]);if(state.generatorVersion)rows.push(['Versi',state.generatorVersion.toUpperCase()]);rows.push(['Mode Form',(localStorage.getItem('promptEduGeneratorFormModeV1')||'quick')==='quick'?'Cepat':'Lengkap']);rows.push(['Field terisi',String(generatorFieldSummary().length)]);}return `<div class="piko-context-card">${rows.map(([k,v])=>`<span><b>${escapeHtml(k)}:</b> ${escapeHtml(v)}</span>`).join('')}</div>`;}
 function pikoSetPackageVersion(version){if(state.view!=='generator'||!isPackageMode()){pikoAppendBot('Perintah versi Biasa/PRO berlaku saat Generator MPI, Game, atau Lab Maya sedang aktif.');return;}state.generatorVersion=version;state.generatorPackage='';state.generatorPrompt0Confirmed=false;clearGeneratorResult();refreshGeneratorTemplates();pikoAppendBot(`Versi <strong>${version==='pro'?'PRO':'Biasa'}</strong> sudah dipilih. Silakan periksa Paket pada Panel 2.`);}
 function pikoAutoMinimizeMobile(){if(matchMedia('(max-width:680px) and (orientation:portrait)').matches)setTimeout(closeHeraAssistant,850);}
 function pikoOpenGenerator(data){if(!data.product){pikoAppendBot(`Pilih dulu jenis yang ingin dibuat:${pikoProductButtons()}`);return;}pikoState.pendingData=data;state.generatorType=data.product;state.generatorTemplateKey=null;state.generatorPackage='';state.generatorPrompt0Confirmed=false;if(packageTypes.has(data.product)){state.generatorVersion=data.version||'';}else state.generatorVersion='';switchView('generator');setTimeout(()=>{const n=pikoTryFillGenerator();if(packageTypes.has(data.product)&&!state.generatorVersion){pikoAppendBot(`Saya sudah membuka <strong>${escapeHtml(pikoProductLabel(data.product))}</strong>. Pilih dulu <strong>Versi Biasa atau PRO</strong> pada Panel 2. Data yang saya tangkap akan tetap disimpan dan diisikan setelah versi dipilih.${pikoDetectedHtml(data)}`);}else{pikoAppendBot(`Generator <strong>${escapeHtml(pikoProductLabel(data.product))}</strong> sudah dibuka${n?` dan ${n} field berhasil saya isi otomatis`:''}. Silakan periksa datanya sebelum Generate.${pikoDetectedHtml(data)}`);}pikoAutoMinimizeMobile();},80);}
@@ -8845,7 +8873,7 @@ function pikoLocalHelp(text){const t=normalize(text);if(/cara.*(gunakan|generato
 function pikoV2Command(raw){const t=normalize(raw);if(/^(kosongkan|bersihkan|reset)\s+(form|isian)/.test(t)){pikoClearCurrentForm();return true;}if(/mode\s+cepat/.test(t)){if(state.view!=='generator')switchView('generator');applyGeneratorFormMode('quick',true);pikoAppendBot('Mode Cepat aktif. Input lanjutan disembunyikan dari tampilan, tetapi aturan template tetap utuh.');return true;}if(/mode\s+lengkap/.test(t)){if(state.view!=='generator')switchView('generator');applyGeneratorFormMode('full',true);pikoAppendBot('Mode Lengkap aktif. Semua konfigurasi tersedia kembali.');return true;}if(/quality\s*check|cek kualitas|periksa kualitas/.test(t)){if(state.view==='generator')openQualityCheck(false);else pikoAppendBot('Buka Generator terlebih dahulu untuk menjalankan Quality Check.');return true;}if(/proyek saya/.test(t)){openProjectCenter('projects');return true;}if(/riwayat/.test(t)){openProjectCenter('history');return true;}if(/salin hasil|copy hasil|salin prompt hasil/.test(t)){if(els.genOutput?.value)copyText(els.genOutput.value);else pikoAppendBot('Belum ada hasil prompt di Panel 4 untuk disalin.');return true;}if(/(?:pilih|ganti|ubah).*\bpro\b/.test(t)){pikoSetPackageVersion('pro');return true;}if(/(?:pilih|ganti|ubah).*\bbiasa\b/.test(t)){pikoSetPackageVersion('biasa');return true;}if(/konteks aktif|menu ini|form ini/.test(t)){pikoAppendBot(`<strong>Konteks aktif saat ini:</strong>${pikoCurrentContextHtml()}<div class="piko-command-hint">Anda bisa memberi perintah seperti <code>ubah kelas VIII, PjBL, 3 pertemuan, campuran/heterogen</code>.</div>`);return true;}return false;}
 function pikoHandleCurrentGeneratorEdit(raw){if(state.view!=='generator'||state.generatorType==='all')return false;const t=normalize(raw);if(!/(ubah|ganti|isi|set|kelas|topik|materi|mapel|mata pelajaran|pertemuan|pbl|pjbl|inklusi|heterogen|kelompok|individu|durasi|alokasi|pdf|docx)/.test(t))return false;const data=pikoExtractData(raw);data.product=state.generatorType;pikoState.pendingData=data;const n=pikoApplyDataToCurrentGenerator(data,true);if(n){pikoAppendBot(`<strong>${n} field pada Generator aktif sudah diperbarui.</strong>${pikoDetectedHtml(data)}<span class="piko-msg-note">Periksa kembali field sebelum Review & Generate.</span>`);return true;}return false;}
 function pikoHandleMessage(raw){const text=raw.trim();if(!text)return;pikoState.lastUserText=text;pikoAppendUser(text);if(pikoV2Command(text))return;if(pikoHandleCurrentGeneratorEdit(text))return;const help=pikoLocalHelp(text);if(help){pikoAppendBot(help);return;}if(/^(cari|carikan|temukan)\b/i.test(text)){pikoSearchReply(text);return;}const data=pikoExtractData(text);pikoState.pendingData=data;const detected=pikoDetectedHtml(data);if(data.product){pikoState.lastPreparedPrompt=`Saya ingin membuat ${pikoProductLabel(data.product)}.\nKebutuhan: ${text}`;pikoAppendBot(`Saya menangkap kebutuhan Anda.${detected}<div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap"><button class="piko-chip" data-piko-fill-now="1">Isi Generator</button><button class="piko-chip" data-piko-search-product="${data.product}">Cari Prompt terkait</button></div><span class="piko-msg-note">Periksa kembali hasil deteksi sebelum Generate.</span>`);return;}if(/prompt|bank|template/.test(normalize(text))){pikoSearchReply(text);return;}pikoAppendBot(`Saya belum yakin produk yang dimaksud. Jika Anda sedang berada di Generator, Anda juga bisa memberi perintah langsung seperti <strong>“ubah kelas VIII, PBL, 3 pertemuan”</strong>.${pikoProductButtons()}`);}
-function pikoQuickAction(action){if(action==='context'){pikoAppendBot(`<strong>Konteks aktif:</strong>${pikoCurrentContextHtml()}`);return;}if(action==='fill-current'){if(state.view!=='generator'){pikoAppendBot('Buka Generator terlebih dahulu, atau ceritakan produk yang ingin dibuat.');return;}pikoAppendBot('Tulis perubahan untuk form aktif, misalnya: <strong>“ubah kelas VIII, PjBL, 3 pertemuan, campuran/heterogen.”</strong>');return;}if(action==='quality'){if(state.view==='generator')openQualityCheck(false);else pikoAppendBot('Quality Check tersedia ketika Generator sedang aktif.');return;}if(action==='projects'){openProjectCenter('projects');return;}if(action==='quick-mode'){if(state.view!=='generator')switchView('generator');const next=(localStorage.getItem('promptEduGeneratorFormModeV1')||'full')==='quick'?'full':'quick';applyGeneratorFormMode(next,true);pikoAppendBot(`Mode form diubah menjadi <strong>${next==='quick'?'Cepat':'Lengkap'}</strong>.`);return;}if(action==='choose'){pikoAppendBot(`Apa yang ingin dibuat?${pikoProductButtons()}`);return;}if(action==='fill'){pikoAppendBot('Tuliskan kebutuhan Anda dalam satu kalimat. Contoh: <strong>“Saya mau LKPD IPA kelas VIII tentang sistem pernapasan secara kelompok.”</strong>');return;}if(action==='search'){pikoAppendBot('Ketik <strong>“Cari prompt ...”</strong>, misalnya “Cari prompt video pembelajaran” atau “Cari prompt game critical thinking”.');return;}if(action==='help'){pikoAppendBot('<strong>HERA v2:</strong> ceritakan kebutuhan → Isi Generator, atau saat Generator terbuka beri perintah langsung seperti <em>ubah kelas VIII, PBL, 3 pertemuan</em>. Saya juga dapat membuka Quality Check, Proyek Saya, Riwayat, mengganti Mode Cepat/Lengkap, dan menyalin hasil. Semua tetap lokal tanpa API.');}}
+function pikoQuickAction(action){if(action==='context'){pikoAppendBot(`<strong>Konteks aktif:</strong>${pikoCurrentContextHtml()}`);return;}if(action==='fill-current'){if(state.view!=='generator'){pikoAppendBot('Buka Generator terlebih dahulu, atau ceritakan produk yang ingin dibuat.');return;}pikoAppendBot('Tulis perubahan untuk form aktif, misalnya: <strong>“ubah kelas VIII, PjBL, 3 pertemuan, campuran/heterogen.”</strong>');return;}if(action==='quality'){if(state.view==='generator')openQualityCheck(false);else pikoAppendBot('Quality Check tersedia ketika Generator sedang aktif.');return;}if(action==='projects'){openProjectCenter('projects');return;}if(action==='quick-mode'){if(state.view!=='generator')switchView('generator');const next=(localStorage.getItem('promptEduGeneratorFormModeV1')||'quick')==='quick'?'full':'quick';applyGeneratorFormMode(next,true);pikoAppendBot(`Mode form diubah menjadi <strong>${next==='quick'?'Cepat':'Lengkap'}</strong>.`);return;}if(action==='choose'){pikoAppendBot(`Apa yang ingin dibuat?${pikoProductButtons()}`);return;}if(action==='fill'){pikoAppendBot('Tuliskan kebutuhan Anda dalam satu kalimat. Contoh: <strong>“Saya mau LKPD IPA kelas VIII tentang sistem pernapasan secara kelompok.”</strong>');return;}if(action==='search'){pikoAppendBot('Ketik <strong>“Cari prompt ...”</strong>, misalnya “Cari prompt video pembelajaran” atau “Cari prompt game critical thinking”.');return;}if(action==='help'){pikoAppendBot('<strong>HERA v2:</strong> ceritakan kebutuhan → Isi Generator, atau saat Generator terbuka beri perintah langsung seperti <em>ubah kelas VIII, PBL, 3 pertemuan</em>. Saya juga dapat membuka Quality Check, Proyek Saya, Riwayat, mengganti Mode Cepat/Lengkap, dan menyalin hasil. Semua tetap lokal tanpa API.');}}
 document.querySelectorAll('.app-root [data-piko-guide]').forEach(el=>{el.title='Buka HERA Assistant';el.setAttribute('aria-label','Buka HERA Assistant');});
 if(pikoEls.launcher){const src=document.querySelector('.global-brand .mascot img')?.src||document.querySelector('.mascot img')?.src||'';pikoEls.launcherAvatar.src=src;pikoEls.chatAvatar.src=src;pikoEls.launcher.addEventListener('click',openHeraAssistant);pikoEls.close.addEventListener('click',closeHeraAssistant);pikoEls.backdrop.addEventListener('click',closeHeraAssistant);pikoEls.voice.addEventListener('click',()=>replayHeraGuide());pikoEls.composer.addEventListener('submit',e=>{e.preventDefault();const v=pikoEls.input.value;pikoEls.input.value='';pikoHandleMessage(v);});pikoEls.input.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();pikoEls.composer.requestSubmit();}});pikoEls.quick.addEventListener('click',e=>{const b=e.target.closest('[data-piko-action]');if(b)pikoQuickAction(b.dataset.pikoAction);});pikoEls.messages.addEventListener('click',e=>{const prod=e.target.closest('[data-piko-product]');if(prod){const data={product:prod.dataset.pikoProduct,raw:`Saya ingin membuat ${pikoProductLabel(prod.dataset.pikoProduct)}`};pikoState.pendingData=data;pikoOpenGenerator(data);return;}const fill=e.target.closest('[data-piko-fill-now]');if(fill){pikoOpenGenerator(pikoState.pendingData||{});return;}const search=e.target.closest('[data-piko-search-product]');if(search){pikoSearchReply(`Cari prompt ${pikoProductLabel(search.dataset.pikoSearchProduct)}`);return;}const open=e.target.closest('[data-piko-open-prompt]');if(open){const p=allPrompts.find(x=>x.key===open.dataset.pikoOpenPrompt);if(p){state.category=p.categoryId;state.favoritesOnly=false;state.query='';els.search.value='';switchView('bank');openPrompt(p.key);closeHeraAssistant();}return;}});pikoEls.copy.addEventListener('click',()=>copyText(pikoPreparedPrompt()));pikoEls.chatgpt.addEventListener('click',()=>pikoOpenAi('https://chatgpt.com/','ChatGPT'));pikoEls.claude.addEventListener('click',()=>pikoOpenAi('https://claude.ai/','Claude'));}
 
