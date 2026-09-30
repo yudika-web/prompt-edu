@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="theme-color" content="#6d5dfc" />
 <title>Prompt EDU — AI Prompt Studio untuk Guru</title>
-<meta name="bank-prompt-build" content="2026-09-30-mpi-eval-depth-1" />
+<meta name="bank-prompt-build" content="2026-09-30-mpi-external-visual-ready-url-2" />
 <style>
 :root{
   --bg:#f4f7fb;
@@ -2320,6 +2320,7 @@ Akses menu: [Berurutan — Menu Utama selalu tampil; menu/submateri yang belum m
 Cek Pemahaman Setelah Materi: [Ya / Tidak]
 Feedback Evaluasi Akhir: [Konstruktif — tampilkan feedback untuk jawaban benar maupun salah / Tanpa Feedback — penilaian mutlak, jangan tampilkan benar-salah/pembahasan selama evaluasi]
 Kedalaman Materi: [Disesuaikan oleh AI / Sederhana / Sedang / Mendetail]
+Sisipkan Gambar/Visual dari Link Eksternal: [Ya / Tidak]
 Konfigurasi Evaluasi Akhir (Kognitif): [Atur tipe soal, jumlah soal, dan proporsi LOTS/MOTS/HOTS pada Generator Prompt / Disesuaikan oleh AI]
 Game Pembelajaran: [Ada / Tidak Ada]
 Jenis Game jika Ada: [Spin Game / Flip Card / Make a Match / Quiz Challenge / Susun Urutan / Drag & Drop / Tebak Gambar / True–False Challenge / Memory Game / Disesuaikan oleh AI]
@@ -2360,6 +2361,18 @@ KETENTUAN OPSI — WAJIB DIPATUHI:
 - Jika Feedback Evaluasi Akhir = Konstruktif, berikan feedback bermakna untuk jawaban benar dan salah sesuai konsep. Jika = Tanpa Feedback, selama evaluasi jangan tampilkan status benar/salah, pembahasan, petunjuk, atau jawaban benar; sistem tetap boleh menganalisis jawaban secara internal untuk skor dan Bagian Perlu Penguatan.
 - Evaluasi Akhir HANYA ranah kognitif. Ikuti Konfigurasi Evaluasi Akhir untuk tipe soal, jumlah soal, dan proporsi LOTS/MOTS/HOTS. Jika rincian ditetapkan guru, patuhi tepat; jika dibiarkan Disesuaikan oleh AI, tentukan berdasarkan jenjang, tujuan pembelajaran, keluasan materi, dan estimasi waktu. Setiap soal wajib diberi metadata tipe soal, level kognitif (LOTS/MOTS/HOTS), submateri/topik, dan indikator/tujuan yang diukur.
 - Kedalaman Materi wajib mengikuti pilihan guru dan tetap sesuai jenjang: Sederhana = fokus konsep esensial + contoh inti; Sedang = penjelasan proporsional + hubungan konsep + contoh + miskonsepsi utama; Mendetail = uraian lebih lengkap + hubungan sebab-akibat/proses + penerapan + variasi contoh + miskonsepsi penting. Disesuaikan oleh AI = pilih tingkat kedalaman yang paling efektif berdasarkan jenjang, tujuan, durasi, dan kompleksitas materi.
+- Jika Sisipkan Gambar/Visual dari Link Eksternal = Ya, CHATGPT/AI yang menerima prompt ini WAJIB menjadi pihak yang MENCARI dan MENYIAPKAN link visual melalui pencarian web sebelum memberi jawaban. JANGAN meminta Canva/Canva Code mencari gambar dan jangan menyerahkan pencarian aset ke pengguna.
+  Aturan URL visual:
+  1) Pilih hanya visual yang benar-benar mendukung pemahaman materi, contoh, diagram, konteks, atau stimulus soal; jangan menambah gambar dekoratif tanpa fungsi belajar.
+  2) PRIORITAS REFERENSI INDONESIA: cari terlebih dahulu dari sumber Indonesia yang kredibel dan publik, terutama situs resmi pemerintah/instansi Indonesia (.go.id), lembaga pendidikan/perguruan tinggi (.ac.id/.sch.id), lembaga riset, museum/perpustakaan, organisasi pendidikan, atau sumber terbuka Indonesia yang jelas asalnya. Bila memungkinkan prioritaskan public domain/open-license atau sumber resmi/pendidikan.
+  3) PRIORITAS BAHASA DI DALAM GAMBAR: utamakan visual yang judul, label, legenda, nama bagian, penanda, dan teks yang tertanam di dalam gambarnya menggunakan Bahasa Indonesia. Urutan pilihan: (a) sumber Indonesia + label Bahasa Indonesia; (b) sumber Indonesia + visual tanpa teks/label; (c) sumber internasional + visual netral tanpa teks; (d) visual berlabel bahasa asing hanya sebagai pilihan terakhir. Jika terpaksa memakai visual berlabel bahasa asing, beri catatan dan sediakan padanan/terjemahan Bahasa Indonesia pada caption atau UI di dekat gambar; jangan mengklaim gambar tersebut berbahasa Indonesia.
+  4) Untuk konteks yang spesifik Indonesia (peta, flora-fauna, budaya, sejarah, geografi, pemerintahan, data sosial, lingkungan, kebencanaan, dan contoh kehidupan sehari-hari), dahulukan visual yang benar-benar merepresentasikan Indonesia daripada contoh negara lain.
+  5) Hindari Google Images, Pinterest, halaman hasil pencarian, short-link, URL bertoken/signature yang cepat kedaluwarsa, dan link yang meminta login/paywall.
+  6) Berikan URL HTTPS LANGSUNG ke file/aset gambar yang siap dipakai pada atribut src di Canva Code, bukan hanya URL halaman web. Prioritaskan PNG, JPG/JPEG, WEBP, SVG, atau GIF bila relevan. Jangan gunakan data URI/base64 sebagai pengganti link eksternal.
+  7) Verifikasi semampunya bahwa URL dapat dibuka publik dan mengarah ke gambar/aset yang benar. Jika link tidak dapat diverifikasi, JANGAN mengarang URL; cari alternatif lain atau tandai tidak tersedia.
+  8) Untuk setiap visual, sertakan: bagian MPI/nomor soal, fungsi pedagogis, deskripsi/alt text Bahasa Indonesia, asal referensi (Indonesia/Internasional), bahasa label di dalam gambar, format, halaman sumber, keterangan lisensi/akses bila tersedia, dan DIRECT_IMAGE_URL_READY_FOR_CANVA. Link direct inilah yang nanti dipakai oleh prompt coding.
+  9) Siapkan fallback berupa alt text/caption Bahasa Indonesia sehingga materi/soal tetap dapat digunakan jika gambar gagal dimuat.
+- Jika Sisipkan Gambar/Visual dari Link Eksternal = Tidak, jangan mencari, mewajibkan, atau menambahkan visual eksternal.
 - Bagian Perlu Penguatan harus diturunkan dari soal Evaluasi Akhir yang salah dan metadata submateri/indikator yang diukur, bukan ditebak secara umum. Riwayat cek pemahaman boleh dipakai sebagai informasi pendukung, tetapi tidak mengubah nilai akhir.
 - Jika Game Pembelajaran = Ada, game harus berkaitan langsung dengan materi, memberi feedback latihan, tidak menyalin persis soal Cek Pemahaman/Evaluasi, dan skor game tidak dicampur dengan Nilai Evaluasi Akhir.
 - Jika Jenis Game = Disesuaikan oleh AI, pilih game paling relevan berdasarkan tujuan pembelajaran, karakter materi, jenjang siswa, dan jenis interaksi yang bermakna; jangan memilih hanya karena menarik secara visual. Contoh: proses/kronologi → Susun Urutan; pasangan konsep-fungsi/kosakata → Make a Match atau Flip Card; klasifikasi → Drag & Drop; materi visual → Tebak Gambar; latihan konsep umum → Quiz Challenge/Spin Game.
@@ -2378,6 +2391,7 @@ Buatkan minimal 3 alternatif pendekatan pengemasan MPI untuk materi ini (berbeda
 10. Rencana Game — hanya jika Game = Ada; sebutkan jenis, alasan pedagogis, mekanisme, dan posisi game. Jika Disesuaikan oleh AI, tuliskan game yang dipilih dan alasan pemilihannya
 11. Pengaturan Canva Sheet & Navigasi — jelaskan penerapan pilihan Canva Sheet, tiga mode akses, hubungan dengan Cek Pemahaman, serta jaminan tombol Home/Menu Utama selalu dapat digunakan
 12. Gaya Visual — modern, minim scroll, sesuai jenjang [SD/SMP/SMA]
+13. Rekomendasi Gambar/Visual Eksternal — hanya jika opsi ini diaktifkan; CHATGPT/AI wajib mencari web terlebih dahulu dengan PRIORITAS SUMBER INDONESIA dan visual berlabel Bahasa Indonesia, lalu tampilkan tabel: Bagian MPI/No. Soal | Fungsi Pedagogis | Deskripsi + Alt Text Bahasa Indonesia | Asal Referensi (Indonesia/Internasional) | Bahasa Label di Gambar | Format | Halaman Sumber | Lisensi/Akses (jika tersedia) | DIRECT_IMAGE_URL_READY_FOR_CANVA. Kolom terakhir wajib berupa URL HTTPS langsung yang siap ditempel ke src di Canva Code, bukan halaman pencarian/sumber. Jika pilihan bukan dari Indonesia atau label di dalam gambar bukan Bahasa Indonesia, jelaskan singkat alasannya.
 
 [Tempel/lampirkan silabus, modul ajar, atau buku materi di sini jika ada]
 
@@ -2401,6 +2415,7 @@ WAJIB PERTAHANKAN seluruh keputusan yang sudah dipilih pada Prompt 0 PRO, jangan
 - Cek Pemahaman Setelah Materi: [Ya / Tidak — isi sesuai Prompt 0 PRO]
 - Feedback Evaluasi Akhir: [Konstruktif / Tanpa Feedback — isi sesuai Prompt 0 PRO]
 - Kedalaman Materi: [ikuti sesuai Prompt 0 PRO]
+- Sisipkan Gambar/Visual dari Link Eksternal: [Ya / Tidak — isi sesuai Prompt 0 PRO]
 - Konfigurasi Evaluasi Akhir (Kognitif): [ikuti tipe soal, jumlah soal, dan proporsi LOTS/MOTS/HOTS sesuai Prompt 0 PRO]
 - Game Pembelajaran: [Ada / Tidak Ada — isi sesuai Prompt 0 PRO]
 - Jenis & Jumlah Game: [isi sesuai Prompt 0 PRO; abaikan jika Game = Tidak Ada]
@@ -2438,7 +2453,8 @@ ATURAN KONSISTENSI DENGAN PROMPT 0 PRO:
 7. Cek Pemahaman jika aktif bersifat formatif, bukan bagian nilai akhir. Setiap item harus terkait langsung dengan submateri yang baru dipelajari dan memiliki feedback konstruktif benar/salah serta aturan baca ulang sebelum retry setelah jawaban salah.
 8. Evaluasi Akhir hanya kognitif dan wajib mengikuti tipe soal, jumlah soal, serta proporsi LOTS/MOTS/HOTS dari Prompt 0 PRO. Setiap soal harus memuat metadata tipe soal, level kognitif, submateri/topik, dan indikator/tujuan yang diukur. Pemetaan jawaban salah digunakan untuk menghasilkan Bagian Perlu Penguatan.
 9. Jika Feedback Evaluasi = Konstruktif, siapkan feedback untuk jawaban benar dan salah. Jika = Tanpa Feedback, jangan menampilkan benar/salah/pembahasan selama evaluasi; hanya simpan analisis internal untuk skor dan penguatan.
-10. Jika Game = Ada, game adalah pengayaan: tidak menjadi syarat unlock Evaluasi, tidak memengaruhi Nilai Evaluasi Akhir, tidak menyalin persis soal Cek Pemahaman/Evaluasi, dan selalu memberi feedback latihan. Jika Jenis Game = Disesuaikan oleh AI, gunakan jenis yang sudah dipilih/direkomendasikan di Prompt 0 atau tetapkan secara eksplisit berdasarkan tujuan, materi, dan jenjang.
+10. Jika Sisipkan Gambar/Visual dari Link Eksternal = Ya, pertahankan dan gunakan hasil pencarian web dari Prompt 0. Jika Prompt 0 belum memberikan DIRECT_IMAGE_URL_READY_FOR_CANVA yang valid untuk visual yang dibutuhkan, CHATGPT/AI harus melakukan pencarian web sekarang sebelum menyelesaikan rancangan; Canva/Canva Code TIDAK BOLEH diminta mencari gambar. Pertahankan prioritas: sumber Indonesia yang kredibel + label/legenda/nama bagian berbahasa Indonesia; jika tidak tersedia pilih visual Indonesia tanpa teks, lalu visual internasional netral tanpa teks, dan visual berlabel bahasa asing hanya sebagai pilihan terakhir. Untuk setiap visual, tetapkan lokasi pemakaian (submateri/layar/nomor soal), fungsi pedagogis, alt text/caption Bahasa Indonesia, asal referensi, bahasa label di dalam gambar, halaman sumber, keterangan lisensi/akses bila tersedia, format, dan URL HTTPS langsung yang siap dipakai pada src. Hindari halaman pencarian, Pinterest/Google Images, URL login/paywall, atau URL sementara/bertanda tangan yang mudah kedaluwarsa. Jika Tidak, jangan mewajibkan visual eksternal.
+11. Jika Game = Ada, game adalah pengayaan: tidak menjadi syarat unlock Evaluasi, tidak memengaruhi Nilai Evaluasi Akhir, tidak menyalin persis soal Cek Pemahaman/Evaluasi, dan selalu memberi feedback latihan. Jika Jenis Game = Disesuaikan oleh AI, gunakan jenis yang sudah dipilih/direkomendasikan di Prompt 0 atau tetapkan secara eksplisit berdasarkan tujuan, materi, dan jenjang.
 
 ALUR AWAL & MENU UTAMA — WAJIB:
 - Urutan awal rancangan: Pembuka → Input Nama/Kelas bila digunakan → Panduan & Alur Penggunaan → Apersepsi Kontekstual/Pertanyaan Pemantik → Menu Utama/Dashboard → aktivitas belajar sesuai mode.
@@ -2462,7 +2478,8 @@ Buatkan rancangan dengan format:
 14. Integrasi Canva Sheet (kondisional) — jika Ya jelaskan input identitas, payload minimal Nama/Kelas/Nilai/Kategori/Bagian Perlu Penguatan/Refleksi, waktu kirim, status, retry; jika Tidak tulis tegas tidak menggunakan Canva Sheet
 15. Desain Halaman Hasil — Nilai Akhir, Kategori Hasil, Bagian Perlu Penguatan, Saran Penguatan singkat, dan Refleksi Siswa; pembahasan per soal hanya jika sesuai mode Feedback Evaluasi
 16. Desain Visual/UI — palet HEX, tipografi, tombol/kartu/panel/ikon, layout pembuka/panduan/menu utama/materi/refleksi/game/evaluasi/hasil, karakter/maskot jika ada, mood keseluruhan
-17. Checklist Kualitas MPI — semua pilihan Prompt 0 dipatuhi; Menu Utama memuat Tujuan, Materi, Evaluasi, Lihat Hasil, Refleksi, Mini Game/Kuis jika dipilih, dan menu tambahan hanya bila relevan; dashboard tetap tampak dan dapat kembali diakses; kartu yang belum tersedia tetap terlihat; indeks materi tetap dapat dibuka dan urutan submateri benar bila Berurutan; Lihat Hasil baru aktif setelah Evaluasi selesai; game hanya jika dipilih; logika akses benar; reread gate bekerja bila Cek Pemahaman aktif; refleksi tersimpan; penguatan diturunkan dari metadata evaluasi; feedback evaluasi sesuai mode; data Canva Sheet lengkap bila digunakan; navigasi mudah; siap dibuat kode
+17. Daftar Gambar/Visual Eksternal — hanya jika diaktifkan; tampilkan bagian yang didukung, fungsi visual, deskripsi visual singkat, asal referensi (utamakan Indonesia), bahasa label di dalam gambar (utamakan Bahasa Indonesia), format file, dan URL publik bebas akses
+18. Checklist Kualitas MPI — semua pilihan Prompt 0 dipatuhi; Menu Utama memuat Tujuan, Materi, Evaluasi, Lihat Hasil, Refleksi, Mini Game/Kuis jika dipilih, dan menu tambahan hanya bila relevan; dashboard tetap tampak dan dapat kembali diakses; kartu yang belum tersedia tetap terlihat; indeks materi tetap dapat dibuka dan urutan submateri benar bila Berurutan; Lihat Hasil baru aktif setelah Evaluasi selesai; game hanya jika dipilih; logika akses benar; reread gate bekerja bila Cek Pemahaman aktif; refleksi tersimpan; penguatan diturunkan dari metadata evaluasi; feedback evaluasi sesuai mode; data Canva Sheet lengkap bila digunakan; navigasi mudah; siap dibuat kode
 
 Jangan mengubah keputusan Prompt 0 PRO saat menyusun rancangan.
 
@@ -2486,6 +2503,7 @@ WAJIB mengacu pada seluruh keputusan yang sudah dikunci sejak Prompt 0 PRO dan d
 - Akses menu: [Berurutan / Evaluasi Terkunci / Bebas]
 - Cek Pemahaman Setelah Materi: [Ya / Tidak]
 - Feedback Evaluasi Akhir: [Konstruktif / Tanpa Feedback]
+- Sisipkan Gambar/Visual dari Link Eksternal: [Ya / Tidak]
 - Game Pembelajaran: [Ada / Tidak Ada]
 - Jenis & Jumlah Game: [sesuai keputusan; abaikan jika Game = Tidak Ada]
 
@@ -2515,6 +2533,8 @@ Ketentuan kondisional:
 - Jika Game = Tidak Ada, jangan membuat aset game.
 - Jika Canva Sheet = Ya, sertakan aset pendukung input Nama/Kelas dan status kirim hanya bila desain benar-benar membutuhkannya.
 - Jika Canva Sheet = Tidak, jangan membuat aset khusus spreadsheet/kirim nilai/status sinkronisasi.
+- Jika Sisipkan Gambar/Visual dari Link Eksternal = Ya, buat subbagian terpisah "Aset Eksternal dari URL" yang MENYALIN visual terpilih dari Prompt 0/1 lengkap dengan DIRECT_IMAGE_URL_READY_FOR_CANVA, asal referensi (Indonesia/Internasional), bahasa label di dalam gambar, halaman sumber, lisensi/akses bila tersedia, lokasi pemakaian, dan alt text Bahasa Indonesia. Prioritas sumber Indonesia + label Bahasa Indonesia yang sudah dikunci pada Prompt 0/1 tidak boleh diturunkan pada tahap ini. Tandai aset ini sebagai EXTERNAL-URL dan JANGAN masukkan ke antrean generate gambar pada Prompt 3/4. Jangan membuat ulang aset yang sudah dipenuhi oleh URL eksternal kecuali rancangan memang membutuhkan versi khusus yang tidak tersedia.
+- Jika Sisipkan Gambar/Visual dari Link Eksternal = Tidak, jangan membuat subbagian aset URL eksternal.
 
 Untuk setiap aset, sajikan tabel dengan kolom:
 - Nama Aset (nama file konsisten, misal bg_pembuka.webp, ikon_refleksi.webp)
@@ -2539,6 +2559,8 @@ ATURAN INVENTARIS FILE GAMBAR — WAJIB:
       {
         title: "Prompt 3 PRO Generate Prompt Aset MPI",
         text: `Berdasarkan Daftar Inventaris Aset (Prompt 2 PRO), buatkan kumpulan prompt siap pakai untuk menghasilkan SETIAP aset proyek MPI menggunakan AI image/audio generator (misalnya ChatGPT, Claude yang mendukung image generation, Gemini, Midjourney, Ideogram, Canva AI, atau generator lain yang sesuai).
+
+PENTING: aset yang pada Prompt 2 ditandai EXTERNAL-URL karena sudah memiliki DIRECT_IMAGE_URL_READY_FOR_CANVA TIDAK BOLEH dibuat ulang oleh image generator. Lewati aset tersebut dan pertahankan URL-nya untuk tahap coding.
 
 ATURAN UTAMA — SATU FILE = SATU GAMBAR/ASET:
 1. Buat SATU prompt gambar terpisah untuk SATU aset. DILARANG menggabungkan dua atau lebih aset, pose, state, objek, atau variasi ke dalam satu file gambar.
@@ -2586,6 +2608,8 @@ Output akhir: daftar prompt siap-copy yang dikelompokkan per kategori aset, teta
       {
         title: "Prompt 4 PRO Generate Semua Aset Otomatis MPI di ChatGPT/Claude",
         text: `Berdasarkan rancangan desain (Prompt 1 PRO), Daftar Inventaris Aset (Prompt 2 PRO), dan kumpulan prompt aset (Prompt 3 PRO), sekarang GENERATE semua aset proyek MPI secara otomatis langsung di percakapan ChatGPT/Claude ini. Jangan berhenti pada daftar atau prompt saja jika platform memiliki kemampuan image generation. Kerjakan per batch sesuai kemampuan AI agar kualitas dan konsistensi tetap terjaga.
+
+JANGAN generate ulang aset yang ditandai EXTERNAL-URL. Aset tersebut sudah memiliki DIRECT_IMAGE_URL_READY_FOR_CANVA dan harus dipertahankan apa adanya untuk Prompt 5 PRO.
 
 Platform: [ChatGPT / Claude]
 
@@ -2677,6 +2701,7 @@ WAJIB mempertahankan seluruh keputusan proyek dari Prompt 0 PRO dan Prompt 1 PRO
 - Cek Pemahaman Setelah Materi: [Ya / Tidak]
 - Feedback Evaluasi Akhir: [Konstruktif / Tanpa Feedback]
 - Kedalaman Materi: [ikuti sesuai Prompt 0 PRO]
+- Sisipkan Gambar/Visual dari Link Eksternal: [Ya / Tidak]
 - Konfigurasi Evaluasi Akhir (Kognitif): [ikuti tipe soal, jumlah soal, dan proporsi LOTS/MOTS/HOTS sesuai Prompt 0 PRO]
 - Game Pembelajaran: [Ada / Tidak Ada]
 - Jenis & Jumlah Game: [sesuai pilihan sebelumnya]
@@ -2691,6 +2716,7 @@ Ketentuan umum:
 5. Tombol navigasi besar, jelas, selalu mudah dijangkau (Home/Menu Utama, Petunjuk, Lanjut, Kembali).
 6. Kode rapi dan diberi komentar singkat.
 7. Satu layar dinamis (single page app), bukan banyak file terpisah.
+8. Jika Sisipkan Gambar/Visual dari Link Eksternal = Ya, JANGAN melakukan atau mendelegasikan pencarian gambar kepada Canva/Canva Code. Gunakan DIRECT_IMAGE_URL_READY_FOR_CANVA yang sudah ditemukan dan diverifikasi ChatGPT/AI pada Prompt 0/1, dengan prioritas sumber Indonesia dan label/teks di dalam visual berbahasa Indonesia sebagaimana telah dipilih pada tahap sebelumnya. Jangan mengganti URL dengan placeholder, kata kunci pencarian, URL Google Images/Pinterest, atau halaman sumber. Masukkan URL langsung tersebut pada data aset/atribut src yang sesuai. Untuk implementasi, kelompokkan URL dalam konstanta/objek aset agar mudah diperiksa, gunakan alt text bermakna, loading="lazy" bila sesuai, object-fit yang aman, serta fallback UI/caption saat onerror sehingga materi/soal tetap terbaca jika host gagal dimuat. Jika URL yang dibutuhkan belum tersedia/terverifikasi, jangan mengarang link; nyatakan aset mana yang belum siap dan minta ChatGPT/AI tahap sebelumnya mencarikan URL valid sebelum kode final. Jika opsi = Tidak, jangan membuat ketergantungan pada gambar eksternal.
 
 ALUR AWAL & DASHBOARD MENU UTAMA — WAJIB:
 - Alur pertama: Pembuka → Input Nama/Kelas bila digunakan → Panduan & Alur Penggunaan → Apersepsi Kontekstual/Pertanyaan Pemantik → Menu Utama/Dashboard → aktivitas belajar.
@@ -2847,6 +2873,7 @@ TAHAP 7 — UJI RESPONSIVE, UX, AKSESIBILITAS, KONTEN, DAN ASET:
 26. Pastikan fokus keyboard terlihat, kontras memadai, target klik cukup besar, dan reduced motion tidak merusak fungsi bila relevan.
 27. Periksa akurasi materi, istilah, contoh, gambar, diagram, apersepsi, pertanyaan pemantik, alasan pentingnya materi, serta kesesuaian aktivitas dengan tujuan pembelajaran.
 28. Pastikan aset WebP tampil tajam, proporsi benar, tidak tertukar, dan fallback aman. Pastikan tidak ada placeholder/gibberish/data dummy/kredensial rahasia di produksi.
+28A. Jika Sisipkan Gambar/Visual dari Link Eksternal = Ya, audit SETIAP DIRECT_IMAGE_URL_READY_FOR_CANVA: URL yang tertanam harus sama dengan daftar final Prompt 0/1, bukan halaman pencarian/sumber; gambar harus berhasil dimuat tanpa login/paywall; prioritas sumber Indonesia sudah diterapkan; label/judul/legenda/nama bagian di dalam gambar menggunakan Bahasa Indonesia bila tersedia; visual berbahasa asing hanya dipakai jika alternatif Indonesia/netral tidak layak dan memiliki caption/padanan Bahasa Indonesia; alt text/fallback tersedia; dan kegagalan satu host tidak boleh membuat materi/soal tidak terbaca. Jangan meminta Canva mencari pengganti. Jika URL rusak, ChatGPT/AI harus mencari URL pengganti yang valid dan memperbarui konstanta aset + sumbernya sebelum menyatakan SIAP DIGUNAKAN.
 
 TAHAP 8 — UJI TEKNIS & PERFORMA:
 29. Periksa HTML/CSS/JavaScript untuk syntax error, ID/selector konflik, fungsi undefined, listener ganda, state bocor, asset path rusak, request gagal tanpa penanganan, dan potensi memory leak sederhana.
@@ -3945,6 +3972,7 @@ Akses menu: [Berurutan — Menu Utama selalu tampil; menu/submateri yang belum m
 Cek Pemahaman Setelah Materi: [Ya / Tidak]
 Feedback Evaluasi Akhir: [Konstruktif — feedback benar dan salah / Tanpa Feedback — penilaian mutlak tanpa benar-salah/pembahasan selama evaluasi]
 Kedalaman Materi: [Disesuaikan oleh AI / Sederhana / Sedang / Mendetail]
+Sisipkan Gambar/Visual dari Link Eksternal: [Ya / Tidak]
 Konfigurasi Evaluasi Akhir (Kognitif): [Atur tipe soal, jumlah soal, dan proporsi LOTS/MOTS/HOTS pada Generator Prompt / Disesuaikan oleh AI]
 Game Pembelajaran: [Ada / Tidak Ada]
 Jenis Game jika Ada: [Spin Game / Flip Card / Make a Match / Quiz Challenge / Susun Urutan / Drag & Drop / Tebak Gambar / True–False Challenge / Memory Game / Disesuaikan oleh AI]
@@ -3978,6 +4006,18 @@ KETENTUAN INTEGRASI, NAVIGASI, DAN PEDAGOGI:
 - Feedback Evaluasi = Konstruktif: tampilkan feedback bermakna untuk jawaban benar dan salah. Tanpa Feedback: jangan tampilkan benar/salah/pembahasan/petunjuk selama evaluasi; tetap hitung skor dan penguatan secara internal.
 - Evaluasi Akhir HANYA ranah kognitif. Ikuti Konfigurasi Evaluasi Akhir untuk tipe soal, jumlah soal, dan proporsi LOTS/MOTS/HOTS. Jika rincian ditetapkan guru, patuhi tepat; jika Disesuaikan oleh AI, tentukan berdasarkan jenjang, tujuan pembelajaran, keluasan materi, dan waktu. Setiap soal wajib memuat metadata tipe soal, level kognitif (LOTS/MOTS/HOTS), submateri/topik, dan indikator/tujuan.
 - Kedalaman Materi wajib mengikuti pilihan guru dan tetap sesuai jenjang: Sederhana = konsep esensial + contoh inti; Sedang = penjelasan proporsional + hubungan konsep + contoh + miskonsepsi utama; Mendetail = uraian lebih lengkap + proses/sebab-akibat + penerapan + variasi contoh + miskonsepsi penting. Disesuaikan oleh AI = pilih kedalaman paling efektif dari jenjang, tujuan, durasi, dan kompleksitas.
+- Jika Sisipkan Gambar/Visual dari Link Eksternal = Ya, CHATGPT/AI yang menerima prompt ini WAJIB menjadi pihak yang MENCARI dan MENYIAPKAN link visual melalui pencarian web sebelum memberi jawaban. JANGAN meminta Canva/Canva Code mencari gambar dan jangan menyerahkan pencarian aset ke pengguna.
+  Aturan URL visual:
+  1) Pilih hanya visual yang benar-benar mendukung pemahaman materi, contoh, diagram, konteks, atau stimulus soal; jangan menambah gambar dekoratif tanpa fungsi belajar.
+  2) PRIORITAS REFERENSI INDONESIA: cari terlebih dahulu dari sumber Indonesia yang kredibel dan publik, terutama situs resmi pemerintah/instansi Indonesia (.go.id), lembaga pendidikan/perguruan tinggi (.ac.id/.sch.id), lembaga riset, museum/perpustakaan, organisasi pendidikan, atau sumber terbuka Indonesia yang jelas asalnya. Bila memungkinkan prioritaskan public domain/open-license atau sumber resmi/pendidikan.
+  3) PRIORITAS BAHASA DI DALAM GAMBAR: utamakan visual yang judul, label, legenda, nama bagian, penanda, dan teks yang tertanam di dalam gambarnya menggunakan Bahasa Indonesia. Urutan pilihan: (a) sumber Indonesia + label Bahasa Indonesia; (b) sumber Indonesia + visual tanpa teks/label; (c) sumber internasional + visual netral tanpa teks; (d) visual berlabel bahasa asing hanya sebagai pilihan terakhir. Jika terpaksa memakai visual berlabel bahasa asing, beri catatan dan sediakan padanan/terjemahan Bahasa Indonesia pada caption atau UI di dekat gambar; jangan mengklaim gambar tersebut berbahasa Indonesia.
+  4) Untuk konteks yang spesifik Indonesia (peta, flora-fauna, budaya, sejarah, geografi, pemerintahan, data sosial, lingkungan, kebencanaan, dan contoh kehidupan sehari-hari), dahulukan visual yang benar-benar merepresentasikan Indonesia daripada contoh negara lain.
+  5) Hindari Google Images, Pinterest, halaman hasil pencarian, short-link, URL bertoken/signature yang cepat kedaluwarsa, dan link yang meminta login/paywall.
+  6) Berikan URL HTTPS LANGSUNG ke file/aset gambar yang siap dipakai pada atribut src di Canva Code, bukan hanya URL halaman web. Prioritaskan PNG, JPG/JPEG, WEBP, SVG, atau GIF bila relevan. Jangan gunakan data URI/base64 sebagai pengganti link eksternal.
+  7) Verifikasi semampunya bahwa URL dapat dibuka publik dan mengarah ke gambar/aset yang benar. Jika link tidak dapat diverifikasi, JANGAN mengarang URL; cari alternatif lain atau tandai tidak tersedia.
+  8) Untuk setiap visual, sertakan: bagian MPI/nomor soal, fungsi pedagogis, deskripsi/alt text Bahasa Indonesia, asal referensi (Indonesia/Internasional), bahasa label di dalam gambar, format, halaman sumber, keterangan lisensi/akses bila tersedia, dan DIRECT_IMAGE_URL_READY_FOR_CANVA. Link direct inilah yang nanti dipakai oleh prompt coding.
+  9) Siapkan fallback berupa alt text/caption Bahasa Indonesia sehingga materi/soal tetap dapat digunakan jika gambar gagal dimuat.
+- Jika Sisipkan Gambar/Visual dari Link Eksternal = Tidak, jangan mencari, mewajibkan, atau menambahkan visual eksternal.
 - Bagian Perlu Penguatan harus berasal dari soal evaluasi yang salah dan metadata submateri/indikator, bukan tebakan umum.
 - Game = Ada: konten terkait materi, feedback langsung, tidak menyalin persis soal cek/evaluasi, skor game terpisah dari nilai akhir, dan tidak menjadi syarat membuka Evaluasi.
 - Jenis Game = Disesuaikan oleh AI: AI memilih berdasarkan tujuan, karakter materi, jenjang, dan interaksi pedagogis. Contoh: proses/kronologi → Susun Urutan; pasangan konsep/fungsi → Make a Match/Flip Card; klasifikasi → Drag & Drop; visual → Tebak Gambar; latihan umum → Quiz Challenge/Spin.
@@ -4003,7 +4043,8 @@ Untuk SETIAP ide, berikan:
 10. Rencana Evaluasi — khusus kognitif; ikuti tipe soal, jumlah soal, dan proporsi LOTS/MOTS/HOTS dari konfigurasi; sertakan mode feedback serta metadata tipe, level kognitif, submateri, dan indikator untuk penguatan
 11. Rencana Game — jika aktif; jenis, mekanisme, alasan pedagogis, posisi; jika Disesuaikan oleh AI sebutkan pilihan AI dan alasannya
 12. Pengaturan Canva Sheet & Navigasi — jelaskan penerapan semua pilihan dan jaminan Home/Menu Utama selalu tersedia
-13. Catatan Bahasa Konten
+13. Rekomendasi Gambar/Visual Eksternal — hanya jika opsi ini diaktifkan; CHATGPT/AI wajib mencari web terlebih dahulu dengan PRIORITAS SUMBER INDONESIA dan visual berlabel Bahasa Indonesia, lalu tampilkan tabel: Bagian MPI/No. Soal | Fungsi Pedagogis | Deskripsi + Alt Text Bahasa Indonesia | Asal Referensi (Indonesia/Internasional) | Bahasa Label di Gambar | Format | Halaman Sumber | Lisensi/Akses (jika tersedia) | DIRECT_IMAGE_URL_READY_FOR_CANVA. Kolom terakhir wajib berupa URL HTTPS langsung yang siap ditempel ke src di Canva Code, bukan halaman pencarian/sumber. Jika pilihan bukan dari Indonesia atau label di dalam gambar bukan Bahasa Indonesia, jelaskan singkat alasannya.
+14. Catatan Bahasa Konten
 
 Setelah 3 ide ditampilkan, beri rekomendasi singkat ide yang paling mudah dieksekusi di Canva Code dan alasannya.
 
@@ -4030,6 +4071,7 @@ WAJIB PERTAHANKAN seluruh keputusan dari Prompt 0, jangan diubah:
 - Cek Pemahaman Setelah Materi: [Ya / Tidak]
 - Feedback Evaluasi Akhir: [Konstruktif / Tanpa Feedback]
 - Kedalaman Materi: [ikuti sesuai Prompt 0]
+- Sisipkan Gambar/Visual dari Link Eksternal: [Ya / Tidak]
 - Konfigurasi Evaluasi Akhir (Kognitif): [ikuti tipe soal, jumlah soal, dan proporsi LOTS/MOTS/HOTS sesuai Prompt 0]
 - Game Pembelajaran: [Ada / Tidak Ada]
 - Jenis & Jumlah Game: [sesuai Prompt 0]
@@ -4051,7 +4093,8 @@ ATURAN KONSISTENSI DENGAN PROMPT 0:
 6. Refleksi wajib: tampung sudah dipahami, masih sulit/membingungkan, dan rencana perbaikan; bentuk menyesuaikan jenjang.
 7. Evaluasi: hanya kognitif dan wajib mengikuti tipe soal, jumlah soal, serta proporsi LOTS/MOTS/HOTS dari Prompt 0. Setiap soal wajib dipetakan ke tipe soal, level kognitif, submateri/topik, dan indikator/tujuan untuk menentukan Bagian Perlu Penguatan.
 8. Feedback Evaluasi Konstruktif → feedback benar/salah. Tanpa Feedback → jangan bocorkan benar/salah/pembahasan selama pengerjaan.
-9. Game jika Ada → pengayaan, skor terpisah, tidak menjadi syarat unlock/nilai, tidak menyalin persis soal cek/evaluasi. Jika Tidak Ada → jangan rancang game.
+9. Jika Sisipkan Gambar/Visual dari Link Eksternal = Ya, pertahankan dan gunakan hasil pencarian web dari Prompt 0. Jika Prompt 0 belum memberikan DIRECT_IMAGE_URL_READY_FOR_CANVA yang valid untuk visual yang dibutuhkan, CHATGPT/AI harus melakukan pencarian web sekarang sebelum menyelesaikan rancangan; Canva/Canva Code TIDAK BOLEH diminta mencari gambar. Pertahankan prioritas: sumber Indonesia yang kredibel + label/legenda/nama bagian berbahasa Indonesia; jika tidak tersedia pilih visual Indonesia tanpa teks, lalu visual internasional netral tanpa teks, dan visual berlabel bahasa asing hanya sebagai pilihan terakhir. Untuk setiap visual, tetapkan lokasi pemakaian (submateri/layar/nomor soal), fungsi pedagogis, alt text/caption Bahasa Indonesia, asal referensi, bahasa label di dalam gambar, halaman sumber, keterangan lisensi/akses bila tersedia, format, dan URL HTTPS langsung yang siap dipakai pada src. Hindari halaman pencarian, Pinterest/Google Images, URL login/paywall, atau URL sementara/bertanda tangan yang mudah kedaluwarsa. Jika Tidak, jangan mewajibkan visual eksternal.
+10. Game jika Ada → pengayaan, skor terpisah, tidak menjadi syarat unlock/nilai, tidak menyalin persis soal cek/evaluasi. Jika Tidak Ada → jangan rancang game.
 
 ALUR AWAL & MENU UTAMA — WAJIB:
 - Urutan awal: Pembuka → Nama/Kelas bila digunakan → Panduan & Alur Penggunaan → Apersepsi/Pertanyaan Pemantik → Menu Utama/Dashboard.
@@ -4078,7 +4121,8 @@ Buatkan rancangan dengan format:
 16. Integrasi Canva Sheet — jika Ya: payload, waktu kirim, status, retry; jika Tidak: tegas tidak menggunakan Sheet
 17. Halaman Hasil — Nilai, Kategori, Bagian Perlu Penguatan, Saran Penguatan singkat, Refleksi Siswa; pembahasan sesuai mode feedback
 18. Arahan Visual Canva — warna, maskot jika ada, tombol, ikon/status lock, font Arab jika relevan
-19. Checklist Kualitas — semua opsi dipatuhi, Panduan tampil sebelum Apersepsi, dashboard selalu dapat kembali diakses, menu terkunci tetap terlihat, urutan submateri benar bila Berurutan, reread gate benar bila aktif, refleksi tersimpan, penguatan berbasis data, feedback sesuai mode, game kondisional, navigasi mudah, siap dibuat Canva Code
+19. Daftar Gambar/Visual Eksternal — hanya jika diaktifkan; tampilkan bagian yang didukung, fungsi visual, deskripsi visual singkat, format file, dan URL publik bebas akses
+20. Checklist Kualitas — semua opsi dipatuhi, Panduan tampil sebelum Apersepsi, dashboard selalu dapat kembali diakses, menu terkunci tetap terlihat, urutan submateri benar bila Berurutan, reread gate benar bila aktif, refleksi tersimpan, penguatan berbasis data, feedback sesuai mode, game kondisional, navigasi mudah, siap dibuat Canva Code
 
 Pastikan hasil rapi, mudah dipahami guru pemula, dan jangan mengubah keputusan Prompt 0.
 
@@ -4105,6 +4149,7 @@ WAJIB mempertahankan seluruh keputusan dari Prompt 0 dan Prompt 1:
 - Cek Pemahaman Setelah Materi: [Ya / Tidak]
 - Feedback Evaluasi Akhir: [Konstruktif / Tanpa Feedback]
 - Kedalaman Materi: [ikuti sesuai Prompt 0]
+- Sisipkan Gambar/Visual dari Link Eksternal: [Ya / Tidak]
 - Konfigurasi Evaluasi Akhir (Kognitif): [ikuti tipe soal, jumlah soal, dan proporsi LOTS/MOTS/HOTS sesuai Prompt 0]
 - Game Pembelajaran: [Ada / Tidak Ada]
 - Jenis & Jumlah Game: [sesuai pilihan sebelumnya]
@@ -4120,6 +4165,7 @@ Ketentuan umum:
 6. Tombol besar dan touch-friendly.
 7. Kode rapi dengan komentar singkat.
 8. Single page app.
+9. Jika Sisipkan Gambar/Visual dari Link Eksternal = Ya, JANGAN melakukan atau mendelegasikan pencarian gambar kepada Canva/Canva Code. Gunakan DIRECT_IMAGE_URL_READY_FOR_CANVA yang sudah ditemukan dan diverifikasi ChatGPT/AI pada Prompt 0/1, dengan prioritas sumber Indonesia dan label/teks di dalam visual berbahasa Indonesia sebagaimana telah dipilih pada tahap sebelumnya. Jangan mengganti URL dengan placeholder, kata kunci pencarian, URL Google Images/Pinterest, atau halaman sumber. Masukkan URL langsung tersebut pada data aset/atribut src yang sesuai. Untuk implementasi, kelompokkan URL dalam konstanta/objek aset agar mudah diperiksa, gunakan alt text bermakna, loading="lazy" bila sesuai, object-fit yang aman, serta fallback UI/caption saat onerror sehingga materi/soal tetap terbaca jika host gagal dimuat. Jika URL yang dibutuhkan belum tersedia/terverifikasi, jangan mengarang link; nyatakan aset mana yang belum siap dan minta ChatGPT/AI tahap sebelumnya mencarikan URL valid sebelum kode final. Jika opsi = Tidak, jangan membuat ketergantungan pada gambar eksternal.
 
 ALUR AWAL & DASHBOARD MENU UTAMA — WAJIB:
 - Alur awal: Pembuka → Nama/Kelas bila digunakan → Panduan & Alur Penggunaan → Apersepsi/Pertanyaan Pemantik → Menu Utama/Dashboard → aktivitas belajar.
@@ -8080,6 +8126,7 @@ function canonicalFieldKey(label=''){
   if(/feedback evaluasi|umpan balik evaluasi/.test(t))return'feedback-evaluasi';
   if(/konfigurasi evaluasi akhir|evaluasi akhir.*kognitif/.test(t))return'mpi-evaluation';
   if(/kedalaman materi/.test(t))return'material-depth';
+  if(/sisipkan.*(gambar|visual).*link eksternal|link eksternal.*(gambar|visual)/.test(t))return'external-visual-links';
   if(/jenis.*game/.test(t))return'jenis-game';
   if(/jumlah.*game/.test(t))return'jumlah-game';
   if(/game pembelajaran|^game$/.test(t))return'game-pembelajaran';
@@ -8257,7 +8304,8 @@ const videoGeneratorFieldConfig={
 };
 const mpiGeneratorFieldConfig={
   'material-depth':{label:'Kedalaman Materi',type:'select',options:[['Disesuaikan oleh AI','Disesuaikan oleh AI — berdasarkan jenjang, tujuan, waktu, dan kompleksitas'],['Sederhana','Sederhana — konsep esensial, ringkas tetapi utuh, contoh inti'],['Sedang','Sedang — proporsional, hubungan konsep, contoh, dan miskonsepsi utama'],['Mendetail','Mendetail — lebih lengkap, proses/sebab-akibat, penerapan, variasi contoh, dan miskonsepsi']],help:'Kedalaman selalu tetap menyesuaikan jenjang. “Sederhana” berarti lebih fokus dan ringkas, bukan mengurangi akurasi konsep.'},
-  'mpi-evaluation':{label:'Evaluasi Akhir — Kognitif',type:'mpiEvaluation',help:'Sama seperti konfigurasi asesmen formatif pada Modul Ajar, tetapi khusus kognitif: pilih tipe soal, jumlah soal, dan proporsi LOTS/MOTS/HOTS. Kosongkan rincian tertentu jika ingin AI menentukannya.'}
+  'mpi-evaluation':{label:'Evaluasi Akhir — Kognitif',type:'mpiEvaluation',help:'Sama seperti konfigurasi asesmen formatif pada Modul Ajar, tetapi khusus kognitif: pilih tipe soal, jumlah soal, dan proporsi LOTS/MOTS/HOTS. Kosongkan rincian tertentu jika ingin AI menentukannya.'},
+  'external-visual-links':{label:'Sisipkan Gambar/Visual dari Link Eksternal',type:'select',options:[['','— Pilih Ya atau Tidak —'],['Ya','Ya — ChatGPT carikan URL gambar siap Canva Code'],['Tidak','Tidak — tanpa gambar/visual eksternal']],help:'Jika Ya, ChatGPT/AI yang menerima prompt wajib mencari web dan menyiapkan URL HTTPS langsung yang publik, stabil, relevan, dan siap dipakai pada src di Canva Code. Utamakan referensi Indonesia dan gambar yang judul/label/legenda/nama bagiannya memakai Bahasa Indonesia. Jika tidak tersedia, pilih visual Indonesia tanpa teks lalu visual internasional yang netral tanpa teks; visual berlabel bahasa asing hanya sebagai pilihan terakhir. Canva/Canva Code tidak diminta mencari gambar. Prioritaskan PNG, JPG/JPEG, WEBP, SVG, atau GIF bila relevan; jangan mengarang link yang belum diverifikasi.'}
 };
 const generalGeneratorFieldConfig={
   'jenjang-kelas':{label:'Jenjang / Kelas Sasaran',placeholder:'Contoh: SMP / Kelas VIII',help:'Isi jenjang dan kelas sasaran agar bahasa, kedalaman materi, aktivitas, visual, dan asesmen tepat. Contoh: SD / Kelas V; SMP / Kelas VIII; SMA / Kelas XI. Jika fase juga diketahui, boleh tulis: SMP / Kelas VIII / Fase D.'},
@@ -8393,7 +8441,7 @@ function initSpecialGeneratorFields(){
 function generatorProgressGroup(f,cfg,label){
   if(f?.group)return f.group;
   const semantic=canonicalFieldKey(f?.sourceLabel||f?.label||label||'');
-  if(['canva-sheet','akses-menu','cek-pemahaman','feedback-evaluasi','material-depth','mpi-evaluation','jenis-game','jumlah-game','game-pembelajaran','engine-platform','platform-ai'].includes(semantic))return'settings';
+  if(['canva-sheet','akses-menu','cek-pemahaman','feedback-evaluasi','material-depth','mpi-evaluation','external-visual-links','jenis-game','jumlah-game','game-pembelajaran','engine-platform','platform-ai'].includes(semantic))return'settings';
   const t=normalize(`${f?.sourceLabel||''} ${f?.sourceToken||''} ${f?.token||''} ${label||''}`);
   if(/nama guru|nama sekolah|jenjang|fase|kelas|mata pelajaran|\bmapel\b|semester|tahun ajaran|kurikulum|alokasi|estimasi waktu|durasi total|perangkat|bahasa konten|bahasa video/.test(t))return'identity';
   if(/topik|materi|subtopik|tujuan pembelajaran|capaian pembelajaran|konsep|fenomena|miskonsepsi|model|praktik pedagogis|konteks lokal|komposisi|kondisi siswa|karakteristik|dimensi profil|aktivitas siswa|deskripsi cerita|tokoh|latar/.test(t))return'content';
