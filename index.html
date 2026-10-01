@@ -8160,6 +8160,10 @@ const mpiGeneratorFieldConfig={
   'mpi-evaluation':{label:'Evaluasi Akhir — Kognitif',type:'mpiEvaluation',help:'Sama seperti konfigurasi asesmen formatif pada Modul Ajar, tetapi khusus kognitif: pilih tipe soal, jumlah soal, dan proporsi LOTS/MOTS/HOTS/AKM-PISA. Kosongkan rincian tertentu jika ingin AI menentukannya.'},
   'external-visual-links':{label:'Sisipkan Gambar/Visual dari Link Eksternal',type:'select',options:[['','— Pilih Ya atau Tidak —'],['Ya','Ya — ChatGPT carikan URL gambar siap Canva Code'],['Tidak','Tidak — tanpa gambar/visual eksternal']],help:'Jika Ya, ChatGPT/AI yang menerima prompt wajib mencari web dan menyiapkan URL HTTPS langsung yang publik, stabil, relevan, dan siap dipakai pada src di Canva Code. Utamakan referensi Indonesia dan gambar yang judul/label/legenda/nama bagiannya memakai Bahasa Indonesia. Jika tidak tersedia, pilih visual Indonesia tanpa teks lalu visual internasional yang netral tanpa teks; visual berlabel bahasa asing hanya sebagai pilihan terakhir. Canva/Canva Code tidak diminta mencari gambar. Prioritaskan PNG, JPG/JPEG, WEBP, SVG, atau GIF bila relevan; jangan mengarang link yang belum diverifikasi.'}
 };
+// Override khusus paket PRO: seluruh teks UI dan bantuan harus netral-web, tanpa ketergantungan Canva.
+const mpiProGeneratorFieldConfig={
+  'external-visual-links':{label:'Sisipkan Gambar/Visual dari Link Eksternal',type:'select',options:[['','— Pilih Ya atau Tidak —'],['Ya','Ya — ChatGPT carikan URL gambar siap Web/HTML'],['Tidak','Tidak — tanpa gambar/visual eksternal']],help:'Jika Ya, ChatGPT/AI yang menerima prompt wajib mencari web dan menyiapkan URL HTTPS langsung yang publik, stabil, relevan, dan siap dipakai pada atribut src di aplikasi Web/HTML. Utamakan referensi Indonesia dan gambar yang judul/label/legenda/nama bagiannya memakai Bahasa Indonesia. Jika tidak tersedia, pilih visual Indonesia tanpa teks lalu visual internasional yang netral tanpa teks; visual berlabel bahasa asing hanya sebagai pilihan terakhir. Pencarian aset dilakukan oleh ChatGPT/AI pada tahap prompt, bukan dibebankan kepada tool coding. Prioritaskan PNG, JPG/JPEG, WEBP, SVG, atau GIF bila relevan; jangan mengarang link yang belum diverifikasi.'}
+};
 const generalGeneratorFieldConfig={
   'jenjang-kelas':{label:'Jenjang / Kelas Sasaran',placeholder:'Contoh: SMP / Kelas VIII',help:'Isi jenjang dan kelas sasaran agar bahasa, kedalaman materi, aktivitas, visual, dan asesmen tepat. Contoh: SD / Kelas V; SMP / Kelas VIII; SMA / Kelas XI. Jika fase juga diketahui, boleh tulis: SMP / Kelas VIII / Fase D.'},
   'jenjang':{label:'Jenjang',placeholder:'Contoh: SMP',help:'Isi jenjang pendidikan sasaran, misalnya SD, SMP, SMA, SMK, atau jenjang ekuivalen pada kurikulum internasional.'}
@@ -8193,7 +8197,7 @@ function currentGeneratorFieldConfig(tokenOrField){
   else if(p?.title==='Prompt Presentasi Pembelajaran')cfg=presentationGeneratorFieldConfig[token]||null;
   else if(p?.title==='Prompt Video Pembelajaran')cfg=videoGeneratorFieldConfig[token]||null;
   else if(p?.title==='Prompt LKPD')cfg=lkpdGeneratorFieldConfig[token]||null;
-  else if(state.generatorType==='mpi'&&f)cfg=mpiGeneratorFieldConfig[fieldSemanticKey(f)]||null;
+  else if(state.generatorType==='mpi'&&f){const key=fieldSemanticKey(f);cfg=(state.generatorVersion==='pro'?mpiProGeneratorFieldConfig[key]:null)||mpiGeneratorFieldConfig[key]||null;}
   return cfg||(f?generalGeneratorFieldConfig[fieldSemanticKey(f)]:null)||inferredGeneratorFieldConfig(f);
 }
 function moduleFieldConfig(tokenOrField){return currentGeneratorFieldConfig(tokenOrField);}
