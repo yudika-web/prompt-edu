@@ -1979,7 +1979,13 @@ ATURAN INVENTARIS FILE GAMBAR — WAJIB:
       },
       {
         title: "Prompt 3 PRO Generate Prompt Aset Simulasi & Lab Maya",
-        text: `Berdasarkan Daftar Inventaris Aset (Prompt 2 PRO), buatkan kumpulan prompt siap pakai untuk menghasilkan SETIAP aset proyek Simulasi & Lab Maya menggunakan AI image/audio generator (misalnya ChatGPT, Claude yang mendukung image generation, Gemini, Midjourney, Ideogram, Canva AI, atau generator lain yang sesuai).
+        text: `Berdasarkan Daftar Inventaris Aset (Prompt 2 PRO), buatkan kumpulan prompt siap pakai untuk menghasilkan SETIAP aset proyek Simulasi & Lab Maya menggunakan AI image/audio generator (misalnya ChatGPT, Claude yang mendukung image generation, Gemini, Midjourney, Ideogram, atau Adobe Firefly).
+
+ID PRODUKSI — WAJIB:
+- Beri setiap prompt aset satu ID produksi unik dan berurutan: A001, A002, A003, dan seterusnya.
+- Satu ID hanya boleh mewakili SATU file/aset. Pose/state yang berbeda mendapat ID berbeda.
+- Pertahankan urutan ID ini sebagai urutan eksekusi untuk Prompt 4 PRO. Jangan mengulang atau melewati nomor.
+- Jika aset ditandai EXTERNAL-URL dan tidak perlu digenerate, tetap boleh dicatat pada manifest dengan status EXTERNAL-URL, tetapi jangan membuat prompt image-generation untuk aset tersebut.
 
 ATURAN UTAMA — SATU FILE = SATU GAMBAR/ASET:
 1. Buat SATU prompt gambar terpisah untuk SATU aset. DILARANG menggabungkan dua atau lebih aset, pose, state, objek, atau variasi ke dalam satu file gambar.
@@ -2001,7 +2007,7 @@ FORMAT FILE:
 13. Resolusi harus cukup tajam untuk UI; rekomendasikan minimal 512 px pada sisi terpanjang untuk aset lepas, dan resolusi lebih besar untuk background sesuai layout.
 
 STRUKTUR SETIAP PROMPT GAMBAR:
-- Nomor & Nama Aset
+- ID Produksi (A001, A002, A003, dst.) & Nama Aset
 - Nama file target .webp
 - Halaman/menu pemakaian
 - Fungsi edukatif/interaktif
@@ -2022,95 +2028,74 @@ Untuk maskot/ikon/navigasi, sesuaikan negative prompt agar tidak melarang gaya s
 
 Jika ada audio, buat prompt audio terpisah. Audio bersifat opsional sesuai inventaris.
 
-Output akhir: daftar prompt siap-copy yang dikelompokkan per kategori aset, tetapi SETIAP prompt gambar hanya untuk SATU file dan SATU gambar/aset. Hasil Prompt 3 PRO ini menjadi acuan langsung untuk Prompt 4 PRO.`
+Output akhir: daftar prompt siap-copy yang dikelompokkan per kategori aset, tetapi SETIAP prompt gambar hanya untuk SATU file dan SATU gambar/aset. Setiap prompt wajib memiliki ID produksi berurutan A001, A002, A003, dst. Hasil Prompt 3 PRO ini adalah INSTRUKSI FINAL dan menjadi sumber utama yang dieksekusi langsung oleh Prompt 4 PRO.`
       },
       {
         title: "Prompt 4 PRO Generate Semua Aset Otomatis Simulasi & Lab Maya di ChatGPT/Claude",
-        text: `Berdasarkan rancangan desain (Prompt 1 PRO), Daftar Inventaris Aset (Prompt 2 PRO), dan kumpulan prompt aset (Prompt 3 PRO), sekarang GENERATE semua aset proyek Simulasi & Lab Maya secara otomatis langsung di percakapan ChatGPT/Claude ini. Jangan berhenti pada daftar atau prompt saja jika platform memiliki kemampuan image generation. Kerjakan per batch sesuai kemampuan AI agar kualitas dan konsistensi tetap terjaga.
+        text: `Gunakan SELURUH prompt aset yang telah dihasilkan pada Prompt 3 PRO sebagai instruksi final untuk melakukan generate aset proyek Simulasi & Lab Maya.
+
+Tugas pada tahap ini adalah MENGEKSEKUSI prompt-prompt tersebut. Jangan merancang ulang aset, jangan membuat inventaris baru, jangan menulis ulang prompt, dan jangan mengubah keputusan visual yang sudah ditetapkan pada Prompt 3 PRO.
+
+SUMBER UTAMA:
+- Prompt 3 PRO adalah sumber instruksi generate UTAMA dan FINAL.
+- Prompt 1 PRO dan Prompt 2 PRO hanya boleh dipakai sebagai referensi konteks atau verifikasi kelengkapan apabila benar-benar diperlukan.
+- Jika ada perbedaan interpretasi, ikuti spesifikasi eksplisit pada prompt aset di Prompt 3 PRO.
+- Jangan kembali menganalisis atau menyusun ulang desain dari Prompt 1-2 PRO.
 
 Platform: [ChatGPT / Claude]
 
-PRIORITAS ASET:
-1. Aset yang berhubungan langsung dengan materi/aktivitas utama terlebih dahulu.
-2. Karakter/objek interaktif utama, bangunan/ruang/latar, obstacle/rintangan, dan state objek yang diperlukan.
-3. Maskot/karakter pemandu bila digunakan.
-4. Ikon menu/kontrol/navigasi bila desain membutuhkan aset gambar khusus.
-5. Audio hanya jika benar-benar diperlukan atau diminta.
+CARA EKSEKUSI:
+1. Identifikasi seluruh prompt aset Prompt 3 PRO berdasarkan ID produksi A001, A002, A003, dan seterusnya.
+2. Eksekusi prompt tersebut sesuai urutan ID produksi.
+3. SATU prompt gambar menghasilkan SATU file/aset gambar terpisah.
+4. Jangan menggabungkan beberapa prompt menjadi satu gambar, sprite sheet, collage, contact sheet, grid, lembar pose, atau lembar state.
+5. Jangan meringkas, menyederhanakan, memperluas, atau menulis ulang prompt Prompt 3 PRO sebelum generate, kecuali penyesuaian teknis minimum memang diwajibkan oleh generator.
+6. Pertahankan nama file target, format, transparansi/background, rasio/resolusi, gaya, komposisi, konteks faktual, dan negative prompt yang sudah tertulis pada masing-masing prompt Prompt 3 PRO.
+7. Jika satu objek/karakter memiliki beberapa pose atau state, eksekusi setiap ID sebagai file terpisah.
+8. Jika platform mendukung visual reference, gunakan hasil aset terkait sebelumnya untuk menjaga konsistensi karakter, objek, palet, perspektif, pencahayaan, dan detail.
 
-ATURAN MUTLAK FILE GAMBAR — 1 FILE = 1 GAMBAR:
-1. SATU file gambar hanya boleh memuat SATU aset/gambar. Tidak boleh ada dua atau lebih aset dalam satu file.
-2. DILARANG membuat sprite sheet, contact sheet, collage, grid beberapa aset, lembar pose, lembar state, atau satu gambar berisi beberapa objek yang sebenarnya harus menjadi aset terpisah.
-3. Setiap pose karakter, ekspresi, state objek, keadaan sebelum/sesudah, kosong/terisi, normal/aktif, dan variasi lain yang diperlukan WAJIB dibuat sebagai file terpisah.
-4. Nama file harus unik dan deskriptif, misalnya objek_normal.webp, objek_aktif.webp, karakter_menunjuk.webp.
+BATCH GENERATION:
+9. Jika jumlah aset terlalu banyak untuk dibuat sekaligus, kerjakan berdasarkan urutan ID produksi dengan maksimal 10 aset gambar per batch. Contoh: Batch 1 = A001-A010, Batch 2 = A011-A020.
+10. Ukuran batch boleh diperkecil jika diperlukan untuk menjaga kualitas atau konsistensi.
+11. Sebelum generate, cukup tampilkan daftar singkat ID produksi, nama file, dan nama aset pada batch tersebut. Jangan membuat ulang Peta Batch dari Prompt 2 PRO.
+12. Setelah daftar batch tampil, LANGSUNG generate aset pada batch tersebut tanpa menunggu persetujuan tambahan, kecuali saya meminta konfirmasi.
+13. Setelah batch selesai, lanjutkan ke ID berikutnya sampai seluruh prompt Prompt 3 PRO telah diproses.
 
-ATURAN VISUAL — KONTEKS NYATA, FAKTUAL, DAN JELAS:
-5. Untuk aset materi/aktivitas utama—termasuk alat dan bahan virtual, objek eksperimen, elemen simulasi, diagram/proses, lingkungan praktikum, serta state objek yang berubah karena variabel—gambar harus konkret, mudah dikenali, dan sesuai konteks nyata. Jika materinya ilmiah/faktual, bentuk, proporsi, warna, material, state, proses, dan fungsi wajib benar.
-6. Gunakan render realistis atau semi-realistis dengan detail jelas dan bentuk tidak ambigu. Hindari aset terlalu abstrak, samar, generic flat vector, clipart, doodle, line-art sederhana, atau visual seperti SVG yang kehilangan detail nyata.
-7. Akurasi konteks/fakta didahulukan daripada dekorasi. Jangan menambahkan detail yang salah, mustahil, atau menyesatkan.
-8. Karakter non-maskot, bangunan, ruang, lingkungan, obstacle, alat, bahan, dan objek materi harus memiliki bentuk dan skala yang masuk akal untuk konteks proyek.
-9. PENGECUALIAN: maskot, ikon menu, ikon kontrol/navigasi, badge, dan elemen UI dekoratif BOLEH menyesuaikan gaya desain Prompt 1 PRO (2D/3D/stylized/chibi/semi-realistis), tetapi tetap harus jelas, tajam, konsisten, dan mudah dikenali.
-10. Pertahankan palet warna, sudut pandang, arah cahaya, proporsi relatif, dan tingkat detail yang konsisten antar-file.
-11. Jangan menaruh teks acak, watermark, label yang tidak diperlukan, atau gibberish di dalam gambar. Teks UI dibuat dengan HTML/CSS.
+VALIDASI HASIL:
+14. Setelah setiap aset digenerate, cocokkan hasilnya dengan prompt sumber pada ID Prompt 3 PRO yang bersangkutan.
+15. Periksa bahwa hasil hanya memuat satu aset utama, pose/state benar, transparansi/background sesuai, tidak ada teks acak/watermark, kualitas tajam, dan tidak menyimpang dari spesifikasi prompt sumber.
+16. Jika suatu aset gagal memenuhi prompt sumber, regenerate HANYA ID tersebut menggunakan prompt Prompt 3 PRO yang sama. Koreksi teknis minimum boleh dilakukan hanya untuk memperbaiki kegagalan generate, tanpa mengubah konsep aset.
+17. Jangan mengulang aset yang sudah benar.
 
-FORMAT FILE:
-12. Target output WAJIB WebP (.webp), kualitas tinggi/lossless bila tersedia.
-13. Untuk aset lepas gunakan alpha/transparansi. Untuk background/latar penuh, transparansi tidak wajib.
-14. Jika platform hanya menghasilkan PNG/JPG, generate kualitas terbaik, tandai "perlu konversi ke WebP", dan jangan menurunkan kualitas.
-15. Jangan menggunakan SVG/vektor sebagai pengganti file gambar utama.
+STATUS SETELAH BATCH:
+Tampilkan tabel ringkas:
+ID | Nama File | Nama Aset | Status
 
-ATURAN BATCH:
-16. Generate PER BATCH, maksimal 10 file gambar per batch. Karena 1 file = 1 aset, maka maksimal 10 aset gambar per batch.
-17. Ukuran batch adaptif. Jika konsistensi, akurasi, atau detail mulai turun, kecilkan batch berikutnya.
-18. Beri label Batch 1, Batch 2, dst. di LUAR gambar.
-19. Sebelum setiap batch, tampilkan PETA BATCH berupa tabel dengan kolom:
-   - Nomor file (B1-F01, dst.)
-   - Nama file .webp
-   - Nama aset
-   - Kategori
-   - Halaman/menu pemakaian
-   - Fungsi aset
-   - Transparan/Penuh
-   - Catatan konteks nyata/akurasi yang wajib benar
-20. Pastikan setiap aset Prompt 2 PRO muncul tepat satu kali dalam peta produksi. Jika satu objek memiliki beberapa state, setiap state muncul sebagai baris/file terpisah.
-21. Setelah Peta Batch tampil, langsung generate file-file batch tersebut tanpa menunggu persetujuan tambahan, kecuali saya meminta konfirmasi.
+Gunakan status:
+- SELESAI
+- PERLU ULANG
+- PERLU KONVERSI WEBP
+- EXTERNAL-URL — TIDAK DIGENERATE (jika berlaku)
 
-PEMERIKSAAN SETELAH GENERATE:
-22. Periksa SETIAP file secara individual:
-   a. file hanya berisi satu aset/gambar;
-   b. tidak ada aset kedua, sprite, grid, atau collage;
-   c. bentuk/proporsi/material/konteks benar;
-   d. aset materi faktual/ilmiah akurat;
-   e. visual jelas dan tidak terlalu abstrak/vektor generik;
-   f. gaya konsisten dengan Prompt 1 PRO;
-   g. background transparan jika aset lepas;
-   h. target format WebP tercapai atau diberi status perlu konversi;
-   i. tidak ada teks acak/watermark;
-   j. resolusi cukup tajam.
-23. Tampilkan HASIL BATCH dengan kolom nomor file, nama file, aset, kategori, halaman, format, dan status Selesai/Perlu Ulang.
-24. File yang gagal diregenerate HANYA file tersebut, satu per satu atau batch kecil; jangan mengulang file yang sudah lolos.
-25. Setelah batch lolos, lanjutkan ke batch berikutnya sampai seluruh aset utama selesai.
-
-ATURAN GENERATE:
-26. Gunakan nama/fungsi aset dari Prompt 2 PRO sebagai sumber utama dan Prompt 3 PRO sebagai instruksi visual per file.
-27. Jangan menggabungkan aset demi menghemat jumlah generate. Jika ada 37 aset, targetnya tetap 37 file gambar terpisah (ditambah audio bila ada).
-28. Untuk pose/state berulang, gunakan file hasil sebelumnya sebagai visual reference bila platform mendukung agar konsisten.
-29. Audio dan tombol navigasi gambar tetap opsional; tombol HTML/CSS lebih diutamakan kecuali desain memang meminta aset visual khusus.
-30. Setelah semua aset selesai, buat REKAP MANIFEST ASET FINAL: Wajib selesai, Opsional selesai, Opsional belum dibuat, serta file yang masih perlu konversi ke WebP.
+SETELAH SEMUA ASET SELESAI:
+Buat Manifest Aset Final berdasarkan ID produksi Prompt 3 PRO yang menunjukkan aset selesai, perlu ulang, perlu konversi, atau External URL. Pastikan tidak ada ID yang terlewat atau diproses dua kali.
 
 PENTING:
 - Jangan hanya menjelaskan cara membuat aset.
-- Jangan hanya mengulang Prompt 3 PRO.
-- Jika image generation tersedia, langsung generate sesuai Peta Batch.
-- Jika platform tidak dapat membuat gambar langsung, susun paket prompt final PER FILE/PER ASET sesuai Peta Batch dan tandai "perlu dieksekusi pada generator aset".
-- Jangan pernah kembali ke format multi-aset dalam satu file.
+- Jangan hanya menampilkan ulang Prompt 3 PRO.
+- Jangan membuat prompt aset baru.
+- Jangan membuat ulang inventaris atau prioritas aset.
+- Jangan mengubah style/spesifikasi Prompt 3 PRO.
+- Jika image generation tersedia, langsung gunakan prompt Prompt 3 PRO untuk generate.
+- Jika platform tidak dapat membuat gambar secara langsung, tampilkan prompt PER ID apa adanya dan tandai "PERLU DIEKSEKUSI PADA GENERATOR ASET"; jangan menyusun prompt pengganti.
 
-Mulai dari Batch 1 berisi aset prioritas tertinggi yang paling berhubungan dengan materi/aktivitas utama.`
+Mulai dari ID produksi pertama pada Prompt 3 PRO dan lanjutkan berurutan sampai selesai.`
       },
       {
         title: "Prompt 5 PRO Susun Prompt Web App Simulasi & Lab Maya",
         text: `Berdasarkan rancangan desain (Prompt 1 PRO — termasuk Model Variabel & Rumus) dan Daftar Inventaris Aset, prompt aset, dan hasil aset yang sudah digenerate (Prompt 2 PRO, Prompt 3 PRO, dan Prompt 4 PRO) di atas, JANGAN langsung tuliskan kode HTML/CSS/JS.
 
-Sebagai gantinya, susun SATU prompt lengkap dan siap pakai yang akan saya tempel ke tool/AI pembuat web app lain (misalnya Claude Code, Canva Code, v0, bolt.new, Cursor, Replit AI, atau Lovable) agar tool tersebut yang membangun seluruh web app-nya sekaligus — jadi prompt ini harus berdiri sendiri (self-contained), lengkap dengan semua konteks yang dibutuhkan tanpa perlu melampirkan Prompt 0-4 PRO lagi.
+Sebagai gantinya, susun SATU prompt lengkap dan siap pakai yang akan saya tempel ke tool/AI pembuat web app lain (misalnya Claude Code, v0, bolt.new, Cursor, Replit AI, atau Lovable) agar tool tersebut yang membangun seluruh web app-nya sekaligus — jadi prompt ini harus berdiri sendiri (self-contained), lengkap dengan semua konteks yang dibutuhkan tanpa perlu melampirkan Prompt 0-4 PRO lagi.
 
 Prompt yang disusun harus memuat, secara berurutan:
 1. Ringkasan konteks — mata pelajaran, kelas, jenis (Simulasi Interaktif/Lab Maya), fenomena/materi, dan tujuan pembelajaran
@@ -2266,7 +2251,7 @@ Buatkan rancangan dengan format:
         title: "Prompt 2 Susun Prompt Web App Simulasi & Lab Maya (Versi Biasa)",
         text: `Berdasarkan rancangan desain di atas (Prompt 1), JANGAN langsung tuliskan kode HTML/CSS/JS.
 
-Sebagai gantinya, susun SATU prompt lengkap dan siap pakai yang akan saya tempel ke tool/AI pembuat web app lain (misalnya Claude Code, Canva Code, v0, bolt.new, Cursor, Replit AI, atau Lovable) agar tool tersebut yang membangun seluruh web app-nya sekaligus — prompt ini harus berdiri sendiri (self-contained), lengkap dengan semua konteks yang dibutuhkan tanpa perlu melampirkan Prompt 0-1 lagi.
+Sebagai gantinya, susun SATU prompt lengkap dan siap pakai yang akan saya tempel ke tool/AI pembuat web app lain (misalnya Claude Code, v0, bolt.new, Cursor, Replit AI, atau Lovable) agar tool tersebut yang membangun seluruh web app-nya sekaligus — prompt ini harus berdiri sendiri (self-contained), lengkap dengan semua konteks yang dibutuhkan tanpa perlu melampirkan Prompt 0-1 lagi.
 
 Prompt yang disusun harus memuat, secara berurutan:
 1. Ringkasan konteks — mata pelajaran, kelas, jenis (Simulasi Interaktif/Lab Maya), fenomena/materi, dan tujuan pembelajaran
@@ -2286,8 +2271,8 @@ Ketentuan penulisan:
 Output:
 Satu blok prompt siap copy-paste, yang bila ditempel ke tool pembuat web app pilihan saya, akan langsung menghasilkan Simulasi/Lab Maya yang lengkap dan fungsional.
 
-FINAL TESTING DI CANVA — WAJIB DILAKUKAN SEBELUM MENYATAKAN SELESAI:
-Setelah aplikasi/MPI/game/simulasi/lab maya selesai dibuat di Canva, JANGAN langsung menyatakan pekerjaan selesai. WAJIB uji hasil yang benar-benar sudah dibuat dan lakukan perbaikan bila ada masalah.
+FINAL TESTING WEB APP — WAJIB DILAKUKAN SEBELUM MENYATAKAN SELESAI:
+Setelah aplikasi/MPI/game/simulasi/lab maya selesai dibuat, JANGAN langsung menyatakan pekerjaan selesai. WAJIB uji hasil yang benar-benar sudah dibuat dan lakukan perbaikan bila ada masalah.
 1. Uji SEMUA tombol satu per satu: tombol menu, Mulai, Lanjut, Kembali, Home, Reset, Submit/Kirim, navigasi, kontrol permainan/simulasi, serta tombol lain yang tersedia. Pastikan tidak ada tombol mati, salah tujuan, perlu diklik berulang, atau menghasilkan error.
 2. Uji SEMUA menu/halaman/scene dan seluruh fitur/interaksi dari awal sampai akhir. Pastikan alur bisa diselesaikan tanpa buntu dan state/progress/skor/data berubah sesuai rancangan.
 3. Uji input, form, slider, pilihan jawaban, drag-drop, kontrol gerak, timer, skor, evaluasi, simulasi, reset, dan fitur kondisional yang memang digunakan. Uji juga kondisi kosong, salah input, batas minimum/maksimum, dan penggunaan berulang.
@@ -2313,7 +2298,7 @@ const pro2026Categories = [
     id: "paket-pro-mpi",
     name: "Paket PRO — MPI",
     icon: "🎓",
-    keywords: "prompt pro paket pro PRO MPI media pembelajaran interaktif ideasi desain storyboard visual ui asset inventory generate aset generate aset otomatis chatgpt claude coding canva code kurikulum merdeka",
+    keywords: "prompt pro paket pro PRO MPI media pembelajaran interaktif ideasi desain storyboard visual ui asset inventory generate aset generate aset otomatis chatgpt claude coding web app browser kurikulum merdeka",
     prompts: [
       {
         title: "Prompt 0 PRO Ideasi MPI",
@@ -2324,7 +2309,8 @@ Kurikulum / Acuan: [Kurikulum Merdeka / Kurikulum Berbasis Cinta (Kemenag) / Cam
 Aturan kurikulum: sesuaikan istilah capaian/tujuan, pedagogi, materi, dan asesmen dengan acuan yang dipilih; jangan memaksakan istilah Kurikulum Merdeka pada kurikulum internasional.
 Perangkat: [HP/laptop/IFP]
 Estimasi waktu penggunaan: [jumlah JP]
-Tautkan Canva Sheet untuk mencatat hasil belajar: [Ya / Tidak]
+Simpan hasil belajar secara lokal di browser: [Ya / Tidak]
+Platform PRO: gunakan aplikasi web standar berbasis HTML/CSS/JavaScript dan/atau tool AI/coding yang tercantum pada prompt tahap berikutnya; jangan menambahkan ketergantungan pada platform desain visual tertutup atau layanan proprietary yang tidak disebutkan.
 Akses menu: [Berurutan — Menu Utama selalu tampil; menu/submateri yang belum memenuhi syarat tetap terlihat tetapi berstatus terkunci, dan materi dipelajari berurutan / Evaluasi Terkunci — Menu Utama selalu tampil; seluruh materi dapat dipilih tidak berurutan, tetapi kartu Evaluasi tetap terlihat dalam keadaan terkunci sampai seluruh materi wajib tuntas / Bebas — Menu Utama selalu tampil dan semua menu termasuk Evaluasi dapat dipilih sejak awal]
 Cek Pemahaman Setelah Materi: [Ya / Tidak]
 Feedback Evaluasi Akhir: [Konstruktif — tampilkan feedback untuk jawaban benar maupun salah / Tanpa Feedback — penilaian mutlak, jangan tampilkan benar-salah/pembahasan selama evaluasi]
@@ -2362,8 +2348,8 @@ ALUR AWAL, PANDUAN, DAN MENU UTAMA — WAJIB:
 - Saat kartu yang masih terkunci ditekan, jangan masuk ke konten terlarang; tampilkan pesan ramah yang menjelaskan apa yang harus diselesaikan terlebih dahulu.
 
 KETENTUAN OPSI — WAJIB DIPATUHI:
-- Jika Canva Sheet = Ya, sertakan alur pencatatan minimal Nama, Kelas, Nilai Evaluasi, Kategori Hasil, Bagian Perlu Penguatan, Refleksi Siswa, dan status pengiriman data.
-- Jika Canva Sheet = Tidak, jangan memaksakan integrasi spreadsheet; hasil cukup dikelola di dalam MPI sesuai kebutuhan.
+- Jika Penyimpanan Hasil Lokal = Ya, simpan minimal Nama, Kelas, Nilai Evaluasi, Kategori Hasil, Bagian Perlu Penguatan, dan Refleksi Siswa ke localStorage/browser storage serta tampilkan status tersimpan/gagal.
+- Jika Penyimpanan Hasil Lokal = Tidak, jangan membuat mekanisme penyimpanan persisten; hasil cukup dikelola selama sesi aktif.
 - Jika Akses menu = Berurutan, Menu Utama tetap dapat dibuka dan seluruh kartu menu tetap terlihat. Kartu/tahap yang belum memenuhi syarat berstatus terkunci, bukan disembunyikan. Di dalam Materi Pembelajaran, tampilkan HUB TOPIK berisi semua Materi 1, Materi 2, Materi 3, dst. secara bersamaan. Awalnya hanya Materi 1 yang aktif; setelah Materi 1 tuntas, Materi 2 ikut aktif, tetapi Materi 1 tetap aktif untuk diulas kembali. Setelah Materi 2 tuntas, Materi 3 terbuka sementara Materi 1 dan Materi 2 tetap dapat dibuka. Dengan kata lain, akses bersifat kumulatif: topik yang sudah terbuka tidak boleh terkunci kembali. Siswa bebas mundur ke topik lama yang sudah terbuka/selesai, tetapi tidak boleh melompati topik masa depan yang masih terkunci.
 - Jika Akses menu = Evaluasi Terkunci, Menu Utama tetap menampilkan seluruh kartu menu. Seluruh materi/submateri dapat dipilih dalam urutan apa pun; kartu Evaluasi tetap terlihat tetapi berstatus terkunci sampai syarat seluruh materi terpenuhi.
 - Jika Akses menu = Bebas, Menu Utama tetap menjadi dashboard pusat dan semua kartu menu utama yang bersifat konten termasuk Evaluasi aktif sejak awal; Lihat Hasil tetap menunggu Evaluasi selesai; progress hanya sebagai penanda dan tidak boleh menjadi pengunci.
@@ -2375,16 +2361,16 @@ KETENTUAN OPSI — WAJIB DIPATUHI:
 - Jika Feedback Evaluasi Akhir = Konstruktif, berikan feedback bermakna untuk jawaban benar dan salah sesuai konsep. Jika = Tanpa Feedback, selama evaluasi jangan tampilkan status benar/salah, pembahasan, petunjuk, atau jawaban benar; sistem tetap boleh menganalisis jawaban secara internal untuk skor dan Bagian Perlu Penguatan.
 - Evaluasi Akhir HANYA ranah kognitif. Ikuti Konfigurasi Evaluasi Akhir untuk tipe soal, jumlah soal, dan proporsi LOTS/MOTS/HOTS/AKM-PISA. Jika rincian ditetapkan guru, patuhi tepat; jika dibiarkan Disesuaikan oleh AI, tentukan berdasarkan jenjang, tujuan pembelajaran, keluasan materi, dan estimasi waktu. Setiap soal wajib diberi metadata tipe soal, level kognitif (LOTS/MOTS/HOTS/AKM-PISA), submateri/topik, dan indikator/tujuan yang diukur.
 - Kedalaman Materi wajib mengikuti pilihan guru dan tetap sesuai jenjang: Sederhana = fokus konsep esensial + contoh inti; Sedang = penjelasan proporsional + hubungan konsep + contoh + miskonsepsi utama; Mendetail = uraian lebih lengkap + hubungan sebab-akibat/proses + penerapan + variasi contoh + miskonsepsi penting. Disesuaikan oleh AI = pilih tingkat kedalaman yang paling efektif berdasarkan jenjang, tujuan, durasi, dan kompleksitas materi.
-- Jika Sisipkan Gambar/Visual dari Link Eksternal = Ya, CHATGPT/AI yang menerima prompt ini WAJIB menjadi pihak yang MENCARI dan MENYIAPKAN link visual melalui pencarian web sebelum memberi jawaban. JANGAN meminta Canva/Canva Code mencari gambar dan jangan menyerahkan pencarian aset ke pengguna.
+- Jika Sisipkan Gambar/Visual dari Link Eksternal = Ya, CHATGPT/AI yang menerima prompt ini WAJIB menjadi pihak yang MENCARI dan MENYIAPKAN link visual melalui pencarian web sebelum memberi jawaban. JANGAN mendelegasikan pencarian gambar ke tool coding; AI yang mengerjakan tahap ini harus menyiapkan URL yang diperlukan dan jangan menyerahkan pencarian aset ke pengguna.
   Aturan URL visual:
   1) Pilih hanya visual yang benar-benar mendukung pemahaman materi, contoh, diagram, konteks, atau stimulus soal; jangan menambah gambar dekoratif tanpa fungsi belajar.
   2) PRIORITAS REFERENSI INDONESIA: cari terlebih dahulu dari sumber Indonesia yang kredibel dan publik, terutama situs resmi pemerintah/instansi Indonesia (.go.id), lembaga pendidikan/perguruan tinggi (.ac.id/.sch.id), lembaga riset, museum/perpustakaan, organisasi pendidikan, atau sumber terbuka Indonesia yang jelas asalnya. Bila memungkinkan prioritaskan public domain/open-license atau sumber resmi/pendidikan.
   3) PRIORITAS BAHASA DI DALAM GAMBAR: utamakan visual yang judul, label, legenda, nama bagian, penanda, dan teks yang tertanam di dalam gambarnya menggunakan Bahasa Indonesia. Urutan pilihan: (a) sumber Indonesia + label Bahasa Indonesia; (b) sumber Indonesia + visual tanpa teks/label; (c) sumber internasional + visual netral tanpa teks; (d) visual berlabel bahasa asing hanya sebagai pilihan terakhir. Jika terpaksa memakai visual berlabel bahasa asing, beri catatan dan sediakan padanan/terjemahan Bahasa Indonesia pada caption atau UI di dekat gambar; jangan mengklaim gambar tersebut berbahasa Indonesia.
   4) Untuk konteks yang spesifik Indonesia (peta, flora-fauna, budaya, sejarah, geografi, pemerintahan, data sosial, lingkungan, kebencanaan, dan contoh kehidupan sehari-hari), dahulukan visual yang benar-benar merepresentasikan Indonesia daripada contoh negara lain.
   5) Hindari Google Images, Pinterest, halaman hasil pencarian, short-link, URL bertoken/signature yang cepat kedaluwarsa, dan link yang meminta login/paywall.
-  6) Berikan URL HTTPS LANGSUNG ke file/aset gambar yang siap dipakai pada atribut src di Canva Code, bukan hanya URL halaman web. Prioritaskan PNG, JPG/JPEG, WEBP, SVG, atau GIF bila relevan. Jangan gunakan data URI/base64 sebagai pengganti link eksternal.
+  6) Berikan URL HTTPS LANGSUNG ke file/aset gambar yang siap dipakai pada atribut src pada aplikasi web, bukan hanya URL halaman web. Prioritaskan PNG, JPG/JPEG, WEBP, SVG, atau GIF bila relevan. Jangan gunakan data URI/base64 sebagai pengganti link eksternal.
   7) Verifikasi semampunya bahwa URL dapat dibuka publik dan mengarah ke gambar/aset yang benar. Jika link tidak dapat diverifikasi, JANGAN mengarang URL; cari alternatif lain atau tandai tidak tersedia.
-  8) Untuk setiap visual, sertakan: bagian MPI/nomor soal, fungsi pedagogis, deskripsi/alt text Bahasa Indonesia, asal referensi (Indonesia/Internasional), bahasa label di dalam gambar, format, halaman sumber, keterangan lisensi/akses bila tersedia, dan DIRECT_IMAGE_URL_READY_FOR_CANVA. Link direct inilah yang nanti dipakai oleh prompt coding.
+  8) Untuk setiap visual, sertakan: bagian MPI/nomor soal, fungsi pedagogis, deskripsi/alt text Bahasa Indonesia, asal referensi (Indonesia/Internasional), bahasa label di dalam gambar, format, halaman sumber, keterangan lisensi/akses bila tersedia, dan DIRECT_IMAGE_URL_READY_FOR_WEB. Link direct inilah yang nanti dipakai oleh prompt coding.
   9) Siapkan fallback berupa alt text/caption Bahasa Indonesia sehingga materi/soal tetap dapat digunakan jika gambar gagal dimuat.
 - Jika Sisipkan Gambar/Visual dari Link Eksternal = Tidak, jangan mencari, mewajibkan, atau menambahkan visual eksternal.
 - Bagian Perlu Penguatan harus diturunkan dari soal Evaluasi Akhir yang salah dan metadata submateri/indikator yang diukur, bukan ditebak secara umum. Riwayat cek pemahaman boleh dipakai sebagai informasi pendukung, tetapi tidak mengubah nilai akhir.
@@ -2405,9 +2391,9 @@ Buatkan minimal 3 alternatif pendekatan pengemasan MPI untuk materi ini (berbeda
 8. Rencana Refleksi Siswa — bentuk refleksi yang sesuai jenjang
 9. Rencana Evaluasi — khusus kognitif; ikuti tipe soal, jumlah soal, dan proporsi LOTS/MOTS/HOTS/AKM-PISA dari konfigurasi; jelaskan mode Feedback Evaluasi serta pemetaan tiap soal ke level kognitif, submateri, dan indikator untuk menentukan Bagian Perlu Penguatan
 10. Rencana Game — hanya jika Game = Ada; sebutkan jenis, alasan pedagogis, mekanisme, dan posisi game. Jika Disesuaikan oleh AI, tuliskan game yang dipilih dan alasan pemilihannya
-11. Pengaturan Canva Sheet & Navigasi — jelaskan penerapan pilihan Canva Sheet, tiga mode akses, hubungan dengan Cek Pemahaman, serta jaminan tombol Home/Menu Utama selalu dapat digunakan
+11. Pengaturan Penyimpanan Hasil Lokal & Navigasi — jelaskan penerapan pilihan penyimpanan browser, tiga mode akses, hubungan dengan Cek Pemahaman, serta jaminan tombol Home/Menu Utama selalu dapat digunakan
 12. Gaya Visual — modern, minim scroll, sesuai jenjang/kelas sasaran
-13. Rekomendasi Gambar/Visual Eksternal — hanya jika opsi ini diaktifkan; CHATGPT/AI wajib mencari web terlebih dahulu dengan PRIORITAS SUMBER INDONESIA dan visual berlabel Bahasa Indonesia, lalu tampilkan tabel: Bagian MPI/No. Soal | Fungsi Pedagogis | Deskripsi + Alt Text Bahasa Indonesia | Asal Referensi (Indonesia/Internasional) | Bahasa Label di Gambar | Format | Halaman Sumber | Lisensi/Akses (jika tersedia) | DIRECT_IMAGE_URL_READY_FOR_CANVA. Kolom terakhir wajib berupa URL HTTPS langsung yang siap ditempel ke src di Canva Code, bukan halaman pencarian/sumber. Jika pilihan bukan dari Indonesia atau label di dalam gambar bukan Bahasa Indonesia, jelaskan singkat alasannya.
+13. Rekomendasi Gambar/Visual Eksternal — hanya jika opsi ini diaktifkan; CHATGPT/AI wajib mencari web terlebih dahulu dengan PRIORITAS SUMBER INDONESIA dan visual berlabel Bahasa Indonesia, lalu tampilkan tabel: Bagian MPI/No. Soal | Fungsi Pedagogis | Deskripsi + Alt Text Bahasa Indonesia | Asal Referensi (Indonesia/Internasional) | Bahasa Label di Gambar | Format | Halaman Sumber | Lisensi/Akses (jika tersedia) | DIRECT_IMAGE_URL_READY_FOR_WEB. Kolom terakhir wajib berupa URL HTTPS langsung yang siap ditempel ke src pada aplikasi web, bukan halaman pencarian/sumber. Jika pilihan bukan dari Indonesia atau label di dalam gambar bukan Bahasa Indonesia, jelaskan singkat alasannya.
 14. Struktur MPI yang Diusulkan — tuliskan struktur final ide ini secara eksplisit dan berurutan sebagai kerangka yang akan diwarisi Prompt 1. Cantumkan nama layar/menu/bagian, hierarki materi/submateri, posisi cek pemahaman, refleksi, evaluasi, game bila aktif, hasil, serta visual eksternal bila aktif. Struktur tiap ide boleh berbeda sesuai pendekatan, tetapi tetap mematuhi seluruh aturan wajib Prompt 0.
 
 [Tempel/lampirkan silabus, modul ajar, atau buku materi di sini jika ada]
@@ -2426,16 +2412,16 @@ STANDAR MUATAN MATERI MPI — WAJIB:
         text: `Nomor Ide Pilihan (Opsional): [nomor ide]
 Jika bagian ini masih kosong/berupa placeholder, prompt tetap boleh disiapkan dan disalin. Isi atau sesuaikan nomor ide nanti sebelum Prompt 1 benar-benar dijalankan. Jangan mengarang nomor ide.
 
-Gunakan jawaban Prompt 0 PRO yang sudah ada di percakapan ini sebagai sumber konteks utama. Jika nomor ide sudah diisi, gunakan pilihan tersebut; JANGAN meminta ulang judul, mata pelajaran, jenjang/kelas, materi, Tujuan Pembelajaran, kurikulum, perangkat, JP, konfigurasi evaluasi, game, Canva Sheet, akses menu, kedalaman materi, atau pilihan visual eksternal.
+Gunakan jawaban Prompt 0 PRO yang sudah ada di percakapan ini sebagai sumber konteks utama. Jika nomor ide sudah diisi, gunakan pilihan tersebut; JANGAN meminta ulang judul, mata pelajaran, jenjang/kelas, materi, Tujuan Pembelajaran, kurikulum, perangkat, JP, konfigurasi evaluasi, game, Penyimpanan Hasil Lokal, akses menu, kedalaman materi, atau pilihan visual eksternal.
 
 ATURAN WARISAN DARI PROMPT 0 PRO — WAJIB:
 1. Jika Nomor Ide Pilihan sudah diisi, pilih tepat ide tersebut. Jika masih kosong saat prompt dijalankan, minta pengguna memilih salah satu ide hasil Prompt 0; jangan menentukan nomor secara sepihak.
 2. Warisi TUJUAN PEMBELAJARAN FINAL dari Prompt 0 PRO. Jika TP awal dikosongkan guru, gunakan TP yang sudah disusun AI pada Prompt 0 PRO; jangan menyusun TP baru yang berbeda pada tahap ini.
-3. Warisi seluruh keputusan Prompt 0 PRO yang berlaku pada ide terpilih: kurikulum/acuan, perangkat, estimasi JP, Canva Sheet, mode akses, Cek Pemahaman, Feedback Evaluasi, Kedalaman Materi, visual eksternal, konfigurasi Evaluasi Akhir, Game Pembelajaran, bahasa/terminologi, serta keputusan lain yang sudah ditetapkan.
+3. Warisi seluruh keputusan Prompt 0 PRO yang berlaku pada ide terpilih: kurikulum/acuan, perangkat, estimasi JP, Penyimpanan Hasil Lokal, mode akses, Cek Pemahaman, Feedback Evaluasi, Kedalaman Materi, visual eksternal, konfigurasi Evaluasi Akhir, Game Pembelajaran, bahasa/terminologi, serta keputusan lain yang sudah ditetapkan.
 4. STRUKTUR MPI WAJIB mengikuti bagian "Struktur MPI yang Diusulkan" dari ide terpilih pada Prompt 0 PRO. Pertahankan urutan, hierarki layar/menu, pembagian materi/submateri, posisi interaksi, cek pemahaman, refleksi, evaluasi, game bila aktif, hasil, dan visual eksternal yang sudah dirancang. JANGAN menggantinya dengan template struktur generik yang berbeda.
 5. Prompt 1 PRO bertugas MEMPERDALAM ide terpilih menjadi storyboard/desain implementatif. Boleh menambah detail teknis, isi, state, micro-interaction, navigasi, database soal, atau spesifikasi visual yang diperlukan, tetapi jangan mengubah struktur inti dan keputusan Prompt 0 PRO kecuali ada instruksi modifikasi eksplisit pada bagian modifikasi di bawah.
 6. Bila suatu detail implementasi belum dijelaskan di Prompt 0 PRO, lengkapi secara konsisten dengan ide terpilih, Tujuan Pembelajaran Final, kurikulum/acuan, jenjang, materi, dan perangkat. Jangan membuat keputusan baru yang bertentangan dengan Prompt 0 PRO.
-7. Untuk visual eksternal yang aktif, gunakan DIRECT_IMAGE_URL_READY_FOR_CANVA yang sudah ditemukan pada Prompt 0 PRO. Jika ada kebutuhan visual penting yang belum memiliki URL valid, ChatGPT/AI yang mengerjakan Prompt 1 PRO boleh mencari web untuk melengkapinya dengan prioritas sumber Indonesia dan label Bahasa Indonesia; Canva/Canva Code tetap tidak boleh diminta mencari gambar.
+7. Untuk visual eksternal yang aktif, gunakan DIRECT_IMAGE_URL_READY_FOR_WEB yang sudah ditemukan pada Prompt 0 PRO. Jika ada kebutuhan visual penting yang belum memiliki URL valid, ChatGPT/AI yang mengerjakan Prompt 1 PRO boleh mencari web untuk melengkapinya dengan prioritas sumber Indonesia dan label Bahasa Indonesia; tool coding tidak boleh dibebani tugas pencarian gambar.
 
 MODIFIKASI OPSIONAL OLEH GURU — EDIT LANGSUNG PADA TEKS PROMPT INI SETELAH DISALIN:
 Tidak ada modifikasi. Ikuti struktur dan isi ide terpilih dari Prompt 0 PRO.
@@ -2450,7 +2436,7 @@ CARA MENGEMBANGKAN IDE TERPILIH:
 - Evaluasi Akhir hanya kognitif. Jumlah soal, tipe soal, dan proporsi LOTS/MOTS/HOTS/AKM-PISA harus persis mengikuti konfigurasi Prompt 0 PRO. Tiap item memuat tipe, level, pertanyaan, pilihan bila ada, jawaban benar, submateri/topik, indikator/tujuan yang diukur, serta feedback hanya bila mode Konstruktif.
 - Bagian Perlu Penguatan harus berasal dari jawaban Evaluasi yang salah dan metadata submateri/indikator.
 - Game hanya dirancang jika aktif pada Prompt 0 PRO; skor game terpisah dari Nilai Evaluasi Akhir dan game tidak menjadi syarat ketuntasan kecuali Prompt 0 PRO secara eksplisit menetapkannya.
-- Jika Canva Sheet aktif, rincikan payload, waktu kirim, status berhasil/gagal, dan retry sesuai keputusan Prompt 0 PRO.
+- Jika Penyimpanan Hasil Lokal aktif, rincikan struktur data localStorage, kapan data disimpan/diperbarui, status tersimpan/gagal, serta cara pemulihan bila penyimpanan browser tidak tersedia.
 - Pertahankan dashboard, lock/unlock, akses kumulatif topik lama, Lihat Hasil, Petunjuk, Home/Menu Utama, dan aturan navigasi sesuai ide terpilih.
 - Pertahankan tema visual ide terpilih dan buat arahan UI responsif untuk HP/laptop/IFP sesuai perangkat yang diwarisi.
 
@@ -2469,7 +2455,7 @@ Jangan mengembalikan saya ke Generator Prompt untuk modifikasi. Modifikasi setel
         text: `Berdasarkan rancangan desain MPI di atas (Prompt 1 PRO), buatkan Daftar Inventaris Aset (Asset Inventory) khusus untuk MPI ini — hanya aset visual dan audio yang benar-benar dibutuhkan.
 
 WAJIB mengacu pada seluruh keputusan yang sudah dikunci sejak Prompt 0 PRO dan dirinci di Prompt 1 PRO:
-- Tautkan Canva Sheet: [Ya / Tidak]
+- Penyimpanan Hasil Lokal: [Ya / Tidak]
 - Akses menu: [Berurutan / Evaluasi Terkunci / Bebas]
 - Cek Pemahaman Setelah Materi: [Ya / Tidak]
 - Feedback Evaluasi Akhir: [Konstruktif / Tanpa Feedback]
@@ -2490,7 +2476,7 @@ Kelompokkan aset berdasarkan kategori:
 8. Aset Status Progres/Navigasi — sesuaikan dengan mode akses dan state materi; menu/submateri terkunci harus tetap punya representasi visual yang terlihat, bukan disembunyikan
 9. Aset Panduan & Alur Penggunaan — hanya jika layar petunjuk membutuhkan ilustrasi/diagram khusus; utamakan teks/ikon HTML-CSS untuk elemen sederhana
 10. Aset Game — hanya jika Game = Ada; sesuaikan dengan jenis game yang dipilih
-11. Aset Canva Sheet/Identitas — hanya jika Canva Sheet = Ya
+11. Aset Identitas/Status Penyimpanan — hanya jika Penyimpanan Hasil Lokal = Ya dan desain memang membutuhkan indikator visual khusus
 12. Aset Audio — narasi, backsound, efek interaksi (jika diperlukan)
 
 Ketentuan kondisional:
@@ -2501,9 +2487,9 @@ Ketentuan kondisional:
 - Jika Feedback Evaluasi = Tanpa Feedback, jangan membuat aset UI yang mengungkap benar/salah/pembahasan selama evaluasi.
 - Jika Game = Ada, inventaris aset harus sesuai jenis game. Spin Game dapat memerlukan roda/penanda; Flip Card/Memory memerlukan kartu depan-belakang; Make a Match memerlukan pasangan elemen; Susun Urutan/Drag & Drop memerlukan item yang bisa dipindah; Tebak Gambar memerlukan visual materi; jenis lain mengikuti desain. Hindari aset dekoratif berlebihan.
 - Jika Game = Tidak Ada, jangan membuat aset game.
-- Jika Canva Sheet = Ya, sertakan aset pendukung input Nama/Kelas dan status kirim hanya bila desain benar-benar membutuhkannya.
-- Jika Canva Sheet = Tidak, jangan membuat aset khusus spreadsheet/kirim nilai/status sinkronisasi.
-- Jika Sisipkan Gambar/Visual dari Link Eksternal = Ya, buat subbagian terpisah "Aset Eksternal dari URL" yang MENYALIN visual terpilih dari Prompt 0/1 lengkap dengan DIRECT_IMAGE_URL_READY_FOR_CANVA, asal referensi (Indonesia/Internasional), bahasa label di dalam gambar, halaman sumber, lisensi/akses bila tersedia, lokasi pemakaian, dan alt text Bahasa Indonesia. Prioritas sumber Indonesia + label Bahasa Indonesia yang sudah dikunci pada Prompt 0/1 tidak boleh diturunkan pada tahap ini. Tandai aset ini sebagai EXTERNAL-URL dan JANGAN masukkan ke antrean generate gambar pada Prompt 3/4. Jangan membuat ulang aset yang sudah dipenuhi oleh URL eksternal kecuali rancangan memang membutuhkan versi khusus yang tidak tersedia.
+- Jika Penyimpanan Hasil Lokal = Ya, sertakan aset pendukung input Nama/Kelas dan indikator status tersimpan hanya bila desain benar-benar membutuhkannya.
+- Jika Penyimpanan Hasil Lokal = Tidak, jangan membuat aset khusus status penyimpanan atau sinkronisasi.
+- Jika Sisipkan Gambar/Visual dari Link Eksternal = Ya, buat subbagian terpisah "Aset Eksternal dari URL" yang MENYALIN visual terpilih dari Prompt 0/1 lengkap dengan DIRECT_IMAGE_URL_READY_FOR_WEB, asal referensi (Indonesia/Internasional), bahasa label di dalam gambar, halaman sumber, lisensi/akses bila tersedia, lokasi pemakaian, dan alt text Bahasa Indonesia. Prioritas sumber Indonesia + label Bahasa Indonesia yang sudah dikunci pada Prompt 0/1 tidak boleh diturunkan pada tahap ini. Tandai aset ini sebagai EXTERNAL-URL dan JANGAN masukkan ke antrean generate gambar pada Prompt 3/4. Jangan membuat ulang aset yang sudah dipenuhi oleh URL eksternal kecuali rancangan memang membutuhkan versi khusus yang tidak tersedia.
 - Jika Sisipkan Gambar/Visual dari Link Eksternal = Tidak, jangan membuat subbagian aset URL eksternal.
 
 Untuk setiap aset, sajikan tabel dengan kolom:
@@ -2528,9 +2514,15 @@ ATURAN INVENTARIS FILE GAMBAR — WAJIB:
       },
       {
         title: "Prompt 3 PRO Generate Prompt Aset MPI",
-        text: `Berdasarkan Daftar Inventaris Aset (Prompt 2 PRO), buatkan kumpulan prompt siap pakai untuk menghasilkan SETIAP aset proyek MPI menggunakan AI image/audio generator (misalnya ChatGPT, Claude yang mendukung image generation, Gemini, Midjourney, Ideogram, Canva AI, atau generator lain yang sesuai).
+        text: `Berdasarkan Daftar Inventaris Aset (Prompt 2 PRO), buatkan kumpulan prompt siap pakai untuk menghasilkan SETIAP aset proyek MPI menggunakan AI image/audio generator (misalnya ChatGPT, Claude yang mendukung image generation, Gemini, Midjourney, Ideogram, atau Adobe Firefly).
 
-PENTING: aset yang pada Prompt 2 ditandai EXTERNAL-URL karena sudah memiliki DIRECT_IMAGE_URL_READY_FOR_CANVA TIDAK BOLEH dibuat ulang oleh image generator. Lewati aset tersebut dan pertahankan URL-nya untuk tahap coding.
+ID PRODUKSI — WAJIB:
+- Beri setiap prompt aset satu ID produksi unik dan berurutan: A001, A002, A003, dan seterusnya.
+- Satu ID hanya boleh mewakili SATU file/aset. Pose/state yang berbeda mendapat ID berbeda.
+- Pertahankan urutan ID ini sebagai urutan eksekusi untuk Prompt 4 PRO. Jangan mengulang atau melewati nomor.
+- Jika aset ditandai EXTERNAL-URL dan tidak perlu digenerate, tetap boleh dicatat pada manifest dengan status EXTERNAL-URL, tetapi jangan membuat prompt image-generation untuk aset tersebut.
+
+PENTING: aset yang pada Prompt 2 ditandai EXTERNAL-URL karena sudah memiliki DIRECT_IMAGE_URL_READY_FOR_WEB TIDAK BOLEH dibuat ulang oleh image generator. Lewati aset tersebut dan pertahankan URL-nya untuk tahap coding.
 
 ATURAN UTAMA — SATU FILE = SATU GAMBAR/ASET:
 1. Buat SATU prompt gambar terpisah untuk SATU aset. DILARANG menggabungkan dua atau lebih aset, pose, state, objek, atau variasi ke dalam satu file gambar.
@@ -2552,7 +2544,7 @@ FORMAT FILE:
 13. Resolusi harus cukup tajam untuk UI; rekomendasikan minimal 512 px pada sisi terpanjang untuk aset lepas, dan resolusi lebih besar untuk background sesuai layout.
 
 STRUKTUR SETIAP PROMPT GAMBAR:
-- Nomor & Nama Aset
+- ID Produksi (A001, A002, A003, dst.) & Nama Aset
 - Nama file target .webp
 - Halaman/menu pemakaian
 - Fungsi edukatif/interaktif
@@ -2573,100 +2565,80 @@ Untuk maskot/ikon/navigasi, sesuaikan negative prompt agar tidak melarang gaya s
 
 Jika ada audio, buat prompt audio terpisah. Audio bersifat opsional sesuai inventaris.
 
-Output akhir: daftar prompt siap-copy yang dikelompokkan per kategori aset, tetapi SETIAP prompt gambar hanya untuk SATU file dan SATU gambar/aset. Hasil Prompt 3 PRO ini menjadi acuan langsung untuk Prompt 4 PRO.`
+Output akhir: daftar prompt siap-copy yang dikelompokkan per kategori aset, tetapi SETIAP prompt gambar hanya untuk SATU file dan SATU gambar/aset. Setiap prompt wajib memiliki ID produksi berurutan A001, A002, A003, dst. Hasil Prompt 3 PRO ini adalah INSTRUKSI FINAL dan menjadi sumber utama yang dieksekusi langsung oleh Prompt 4 PRO.`
       },
       {
         title: "Prompt 4 PRO Generate Semua Aset Otomatis MPI di ChatGPT/Claude",
-        text: `Berdasarkan rancangan desain (Prompt 1 PRO), Daftar Inventaris Aset (Prompt 2 PRO), dan kumpulan prompt aset (Prompt 3 PRO), sekarang GENERATE semua aset proyek MPI secara otomatis langsung di percakapan ChatGPT/Claude ini. Jangan berhenti pada daftar atau prompt saja jika platform memiliki kemampuan image generation. Kerjakan per batch sesuai kemampuan AI agar kualitas dan konsistensi tetap terjaga.
+        text: `Gunakan SELURUH prompt aset yang telah dihasilkan pada Prompt 3 PRO sebagai instruksi final untuk melakukan generate aset proyek MPI.
 
-JANGAN generate ulang aset yang ditandai EXTERNAL-URL. Aset tersebut sudah memiliki DIRECT_IMAGE_URL_READY_FOR_CANVA dan harus dipertahankan apa adanya untuk Prompt 5 PRO.
+Tugas pada tahap ini adalah MENGEKSEKUSI prompt-prompt tersebut. Jangan merancang ulang aset, jangan membuat inventaris baru, jangan menulis ulang prompt, dan jangan mengubah keputusan visual yang sudah ditetapkan pada Prompt 3 PRO.
+
+SUMBER UTAMA:
+- Prompt 3 PRO adalah sumber instruksi generate UTAMA dan FINAL.
+- Prompt 1 PRO dan Prompt 2 PRO hanya boleh dipakai sebagai referensi konteks atau verifikasi kelengkapan apabila benar-benar diperlukan.
+- Jika ada perbedaan interpretasi, ikuti spesifikasi eksplisit pada prompt aset di Prompt 3 PRO.
+- Jangan kembali menganalisis atau menyusun ulang desain dari Prompt 1-2 PRO.
+
+ASET EXTERNAL-URL:
+Aset yang sebelumnya ditandai EXTERNAL-URL / DIRECT_IMAGE_URL_READY_FOR_WEB tidak boleh digenerate ulang. Pertahankan URL tersebut untuk Prompt 5 PRO dan tandai statusnya sebagai EXTERNAL-URL — TIDAK DIGENERATE.
 
 Platform: [ChatGPT / Claude]
 
-PRIORITAS ASET:
-1. Aset yang berhubungan langsung dengan materi/aktivitas utama terlebih dahulu.
-2. Karakter/objek interaktif utama, bangunan/ruang/latar, obstacle/rintangan, dan state objek yang diperlukan.
-3. Maskot/karakter pemandu bila digunakan.
-4. Ikon menu/kontrol/navigasi bila desain membutuhkan aset gambar khusus, termasuk Home/Menu Utama, Petunjuk, dan indikator status terkunci/terbuka/selesai yang tercantum pada inventaris.
-5. Audio hanya jika benar-benar diperlukan atau diminta.
+CARA EKSEKUSI:
+1. Identifikasi seluruh prompt aset Prompt 3 PRO berdasarkan ID produksi A001, A002, A003, dan seterusnya.
+2. Eksekusi prompt tersebut sesuai urutan ID produksi.
+3. SATU prompt gambar menghasilkan SATU file/aset gambar terpisah.
+4. Jangan menggabungkan beberapa prompt menjadi satu gambar, sprite sheet, collage, contact sheet, grid, lembar pose, atau lembar state.
+5. Jangan meringkas, menyederhanakan, memperluas, atau menulis ulang prompt Prompt 3 PRO sebelum generate, kecuali penyesuaian teknis minimum memang diwajibkan oleh generator.
+6. Pertahankan nama file target, format, transparansi/background, rasio/resolusi, gaya, komposisi, konteks faktual, dan negative prompt yang sudah tertulis pada masing-masing prompt Prompt 3 PRO.
+7. Jika satu objek/karakter memiliki beberapa pose atau state, eksekusi setiap ID sebagai file terpisah.
+8. Jika platform mendukung visual reference, gunakan hasil aset terkait sebelumnya untuk menjaga konsistensi karakter, objek, palet, perspektif, pencahayaan, dan detail.
 
-ATURAN MUTLAK FILE GAMBAR — 1 FILE = 1 GAMBAR:
-1. SATU file gambar hanya boleh memuat SATU aset/gambar. Tidak boleh ada dua atau lebih aset dalam satu file.
-2. DILARANG membuat sprite sheet, contact sheet, collage, grid beberapa aset, lembar pose, lembar state, atau satu gambar berisi beberapa objek yang sebenarnya harus menjadi aset terpisah.
-3. Setiap pose karakter, ekspresi, state objek, keadaan sebelum/sesudah, kosong/terisi, normal/aktif, dan variasi lain yang diperlukan WAJIB dibuat sebagai file terpisah.
-4. Nama file harus unik dan deskriptif, misalnya objek_normal.webp, objek_aktif.webp, karakter_menunjuk.webp.
+BATCH GENERATION:
+9. Jika jumlah aset terlalu banyak untuk dibuat sekaligus, kerjakan berdasarkan urutan ID produksi dengan maksimal 10 aset gambar per batch. Contoh: Batch 1 = A001-A010, Batch 2 = A011-A020.
+10. Ukuran batch boleh diperkecil jika diperlukan untuk menjaga kualitas atau konsistensi.
+11. Sebelum generate, cukup tampilkan daftar singkat ID produksi, nama file, dan nama aset pada batch tersebut. Jangan membuat ulang Peta Batch dari Prompt 2 PRO.
+12. Setelah daftar batch tampil, LANGSUNG generate aset pada batch tersebut tanpa menunggu persetujuan tambahan, kecuali saya meminta konfirmasi.
+13. Setelah batch selesai, lanjutkan ke ID berikutnya sampai seluruh prompt Prompt 3 PRO telah diproses.
 
-ATURAN VISUAL — KONTEKS NYATA, FAKTUAL, DAN JELAS:
-5. Untuk aset materi/aktivitas utama—termasuk ilustrasi materi, objek contoh kontekstual, lingkungan belajar, diagram/proses, karakter non-maskot, dan visual pendukung konsep—gambar harus konkret, mudah dikenali, dan sesuai konteks nyata. Jika materinya ilmiah/faktual, bentuk, proporsi, warna, material, state, proses, dan fungsi wajib benar.
-6. Gunakan render realistis atau semi-realistis dengan detail jelas dan bentuk tidak ambigu. Hindari aset terlalu abstrak, samar, generic flat vector, clipart, doodle, line-art sederhana, atau visual seperti SVG yang kehilangan detail nyata.
-7. Akurasi konteks/fakta didahulukan daripada dekorasi. Jangan menambahkan detail yang salah, mustahil, atau menyesatkan.
-8. Karakter non-maskot, bangunan, ruang, lingkungan, obstacle, alat, bahan, dan objek materi harus memiliki bentuk dan skala yang masuk akal untuk konteks proyek.
-9. PENGECUALIAN: maskot, ikon menu, ikon kontrol/navigasi, badge, dan elemen UI dekoratif BOLEH menyesuaikan gaya desain Prompt 1 PRO (2D/3D/stylized/chibi/semi-realistis), tetapi tetap harus jelas, tajam, konsisten, dan mudah dikenali.
-10. Pertahankan palet warna, sudut pandang, arah cahaya, proporsi relatif, dan tingkat detail yang konsisten antar-file.
-11. Jangan menaruh teks acak, watermark, label yang tidak diperlukan, atau gibberish di dalam gambar. Teks UI dibuat dengan HTML/CSS.
+VALIDASI HASIL:
+14. Setelah setiap aset digenerate, cocokkan hasilnya dengan prompt sumber pada ID Prompt 3 PRO yang bersangkutan.
+15. Periksa bahwa hasil hanya memuat satu aset utama, pose/state benar, transparansi/background sesuai, tidak ada teks acak/watermark, kualitas tajam, dan tidak menyimpang dari spesifikasi prompt sumber.
+16. Jika suatu aset gagal memenuhi prompt sumber, regenerate HANYA ID tersebut menggunakan prompt Prompt 3 PRO yang sama. Koreksi teknis minimum boleh dilakukan hanya untuk memperbaiki kegagalan generate, tanpa mengubah konsep aset.
+17. Jangan mengulang aset yang sudah benar.
 
-FORMAT FILE:
-12. Target output WAJIB WebP (.webp), kualitas tinggi/lossless bila tersedia.
-13. Untuk aset lepas gunakan alpha/transparansi. Untuk background/latar penuh, transparansi tidak wajib.
-14. Jika platform hanya menghasilkan PNG/JPG, generate kualitas terbaik, tandai "perlu konversi ke WebP", dan jangan menurunkan kualitas.
-15. Jangan menggunakan SVG/vektor sebagai pengganti file gambar utama.
+STATUS SETELAH BATCH:
+Tampilkan tabel ringkas:
+ID | Nama File | Nama Aset | Status
 
-ATURAN BATCH:
-16. Generate PER BATCH, maksimal 10 file gambar per batch. Karena 1 file = 1 aset, maka maksimal 10 aset gambar per batch.
-17. Ukuran batch adaptif. Jika konsistensi, akurasi, atau detail mulai turun, kecilkan batch berikutnya.
-18. Beri label Batch 1, Batch 2, dst. di LUAR gambar.
-19. Sebelum setiap batch, tampilkan PETA BATCH berupa tabel dengan kolom:
-   - Nomor file (B1-F01, dst.)
-   - Nama file .webp
-   - Nama aset
-   - Kategori
-   - Halaman/menu pemakaian
-   - Fungsi aset
-   - Transparan/Penuh
-   - Catatan konteks nyata/akurasi yang wajib benar
-20. Pastikan setiap aset Prompt 2 PRO muncul tepat satu kali dalam peta produksi. Jika satu objek memiliki beberapa state, setiap state muncul sebagai baris/file terpisah.
-21. Setelah Peta Batch tampil, langsung generate file-file batch tersebut tanpa menunggu persetujuan tambahan, kecuali saya meminta konfirmasi.
+Gunakan status:
+- SELESAI
+- PERLU ULANG
+- PERLU KONVERSI WEBP
+- EXTERNAL-URL — TIDAK DIGENERATE (jika berlaku)
 
-PEMERIKSAAN SETELAH GENERATE:
-22. Periksa SETIAP file secara individual:
-   a. file hanya berisi satu aset/gambar;
-   b. tidak ada aset kedua, sprite, grid, atau collage;
-   c. bentuk/proporsi/material/konteks benar;
-   d. aset materi faktual/ilmiah akurat;
-   e. visual jelas dan tidak terlalu abstrak/vektor generik;
-   f. gaya konsisten dengan Prompt 1 PRO;
-   g. background transparan jika aset lepas;
-   h. target format WebP tercapai atau diberi status perlu konversi;
-   i. tidak ada teks acak/watermark;
-   j. resolusi cukup tajam.
-23. Tampilkan HASIL BATCH dengan kolom nomor file, nama file, aset, kategori, halaman, format, dan status Selesai/Perlu Ulang.
-24. File yang gagal diregenerate HANYA file tersebut, satu per satu atau batch kecil; jangan mengulang file yang sudah lolos.
-25. Setelah batch lolos, lanjutkan ke batch berikutnya sampai seluruh aset utama selesai.
-
-ATURAN GENERATE:
-26. Gunakan nama/fungsi aset dari Prompt 2 PRO sebagai sumber utama dan Prompt 3 PRO sebagai instruksi visual per file.
-27. Jangan menggabungkan aset demi menghemat jumlah generate. Jika ada 37 aset, targetnya tetap 37 file gambar terpisah (ditambah audio bila ada).
-28. Untuk pose/state berulang, gunakan file hasil sebelumnya sebagai visual reference bila platform mendukung agar konsisten.
-29. Audio dan tombol navigasi gambar tetap opsional; tombol HTML/CSS lebih diutamakan kecuali desain memang meminta aset visual khusus.
-30. Setelah semua aset selesai, buat REKAP MANIFEST ASET FINAL: Wajib selesai, Opsional selesai, Opsional belum dibuat, serta file yang masih perlu konversi ke WebP.
+SETELAH SEMUA ASET SELESAI:
+Buat Manifest Aset Final berdasarkan ID produksi Prompt 3 PRO yang menunjukkan aset selesai, perlu ulang, perlu konversi, atau External URL. Pastikan tidak ada ID yang terlewat atau diproses dua kali.
 
 PENTING:
 - Jangan hanya menjelaskan cara membuat aset.
-- Jangan hanya mengulang Prompt 3 PRO.
-- Jika image generation tersedia, langsung generate sesuai Peta Batch.
-- Jika platform tidak dapat membuat gambar langsung, susun paket prompt final PER FILE/PER ASET sesuai Peta Batch dan tandai "perlu dieksekusi pada generator aset".
-- Jangan pernah kembali ke format multi-aset dalam satu file.
+- Jangan hanya menampilkan ulang Prompt 3 PRO.
+- Jangan membuat prompt aset baru.
+- Jangan membuat ulang inventaris atau prioritas aset.
+- Jangan mengubah style/spesifikasi Prompt 3 PRO.
+- Jika image generation tersedia, langsung gunakan prompt Prompt 3 PRO untuk generate.
+- Jika platform tidak dapat membuat gambar secara langsung, tampilkan prompt PER ID apa adanya dan tandai "PERLU DIEKSEKUSI PADA GENERATOR ASET"; jangan menyusun prompt pengganti.
 
-Mulai dari Batch 1 berisi aset prioritas tertinggi yang paling berhubungan dengan materi/aktivitas utama.`
+Mulai dari ID produksi pertama pada Prompt 3 PRO dan lanjutkan berurutan sampai selesai.`
       },
       {
         title: "Prompt 5 PRO Coding MPI (Gabungkan Semua Aset ke Desain)",
         text: `Ubah rancangan desain MPI (Prompt 1 PRO) dan aset yang sudah dibuat/digenerate (hasil Prompt 4 PRO; mengacu Prompt 2–3 PRO) menjadi kode MPI interaktif yang bisa langsung dijalankan, dalam satu file HTML lengkap (HTML, CSS, JavaScript).
 
-Engine/Platform tujuan: [pilih satu — Canva Code / dikerjakan bersama Claude / Gemini / ChatGPT]
+Engine/Platform tujuan: [pilih satu — HTML/CSS/JavaScript di browser / Claude Code / ChatGPT / Gemini / v0 / bolt.new / Cursor / Replit AI / Lovable]
 
 WAJIB mempertahankan seluruh keputusan proyek dari Prompt 0 PRO dan Prompt 1 PRO:
-- Tautkan Canva Sheet: [Ya / Tidak]
+- Penyimpanan Hasil Lokal: [Ya / Tidak]
 - Akses menu: [Berurutan / Evaluasi Terkunci / Bebas]
 - Cek Pemahaman Setelah Materi: [Ya / Tidak]
 - Feedback Evaluasi Akhir: [Konstruktif / Tanpa Feedback]
@@ -2679,14 +2651,14 @@ WAJIB mempertahankan seluruh keputusan proyek dari Prompt 0 PRO dan Prompt 1 PRO
 Jangan mengubah keputusan tersebut saat membuat kode.
 
 Ketentuan umum:
-1. Harus langsung bisa dijalankan di [Canva Code/browser].
+1. Harus langsung bisa dijalankan sebagai aplikasi web di browser.
 2. Jangan gunakan library/database eksternal yang tidak diminta. Gunakan state sesi berbasis variabel/array JavaScript.
 3. Semua teks antarmuka berbahasa Indonesia.
 4. Tampilan responsif HP, laptop, dan IFP; minim scroll per halaman.
 5. Tombol navigasi besar, jelas, selalu mudah dijangkau (Home/Menu Utama, Petunjuk, Lanjut, Kembali).
 6. Kode rapi dan diberi komentar singkat.
 7. Satu layar dinamis (single page app), bukan banyak file terpisah.
-8. Jika Sisipkan Gambar/Visual dari Link Eksternal = Ya, JANGAN melakukan atau mendelegasikan pencarian gambar kepada Canva/Canva Code. Gunakan DIRECT_IMAGE_URL_READY_FOR_CANVA yang sudah ditemukan dan diverifikasi ChatGPT/AI pada Prompt 0/1, dengan prioritas sumber Indonesia dan label/teks di dalam visual berbahasa Indonesia sebagaimana telah dipilih pada tahap sebelumnya. Jangan mengganti URL dengan placeholder, kata kunci pencarian, URL Google Images/Pinterest, atau halaman sumber. Masukkan URL langsung tersebut pada data aset/atribut src yang sesuai. Untuk implementasi, kelompokkan URL dalam konstanta/objek aset agar mudah diperiksa, gunakan alt text bermakna, loading="lazy" bila sesuai, object-fit yang aman, serta fallback UI/caption saat onerror sehingga materi/soal tetap terbaca jika host gagal dimuat. Jika URL yang dibutuhkan belum tersedia/terverifikasi, jangan mengarang link; nyatakan aset mana yang belum siap dan minta ChatGPT/AI tahap sebelumnya mencarikan URL valid sebelum kode final. Jika opsi = Tidak, jangan membuat ketergantungan pada gambar eksternal.
+8. Jika Sisipkan Gambar/Visual dari Link Eksternal = Ya, JANGAN melakukan atau mendelegasikan pencarian gambar kepada platform pembuat web/app. Gunakan DIRECT_IMAGE_URL_READY_FOR_WEB yang sudah ditemukan dan diverifikasi ChatGPT/AI pada Prompt 0/1, dengan prioritas sumber Indonesia dan label/teks di dalam visual berbahasa Indonesia sebagaimana telah dipilih pada tahap sebelumnya. Jangan mengganti URL dengan placeholder, kata kunci pencarian, URL Google Images/Pinterest, atau halaman sumber. Masukkan URL langsung tersebut pada data aset/atribut src yang sesuai. Untuk implementasi, kelompokkan URL dalam konstanta/objek aset agar mudah diperiksa, gunakan alt text bermakna, loading="lazy" bila sesuai, object-fit yang aman, serta fallback UI/caption saat onerror sehingga materi/soal tetap terbaca jika host gagal dimuat. Jika URL yang dibutuhkan belum tersedia/terverifikasi, jangan mengarang link; nyatakan aset mana yang belum siap dan minta ChatGPT/AI tahap sebelumnya mencarikan URL valid sebelum kode final. Jika opsi = Tidak, jangan membuat ketergantungan pada gambar eksternal.
 
 ALUR AWAL & DASHBOARD MENU UTAMA — WAJIB:
 - Alur pertama: Pembuka → Input Nama/Kelas bila digunakan → Panduan & Alur Penggunaan → Apersepsi Kontekstual/Pertanyaan Pemantik → Menu Utama/Dashboard → aktivitas belajar.
@@ -2708,14 +2680,14 @@ AKSES ULANG MATERI — PRINSIP WAJIB:
 10. Simpan Refleksi Siswa minimal untuk: sudah dipahami, bagian masih sulit/membingungkan, dan rencana agar lebih paham. Bentuk UI boleh menyesuaikan jenjang, tetapi datanya harus dapat dirangkum.
 11. Database Evaluasi wajib hanya berisi soal kognitif dan mengikuti konfigurasi Prompt 0 PRO: jumlah soal tepat, hanya tipe soal terpilih, serta distribusi LOTS/MOTS/HOTS/AKM-PISA sesuai proporsi. Setiap soal wajib memuat metadata tipe soal, level kognitif, submateri/topik, dan indikator/tujuan agar Bagian Perlu Penguatan dapat dihitung dari jawaban yang salah.
 
-ATURAN CANVA SHEET — KONDISIONAL:
-12. Jika Canva Sheet = Ya:
+ATURAN PENYIMPANAN HASIL LOKAL — KONDISIONAL:
+12. Jika Penyimpanan Hasil Lokal = Ya:
    - Halaman Pembuka wajib meminta Nama dan Kelas; validasi tidak boleh kosong.
-   - Setelah Evaluasi selesai dan data refleksi tersedia, kirim minimal Nama, Kelas, Nilai Evaluasi, Kategori Hasil, Bagian Perlu Penguatan, dan Refleksi Siswa.
-   - Tampilkan status mengirim, berhasil, gagal, dan tombol coba lagi tanpa menggandakan pengiriman yang sudah sukses bila mekanisme memungkinkan.
-13. Jika Canva Sheet = Tidak:
-   - Jangan membuat integrasi spreadsheet, endpoint, form kirim nilai, atau status sinkronisasi.
-   - Hasil, penguatan, dan refleksi cukup dikelola selama sesi.
+   - Setelah Evaluasi selesai dan data refleksi tersedia, simpan minimal Nama, Kelas, Nilai Evaluasi, Kategori Hasil, Bagian Perlu Penguatan, dan Refleksi Siswa ke localStorage/browser storage pada perangkat pengguna.
+   - Tampilkan status tersimpan/gagal dan tombol coba simpan lagi bila penyimpanan gagal. Data tetap lokal di browser dan tidak dikirim ke layanan eksternal.
+13. Jika Penyimpanan Hasil Lokal = Tidak:
+   - Jangan membuat localStorage, integrasi spreadsheet, endpoint, form kirim nilai, atau status sinkronisasi.
+   - Hasil, penguatan, dan refleksi cukup dikelola selama sesi aktif.
 
 ATURAN AKSES MENU — KONDISIONAL:
 14. Jika Akses menu = Berurutan:
@@ -2762,7 +2734,7 @@ INTEGRASI ASET:
 31. Sebutkan daftar nama file aset sesuai Prompt 2/3/4 PRO dan tempat pemakaiannya.
 32. Gunakan path placeholder yang jelas atau base64 bila file benar-benar tersedia dan sesuai.
 33. Jika aset belum tersedia, gunakan bentuk/warna sederhana sebagai placeholder dengan komentar TODO; jangan mengubah logika fitur.
-34. Pastikan visual state akses, refleksi, game, dan Canva Sheet hanya muncul bila relevan dengan konfigurasi.
+34. Pastikan visual state akses, refleksi, game, dan indikator penyimpanan lokal hanya muncul bila relevan dengan konfigurasi.
 
 Struktur MPI: [ikuti Peta Menu & Storyboard Prompt 1 PRO — layar onboarding/pengantar: Pembuka → Identitas bila digunakan → Panduan → Apersepsi; setelah itu Dashboard Menu Utama wajib memuat Tujuan Pembelajaran, Materi Pembelajaran (indeks submateri), Evaluasi, Lihat Hasil, Refleksi, Mini Game/Kuis jika dipilih, serta menu tambahan hanya bila relevan. Lihat Hasil selalu terlihat tetapi baru aktif setelah Evaluasi selesai. Panduan dan onboarding bukan kartu pengganti Menu Utama]
 
@@ -2779,7 +2751,7 @@ Testing & Revisi — WAJIB:
 - Tes Refleksi tersimpan dan muncul pada hasil/payload.
 - Tes Bagian Perlu Penguatan berasal dari metadata soal salah.
 - Tes Game jika aktif: mekanisme, feedback, skor terpisah, dan tidak memengaruhi unlock/nilai; jika tidak aktif, pastikan tidak ada sisa game.
-- Tes Canva Sheet: jika Ya, payload mencakup Nama, Kelas, Nilai, Kategori, Bagian Perlu Penguatan, Refleksi; jika Tidak, tidak ada integrasi.
+- Tes Penyimpanan Hasil Lokal: jika Ya, data Nama, Kelas, Nilai, Kategori, Bagian Perlu Penguatan, dan Refleksi tersimpan serta dapat dibaca kembali dari browser storage; jika Tidak, tidak ada penyimpanan persisten.
 - Tes responsivitas HP, laptop, IFP, keterbacaan, dan seluruh tombol.
 
 Deploy:
@@ -2801,7 +2773,7 @@ STANDAR MUATAN MATERI MPI — WAJIB:
         text: `Aplikasi MPI sudah selesai dibuat dari Prompt 0–5 PRO. Sekarang lakukan FINAL CHECK menyeluruh sebagai QA engineer, instructional designer, dan penguji aplikasi edukasi. Jangan menulis ulang aplikasi dari nol. Audit versi yang ada, uji fungsi, temukan masalah, lalu PERBAIKI masalah yang benar-benar ditemukan tanpa merusak fitur yang sudah benar.
 
 TAHAP 1 — INVENTARIS KONFIGURASI & PETA UJI:
-1. Ringkas konfigurasi aktual: Canva Sheet, mode Akses Menu, Cek Pemahaman, Feedback Evaluasi, Kedalaman Materi, Konfigurasi Evaluasi Akhir (tipe soal, jumlah soal, proporsi LOTS/MOTS/HOTS/AKM-PISA), Game (ada/tidak + jenis/jumlah), alur awal Pembuka/Identitas → Panduan → Apersepsi, Dashboard Menu Utama, halaman/menu, data/state, aset, evaluasi, refleksi, dan alur pengguna.
+1. Ringkas konfigurasi aktual: Penyimpanan Hasil Lokal, mode Akses Menu, Cek Pemahaman, Feedback Evaluasi, Kedalaman Materi, Konfigurasi Evaluasi Akhir (tipe soal, jumlah soal, proporsi LOTS/MOTS/HOTS/AKM-PISA), Game (ada/tidak + jenis/jumlah), alur awal Pembuka/Identitas → Panduan → Apersepsi, Dashboard Menu Utama, halaman/menu, data/state, aset, evaluasi, refleksi, dan alur pengguna.
 2. Cocokkan konfigurasi tersebut dengan keputusan Prompt 0/1 PRO. Jangan menguji fitur yang memang dipilih Tidak Ada seolah-olah wajib ada; justru pastikan tidak ada sisa fitur yang dinonaktifkan.
 3. Buat checklist pengujian dengan status awal Belum Diuji dan tandai fitur kritis.
 
@@ -2833,9 +2805,9 @@ TAHAP 5 — UJI GAME PEMBELAJARAN:
 20. Pastikan game terkait materi, tidak menyalin persis soal Cek Pemahaman/Evaluasi, skor game terpisah dari nilai akhir, dan game tidak menjadi syarat unlock Evaluasi.
 21. Jika Game = Tidak Ada, pastikan menu/aset/state/skor/kode game tidak muncul.
 
-TAHAP 6 — UJI CANVA SHEET:
-22. Jika Canva Sheet = Ya, uji validasi Nama/Kelas, pengiriman minimal Nama, Kelas, Nilai, Kategori, Bagian Perlu Penguatan, Refleksi Siswa, status mengirim/berhasil/gagal, dan retry. Pastikan tidak ada field inti yang kosong akibat salah mapping.
-23. Jika Canva Sheet = Tidak, pastikan tidak ada endpoint/form/status sinkronisasi yang tersisa.
+TAHAP 6 — UJI PENYIMPANAN HASIL LOKAL:
+22. Jika Penyimpanan Hasil Lokal = Ya, uji validasi Nama/Kelas, penyimpanan minimal Nama, Kelas, Nilai, Kategori, Bagian Perlu Penguatan, dan Refleksi Siswa ke localStorage/browser storage; muat ulang aplikasi dan pastikan data dapat dibaca kembali dengan mapping yang benar.
+23. Jika Penyimpanan Hasil Lokal = Tidak, pastikan tidak ada localStorage, endpoint, atau status sinkronisasi yang dipaksakan.
 
 TAHAP 7 — UJI RESPONSIVE, UX, AKSESIBILITAS, KONTEN, DAN ASET:
 24. Uji minimal HP kecil, HP besar, tablet, laptop, desktop, dan IFP/layar sentuh.
@@ -2843,7 +2815,7 @@ TAHAP 7 — UJI RESPONSIVE, UX, AKSESIBILITAS, KONTEN, DAN ASET:
 26. Pastikan fokus keyboard terlihat, kontras memadai, target klik cukup besar, dan reduced motion tidak merusak fungsi bila relevan.
 27. Periksa akurasi materi, istilah, contoh, gambar, diagram, apersepsi, pertanyaan pemantik, alasan pentingnya materi, serta kesesuaian aktivitas dengan tujuan pembelajaran.
 28. Pastikan aset WebP tampil tajam, proporsi benar, tidak tertukar, dan fallback aman. Pastikan tidak ada placeholder/gibberish/data dummy/kredensial rahasia di produksi.
-28A. Jika Sisipkan Gambar/Visual dari Link Eksternal = Ya, audit SETIAP DIRECT_IMAGE_URL_READY_FOR_CANVA: URL yang tertanam harus sama dengan daftar final Prompt 0/1, bukan halaman pencarian/sumber; gambar harus berhasil dimuat tanpa login/paywall; prioritas sumber Indonesia sudah diterapkan; label/judul/legenda/nama bagian di dalam gambar menggunakan Bahasa Indonesia bila tersedia; visual berbahasa asing hanya dipakai jika alternatif Indonesia/netral tidak layak dan memiliki caption/padanan Bahasa Indonesia; alt text/fallback tersedia; dan kegagalan satu host tidak boleh membuat materi/soal tidak terbaca. Jangan meminta Canva mencari pengganti. Jika URL rusak, ChatGPT/AI harus mencari URL pengganti yang valid dan memperbarui konstanta aset + sumbernya sebelum menyatakan SIAP DIGUNAKAN.
+28A. Jika Sisipkan Gambar/Visual dari Link Eksternal = Ya, audit SETIAP DIRECT_IMAGE_URL_READY_FOR_WEB: URL yang tertanam harus sama dengan daftar final Prompt 0/1, bukan halaman pencarian/sumber; gambar harus berhasil dimuat tanpa login/paywall; prioritas sumber Indonesia sudah diterapkan; label/judul/legenda/nama bagian di dalam gambar menggunakan Bahasa Indonesia bila tersedia; visual berbahasa asing hanya dipakai jika alternatif Indonesia/netral tidak layak dan memiliki caption/padanan Bahasa Indonesia; alt text/fallback tersedia; dan kegagalan satu host tidak boleh membuat materi/soal tidak terbaca. Jangan meminta tool coding mencari pengganti. Jika URL rusak, ChatGPT/AI harus mencari URL pengganti yang valid dan memperbarui konstanta aset + sumbernya sebelum menyatakan SIAP DIGUNAKAN.
 
 TAHAP 8 — UJI TEKNIS & PERFORMA:
 29. Periksa HTML/CSS/JavaScript untuk syntax error, ID/selector konflik, fungsi undefined, listener ganda, state bocor, asset path rusak, request gagal tanpa penanganan, dan potensi memory leak sederhana.
@@ -2857,7 +2829,7 @@ TAHAP 9 — LAPORAN, PERBAIKAN, REGRESSION:
 35. Lakukan regression test pada fitur terkait sampai status Lulus/Gagal jelas.
 36. Tampilkan ringkasan akhir: jumlah uji, lulus, diperbaiki, sisa masalah, dan checklist Siap Digunakan.
 
-Hanya nyatakan SIAP DIGUNAKAN jika alur Panduan sebelum Apersepsi, akses kembali ke Dashboard Menu Utama, visibilitas kartu menu terkunci, urutan submateri pada mode Berurutan, logika akses, Cek Pemahaman, Refleksi, Evaluasi/Feedback, Penguatan, Game kondisional, Canva Sheet kondisional, responsivitas, dan fungsi utama semuanya sesuai konfigurasi proyek.
+Hanya nyatakan SIAP DIGUNAKAN jika alur Panduan sebelum Apersepsi, akses kembali ke Dashboard Menu Utama, visibilitas kartu menu terkunci, urutan submateri pada mode Berurutan, logika akses, Cek Pemahaman, Refleksi, Evaluasi/Feedback, Penguatan, Game kondisional, Penyimpanan Hasil Lokal kondisional, responsivitas, dan fungsi utama semuanya sesuai konfigurasi proyek.
 
 TAHAP 10 — PILIHAN KONVERSI DEPLOYMENT (WAJIB DITAWARKAN DI AKHIR):
 Setelah Final Check selesai, JANGAN langsung mengonversi sebelum saya memilih. Tawarkan dua pilihan berikut:
@@ -2963,7 +2935,13 @@ ATURAN INVENTARIS FILE GAMBAR — WAJIB:
       },
       {
         title: "Prompt 3 PRO Generate Prompt Aset Game Edukasi Sederhana",
-        text: `Berdasarkan Daftar Inventaris Aset (Prompt 2 PRO), buatkan kumpulan prompt siap pakai untuk menghasilkan SETIAP aset proyek Game Edukasi Sederhana menggunakan AI image/audio generator (misalnya ChatGPT, Claude yang mendukung image generation, Gemini, Midjourney, Ideogram, Canva AI, atau generator lain yang sesuai).
+        text: `Berdasarkan Daftar Inventaris Aset (Prompt 2 PRO), buatkan kumpulan prompt siap pakai untuk menghasilkan SETIAP aset proyek Game Edukasi Sederhana menggunakan AI image/audio generator (misalnya ChatGPT, Claude yang mendukung image generation, Gemini, Midjourney, Ideogram, atau Adobe Firefly).
+
+ID PRODUKSI — WAJIB:
+- Beri setiap prompt aset satu ID produksi unik dan berurutan: A001, A002, A003, dan seterusnya.
+- Satu ID hanya boleh mewakili SATU file/aset. Pose/state yang berbeda mendapat ID berbeda.
+- Pertahankan urutan ID ini sebagai urutan eksekusi untuk Prompt 4 PRO. Jangan mengulang atau melewati nomor.
+- Jika aset ditandai EXTERNAL-URL dan tidak perlu digenerate, tetap boleh dicatat pada manifest dengan status EXTERNAL-URL, tetapi jangan membuat prompt image-generation untuk aset tersebut.
 
 ATURAN UTAMA — SATU FILE = SATU GAMBAR/ASET:
 1. Buat SATU prompt gambar terpisah untuk SATU aset. DILARANG menggabungkan dua atau lebih aset, pose, state, objek, atau variasi ke dalam satu file gambar.
@@ -2985,7 +2963,7 @@ FORMAT FILE:
 13. Resolusi harus cukup tajam untuk UI; rekomendasikan minimal 512 px pada sisi terpanjang untuk aset lepas, dan resolusi lebih besar untuk background sesuai layout.
 
 STRUKTUR SETIAP PROMPT GAMBAR:
-- Nomor & Nama Aset
+- ID Produksi (A001, A002, A003, dst.) & Nama Aset
 - Nama file target .webp
 - Halaman/menu pemakaian
 - Fungsi edukatif/interaktif
@@ -3006,98 +2984,77 @@ Untuk maskot/ikon/navigasi, sesuaikan negative prompt agar tidak melarang gaya s
 
 Jika ada audio, buat prompt audio terpisah. Audio bersifat opsional sesuai inventaris.
 
-Output akhir: daftar prompt siap-copy yang dikelompokkan per kategori aset, tetapi SETIAP prompt gambar hanya untuk SATU file dan SATU gambar/aset. Hasil Prompt 3 PRO ini menjadi acuan langsung untuk Prompt 4 PRO.`
+Output akhir: daftar prompt siap-copy yang dikelompokkan per kategori aset, tetapi SETIAP prompt gambar hanya untuk SATU file dan SATU gambar/aset. Setiap prompt wajib memiliki ID produksi berurutan A001, A002, A003, dst. Hasil Prompt 3 PRO ini adalah INSTRUKSI FINAL dan menjadi sumber utama yang dieksekusi langsung oleh Prompt 4 PRO.`
       },
       {
         title: "Prompt 4 PRO Generate Semua Aset Otomatis Game Edukasi Sederhana di ChatGPT/Claude",
-        text: `Berdasarkan rancangan desain (Prompt 1 PRO), Daftar Inventaris Aset (Prompt 2 PRO), dan kumpulan prompt aset (Prompt 3 PRO), sekarang GENERATE semua aset proyek Game Edukasi Sederhana secara otomatis langsung di percakapan ChatGPT/Claude ini. Jangan berhenti pada daftar atau prompt saja jika platform memiliki kemampuan image generation. Kerjakan per batch sesuai kemampuan AI agar kualitas dan konsistensi tetap terjaga.
+        text: `Gunakan SELURUH prompt aset yang telah dihasilkan pada Prompt 3 PRO sebagai instruksi final untuk melakukan generate aset proyek Game Edukasi Sederhana.
+
+Tugas pada tahap ini adalah MENGEKSEKUSI prompt-prompt tersebut. Jangan merancang ulang aset, jangan membuat inventaris baru, jangan menulis ulang prompt, dan jangan mengubah keputusan visual yang sudah ditetapkan pada Prompt 3 PRO.
+
+SUMBER UTAMA:
+- Prompt 3 PRO adalah sumber instruksi generate UTAMA dan FINAL.
+- Prompt 1 PRO dan Prompt 2 PRO hanya boleh dipakai sebagai referensi konteks atau verifikasi kelengkapan apabila benar-benar diperlukan.
+- Jika ada perbedaan interpretasi, ikuti spesifikasi eksplisit pada prompt aset di Prompt 3 PRO.
+- Jangan kembali menganalisis atau menyusun ulang desain dari Prompt 1-2 PRO.
 
 Platform: [ChatGPT / Claude]
 
-PRIORITAS ASET:
-1. Aset yang berhubungan langsung dengan materi/aktivitas utama terlebih dahulu.
-2. Karakter/objek interaktif utama, bangunan/ruang/latar, obstacle/rintangan, dan state objek yang diperlukan.
-3. Maskot/karakter pemandu bila digunakan.
-4. Ikon menu/kontrol/navigasi bila desain membutuhkan aset gambar khusus.
-5. Audio hanya jika benar-benar diperlukan atau diminta.
+CARA EKSEKUSI:
+1. Identifikasi seluruh prompt aset Prompt 3 PRO berdasarkan ID produksi A001, A002, A003, dan seterusnya.
+2. Eksekusi prompt tersebut sesuai urutan ID produksi.
+3. SATU prompt gambar menghasilkan SATU file/aset gambar terpisah.
+4. Jangan menggabungkan beberapa prompt menjadi satu gambar, sprite sheet, collage, contact sheet, grid, lembar pose, atau lembar state.
+5. Jangan meringkas, menyederhanakan, memperluas, atau menulis ulang prompt Prompt 3 PRO sebelum generate, kecuali penyesuaian teknis minimum memang diwajibkan oleh generator.
+6. Pertahankan nama file target, format, transparansi/background, rasio/resolusi, gaya, komposisi, konteks faktual, dan negative prompt yang sudah tertulis pada masing-masing prompt Prompt 3 PRO.
+7. Jika satu objek/karakter memiliki beberapa pose atau state, eksekusi setiap ID sebagai file terpisah.
+8. Jika platform mendukung visual reference, gunakan hasil aset terkait sebelumnya untuk menjaga konsistensi karakter, objek, palet, perspektif, pencahayaan, dan detail.
 
-ATURAN MUTLAK FILE GAMBAR — 1 FILE = 1 GAMBAR:
-1. SATU file gambar hanya boleh memuat SATU aset/gambar. Tidak boleh ada dua atau lebih aset dalam satu file.
-2. DILARANG membuat sprite sheet, contact sheet, collage, grid beberapa aset, lembar pose, lembar state, atau satu gambar berisi beberapa objek yang sebenarnya harus menjadi aset terpisah.
-3. Setiap pose karakter, ekspresi, state objek, keadaan sebelum/sesudah, kosong/terisi, normal/aktif, dan variasi lain yang diperlukan WAJIB dibuat sebagai file terpisah.
-4. Nama file harus unik dan deskriptif, misalnya objek_normal.webp, objek_aktif.webp, karakter_menunjuk.webp.
+BATCH GENERATION:
+9. Jika jumlah aset terlalu banyak untuk dibuat sekaligus, kerjakan berdasarkan urutan ID produksi dengan maksimal 10 aset gambar per batch. Contoh: Batch 1 = A001-A010, Batch 2 = A011-A020.
+10. Ukuran batch boleh diperkecil jika diperlukan untuk menjaga kualitas atau konsistensi.
+11. Sebelum generate, cukup tampilkan daftar singkat ID produksi, nama file, dan nama aset pada batch tersebut. Jangan membuat ulang Peta Batch dari Prompt 2 PRO.
+12. Setelah daftar batch tampil, LANGSUNG generate aset pada batch tersebut tanpa menunggu persetujuan tambahan, kecuali saya meminta konfirmasi.
+13. Setelah batch selesai, lanjutkan ke ID berikutnya sampai seluruh prompt Prompt 3 PRO telah diproses.
 
-ATURAN VISUAL — KONTEKS NYATA, FAKTUAL, DAN JELAS:
-5. Untuk aset materi/aktivitas utama—termasuk objek materi, lingkungan permainan, karakter non-maskot, bangunan, obstacle/rintangan, item interaktif, dan state objek permainan—gambar harus konkret, mudah dikenali, dan sesuai konteks nyata. Jika materinya ilmiah/faktual, bentuk, proporsi, warna, material, state, proses, dan fungsi wajib benar.
-6. Gunakan render realistis atau semi-realistis dengan detail jelas dan bentuk tidak ambigu. Hindari aset terlalu abstrak, samar, generic flat vector, clipart, doodle, line-art sederhana, atau visual seperti SVG yang kehilangan detail nyata.
-7. Akurasi konteks/fakta didahulukan daripada dekorasi. Jangan menambahkan detail yang salah, mustahil, atau menyesatkan.
-8. Karakter non-maskot, bangunan, ruang, lingkungan, obstacle, alat, bahan, dan objek materi harus memiliki bentuk dan skala yang masuk akal untuk konteks proyek.
-9. PENGECUALIAN: maskot, ikon menu, ikon kontrol/navigasi, badge, dan elemen UI dekoratif BOLEH menyesuaikan gaya desain Prompt 1 PRO (2D/3D/stylized/chibi/semi-realistis), tetapi tetap harus jelas, tajam, konsisten, dan mudah dikenali.
-10. Pertahankan palet warna, sudut pandang, arah cahaya, proporsi relatif, dan tingkat detail yang konsisten antar-file.
-11. Jangan menaruh teks acak, watermark, label yang tidak diperlukan, atau gibberish di dalam gambar. Teks UI dibuat dengan HTML/CSS.
+VALIDASI HASIL:
+14. Setelah setiap aset digenerate, cocokkan hasilnya dengan prompt sumber pada ID Prompt 3 PRO yang bersangkutan.
+15. Periksa bahwa hasil hanya memuat satu aset utama, pose/state benar, transparansi/background sesuai, tidak ada teks acak/watermark, kualitas tajam, dan tidak menyimpang dari spesifikasi prompt sumber.
+16. Jika suatu aset gagal memenuhi prompt sumber, regenerate HANYA ID tersebut menggunakan prompt Prompt 3 PRO yang sama. Koreksi teknis minimum boleh dilakukan hanya untuk memperbaiki kegagalan generate, tanpa mengubah konsep aset.
+17. Jangan mengulang aset yang sudah benar.
 
-FORMAT FILE:
-12. Target output WAJIB WebP (.webp), kualitas tinggi/lossless bila tersedia.
-13. Untuk aset lepas gunakan alpha/transparansi. Untuk background/latar penuh, transparansi tidak wajib.
-14. Jika platform hanya menghasilkan PNG/JPG, generate kualitas terbaik, tandai "perlu konversi ke WebP", dan jangan menurunkan kualitas.
-15. Jangan menggunakan SVG/vektor sebagai pengganti file gambar utama.
+STATUS SETELAH BATCH:
+Tampilkan tabel ringkas:
+ID | Nama File | Nama Aset | Status
 
-ATURAN BATCH:
-16. Generate PER BATCH, maksimal 10 file gambar per batch. Karena 1 file = 1 aset, maka maksimal 10 aset gambar per batch.
-17. Ukuran batch adaptif. Jika konsistensi, akurasi, atau detail mulai turun, kecilkan batch berikutnya.
-18. Beri label Batch 1, Batch 2, dst. di LUAR gambar.
-19. Sebelum setiap batch, tampilkan PETA BATCH berupa tabel dengan kolom:
-   - Nomor file (B1-F01, dst.)
-   - Nama file .webp
-   - Nama aset
-   - Kategori
-   - Halaman/menu pemakaian
-   - Fungsi aset
-   - Transparan/Penuh
-   - Catatan konteks nyata/akurasi yang wajib benar
-20. Pastikan setiap aset Prompt 2 PRO muncul tepat satu kali dalam peta produksi. Jika satu objek memiliki beberapa state, setiap state muncul sebagai baris/file terpisah.
-21. Setelah Peta Batch tampil, langsung generate file-file batch tersebut tanpa menunggu persetujuan tambahan, kecuali saya meminta konfirmasi.
+Gunakan status:
+- SELESAI
+- PERLU ULANG
+- PERLU KONVERSI WEBP
+- EXTERNAL-URL — TIDAK DIGENERATE (jika berlaku)
 
-PEMERIKSAAN SETELAH GENERATE:
-22. Periksa SETIAP file secara individual:
-   a. file hanya berisi satu aset/gambar;
-   b. tidak ada aset kedua, sprite, grid, atau collage;
-   c. bentuk/proporsi/material/konteks benar;
-   d. aset materi faktual/ilmiah akurat;
-   e. visual jelas dan tidak terlalu abstrak/vektor generik;
-   f. gaya konsisten dengan Prompt 1 PRO;
-   g. background transparan jika aset lepas;
-   h. target format WebP tercapai atau diberi status perlu konversi;
-   i. tidak ada teks acak/watermark;
-   j. resolusi cukup tajam.
-23. Tampilkan HASIL BATCH dengan kolom nomor file, nama file, aset, kategori, halaman, format, dan status Selesai/Perlu Ulang.
-24. File yang gagal diregenerate HANYA file tersebut, satu per satu atau batch kecil; jangan mengulang file yang sudah lolos.
-25. Setelah batch lolos, lanjutkan ke batch berikutnya sampai seluruh aset utama selesai.
-
-ATURAN GENERATE:
-26. Gunakan nama/fungsi aset dari Prompt 2 PRO sebagai sumber utama dan Prompt 3 PRO sebagai instruksi visual per file.
-27. Jangan menggabungkan aset demi menghemat jumlah generate. Jika ada 37 aset, targetnya tetap 37 file gambar terpisah (ditambah audio bila ada).
-28. Untuk pose/state berulang, gunakan file hasil sebelumnya sebagai visual reference bila platform mendukung agar konsisten.
-29. Audio dan tombol navigasi gambar tetap opsional; tombol HTML/CSS lebih diutamakan kecuali desain memang meminta aset visual khusus.
-30. Setelah semua aset selesai, buat REKAP MANIFEST ASET FINAL: Wajib selesai, Opsional selesai, Opsional belum dibuat, serta file yang masih perlu konversi ke WebP.
+SETELAH SEMUA ASET SELESAI:
+Buat Manifest Aset Final berdasarkan ID produksi Prompt 3 PRO yang menunjukkan aset selesai, perlu ulang, perlu konversi, atau External URL. Pastikan tidak ada ID yang terlewat atau diproses dua kali.
 
 PENTING:
 - Jangan hanya menjelaskan cara membuat aset.
-- Jangan hanya mengulang Prompt 3 PRO.
-- Jika image generation tersedia, langsung generate sesuai Peta Batch.
-- Jika platform tidak dapat membuat gambar langsung, susun paket prompt final PER FILE/PER ASET sesuai Peta Batch dan tandai "perlu dieksekusi pada generator aset".
-- Jangan pernah kembali ke format multi-aset dalam satu file.
+- Jangan hanya menampilkan ulang Prompt 3 PRO.
+- Jangan membuat prompt aset baru.
+- Jangan membuat ulang inventaris atau prioritas aset.
+- Jangan mengubah style/spesifikasi Prompt 3 PRO.
+- Jika image generation tersedia, langsung gunakan prompt Prompt 3 PRO untuk generate.
+- Jika platform tidak dapat membuat gambar secara langsung, tampilkan prompt PER ID apa adanya dan tandai "PERLU DIEKSEKUSI PADA GENERATOR ASET"; jangan menyusun prompt pengganti.
 
-Mulai dari Batch 1 berisi aset prioritas tertinggi yang paling berhubungan dengan materi/aktivitas utama.`
+Mulai dari ID produksi pertama pada Prompt 3 PRO dan lanjutkan berurutan sampai selesai.`
       },
       {
         title: "Prompt 5 PRO Coding Game Edukasi Sederhana (Gabungkan Semua Aset ke Desain)",
         text: `Ubah rancangan desain game (Prompt 1 PRO) dan aset yang sudah dibuat/digenerate (hasil Prompt 4 PRO; mengacu Prompt 2-3 PRO) menjadi kode game interaktif dalam satu file HTML lengkap (HTML, CSS, JavaScript). Jelaskan mekanisme dan tampilan game secara sangat detail.
 
-Engine/Platform tujuan: [pilih satu — Canva Code / dikerjakan bersama Claude / Gemini / ChatGPT]
+Engine/Platform tujuan: [pilih satu — HTML/CSS/JavaScript di browser / Claude Code / ChatGPT / Gemini / v0 / bolt.new / Cursor / Replit AI / Lovable]
 
 Ketentuan umum:
-1. Langsung bisa dijalankan di [Canva Code/browser].
+1. Langsung bisa dijalankan sebagai aplikasi web di browser.
 2. Jangan gunakan library atau database eksternal (kecuali disebutkan lain sesuai engine yang dipilih).
 3. Semua teks berbahasa Indonesia.
 4. Tampilan responsif HP/laptop/IFP.
@@ -3273,7 +3230,13 @@ ATURAN INVENTARIS FILE GAMBAR — WAJIB:
       },
       {
         title: "Prompt 3 PRO Generate Prompt Aset Game Edukasi Critical Thinking",
-        text: `Berdasarkan Daftar Inventaris Aset (Prompt 2 PRO), buatkan kumpulan prompt siap pakai untuk menghasilkan SETIAP aset proyek Game Edukasi Critical Thinking menggunakan AI image/audio generator (misalnya ChatGPT, Claude yang mendukung image generation, Gemini, Midjourney, Ideogram, Canva AI, atau generator lain yang sesuai).
+        text: `Berdasarkan Daftar Inventaris Aset (Prompt 2 PRO), buatkan kumpulan prompt siap pakai untuk menghasilkan SETIAP aset proyek Game Edukasi Critical Thinking menggunakan AI image/audio generator (misalnya ChatGPT, Claude yang mendukung image generation, Gemini, Midjourney, Ideogram, atau Adobe Firefly).
+
+ID PRODUKSI — WAJIB:
+- Beri setiap prompt aset satu ID produksi unik dan berurutan: A001, A002, A003, dan seterusnya.
+- Satu ID hanya boleh mewakili SATU file/aset. Pose/state yang berbeda mendapat ID berbeda.
+- Pertahankan urutan ID ini sebagai urutan eksekusi untuk Prompt 4 PRO. Jangan mengulang atau melewati nomor.
+- Jika aset ditandai EXTERNAL-URL dan tidak perlu digenerate, tetap boleh dicatat pada manifest dengan status EXTERNAL-URL, tetapi jangan membuat prompt image-generation untuk aset tersebut.
 
 ATURAN UTAMA — SATU FILE = SATU GAMBAR/ASET:
 1. Buat SATU prompt gambar terpisah untuk SATU aset. DILARANG menggabungkan dua atau lebih aset, pose, state, objek, atau variasi ke dalam satu file gambar.
@@ -3295,7 +3258,7 @@ FORMAT FILE:
 13. Resolusi harus cukup tajam untuk UI; rekomendasikan minimal 512 px pada sisi terpanjang untuk aset lepas, dan resolusi lebih besar untuk background sesuai layout.
 
 STRUKTUR SETIAP PROMPT GAMBAR:
-- Nomor & Nama Aset
+- ID Produksi (A001, A002, A003, dst.) & Nama Aset
 - Nama file target .webp
 - Halaman/menu pemakaian
 - Fungsi edukatif/interaktif
@@ -3316,95 +3279,74 @@ Untuk maskot/ikon/navigasi, sesuaikan negative prompt agar tidak melarang gaya s
 
 Jika ada audio, buat prompt audio terpisah. Audio bersifat opsional sesuai inventaris.
 
-Output akhir: daftar prompt siap-copy yang dikelompokkan per kategori aset, tetapi SETIAP prompt gambar hanya untuk SATU file dan SATU gambar/aset. Hasil Prompt 3 PRO ini menjadi acuan langsung untuk Prompt 4 PRO.`
+Output akhir: daftar prompt siap-copy yang dikelompokkan per kategori aset, tetapi SETIAP prompt gambar hanya untuk SATU file dan SATU gambar/aset. Setiap prompt wajib memiliki ID produksi berurutan A001, A002, A003, dst. Hasil Prompt 3 PRO ini adalah INSTRUKSI FINAL dan menjadi sumber utama yang dieksekusi langsung oleh Prompt 4 PRO.`
       },
       {
         title: "Prompt 4 PRO Generate Semua Aset Otomatis Game Critical Thinking di ChatGPT/Claude",
-        text: `Berdasarkan rancangan desain (Prompt 1 PRO), Daftar Inventaris Aset (Prompt 2 PRO), dan kumpulan prompt aset (Prompt 3 PRO), sekarang GENERATE semua aset proyek Game Edukasi Critical Thinking secara otomatis langsung di percakapan ChatGPT/Claude ini. Jangan berhenti pada daftar atau prompt saja jika platform memiliki kemampuan image generation. Kerjakan per batch sesuai kemampuan AI agar kualitas dan konsistensi tetap terjaga.
+        text: `Gunakan SELURUH prompt aset yang telah dihasilkan pada Prompt 3 PRO sebagai instruksi final untuk melakukan generate aset proyek Game Edukasi Critical Thinking.
+
+Tugas pada tahap ini adalah MENGEKSEKUSI prompt-prompt tersebut. Jangan merancang ulang aset, jangan membuat inventaris baru, jangan menulis ulang prompt, dan jangan mengubah keputusan visual yang sudah ditetapkan pada Prompt 3 PRO.
+
+SUMBER UTAMA:
+- Prompt 3 PRO adalah sumber instruksi generate UTAMA dan FINAL.
+- Prompt 1 PRO dan Prompt 2 PRO hanya boleh dipakai sebagai referensi konteks atau verifikasi kelengkapan apabila benar-benar diperlukan.
+- Jika ada perbedaan interpretasi, ikuti spesifikasi eksplisit pada prompt aset di Prompt 3 PRO.
+- Jangan kembali menganalisis atau menyusun ulang desain dari Prompt 1-2 PRO.
 
 Platform: [ChatGPT / Claude]
 
-PRIORITAS ASET:
-1. Aset yang berhubungan langsung dengan materi/aktivitas utama terlebih dahulu.
-2. Karakter/objek interaktif utama, bangunan/ruang/latar, obstacle/rintangan, dan state objek yang diperlukan.
-3. Maskot/karakter pemandu bila digunakan.
-4. Ikon menu/kontrol/navigasi bila desain membutuhkan aset gambar khusus.
-5. Audio hanya jika benar-benar diperlukan atau diminta.
+CARA EKSEKUSI:
+1. Identifikasi seluruh prompt aset Prompt 3 PRO berdasarkan ID produksi A001, A002, A003, dan seterusnya.
+2. Eksekusi prompt tersebut sesuai urutan ID produksi.
+3. SATU prompt gambar menghasilkan SATU file/aset gambar terpisah.
+4. Jangan menggabungkan beberapa prompt menjadi satu gambar, sprite sheet, collage, contact sheet, grid, lembar pose, atau lembar state.
+5. Jangan meringkas, menyederhanakan, memperluas, atau menulis ulang prompt Prompt 3 PRO sebelum generate, kecuali penyesuaian teknis minimum memang diwajibkan oleh generator.
+6. Pertahankan nama file target, format, transparansi/background, rasio/resolusi, gaya, komposisi, konteks faktual, dan negative prompt yang sudah tertulis pada masing-masing prompt Prompt 3 PRO.
+7. Jika satu objek/karakter memiliki beberapa pose atau state, eksekusi setiap ID sebagai file terpisah.
+8. Jika platform mendukung visual reference, gunakan hasil aset terkait sebelumnya untuk menjaga konsistensi karakter, objek, palet, perspektif, pencahayaan, dan detail.
 
-ATURAN MUTLAK FILE GAMBAR — 1 FILE = 1 GAMBAR:
-1. SATU file gambar hanya boleh memuat SATU aset/gambar. Tidak boleh ada dua atau lebih aset dalam satu file.
-2. DILARANG membuat sprite sheet, contact sheet, collage, grid beberapa aset, lembar pose, lembar state, atau satu gambar berisi beberapa objek yang sebenarnya harus menjadi aset terpisah.
-3. Setiap pose karakter, ekspresi, state objek, keadaan sebelum/sesudah, kosong/terisi, normal/aktif, dan variasi lain yang diperlukan WAJIB dibuat sebagai file terpisah.
-4. Nama file harus unik dan deskriptif, misalnya objek_normal.webp, objek_aktif.webp, karakter_menunjuk.webp.
+BATCH GENERATION:
+9. Jika jumlah aset terlalu banyak untuk dibuat sekaligus, kerjakan berdasarkan urutan ID produksi dengan maksimal 10 aset gambar per batch. Contoh: Batch 1 = A001-A010, Batch 2 = A011-A020.
+10. Ukuran batch boleh diperkecil jika diperlukan untuk menjaga kualitas atau konsistensi.
+11. Sebelum generate, cukup tampilkan daftar singkat ID produksi, nama file, dan nama aset pada batch tersebut. Jangan membuat ulang Peta Batch dari Prompt 2 PRO.
+12. Setelah daftar batch tampil, LANGSUNG generate aset pada batch tersebut tanpa menunggu persetujuan tambahan, kecuali saya meminta konfirmasi.
+13. Setelah batch selesai, lanjutkan ke ID berikutnya sampai seluruh prompt Prompt 3 PRO telah diproses.
 
-ATURAN VISUAL — KONTEKS NYATA, FAKTUAL, DAN JELAS:
-5. Untuk aset materi/aktivitas utama—termasuk bukti/data visual, objek materi, lingkungan kasus, karakter non-maskot, lokasi, obstacle, item investigasi, dan state objek yang dianalisis siswa—gambar harus konkret, mudah dikenali, dan sesuai konteks nyata. Jika materinya ilmiah/faktual, bentuk, proporsi, warna, material, state, proses, dan fungsi wajib benar.
-6. Gunakan render realistis atau semi-realistis dengan detail jelas dan bentuk tidak ambigu. Hindari aset terlalu abstrak, samar, generic flat vector, clipart, doodle, line-art sederhana, atau visual seperti SVG yang kehilangan detail nyata.
-7. Akurasi konteks/fakta didahulukan daripada dekorasi. Jangan menambahkan detail yang salah, mustahil, atau menyesatkan.
-8. Karakter non-maskot, bangunan, ruang, lingkungan, obstacle, alat, bahan, dan objek materi harus memiliki bentuk dan skala yang masuk akal untuk konteks proyek.
-9. PENGECUALIAN: maskot, ikon menu, ikon kontrol/navigasi, badge, dan elemen UI dekoratif BOLEH menyesuaikan gaya desain Prompt 1 PRO (2D/3D/stylized/chibi/semi-realistis), tetapi tetap harus jelas, tajam, konsisten, dan mudah dikenali.
-10. Pertahankan palet warna, sudut pandang, arah cahaya, proporsi relatif, dan tingkat detail yang konsisten antar-file.
-11. Jangan menaruh teks acak, watermark, label yang tidak diperlukan, atau gibberish di dalam gambar. Teks UI dibuat dengan HTML/CSS.
+VALIDASI HASIL:
+14. Setelah setiap aset digenerate, cocokkan hasilnya dengan prompt sumber pada ID Prompt 3 PRO yang bersangkutan.
+15. Periksa bahwa hasil hanya memuat satu aset utama, pose/state benar, transparansi/background sesuai, tidak ada teks acak/watermark, kualitas tajam, dan tidak menyimpang dari spesifikasi prompt sumber.
+16. Jika suatu aset gagal memenuhi prompt sumber, regenerate HANYA ID tersebut menggunakan prompt Prompt 3 PRO yang sama. Koreksi teknis minimum boleh dilakukan hanya untuk memperbaiki kegagalan generate, tanpa mengubah konsep aset.
+17. Jangan mengulang aset yang sudah benar.
 
-FORMAT FILE:
-12. Target output WAJIB WebP (.webp), kualitas tinggi/lossless bila tersedia.
-13. Untuk aset lepas gunakan alpha/transparansi. Untuk background/latar penuh, transparansi tidak wajib.
-14. Jika platform hanya menghasilkan PNG/JPG, generate kualitas terbaik, tandai "perlu konversi ke WebP", dan jangan menurunkan kualitas.
-15. Jangan menggunakan SVG/vektor sebagai pengganti file gambar utama.
+STATUS SETELAH BATCH:
+Tampilkan tabel ringkas:
+ID | Nama File | Nama Aset | Status
 
-ATURAN BATCH:
-16. Generate PER BATCH, maksimal 10 file gambar per batch. Karena 1 file = 1 aset, maka maksimal 10 aset gambar per batch.
-17. Ukuran batch adaptif. Jika konsistensi, akurasi, atau detail mulai turun, kecilkan batch berikutnya.
-18. Beri label Batch 1, Batch 2, dst. di LUAR gambar.
-19. Sebelum setiap batch, tampilkan PETA BATCH berupa tabel dengan kolom:
-   - Nomor file (B1-F01, dst.)
-   - Nama file .webp
-   - Nama aset
-   - Kategori
-   - Halaman/menu pemakaian
-   - Fungsi aset
-   - Transparan/Penuh
-   - Catatan konteks nyata/akurasi yang wajib benar
-20. Pastikan setiap aset Prompt 2 PRO muncul tepat satu kali dalam peta produksi. Jika satu objek memiliki beberapa state, setiap state muncul sebagai baris/file terpisah.
-21. Setelah Peta Batch tampil, langsung generate file-file batch tersebut tanpa menunggu persetujuan tambahan, kecuali saya meminta konfirmasi.
+Gunakan status:
+- SELESAI
+- PERLU ULANG
+- PERLU KONVERSI WEBP
+- EXTERNAL-URL — TIDAK DIGENERATE (jika berlaku)
 
-PEMERIKSAAN SETELAH GENERATE:
-22. Periksa SETIAP file secara individual:
-   a. file hanya berisi satu aset/gambar;
-   b. tidak ada aset kedua, sprite, grid, atau collage;
-   c. bentuk/proporsi/material/konteks benar;
-   d. aset materi faktual/ilmiah akurat;
-   e. visual jelas dan tidak terlalu abstrak/vektor generik;
-   f. gaya konsisten dengan Prompt 1 PRO;
-   g. background transparan jika aset lepas;
-   h. target format WebP tercapai atau diberi status perlu konversi;
-   i. tidak ada teks acak/watermark;
-   j. resolusi cukup tajam.
-23. Tampilkan HASIL BATCH dengan kolom nomor file, nama file, aset, kategori, halaman, format, dan status Selesai/Perlu Ulang.
-24. File yang gagal diregenerate HANYA file tersebut, satu per satu atau batch kecil; jangan mengulang file yang sudah lolos.
-25. Setelah batch lolos, lanjutkan ke batch berikutnya sampai seluruh aset utama selesai.
-
-ATURAN GENERATE:
-26. Gunakan nama/fungsi aset dari Prompt 2 PRO sebagai sumber utama dan Prompt 3 PRO sebagai instruksi visual per file.
-27. Jangan menggabungkan aset demi menghemat jumlah generate. Jika ada 37 aset, targetnya tetap 37 file gambar terpisah (ditambah audio bila ada).
-28. Untuk pose/state berulang, gunakan file hasil sebelumnya sebagai visual reference bila platform mendukung agar konsisten.
-29. Audio dan tombol navigasi gambar tetap opsional; tombol HTML/CSS lebih diutamakan kecuali desain memang meminta aset visual khusus.
-30. Setelah semua aset selesai, buat REKAP MANIFEST ASET FINAL: Wajib selesai, Opsional selesai, Opsional belum dibuat, serta file yang masih perlu konversi ke WebP.
+SETELAH SEMUA ASET SELESAI:
+Buat Manifest Aset Final berdasarkan ID produksi Prompt 3 PRO yang menunjukkan aset selesai, perlu ulang, perlu konversi, atau External URL. Pastikan tidak ada ID yang terlewat atau diproses dua kali.
 
 PENTING:
 - Jangan hanya menjelaskan cara membuat aset.
-- Jangan hanya mengulang Prompt 3 PRO.
-- Jika image generation tersedia, langsung generate sesuai Peta Batch.
-- Jika platform tidak dapat membuat gambar langsung, susun paket prompt final PER FILE/PER ASET sesuai Peta Batch dan tandai "perlu dieksekusi pada generator aset".
-- Jangan pernah kembali ke format multi-aset dalam satu file.
+- Jangan hanya menampilkan ulang Prompt 3 PRO.
+- Jangan membuat prompt aset baru.
+- Jangan membuat ulang inventaris atau prioritas aset.
+- Jangan mengubah style/spesifikasi Prompt 3 PRO.
+- Jika image generation tersedia, langsung gunakan prompt Prompt 3 PRO untuk generate.
+- Jika platform tidak dapat membuat gambar secara langsung, tampilkan prompt PER ID apa adanya dan tandai "PERLU DIEKSEKUSI PADA GENERATOR ASET"; jangan menyusun prompt pengganti.
 
-Mulai dari Batch 1 berisi aset prioritas tertinggi yang paling berhubungan dengan materi/aktivitas utama.`
+Mulai dari ID produksi pertama pada Prompt 3 PRO dan lanjutkan berurutan sampai selesai.`
       },
       {
         title: "Prompt 5 PRO Coding Game Edukasi Critical Thinking (Gabungkan Semua Aset ke Desain)",
         text: `Ubah rancangan desain game (Prompt 1 PRO) dan aset yang sudah dibuat/digenerate (hasil Prompt 4 PRO; mengacu Prompt 2-3 PRO) menjadi kode game interaktif dalam satu file HTML lengkap. Jelaskan mekanisme dan tampilan game secara sangat detail.
 
-Engine/Platform tujuan: [pilih satu — Canva Code / dikerjakan bersama Claude / Gemini / ChatGPT]
+Engine/Platform tujuan: [pilih satu — HTML/CSS/JavaScript di browser / Claude Code / ChatGPT / Gemini / v0 / bolt.new / Cursor / Replit AI / Lovable]
 
 Ketentuan umum, struktur, fitur, sistem soal, dan sistem skor: sama seperti Prompt 4 PRO varian Game Sederhana.
 
@@ -3595,7 +3537,13 @@ ATURAN INVENTARIS FILE GAMBAR — WAJIB:
       },
       {
         title: "Prompt 3 PRO Generate Prompt Aset Game Edukasi Skill & Luck",
-        text: `Berdasarkan Daftar Inventaris Aset (Prompt 2 PRO), buatkan kumpulan prompt siap pakai untuk menghasilkan SETIAP aset proyek Game Edukasi Skill & Luck menggunakan AI image/audio generator (misalnya ChatGPT, Claude yang mendukung image generation, Gemini, Midjourney, Ideogram, Canva AI, atau generator lain yang sesuai).
+        text: `Berdasarkan Daftar Inventaris Aset (Prompt 2 PRO), buatkan kumpulan prompt siap pakai untuk menghasilkan SETIAP aset proyek Game Edukasi Skill & Luck menggunakan AI image/audio generator (misalnya ChatGPT, Claude yang mendukung image generation, Gemini, Midjourney, Ideogram, atau Adobe Firefly).
+
+ID PRODUKSI — WAJIB:
+- Beri setiap prompt aset satu ID produksi unik dan berurutan: A001, A002, A003, dan seterusnya.
+- Satu ID hanya boleh mewakili SATU file/aset. Pose/state yang berbeda mendapat ID berbeda.
+- Pertahankan urutan ID ini sebagai urutan eksekusi untuk Prompt 4 PRO. Jangan mengulang atau melewati nomor.
+- Jika aset ditandai EXTERNAL-URL dan tidak perlu digenerate, tetap boleh dicatat pada manifest dengan status EXTERNAL-URL, tetapi jangan membuat prompt image-generation untuk aset tersebut.
 
 ATURAN UTAMA — SATU FILE = SATU GAMBAR/ASET:
 1. Buat SATU prompt gambar terpisah untuk SATU aset. DILARANG menggabungkan dua atau lebih aset, pose, state, objek, atau variasi ke dalam satu file gambar.
@@ -3617,7 +3565,7 @@ FORMAT FILE:
 13. Resolusi harus cukup tajam untuk UI; rekomendasikan minimal 512 px pada sisi terpanjang untuk aset lepas, dan resolusi lebih besar untuk background sesuai layout.
 
 STRUKTUR SETIAP PROMPT GAMBAR:
-- Nomor & Nama Aset
+- ID Produksi (A001, A002, A003, dst.) & Nama Aset
 - Nama file target .webp
 - Halaman/menu pemakaian
 - Fungsi edukatif/interaktif
@@ -3638,98 +3586,77 @@ Untuk maskot/ikon/navigasi, sesuaikan negative prompt agar tidak melarang gaya s
 
 Jika ada audio, buat prompt audio terpisah. Audio bersifat opsional sesuai inventaris.
 
-Output akhir: daftar prompt siap-copy yang dikelompokkan per kategori aset, tetapi SETIAP prompt gambar hanya untuk SATU file dan SATU gambar/aset. Hasil Prompt 3 PRO ini menjadi acuan langsung untuk Prompt 4 PRO.`
+Output akhir: daftar prompt siap-copy yang dikelompokkan per kategori aset, tetapi SETIAP prompt gambar hanya untuk SATU file dan SATU gambar/aset. Setiap prompt wajib memiliki ID produksi berurutan A001, A002, A003, dst. Hasil Prompt 3 PRO ini adalah INSTRUKSI FINAL dan menjadi sumber utama yang dieksekusi langsung oleh Prompt 4 PRO.`
       },
       {
         title: "Prompt 4 PRO Generate Semua Aset Otomatis Game Skill & Luck di ChatGPT/Claude",
-        text: `Berdasarkan rancangan desain (Prompt 1 PRO), Daftar Inventaris Aset (Prompt 2 PRO), dan kumpulan prompt aset (Prompt 3 PRO), sekarang GENERATE semua aset proyek Game Edukasi Skill & Luck secara otomatis langsung di percakapan ChatGPT/Claude ini. Jangan berhenti pada daftar atau prompt saja jika platform memiliki kemampuan image generation. Kerjakan per batch sesuai kemampuan AI agar kualitas dan konsistensi tetap terjaga.
+        text: `Gunakan SELURUH prompt aset yang telah dihasilkan pada Prompt 3 PRO sebagai instruksi final untuk melakukan generate aset proyek Game Edukasi Skill & Luck.
+
+Tugas pada tahap ini adalah MENGEKSEKUSI prompt-prompt tersebut. Jangan merancang ulang aset, jangan membuat inventaris baru, jangan menulis ulang prompt, dan jangan mengubah keputusan visual yang sudah ditetapkan pada Prompt 3 PRO.
+
+SUMBER UTAMA:
+- Prompt 3 PRO adalah sumber instruksi generate UTAMA dan FINAL.
+- Prompt 1 PRO dan Prompt 2 PRO hanya boleh dipakai sebagai referensi konteks atau verifikasi kelengkapan apabila benar-benar diperlukan.
+- Jika ada perbedaan interpretasi, ikuti spesifikasi eksplisit pada prompt aset di Prompt 3 PRO.
+- Jangan kembali menganalisis atau menyusun ulang desain dari Prompt 1-2 PRO.
 
 Platform: [ChatGPT / Claude]
 
-PRIORITAS ASET:
-1. Aset yang berhubungan langsung dengan materi/aktivitas utama terlebih dahulu.
-2. Karakter/objek interaktif utama, bangunan/ruang/latar, obstacle/rintangan, dan state objek yang diperlukan.
-3. Maskot/karakter pemandu bila digunakan.
-4. Ikon menu/kontrol/navigasi bila desain membutuhkan aset gambar khusus.
-5. Audio hanya jika benar-benar diperlukan atau diminta.
+CARA EKSEKUSI:
+1. Identifikasi seluruh prompt aset Prompt 3 PRO berdasarkan ID produksi A001, A002, A003, dan seterusnya.
+2. Eksekusi prompt tersebut sesuai urutan ID produksi.
+3. SATU prompt gambar menghasilkan SATU file/aset gambar terpisah.
+4. Jangan menggabungkan beberapa prompt menjadi satu gambar, sprite sheet, collage, contact sheet, grid, lembar pose, atau lembar state.
+5. Jangan meringkas, menyederhanakan, memperluas, atau menulis ulang prompt Prompt 3 PRO sebelum generate, kecuali penyesuaian teknis minimum memang diwajibkan oleh generator.
+6. Pertahankan nama file target, format, transparansi/background, rasio/resolusi, gaya, komposisi, konteks faktual, dan negative prompt yang sudah tertulis pada masing-masing prompt Prompt 3 PRO.
+7. Jika satu objek/karakter memiliki beberapa pose atau state, eksekusi setiap ID sebagai file terpisah.
+8. Jika platform mendukung visual reference, gunakan hasil aset terkait sebelumnya untuk menjaga konsistensi karakter, objek, palet, perspektif, pencahayaan, dan detail.
 
-ATURAN MUTLAK FILE GAMBAR — 1 FILE = 1 GAMBAR:
-1. SATU file gambar hanya boleh memuat SATU aset/gambar. Tidak boleh ada dua atau lebih aset dalam satu file.
-2. DILARANG membuat sprite sheet, contact sheet, collage, grid beberapa aset, lembar pose, lembar state, atau satu gambar berisi beberapa objek yang sebenarnya harus menjadi aset terpisah.
-3. Setiap pose karakter, ekspresi, state objek, keadaan sebelum/sesudah, kosong/terisi, normal/aktif, dan variasi lain yang diperlukan WAJIB dibuat sebagai file terpisah.
-4. Nama file harus unik dan deskriptif, misalnya objek_normal.webp, objek_aktif.webp, karakter_menunjuk.webp.
+BATCH GENERATION:
+9. Jika jumlah aset terlalu banyak untuk dibuat sekaligus, kerjakan berdasarkan urutan ID produksi dengan maksimal 10 aset gambar per batch. Contoh: Batch 1 = A001-A010, Batch 2 = A011-A020.
+10. Ukuran batch boleh diperkecil jika diperlukan untuk menjaga kualitas atau konsistensi.
+11. Sebelum generate, cukup tampilkan daftar singkat ID produksi, nama file, dan nama aset pada batch tersebut. Jangan membuat ulang Peta Batch dari Prompt 2 PRO.
+12. Setelah daftar batch tampil, LANGSUNG generate aset pada batch tersebut tanpa menunggu persetujuan tambahan, kecuali saya meminta konfirmasi.
+13. Setelah batch selesai, lanjutkan ke ID berikutnya sampai seluruh prompt Prompt 3 PRO telah diproses.
 
-ATURAN VISUAL — KONTEKS NYATA, FAKTUAL, DAN JELAS:
-5. Untuk aset materi/aktivitas utama—termasuk objek materi, lingkungan permainan, karakter non-maskot, bangunan, obstacle, item skill/luck, dan state objek permainan—gambar harus konkret, mudah dikenali, dan sesuai konteks nyata. Jika materinya ilmiah/faktual, bentuk, proporsi, warna, material, state, proses, dan fungsi wajib benar.
-6. Gunakan render realistis atau semi-realistis dengan detail jelas dan bentuk tidak ambigu. Hindari aset terlalu abstrak, samar, generic flat vector, clipart, doodle, line-art sederhana, atau visual seperti SVG yang kehilangan detail nyata.
-7. Akurasi konteks/fakta didahulukan daripada dekorasi. Jangan menambahkan detail yang salah, mustahil, atau menyesatkan.
-8. Karakter non-maskot, bangunan, ruang, lingkungan, obstacle, alat, bahan, dan objek materi harus memiliki bentuk dan skala yang masuk akal untuk konteks proyek.
-9. PENGECUALIAN: maskot, ikon menu, ikon kontrol/navigasi, badge, dan elemen UI dekoratif BOLEH menyesuaikan gaya desain Prompt 1 PRO (2D/3D/stylized/chibi/semi-realistis), tetapi tetap harus jelas, tajam, konsisten, dan mudah dikenali.
-10. Pertahankan palet warna, sudut pandang, arah cahaya, proporsi relatif, dan tingkat detail yang konsisten antar-file.
-11. Jangan menaruh teks acak, watermark, label yang tidak diperlukan, atau gibberish di dalam gambar. Teks UI dibuat dengan HTML/CSS.
+VALIDASI HASIL:
+14. Setelah setiap aset digenerate, cocokkan hasilnya dengan prompt sumber pada ID Prompt 3 PRO yang bersangkutan.
+15. Periksa bahwa hasil hanya memuat satu aset utama, pose/state benar, transparansi/background sesuai, tidak ada teks acak/watermark, kualitas tajam, dan tidak menyimpang dari spesifikasi prompt sumber.
+16. Jika suatu aset gagal memenuhi prompt sumber, regenerate HANYA ID tersebut menggunakan prompt Prompt 3 PRO yang sama. Koreksi teknis minimum boleh dilakukan hanya untuk memperbaiki kegagalan generate, tanpa mengubah konsep aset.
+17. Jangan mengulang aset yang sudah benar.
 
-FORMAT FILE:
-12. Target output WAJIB WebP (.webp), kualitas tinggi/lossless bila tersedia.
-13. Untuk aset lepas gunakan alpha/transparansi. Untuk background/latar penuh, transparansi tidak wajib.
-14. Jika platform hanya menghasilkan PNG/JPG, generate kualitas terbaik, tandai "perlu konversi ke WebP", dan jangan menurunkan kualitas.
-15. Jangan menggunakan SVG/vektor sebagai pengganti file gambar utama.
+STATUS SETELAH BATCH:
+Tampilkan tabel ringkas:
+ID | Nama File | Nama Aset | Status
 
-ATURAN BATCH:
-16. Generate PER BATCH, maksimal 10 file gambar per batch. Karena 1 file = 1 aset, maka maksimal 10 aset gambar per batch.
-17. Ukuran batch adaptif. Jika konsistensi, akurasi, atau detail mulai turun, kecilkan batch berikutnya.
-18. Beri label Batch 1, Batch 2, dst. di LUAR gambar.
-19. Sebelum setiap batch, tampilkan PETA BATCH berupa tabel dengan kolom:
-   - Nomor file (B1-F01, dst.)
-   - Nama file .webp
-   - Nama aset
-   - Kategori
-   - Halaman/menu pemakaian
-   - Fungsi aset
-   - Transparan/Penuh
-   - Catatan konteks nyata/akurasi yang wajib benar
-20. Pastikan setiap aset Prompt 2 PRO muncul tepat satu kali dalam peta produksi. Jika satu objek memiliki beberapa state, setiap state muncul sebagai baris/file terpisah.
-21. Setelah Peta Batch tampil, langsung generate file-file batch tersebut tanpa menunggu persetujuan tambahan, kecuali saya meminta konfirmasi.
+Gunakan status:
+- SELESAI
+- PERLU ULANG
+- PERLU KONVERSI WEBP
+- EXTERNAL-URL — TIDAK DIGENERATE (jika berlaku)
 
-PEMERIKSAAN SETELAH GENERATE:
-22. Periksa SETIAP file secara individual:
-   a. file hanya berisi satu aset/gambar;
-   b. tidak ada aset kedua, sprite, grid, atau collage;
-   c. bentuk/proporsi/material/konteks benar;
-   d. aset materi faktual/ilmiah akurat;
-   e. visual jelas dan tidak terlalu abstrak/vektor generik;
-   f. gaya konsisten dengan Prompt 1 PRO;
-   g. background transparan jika aset lepas;
-   h. target format WebP tercapai atau diberi status perlu konversi;
-   i. tidak ada teks acak/watermark;
-   j. resolusi cukup tajam.
-23. Tampilkan HASIL BATCH dengan kolom nomor file, nama file, aset, kategori, halaman, format, dan status Selesai/Perlu Ulang.
-24. File yang gagal diregenerate HANYA file tersebut, satu per satu atau batch kecil; jangan mengulang file yang sudah lolos.
-25. Setelah batch lolos, lanjutkan ke batch berikutnya sampai seluruh aset utama selesai.
-
-ATURAN GENERATE:
-26. Gunakan nama/fungsi aset dari Prompt 2 PRO sebagai sumber utama dan Prompt 3 PRO sebagai instruksi visual per file.
-27. Jangan menggabungkan aset demi menghemat jumlah generate. Jika ada 37 aset, targetnya tetap 37 file gambar terpisah (ditambah audio bila ada).
-28. Untuk pose/state berulang, gunakan file hasil sebelumnya sebagai visual reference bila platform mendukung agar konsisten.
-29. Audio dan tombol navigasi gambar tetap opsional; tombol HTML/CSS lebih diutamakan kecuali desain memang meminta aset visual khusus.
-30. Setelah semua aset selesai, buat REKAP MANIFEST ASET FINAL: Wajib selesai, Opsional selesai, Opsional belum dibuat, serta file yang masih perlu konversi ke WebP.
+SETELAH SEMUA ASET SELESAI:
+Buat Manifest Aset Final berdasarkan ID produksi Prompt 3 PRO yang menunjukkan aset selesai, perlu ulang, perlu konversi, atau External URL. Pastikan tidak ada ID yang terlewat atau diproses dua kali.
 
 PENTING:
 - Jangan hanya menjelaskan cara membuat aset.
-- Jangan hanya mengulang Prompt 3 PRO.
-- Jika image generation tersedia, langsung generate sesuai Peta Batch.
-- Jika platform tidak dapat membuat gambar langsung, susun paket prompt final PER FILE/PER ASET sesuai Peta Batch dan tandai "perlu dieksekusi pada generator aset".
-- Jangan pernah kembali ke format multi-aset dalam satu file.
+- Jangan hanya menampilkan ulang Prompt 3 PRO.
+- Jangan membuat prompt aset baru.
+- Jangan membuat ulang inventaris atau prioritas aset.
+- Jangan mengubah style/spesifikasi Prompt 3 PRO.
+- Jika image generation tersedia, langsung gunakan prompt Prompt 3 PRO untuk generate.
+- Jika platform tidak dapat membuat gambar secara langsung, tampilkan prompt PER ID apa adanya dan tandai "PERLU DIEKSEKUSI PADA GENERATOR ASET"; jangan menyusun prompt pengganti.
 
-Mulai dari Batch 1 berisi aset prioritas tertinggi yang paling berhubungan dengan materi/aktivitas utama.`
+Mulai dari ID produksi pertama pada Prompt 3 PRO dan lanjutkan berurutan sampai selesai.`
       },
       {
         title: "Prompt 5 PRO Coding Game Edukasi Skill & Luck (Gabungkan Semua Aset ke Desain)",
         text: `Ubah rancangan desain game (Prompt 1 PRO) dan aset yang sudah dibuat/digenerate (hasil Prompt 4 PRO; mengacu Prompt 2-3 PRO) menjadi kode game interaktif dalam satu file HTML lengkap. Pastikan mekanisme game dan tampilan dijelaskan sangat detail.
 
-Engine/Platform tujuan: [pilih satu — Canva Code / dikerjakan bersama Claude / Gemini / ChatGPT]
+Engine/Platform tujuan: [pilih satu — HTML/CSS/JavaScript di browser / Claude Code / ChatGPT / Gemini / v0 / bolt.new / Cursor / Replit AI / Lovable]
 
 Ketentuan umum:
-1. Langsung bisa dijalankan di [Canva Code/browser].
+1. Langsung bisa dijalankan sebagai aplikasi web di browser.
 2. Jangan gunakan library atau database eksternal (kecuali disebutkan lain sesuai engine yang dipilih).
 3. Semua teks berbahasa Indonesia.
 4. Tampilan responsif HP/laptop/IFP.
