@@ -2032,64 +2032,99 @@ Output akhir: daftar prompt siap-copy yang dikelompokkan per kategori aset, teta
       },
       {
         title: "Prompt 4 PRO Generate Semua Aset Otomatis Simulasi & Lab Maya di ChatGPT/Claude",
-        text: `Gunakan SELURUH prompt aset yang telah dihasilkan pada Prompt 3 PRO sebagai instruksi final untuk melakukan generate aset proyek Simulasi & Lab Maya.
+        text: `Gunakan HANYA Prompt 3 PRO TERAKHIR yang tersedia lengkap di percakapan aktif ini sebagai instruksi final untuk melakukan generate aset proyek Simulasi & Lab Maya.
 
-Tugas pada tahap ini adalah MENGEKSEKUSI prompt-prompt tersebut. Jangan merancang ulang aset, jangan membuat inventaris baru, jangan menulis ulang prompt, dan jangan mengubah keputusan visual yang sudah ditetapkan pada Prompt 3 PRO.
+Tugas tahap ini adalah MENGEKSEKUSI aset satu per satu. Jangan merancang ulang aset, jangan membuat inventaris baru, jangan menulis ulang prompt, dan jangan mengambil konteks proyek lain.
 
-SUMBER UTAMA:
-- Prompt 3 PRO adalah sumber instruksi generate UTAMA dan FINAL.
-- Prompt 1 PRO dan Prompt 2 PRO hanya boleh dipakai sebagai referensi konteks atau verifikasi kelengkapan apabila benar-benar diperlukan.
-- Jika ada perbedaan interpretasi, ikuti spesifikasi eksplisit pada prompt aset di Prompt 3 PRO.
-- Jangan kembali menganalisis atau menyusun ulang desain dari Prompt 1-2 PRO.
+SUMBER KEBENARAN — WAJIB:
+- Prompt 3 PRO TERAKHIR pada percakapan aktif ini adalah sumber instruksi generate UTAMA dan FINAL.
+- Gunakan bagian Kunci Konsistensi Global, prompt per-ID, negative prompt per-ID, dan Manifest Produksi Final dari Prompt 3 PRO tersebut.
+- Prompt 1 PRO dan Prompt 2 PRO hanya boleh dipakai untuk verifikasi bila Prompt 3 PRO secara eksplisit merujuknya.
+- JANGAN memakai aset, tema, objek, karakter, atau konteks dari percakapan/proyek lain, memory, contoh sebelumnya, atau asumsi umum.
+- Jika ada perbedaan interpretasi, spesifikasi eksplisit pada ID Prompt 3 PRO mengalahkan asumsi lain.
+
+VALIDASI KONTEKS SEBELUM GENERATE — JANGAN DILEWATI:
+1. Temukan Prompt 3 PRO lengkap dan Manifest Produksi Final yang terkait dengan proyek aktif.
+2. Ambil identitas proyek dari Prompt 3 PRO: nama/judul proyek, mata pelajaran/topik bila ada, gaya visual global, dan jumlah ID produksi.
+3. Cocokkan ID pertama berstatus GENERATE dengan nama file dan nama asetnya.
+4. Jika Prompt 3 PRO tidak ditemukan, terpotong, tidak lengkap, atau identitas proyek tidak dapat dipastikan, BERHENTI. Jangan generate gambar apa pun. Minta pengguna menempelkan Prompt 3 PRO lengkap.
+5. Jika konteks yang terbaca bertentangan dengan Prompt 3 PRO aktif, abaikan konteks lain dan gunakan Prompt 3 PRO aktif.
+
+ASET EXTERNAL-URL:
+- ID berstatus EXTERNAL-URL / DIRECT_IMAGE_URL_READY_FOR_WEB TIDAK BOLEH dikirim ke image generator.
+- Pertahankan URL dan metadata yang sudah ada untuk tahap coding berikutnya.
+- Tandai statusnya sebagai EXTERNAL-URL — TIDAK DIGENERATE.
 
 Platform: [ChatGPT / Claude]
 
-CARA EKSEKUSI:
-1. Identifikasi seluruh prompt aset Prompt 3 PRO berdasarkan ID produksi A001, A002, A003, dan seterusnya.
-2. Eksekusi prompt tersebut sesuai urutan ID produksi.
-3. SATU prompt gambar menghasilkan SATU file/aset gambar terpisah.
-4. Jangan menggabungkan beberapa prompt menjadi satu gambar, sprite sheet, collage, contact sheet, grid, lembar pose, atau lembar state.
-5. Jangan meringkas, menyederhanakan, memperluas, atau menulis ulang prompt Prompt 3 PRO sebelum generate, kecuali penyesuaian teknis minimum memang diwajibkan oleh generator.
-6. Pertahankan nama file target, format, transparansi/background, rasio/resolusi, gaya, komposisi, konteks faktual, dan negative prompt yang sudah tertulis pada masing-masing prompt Prompt 3 PRO.
-7. Jika satu objek/karakter memiliki beberapa pose atau state, eksekusi setiap ID sebagai file terpisah.
-8. Jika platform mendukung visual reference, gunakan hasil aset terkait sebelumnya untuk menjaga konsistensi karakter, objek, palet, perspektif, pencahayaan, dan detail.
+MODE EKSEKUSI WAJIB — SINGLE-ASSET / SINGLE-CALL:
+1. Proses ID produksi secara berurutan A001, A002, A003, dan seterusnya.
+2. SATU image-generation request/call HANYA BOLEH berisi SATU ID produksi.
+3. SATU call menghasilkan tepat SATU aset/gambar utama. Jangan memasukkan dua ID atau lebih ke call yang sama walaupun disebut batch.
+4. DILARANG meminta generator membuat A001-A010 sekaligus, membuat lembar aset, sprite sheet, character sheet, contact sheet, collage, grid, atau beberapa file/variasi dalam satu kanvas.
+5. Batch hanya boleh dipakai sebagai CHECKPOINT STATUS administratif setelah beberapa ID selesai; batch TIDAK BOLEH dipakai sebagai satu prompt image generation.
+6. Untuk setiap ID, gunakan hanya:
+   a. Kunci Konsistensi Global Prompt 3 PRO yang relevan;
+   b. ID + nama aset + nama file target;
+   c. PROMPT IMAGE GENERATION/PROMPT milik ID tersebut;
+   d. NEGATIVE PROMPT milik ID tersebut;
+   e. batasan teknis file/transparansi/resolusi milik ID tersebut.
+7. Jangan menyertakan prompt ID lain di dalam request yang sedang digenerate.
+8. Jangan meringkas atau mengganti subjek utama. Nama aset dan subjek pada ID aktif harus menjadi objek utama hasil gambar.
+9. Elemen yang tidak diminta oleh ID aktif tidak boleh ditambahkan. Jika ID meminta satu karakter, hasil tidak boleh berubah menjadi kumpulan karakter/objek. Jika ID meminta satu ikon, hasil tidak boleh menjadi satu set ikon. Jika ID meminta satu ilustrasi materi, jangan menambahkan aset lain yang tidak diperlukan.
+10. Jika platform mendukung image reference/character reference/seed, gunakan hasil karakter dasar sebelumnya sebagai referensi untuk pose/state berikutnya, tanpa menggabungkan pose ke satu gambar.
 
-BATCH GENERATION:
-9. Jika jumlah aset terlalu banyak untuk dibuat sekaligus, kerjakan berdasarkan urutan ID produksi dengan maksimal 10 aset gambar per batch. Contoh: Batch 1 = A001-A010, Batch 2 = A011-A020.
-10. Ukuran batch boleh diperkecil jika diperlukan untuk menjaga kualitas atau konsistensi.
-11. Sebelum generate, cukup tampilkan daftar singkat ID produksi, nama file, dan nama aset pada batch tersebut. Jangan membuat ulang Peta Batch dari Prompt 2 PRO.
-12. Setelah daftar batch tampil, LANGSUNG generate aset pada batch tersebut tanpa menunggu persetujuan tambahan, kecuali saya meminta konfirmasi.
-13. Setelah batch selesai, lanjutkan ke ID berikutnya sampai seluruh prompt Prompt 3 PRO telah diproses.
+FORMAT INSTRUKSI YANG DIKIRIM KE IMAGE GENERATOR — WAJIB:
+PROJECT CONTEXT: salin singkat Kunci Konsistensi Global yang relevan dari Prompt 3 PRO.
+CURRENT ASSET: tulis ID produksi aktif dan nama aset persis seperti Prompt 3 PRO.
+TARGET FILE: tulis nama file target persis seperti Prompt 3 PRO.
+IMAGE PROMPT: gunakan prompt milik ID aktif sedekat mungkin dengan teks asli Prompt 3 PRO.
+NEGATIVE PROMPT: gunakan negative prompt milik ID aktif.
+HARD OUTPUT CONSTRAINT: exactly one image, exactly one requested asset/scene, no extra variants, no contact sheet, no collage, no sprite sheet, no grid, no unrelated objects.
 
-VALIDASI HASIL:
-14. Setelah setiap aset digenerate, cocokkan hasilnya dengan prompt sumber pada ID Prompt 3 PRO yang bersangkutan.
-15. Periksa bahwa hasil hanya memuat satu aset utama, pose/state benar, transparansi/background sesuai, tidak ada teks acak/watermark, kualitas tajam, dan tidak menyimpang dari spesifikasi prompt sumber.
-16. Jika suatu aset gagal memenuhi prompt sumber, regenerate HANYA ID tersebut menggunakan prompt Prompt 3 PRO yang sama. Koreksi teknis minimum boleh dilakukan hanya untuk memperbaiki kegagalan generate, tanpa mengubah konsep aset.
-17. Jangan mengulang aset yang sudah benar.
+Jangan memasukkan daftar manifest penuh ke image-generation request. Manifest hanya untuk memilih ID berikutnya.
 
-STATUS SETELAH BATCH:
-Tampilkan tabel ringkas:
+URUTAN EKSEKUSI OTOMATIS:
+11. Mulai dari ID GENERATE pertama.
+12. Panggil image generator untuk ID itu saja.
+13. Setelah hasil tersedia, validasi hasil terhadap ID sumber sebelum berpindah.
+14. Jika hasil lulus, tandai SELESAI dan lanjut ke ID GENERATE berikutnya dengan image-generation call BARU yang terpisah.
+15. Jika hasil gagal, regenerate HANYA ID tersebut. Jangan melanjutkan sampai subjek/konteks utamanya benar.
+16. Jika platform tidak memungkinkan beberapa image-generation call terpisah dalam satu respons/turn, JANGAN menggabungkan ID. Generate hanya satu ID yang sedang aktif, lalu berhenti dan lanjutkan ID berikutnya pada turn berikutnya.
+
+VALIDASI HASIL PER ID — WAJIB:
+17. Nama/subjek utama hasil harus sama dengan ID aktif dan sesuai proyek aktif.
+18. Pastikan hanya satu aset/scene utama sesuai prompt, pose/state benar, style dan palet sesuai, transparansi/background sesuai, dan tidak ada objek dari proyek lain.
+19. Pastikan tidak ada teks acak, watermark, multi-aset, collage, grid, sprite sheet, atau contact sheet.
+20. Untuk aset ilmiah/faktual, cek bahwa bentuk, anatomi, arah proses, alat, material, dan hubungan objek tidak menyesatkan.
+21. Jika hasil memuat tema yang tidak disebut dalam ID aktif — misalnya tanaman, alat kebun, kendaraan, karakter tambahan, atau objek lain yang berasal dari konteks berbeda — status otomatis PERLU ULANG dan generate ulang menggunakan prompt ID aktif yang sama.
+22. Jangan mengulang aset yang sudah benar.
+
+CHECKPOINT STATUS:
+Setelah maksimal 5–10 ID SELESAI, boleh tampilkan tabel administratif:
 ID | Nama File | Nama Aset | Status
-
-Gunakan status:
+Status yang dipakai:
 - SELESAI
 - PERLU ULANG
 - PERLU KONVERSI WEBP
-- EXTERNAL-URL — TIDAK DIGENERATE (jika berlaku)
+- EXTERNAL-URL — TIDAK DIGENERATE
 
-SETELAH SEMUA ASET SELESAI:
-Buat Manifest Aset Final berdasarkan ID produksi Prompt 3 PRO yang menunjukkan aset selesai, perlu ulang, perlu konversi, atau External URL. Pastikan tidak ada ID yang terlewat atau diproses dua kali.
+Checkpoint status tidak boleh menyebabkan beberapa ID digenerate dalam satu gambar.
+
+SETELAH SEMUA ID DIPROSES:
+Buat Manifest Aset Final berdasarkan ID Prompt 3 PRO dan pastikan tidak ada ID terlewat, duplikat, atau tertukar.
 
 PENTING:
 - Jangan hanya menjelaskan cara membuat aset.
 - Jangan hanya menampilkan ulang Prompt 3 PRO.
 - Jangan membuat prompt aset baru.
-- Jangan membuat ulang inventaris atau prioritas aset.
+- Jangan membuat ulang inventaris.
 - Jangan mengubah style/spesifikasi Prompt 3 PRO.
-- Jika image generation tersedia, langsung gunakan prompt Prompt 3 PRO untuk generate.
-- Jika platform tidak dapat membuat gambar secara langsung, tampilkan prompt PER ID apa adanya dan tandai "PERLU DIEKSEKUSI PADA GENERATOR ASET"; jangan menyusun prompt pengganti.
+- Jika image generation tersedia, eksekusi prompt per-ID secara terpisah.
+- Jika image generation tidak tersedia, tampilkan prompt PER ID apa adanya dan tandai PERLU DIEKSEKUSI PADA GENERATOR ASET.
+- Prioritas utama adalah KETEPATAN KONTEKS per ID, bukan jumlah aset yang dibuat sekaligus.
 
-Mulai dari ID produksi pertama pada Prompt 3 PRO dan lanjutkan berurutan sampai selesai.`
+Mulai dari ID GENERATE pertama pada Prompt 3 PRO dan gunakan SATU image-generation call khusus untuk ID tersebut saja.`
       },
       {
         title: "Prompt 5 PRO Susun Prompt Web App Simulasi & Lab Maya",
@@ -2569,67 +2604,99 @@ Output akhir: daftar prompt siap-copy yang dikelompokkan per kategori aset, teta
       },
       {
         title: "Prompt 4 PRO Generate Semua Aset Otomatis MPI di ChatGPT/Claude",
-        text: `Gunakan SELURUH prompt aset yang telah dihasilkan pada Prompt 3 PRO sebagai instruksi final untuk melakukan generate aset proyek MPI.
+        text: `Gunakan HANYA Prompt 3 PRO TERAKHIR yang tersedia lengkap di percakapan aktif ini sebagai instruksi final untuk melakukan generate aset proyek MPI.
 
-Tugas pada tahap ini adalah MENGEKSEKUSI prompt-prompt tersebut. Jangan merancang ulang aset, jangan membuat inventaris baru, jangan menulis ulang prompt, dan jangan mengubah keputusan visual yang sudah ditetapkan pada Prompt 3 PRO.
+Tugas tahap ini adalah MENGEKSEKUSI aset satu per satu. Jangan merancang ulang aset, jangan membuat inventaris baru, jangan menulis ulang prompt, dan jangan mengambil konteks proyek lain.
 
-SUMBER UTAMA:
-- Prompt 3 PRO adalah sumber instruksi generate UTAMA dan FINAL.
-- Prompt 1 PRO dan Prompt 2 PRO hanya boleh dipakai sebagai referensi konteks atau verifikasi kelengkapan apabila benar-benar diperlukan.
-- Jika ada perbedaan interpretasi, ikuti spesifikasi eksplisit pada prompt aset di Prompt 3 PRO.
-- Jangan kembali menganalisis atau menyusun ulang desain dari Prompt 1-2 PRO.
+SUMBER KEBENARAN — WAJIB:
+- Prompt 3 PRO TERAKHIR pada percakapan aktif ini adalah sumber instruksi generate UTAMA dan FINAL.
+- Gunakan bagian Kunci Konsistensi Global, prompt per-ID, negative prompt per-ID, dan Manifest Produksi Final dari Prompt 3 PRO tersebut.
+- Prompt 1 PRO dan Prompt 2 PRO hanya boleh dipakai untuk verifikasi bila Prompt 3 PRO secara eksplisit merujuknya.
+- JANGAN memakai aset, tema, objek, karakter, atau konteks dari percakapan/proyek lain, memory, contoh sebelumnya, atau asumsi umum.
+- Jika ada perbedaan interpretasi, spesifikasi eksplisit pada ID Prompt 3 PRO mengalahkan asumsi lain.
+
+VALIDASI KONTEKS SEBELUM GENERATE — JANGAN DILEWATI:
+1. Temukan Prompt 3 PRO lengkap dan Manifest Produksi Final yang terkait dengan proyek aktif.
+2. Ambil identitas proyek dari Prompt 3 PRO: nama/judul proyek, mata pelajaran/topik bila ada, gaya visual global, dan jumlah ID produksi.
+3. Cocokkan ID pertama berstatus GENERATE dengan nama file dan nama asetnya.
+4. Jika Prompt 3 PRO tidak ditemukan, terpotong, tidak lengkap, atau identitas proyek tidak dapat dipastikan, BERHENTI. Jangan generate gambar apa pun. Minta pengguna menempelkan Prompt 3 PRO lengkap.
+5. Jika konteks yang terbaca bertentangan dengan Prompt 3 PRO aktif, abaikan konteks lain dan gunakan Prompt 3 PRO aktif.
 
 ASET EXTERNAL-URL:
-Aset yang sebelumnya ditandai EXTERNAL-URL / DIRECT_IMAGE_URL_READY_FOR_WEB tidak boleh digenerate ulang. Pertahankan URL tersebut untuk Prompt 5 PRO dan tandai statusnya sebagai EXTERNAL-URL — TIDAK DIGENERATE.
+- ID berstatus EXTERNAL-URL / DIRECT_IMAGE_URL_READY_FOR_WEB TIDAK BOLEH dikirim ke image generator.
+- Pertahankan URL dan metadata yang sudah ada untuk tahap coding berikutnya.
+- Tandai statusnya sebagai EXTERNAL-URL — TIDAK DIGENERATE.
 
 Platform: [ChatGPT / Claude]
 
-CARA EKSEKUSI:
-1. Identifikasi seluruh prompt aset Prompt 3 PRO berdasarkan ID produksi A001, A002, A003, dan seterusnya.
-2. Eksekusi prompt tersebut sesuai urutan ID produksi.
-3. SATU prompt gambar menghasilkan SATU file/aset gambar terpisah.
-4. Jangan menggabungkan beberapa prompt menjadi satu gambar, sprite sheet, collage, contact sheet, grid, lembar pose, atau lembar state.
-5. Jangan meringkas, menyederhanakan, memperluas, atau menulis ulang prompt Prompt 3 PRO sebelum generate, kecuali penyesuaian teknis minimum memang diwajibkan oleh generator.
-6. Pertahankan nama file target, format, transparansi/background, rasio/resolusi, gaya, komposisi, konteks faktual, dan negative prompt yang sudah tertulis pada masing-masing prompt Prompt 3 PRO.
-7. Jika satu objek/karakter memiliki beberapa pose atau state, eksekusi setiap ID sebagai file terpisah.
-8. Jika platform mendukung visual reference, gunakan hasil aset terkait sebelumnya untuk menjaga konsistensi karakter, objek, palet, perspektif, pencahayaan, dan detail.
+MODE EKSEKUSI WAJIB — SINGLE-ASSET / SINGLE-CALL:
+1. Proses ID produksi secara berurutan A001, A002, A003, dan seterusnya.
+2. SATU image-generation request/call HANYA BOLEH berisi SATU ID produksi.
+3. SATU call menghasilkan tepat SATU aset/gambar utama. Jangan memasukkan dua ID atau lebih ke call yang sama walaupun disebut batch.
+4. DILARANG meminta generator membuat A001-A010 sekaligus, membuat lembar aset, sprite sheet, character sheet, contact sheet, collage, grid, atau beberapa file/variasi dalam satu kanvas.
+5. Batch hanya boleh dipakai sebagai CHECKPOINT STATUS administratif setelah beberapa ID selesai; batch TIDAK BOLEH dipakai sebagai satu prompt image generation.
+6. Untuk setiap ID, gunakan hanya:
+   a. Kunci Konsistensi Global Prompt 3 PRO yang relevan;
+   b. ID + nama aset + nama file target;
+   c. PROMPT IMAGE GENERATION/PROMPT milik ID tersebut;
+   d. NEGATIVE PROMPT milik ID tersebut;
+   e. batasan teknis file/transparansi/resolusi milik ID tersebut.
+7. Jangan menyertakan prompt ID lain di dalam request yang sedang digenerate.
+8. Jangan meringkas atau mengganti subjek utama. Nama aset dan subjek pada ID aktif harus menjadi objek utama hasil gambar.
+9. Elemen yang tidak diminta oleh ID aktif tidak boleh ditambahkan. Jika ID meminta satu karakter, hasil tidak boleh berubah menjadi kumpulan karakter/objek. Jika ID meminta satu ikon, hasil tidak boleh menjadi satu set ikon. Jika ID meminta satu ilustrasi materi, jangan menambahkan aset lain yang tidak diperlukan.
+10. Jika platform mendukung image reference/character reference/seed, gunakan hasil karakter dasar sebelumnya sebagai referensi untuk pose/state berikutnya, tanpa menggabungkan pose ke satu gambar.
 
-BATCH GENERATION:
-9. Jika jumlah aset terlalu banyak untuk dibuat sekaligus, kerjakan berdasarkan urutan ID produksi dengan maksimal 10 aset gambar per batch. Contoh: Batch 1 = A001-A010, Batch 2 = A011-A020.
-10. Ukuran batch boleh diperkecil jika diperlukan untuk menjaga kualitas atau konsistensi.
-11. Sebelum generate, cukup tampilkan daftar singkat ID produksi, nama file, dan nama aset pada batch tersebut. Jangan membuat ulang Peta Batch dari Prompt 2 PRO.
-12. Setelah daftar batch tampil, LANGSUNG generate aset pada batch tersebut tanpa menunggu persetujuan tambahan, kecuali saya meminta konfirmasi.
-13. Setelah batch selesai, lanjutkan ke ID berikutnya sampai seluruh prompt Prompt 3 PRO telah diproses.
+FORMAT INSTRUKSI YANG DIKIRIM KE IMAGE GENERATOR — WAJIB:
+PROJECT CONTEXT: salin singkat Kunci Konsistensi Global yang relevan dari Prompt 3 PRO.
+CURRENT ASSET: tulis ID produksi aktif dan nama aset persis seperti Prompt 3 PRO.
+TARGET FILE: tulis nama file target persis seperti Prompt 3 PRO.
+IMAGE PROMPT: gunakan prompt milik ID aktif sedekat mungkin dengan teks asli Prompt 3 PRO.
+NEGATIVE PROMPT: gunakan negative prompt milik ID aktif.
+HARD OUTPUT CONSTRAINT: exactly one image, exactly one requested asset/scene, no extra variants, no contact sheet, no collage, no sprite sheet, no grid, no unrelated objects.
 
-VALIDASI HASIL:
-14. Setelah setiap aset digenerate, cocokkan hasilnya dengan prompt sumber pada ID Prompt 3 PRO yang bersangkutan.
-15. Periksa bahwa hasil hanya memuat satu aset utama, pose/state benar, transparansi/background sesuai, tidak ada teks acak/watermark, kualitas tajam, dan tidak menyimpang dari spesifikasi prompt sumber.
-16. Jika suatu aset gagal memenuhi prompt sumber, regenerate HANYA ID tersebut menggunakan prompt Prompt 3 PRO yang sama. Koreksi teknis minimum boleh dilakukan hanya untuk memperbaiki kegagalan generate, tanpa mengubah konsep aset.
-17. Jangan mengulang aset yang sudah benar.
+Jangan memasukkan daftar manifest penuh ke image-generation request. Manifest hanya untuk memilih ID berikutnya.
 
-STATUS SETELAH BATCH:
-Tampilkan tabel ringkas:
+URUTAN EKSEKUSI OTOMATIS:
+11. Mulai dari ID GENERATE pertama.
+12. Panggil image generator untuk ID itu saja.
+13. Setelah hasil tersedia, validasi hasil terhadap ID sumber sebelum berpindah.
+14. Jika hasil lulus, tandai SELESAI dan lanjut ke ID GENERATE berikutnya dengan image-generation call BARU yang terpisah.
+15. Jika hasil gagal, regenerate HANYA ID tersebut. Jangan melanjutkan sampai subjek/konteks utamanya benar.
+16. Jika platform tidak memungkinkan beberapa image-generation call terpisah dalam satu respons/turn, JANGAN menggabungkan ID. Generate hanya satu ID yang sedang aktif, lalu berhenti dan lanjutkan ID berikutnya pada turn berikutnya.
+
+VALIDASI HASIL PER ID — WAJIB:
+17. Nama/subjek utama hasil harus sama dengan ID aktif dan sesuai proyek aktif.
+18. Pastikan hanya satu aset/scene utama sesuai prompt, pose/state benar, style dan palet sesuai, transparansi/background sesuai, dan tidak ada objek dari proyek lain.
+19. Pastikan tidak ada teks acak, watermark, multi-aset, collage, grid, sprite sheet, atau contact sheet.
+20. Untuk aset ilmiah/faktual, cek bahwa bentuk, anatomi, arah proses, alat, material, dan hubungan objek tidak menyesatkan.
+21. Jika hasil memuat tema yang tidak disebut dalam ID aktif — misalnya tanaman, alat kebun, kendaraan, karakter tambahan, atau objek lain yang berasal dari konteks berbeda — status otomatis PERLU ULANG dan generate ulang menggunakan prompt ID aktif yang sama.
+22. Jangan mengulang aset yang sudah benar.
+
+CHECKPOINT STATUS:
+Setelah maksimal 5–10 ID SELESAI, boleh tampilkan tabel administratif:
 ID | Nama File | Nama Aset | Status
-
-Gunakan status:
+Status yang dipakai:
 - SELESAI
 - PERLU ULANG
 - PERLU KONVERSI WEBP
-- EXTERNAL-URL — TIDAK DIGENERATE (jika berlaku)
+- EXTERNAL-URL — TIDAK DIGENERATE
 
-SETELAH SEMUA ASET SELESAI:
-Buat Manifest Aset Final berdasarkan ID produksi Prompt 3 PRO yang menunjukkan aset selesai, perlu ulang, perlu konversi, atau External URL. Pastikan tidak ada ID yang terlewat atau diproses dua kali.
+Checkpoint status tidak boleh menyebabkan beberapa ID digenerate dalam satu gambar.
+
+SETELAH SEMUA ID DIPROSES:
+Buat Manifest Aset Final berdasarkan ID Prompt 3 PRO dan pastikan tidak ada ID terlewat, duplikat, atau tertukar.
 
 PENTING:
 - Jangan hanya menjelaskan cara membuat aset.
 - Jangan hanya menampilkan ulang Prompt 3 PRO.
 - Jangan membuat prompt aset baru.
-- Jangan membuat ulang inventaris atau prioritas aset.
+- Jangan membuat ulang inventaris.
 - Jangan mengubah style/spesifikasi Prompt 3 PRO.
-- Jika image generation tersedia, langsung gunakan prompt Prompt 3 PRO untuk generate.
-- Jika platform tidak dapat membuat gambar secara langsung, tampilkan prompt PER ID apa adanya dan tandai "PERLU DIEKSEKUSI PADA GENERATOR ASET"; jangan menyusun prompt pengganti.
+- Jika image generation tersedia, eksekusi prompt per-ID secara terpisah.
+- Jika image generation tidak tersedia, tampilkan prompt PER ID apa adanya dan tandai PERLU DIEKSEKUSI PADA GENERATOR ASET.
+- Prioritas utama adalah KETEPATAN KONTEKS per ID, bukan jumlah aset yang dibuat sekaligus.
 
-Mulai dari ID produksi pertama pada Prompt 3 PRO dan lanjutkan berurutan sampai selesai.`
+Mulai dari ID GENERATE pertama pada Prompt 3 PRO dan gunakan SATU image-generation call khusus untuk ID tersebut saja.`
       },
       {
         title: "Prompt 5 PRO Coding MPI (Gabungkan Semua Aset ke Desain)",
@@ -2988,64 +3055,99 @@ Output akhir: daftar prompt siap-copy yang dikelompokkan per kategori aset, teta
       },
       {
         title: "Prompt 4 PRO Generate Semua Aset Otomatis Game Edukasi Sederhana di ChatGPT/Claude",
-        text: `Gunakan SELURUH prompt aset yang telah dihasilkan pada Prompt 3 PRO sebagai instruksi final untuk melakukan generate aset proyek Game Edukasi Sederhana.
+        text: `Gunakan HANYA Prompt 3 PRO TERAKHIR yang tersedia lengkap di percakapan aktif ini sebagai instruksi final untuk melakukan generate aset proyek Game Edukasi Sederhana.
 
-Tugas pada tahap ini adalah MENGEKSEKUSI prompt-prompt tersebut. Jangan merancang ulang aset, jangan membuat inventaris baru, jangan menulis ulang prompt, dan jangan mengubah keputusan visual yang sudah ditetapkan pada Prompt 3 PRO.
+Tugas tahap ini adalah MENGEKSEKUSI aset satu per satu. Jangan merancang ulang aset, jangan membuat inventaris baru, jangan menulis ulang prompt, dan jangan mengambil konteks proyek lain.
 
-SUMBER UTAMA:
-- Prompt 3 PRO adalah sumber instruksi generate UTAMA dan FINAL.
-- Prompt 1 PRO dan Prompt 2 PRO hanya boleh dipakai sebagai referensi konteks atau verifikasi kelengkapan apabila benar-benar diperlukan.
-- Jika ada perbedaan interpretasi, ikuti spesifikasi eksplisit pada prompt aset di Prompt 3 PRO.
-- Jangan kembali menganalisis atau menyusun ulang desain dari Prompt 1-2 PRO.
+SUMBER KEBENARAN — WAJIB:
+- Prompt 3 PRO TERAKHIR pada percakapan aktif ini adalah sumber instruksi generate UTAMA dan FINAL.
+- Gunakan bagian Kunci Konsistensi Global, prompt per-ID, negative prompt per-ID, dan Manifest Produksi Final dari Prompt 3 PRO tersebut.
+- Prompt 1 PRO dan Prompt 2 PRO hanya boleh dipakai untuk verifikasi bila Prompt 3 PRO secara eksplisit merujuknya.
+- JANGAN memakai aset, tema, objek, karakter, atau konteks dari percakapan/proyek lain, memory, contoh sebelumnya, atau asumsi umum.
+- Jika ada perbedaan interpretasi, spesifikasi eksplisit pada ID Prompt 3 PRO mengalahkan asumsi lain.
+
+VALIDASI KONTEKS SEBELUM GENERATE — JANGAN DILEWATI:
+1. Temukan Prompt 3 PRO lengkap dan Manifest Produksi Final yang terkait dengan proyek aktif.
+2. Ambil identitas proyek dari Prompt 3 PRO: nama/judul proyek, mata pelajaran/topik bila ada, gaya visual global, dan jumlah ID produksi.
+3. Cocokkan ID pertama berstatus GENERATE dengan nama file dan nama asetnya.
+4. Jika Prompt 3 PRO tidak ditemukan, terpotong, tidak lengkap, atau identitas proyek tidak dapat dipastikan, BERHENTI. Jangan generate gambar apa pun. Minta pengguna menempelkan Prompt 3 PRO lengkap.
+5. Jika konteks yang terbaca bertentangan dengan Prompt 3 PRO aktif, abaikan konteks lain dan gunakan Prompt 3 PRO aktif.
+
+ASET EXTERNAL-URL:
+- ID berstatus EXTERNAL-URL / DIRECT_IMAGE_URL_READY_FOR_WEB TIDAK BOLEH dikirim ke image generator.
+- Pertahankan URL dan metadata yang sudah ada untuk tahap coding berikutnya.
+- Tandai statusnya sebagai EXTERNAL-URL — TIDAK DIGENERATE.
 
 Platform: [ChatGPT / Claude]
 
-CARA EKSEKUSI:
-1. Identifikasi seluruh prompt aset Prompt 3 PRO berdasarkan ID produksi A001, A002, A003, dan seterusnya.
-2. Eksekusi prompt tersebut sesuai urutan ID produksi.
-3. SATU prompt gambar menghasilkan SATU file/aset gambar terpisah.
-4. Jangan menggabungkan beberapa prompt menjadi satu gambar, sprite sheet, collage, contact sheet, grid, lembar pose, atau lembar state.
-5. Jangan meringkas, menyederhanakan, memperluas, atau menulis ulang prompt Prompt 3 PRO sebelum generate, kecuali penyesuaian teknis minimum memang diwajibkan oleh generator.
-6. Pertahankan nama file target, format, transparansi/background, rasio/resolusi, gaya, komposisi, konteks faktual, dan negative prompt yang sudah tertulis pada masing-masing prompt Prompt 3 PRO.
-7. Jika satu objek/karakter memiliki beberapa pose atau state, eksekusi setiap ID sebagai file terpisah.
-8. Jika platform mendukung visual reference, gunakan hasil aset terkait sebelumnya untuk menjaga konsistensi karakter, objek, palet, perspektif, pencahayaan, dan detail.
+MODE EKSEKUSI WAJIB — SINGLE-ASSET / SINGLE-CALL:
+1. Proses ID produksi secara berurutan A001, A002, A003, dan seterusnya.
+2. SATU image-generation request/call HANYA BOLEH berisi SATU ID produksi.
+3. SATU call menghasilkan tepat SATU aset/gambar utama. Jangan memasukkan dua ID atau lebih ke call yang sama walaupun disebut batch.
+4. DILARANG meminta generator membuat A001-A010 sekaligus, membuat lembar aset, sprite sheet, character sheet, contact sheet, collage, grid, atau beberapa file/variasi dalam satu kanvas.
+5. Batch hanya boleh dipakai sebagai CHECKPOINT STATUS administratif setelah beberapa ID selesai; batch TIDAK BOLEH dipakai sebagai satu prompt image generation.
+6. Untuk setiap ID, gunakan hanya:
+   a. Kunci Konsistensi Global Prompt 3 PRO yang relevan;
+   b. ID + nama aset + nama file target;
+   c. PROMPT IMAGE GENERATION/PROMPT milik ID tersebut;
+   d. NEGATIVE PROMPT milik ID tersebut;
+   e. batasan teknis file/transparansi/resolusi milik ID tersebut.
+7. Jangan menyertakan prompt ID lain di dalam request yang sedang digenerate.
+8. Jangan meringkas atau mengganti subjek utama. Nama aset dan subjek pada ID aktif harus menjadi objek utama hasil gambar.
+9. Elemen yang tidak diminta oleh ID aktif tidak boleh ditambahkan. Jika ID meminta satu karakter, hasil tidak boleh berubah menjadi kumpulan karakter/objek. Jika ID meminta satu ikon, hasil tidak boleh menjadi satu set ikon. Jika ID meminta satu ilustrasi materi, jangan menambahkan aset lain yang tidak diperlukan.
+10. Jika platform mendukung image reference/character reference/seed, gunakan hasil karakter dasar sebelumnya sebagai referensi untuk pose/state berikutnya, tanpa menggabungkan pose ke satu gambar.
 
-BATCH GENERATION:
-9. Jika jumlah aset terlalu banyak untuk dibuat sekaligus, kerjakan berdasarkan urutan ID produksi dengan maksimal 10 aset gambar per batch. Contoh: Batch 1 = A001-A010, Batch 2 = A011-A020.
-10. Ukuran batch boleh diperkecil jika diperlukan untuk menjaga kualitas atau konsistensi.
-11. Sebelum generate, cukup tampilkan daftar singkat ID produksi, nama file, dan nama aset pada batch tersebut. Jangan membuat ulang Peta Batch dari Prompt 2 PRO.
-12. Setelah daftar batch tampil, LANGSUNG generate aset pada batch tersebut tanpa menunggu persetujuan tambahan, kecuali saya meminta konfirmasi.
-13. Setelah batch selesai, lanjutkan ke ID berikutnya sampai seluruh prompt Prompt 3 PRO telah diproses.
+FORMAT INSTRUKSI YANG DIKIRIM KE IMAGE GENERATOR — WAJIB:
+PROJECT CONTEXT: salin singkat Kunci Konsistensi Global yang relevan dari Prompt 3 PRO.
+CURRENT ASSET: tulis ID produksi aktif dan nama aset persis seperti Prompt 3 PRO.
+TARGET FILE: tulis nama file target persis seperti Prompt 3 PRO.
+IMAGE PROMPT: gunakan prompt milik ID aktif sedekat mungkin dengan teks asli Prompt 3 PRO.
+NEGATIVE PROMPT: gunakan negative prompt milik ID aktif.
+HARD OUTPUT CONSTRAINT: exactly one image, exactly one requested asset/scene, no extra variants, no contact sheet, no collage, no sprite sheet, no grid, no unrelated objects.
 
-VALIDASI HASIL:
-14. Setelah setiap aset digenerate, cocokkan hasilnya dengan prompt sumber pada ID Prompt 3 PRO yang bersangkutan.
-15. Periksa bahwa hasil hanya memuat satu aset utama, pose/state benar, transparansi/background sesuai, tidak ada teks acak/watermark, kualitas tajam, dan tidak menyimpang dari spesifikasi prompt sumber.
-16. Jika suatu aset gagal memenuhi prompt sumber, regenerate HANYA ID tersebut menggunakan prompt Prompt 3 PRO yang sama. Koreksi teknis minimum boleh dilakukan hanya untuk memperbaiki kegagalan generate, tanpa mengubah konsep aset.
-17. Jangan mengulang aset yang sudah benar.
+Jangan memasukkan daftar manifest penuh ke image-generation request. Manifest hanya untuk memilih ID berikutnya.
 
-STATUS SETELAH BATCH:
-Tampilkan tabel ringkas:
+URUTAN EKSEKUSI OTOMATIS:
+11. Mulai dari ID GENERATE pertama.
+12. Panggil image generator untuk ID itu saja.
+13. Setelah hasil tersedia, validasi hasil terhadap ID sumber sebelum berpindah.
+14. Jika hasil lulus, tandai SELESAI dan lanjut ke ID GENERATE berikutnya dengan image-generation call BARU yang terpisah.
+15. Jika hasil gagal, regenerate HANYA ID tersebut. Jangan melanjutkan sampai subjek/konteks utamanya benar.
+16. Jika platform tidak memungkinkan beberapa image-generation call terpisah dalam satu respons/turn, JANGAN menggabungkan ID. Generate hanya satu ID yang sedang aktif, lalu berhenti dan lanjutkan ID berikutnya pada turn berikutnya.
+
+VALIDASI HASIL PER ID — WAJIB:
+17. Nama/subjek utama hasil harus sama dengan ID aktif dan sesuai proyek aktif.
+18. Pastikan hanya satu aset/scene utama sesuai prompt, pose/state benar, style dan palet sesuai, transparansi/background sesuai, dan tidak ada objek dari proyek lain.
+19. Pastikan tidak ada teks acak, watermark, multi-aset, collage, grid, sprite sheet, atau contact sheet.
+20. Untuk aset ilmiah/faktual, cek bahwa bentuk, anatomi, arah proses, alat, material, dan hubungan objek tidak menyesatkan.
+21. Jika hasil memuat tema yang tidak disebut dalam ID aktif — misalnya tanaman, alat kebun, kendaraan, karakter tambahan, atau objek lain yang berasal dari konteks berbeda — status otomatis PERLU ULANG dan generate ulang menggunakan prompt ID aktif yang sama.
+22. Jangan mengulang aset yang sudah benar.
+
+CHECKPOINT STATUS:
+Setelah maksimal 5–10 ID SELESAI, boleh tampilkan tabel administratif:
 ID | Nama File | Nama Aset | Status
-
-Gunakan status:
+Status yang dipakai:
 - SELESAI
 - PERLU ULANG
 - PERLU KONVERSI WEBP
-- EXTERNAL-URL — TIDAK DIGENERATE (jika berlaku)
+- EXTERNAL-URL — TIDAK DIGENERATE
 
-SETELAH SEMUA ASET SELESAI:
-Buat Manifest Aset Final berdasarkan ID produksi Prompt 3 PRO yang menunjukkan aset selesai, perlu ulang, perlu konversi, atau External URL. Pastikan tidak ada ID yang terlewat atau diproses dua kali.
+Checkpoint status tidak boleh menyebabkan beberapa ID digenerate dalam satu gambar.
+
+SETELAH SEMUA ID DIPROSES:
+Buat Manifest Aset Final berdasarkan ID Prompt 3 PRO dan pastikan tidak ada ID terlewat, duplikat, atau tertukar.
 
 PENTING:
 - Jangan hanya menjelaskan cara membuat aset.
 - Jangan hanya menampilkan ulang Prompt 3 PRO.
 - Jangan membuat prompt aset baru.
-- Jangan membuat ulang inventaris atau prioritas aset.
+- Jangan membuat ulang inventaris.
 - Jangan mengubah style/spesifikasi Prompt 3 PRO.
-- Jika image generation tersedia, langsung gunakan prompt Prompt 3 PRO untuk generate.
-- Jika platform tidak dapat membuat gambar secara langsung, tampilkan prompt PER ID apa adanya dan tandai "PERLU DIEKSEKUSI PADA GENERATOR ASET"; jangan menyusun prompt pengganti.
+- Jika image generation tersedia, eksekusi prompt per-ID secara terpisah.
+- Jika image generation tidak tersedia, tampilkan prompt PER ID apa adanya dan tandai PERLU DIEKSEKUSI PADA GENERATOR ASET.
+- Prioritas utama adalah KETEPATAN KONTEKS per ID, bukan jumlah aset yang dibuat sekaligus.
 
-Mulai dari ID produksi pertama pada Prompt 3 PRO dan lanjutkan berurutan sampai selesai.`
+Mulai dari ID GENERATE pertama pada Prompt 3 PRO dan gunakan SATU image-generation call khusus untuk ID tersebut saja.`
       },
       {
         title: "Prompt 5 PRO Coding Game Edukasi Sederhana (Gabungkan Semua Aset ke Desain)",
@@ -3283,64 +3385,99 @@ Output akhir: daftar prompt siap-copy yang dikelompokkan per kategori aset, teta
       },
       {
         title: "Prompt 4 PRO Generate Semua Aset Otomatis Game Critical Thinking di ChatGPT/Claude",
-        text: `Gunakan SELURUH prompt aset yang telah dihasilkan pada Prompt 3 PRO sebagai instruksi final untuk melakukan generate aset proyek Game Edukasi Critical Thinking.
+        text: `Gunakan HANYA Prompt 3 PRO TERAKHIR yang tersedia lengkap di percakapan aktif ini sebagai instruksi final untuk melakukan generate aset proyek Game Critical Thinking.
 
-Tugas pada tahap ini adalah MENGEKSEKUSI prompt-prompt tersebut. Jangan merancang ulang aset, jangan membuat inventaris baru, jangan menulis ulang prompt, dan jangan mengubah keputusan visual yang sudah ditetapkan pada Prompt 3 PRO.
+Tugas tahap ini adalah MENGEKSEKUSI aset satu per satu. Jangan merancang ulang aset, jangan membuat inventaris baru, jangan menulis ulang prompt, dan jangan mengambil konteks proyek lain.
 
-SUMBER UTAMA:
-- Prompt 3 PRO adalah sumber instruksi generate UTAMA dan FINAL.
-- Prompt 1 PRO dan Prompt 2 PRO hanya boleh dipakai sebagai referensi konteks atau verifikasi kelengkapan apabila benar-benar diperlukan.
-- Jika ada perbedaan interpretasi, ikuti spesifikasi eksplisit pada prompt aset di Prompt 3 PRO.
-- Jangan kembali menganalisis atau menyusun ulang desain dari Prompt 1-2 PRO.
+SUMBER KEBENARAN — WAJIB:
+- Prompt 3 PRO TERAKHIR pada percakapan aktif ini adalah sumber instruksi generate UTAMA dan FINAL.
+- Gunakan bagian Kunci Konsistensi Global, prompt per-ID, negative prompt per-ID, dan Manifest Produksi Final dari Prompt 3 PRO tersebut.
+- Prompt 1 PRO dan Prompt 2 PRO hanya boleh dipakai untuk verifikasi bila Prompt 3 PRO secara eksplisit merujuknya.
+- JANGAN memakai aset, tema, objek, karakter, atau konteks dari percakapan/proyek lain, memory, contoh sebelumnya, atau asumsi umum.
+- Jika ada perbedaan interpretasi, spesifikasi eksplisit pada ID Prompt 3 PRO mengalahkan asumsi lain.
+
+VALIDASI KONTEKS SEBELUM GENERATE — JANGAN DILEWATI:
+1. Temukan Prompt 3 PRO lengkap dan Manifest Produksi Final yang terkait dengan proyek aktif.
+2. Ambil identitas proyek dari Prompt 3 PRO: nama/judul proyek, mata pelajaran/topik bila ada, gaya visual global, dan jumlah ID produksi.
+3. Cocokkan ID pertama berstatus GENERATE dengan nama file dan nama asetnya.
+4. Jika Prompt 3 PRO tidak ditemukan, terpotong, tidak lengkap, atau identitas proyek tidak dapat dipastikan, BERHENTI. Jangan generate gambar apa pun. Minta pengguna menempelkan Prompt 3 PRO lengkap.
+5. Jika konteks yang terbaca bertentangan dengan Prompt 3 PRO aktif, abaikan konteks lain dan gunakan Prompt 3 PRO aktif.
+
+ASET EXTERNAL-URL:
+- ID berstatus EXTERNAL-URL / DIRECT_IMAGE_URL_READY_FOR_WEB TIDAK BOLEH dikirim ke image generator.
+- Pertahankan URL dan metadata yang sudah ada untuk tahap coding berikutnya.
+- Tandai statusnya sebagai EXTERNAL-URL — TIDAK DIGENERATE.
 
 Platform: [ChatGPT / Claude]
 
-CARA EKSEKUSI:
-1. Identifikasi seluruh prompt aset Prompt 3 PRO berdasarkan ID produksi A001, A002, A003, dan seterusnya.
-2. Eksekusi prompt tersebut sesuai urutan ID produksi.
-3. SATU prompt gambar menghasilkan SATU file/aset gambar terpisah.
-4. Jangan menggabungkan beberapa prompt menjadi satu gambar, sprite sheet, collage, contact sheet, grid, lembar pose, atau lembar state.
-5. Jangan meringkas, menyederhanakan, memperluas, atau menulis ulang prompt Prompt 3 PRO sebelum generate, kecuali penyesuaian teknis minimum memang diwajibkan oleh generator.
-6. Pertahankan nama file target, format, transparansi/background, rasio/resolusi, gaya, komposisi, konteks faktual, dan negative prompt yang sudah tertulis pada masing-masing prompt Prompt 3 PRO.
-7. Jika satu objek/karakter memiliki beberapa pose atau state, eksekusi setiap ID sebagai file terpisah.
-8. Jika platform mendukung visual reference, gunakan hasil aset terkait sebelumnya untuk menjaga konsistensi karakter, objek, palet, perspektif, pencahayaan, dan detail.
+MODE EKSEKUSI WAJIB — SINGLE-ASSET / SINGLE-CALL:
+1. Proses ID produksi secara berurutan A001, A002, A003, dan seterusnya.
+2. SATU image-generation request/call HANYA BOLEH berisi SATU ID produksi.
+3. SATU call menghasilkan tepat SATU aset/gambar utama. Jangan memasukkan dua ID atau lebih ke call yang sama walaupun disebut batch.
+4. DILARANG meminta generator membuat A001-A010 sekaligus, membuat lembar aset, sprite sheet, character sheet, contact sheet, collage, grid, atau beberapa file/variasi dalam satu kanvas.
+5. Batch hanya boleh dipakai sebagai CHECKPOINT STATUS administratif setelah beberapa ID selesai; batch TIDAK BOLEH dipakai sebagai satu prompt image generation.
+6. Untuk setiap ID, gunakan hanya:
+   a. Kunci Konsistensi Global Prompt 3 PRO yang relevan;
+   b. ID + nama aset + nama file target;
+   c. PROMPT IMAGE GENERATION/PROMPT milik ID tersebut;
+   d. NEGATIVE PROMPT milik ID tersebut;
+   e. batasan teknis file/transparansi/resolusi milik ID tersebut.
+7. Jangan menyertakan prompt ID lain di dalam request yang sedang digenerate.
+8. Jangan meringkas atau mengganti subjek utama. Nama aset dan subjek pada ID aktif harus menjadi objek utama hasil gambar.
+9. Elemen yang tidak diminta oleh ID aktif tidak boleh ditambahkan. Jika ID meminta satu karakter, hasil tidak boleh berubah menjadi kumpulan karakter/objek. Jika ID meminta satu ikon, hasil tidak boleh menjadi satu set ikon. Jika ID meminta satu ilustrasi materi, jangan menambahkan aset lain yang tidak diperlukan.
+10. Jika platform mendukung image reference/character reference/seed, gunakan hasil karakter dasar sebelumnya sebagai referensi untuk pose/state berikutnya, tanpa menggabungkan pose ke satu gambar.
 
-BATCH GENERATION:
-9. Jika jumlah aset terlalu banyak untuk dibuat sekaligus, kerjakan berdasarkan urutan ID produksi dengan maksimal 10 aset gambar per batch. Contoh: Batch 1 = A001-A010, Batch 2 = A011-A020.
-10. Ukuran batch boleh diperkecil jika diperlukan untuk menjaga kualitas atau konsistensi.
-11. Sebelum generate, cukup tampilkan daftar singkat ID produksi, nama file, dan nama aset pada batch tersebut. Jangan membuat ulang Peta Batch dari Prompt 2 PRO.
-12. Setelah daftar batch tampil, LANGSUNG generate aset pada batch tersebut tanpa menunggu persetujuan tambahan, kecuali saya meminta konfirmasi.
-13. Setelah batch selesai, lanjutkan ke ID berikutnya sampai seluruh prompt Prompt 3 PRO telah diproses.
+FORMAT INSTRUKSI YANG DIKIRIM KE IMAGE GENERATOR — WAJIB:
+PROJECT CONTEXT: salin singkat Kunci Konsistensi Global yang relevan dari Prompt 3 PRO.
+CURRENT ASSET: tulis ID produksi aktif dan nama aset persis seperti Prompt 3 PRO.
+TARGET FILE: tulis nama file target persis seperti Prompt 3 PRO.
+IMAGE PROMPT: gunakan prompt milik ID aktif sedekat mungkin dengan teks asli Prompt 3 PRO.
+NEGATIVE PROMPT: gunakan negative prompt milik ID aktif.
+HARD OUTPUT CONSTRAINT: exactly one image, exactly one requested asset/scene, no extra variants, no contact sheet, no collage, no sprite sheet, no grid, no unrelated objects.
 
-VALIDASI HASIL:
-14. Setelah setiap aset digenerate, cocokkan hasilnya dengan prompt sumber pada ID Prompt 3 PRO yang bersangkutan.
-15. Periksa bahwa hasil hanya memuat satu aset utama, pose/state benar, transparansi/background sesuai, tidak ada teks acak/watermark, kualitas tajam, dan tidak menyimpang dari spesifikasi prompt sumber.
-16. Jika suatu aset gagal memenuhi prompt sumber, regenerate HANYA ID tersebut menggunakan prompt Prompt 3 PRO yang sama. Koreksi teknis minimum boleh dilakukan hanya untuk memperbaiki kegagalan generate, tanpa mengubah konsep aset.
-17. Jangan mengulang aset yang sudah benar.
+Jangan memasukkan daftar manifest penuh ke image-generation request. Manifest hanya untuk memilih ID berikutnya.
 
-STATUS SETELAH BATCH:
-Tampilkan tabel ringkas:
+URUTAN EKSEKUSI OTOMATIS:
+11. Mulai dari ID GENERATE pertama.
+12. Panggil image generator untuk ID itu saja.
+13. Setelah hasil tersedia, validasi hasil terhadap ID sumber sebelum berpindah.
+14. Jika hasil lulus, tandai SELESAI dan lanjut ke ID GENERATE berikutnya dengan image-generation call BARU yang terpisah.
+15. Jika hasil gagal, regenerate HANYA ID tersebut. Jangan melanjutkan sampai subjek/konteks utamanya benar.
+16. Jika platform tidak memungkinkan beberapa image-generation call terpisah dalam satu respons/turn, JANGAN menggabungkan ID. Generate hanya satu ID yang sedang aktif, lalu berhenti dan lanjutkan ID berikutnya pada turn berikutnya.
+
+VALIDASI HASIL PER ID — WAJIB:
+17. Nama/subjek utama hasil harus sama dengan ID aktif dan sesuai proyek aktif.
+18. Pastikan hanya satu aset/scene utama sesuai prompt, pose/state benar, style dan palet sesuai, transparansi/background sesuai, dan tidak ada objek dari proyek lain.
+19. Pastikan tidak ada teks acak, watermark, multi-aset, collage, grid, sprite sheet, atau contact sheet.
+20. Untuk aset ilmiah/faktual, cek bahwa bentuk, anatomi, arah proses, alat, material, dan hubungan objek tidak menyesatkan.
+21. Jika hasil memuat tema yang tidak disebut dalam ID aktif — misalnya tanaman, alat kebun, kendaraan, karakter tambahan, atau objek lain yang berasal dari konteks berbeda — status otomatis PERLU ULANG dan generate ulang menggunakan prompt ID aktif yang sama.
+22. Jangan mengulang aset yang sudah benar.
+
+CHECKPOINT STATUS:
+Setelah maksimal 5–10 ID SELESAI, boleh tampilkan tabel administratif:
 ID | Nama File | Nama Aset | Status
-
-Gunakan status:
+Status yang dipakai:
 - SELESAI
 - PERLU ULANG
 - PERLU KONVERSI WEBP
-- EXTERNAL-URL — TIDAK DIGENERATE (jika berlaku)
+- EXTERNAL-URL — TIDAK DIGENERATE
 
-SETELAH SEMUA ASET SELESAI:
-Buat Manifest Aset Final berdasarkan ID produksi Prompt 3 PRO yang menunjukkan aset selesai, perlu ulang, perlu konversi, atau External URL. Pastikan tidak ada ID yang terlewat atau diproses dua kali.
+Checkpoint status tidak boleh menyebabkan beberapa ID digenerate dalam satu gambar.
+
+SETELAH SEMUA ID DIPROSES:
+Buat Manifest Aset Final berdasarkan ID Prompt 3 PRO dan pastikan tidak ada ID terlewat, duplikat, atau tertukar.
 
 PENTING:
 - Jangan hanya menjelaskan cara membuat aset.
 - Jangan hanya menampilkan ulang Prompt 3 PRO.
 - Jangan membuat prompt aset baru.
-- Jangan membuat ulang inventaris atau prioritas aset.
+- Jangan membuat ulang inventaris.
 - Jangan mengubah style/spesifikasi Prompt 3 PRO.
-- Jika image generation tersedia, langsung gunakan prompt Prompt 3 PRO untuk generate.
-- Jika platform tidak dapat membuat gambar secara langsung, tampilkan prompt PER ID apa adanya dan tandai "PERLU DIEKSEKUSI PADA GENERATOR ASET"; jangan menyusun prompt pengganti.
+- Jika image generation tersedia, eksekusi prompt per-ID secara terpisah.
+- Jika image generation tidak tersedia, tampilkan prompt PER ID apa adanya dan tandai PERLU DIEKSEKUSI PADA GENERATOR ASET.
+- Prioritas utama adalah KETEPATAN KONTEKS per ID, bukan jumlah aset yang dibuat sekaligus.
 
-Mulai dari ID produksi pertama pada Prompt 3 PRO dan lanjutkan berurutan sampai selesai.`
+Mulai dari ID GENERATE pertama pada Prompt 3 PRO dan gunakan SATU image-generation call khusus untuk ID tersebut saja.`
       },
       {
         title: "Prompt 5 PRO Coding Game Edukasi Critical Thinking (Gabungkan Semua Aset ke Desain)",
@@ -3590,64 +3727,99 @@ Output akhir: daftar prompt siap-copy yang dikelompokkan per kategori aset, teta
       },
       {
         title: "Prompt 4 PRO Generate Semua Aset Otomatis Game Skill & Luck di ChatGPT/Claude",
-        text: `Gunakan SELURUH prompt aset yang telah dihasilkan pada Prompt 3 PRO sebagai instruksi final untuk melakukan generate aset proyek Game Edukasi Skill & Luck.
+        text: `Gunakan HANYA Prompt 3 PRO TERAKHIR yang tersedia lengkap di percakapan aktif ini sebagai instruksi final untuk melakukan generate aset proyek Game Skill & Luck.
 
-Tugas pada tahap ini adalah MENGEKSEKUSI prompt-prompt tersebut. Jangan merancang ulang aset, jangan membuat inventaris baru, jangan menulis ulang prompt, dan jangan mengubah keputusan visual yang sudah ditetapkan pada Prompt 3 PRO.
+Tugas tahap ini adalah MENGEKSEKUSI aset satu per satu. Jangan merancang ulang aset, jangan membuat inventaris baru, jangan menulis ulang prompt, dan jangan mengambil konteks proyek lain.
 
-SUMBER UTAMA:
-- Prompt 3 PRO adalah sumber instruksi generate UTAMA dan FINAL.
-- Prompt 1 PRO dan Prompt 2 PRO hanya boleh dipakai sebagai referensi konteks atau verifikasi kelengkapan apabila benar-benar diperlukan.
-- Jika ada perbedaan interpretasi, ikuti spesifikasi eksplisit pada prompt aset di Prompt 3 PRO.
-- Jangan kembali menganalisis atau menyusun ulang desain dari Prompt 1-2 PRO.
+SUMBER KEBENARAN — WAJIB:
+- Prompt 3 PRO TERAKHIR pada percakapan aktif ini adalah sumber instruksi generate UTAMA dan FINAL.
+- Gunakan bagian Kunci Konsistensi Global, prompt per-ID, negative prompt per-ID, dan Manifest Produksi Final dari Prompt 3 PRO tersebut.
+- Prompt 1 PRO dan Prompt 2 PRO hanya boleh dipakai untuk verifikasi bila Prompt 3 PRO secara eksplisit merujuknya.
+- JANGAN memakai aset, tema, objek, karakter, atau konteks dari percakapan/proyek lain, memory, contoh sebelumnya, atau asumsi umum.
+- Jika ada perbedaan interpretasi, spesifikasi eksplisit pada ID Prompt 3 PRO mengalahkan asumsi lain.
+
+VALIDASI KONTEKS SEBELUM GENERATE — JANGAN DILEWATI:
+1. Temukan Prompt 3 PRO lengkap dan Manifest Produksi Final yang terkait dengan proyek aktif.
+2. Ambil identitas proyek dari Prompt 3 PRO: nama/judul proyek, mata pelajaran/topik bila ada, gaya visual global, dan jumlah ID produksi.
+3. Cocokkan ID pertama berstatus GENERATE dengan nama file dan nama asetnya.
+4. Jika Prompt 3 PRO tidak ditemukan, terpotong, tidak lengkap, atau identitas proyek tidak dapat dipastikan, BERHENTI. Jangan generate gambar apa pun. Minta pengguna menempelkan Prompt 3 PRO lengkap.
+5. Jika konteks yang terbaca bertentangan dengan Prompt 3 PRO aktif, abaikan konteks lain dan gunakan Prompt 3 PRO aktif.
+
+ASET EXTERNAL-URL:
+- ID berstatus EXTERNAL-URL / DIRECT_IMAGE_URL_READY_FOR_WEB TIDAK BOLEH dikirim ke image generator.
+- Pertahankan URL dan metadata yang sudah ada untuk tahap coding berikutnya.
+- Tandai statusnya sebagai EXTERNAL-URL — TIDAK DIGENERATE.
 
 Platform: [ChatGPT / Claude]
 
-CARA EKSEKUSI:
-1. Identifikasi seluruh prompt aset Prompt 3 PRO berdasarkan ID produksi A001, A002, A003, dan seterusnya.
-2. Eksekusi prompt tersebut sesuai urutan ID produksi.
-3. SATU prompt gambar menghasilkan SATU file/aset gambar terpisah.
-4. Jangan menggabungkan beberapa prompt menjadi satu gambar, sprite sheet, collage, contact sheet, grid, lembar pose, atau lembar state.
-5. Jangan meringkas, menyederhanakan, memperluas, atau menulis ulang prompt Prompt 3 PRO sebelum generate, kecuali penyesuaian teknis minimum memang diwajibkan oleh generator.
-6. Pertahankan nama file target, format, transparansi/background, rasio/resolusi, gaya, komposisi, konteks faktual, dan negative prompt yang sudah tertulis pada masing-masing prompt Prompt 3 PRO.
-7. Jika satu objek/karakter memiliki beberapa pose atau state, eksekusi setiap ID sebagai file terpisah.
-8. Jika platform mendukung visual reference, gunakan hasil aset terkait sebelumnya untuk menjaga konsistensi karakter, objek, palet, perspektif, pencahayaan, dan detail.
+MODE EKSEKUSI WAJIB — SINGLE-ASSET / SINGLE-CALL:
+1. Proses ID produksi secara berurutan A001, A002, A003, dan seterusnya.
+2. SATU image-generation request/call HANYA BOLEH berisi SATU ID produksi.
+3. SATU call menghasilkan tepat SATU aset/gambar utama. Jangan memasukkan dua ID atau lebih ke call yang sama walaupun disebut batch.
+4. DILARANG meminta generator membuat A001-A010 sekaligus, membuat lembar aset, sprite sheet, character sheet, contact sheet, collage, grid, atau beberapa file/variasi dalam satu kanvas.
+5. Batch hanya boleh dipakai sebagai CHECKPOINT STATUS administratif setelah beberapa ID selesai; batch TIDAK BOLEH dipakai sebagai satu prompt image generation.
+6. Untuk setiap ID, gunakan hanya:
+   a. Kunci Konsistensi Global Prompt 3 PRO yang relevan;
+   b. ID + nama aset + nama file target;
+   c. PROMPT IMAGE GENERATION/PROMPT milik ID tersebut;
+   d. NEGATIVE PROMPT milik ID tersebut;
+   e. batasan teknis file/transparansi/resolusi milik ID tersebut.
+7. Jangan menyertakan prompt ID lain di dalam request yang sedang digenerate.
+8. Jangan meringkas atau mengganti subjek utama. Nama aset dan subjek pada ID aktif harus menjadi objek utama hasil gambar.
+9. Elemen yang tidak diminta oleh ID aktif tidak boleh ditambahkan. Jika ID meminta satu karakter, hasil tidak boleh berubah menjadi kumpulan karakter/objek. Jika ID meminta satu ikon, hasil tidak boleh menjadi satu set ikon. Jika ID meminta satu ilustrasi materi, jangan menambahkan aset lain yang tidak diperlukan.
+10. Jika platform mendukung image reference/character reference/seed, gunakan hasil karakter dasar sebelumnya sebagai referensi untuk pose/state berikutnya, tanpa menggabungkan pose ke satu gambar.
 
-BATCH GENERATION:
-9. Jika jumlah aset terlalu banyak untuk dibuat sekaligus, kerjakan berdasarkan urutan ID produksi dengan maksimal 10 aset gambar per batch. Contoh: Batch 1 = A001-A010, Batch 2 = A011-A020.
-10. Ukuran batch boleh diperkecil jika diperlukan untuk menjaga kualitas atau konsistensi.
-11. Sebelum generate, cukup tampilkan daftar singkat ID produksi, nama file, dan nama aset pada batch tersebut. Jangan membuat ulang Peta Batch dari Prompt 2 PRO.
-12. Setelah daftar batch tampil, LANGSUNG generate aset pada batch tersebut tanpa menunggu persetujuan tambahan, kecuali saya meminta konfirmasi.
-13. Setelah batch selesai, lanjutkan ke ID berikutnya sampai seluruh prompt Prompt 3 PRO telah diproses.
+FORMAT INSTRUKSI YANG DIKIRIM KE IMAGE GENERATOR — WAJIB:
+PROJECT CONTEXT: salin singkat Kunci Konsistensi Global yang relevan dari Prompt 3 PRO.
+CURRENT ASSET: tulis ID produksi aktif dan nama aset persis seperti Prompt 3 PRO.
+TARGET FILE: tulis nama file target persis seperti Prompt 3 PRO.
+IMAGE PROMPT: gunakan prompt milik ID aktif sedekat mungkin dengan teks asli Prompt 3 PRO.
+NEGATIVE PROMPT: gunakan negative prompt milik ID aktif.
+HARD OUTPUT CONSTRAINT: exactly one image, exactly one requested asset/scene, no extra variants, no contact sheet, no collage, no sprite sheet, no grid, no unrelated objects.
 
-VALIDASI HASIL:
-14. Setelah setiap aset digenerate, cocokkan hasilnya dengan prompt sumber pada ID Prompt 3 PRO yang bersangkutan.
-15. Periksa bahwa hasil hanya memuat satu aset utama, pose/state benar, transparansi/background sesuai, tidak ada teks acak/watermark, kualitas tajam, dan tidak menyimpang dari spesifikasi prompt sumber.
-16. Jika suatu aset gagal memenuhi prompt sumber, regenerate HANYA ID tersebut menggunakan prompt Prompt 3 PRO yang sama. Koreksi teknis minimum boleh dilakukan hanya untuk memperbaiki kegagalan generate, tanpa mengubah konsep aset.
-17. Jangan mengulang aset yang sudah benar.
+Jangan memasukkan daftar manifest penuh ke image-generation request. Manifest hanya untuk memilih ID berikutnya.
 
-STATUS SETELAH BATCH:
-Tampilkan tabel ringkas:
+URUTAN EKSEKUSI OTOMATIS:
+11. Mulai dari ID GENERATE pertama.
+12. Panggil image generator untuk ID itu saja.
+13. Setelah hasil tersedia, validasi hasil terhadap ID sumber sebelum berpindah.
+14. Jika hasil lulus, tandai SELESAI dan lanjut ke ID GENERATE berikutnya dengan image-generation call BARU yang terpisah.
+15. Jika hasil gagal, regenerate HANYA ID tersebut. Jangan melanjutkan sampai subjek/konteks utamanya benar.
+16. Jika platform tidak memungkinkan beberapa image-generation call terpisah dalam satu respons/turn, JANGAN menggabungkan ID. Generate hanya satu ID yang sedang aktif, lalu berhenti dan lanjutkan ID berikutnya pada turn berikutnya.
+
+VALIDASI HASIL PER ID — WAJIB:
+17. Nama/subjek utama hasil harus sama dengan ID aktif dan sesuai proyek aktif.
+18. Pastikan hanya satu aset/scene utama sesuai prompt, pose/state benar, style dan palet sesuai, transparansi/background sesuai, dan tidak ada objek dari proyek lain.
+19. Pastikan tidak ada teks acak, watermark, multi-aset, collage, grid, sprite sheet, atau contact sheet.
+20. Untuk aset ilmiah/faktual, cek bahwa bentuk, anatomi, arah proses, alat, material, dan hubungan objek tidak menyesatkan.
+21. Jika hasil memuat tema yang tidak disebut dalam ID aktif — misalnya tanaman, alat kebun, kendaraan, karakter tambahan, atau objek lain yang berasal dari konteks berbeda — status otomatis PERLU ULANG dan generate ulang menggunakan prompt ID aktif yang sama.
+22. Jangan mengulang aset yang sudah benar.
+
+CHECKPOINT STATUS:
+Setelah maksimal 5–10 ID SELESAI, boleh tampilkan tabel administratif:
 ID | Nama File | Nama Aset | Status
-
-Gunakan status:
+Status yang dipakai:
 - SELESAI
 - PERLU ULANG
 - PERLU KONVERSI WEBP
-- EXTERNAL-URL — TIDAK DIGENERATE (jika berlaku)
+- EXTERNAL-URL — TIDAK DIGENERATE
 
-SETELAH SEMUA ASET SELESAI:
-Buat Manifest Aset Final berdasarkan ID produksi Prompt 3 PRO yang menunjukkan aset selesai, perlu ulang, perlu konversi, atau External URL. Pastikan tidak ada ID yang terlewat atau diproses dua kali.
+Checkpoint status tidak boleh menyebabkan beberapa ID digenerate dalam satu gambar.
+
+SETELAH SEMUA ID DIPROSES:
+Buat Manifest Aset Final berdasarkan ID Prompt 3 PRO dan pastikan tidak ada ID terlewat, duplikat, atau tertukar.
 
 PENTING:
 - Jangan hanya menjelaskan cara membuat aset.
 - Jangan hanya menampilkan ulang Prompt 3 PRO.
 - Jangan membuat prompt aset baru.
-- Jangan membuat ulang inventaris atau prioritas aset.
+- Jangan membuat ulang inventaris.
 - Jangan mengubah style/spesifikasi Prompt 3 PRO.
-- Jika image generation tersedia, langsung gunakan prompt Prompt 3 PRO untuk generate.
-- Jika platform tidak dapat membuat gambar secara langsung, tampilkan prompt PER ID apa adanya dan tandai "PERLU DIEKSEKUSI PADA GENERATOR ASET"; jangan menyusun prompt pengganti.
+- Jika image generation tersedia, eksekusi prompt per-ID secara terpisah.
+- Jika image generation tidak tersedia, tampilkan prompt PER ID apa adanya dan tandai PERLU DIEKSEKUSI PADA GENERATOR ASET.
+- Prioritas utama adalah KETEPATAN KONTEKS per ID, bukan jumlah aset yang dibuat sekaligus.
 
-Mulai dari ID produksi pertama pada Prompt 3 PRO dan lanjutkan berurutan sampai selesai.`
+Mulai dari ID GENERATE pertama pada Prompt 3 PRO dan gunakan SATU image-generation call khusus untuk ID tersebut saja.`
       },
       {
         title: "Prompt 5 PRO Coding Game Edukasi Skill & Luck (Gabungkan Semua Aset ke Desain)",
