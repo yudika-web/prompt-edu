@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="theme-color" content="#6d5dfc" />
 <title>Prompt EDU — AI Prompt Studio untuk Guru</title>
-<meta name="bank-prompt-build" content="2026-09-30-ux-feedback-mpi-akm-idea-optional-1" />
+<meta name="bank-prompt-build" content="2026-10-04-mpi-generator-settings-fix-1" />
 <style>
 :root{
   --bg:#f4f7fb;
@@ -7968,9 +7968,11 @@ function friendlyLabel(raw){
 }
 const LABELED_FIELD_PREFIX='@@LABELED@@';
 const SUPPLEMENTAL_FIELD_PREFIX='@@SUPPLEMENTAL@@';
+// MPI settings fix 2026-10-04: long labeled placeholders (notably Akses Menu PRO) must remain detectable and semantically inherited across Prompt 0 → Prompt 2+/Coding.
 function canonicalFieldKey(label=''){
   const t=normalize(friendlyLabel(label));
   if(/canva sheet|spreadsheet/.test(t))return'canva-sheet';
+  if(/simpan hasil belajar.*lokal|penyimpanan hasil lokal|penyimpanan.*browser|localstorage|browser storage/.test(t))return'local-storage';
   if(/akses menu|mode akses|penguncian menu/.test(t))return'akses-menu';
   if(/cek pemahaman/.test(t))return'cek-pemahaman';
   if(/feedback evaluasi|umpan balik evaluasi/.test(t))return'feedback-evaluasi';
@@ -8007,12 +8009,17 @@ function bracketChoiceOptions(raw=''){
   if(!parts||parts.length<2||parts.length>12)return null;
   return [['','— Biarkan sesuai template / AI menentukan —'],...parts.map(part=>{const v=part.split(/\s+—\s+/)[0].trim();return[v,part.trim()];})];
 }
+function generatorInstructionOnlyField(label='',raw=''){
+  const l=normalize(friendlyLabel(label)),r=normalize(raw);
+  if(/^struktur mpi$/.test(l)&&(/ikuti peta menu/.test(r)||/ikuti struktur/.test(r)||/prompt 1/.test(r)))return true;
+  return false;
+}
 function extractPlaceholders(text){
   const found=[];const seen=new Set();const occupied=[];
   const add=(token,label,extra={})=>{if(!token||seen.has(token))return;seen.add(token);found.push({token,label:friendlyLabel(label||token),...extra});};
   [...text.matchAll(/\{\{\s*([^{}]+?)\s*\}\}/g)].forEach(m=>add(m[0],m[1],{sourceToken:m[0]}));
-  const lineRx=/^([ \t]*[-•]?[ \t]*([^:\n]{2,110}?))[ \t]*:[ \t]*(\[[^\]\n]{1,420}\])[ \t]*$/gm;
-  [...text.matchAll(lineRx)].forEach(m=>{const full=m[0],label=m[2].trim().replace(/^[-•]\s*/,''),sourceToken=m[3],raw=sourceToken.slice(1,-1).trim();occupied.push([m.index,m.index+full.length]);add(LABELED_FIELD_PREFIX+full,label,{sourceToken,sourceLabel:label,choiceOptions:bracketChoiceOptions(raw),labeled:true});});
+  const lineRx=/^([ \t]*[-•]?[ \t]*([^:\n]{2,110}?))[ \t]*:[ \t]*(\[[^\]\n]{1,900}\])[ \t]*$/gm;
+  [...text.matchAll(lineRx)].forEach(m=>{const full=m[0],label=m[2].trim().replace(/^[-•]\s*/,''),sourceToken=m[3],raw=sourceToken.slice(1,-1).trim();occupied.push([m.index,m.index+full.length]);if(generatorInstructionOnlyField(label,raw))return;add(LABELED_FIELD_PREFIX+full,label,{sourceToken,sourceLabel:label,choiceOptions:bracketChoiceOptions(raw),labeled:true});});
   [...text.matchAll(/\[([^\]\n]{1,180})\]/g)].forEach(m=>{if(occupied.some(([a,b])=>m.index>=a&&m.index<b))return;const x=m[1].trim();if(!x||/^Khusus\b/i.test(x)||/^Gambar:/i.test(x)||/^Catatan:/i.test(x)||/^Lihat\b/i.test(x)||/^perlu verifikasi/i.test(x)||/^Canva Code\/browser$/i.test(x))return;add(m[0],x,{sourceToken:m[0],choiceOptions:bracketChoiceOptions(x)});});
   return found.slice(0,90);
 }
@@ -8156,6 +8163,14 @@ const videoGeneratorFieldConfig={
 const mpiGeneratorFieldConfig={
   'tujuan-pembelajaran':{label:'Tujuan Pembelajaran (Opsional)',type:'textarea',placeholder:'Contoh: Peserta didik mampu menganalisis hubungan gaya dan gerak melalui contoh kontekstual.',help:'Isi jika sudah memiliki Tujuan Pembelajaran. Jika kosong, AI menyusun otomatis sesuai kurikulum/acuan, jenjang/kelas, mata pelajaran, topik, kedalaman materi, dan estimasi waktu. TP final diputuskan di Prompt 0 dan tidak diminta lagi pada Prompt 1.'},
   'idea-choice':{label:'Nomor Ide Pilihan (Opsional)',type:'ideaNumber',help:'Boleh dikosongkan saat menyiapkan prompt. Isi nomor ide setelah Prompt 0 menghasilkan pilihan, atau sesuaikan langsung nanti pada teks Prompt 1 sebelum dijalankan. Modifikasi isi/struktur tetap dapat dilakukan pada teks hasil salin.'},
+  'local-storage':{label:'Penyimpanan Hasil Lokal',type:'select',options:[['','— Pilih Ya atau Tidak —'],['Ya','Ya — simpan hasil/progres secara lokal di browser'],['Tidak','Tidak — hasil hanya selama sesi aktif']],help:'Khusus alur MPI PRO. Pilihan ini diwariskan konsisten ke Prompt 2 dan Prompt Coding meskipun teks template memakai variasi label “Simpan hasil belajar secara lokal di browser” atau “Penyimpanan Hasil Lokal”.'},
+  'canva-sheet':{label:'Tautkan Canva Sheet untuk Mencatat Hasil Belajar',type:'select',options:[['','— Pilih Ya atau Tidak —'],['Ya','Ya — gunakan Canva Sheet sesuai aturan template'],['Tidak','Tidak — tanpa integrasi Canva Sheet']],help:'Khusus MPI versi biasa. Nilai ini diwariskan ke prompt coding dan tidak boleh berubah sendiri.'},
+  'akses-menu':{label:'Akses Menu',type:'select',options:[['','— Pilih mode akses —'],['Berurutan','Berurutan — materi dibuka bertahap; topik yang sudah terbuka tetap dapat diulas'],['Evaluasi Terkunci','Evaluasi Terkunci — materi bebas dipilih; Evaluasi terbuka setelah syarat materi terpenuhi'],['Bebas','Bebas — semua menu konten termasuk Evaluasi aktif sejak awal']],help:'Pilihan ini harus mengganti placeholder Akses menu pada Prompt 0 dan diwariskan ke seluruh prompt MPI berikutnya.'},
+  'cek-pemahaman':{label:'Cek Pemahaman Setelah Materi',type:'select',options:[['','— Pilih Ya atau Tidak —'],['Ya','Ya — aktifkan cek pemahaman formatif'],['Tidak','Tidak — tanpa checkpoint wajib']],help:'Nilai diwariskan konsisten ke semua tahap MPI.'},
+  'feedback-evaluasi':{label:'Feedback Evaluasi Akhir',type:'select',options:[['','— Pilih mode feedback —'],['Konstruktif','Konstruktif — tampilkan umpan balik bermakna sesuai aturan template'],['Tanpa Feedback','Tanpa Feedback — jangan tampilkan benar/salah atau pembahasan selama evaluasi']],help:'Nilai diwariskan konsisten ke semua tahap MPI.'},
+  'game-pembelajaran':{label:'Game Pembelajaran',type:'select',options:[['','— Pilih Ada atau Tidak Ada —'],['Ada','Ada'],['Tidak Ada','Tidak Ada']],help:'Jika Tidak Ada, prompt lanjutan tidak boleh menambahkan menu, aset, state, atau skor game.'},
+  'jenis-game':{label:'Jenis Game jika Ada',type:'select',options:[['','— Pilih jenis / biarkan AI menentukan —'],['Spin Game','Spin Game'],['Flip Card','Flip Card'],['Make a Match','Make a Match'],['Quiz Challenge','Quiz Challenge'],['Susun Urutan','Susun Urutan'],['Drag & Drop','Drag & Drop'],['Tebak Gambar','Tebak Gambar'],['True–False Challenge','True–False Challenge'],['Memory Game','Memory Game'],['Disesuaikan oleh AI','Disesuaikan oleh AI']],help:'Digunakan hanya jika Game Pembelajaran = Ada.'},
+  'jumlah-game':{label:'Jumlah Game jika Ada',type:'select',options:[['','— Pilih jumlah / biarkan AI menentukan —'],['1','1'],['2','2'],['Disesuaikan oleh AI','Disesuaikan oleh AI']],help:'Digunakan hanya jika Game Pembelajaran = Ada.'},
   'material-depth':{label:'Kedalaman Materi',type:'select',options:[['Disesuaikan oleh AI','Disesuaikan oleh AI — berdasarkan jenjang, tujuan, waktu, dan kompleksitas'],['Sederhana','Sederhana — konsep esensial, ringkas tetapi utuh, contoh inti'],['Sedang','Sedang — proporsional, hubungan konsep, contoh, dan miskonsepsi utama'],['Mendetail','Mendetail — lebih lengkap, proses/sebab-akibat, penerapan, variasi contoh, dan miskonsepsi']],help:'Kedalaman selalu tetap menyesuaikan jenjang. “Sederhana” berarti lebih fokus dan ringkas, bukan mengurangi akurasi konsep.'},
   'mpi-evaluation':{label:'Evaluasi Akhir — Kognitif',type:'mpiEvaluation',help:'Sama seperti konfigurasi asesmen formatif pada Modul Ajar, tetapi khusus kognitif: pilih tipe soal, jumlah soal, dan proporsi LOTS/MOTS/HOTS/AKM-PISA. Kosongkan rincian tertentu jika ingin AI menentukannya.'},
   'external-visual-links':{label:'Sisipkan Gambar/Visual dari Link Eksternal',type:'select',options:[['','— Pilih Ya atau Tidak —'],['Ya','Ya — ChatGPT carikan URL gambar siap Canva Code'],['Tidak','Tidak — tanpa gambar/visual eksternal']],help:'Jika Ya, ChatGPT/AI yang menerima prompt wajib mencari web dan menyiapkan URL HTTPS langsung yang publik, stabil, relevan, dan siap dipakai pada src di Canva Code. Utamakan referensi Indonesia dan gambar yang judul/label/legenda/nama bagiannya memakai Bahasa Indonesia. Jika tidak tersedia, pilih visual Indonesia tanpa teks lalu visual internasional yang netral tanpa teks; visual berlabel bahasa asing hanya sebagai pilihan terakhir. Canva/Canva Code tidak diminta mencari gambar. Prioritaskan PNG, JPG/JPEG, WEBP, SVG, atau GIF bila relevan; jangan mengarang link yang belum diverifikasi.'}
@@ -8441,7 +8456,7 @@ function updateGeneratorActionButton(){
   }
 }
 function substitutionMap(){const vals=new Map();vals.semantic=new Map();vals.supplemental=new Map();els.genFields.querySelectorAll('[data-token]').forEach(input=>{let val=input.value.trim();if(input.hasAttribute('data-jp-input')&&val)val=`${val} JP`;if(input.hasAttribute('data-module-model-select')&&['custom','combo'].includes(val)){const custom=els.genFields.querySelector('[data-module-model-custom]')?.value.trim()||'';if(custom)val=val==='combo'?`Kombinasi model: ${custom}`:custom;else val='';}if(!val)return;const group=input.closest('.form-group');const semantic=group?.dataset.semanticKey||'';vals.set(input.dataset.token,val);if(semantic)vals.semantic.set(semantic,val);if(group?.dataset.supplemental==='1')vals.supplemental.set(input.dataset.token,val);});return vals;}
-function applySubstitutions(text,vals){let out=text;vals.forEach((v,k)=>{if(k.startsWith(SUPPLEMENTAL_FIELD_PREFIX))return;if(k.startsWith(LABELED_FIELD_PREFIX)){const original=k.slice(LABELED_FIELD_PREFIX.length);const replaced=original.replace(/\[[^\]\n]+\]/,v);out=out.split(original).join(replaced);return;}out=out.split(k).join(v);});if(vals.semantic?.size){out=out.replace(/^([ \t]*[-•]?[ \t]*([^:\n]{2,110}?))[ \t]*:[ \t]*(\[[^\]\n]{1,420}\])[ \t]*$/gm,(full,prefix,label,token)=>{const normalizedLabel=normalize(friendlyLabel(label));let value='';if(/jenis.*jumlah.*game|jumlah.*jenis.*game/.test(normalizedLabel)){const jenis=vals.semantic.get('jenis-game')||'';const jumlah=vals.semantic.get('jumlah-game')||'';value=[jenis?`Jenis: ${jenis}`:'',jumlah?`Jumlah: ${jumlah}`:''].filter(Boolean).join('; ');}else value=vals.semantic.get(fieldSemanticKey(label))||'';return value?full.replace(token,value):full;});const engine=vals.semantic.get('engine-platform')||'';if(engine&&out.includes('[Canva Code/browser]'))out=out.split('[Canva Code/browser]').join(/canva code/i.test(engine)?'Canva Code':'browser');}return out;}
+function applySubstitutions(text,vals){let out=text;vals.forEach((v,k)=>{if(k.startsWith(SUPPLEMENTAL_FIELD_PREFIX))return;if(k.startsWith(LABELED_FIELD_PREFIX)){const original=k.slice(LABELED_FIELD_PREFIX.length);const replaced=original.replace(/\[[^\]\n]+\]/,v);out=out.split(original).join(replaced);return;}out=out.split(k).join(v);});if(vals.semantic?.size){out=out.replace(/^([ \t]*[-•]?[ \t]*([^:\n]{2,110}?))[ \t]*:[ \t]*(\[[^\]\n]{1,900}\])[ \t]*$/gm,(full,prefix,label,token)=>{const normalizedLabel=normalize(friendlyLabel(label));let value='';if(/jenis.*jumlah.*game|jumlah.*jenis.*game/.test(normalizedLabel)){const jenis=vals.semantic.get('jenis-game')||'';const jumlah=vals.semantic.get('jumlah-game')||'';value=[jenis?`Jenis: ${jenis}`:'',jumlah?`Jumlah: ${jumlah}`:''].filter(Boolean).join('; ');}else value=vals.semantic.get(fieldSemanticKey(label))||'';return value?full.replace(token,value):full;});const engine=vals.semantic.get('engine-platform')||'';if(engine&&out.includes('[Canva Code/browser]'))out=out.split('[Canva Code/browser]').join(/canva code/i.test(engine)?'Canva Code':'browser');}return out;}
 function curriculumDirectiveBlock(prompt,vals){
   const curriculum=vals?.semantic?.get('kurikulum')||vals?.supplemental?.get('@@SUPPLEMENTAL@@curriculum')||'';
   if(!curriculum)return'';
