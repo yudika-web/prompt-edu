@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="theme-color" content="#6d5dfc" />
 <title>Prompt EDU — AI Prompt Studio untuk Guru</title>
-<meta name="bank-prompt-build" content="2026-10-07-mpi-asset-zip-fix-1" />
+<meta name="bank-prompt-build" content="2026-10-07-asset-zip-fix-all-sets-1" />
 <style>
 :root{
   --bg:#f4f7fb;
@@ -1979,152 +1979,180 @@ ATURAN INVENTARIS FILE GAMBAR — WAJIB:
       },
       {
         title: "Prompt 3 PRO Generate Prompt Aset Simulasi & Lab Maya",
-        text: `Berdasarkan Daftar Inventaris Aset (Prompt 2 PRO), buatkan kumpulan prompt siap pakai untuk menghasilkan SETIAP aset proyek Simulasi & Lab Maya menggunakan AI image/audio generator (misalnya ChatGPT, Claude yang mendukung image generation, Gemini, Midjourney, Ideogram, atau Adobe Firefly).
+        text: `Berdasarkan Daftar Inventaris Aset (Prompt 2 PRO), buatkan kumpulan prompt siap pakai untuk menghasilkan SETIAP aset proyek Simulasi & Lab Maya menggunakan AI image/audio generator (misalnya ChatGPT, Gemini, Midjourney, Ideogram, Adobe Firefly, atau Claude yang benar-benar memiliki tool image generation). Hasil tahap ini akan dieksekusi satu per satu oleh Prompt 4 PRO, lalu dikemas menjadi SATU paket ZIP berisi file WebP terpisah + manifest.
 
 ID PRODUKSI — WAJIB:
 - Beri setiap prompt aset satu ID produksi unik dan berurutan: A001, A002, A003, dan seterusnya.
 - Satu ID hanya boleh mewakili SATU file/aset. Pose/state yang berbeda mendapat ID berbeda.
-- Pertahankan urutan ID ini sebagai urutan eksekusi untuk Prompt 4 PRO. Jangan mengulang atau melewati nomor.
-- Jika aset ditandai EXTERNAL-URL dan tidak perlu digenerate, tetap boleh dicatat pada manifest dengan status EXTERNAL-URL, tetapi jangan membuat prompt image-generation untuk aset tersebut.
+- Urutan ID adalah urutan eksekusi Prompt 4 PRO. Jangan mengulang atau melewati nomor.
+- Aset yang pada Prompt 2 ditandai EXTERNAL-URL (sudah memiliki DIRECT_IMAGE_URL_READY_FOR_WEB) TIDAK BOLEH dibuat ulang oleh image generator. Catat pada manifest dengan status EXTERNAL-URL beserta URL-nya, tetapi jangan buat prompt image-generation untuk aset tersebut.
 
 ATURAN UTAMA — SATU FILE = SATU GAMBAR/ASET:
 1. Buat SATU prompt gambar terpisah untuk SATU aset. DILARANG menggabungkan dua atau lebih aset, pose, state, objek, atau variasi ke dalam satu file gambar.
-2. Jika satu karakter/objek membutuhkan beberapa pose atau state, setiap pose/state menjadi prompt dan file WebP TERPISAH. Contoh: karakter_normal.webp, karakter_senyum.webp, karakter_menunjuk.webp; gelas_kosong.webp dan gelas_terisi.webp.
+2. Jika satu karakter/objek membutuhkan beberapa pose atau state, setiap pose/state menjadi ID, prompt, dan file WebP TERPISAH (contoh: mascot_normal.webp, mascot_senyum.webp, mascot_menunjuk.webp).
 3. Jangan membuat sprite sheet, contact sheet, collage, grid aset, lembar pose, atau satu kanvas berisi beberapa gambar.
 
-STANDAR VISUAL — KONTEKS NYATA & JELAS:
-4. Untuk aset yang berhubungan dengan materi atau aktivitas utama—misalnya alat dan bahan virtual, objek eksperimen, elemen simulasi, diagram/proses, lingkungan praktikum, serta state objek yang berubah karena variabel—visual harus konkret, jelas, mudah dikenali, dan sesuai konteks nyata proyek. Jika menyangkut konsep ilmiah/faktual, bentuk, proporsi, warna, material, state, arah proses/gerak, dan hubungan antarobjek harus benar secara keilmuan/faktual.
-5. Gunakan render realistis atau semi-realistis dengan detail cukup, pencahayaan dan material masuk akal, serta bentuk objek tidak ambigu. Hindari visual terlalu abstrak, simbolik samar, flat-vector generik, clipart, doodle, line-art sederhana, atau tampilan seperti SVG yang kehilangan detail nyata.
-6. PENGECUALIAN GAYA: maskot, ikon menu, ikon kontrol/navigasi, badge, dan elemen UI dekoratif boleh menyesuaikan gaya Prompt 1 PRO (mis. 2D, 3D, stylized, chibi, atau semi-realistis), tetapi tetap harus tajam, konsisten, mudah dikenali, dan tidak membingungkan fungsi.
-7. Untuk karakter non-maskot, bangunan, ruang, lingkungan, obstacle, alat, bahan, dan objek materi, pertahankan bentuk yang masuk akal sesuai konteks dunia nyata/proyek; jangan menjadikannya ikon vektor datar kecuali memang elemen UI.
+KELAS RENDER — WAJIB DITETAPKAN UNTUK SETIAP ID:
+- KELAS-M (Materi): alat dan bahan virtual, objek eksperimen, elemen simulasi beserta state visualnya yang berubah karena variabel, diagram/proses, lingkungan praktikum, ilustrasi materi pendukung, karakter non-maskot. Wajib dibuat oleh image generator sungguhan. TIDAK BOLEH digambar dari bentuk geometri dasar (kotak, lingkaran, elips, garis) sebagai pengganti ilustrasi.
+- KELAS-U (UI): ikon menu/navigasi, ikon kontrol simulasi (mulai, jeda, reset, tombol/slider), ikon status progres, badge, dan elemen UI dekoratif sederhana. Boleh bergaya stylized/flat sesuai Prompt 1 PRO.
+- Jika ragu, tetapkan KELAS-M.
+- Kelas ini menentukan apa yang boleh dilakukan Prompt 4 PRO bila platform tidak memiliki image generation. Cantumkan di manifest dan di setiap prompt ID.
+
+STANDAR VISUAL:
+4. KELAS-M: untuk aset yang berhubungan dengan materi atau aktivitas utama—misalnya alat dan bahan virtual, objek eksperimen, elemen simulasi, diagram/proses, lingkungan praktikum, serta state objek yang berubah karena variabel—visual harus konkret, jelas, mudah dikenali, dan sesuai konteks nyata proyek. Untuk konsep ilmiah/faktual, bentuk, proporsi, warna, material, state, arah proses/gerak, urutan, dan hubungan antarobjek harus benar secara keilmuan/faktual (mis. letak, urutan, dan arah proses sesuai topik proyek).
+5. KELAS-M: gunakan render realistis atau semi-realistis (atau ilustrasi edukatif berdetail tinggi bila itu gaya terkunci di Prompt 1 PRO) dengan pencahayaan dan material masuk akal serta bentuk tidak ambigu. Hindari visual abstrak, simbolik samar, clipart, doodle, line-art sederhana, tampilan "bentuk dasar tersusun", atau SVG yang kehilangan detail nyata.
+6. KELAS-U: boleh mengikuti gaya Prompt 1 PRO (2D, 3D, stylized, chibi, flat, atau semi-realistis), tetapi tetap harus tajam, konsisten antar-ikon, mudah dikenali, dan tidak membingungkan fungsi.
+7. Karakter non-maskot, bangunan, ruang, lingkungan, obstacle, alat, bahan, dan objek materi: pertahankan bentuk yang masuk akal sesuai dunia nyata/proyek; jangan menjadikannya ikon vektor datar kecuali memang elemen UI.
 8. Pertahankan konsistensi palet warna, sudut pandang, arah cahaya, proporsi relatif, dan tingkat detail sesuai Prompt 1 PRO di semua file.
-9. Jangan menaruh teks, label, angka acak, watermark, atau simbol yang tidak diperlukan di dalam gambar. Teks UI dibuat dengan HTML/CSS. Bila label ilmiah benar-benar wajib, sebutkan eksplisit dan minimalkan teks.
+9. Jangan menaruh teks, label, angka acak, watermark, atau simbol yang tidak diperlukan di dalam gambar. Teks dan label UI dibuat dengan HTML/CSS. Bila label ilmiah benar-benar wajib di dalam gambar, sebutkan eksplisit dan minimalkan teks.
 
-FORMAT FILE:
+FORMAT FILE & UKURAN:
 10. Target file gambar WAJIB WebP (.webp), kualitas tinggi/lossless bila tersedia.
-11. Gunakan background transparan (alpha) untuk aset lepas seperti alat, karakter, item, obstacle, ikon, dan objek interaktif. Untuk background/latar penuh, gunakan kanvas penuh sesuai kebutuhan dan tidak perlu transparan.
-12. Jika generator hanya menghasilkan PNG/JPG, tetap buat kualitas terbaik dan beri catatan: "perlu konversi ke WebP". Jangan beralih ke SVG/vektor sebagai solusi cadangan.
-13. Resolusi harus cukup tajam untuk UI; rekomendasikan minimal 512 px pada sisi terpanjang untuk aset lepas, dan resolusi lebih besar untuk background sesuai layout.
+11. Background transparan (alpha) untuk aset lepas: ikon, status, badge, alat, karakter, item, objek interaktif, dan diagram/ilustrasi yang ditempel di atas halaman. Background penuh hanya untuk hero/latar halaman.
+12. Jika generator hanya menghasilkan PNG/JPG, buat kualitas terbaik dan beri catatan "perlu konversi ke WebP". Jangan beralih ke SVG/vektor sebagai solusi cadangan untuk KELAS-M.
+13. Setiap ID WAJIB punya ukuran piksel eksplisit LEBAR×TINGGI (bukan "menyesuaikan layout"), karena ukuran ini menjadi target validasi di Prompt 4 PRO dan dicatat di manifest. Acuan: ikon/status/badge/aset lepas 512×512; hero/latar landscape rasio 16:9 (mis. 1200×675); diagram dan infografis minimal 900 px pada sisi terpanjang, rasio mengikuti isi (tulis angka pastinya).
 
-STRUKTUR SETIAP PROMPT GAMBAR:
-- ID Produksi (A001, A002, A003, dst.) & Nama Aset
+KONVENSI NAMA FILE & PAKET ZIP — WAJIB:
+14. Nama file: huruf kecil, snake_case, ASCII, tanpa spasi, berakhiran .webp, dengan awalan kategori yang konsisten (mis. mascot_, bg_, icon_, status_, tool_, material_, sim_, diagram_, hero_). Jika Prompt 2 sudah memberi nama file yang memenuhi pola ini, pertahankan persis; jika tidak, rapikan dan tulis nama final di manifest.
+15. Nama file harus unik dan semua file ditaruh dalam satu folder datar (tanpa subfolder).
+16. Paket akhir yang akan dibuat Prompt 4 PRO: SATU ZIP bernama lab_[slug-proyek]_[jumlah-file-gambar]_assets.zip, berisi semua file WebP berstatus GENERATE + manifest.csv + manifest.json. Rancang nama file dan manifest agar langsung cocok dengan paket ini.
+
+STRUKTUR OUTPUT TAHAP INI — WAJIB, URUT:
+A. KUNCI KONSISTENSI GLOBAL — ringkas: judul/identitas proyek, mata pelajaran/topik, gaya visual KELAS-M, gaya visual KELAS-U, palet warna (kode HEX), sudut pandang, arah cahaya, proporsi relatif, tingkat detail, aturan teks dalam gambar, aturan transparansi.
+B. MANIFEST PRODUKSI FINAL — satu tabel untuk SEMUA ID dengan kolom: ID | Nama File | Nama Aset | Kategori | Kelas Render (M/U) | Lebar×Tinggi px | Transparan (Ya/Tidak) | Status (GENERATE / EXTERNAL-URL) | Dipakai di Menu/Halaman. Tulis jumlah total ID dan jumlah ID GENERATE di bawah tabel.
+C. PROMPT PER ID — dikelompokkan per kategori aset, urut sesuai ID.
+D. PROMPT AUDIO — terpisah dan hanya bila ada di inventaris (opsional).
+
+STRUKTUR SETIAP PROMPT GAMBAR (bagian C):
+- ID Produksi (A001, A002, dst.) & Nama Aset
 - Nama file target .webp
+- Kelas Render (KELAS-M / KELAS-U)
+- Ukuran piksel eksak (LEBAR×TINGGI) & transparansi
 - Halaman/menu pemakaian
 - Fungsi edukatif/interaktif
 - Deskripsi subjek/objek secara konkret
-- Konteks nyata/faktual yang harus dipertahankan
-- Gaya visual sesuai Prompt 1 PRO
+- Konteks nyata/faktual yang harus dipertahankan (wajib untuk KELAS-M)
+- Gaya visual sesuai Kunci Konsistensi Global / Prompt 1 PRO
 - Komposisi & sudut pandang
 - Palet warna
 - Pencahayaan/material/tekstur
-- Background transparan atau penuh
-- Resolusi/rasio
 - Negative prompt/catatan larangan
 
-NEGATIVE PROMPT MINIMAL untuk aset materi/objek nyata:
-scientifically/factually inaccurate, wrong proportions, distorted anatomy/object, impossible material, misleading state, overly abstract, generic flat vector, SVG-like appearance, clipart, blurry, low detail, random text, watermark, multiple assets in one image, collage, sprite sheet, contact sheet.
+NEGATIVE PROMPT MINIMAL — KELAS-M:
+scientifically/factually inaccurate, wrong proportions, wrong object placement, distorted anatomy/object, impossible material, misleading state or process direction, overly abstract, built from basic geometric shapes, primitive placeholder look, generic flat vector, SVG-like appearance, clipart, blurry, low detail, random text, watermark, multiple assets in one image, collage, sprite sheet, contact sheet.
 
-Untuk maskot/ikon/navigasi, sesuaikan negative prompt agar tidak melarang gaya stylized yang memang dipilih, tetapi tetap larang blur, bentuk ambigu, teks acak, dan multi-aset dalam satu file.
+NEGATIVE PROMPT MINIMAL — KELAS-U:
+blurry, ambiguous shape, inconsistent style between icons, random text, watermark, multiple assets in one image, collage, sprite sheet, contact sheet. Jangan melarang gaya stylized/flat yang memang dipilih di Prompt 1 PRO.
 
 Jika ada audio, buat prompt audio terpisah. Audio bersifat opsional sesuai inventaris.
 
-Output akhir: daftar prompt siap-copy yang dikelompokkan per kategori aset, tetapi SETIAP prompt gambar hanya untuk SATU file dan SATU gambar/aset. Setiap prompt wajib memiliki ID produksi berurutan A001, A002, A003, dst. Hasil Prompt 3 PRO ini adalah INSTRUKSI FINAL dan menjadi sumber utama yang dieksekusi langsung oleh Prompt 4 PRO.`
+Output akhir: bagian A, B, C (dan D bila ada) secara lengkap dan tidak terpotong. SETIAP prompt gambar hanya untuk SATU file dan SATU gambar/aset, dengan ID berurutan A001, A002, A003, dst. Hasil Prompt 3 PRO ini adalah INSTRUKSI FINAL dan menjadi sumber utama yang dieksekusi langsung oleh Prompt 4 PRO.`
       },
       {
         title: "Prompt 4 PRO Generate Semua Aset Otomatis Simulasi & Lab Maya di ChatGPT/Claude",
-        text: `Gunakan HANYA Prompt 3 PRO TERAKHIR yang tersedia lengkap di percakapan aktif ini sebagai instruksi final untuk melakukan generate aset proyek Simulasi & Lab Maya.
+        text: `Gunakan HANYA Prompt 3 PRO TERAKHIR yang tersedia lengkap di percakapan aktif ini sebagai instruksi final untuk melakukan generate aset proyek Simulasi & Lab Maya, lalu kemas hasilnya menjadi paket ZIP.
 
 Tugas tahap ini adalah MENGEKSEKUSI aset satu per satu. Jangan merancang ulang aset, jangan membuat inventaris baru, jangan menulis ulang prompt, dan jangan mengambil konteks proyek lain.
 
 SUMBER KEBENARAN — WAJIB:
 - Prompt 3 PRO TERAKHIR pada percakapan aktif ini adalah sumber instruksi generate UTAMA dan FINAL.
-- Gunakan bagian Kunci Konsistensi Global, prompt per-ID, negative prompt per-ID, dan Manifest Produksi Final dari Prompt 3 PRO tersebut.
+- Gunakan bagian A (Kunci Konsistensi Global), bagian B (Manifest Produksi Final), dan bagian C (prompt + negative prompt per-ID) dari Prompt 3 PRO tersebut.
 - Prompt 1 PRO dan Prompt 2 PRO hanya boleh dipakai untuk verifikasi bila Prompt 3 PRO secara eksplisit merujuknya.
 - JANGAN memakai aset, tema, objek, karakter, atau konteks dari percakapan/proyek lain, memory, contoh sebelumnya, atau asumsi umum.
 - Jika ada perbedaan interpretasi, spesifikasi eksplisit pada ID Prompt 3 PRO mengalahkan asumsi lain.
 
 VALIDASI KONTEKS SEBELUM GENERATE — JANGAN DILEWATI:
-1. Temukan Prompt 3 PRO lengkap dan Manifest Produksi Final yang terkait dengan proyek aktif.
-2. Ambil identitas proyek dari Prompt 3 PRO: nama/judul proyek, mata pelajaran/topik bila ada, gaya visual global, dan jumlah ID produksi.
-3. Cocokkan ID pertama berstatus GENERATE dengan nama file dan nama asetnya.
-4. Jika Prompt 3 PRO tidak ditemukan, terpotong, tidak lengkap, atau identitas proyek tidak dapat dipastikan, BERHENTI. Jangan generate gambar apa pun. Minta pengguna menempelkan Prompt 3 PRO lengkap.
-5. Jika konteks yang terbaca bertentangan dengan Prompt 3 PRO aktif, abaikan konteks lain dan gunakan Prompt 3 PRO aktif.
+1. Temukan Prompt 3 PRO lengkap beserta bagian A, B, dan C untuk proyek aktif.
+2. Ambil identitas proyek: nama/judul proyek, mata pelajaran/topik, gaya visual global, jumlah ID total, dan jumlah ID berstatus GENERATE.
+3. Cocokkan ID pertama berstatus GENERATE dengan nama file, nama aset, kelas render, dan ukuran pikselnya.
+4. Jika Prompt 3 PRO tidak ditemukan, terpotong, tidak lengkap, atau identitas proyek tidak dapat dipastikan, BERHENTI. Jangan generate apa pun. Minta pengguna menempelkan Prompt 3 PRO lengkap.
+5. Jika konteks lain bertentangan dengan Prompt 3 PRO aktif, abaikan konteks lain.
+
+PENGATURAN EKSEKUSI (isi sebelum mulai; bila dibiarkan kosong pakai nilai bawaan):
+Platform: [ChatGPT / Claude]
+Izinkan DRAFT-KODE untuk aset KELAS-M bila platform tidak punya image generation: [Tidak / Ya] (bawaan: Tidak)
+Kemas hasil menjadi ZIP: [Ya / Tidak] (bawaan: Ya)
+
+CEK KEMAMPUAN PLATFORM — JUJUR, JANGAN DILEWATI:
+Sebelum ID pertama, tentukan dan nyatakan dalam 1–2 kalimat: (a) apakah platform ini punya tool image generation nyata, dan (b) apakah platform ini bisa menjalankan kode/membuat file untuk membuat ZIP. Jangan berpura-pura memiliki kemampuan yang tidak ada.
+
+JALUR A — Image generation tersedia: semua ID GENERATE (KELAS-M dan KELAS-U) dibuat lewat image generator, satu call per ID.
+
+JALUR B — Image generation TIDAK tersedia (mis. Claude tanpa tool gambar):
+- KELAS-U: boleh dirender lewat kode (mis. Python/PIL atau SVG lalu konversi ke WebP) sebagai SATU file per ID, ukuran persis sesuai manifest, memakai palet dan gaya KELAS-U dari Kunci Konsistensi Global, bentuk jelas dan konsisten antar-ikon.
+- KELAS-M: JANGAN digambar dari bentuk geometri dasar dan JANGAN diberi status SELESAI. Tampilkan prompt per-ID dari Prompt 3 PRO apa adanya, siap tempel ke generator gambar, dengan status PERLU GENERATOR GAMBAR. Jika Izinkan DRAFT-KODE = Ya, render sebagai draft kasar dengan nama file FINAL (agar bisa diganti satu per satu tanpa mengubah kode), beri status DRAFT-KODE — PERLU DIGANTI, dan sebut jelas bahwa itu bukan hasil akhir.
 
 ASET EXTERNAL-URL:
-- ID berstatus EXTERNAL-URL / DIRECT_IMAGE_URL_READY_FOR_WEB TIDAK BOLEH dikirim ke image generator.
-- Pertahankan URL dan metadata yang sudah ada untuk tahap coding berikutnya.
-- Tandai statusnya sebagai EXTERNAL-URL — TIDAK DIGENERATE.
-
-Platform: [ChatGPT / Claude]
+- ID berstatus EXTERNAL-URL / DIRECT_IMAGE_URL_READY_FOR_WEB TIDAK BOLEH dikirim ke image generator dan TIDAK dimasukkan ke ZIP.
+- Pertahankan URL dan metadata yang sudah ada untuk tahap coding; catat di manifest dengan status EXTERNAL-URL — TIDAK DIGENERATE.
 
 MODE EKSEKUSI WAJIB — SINGLE-ASSET / SINGLE-CALL:
 1. Proses ID produksi secara berurutan A001, A002, A003, dan seterusnya.
-2. SATU image-generation request/call HANYA BOLEH berisi SATU ID produksi.
+2. SATU image-generation request/call (atau satu render kode di Jalur B) HANYA BOLEH berisi SATU ID produksi.
 3. SATU call menghasilkan tepat SATU aset/gambar utama. Jangan memasukkan dua ID atau lebih ke call yang sama walaupun disebut batch.
 4. DILARANG meminta generator membuat A001-A010 sekaligus, membuat lembar aset, sprite sheet, character sheet, contact sheet, collage, grid, atau beberapa file/variasi dalam satu kanvas.
-5. Batch hanya boleh dipakai sebagai CHECKPOINT STATUS administratif setelah beberapa ID selesai; batch TIDAK BOLEH dipakai sebagai satu prompt image generation.
+5. Batch hanya boleh dipakai sebagai CHECKPOINT STATUS administratif; batch TIDAK BOLEH dipakai sebagai satu prompt image generation.
 6. Untuk setiap ID, gunakan hanya:
-   a. Kunci Konsistensi Global Prompt 3 PRO yang relevan;
+   a. Kunci Konsistensi Global yang relevan;
    b. ID + nama aset + nama file target;
-   c. PROMPT IMAGE GENERATION/PROMPT milik ID tersebut;
+   c. PROMPT milik ID tersebut;
    d. NEGATIVE PROMPT milik ID tersebut;
-   e. batasan teknis file/transparansi/resolusi milik ID tersebut.
+   e. batasan teknis ID tersebut: ukuran piksel eksak, transparansi, format WebP.
 7. Jangan menyertakan prompt ID lain di dalam request yang sedang digenerate.
-8. Jangan meringkas atau mengganti subjek utama. Nama aset dan subjek pada ID aktif harus menjadi objek utama hasil gambar.
-9. Elemen yang tidak diminta oleh ID aktif tidak boleh ditambahkan. Jika ID meminta satu karakter, hasil tidak boleh berubah menjadi kumpulan karakter/objek. Jika ID meminta satu ikon, hasil tidak boleh menjadi satu set ikon. Jika ID meminta satu ilustrasi materi, jangan menambahkan aset lain yang tidak diperlukan.
-10. Jika platform mendukung image reference/character reference/seed, gunakan hasil karakter dasar sebelumnya sebagai referensi untuk pose/state berikutnya, tanpa menggabungkan pose ke satu gambar.
+8. Jangan meringkas atau mengganti subjek utama. Nama aset dan subjek ID aktif harus menjadi objek utama hasil gambar.
+9. Elemen yang tidak diminta ID aktif tidak boleh ditambahkan. Satu karakter tetap satu karakter, satu ikon tetap satu ikon (bukan set ikon), satu ilustrasi materi tidak ditambahi aset lain.
+10. Jika platform mendukung image reference/character reference/seed, gunakan hasil karakter dasar sebelumnya sebagai referensi pose/state berikutnya, tanpa menggabungkan pose ke satu gambar.
 
 FORMAT INSTRUKSI YANG DIKIRIM KE IMAGE GENERATOR — WAJIB:
-PROJECT CONTEXT: salin singkat Kunci Konsistensi Global yang relevan dari Prompt 3 PRO.
-CURRENT ASSET: tulis ID produksi aktif dan nama aset persis seperti Prompt 3 PRO.
-TARGET FILE: tulis nama file target persis seperti Prompt 3 PRO.
-IMAGE PROMPT: gunakan prompt milik ID aktif sedekat mungkin dengan teks asli Prompt 3 PRO.
-NEGATIVE PROMPT: gunakan negative prompt milik ID aktif.
+PROJECT CONTEXT: salin singkat Kunci Konsistensi Global yang relevan.
+CURRENT ASSET: ID produksi aktif dan nama aset persis seperti Prompt 3 PRO.
+TARGET FILE: nama file target persis seperti Prompt 3 PRO.
+TARGET SIZE: lebar×tinggi piksel dan status transparansi persis seperti manifest.
+IMAGE PROMPT: prompt milik ID aktif sedekat mungkin dengan teks asli Prompt 3 PRO.
+NEGATIVE PROMPT: negative prompt milik ID aktif.
 HARD OUTPUT CONSTRAINT: exactly one image, exactly one requested asset/scene, no extra variants, no contact sheet, no collage, no sprite sheet, no grid, no unrelated objects.
 
-Jangan memasukkan daftar manifest penuh ke image-generation request. Manifest hanya untuk memilih ID berikutnya.
+Jangan memasukkan manifest penuh ke image-generation request. Manifest hanya untuk memilih ID berikutnya.
 
 URUTAN EKSEKUSI OTOMATIS:
 11. Mulai dari ID GENERATE pertama.
-12. Panggil image generator untuk ID itu saja.
-13. Setelah hasil tersedia, validasi hasil terhadap ID sumber sebelum berpindah.
-14. Jika hasil lulus, tandai SELESAI dan lanjut ke ID GENERATE berikutnya dengan image-generation call BARU yang terpisah.
-15. Jika hasil gagal, regenerate HANYA ID tersebut. Jangan melanjutkan sampai subjek/konteks utamanya benar.
-16. Jika platform tidak memungkinkan beberapa image-generation call terpisah dalam satu respons/turn, JANGAN menggabungkan ID. Generate hanya satu ID yang sedang aktif, lalu berhenti dan lanjutkan ID berikutnya pada turn berikutnya.
+12. Generate ID itu saja.
+13. Setelah hasil tersedia, validasi terhadap ID sumber sebelum berpindah.
+14. Jika lulus, tandai SELESAI dan lanjut ke ID GENERATE berikutnya dengan call BARU yang terpisah.
+15. Jika gagal, regenerate HANYA ID tersebut. Jangan lanjut sampai subjek/konteks utamanya benar.
+16. Jika platform tidak memungkinkan beberapa call terpisah dalam satu respons/turn, JANGAN menggabungkan ID. Generate hanya ID aktif, lalu berhenti dan lanjutkan ID berikutnya pada turn berikutnya.
 
 VALIDASI HASIL PER ID — WAJIB:
-17. Nama/subjek utama hasil harus sama dengan ID aktif dan sesuai proyek aktif.
-18. Pastikan hanya satu aset/scene utama sesuai prompt, pose/state benar, style dan palet sesuai, transparansi/background sesuai, dan tidak ada objek dari proyek lain.
-19. Pastikan tidak ada teks acak, watermark, multi-aset, collage, grid, sprite sheet, atau contact sheet.
-20. Untuk aset ilmiah/faktual, cek bahwa bentuk, anatomi, arah proses, alat, material, dan hubungan objek tidak menyesatkan.
-21. Jika hasil memuat tema yang tidak disebut dalam ID aktif — misalnya tanaman, alat kebun, kendaraan, karakter tambahan, atau objek lain yang berasal dari konteks berbeda — status otomatis PERLU ULANG dan generate ulang menggunakan prompt ID aktif yang sama.
-22. Jangan mengulang aset yang sudah benar.
+17. Nama/subjek utama hasil sama dengan ID aktif dan sesuai proyek aktif.
+18. Hanya satu aset/scene utama; pose/state benar; style dan palet sesuai; transparansi/background sesuai.
+19. Tidak ada teks acak, watermark, multi-aset, collage, grid, sprite sheet, atau contact sheet.
+20. Untuk aset ilmiah/faktual (KELAS-M), cek bahwa bentuk, anatomi, letak, urutan, arah proses, dan hubungan objek tidak menyesatkan.
+21. Ukuran piksel hasil sama dengan target manifest. Bila berbeda, status PERLU UKURAN ULANG. Jika hasil bukan WebP, status PERLU KONVERSI WEBP.
+22. Jika hasil memuat tema yang tidak disebut ID aktif (objek/karakter dari konteks lain), status PERLU ULANG dan generate ulang dengan prompt ID aktif yang sama.
+23. Jangan mengulang aset yang sudah benar.
 
 CHECKPOINT STATUS:
-Setelah maksimal 5–10 ID SELESAI, boleh tampilkan tabel administratif:
-ID | Nama File | Nama Aset | Status
-Status yang dipakai:
-- SELESAI
-- PERLU ULANG
-- PERLU KONVERSI WEBP
-- EXTERNAL-URL — TIDAK DIGENERATE
+Setelah maksimal 5–10 ID diproses, boleh tampilkan tabel administratif: ID | Nama File | Nama Aset | Status.
+Status yang dipakai: SELESAI; PERLU ULANG; PERLU KONVERSI WEBP; PERLU UKURAN ULANG; PERLU GENERATOR GAMBAR; DRAFT-KODE — PERLU DIGANTI; EXTERNAL-URL — TIDAK DIGENERATE.
 
-Checkpoint status tidak boleh menyebabkan beberapa ID digenerate dalam satu gambar.
-
-SETELAH SEMUA ID DIPROSES:
-Buat Manifest Aset Final berdasarkan ID Prompt 3 PRO dan pastikan tidak ada ID terlewat, duplikat, atau tertukar.
+PAKET AKHIR (ZIP) — SETELAH SEMUA ID DIPROSES:
+24. Verifikasi dulu: jumlah file gambar = jumlah ID berstatus GENERATE yang sudah berupa file; tidak ada ID terlewat, duplikat, atau tertukar; semua berekstensi .webp; nama file sama persis dengan manifest; ukuran dibaca dari file sebenarnya (bukan ditulis dari asumsi); file transparan memiliki alpha.
+25. Jika Kemas ZIP = Ya dan platform bisa membuat file: buat SATU ZIP bernama lab_[slug-proyek]_[jumlah-file-gambar]_assets.zip, folder datar, berisi semua file WebP yang ada + manifest.csv + manifest.json. Hanya ID yang benar-benar sudah berupa file yang masuk ZIP; ID berstatus PERLU GENERATOR GAMBAR tidak dibuatkan file kosong.
+26. manifest.csv memakai header persis: ID,Nama File,Width,Height,Nama Aset,Kategori,Kelas Render,Transparan,Status,URL
+    manifest.json berupa array objek dengan kunci: id, file, width, height, name, category, render_class, transparent, status, url.
+    Empat kolom pertama sama dengan format paket aset sebelumnya agar kompatibel. Isi Width/Height dari file sebenarnya. Kolom URL hanya diisi untuk EXTERNAL-URL (Nama File dikosongkan untuk baris tersebut).
+27. Jika platform tidak bisa membuat ZIP, atau gambar hasil generate tidak dapat diakses oleh lingkungan kode: JANGAN mengaku ZIP sudah dibuat. Tampilkan tabel manifest final, isi manifest.csv dan manifest.json sebagai teks siap simpan, dan daftar nama file target yang harus diberi nama ulang/diunduh pengguna.
+28. Setelah ZIP/manifest selesai, laporkan singkat: nama ZIP (bila ada), jumlah file di ZIP, tabel manifest final, dan daftar ID yang BELUM final (PERLU ULANG, PERLU GENERATOR GAMBAR, DRAFT-KODE, dst.). Jangan menyebut "semua aset selesai" bila masih ada ID belum final.
 
 PENTING:
 - Jangan hanya menjelaskan cara membuat aset.
 - Jangan hanya menampilkan ulang Prompt 3 PRO.
-- Jangan membuat prompt aset baru.
-- Jangan membuat ulang inventaris.
-- Jangan mengubah style/spesifikasi Prompt 3 PRO.
+- Jangan membuat prompt aset baru, inventaris baru, atau mengubah style/spesifikasi Prompt 3 PRO.
 - Jika image generation tersedia, eksekusi prompt per-ID secara terpisah.
-- Jika image generation tidak tersedia, tampilkan prompt PER ID apa adanya dan tandai PERLU DIEKSEKUSI PADA GENERATOR ASET.
-- Prioritas utama adalah KETEPATAN KONTEKS per ID, bukan jumlah aset yang dibuat sekaligus.
+- Jika image generation tidak tersedia, ikuti JALUR B; jangan menggantinya diam-diam dengan gambar bentuk dasar.
+- Prioritas utama adalah KETEPATAN KONTEKS dan KUALITAS per ID, bukan jumlah aset yang dibuat sekaligus.
 
-Mulai dari ID GENERATE pertama pada Prompt 3 PRO dan gunakan SATU image-generation call khusus untuk ID tersebut saja.`
+Mulai dari ID GENERATE pertama pada Prompt 3 PRO: nyatakan hasil CEK KEMAMPUAN PLATFORM, lalu gunakan SATU call khusus untuk ID tersebut saja.`
       },
       {
         title: "Prompt 5 PRO Susun Prompt Web App Simulasi & Lab Maya",
@@ -2569,7 +2597,7 @@ KELAS RENDER — WAJIB DITETAPKAN UNTUK SETIAP ID:
 - Kelas ini menentukan apa yang boleh dilakukan Prompt 4 PRO bila platform tidak memiliki image generation. Cantumkan di manifest dan di setiap prompt ID.
 
 STANDAR VISUAL:
-4. KELAS-M: visual harus konkret, jelas, mudah dikenali, dan sesuai konteks nyata proyek. Untuk konsep ilmiah/faktual, bentuk, proporsi, warna, material, state, arah proses/gerak, urutan, dan hubungan antarobjek harus benar secara keilmuan/faktual (mis. letak organ, urutan saluran, arah aliran).
+4. KELAS-M: untuk aset yang berhubungan dengan materi atau aktivitas utama—misalnya ilustrasi materi, objek contoh kontekstual, lingkungan belajar, diagram/proses, karakter non-maskot, dan visual pendukung konsep—visual harus konkret, jelas, mudah dikenali, dan sesuai konteks nyata proyek. Untuk konsep ilmiah/faktual, bentuk, proporsi, warna, material, state, arah proses/gerak, urutan, dan hubungan antarobjek harus benar secara keilmuan/faktual (mis. letak, urutan, dan arah proses sesuai topik proyek).
 5. KELAS-M: gunakan render realistis atau semi-realistis (atau ilustrasi edukatif berdetail tinggi bila itu gaya terkunci di Prompt 1 PRO) dengan pencahayaan dan material masuk akal serta bentuk tidak ambigu. Hindari visual abstrak, simbolik samar, clipart, doodle, line-art sederhana, tampilan "bentuk dasar tersusun", atau SVG yang kehilangan detail nyata.
 6. KELAS-U: boleh mengikuti gaya Prompt 1 PRO (2D, 3D, stylized, chibi, flat, atau semi-realistis), tetapi tetap harus tajam, konsisten antar-ikon, mudah dikenali, dan tidak membingungkan fungsi.
 7. Karakter non-maskot, bangunan, ruang, lingkungan, obstacle, alat, bahan, dan objek materi: pertahankan bentuk yang masuk akal sesuai dunia nyata/proyek; jangan menjadikannya ikon vektor datar kecuali memang elemen UI.
@@ -2583,7 +2611,7 @@ FORMAT FILE & UKURAN:
 13. Setiap ID WAJIB punya ukuran piksel eksplisit LEBAR×TINGGI (bukan "menyesuaikan layout"), karena ukuran ini menjadi target validasi di Prompt 4 PRO dan dicatat di manifest. Acuan: ikon/status/badge/aset lepas 512×512; hero/latar landscape rasio 16:9 (mis. 1200×675); diagram dan infografis minimal 900 px pada sisi terpanjang, rasio mengikuti isi (tulis angka pastinya).
 
 KONVENSI NAMA FILE & PAKET ZIP — WAJIB:
-14. Nama file: huruf kecil, snake_case, ASCII, tanpa spasi, berakhiran .webp, dengan awalan kategori yang konsisten: mascot_, bg_, icon_, status_, hero_, diagram_, infographic_, check_, reflect_, eval_, game_, storage_. Jika Prompt 2 sudah memberi nama file yang memenuhi pola ini, pertahankan persis; jika tidak, rapikan dan tulis nama final di manifest.
+14. Nama file: huruf kecil, snake_case, ASCII, tanpa spasi, berakhiran .webp, dengan awalan kategori yang konsisten (mis. mascot_, bg_, icon_, status_, hero_, diagram_, infographic_, check_, reflect_, eval_, game_, storage_). Jika Prompt 2 sudah memberi nama file yang memenuhi pola ini, pertahankan persis; jika tidak, rapikan dan tulis nama final di manifest.
 15. Nama file harus unik dan semua file ditaruh dalam satu folder datar (tanpa subfolder).
 16. Paket akhir yang akan dibuat Prompt 4 PRO: SATU ZIP bernama mpi_[slug-proyek]_[jumlah-file-gambar]_assets.zip, berisi semua file WebP berstatus GENERATE + manifest.csv + manifest.json. Rancang nama file dan manifest agar langsung cocok dengan paket ini.
 
@@ -2609,7 +2637,7 @@ STRUKTUR SETIAP PROMPT GAMBAR (bagian C):
 - Negative prompt/catatan larangan
 
 NEGATIVE PROMPT MINIMAL — KELAS-M:
-scientifically/factually inaccurate, wrong proportions, wrong organ/object placement, distorted anatomy/object, impossible material, misleading state or process direction, overly abstract, built from basic geometric shapes, primitive placeholder look, generic flat vector, SVG-like appearance, clipart, blurry, low detail, random text, watermark, multiple assets in one image, collage, sprite sheet, contact sheet.
+scientifically/factually inaccurate, wrong proportions, wrong object placement, distorted anatomy/object, impossible material, misleading state or process direction, overly abstract, built from basic geometric shapes, primitive placeholder look, generic flat vector, SVG-like appearance, clipart, blurry, low detail, random text, watermark, multiple assets in one image, collage, sprite sheet, contact sheet.
 
 NEGATIVE PROMPT MINIMAL — KELAS-U:
 blurry, ambiguous shape, inconsistent style between icons, random text, watermark, multiple assets in one image, collage, sprite sheet, contact sheet. Jangan melarang gaya stylized/flat yang memang dipilih di Prompt 1 PRO.
@@ -3028,152 +3056,180 @@ ATURAN INVENTARIS FILE GAMBAR — WAJIB:
       },
       {
         title: "Prompt 3 PRO Generate Prompt Aset Game Edukasi Sederhana",
-        text: `Berdasarkan Daftar Inventaris Aset (Prompt 2 PRO), buatkan kumpulan prompt siap pakai untuk menghasilkan SETIAP aset proyek Game Edukasi Sederhana menggunakan AI image/audio generator (misalnya ChatGPT, Claude yang mendukung image generation, Gemini, Midjourney, Ideogram, atau Adobe Firefly).
+        text: `Berdasarkan Daftar Inventaris Aset (Prompt 2 PRO), buatkan kumpulan prompt siap pakai untuk menghasilkan SETIAP aset proyek Game Edukasi Sederhana menggunakan AI image/audio generator (misalnya ChatGPT, Gemini, Midjourney, Ideogram, Adobe Firefly, atau Claude yang benar-benar memiliki tool image generation). Hasil tahap ini akan dieksekusi satu per satu oleh Prompt 4 PRO, lalu dikemas menjadi SATU paket ZIP berisi file WebP terpisah + manifest.
 
 ID PRODUKSI — WAJIB:
 - Beri setiap prompt aset satu ID produksi unik dan berurutan: A001, A002, A003, dan seterusnya.
 - Satu ID hanya boleh mewakili SATU file/aset. Pose/state yang berbeda mendapat ID berbeda.
-- Pertahankan urutan ID ini sebagai urutan eksekusi untuk Prompt 4 PRO. Jangan mengulang atau melewati nomor.
-- Jika aset ditandai EXTERNAL-URL dan tidak perlu digenerate, tetap boleh dicatat pada manifest dengan status EXTERNAL-URL, tetapi jangan membuat prompt image-generation untuk aset tersebut.
+- Urutan ID adalah urutan eksekusi Prompt 4 PRO. Jangan mengulang atau melewati nomor.
+- Aset yang pada Prompt 2 ditandai EXTERNAL-URL (sudah memiliki DIRECT_IMAGE_URL_READY_FOR_WEB) TIDAK BOLEH dibuat ulang oleh image generator. Catat pada manifest dengan status EXTERNAL-URL beserta URL-nya, tetapi jangan buat prompt image-generation untuk aset tersebut.
 
 ATURAN UTAMA — SATU FILE = SATU GAMBAR/ASET:
 1. Buat SATU prompt gambar terpisah untuk SATU aset. DILARANG menggabungkan dua atau lebih aset, pose, state, objek, atau variasi ke dalam satu file gambar.
-2. Jika satu karakter/objek membutuhkan beberapa pose atau state, setiap pose/state menjadi prompt dan file WebP TERPISAH. Contoh: karakter_normal.webp, karakter_senyum.webp, karakter_menunjuk.webp; gelas_kosong.webp dan gelas_terisi.webp.
+2. Jika satu karakter/objek membutuhkan beberapa pose atau state, setiap pose/state menjadi ID, prompt, dan file WebP TERPISAH (contoh: mascot_normal.webp, mascot_senyum.webp, mascot_menunjuk.webp).
 3. Jangan membuat sprite sheet, contact sheet, collage, grid aset, lembar pose, atau satu kanvas berisi beberapa gambar.
 
-STANDAR VISUAL — KONTEKS NYATA & JELAS:
-4. Untuk aset yang berhubungan dengan materi atau aktivitas utama—misalnya objek materi, lingkungan permainan, karakter non-maskot, bangunan, obstacle/rintangan, item interaktif, dan state objek permainan—visual harus konkret, jelas, mudah dikenali, dan sesuai konteks nyata proyek. Jika menyangkut konsep ilmiah/faktual, bentuk, proporsi, warna, material, state, arah proses/gerak, dan hubungan antarobjek harus benar secara keilmuan/faktual.
-5. Gunakan render realistis atau semi-realistis dengan detail cukup, pencahayaan dan material masuk akal, serta bentuk objek tidak ambigu. Hindari visual terlalu abstrak, simbolik samar, flat-vector generik, clipart, doodle, line-art sederhana, atau tampilan seperti SVG yang kehilangan detail nyata.
-6. PENGECUALIAN GAYA: maskot, ikon menu, ikon kontrol/navigasi, badge, dan elemen UI dekoratif boleh menyesuaikan gaya Prompt 1 PRO (mis. 2D, 3D, stylized, chibi, atau semi-realistis), tetapi tetap harus tajam, konsisten, mudah dikenali, dan tidak membingungkan fungsi.
-7. Untuk karakter non-maskot, bangunan, ruang, lingkungan, obstacle, alat, bahan, dan objek materi, pertahankan bentuk yang masuk akal sesuai konteks dunia nyata/proyek; jangan menjadikannya ikon vektor datar kecuali memang elemen UI.
+KELAS RENDER — WAJIB DITETAPKAN UNTUK SETIAP ID:
+- KELAS-M (Materi): objek materi, lingkungan/latar permainan, karakter non-maskot, bangunan, obstacle/rintangan, item interaktif, dan state objek permainan yang memuat konsep materi. Wajib dibuat oleh image generator sungguhan. TIDAK BOLEH digambar dari bentuk geometri dasar (kotak, lingkaran, elips, garis) sebagai pengganti ilustrasi.
+- KELAS-U (UI): ikon menu/navigasi, ikon HUD (skor, nyawa, waktu, level), tombol, badge, ikon status, dan elemen UI dekoratif sederhana. Boleh bergaya stylized/flat sesuai Prompt 1 PRO.
+- Jika ragu, tetapkan KELAS-M.
+- Kelas ini menentukan apa yang boleh dilakukan Prompt 4 PRO bila platform tidak memiliki image generation. Cantumkan di manifest dan di setiap prompt ID.
+
+STANDAR VISUAL:
+4. KELAS-M: untuk aset yang berhubungan dengan materi atau aktivitas utama—misalnya objek materi, lingkungan permainan, karakter non-maskot, bangunan, obstacle/rintangan, item interaktif, dan state objek permainan—visual harus konkret, jelas, mudah dikenali, dan sesuai konteks nyata proyek. Untuk konsep ilmiah/faktual, bentuk, proporsi, warna, material, state, arah proses/gerak, urutan, dan hubungan antarobjek harus benar secara keilmuan/faktual (mis. letak, urutan, dan arah proses sesuai topik proyek).
+5. KELAS-M: gunakan render realistis atau semi-realistis (atau ilustrasi edukatif berdetail tinggi bila itu gaya terkunci di Prompt 1 PRO) dengan pencahayaan dan material masuk akal serta bentuk tidak ambigu. Hindari visual abstrak, simbolik samar, clipart, doodle, line-art sederhana, tampilan "bentuk dasar tersusun", atau SVG yang kehilangan detail nyata.
+6. KELAS-U: boleh mengikuti gaya Prompt 1 PRO (2D, 3D, stylized, chibi, flat, atau semi-realistis), tetapi tetap harus tajam, konsisten antar-ikon, mudah dikenali, dan tidak membingungkan fungsi.
+7. Karakter non-maskot, bangunan, ruang, lingkungan, obstacle, alat, bahan, dan objek materi: pertahankan bentuk yang masuk akal sesuai dunia nyata/proyek; jangan menjadikannya ikon vektor datar kecuali memang elemen UI.
 8. Pertahankan konsistensi palet warna, sudut pandang, arah cahaya, proporsi relatif, dan tingkat detail sesuai Prompt 1 PRO di semua file.
-9. Jangan menaruh teks, label, angka acak, watermark, atau simbol yang tidak diperlukan di dalam gambar. Teks UI dibuat dengan HTML/CSS. Bila label ilmiah benar-benar wajib, sebutkan eksplisit dan minimalkan teks.
+9. Jangan menaruh teks, label, angka acak, watermark, atau simbol yang tidak diperlukan di dalam gambar. Teks dan label UI dibuat dengan HTML/CSS. Bila label ilmiah benar-benar wajib di dalam gambar, sebutkan eksplisit dan minimalkan teks.
 
-FORMAT FILE:
+FORMAT FILE & UKURAN:
 10. Target file gambar WAJIB WebP (.webp), kualitas tinggi/lossless bila tersedia.
-11. Gunakan background transparan (alpha) untuk aset lepas seperti alat, karakter, item, obstacle, ikon, dan objek interaktif. Untuk background/latar penuh, gunakan kanvas penuh sesuai kebutuhan dan tidak perlu transparan.
-12. Jika generator hanya menghasilkan PNG/JPG, tetap buat kualitas terbaik dan beri catatan: "perlu konversi ke WebP". Jangan beralih ke SVG/vektor sebagai solusi cadangan.
-13. Resolusi harus cukup tajam untuk UI; rekomendasikan minimal 512 px pada sisi terpanjang untuk aset lepas, dan resolusi lebih besar untuk background sesuai layout.
+11. Background transparan (alpha) untuk aset lepas: ikon, status, badge, alat, karakter, item, objek interaktif, dan diagram/ilustrasi yang ditempel di atas halaman. Background penuh hanya untuk hero/latar halaman.
+12. Jika generator hanya menghasilkan PNG/JPG, buat kualitas terbaik dan beri catatan "perlu konversi ke WebP". Jangan beralih ke SVG/vektor sebagai solusi cadangan untuk KELAS-M.
+13. Setiap ID WAJIB punya ukuran piksel eksplisit LEBAR×TINGGI (bukan "menyesuaikan layout"), karena ukuran ini menjadi target validasi di Prompt 4 PRO dan dicatat di manifest. Acuan: ikon/status/badge/aset lepas 512×512; hero/latar landscape rasio 16:9 (mis. 1200×675); diagram dan infografis minimal 900 px pada sisi terpanjang, rasio mengikuti isi (tulis angka pastinya).
 
-STRUKTUR SETIAP PROMPT GAMBAR:
-- ID Produksi (A001, A002, A003, dst.) & Nama Aset
+KONVENSI NAMA FILE & PAKET ZIP — WAJIB:
+14. Nama file: huruf kecil, snake_case, ASCII, tanpa spasi, berakhiran .webp, dengan awalan kategori yang konsisten (mis. mascot_, bg_, icon_, status_, char_, obj_, item_, obstacle_, hud_, game_). Jika Prompt 2 sudah memberi nama file yang memenuhi pola ini, pertahankan persis; jika tidak, rapikan dan tulis nama final di manifest.
+15. Nama file harus unik dan semua file ditaruh dalam satu folder datar (tanpa subfolder).
+16. Paket akhir yang akan dibuat Prompt 4 PRO: SATU ZIP bernama game_[slug-proyek]_[jumlah-file-gambar]_assets.zip, berisi semua file WebP berstatus GENERATE + manifest.csv + manifest.json. Rancang nama file dan manifest agar langsung cocok dengan paket ini.
+
+STRUKTUR OUTPUT TAHAP INI — WAJIB, URUT:
+A. KUNCI KONSISTENSI GLOBAL — ringkas: judul/identitas proyek, mata pelajaran/topik, gaya visual KELAS-M, gaya visual KELAS-U, palet warna (kode HEX), sudut pandang, arah cahaya, proporsi relatif, tingkat detail, aturan teks dalam gambar, aturan transparansi.
+B. MANIFEST PRODUKSI FINAL — satu tabel untuk SEMUA ID dengan kolom: ID | Nama File | Nama Aset | Kategori | Kelas Render (M/U) | Lebar×Tinggi px | Transparan (Ya/Tidak) | Status (GENERATE / EXTERNAL-URL) | Dipakai di Menu/Halaman. Tulis jumlah total ID dan jumlah ID GENERATE di bawah tabel.
+C. PROMPT PER ID — dikelompokkan per kategori aset, urut sesuai ID.
+D. PROMPT AUDIO — terpisah dan hanya bila ada di inventaris (opsional).
+
+STRUKTUR SETIAP PROMPT GAMBAR (bagian C):
+- ID Produksi (A001, A002, dst.) & Nama Aset
 - Nama file target .webp
+- Kelas Render (KELAS-M / KELAS-U)
+- Ukuran piksel eksak (LEBAR×TINGGI) & transparansi
 - Halaman/menu pemakaian
 - Fungsi edukatif/interaktif
 - Deskripsi subjek/objek secara konkret
-- Konteks nyata/faktual yang harus dipertahankan
-- Gaya visual sesuai Prompt 1 PRO
+- Konteks nyata/faktual yang harus dipertahankan (wajib untuk KELAS-M)
+- Gaya visual sesuai Kunci Konsistensi Global / Prompt 1 PRO
 - Komposisi & sudut pandang
 - Palet warna
 - Pencahayaan/material/tekstur
-- Background transparan atau penuh
-- Resolusi/rasio
 - Negative prompt/catatan larangan
 
-NEGATIVE PROMPT MINIMAL untuk aset materi/objek nyata:
-scientifically/factually inaccurate, wrong proportions, distorted anatomy/object, impossible material, misleading state, overly abstract, generic flat vector, SVG-like appearance, clipart, blurry, low detail, random text, watermark, multiple assets in one image, collage, sprite sheet, contact sheet.
+NEGATIVE PROMPT MINIMAL — KELAS-M:
+scientifically/factually inaccurate, wrong proportions, wrong object placement, distorted anatomy/object, impossible material, misleading state or process direction, overly abstract, built from basic geometric shapes, primitive placeholder look, generic flat vector, SVG-like appearance, clipart, blurry, low detail, random text, watermark, multiple assets in one image, collage, sprite sheet, contact sheet.
 
-Untuk maskot/ikon/navigasi, sesuaikan negative prompt agar tidak melarang gaya stylized yang memang dipilih, tetapi tetap larang blur, bentuk ambigu, teks acak, dan multi-aset dalam satu file.
+NEGATIVE PROMPT MINIMAL — KELAS-U:
+blurry, ambiguous shape, inconsistent style between icons, random text, watermark, multiple assets in one image, collage, sprite sheet, contact sheet. Jangan melarang gaya stylized/flat yang memang dipilih di Prompt 1 PRO.
 
 Jika ada audio, buat prompt audio terpisah. Audio bersifat opsional sesuai inventaris.
 
-Output akhir: daftar prompt siap-copy yang dikelompokkan per kategori aset, tetapi SETIAP prompt gambar hanya untuk SATU file dan SATU gambar/aset. Setiap prompt wajib memiliki ID produksi berurutan A001, A002, A003, dst. Hasil Prompt 3 PRO ini adalah INSTRUKSI FINAL dan menjadi sumber utama yang dieksekusi langsung oleh Prompt 4 PRO.`
+Output akhir: bagian A, B, C (dan D bila ada) secara lengkap dan tidak terpotong. SETIAP prompt gambar hanya untuk SATU file dan SATU gambar/aset, dengan ID berurutan A001, A002, A003, dst. Hasil Prompt 3 PRO ini adalah INSTRUKSI FINAL dan menjadi sumber utama yang dieksekusi langsung oleh Prompt 4 PRO.`
       },
       {
         title: "Prompt 4 PRO Generate Semua Aset Otomatis Game Edukasi Sederhana di ChatGPT/Claude",
-        text: `Gunakan HANYA Prompt 3 PRO TERAKHIR yang tersedia lengkap di percakapan aktif ini sebagai instruksi final untuk melakukan generate aset proyek Game Edukasi Sederhana.
+        text: `Gunakan HANYA Prompt 3 PRO TERAKHIR yang tersedia lengkap di percakapan aktif ini sebagai instruksi final untuk melakukan generate aset proyek Game Edukasi Sederhana, lalu kemas hasilnya menjadi paket ZIP.
 
 Tugas tahap ini adalah MENGEKSEKUSI aset satu per satu. Jangan merancang ulang aset, jangan membuat inventaris baru, jangan menulis ulang prompt, dan jangan mengambil konteks proyek lain.
 
 SUMBER KEBENARAN — WAJIB:
 - Prompt 3 PRO TERAKHIR pada percakapan aktif ini adalah sumber instruksi generate UTAMA dan FINAL.
-- Gunakan bagian Kunci Konsistensi Global, prompt per-ID, negative prompt per-ID, dan Manifest Produksi Final dari Prompt 3 PRO tersebut.
+- Gunakan bagian A (Kunci Konsistensi Global), bagian B (Manifest Produksi Final), dan bagian C (prompt + negative prompt per-ID) dari Prompt 3 PRO tersebut.
 - Prompt 1 PRO dan Prompt 2 PRO hanya boleh dipakai untuk verifikasi bila Prompt 3 PRO secara eksplisit merujuknya.
 - JANGAN memakai aset, tema, objek, karakter, atau konteks dari percakapan/proyek lain, memory, contoh sebelumnya, atau asumsi umum.
 - Jika ada perbedaan interpretasi, spesifikasi eksplisit pada ID Prompt 3 PRO mengalahkan asumsi lain.
 
 VALIDASI KONTEKS SEBELUM GENERATE — JANGAN DILEWATI:
-1. Temukan Prompt 3 PRO lengkap dan Manifest Produksi Final yang terkait dengan proyek aktif.
-2. Ambil identitas proyek dari Prompt 3 PRO: nama/judul proyek, mata pelajaran/topik bila ada, gaya visual global, dan jumlah ID produksi.
-3. Cocokkan ID pertama berstatus GENERATE dengan nama file dan nama asetnya.
-4. Jika Prompt 3 PRO tidak ditemukan, terpotong, tidak lengkap, atau identitas proyek tidak dapat dipastikan, BERHENTI. Jangan generate gambar apa pun. Minta pengguna menempelkan Prompt 3 PRO lengkap.
-5. Jika konteks yang terbaca bertentangan dengan Prompt 3 PRO aktif, abaikan konteks lain dan gunakan Prompt 3 PRO aktif.
+1. Temukan Prompt 3 PRO lengkap beserta bagian A, B, dan C untuk proyek aktif.
+2. Ambil identitas proyek: nama/judul proyek, mata pelajaran/topik, gaya visual global, jumlah ID total, dan jumlah ID berstatus GENERATE.
+3. Cocokkan ID pertama berstatus GENERATE dengan nama file, nama aset, kelas render, dan ukuran pikselnya.
+4. Jika Prompt 3 PRO tidak ditemukan, terpotong, tidak lengkap, atau identitas proyek tidak dapat dipastikan, BERHENTI. Jangan generate apa pun. Minta pengguna menempelkan Prompt 3 PRO lengkap.
+5. Jika konteks lain bertentangan dengan Prompt 3 PRO aktif, abaikan konteks lain.
+
+PENGATURAN EKSEKUSI (isi sebelum mulai; bila dibiarkan kosong pakai nilai bawaan):
+Platform: [ChatGPT / Claude]
+Izinkan DRAFT-KODE untuk aset KELAS-M bila platform tidak punya image generation: [Tidak / Ya] (bawaan: Tidak)
+Kemas hasil menjadi ZIP: [Ya / Tidak] (bawaan: Ya)
+
+CEK KEMAMPUAN PLATFORM — JUJUR, JANGAN DILEWATI:
+Sebelum ID pertama, tentukan dan nyatakan dalam 1–2 kalimat: (a) apakah platform ini punya tool image generation nyata, dan (b) apakah platform ini bisa menjalankan kode/membuat file untuk membuat ZIP. Jangan berpura-pura memiliki kemampuan yang tidak ada.
+
+JALUR A — Image generation tersedia: semua ID GENERATE (KELAS-M dan KELAS-U) dibuat lewat image generator, satu call per ID.
+
+JALUR B — Image generation TIDAK tersedia (mis. Claude tanpa tool gambar):
+- KELAS-U: boleh dirender lewat kode (mis. Python/PIL atau SVG lalu konversi ke WebP) sebagai SATU file per ID, ukuran persis sesuai manifest, memakai palet dan gaya KELAS-U dari Kunci Konsistensi Global, bentuk jelas dan konsisten antar-ikon.
+- KELAS-M: JANGAN digambar dari bentuk geometri dasar dan JANGAN diberi status SELESAI. Tampilkan prompt per-ID dari Prompt 3 PRO apa adanya, siap tempel ke generator gambar, dengan status PERLU GENERATOR GAMBAR. Jika Izinkan DRAFT-KODE = Ya, render sebagai draft kasar dengan nama file FINAL (agar bisa diganti satu per satu tanpa mengubah kode), beri status DRAFT-KODE — PERLU DIGANTI, dan sebut jelas bahwa itu bukan hasil akhir.
 
 ASET EXTERNAL-URL:
-- ID berstatus EXTERNAL-URL / DIRECT_IMAGE_URL_READY_FOR_WEB TIDAK BOLEH dikirim ke image generator.
-- Pertahankan URL dan metadata yang sudah ada untuk tahap coding berikutnya.
-- Tandai statusnya sebagai EXTERNAL-URL — TIDAK DIGENERATE.
-
-Platform: [ChatGPT / Claude]
+- ID berstatus EXTERNAL-URL / DIRECT_IMAGE_URL_READY_FOR_WEB TIDAK BOLEH dikirim ke image generator dan TIDAK dimasukkan ke ZIP.
+- Pertahankan URL dan metadata yang sudah ada untuk tahap coding; catat di manifest dengan status EXTERNAL-URL — TIDAK DIGENERATE.
 
 MODE EKSEKUSI WAJIB — SINGLE-ASSET / SINGLE-CALL:
 1. Proses ID produksi secara berurutan A001, A002, A003, dan seterusnya.
-2. SATU image-generation request/call HANYA BOLEH berisi SATU ID produksi.
+2. SATU image-generation request/call (atau satu render kode di Jalur B) HANYA BOLEH berisi SATU ID produksi.
 3. SATU call menghasilkan tepat SATU aset/gambar utama. Jangan memasukkan dua ID atau lebih ke call yang sama walaupun disebut batch.
 4. DILARANG meminta generator membuat A001-A010 sekaligus, membuat lembar aset, sprite sheet, character sheet, contact sheet, collage, grid, atau beberapa file/variasi dalam satu kanvas.
-5. Batch hanya boleh dipakai sebagai CHECKPOINT STATUS administratif setelah beberapa ID selesai; batch TIDAK BOLEH dipakai sebagai satu prompt image generation.
+5. Batch hanya boleh dipakai sebagai CHECKPOINT STATUS administratif; batch TIDAK BOLEH dipakai sebagai satu prompt image generation.
 6. Untuk setiap ID, gunakan hanya:
-   a. Kunci Konsistensi Global Prompt 3 PRO yang relevan;
+   a. Kunci Konsistensi Global yang relevan;
    b. ID + nama aset + nama file target;
-   c. PROMPT IMAGE GENERATION/PROMPT milik ID tersebut;
+   c. PROMPT milik ID tersebut;
    d. NEGATIVE PROMPT milik ID tersebut;
-   e. batasan teknis file/transparansi/resolusi milik ID tersebut.
+   e. batasan teknis ID tersebut: ukuran piksel eksak, transparansi, format WebP.
 7. Jangan menyertakan prompt ID lain di dalam request yang sedang digenerate.
-8. Jangan meringkas atau mengganti subjek utama. Nama aset dan subjek pada ID aktif harus menjadi objek utama hasil gambar.
-9. Elemen yang tidak diminta oleh ID aktif tidak boleh ditambahkan. Jika ID meminta satu karakter, hasil tidak boleh berubah menjadi kumpulan karakter/objek. Jika ID meminta satu ikon, hasil tidak boleh menjadi satu set ikon. Jika ID meminta satu ilustrasi materi, jangan menambahkan aset lain yang tidak diperlukan.
-10. Jika platform mendukung image reference/character reference/seed, gunakan hasil karakter dasar sebelumnya sebagai referensi untuk pose/state berikutnya, tanpa menggabungkan pose ke satu gambar.
+8. Jangan meringkas atau mengganti subjek utama. Nama aset dan subjek ID aktif harus menjadi objek utama hasil gambar.
+9. Elemen yang tidak diminta ID aktif tidak boleh ditambahkan. Satu karakter tetap satu karakter, satu ikon tetap satu ikon (bukan set ikon), satu ilustrasi materi tidak ditambahi aset lain.
+10. Jika platform mendukung image reference/character reference/seed, gunakan hasil karakter dasar sebelumnya sebagai referensi pose/state berikutnya, tanpa menggabungkan pose ke satu gambar.
 
 FORMAT INSTRUKSI YANG DIKIRIM KE IMAGE GENERATOR — WAJIB:
-PROJECT CONTEXT: salin singkat Kunci Konsistensi Global yang relevan dari Prompt 3 PRO.
-CURRENT ASSET: tulis ID produksi aktif dan nama aset persis seperti Prompt 3 PRO.
-TARGET FILE: tulis nama file target persis seperti Prompt 3 PRO.
-IMAGE PROMPT: gunakan prompt milik ID aktif sedekat mungkin dengan teks asli Prompt 3 PRO.
-NEGATIVE PROMPT: gunakan negative prompt milik ID aktif.
+PROJECT CONTEXT: salin singkat Kunci Konsistensi Global yang relevan.
+CURRENT ASSET: ID produksi aktif dan nama aset persis seperti Prompt 3 PRO.
+TARGET FILE: nama file target persis seperti Prompt 3 PRO.
+TARGET SIZE: lebar×tinggi piksel dan status transparansi persis seperti manifest.
+IMAGE PROMPT: prompt milik ID aktif sedekat mungkin dengan teks asli Prompt 3 PRO.
+NEGATIVE PROMPT: negative prompt milik ID aktif.
 HARD OUTPUT CONSTRAINT: exactly one image, exactly one requested asset/scene, no extra variants, no contact sheet, no collage, no sprite sheet, no grid, no unrelated objects.
 
-Jangan memasukkan daftar manifest penuh ke image-generation request. Manifest hanya untuk memilih ID berikutnya.
+Jangan memasukkan manifest penuh ke image-generation request. Manifest hanya untuk memilih ID berikutnya.
 
 URUTAN EKSEKUSI OTOMATIS:
 11. Mulai dari ID GENERATE pertama.
-12. Panggil image generator untuk ID itu saja.
-13. Setelah hasil tersedia, validasi hasil terhadap ID sumber sebelum berpindah.
-14. Jika hasil lulus, tandai SELESAI dan lanjut ke ID GENERATE berikutnya dengan image-generation call BARU yang terpisah.
-15. Jika hasil gagal, regenerate HANYA ID tersebut. Jangan melanjutkan sampai subjek/konteks utamanya benar.
-16. Jika platform tidak memungkinkan beberapa image-generation call terpisah dalam satu respons/turn, JANGAN menggabungkan ID. Generate hanya satu ID yang sedang aktif, lalu berhenti dan lanjutkan ID berikutnya pada turn berikutnya.
+12. Generate ID itu saja.
+13. Setelah hasil tersedia, validasi terhadap ID sumber sebelum berpindah.
+14. Jika lulus, tandai SELESAI dan lanjut ke ID GENERATE berikutnya dengan call BARU yang terpisah.
+15. Jika gagal, regenerate HANYA ID tersebut. Jangan lanjut sampai subjek/konteks utamanya benar.
+16. Jika platform tidak memungkinkan beberapa call terpisah dalam satu respons/turn, JANGAN menggabungkan ID. Generate hanya ID aktif, lalu berhenti dan lanjutkan ID berikutnya pada turn berikutnya.
 
 VALIDASI HASIL PER ID — WAJIB:
-17. Nama/subjek utama hasil harus sama dengan ID aktif dan sesuai proyek aktif.
-18. Pastikan hanya satu aset/scene utama sesuai prompt, pose/state benar, style dan palet sesuai, transparansi/background sesuai, dan tidak ada objek dari proyek lain.
-19. Pastikan tidak ada teks acak, watermark, multi-aset, collage, grid, sprite sheet, atau contact sheet.
-20. Untuk aset ilmiah/faktual, cek bahwa bentuk, anatomi, arah proses, alat, material, dan hubungan objek tidak menyesatkan.
-21. Jika hasil memuat tema yang tidak disebut dalam ID aktif — misalnya tanaman, alat kebun, kendaraan, karakter tambahan, atau objek lain yang berasal dari konteks berbeda — status otomatis PERLU ULANG dan generate ulang menggunakan prompt ID aktif yang sama.
-22. Jangan mengulang aset yang sudah benar.
+17. Nama/subjek utama hasil sama dengan ID aktif dan sesuai proyek aktif.
+18. Hanya satu aset/scene utama; pose/state benar; style dan palet sesuai; transparansi/background sesuai.
+19. Tidak ada teks acak, watermark, multi-aset, collage, grid, sprite sheet, atau contact sheet.
+20. Untuk aset ilmiah/faktual (KELAS-M), cek bahwa bentuk, anatomi, letak, urutan, arah proses, dan hubungan objek tidak menyesatkan.
+21. Ukuran piksel hasil sama dengan target manifest. Bila berbeda, status PERLU UKURAN ULANG. Jika hasil bukan WebP, status PERLU KONVERSI WEBP.
+22. Jika hasil memuat tema yang tidak disebut ID aktif (objek/karakter dari konteks lain), status PERLU ULANG dan generate ulang dengan prompt ID aktif yang sama.
+23. Jangan mengulang aset yang sudah benar.
 
 CHECKPOINT STATUS:
-Setelah maksimal 5–10 ID SELESAI, boleh tampilkan tabel administratif:
-ID | Nama File | Nama Aset | Status
-Status yang dipakai:
-- SELESAI
-- PERLU ULANG
-- PERLU KONVERSI WEBP
-- EXTERNAL-URL — TIDAK DIGENERATE
+Setelah maksimal 5–10 ID diproses, boleh tampilkan tabel administratif: ID | Nama File | Nama Aset | Status.
+Status yang dipakai: SELESAI; PERLU ULANG; PERLU KONVERSI WEBP; PERLU UKURAN ULANG; PERLU GENERATOR GAMBAR; DRAFT-KODE — PERLU DIGANTI; EXTERNAL-URL — TIDAK DIGENERATE.
 
-Checkpoint status tidak boleh menyebabkan beberapa ID digenerate dalam satu gambar.
-
-SETELAH SEMUA ID DIPROSES:
-Buat Manifest Aset Final berdasarkan ID Prompt 3 PRO dan pastikan tidak ada ID terlewat, duplikat, atau tertukar.
+PAKET AKHIR (ZIP) — SETELAH SEMUA ID DIPROSES:
+24. Verifikasi dulu: jumlah file gambar = jumlah ID berstatus GENERATE yang sudah berupa file; tidak ada ID terlewat, duplikat, atau tertukar; semua berekstensi .webp; nama file sama persis dengan manifest; ukuran dibaca dari file sebenarnya (bukan ditulis dari asumsi); file transparan memiliki alpha.
+25. Jika Kemas ZIP = Ya dan platform bisa membuat file: buat SATU ZIP bernama game_[slug-proyek]_[jumlah-file-gambar]_assets.zip, folder datar, berisi semua file WebP yang ada + manifest.csv + manifest.json. Hanya ID yang benar-benar sudah berupa file yang masuk ZIP; ID berstatus PERLU GENERATOR GAMBAR tidak dibuatkan file kosong.
+26. manifest.csv memakai header persis: ID,Nama File,Width,Height,Nama Aset,Kategori,Kelas Render,Transparan,Status,URL
+    manifest.json berupa array objek dengan kunci: id, file, width, height, name, category, render_class, transparent, status, url.
+    Empat kolom pertama sama dengan format paket aset sebelumnya agar kompatibel. Isi Width/Height dari file sebenarnya. Kolom URL hanya diisi untuk EXTERNAL-URL (Nama File dikosongkan untuk baris tersebut).
+27. Jika platform tidak bisa membuat ZIP, atau gambar hasil generate tidak dapat diakses oleh lingkungan kode: JANGAN mengaku ZIP sudah dibuat. Tampilkan tabel manifest final, isi manifest.csv dan manifest.json sebagai teks siap simpan, dan daftar nama file target yang harus diberi nama ulang/diunduh pengguna.
+28. Setelah ZIP/manifest selesai, laporkan singkat: nama ZIP (bila ada), jumlah file di ZIP, tabel manifest final, dan daftar ID yang BELUM final (PERLU ULANG, PERLU GENERATOR GAMBAR, DRAFT-KODE, dst.). Jangan menyebut "semua aset selesai" bila masih ada ID belum final.
 
 PENTING:
 - Jangan hanya menjelaskan cara membuat aset.
 - Jangan hanya menampilkan ulang Prompt 3 PRO.
-- Jangan membuat prompt aset baru.
-- Jangan membuat ulang inventaris.
-- Jangan mengubah style/spesifikasi Prompt 3 PRO.
+- Jangan membuat prompt aset baru, inventaris baru, atau mengubah style/spesifikasi Prompt 3 PRO.
 - Jika image generation tersedia, eksekusi prompt per-ID secara terpisah.
-- Jika image generation tidak tersedia, tampilkan prompt PER ID apa adanya dan tandai PERLU DIEKSEKUSI PADA GENERATOR ASET.
-- Prioritas utama adalah KETEPATAN KONTEKS per ID, bukan jumlah aset yang dibuat sekaligus.
+- Jika image generation tidak tersedia, ikuti JALUR B; jangan menggantinya diam-diam dengan gambar bentuk dasar.
+- Prioritas utama adalah KETEPATAN KONTEKS dan KUALITAS per ID, bukan jumlah aset yang dibuat sekaligus.
 
-Mulai dari ID GENERATE pertama pada Prompt 3 PRO dan gunakan SATU image-generation call khusus untuk ID tersebut saja.`
+Mulai dari ID GENERATE pertama pada Prompt 3 PRO: nyatakan hasil CEK KEMAMPUAN PLATFORM, lalu gunakan SATU call khusus untuk ID tersebut saja.`
       },
       {
         title: "Prompt 5 PRO Coding Game Edukasi Sederhana (Gabungkan Semua Aset ke Desain)",
@@ -3358,152 +3414,180 @@ ATURAN INVENTARIS FILE GAMBAR — WAJIB:
       },
       {
         title: "Prompt 3 PRO Generate Prompt Aset Game Edukasi Critical Thinking",
-        text: `Berdasarkan Daftar Inventaris Aset (Prompt 2 PRO), buatkan kumpulan prompt siap pakai untuk menghasilkan SETIAP aset proyek Game Edukasi Critical Thinking menggunakan AI image/audio generator (misalnya ChatGPT, Claude yang mendukung image generation, Gemini, Midjourney, Ideogram, atau Adobe Firefly).
+        text: `Berdasarkan Daftar Inventaris Aset (Prompt 2 PRO), buatkan kumpulan prompt siap pakai untuk menghasilkan SETIAP aset proyek Game Edukasi Critical Thinking menggunakan AI image/audio generator (misalnya ChatGPT, Gemini, Midjourney, Ideogram, Adobe Firefly, atau Claude yang benar-benar memiliki tool image generation). Hasil tahap ini akan dieksekusi satu per satu oleh Prompt 4 PRO, lalu dikemas menjadi SATU paket ZIP berisi file WebP terpisah + manifest.
 
 ID PRODUKSI — WAJIB:
 - Beri setiap prompt aset satu ID produksi unik dan berurutan: A001, A002, A003, dan seterusnya.
 - Satu ID hanya boleh mewakili SATU file/aset. Pose/state yang berbeda mendapat ID berbeda.
-- Pertahankan urutan ID ini sebagai urutan eksekusi untuk Prompt 4 PRO. Jangan mengulang atau melewati nomor.
-- Jika aset ditandai EXTERNAL-URL dan tidak perlu digenerate, tetap boleh dicatat pada manifest dengan status EXTERNAL-URL, tetapi jangan membuat prompt image-generation untuk aset tersebut.
+- Urutan ID adalah urutan eksekusi Prompt 4 PRO. Jangan mengulang atau melewati nomor.
+- Aset yang pada Prompt 2 ditandai EXTERNAL-URL (sudah memiliki DIRECT_IMAGE_URL_READY_FOR_WEB) TIDAK BOLEH dibuat ulang oleh image generator. Catat pada manifest dengan status EXTERNAL-URL beserta URL-nya, tetapi jangan buat prompt image-generation untuk aset tersebut.
 
 ATURAN UTAMA — SATU FILE = SATU GAMBAR/ASET:
 1. Buat SATU prompt gambar terpisah untuk SATU aset. DILARANG menggabungkan dua atau lebih aset, pose, state, objek, atau variasi ke dalam satu file gambar.
-2. Jika satu karakter/objek membutuhkan beberapa pose atau state, setiap pose/state menjadi prompt dan file WebP TERPISAH. Contoh: karakter_normal.webp, karakter_senyum.webp, karakter_menunjuk.webp; gelas_kosong.webp dan gelas_terisi.webp.
+2. Jika satu karakter/objek membutuhkan beberapa pose atau state, setiap pose/state menjadi ID, prompt, dan file WebP TERPISAH (contoh: mascot_normal.webp, mascot_senyum.webp, mascot_menunjuk.webp).
 3. Jangan membuat sprite sheet, contact sheet, collage, grid aset, lembar pose, atau satu kanvas berisi beberapa gambar.
 
-STANDAR VISUAL — KONTEKS NYATA & JELAS:
-4. Untuk aset yang berhubungan dengan materi atau aktivitas utama—misalnya bukti/data visual, objek materi, lingkungan kasus, karakter non-maskot, lokasi, obstacle, item investigasi, dan state objek yang dianalisis siswa—visual harus konkret, jelas, mudah dikenali, dan sesuai konteks nyata proyek. Jika menyangkut konsep ilmiah/faktual, bentuk, proporsi, warna, material, state, arah proses/gerak, dan hubungan antarobjek harus benar secara keilmuan/faktual.
-5. Gunakan render realistis atau semi-realistis dengan detail cukup, pencahayaan dan material masuk akal, serta bentuk objek tidak ambigu. Hindari visual terlalu abstrak, simbolik samar, flat-vector generik, clipart, doodle, line-art sederhana, atau tampilan seperti SVG yang kehilangan detail nyata.
-6. PENGECUALIAN GAYA: maskot, ikon menu, ikon kontrol/navigasi, badge, dan elemen UI dekoratif boleh menyesuaikan gaya Prompt 1 PRO (mis. 2D, 3D, stylized, chibi, atau semi-realistis), tetapi tetap harus tajam, konsisten, mudah dikenali, dan tidak membingungkan fungsi.
-7. Untuk karakter non-maskot, bangunan, ruang, lingkungan, obstacle, alat, bahan, dan objek materi, pertahankan bentuk yang masuk akal sesuai konteks dunia nyata/proyek; jangan menjadikannya ikon vektor datar kecuali memang elemen UI.
+KELAS RENDER — WAJIB DITETAPKAN UNTUK SETIAP ID:
+- KELAS-M (Materi): bukti/data visual, objek materi, lingkungan kasus, karakter non-maskot, lokasi, obstacle, item investigasi, dan state objek yang dianalisis siswa. Wajib dibuat oleh image generator sungguhan. TIDAK BOLEH digambar dari bentuk geometri dasar (kotak, lingkaran, elips, garis) sebagai pengganti ilustrasi.
+- KELAS-U (UI): ikon menu/navigasi, ikon HUD (skor, nyawa, waktu, level), tombol, badge, ikon status, dan elemen UI dekoratif sederhana. Boleh bergaya stylized/flat sesuai Prompt 1 PRO.
+- Jika ragu, tetapkan KELAS-M.
+- Kelas ini menentukan apa yang boleh dilakukan Prompt 4 PRO bila platform tidak memiliki image generation. Cantumkan di manifest dan di setiap prompt ID.
+
+STANDAR VISUAL:
+4. KELAS-M: untuk aset yang berhubungan dengan materi atau aktivitas utama—misalnya bukti/data visual, objek materi, lingkungan kasus, karakter non-maskot, lokasi, obstacle, item investigasi, dan state objek yang dianalisis siswa—visual harus konkret, jelas, mudah dikenali, dan sesuai konteks nyata proyek. Untuk konsep ilmiah/faktual, bentuk, proporsi, warna, material, state, arah proses/gerak, urutan, dan hubungan antarobjek harus benar secara keilmuan/faktual (mis. letak, urutan, dan arah proses sesuai topik proyek).
+5. KELAS-M: gunakan render realistis atau semi-realistis (atau ilustrasi edukatif berdetail tinggi bila itu gaya terkunci di Prompt 1 PRO) dengan pencahayaan dan material masuk akal serta bentuk tidak ambigu. Hindari visual abstrak, simbolik samar, clipart, doodle, line-art sederhana, tampilan "bentuk dasar tersusun", atau SVG yang kehilangan detail nyata.
+6. KELAS-U: boleh mengikuti gaya Prompt 1 PRO (2D, 3D, stylized, chibi, flat, atau semi-realistis), tetapi tetap harus tajam, konsisten antar-ikon, mudah dikenali, dan tidak membingungkan fungsi.
+7. Karakter non-maskot, bangunan, ruang, lingkungan, obstacle, alat, bahan, dan objek materi: pertahankan bentuk yang masuk akal sesuai dunia nyata/proyek; jangan menjadikannya ikon vektor datar kecuali memang elemen UI.
 8. Pertahankan konsistensi palet warna, sudut pandang, arah cahaya, proporsi relatif, dan tingkat detail sesuai Prompt 1 PRO di semua file.
-9. Jangan menaruh teks, label, angka acak, watermark, atau simbol yang tidak diperlukan di dalam gambar. Teks UI dibuat dengan HTML/CSS. Bila label ilmiah benar-benar wajib, sebutkan eksplisit dan minimalkan teks.
+9. Jangan menaruh teks, label, angka acak, watermark, atau simbol yang tidak diperlukan di dalam gambar. Teks dan label UI dibuat dengan HTML/CSS. Bila label ilmiah benar-benar wajib di dalam gambar, sebutkan eksplisit dan minimalkan teks.
 
-FORMAT FILE:
+FORMAT FILE & UKURAN:
 10. Target file gambar WAJIB WebP (.webp), kualitas tinggi/lossless bila tersedia.
-11. Gunakan background transparan (alpha) untuk aset lepas seperti alat, karakter, item, obstacle, ikon, dan objek interaktif. Untuk background/latar penuh, gunakan kanvas penuh sesuai kebutuhan dan tidak perlu transparan.
-12. Jika generator hanya menghasilkan PNG/JPG, tetap buat kualitas terbaik dan beri catatan: "perlu konversi ke WebP". Jangan beralih ke SVG/vektor sebagai solusi cadangan.
-13. Resolusi harus cukup tajam untuk UI; rekomendasikan minimal 512 px pada sisi terpanjang untuk aset lepas, dan resolusi lebih besar untuk background sesuai layout.
+11. Background transparan (alpha) untuk aset lepas: ikon, status, badge, alat, karakter, item, objek interaktif, dan diagram/ilustrasi yang ditempel di atas halaman. Background penuh hanya untuk hero/latar halaman.
+12. Jika generator hanya menghasilkan PNG/JPG, buat kualitas terbaik dan beri catatan "perlu konversi ke WebP". Jangan beralih ke SVG/vektor sebagai solusi cadangan untuk KELAS-M.
+13. Setiap ID WAJIB punya ukuran piksel eksplisit LEBAR×TINGGI (bukan "menyesuaikan layout"), karena ukuran ini menjadi target validasi di Prompt 4 PRO dan dicatat di manifest. Acuan: ikon/status/badge/aset lepas 512×512; hero/latar landscape rasio 16:9 (mis. 1200×675); diagram dan infografis minimal 900 px pada sisi terpanjang, rasio mengikuti isi (tulis angka pastinya).
 
-STRUKTUR SETIAP PROMPT GAMBAR:
-- ID Produksi (A001, A002, A003, dst.) & Nama Aset
+KONVENSI NAMA FILE & PAKET ZIP — WAJIB:
+14. Nama file: huruf kecil, snake_case, ASCII, tanpa spasi, berakhiran .webp, dengan awalan kategori yang konsisten (mis. mascot_, bg_, icon_, status_, char_, evidence_, loc_, item_, hud_, game_). Jika Prompt 2 sudah memberi nama file yang memenuhi pola ini, pertahankan persis; jika tidak, rapikan dan tulis nama final di manifest.
+15. Nama file harus unik dan semua file ditaruh dalam satu folder datar (tanpa subfolder).
+16. Paket akhir yang akan dibuat Prompt 4 PRO: SATU ZIP bernama game_[slug-proyek]_[jumlah-file-gambar]_assets.zip, berisi semua file WebP berstatus GENERATE + manifest.csv + manifest.json. Rancang nama file dan manifest agar langsung cocok dengan paket ini.
+
+STRUKTUR OUTPUT TAHAP INI — WAJIB, URUT:
+A. KUNCI KONSISTENSI GLOBAL — ringkas: judul/identitas proyek, mata pelajaran/topik, gaya visual KELAS-M, gaya visual KELAS-U, palet warna (kode HEX), sudut pandang, arah cahaya, proporsi relatif, tingkat detail, aturan teks dalam gambar, aturan transparansi.
+B. MANIFEST PRODUKSI FINAL — satu tabel untuk SEMUA ID dengan kolom: ID | Nama File | Nama Aset | Kategori | Kelas Render (M/U) | Lebar×Tinggi px | Transparan (Ya/Tidak) | Status (GENERATE / EXTERNAL-URL) | Dipakai di Menu/Halaman. Tulis jumlah total ID dan jumlah ID GENERATE di bawah tabel.
+C. PROMPT PER ID — dikelompokkan per kategori aset, urut sesuai ID.
+D. PROMPT AUDIO — terpisah dan hanya bila ada di inventaris (opsional).
+
+STRUKTUR SETIAP PROMPT GAMBAR (bagian C):
+- ID Produksi (A001, A002, dst.) & Nama Aset
 - Nama file target .webp
+- Kelas Render (KELAS-M / KELAS-U)
+- Ukuran piksel eksak (LEBAR×TINGGI) & transparansi
 - Halaman/menu pemakaian
 - Fungsi edukatif/interaktif
 - Deskripsi subjek/objek secara konkret
-- Konteks nyata/faktual yang harus dipertahankan
-- Gaya visual sesuai Prompt 1 PRO
+- Konteks nyata/faktual yang harus dipertahankan (wajib untuk KELAS-M)
+- Gaya visual sesuai Kunci Konsistensi Global / Prompt 1 PRO
 - Komposisi & sudut pandang
 - Palet warna
 - Pencahayaan/material/tekstur
-- Background transparan atau penuh
-- Resolusi/rasio
 - Negative prompt/catatan larangan
 
-NEGATIVE PROMPT MINIMAL untuk aset materi/objek nyata:
-scientifically/factually inaccurate, wrong proportions, distorted anatomy/object, impossible material, misleading state, overly abstract, generic flat vector, SVG-like appearance, clipart, blurry, low detail, random text, watermark, multiple assets in one image, collage, sprite sheet, contact sheet.
+NEGATIVE PROMPT MINIMAL — KELAS-M:
+scientifically/factually inaccurate, wrong proportions, wrong object placement, distorted anatomy/object, impossible material, misleading state or process direction, overly abstract, built from basic geometric shapes, primitive placeholder look, generic flat vector, SVG-like appearance, clipart, blurry, low detail, random text, watermark, multiple assets in one image, collage, sprite sheet, contact sheet.
 
-Untuk maskot/ikon/navigasi, sesuaikan negative prompt agar tidak melarang gaya stylized yang memang dipilih, tetapi tetap larang blur, bentuk ambigu, teks acak, dan multi-aset dalam satu file.
+NEGATIVE PROMPT MINIMAL — KELAS-U:
+blurry, ambiguous shape, inconsistent style between icons, random text, watermark, multiple assets in one image, collage, sprite sheet, contact sheet. Jangan melarang gaya stylized/flat yang memang dipilih di Prompt 1 PRO.
 
 Jika ada audio, buat prompt audio terpisah. Audio bersifat opsional sesuai inventaris.
 
-Output akhir: daftar prompt siap-copy yang dikelompokkan per kategori aset, tetapi SETIAP prompt gambar hanya untuk SATU file dan SATU gambar/aset. Setiap prompt wajib memiliki ID produksi berurutan A001, A002, A003, dst. Hasil Prompt 3 PRO ini adalah INSTRUKSI FINAL dan menjadi sumber utama yang dieksekusi langsung oleh Prompt 4 PRO.`
+Output akhir: bagian A, B, C (dan D bila ada) secara lengkap dan tidak terpotong. SETIAP prompt gambar hanya untuk SATU file dan SATU gambar/aset, dengan ID berurutan A001, A002, A003, dst. Hasil Prompt 3 PRO ini adalah INSTRUKSI FINAL dan menjadi sumber utama yang dieksekusi langsung oleh Prompt 4 PRO.`
       },
       {
         title: "Prompt 4 PRO Generate Semua Aset Otomatis Game Critical Thinking di ChatGPT/Claude",
-        text: `Gunakan HANYA Prompt 3 PRO TERAKHIR yang tersedia lengkap di percakapan aktif ini sebagai instruksi final untuk melakukan generate aset proyek Game Critical Thinking.
+        text: `Gunakan HANYA Prompt 3 PRO TERAKHIR yang tersedia lengkap di percakapan aktif ini sebagai instruksi final untuk melakukan generate aset proyek Game Edukasi Critical Thinking, lalu kemas hasilnya menjadi paket ZIP.
 
 Tugas tahap ini adalah MENGEKSEKUSI aset satu per satu. Jangan merancang ulang aset, jangan membuat inventaris baru, jangan menulis ulang prompt, dan jangan mengambil konteks proyek lain.
 
 SUMBER KEBENARAN — WAJIB:
 - Prompt 3 PRO TERAKHIR pada percakapan aktif ini adalah sumber instruksi generate UTAMA dan FINAL.
-- Gunakan bagian Kunci Konsistensi Global, prompt per-ID, negative prompt per-ID, dan Manifest Produksi Final dari Prompt 3 PRO tersebut.
+- Gunakan bagian A (Kunci Konsistensi Global), bagian B (Manifest Produksi Final), dan bagian C (prompt + negative prompt per-ID) dari Prompt 3 PRO tersebut.
 - Prompt 1 PRO dan Prompt 2 PRO hanya boleh dipakai untuk verifikasi bila Prompt 3 PRO secara eksplisit merujuknya.
 - JANGAN memakai aset, tema, objek, karakter, atau konteks dari percakapan/proyek lain, memory, contoh sebelumnya, atau asumsi umum.
 - Jika ada perbedaan interpretasi, spesifikasi eksplisit pada ID Prompt 3 PRO mengalahkan asumsi lain.
 
 VALIDASI KONTEKS SEBELUM GENERATE — JANGAN DILEWATI:
-1. Temukan Prompt 3 PRO lengkap dan Manifest Produksi Final yang terkait dengan proyek aktif.
-2. Ambil identitas proyek dari Prompt 3 PRO: nama/judul proyek, mata pelajaran/topik bila ada, gaya visual global, dan jumlah ID produksi.
-3. Cocokkan ID pertama berstatus GENERATE dengan nama file dan nama asetnya.
-4. Jika Prompt 3 PRO tidak ditemukan, terpotong, tidak lengkap, atau identitas proyek tidak dapat dipastikan, BERHENTI. Jangan generate gambar apa pun. Minta pengguna menempelkan Prompt 3 PRO lengkap.
-5. Jika konteks yang terbaca bertentangan dengan Prompt 3 PRO aktif, abaikan konteks lain dan gunakan Prompt 3 PRO aktif.
+1. Temukan Prompt 3 PRO lengkap beserta bagian A, B, dan C untuk proyek aktif.
+2. Ambil identitas proyek: nama/judul proyek, mata pelajaran/topik, gaya visual global, jumlah ID total, dan jumlah ID berstatus GENERATE.
+3. Cocokkan ID pertama berstatus GENERATE dengan nama file, nama aset, kelas render, dan ukuran pikselnya.
+4. Jika Prompt 3 PRO tidak ditemukan, terpotong, tidak lengkap, atau identitas proyek tidak dapat dipastikan, BERHENTI. Jangan generate apa pun. Minta pengguna menempelkan Prompt 3 PRO lengkap.
+5. Jika konteks lain bertentangan dengan Prompt 3 PRO aktif, abaikan konteks lain.
+
+PENGATURAN EKSEKUSI (isi sebelum mulai; bila dibiarkan kosong pakai nilai bawaan):
+Platform: [ChatGPT / Claude]
+Izinkan DRAFT-KODE untuk aset KELAS-M bila platform tidak punya image generation: [Tidak / Ya] (bawaan: Tidak)
+Kemas hasil menjadi ZIP: [Ya / Tidak] (bawaan: Ya)
+
+CEK KEMAMPUAN PLATFORM — JUJUR, JANGAN DILEWATI:
+Sebelum ID pertama, tentukan dan nyatakan dalam 1–2 kalimat: (a) apakah platform ini punya tool image generation nyata, dan (b) apakah platform ini bisa menjalankan kode/membuat file untuk membuat ZIP. Jangan berpura-pura memiliki kemampuan yang tidak ada.
+
+JALUR A — Image generation tersedia: semua ID GENERATE (KELAS-M dan KELAS-U) dibuat lewat image generator, satu call per ID.
+
+JALUR B — Image generation TIDAK tersedia (mis. Claude tanpa tool gambar):
+- KELAS-U: boleh dirender lewat kode (mis. Python/PIL atau SVG lalu konversi ke WebP) sebagai SATU file per ID, ukuran persis sesuai manifest, memakai palet dan gaya KELAS-U dari Kunci Konsistensi Global, bentuk jelas dan konsisten antar-ikon.
+- KELAS-M: JANGAN digambar dari bentuk geometri dasar dan JANGAN diberi status SELESAI. Tampilkan prompt per-ID dari Prompt 3 PRO apa adanya, siap tempel ke generator gambar, dengan status PERLU GENERATOR GAMBAR. Jika Izinkan DRAFT-KODE = Ya, render sebagai draft kasar dengan nama file FINAL (agar bisa diganti satu per satu tanpa mengubah kode), beri status DRAFT-KODE — PERLU DIGANTI, dan sebut jelas bahwa itu bukan hasil akhir.
 
 ASET EXTERNAL-URL:
-- ID berstatus EXTERNAL-URL / DIRECT_IMAGE_URL_READY_FOR_WEB TIDAK BOLEH dikirim ke image generator.
-- Pertahankan URL dan metadata yang sudah ada untuk tahap coding berikutnya.
-- Tandai statusnya sebagai EXTERNAL-URL — TIDAK DIGENERATE.
-
-Platform: [ChatGPT / Claude]
+- ID berstatus EXTERNAL-URL / DIRECT_IMAGE_URL_READY_FOR_WEB TIDAK BOLEH dikirim ke image generator dan TIDAK dimasukkan ke ZIP.
+- Pertahankan URL dan metadata yang sudah ada untuk tahap coding; catat di manifest dengan status EXTERNAL-URL — TIDAK DIGENERATE.
 
 MODE EKSEKUSI WAJIB — SINGLE-ASSET / SINGLE-CALL:
 1. Proses ID produksi secara berurutan A001, A002, A003, dan seterusnya.
-2. SATU image-generation request/call HANYA BOLEH berisi SATU ID produksi.
+2. SATU image-generation request/call (atau satu render kode di Jalur B) HANYA BOLEH berisi SATU ID produksi.
 3. SATU call menghasilkan tepat SATU aset/gambar utama. Jangan memasukkan dua ID atau lebih ke call yang sama walaupun disebut batch.
 4. DILARANG meminta generator membuat A001-A010 sekaligus, membuat lembar aset, sprite sheet, character sheet, contact sheet, collage, grid, atau beberapa file/variasi dalam satu kanvas.
-5. Batch hanya boleh dipakai sebagai CHECKPOINT STATUS administratif setelah beberapa ID selesai; batch TIDAK BOLEH dipakai sebagai satu prompt image generation.
+5. Batch hanya boleh dipakai sebagai CHECKPOINT STATUS administratif; batch TIDAK BOLEH dipakai sebagai satu prompt image generation.
 6. Untuk setiap ID, gunakan hanya:
-   a. Kunci Konsistensi Global Prompt 3 PRO yang relevan;
+   a. Kunci Konsistensi Global yang relevan;
    b. ID + nama aset + nama file target;
-   c. PROMPT IMAGE GENERATION/PROMPT milik ID tersebut;
+   c. PROMPT milik ID tersebut;
    d. NEGATIVE PROMPT milik ID tersebut;
-   e. batasan teknis file/transparansi/resolusi milik ID tersebut.
+   e. batasan teknis ID tersebut: ukuran piksel eksak, transparansi, format WebP.
 7. Jangan menyertakan prompt ID lain di dalam request yang sedang digenerate.
-8. Jangan meringkas atau mengganti subjek utama. Nama aset dan subjek pada ID aktif harus menjadi objek utama hasil gambar.
-9. Elemen yang tidak diminta oleh ID aktif tidak boleh ditambahkan. Jika ID meminta satu karakter, hasil tidak boleh berubah menjadi kumpulan karakter/objek. Jika ID meminta satu ikon, hasil tidak boleh menjadi satu set ikon. Jika ID meminta satu ilustrasi materi, jangan menambahkan aset lain yang tidak diperlukan.
-10. Jika platform mendukung image reference/character reference/seed, gunakan hasil karakter dasar sebelumnya sebagai referensi untuk pose/state berikutnya, tanpa menggabungkan pose ke satu gambar.
+8. Jangan meringkas atau mengganti subjek utama. Nama aset dan subjek ID aktif harus menjadi objek utama hasil gambar.
+9. Elemen yang tidak diminta ID aktif tidak boleh ditambahkan. Satu karakter tetap satu karakter, satu ikon tetap satu ikon (bukan set ikon), satu ilustrasi materi tidak ditambahi aset lain.
+10. Jika platform mendukung image reference/character reference/seed, gunakan hasil karakter dasar sebelumnya sebagai referensi pose/state berikutnya, tanpa menggabungkan pose ke satu gambar.
 
 FORMAT INSTRUKSI YANG DIKIRIM KE IMAGE GENERATOR — WAJIB:
-PROJECT CONTEXT: salin singkat Kunci Konsistensi Global yang relevan dari Prompt 3 PRO.
-CURRENT ASSET: tulis ID produksi aktif dan nama aset persis seperti Prompt 3 PRO.
-TARGET FILE: tulis nama file target persis seperti Prompt 3 PRO.
-IMAGE PROMPT: gunakan prompt milik ID aktif sedekat mungkin dengan teks asli Prompt 3 PRO.
-NEGATIVE PROMPT: gunakan negative prompt milik ID aktif.
+PROJECT CONTEXT: salin singkat Kunci Konsistensi Global yang relevan.
+CURRENT ASSET: ID produksi aktif dan nama aset persis seperti Prompt 3 PRO.
+TARGET FILE: nama file target persis seperti Prompt 3 PRO.
+TARGET SIZE: lebar×tinggi piksel dan status transparansi persis seperti manifest.
+IMAGE PROMPT: prompt milik ID aktif sedekat mungkin dengan teks asli Prompt 3 PRO.
+NEGATIVE PROMPT: negative prompt milik ID aktif.
 HARD OUTPUT CONSTRAINT: exactly one image, exactly one requested asset/scene, no extra variants, no contact sheet, no collage, no sprite sheet, no grid, no unrelated objects.
 
-Jangan memasukkan daftar manifest penuh ke image-generation request. Manifest hanya untuk memilih ID berikutnya.
+Jangan memasukkan manifest penuh ke image-generation request. Manifest hanya untuk memilih ID berikutnya.
 
 URUTAN EKSEKUSI OTOMATIS:
 11. Mulai dari ID GENERATE pertama.
-12. Panggil image generator untuk ID itu saja.
-13. Setelah hasil tersedia, validasi hasil terhadap ID sumber sebelum berpindah.
-14. Jika hasil lulus, tandai SELESAI dan lanjut ke ID GENERATE berikutnya dengan image-generation call BARU yang terpisah.
-15. Jika hasil gagal, regenerate HANYA ID tersebut. Jangan melanjutkan sampai subjek/konteks utamanya benar.
-16. Jika platform tidak memungkinkan beberapa image-generation call terpisah dalam satu respons/turn, JANGAN menggabungkan ID. Generate hanya satu ID yang sedang aktif, lalu berhenti dan lanjutkan ID berikutnya pada turn berikutnya.
+12. Generate ID itu saja.
+13. Setelah hasil tersedia, validasi terhadap ID sumber sebelum berpindah.
+14. Jika lulus, tandai SELESAI dan lanjut ke ID GENERATE berikutnya dengan call BARU yang terpisah.
+15. Jika gagal, regenerate HANYA ID tersebut. Jangan lanjut sampai subjek/konteks utamanya benar.
+16. Jika platform tidak memungkinkan beberapa call terpisah dalam satu respons/turn, JANGAN menggabungkan ID. Generate hanya ID aktif, lalu berhenti dan lanjutkan ID berikutnya pada turn berikutnya.
 
 VALIDASI HASIL PER ID — WAJIB:
-17. Nama/subjek utama hasil harus sama dengan ID aktif dan sesuai proyek aktif.
-18. Pastikan hanya satu aset/scene utama sesuai prompt, pose/state benar, style dan palet sesuai, transparansi/background sesuai, dan tidak ada objek dari proyek lain.
-19. Pastikan tidak ada teks acak, watermark, multi-aset, collage, grid, sprite sheet, atau contact sheet.
-20. Untuk aset ilmiah/faktual, cek bahwa bentuk, anatomi, arah proses, alat, material, dan hubungan objek tidak menyesatkan.
-21. Jika hasil memuat tema yang tidak disebut dalam ID aktif — misalnya tanaman, alat kebun, kendaraan, karakter tambahan, atau objek lain yang berasal dari konteks berbeda — status otomatis PERLU ULANG dan generate ulang menggunakan prompt ID aktif yang sama.
-22. Jangan mengulang aset yang sudah benar.
+17. Nama/subjek utama hasil sama dengan ID aktif dan sesuai proyek aktif.
+18. Hanya satu aset/scene utama; pose/state benar; style dan palet sesuai; transparansi/background sesuai.
+19. Tidak ada teks acak, watermark, multi-aset, collage, grid, sprite sheet, atau contact sheet.
+20. Untuk aset ilmiah/faktual (KELAS-M), cek bahwa bentuk, anatomi, letak, urutan, arah proses, dan hubungan objek tidak menyesatkan.
+21. Ukuran piksel hasil sama dengan target manifest. Bila berbeda, status PERLU UKURAN ULANG. Jika hasil bukan WebP, status PERLU KONVERSI WEBP.
+22. Jika hasil memuat tema yang tidak disebut ID aktif (objek/karakter dari konteks lain), status PERLU ULANG dan generate ulang dengan prompt ID aktif yang sama.
+23. Jangan mengulang aset yang sudah benar.
 
 CHECKPOINT STATUS:
-Setelah maksimal 5–10 ID SELESAI, boleh tampilkan tabel administratif:
-ID | Nama File | Nama Aset | Status
-Status yang dipakai:
-- SELESAI
-- PERLU ULANG
-- PERLU KONVERSI WEBP
-- EXTERNAL-URL — TIDAK DIGENERATE
+Setelah maksimal 5–10 ID diproses, boleh tampilkan tabel administratif: ID | Nama File | Nama Aset | Status.
+Status yang dipakai: SELESAI; PERLU ULANG; PERLU KONVERSI WEBP; PERLU UKURAN ULANG; PERLU GENERATOR GAMBAR; DRAFT-KODE — PERLU DIGANTI; EXTERNAL-URL — TIDAK DIGENERATE.
 
-Checkpoint status tidak boleh menyebabkan beberapa ID digenerate dalam satu gambar.
-
-SETELAH SEMUA ID DIPROSES:
-Buat Manifest Aset Final berdasarkan ID Prompt 3 PRO dan pastikan tidak ada ID terlewat, duplikat, atau tertukar.
+PAKET AKHIR (ZIP) — SETELAH SEMUA ID DIPROSES:
+24. Verifikasi dulu: jumlah file gambar = jumlah ID berstatus GENERATE yang sudah berupa file; tidak ada ID terlewat, duplikat, atau tertukar; semua berekstensi .webp; nama file sama persis dengan manifest; ukuran dibaca dari file sebenarnya (bukan ditulis dari asumsi); file transparan memiliki alpha.
+25. Jika Kemas ZIP = Ya dan platform bisa membuat file: buat SATU ZIP bernama game_[slug-proyek]_[jumlah-file-gambar]_assets.zip, folder datar, berisi semua file WebP yang ada + manifest.csv + manifest.json. Hanya ID yang benar-benar sudah berupa file yang masuk ZIP; ID berstatus PERLU GENERATOR GAMBAR tidak dibuatkan file kosong.
+26. manifest.csv memakai header persis: ID,Nama File,Width,Height,Nama Aset,Kategori,Kelas Render,Transparan,Status,URL
+    manifest.json berupa array objek dengan kunci: id, file, width, height, name, category, render_class, transparent, status, url.
+    Empat kolom pertama sama dengan format paket aset sebelumnya agar kompatibel. Isi Width/Height dari file sebenarnya. Kolom URL hanya diisi untuk EXTERNAL-URL (Nama File dikosongkan untuk baris tersebut).
+27. Jika platform tidak bisa membuat ZIP, atau gambar hasil generate tidak dapat diakses oleh lingkungan kode: JANGAN mengaku ZIP sudah dibuat. Tampilkan tabel manifest final, isi manifest.csv dan manifest.json sebagai teks siap simpan, dan daftar nama file target yang harus diberi nama ulang/diunduh pengguna.
+28. Setelah ZIP/manifest selesai, laporkan singkat: nama ZIP (bila ada), jumlah file di ZIP, tabel manifest final, dan daftar ID yang BELUM final (PERLU ULANG, PERLU GENERATOR GAMBAR, DRAFT-KODE, dst.). Jangan menyebut "semua aset selesai" bila masih ada ID belum final.
 
 PENTING:
 - Jangan hanya menjelaskan cara membuat aset.
 - Jangan hanya menampilkan ulang Prompt 3 PRO.
-- Jangan membuat prompt aset baru.
-- Jangan membuat ulang inventaris.
-- Jangan mengubah style/spesifikasi Prompt 3 PRO.
+- Jangan membuat prompt aset baru, inventaris baru, atau mengubah style/spesifikasi Prompt 3 PRO.
 - Jika image generation tersedia, eksekusi prompt per-ID secara terpisah.
-- Jika image generation tidak tersedia, tampilkan prompt PER ID apa adanya dan tandai PERLU DIEKSEKUSI PADA GENERATOR ASET.
-- Prioritas utama adalah KETEPATAN KONTEKS per ID, bukan jumlah aset yang dibuat sekaligus.
+- Jika image generation tidak tersedia, ikuti JALUR B; jangan menggantinya diam-diam dengan gambar bentuk dasar.
+- Prioritas utama adalah KETEPATAN KONTEKS dan KUALITAS per ID, bukan jumlah aset yang dibuat sekaligus.
 
-Mulai dari ID GENERATE pertama pada Prompt 3 PRO dan gunakan SATU image-generation call khusus untuk ID tersebut saja.`
+Mulai dari ID GENERATE pertama pada Prompt 3 PRO: nyatakan hasil CEK KEMAMPUAN PLATFORM, lalu gunakan SATU call khusus untuk ID tersebut saja.`
       },
       {
         title: "Prompt 5 PRO Coding Game Edukasi Critical Thinking (Gabungkan Semua Aset ke Desain)",
@@ -3700,152 +3784,180 @@ ATURAN INVENTARIS FILE GAMBAR — WAJIB:
       },
       {
         title: "Prompt 3 PRO Generate Prompt Aset Game Edukasi Skill & Luck",
-        text: `Berdasarkan Daftar Inventaris Aset (Prompt 2 PRO), buatkan kumpulan prompt siap pakai untuk menghasilkan SETIAP aset proyek Game Edukasi Skill & Luck menggunakan AI image/audio generator (misalnya ChatGPT, Claude yang mendukung image generation, Gemini, Midjourney, Ideogram, atau Adobe Firefly).
+        text: `Berdasarkan Daftar Inventaris Aset (Prompt 2 PRO), buatkan kumpulan prompt siap pakai untuk menghasilkan SETIAP aset proyek Game Edukasi Skill & Luck menggunakan AI image/audio generator (misalnya ChatGPT, Gemini, Midjourney, Ideogram, Adobe Firefly, atau Claude yang benar-benar memiliki tool image generation). Hasil tahap ini akan dieksekusi satu per satu oleh Prompt 4 PRO, lalu dikemas menjadi SATU paket ZIP berisi file WebP terpisah + manifest.
 
 ID PRODUKSI — WAJIB:
 - Beri setiap prompt aset satu ID produksi unik dan berurutan: A001, A002, A003, dan seterusnya.
 - Satu ID hanya boleh mewakili SATU file/aset. Pose/state yang berbeda mendapat ID berbeda.
-- Pertahankan urutan ID ini sebagai urutan eksekusi untuk Prompt 4 PRO. Jangan mengulang atau melewati nomor.
-- Jika aset ditandai EXTERNAL-URL dan tidak perlu digenerate, tetap boleh dicatat pada manifest dengan status EXTERNAL-URL, tetapi jangan membuat prompt image-generation untuk aset tersebut.
+- Urutan ID adalah urutan eksekusi Prompt 4 PRO. Jangan mengulang atau melewati nomor.
+- Aset yang pada Prompt 2 ditandai EXTERNAL-URL (sudah memiliki DIRECT_IMAGE_URL_READY_FOR_WEB) TIDAK BOLEH dibuat ulang oleh image generator. Catat pada manifest dengan status EXTERNAL-URL beserta URL-nya, tetapi jangan buat prompt image-generation untuk aset tersebut.
 
 ATURAN UTAMA — SATU FILE = SATU GAMBAR/ASET:
 1. Buat SATU prompt gambar terpisah untuk SATU aset. DILARANG menggabungkan dua atau lebih aset, pose, state, objek, atau variasi ke dalam satu file gambar.
-2. Jika satu karakter/objek membutuhkan beberapa pose atau state, setiap pose/state menjadi prompt dan file WebP TERPISAH. Contoh: karakter_normal.webp, karakter_senyum.webp, karakter_menunjuk.webp; gelas_kosong.webp dan gelas_terisi.webp.
+2. Jika satu karakter/objek membutuhkan beberapa pose atau state, setiap pose/state menjadi ID, prompt, dan file WebP TERPISAH (contoh: mascot_normal.webp, mascot_senyum.webp, mascot_menunjuk.webp).
 3. Jangan membuat sprite sheet, contact sheet, collage, grid aset, lembar pose, atau satu kanvas berisi beberapa gambar.
 
-STANDAR VISUAL — KONTEKS NYATA & JELAS:
-4. Untuk aset yang berhubungan dengan materi atau aktivitas utama—misalnya objek materi, lingkungan permainan, karakter non-maskot, bangunan, obstacle, item skill/luck, dan state objek permainan—visual harus konkret, jelas, mudah dikenali, dan sesuai konteks nyata proyek. Jika menyangkut konsep ilmiah/faktual, bentuk, proporsi, warna, material, state, arah proses/gerak, dan hubungan antarobjek harus benar secara keilmuan/faktual.
-5. Gunakan render realistis atau semi-realistis dengan detail cukup, pencahayaan dan material masuk akal, serta bentuk objek tidak ambigu. Hindari visual terlalu abstrak, simbolik samar, flat-vector generik, clipart, doodle, line-art sederhana, atau tampilan seperti SVG yang kehilangan detail nyata.
-6. PENGECUALIAN GAYA: maskot, ikon menu, ikon kontrol/navigasi, badge, dan elemen UI dekoratif boleh menyesuaikan gaya Prompt 1 PRO (mis. 2D, 3D, stylized, chibi, atau semi-realistis), tetapi tetap harus tajam, konsisten, mudah dikenali, dan tidak membingungkan fungsi.
-7. Untuk karakter non-maskot, bangunan, ruang, lingkungan, obstacle, alat, bahan, dan objek materi, pertahankan bentuk yang masuk akal sesuai konteks dunia nyata/proyek; jangan menjadikannya ikon vektor datar kecuali memang elemen UI.
+KELAS RENDER — WAJIB DITETAPKAN UNTUK SETIAP ID:
+- KELAS-M (Materi): objek materi, lingkungan/latar permainan, karakter non-maskot, bangunan, obstacle, item skill/luck, dan state objek permainan yang memuat konsep materi. Wajib dibuat oleh image generator sungguhan. TIDAK BOLEH digambar dari bentuk geometri dasar (kotak, lingkaran, elips, garis) sebagai pengganti ilustrasi.
+- KELAS-U (UI): ikon menu/navigasi, ikon HUD (skor, nyawa, waktu, level), tombol, badge, ikon status, dan elemen UI dekoratif sederhana. Boleh bergaya stylized/flat sesuai Prompt 1 PRO.
+- Jika ragu, tetapkan KELAS-M.
+- Kelas ini menentukan apa yang boleh dilakukan Prompt 4 PRO bila platform tidak memiliki image generation. Cantumkan di manifest dan di setiap prompt ID.
+
+STANDAR VISUAL:
+4. KELAS-M: untuk aset yang berhubungan dengan materi atau aktivitas utama—misalnya objek materi, lingkungan permainan, karakter non-maskot, bangunan, obstacle, item skill/luck, dan state objek permainan—visual harus konkret, jelas, mudah dikenali, dan sesuai konteks nyata proyek. Untuk konsep ilmiah/faktual, bentuk, proporsi, warna, material, state, arah proses/gerak, urutan, dan hubungan antarobjek harus benar secara keilmuan/faktual (mis. letak, urutan, dan arah proses sesuai topik proyek).
+5. KELAS-M: gunakan render realistis atau semi-realistis (atau ilustrasi edukatif berdetail tinggi bila itu gaya terkunci di Prompt 1 PRO) dengan pencahayaan dan material masuk akal serta bentuk tidak ambigu. Hindari visual abstrak, simbolik samar, clipart, doodle, line-art sederhana, tampilan "bentuk dasar tersusun", atau SVG yang kehilangan detail nyata.
+6. KELAS-U: boleh mengikuti gaya Prompt 1 PRO (2D, 3D, stylized, chibi, flat, atau semi-realistis), tetapi tetap harus tajam, konsisten antar-ikon, mudah dikenali, dan tidak membingungkan fungsi.
+7. Karakter non-maskot, bangunan, ruang, lingkungan, obstacle, alat, bahan, dan objek materi: pertahankan bentuk yang masuk akal sesuai dunia nyata/proyek; jangan menjadikannya ikon vektor datar kecuali memang elemen UI.
 8. Pertahankan konsistensi palet warna, sudut pandang, arah cahaya, proporsi relatif, dan tingkat detail sesuai Prompt 1 PRO di semua file.
-9. Jangan menaruh teks, label, angka acak, watermark, atau simbol yang tidak diperlukan di dalam gambar. Teks UI dibuat dengan HTML/CSS. Bila label ilmiah benar-benar wajib, sebutkan eksplisit dan minimalkan teks.
+9. Jangan menaruh teks, label, angka acak, watermark, atau simbol yang tidak diperlukan di dalam gambar. Teks dan label UI dibuat dengan HTML/CSS. Bila label ilmiah benar-benar wajib di dalam gambar, sebutkan eksplisit dan minimalkan teks.
 
-FORMAT FILE:
+FORMAT FILE & UKURAN:
 10. Target file gambar WAJIB WebP (.webp), kualitas tinggi/lossless bila tersedia.
-11. Gunakan background transparan (alpha) untuk aset lepas seperti alat, karakter, item, obstacle, ikon, dan objek interaktif. Untuk background/latar penuh, gunakan kanvas penuh sesuai kebutuhan dan tidak perlu transparan.
-12. Jika generator hanya menghasilkan PNG/JPG, tetap buat kualitas terbaik dan beri catatan: "perlu konversi ke WebP". Jangan beralih ke SVG/vektor sebagai solusi cadangan.
-13. Resolusi harus cukup tajam untuk UI; rekomendasikan minimal 512 px pada sisi terpanjang untuk aset lepas, dan resolusi lebih besar untuk background sesuai layout.
+11. Background transparan (alpha) untuk aset lepas: ikon, status, badge, alat, karakter, item, objek interaktif, dan diagram/ilustrasi yang ditempel di atas halaman. Background penuh hanya untuk hero/latar halaman.
+12. Jika generator hanya menghasilkan PNG/JPG, buat kualitas terbaik dan beri catatan "perlu konversi ke WebP". Jangan beralih ke SVG/vektor sebagai solusi cadangan untuk KELAS-M.
+13. Setiap ID WAJIB punya ukuran piksel eksplisit LEBAR×TINGGI (bukan "menyesuaikan layout"), karena ukuran ini menjadi target validasi di Prompt 4 PRO dan dicatat di manifest. Acuan: ikon/status/badge/aset lepas 512×512; hero/latar landscape rasio 16:9 (mis. 1200×675); diagram dan infografis minimal 900 px pada sisi terpanjang, rasio mengikuti isi (tulis angka pastinya).
 
-STRUKTUR SETIAP PROMPT GAMBAR:
-- ID Produksi (A001, A002, A003, dst.) & Nama Aset
+KONVENSI NAMA FILE & PAKET ZIP — WAJIB:
+14. Nama file: huruf kecil, snake_case, ASCII, tanpa spasi, berakhiran .webp, dengan awalan kategori yang konsisten (mis. mascot_, bg_, icon_, status_, char_, obj_, item_, obstacle_, hud_, game_). Jika Prompt 2 sudah memberi nama file yang memenuhi pola ini, pertahankan persis; jika tidak, rapikan dan tulis nama final di manifest.
+15. Nama file harus unik dan semua file ditaruh dalam satu folder datar (tanpa subfolder).
+16. Paket akhir yang akan dibuat Prompt 4 PRO: SATU ZIP bernama game_[slug-proyek]_[jumlah-file-gambar]_assets.zip, berisi semua file WebP berstatus GENERATE + manifest.csv + manifest.json. Rancang nama file dan manifest agar langsung cocok dengan paket ini.
+
+STRUKTUR OUTPUT TAHAP INI — WAJIB, URUT:
+A. KUNCI KONSISTENSI GLOBAL — ringkas: judul/identitas proyek, mata pelajaran/topik, gaya visual KELAS-M, gaya visual KELAS-U, palet warna (kode HEX), sudut pandang, arah cahaya, proporsi relatif, tingkat detail, aturan teks dalam gambar, aturan transparansi.
+B. MANIFEST PRODUKSI FINAL — satu tabel untuk SEMUA ID dengan kolom: ID | Nama File | Nama Aset | Kategori | Kelas Render (M/U) | Lebar×Tinggi px | Transparan (Ya/Tidak) | Status (GENERATE / EXTERNAL-URL) | Dipakai di Menu/Halaman. Tulis jumlah total ID dan jumlah ID GENERATE di bawah tabel.
+C. PROMPT PER ID — dikelompokkan per kategori aset, urut sesuai ID.
+D. PROMPT AUDIO — terpisah dan hanya bila ada di inventaris (opsional).
+
+STRUKTUR SETIAP PROMPT GAMBAR (bagian C):
+- ID Produksi (A001, A002, dst.) & Nama Aset
 - Nama file target .webp
+- Kelas Render (KELAS-M / KELAS-U)
+- Ukuran piksel eksak (LEBAR×TINGGI) & transparansi
 - Halaman/menu pemakaian
 - Fungsi edukatif/interaktif
 - Deskripsi subjek/objek secara konkret
-- Konteks nyata/faktual yang harus dipertahankan
-- Gaya visual sesuai Prompt 1 PRO
+- Konteks nyata/faktual yang harus dipertahankan (wajib untuk KELAS-M)
+- Gaya visual sesuai Kunci Konsistensi Global / Prompt 1 PRO
 - Komposisi & sudut pandang
 - Palet warna
 - Pencahayaan/material/tekstur
-- Background transparan atau penuh
-- Resolusi/rasio
 - Negative prompt/catatan larangan
 
-NEGATIVE PROMPT MINIMAL untuk aset materi/objek nyata:
-scientifically/factually inaccurate, wrong proportions, distorted anatomy/object, impossible material, misleading state, overly abstract, generic flat vector, SVG-like appearance, clipart, blurry, low detail, random text, watermark, multiple assets in one image, collage, sprite sheet, contact sheet.
+NEGATIVE PROMPT MINIMAL — KELAS-M:
+scientifically/factually inaccurate, wrong proportions, wrong object placement, distorted anatomy/object, impossible material, misleading state or process direction, overly abstract, built from basic geometric shapes, primitive placeholder look, generic flat vector, SVG-like appearance, clipart, blurry, low detail, random text, watermark, multiple assets in one image, collage, sprite sheet, contact sheet.
 
-Untuk maskot/ikon/navigasi, sesuaikan negative prompt agar tidak melarang gaya stylized yang memang dipilih, tetapi tetap larang blur, bentuk ambigu, teks acak, dan multi-aset dalam satu file.
+NEGATIVE PROMPT MINIMAL — KELAS-U:
+blurry, ambiguous shape, inconsistent style between icons, random text, watermark, multiple assets in one image, collage, sprite sheet, contact sheet. Jangan melarang gaya stylized/flat yang memang dipilih di Prompt 1 PRO.
 
 Jika ada audio, buat prompt audio terpisah. Audio bersifat opsional sesuai inventaris.
 
-Output akhir: daftar prompt siap-copy yang dikelompokkan per kategori aset, tetapi SETIAP prompt gambar hanya untuk SATU file dan SATU gambar/aset. Setiap prompt wajib memiliki ID produksi berurutan A001, A002, A003, dst. Hasil Prompt 3 PRO ini adalah INSTRUKSI FINAL dan menjadi sumber utama yang dieksekusi langsung oleh Prompt 4 PRO.`
+Output akhir: bagian A, B, C (dan D bila ada) secara lengkap dan tidak terpotong. SETIAP prompt gambar hanya untuk SATU file dan SATU gambar/aset, dengan ID berurutan A001, A002, A003, dst. Hasil Prompt 3 PRO ini adalah INSTRUKSI FINAL dan menjadi sumber utama yang dieksekusi langsung oleh Prompt 4 PRO.`
       },
       {
         title: "Prompt 4 PRO Generate Semua Aset Otomatis Game Skill & Luck di ChatGPT/Claude",
-        text: `Gunakan HANYA Prompt 3 PRO TERAKHIR yang tersedia lengkap di percakapan aktif ini sebagai instruksi final untuk melakukan generate aset proyek Game Skill & Luck.
+        text: `Gunakan HANYA Prompt 3 PRO TERAKHIR yang tersedia lengkap di percakapan aktif ini sebagai instruksi final untuk melakukan generate aset proyek Game Edukasi Skill & Luck, lalu kemas hasilnya menjadi paket ZIP.
 
 Tugas tahap ini adalah MENGEKSEKUSI aset satu per satu. Jangan merancang ulang aset, jangan membuat inventaris baru, jangan menulis ulang prompt, dan jangan mengambil konteks proyek lain.
 
 SUMBER KEBENARAN — WAJIB:
 - Prompt 3 PRO TERAKHIR pada percakapan aktif ini adalah sumber instruksi generate UTAMA dan FINAL.
-- Gunakan bagian Kunci Konsistensi Global, prompt per-ID, negative prompt per-ID, dan Manifest Produksi Final dari Prompt 3 PRO tersebut.
+- Gunakan bagian A (Kunci Konsistensi Global), bagian B (Manifest Produksi Final), dan bagian C (prompt + negative prompt per-ID) dari Prompt 3 PRO tersebut.
 - Prompt 1 PRO dan Prompt 2 PRO hanya boleh dipakai untuk verifikasi bila Prompt 3 PRO secara eksplisit merujuknya.
 - JANGAN memakai aset, tema, objek, karakter, atau konteks dari percakapan/proyek lain, memory, contoh sebelumnya, atau asumsi umum.
 - Jika ada perbedaan interpretasi, spesifikasi eksplisit pada ID Prompt 3 PRO mengalahkan asumsi lain.
 
 VALIDASI KONTEKS SEBELUM GENERATE — JANGAN DILEWATI:
-1. Temukan Prompt 3 PRO lengkap dan Manifest Produksi Final yang terkait dengan proyek aktif.
-2. Ambil identitas proyek dari Prompt 3 PRO: nama/judul proyek, mata pelajaran/topik bila ada, gaya visual global, dan jumlah ID produksi.
-3. Cocokkan ID pertama berstatus GENERATE dengan nama file dan nama asetnya.
-4. Jika Prompt 3 PRO tidak ditemukan, terpotong, tidak lengkap, atau identitas proyek tidak dapat dipastikan, BERHENTI. Jangan generate gambar apa pun. Minta pengguna menempelkan Prompt 3 PRO lengkap.
-5. Jika konteks yang terbaca bertentangan dengan Prompt 3 PRO aktif, abaikan konteks lain dan gunakan Prompt 3 PRO aktif.
+1. Temukan Prompt 3 PRO lengkap beserta bagian A, B, dan C untuk proyek aktif.
+2. Ambil identitas proyek: nama/judul proyek, mata pelajaran/topik, gaya visual global, jumlah ID total, dan jumlah ID berstatus GENERATE.
+3. Cocokkan ID pertama berstatus GENERATE dengan nama file, nama aset, kelas render, dan ukuran pikselnya.
+4. Jika Prompt 3 PRO tidak ditemukan, terpotong, tidak lengkap, atau identitas proyek tidak dapat dipastikan, BERHENTI. Jangan generate apa pun. Minta pengguna menempelkan Prompt 3 PRO lengkap.
+5. Jika konteks lain bertentangan dengan Prompt 3 PRO aktif, abaikan konteks lain.
+
+PENGATURAN EKSEKUSI (isi sebelum mulai; bila dibiarkan kosong pakai nilai bawaan):
+Platform: [ChatGPT / Claude]
+Izinkan DRAFT-KODE untuk aset KELAS-M bila platform tidak punya image generation: [Tidak / Ya] (bawaan: Tidak)
+Kemas hasil menjadi ZIP: [Ya / Tidak] (bawaan: Ya)
+
+CEK KEMAMPUAN PLATFORM — JUJUR, JANGAN DILEWATI:
+Sebelum ID pertama, tentukan dan nyatakan dalam 1–2 kalimat: (a) apakah platform ini punya tool image generation nyata, dan (b) apakah platform ini bisa menjalankan kode/membuat file untuk membuat ZIP. Jangan berpura-pura memiliki kemampuan yang tidak ada.
+
+JALUR A — Image generation tersedia: semua ID GENERATE (KELAS-M dan KELAS-U) dibuat lewat image generator, satu call per ID.
+
+JALUR B — Image generation TIDAK tersedia (mis. Claude tanpa tool gambar):
+- KELAS-U: boleh dirender lewat kode (mis. Python/PIL atau SVG lalu konversi ke WebP) sebagai SATU file per ID, ukuran persis sesuai manifest, memakai palet dan gaya KELAS-U dari Kunci Konsistensi Global, bentuk jelas dan konsisten antar-ikon.
+- KELAS-M: JANGAN digambar dari bentuk geometri dasar dan JANGAN diberi status SELESAI. Tampilkan prompt per-ID dari Prompt 3 PRO apa adanya, siap tempel ke generator gambar, dengan status PERLU GENERATOR GAMBAR. Jika Izinkan DRAFT-KODE = Ya, render sebagai draft kasar dengan nama file FINAL (agar bisa diganti satu per satu tanpa mengubah kode), beri status DRAFT-KODE — PERLU DIGANTI, dan sebut jelas bahwa itu bukan hasil akhir.
 
 ASET EXTERNAL-URL:
-- ID berstatus EXTERNAL-URL / DIRECT_IMAGE_URL_READY_FOR_WEB TIDAK BOLEH dikirim ke image generator.
-- Pertahankan URL dan metadata yang sudah ada untuk tahap coding berikutnya.
-- Tandai statusnya sebagai EXTERNAL-URL — TIDAK DIGENERATE.
-
-Platform: [ChatGPT / Claude]
+- ID berstatus EXTERNAL-URL / DIRECT_IMAGE_URL_READY_FOR_WEB TIDAK BOLEH dikirim ke image generator dan TIDAK dimasukkan ke ZIP.
+- Pertahankan URL dan metadata yang sudah ada untuk tahap coding; catat di manifest dengan status EXTERNAL-URL — TIDAK DIGENERATE.
 
 MODE EKSEKUSI WAJIB — SINGLE-ASSET / SINGLE-CALL:
 1. Proses ID produksi secara berurutan A001, A002, A003, dan seterusnya.
-2. SATU image-generation request/call HANYA BOLEH berisi SATU ID produksi.
+2. SATU image-generation request/call (atau satu render kode di Jalur B) HANYA BOLEH berisi SATU ID produksi.
 3. SATU call menghasilkan tepat SATU aset/gambar utama. Jangan memasukkan dua ID atau lebih ke call yang sama walaupun disebut batch.
 4. DILARANG meminta generator membuat A001-A010 sekaligus, membuat lembar aset, sprite sheet, character sheet, contact sheet, collage, grid, atau beberapa file/variasi dalam satu kanvas.
-5. Batch hanya boleh dipakai sebagai CHECKPOINT STATUS administratif setelah beberapa ID selesai; batch TIDAK BOLEH dipakai sebagai satu prompt image generation.
+5. Batch hanya boleh dipakai sebagai CHECKPOINT STATUS administratif; batch TIDAK BOLEH dipakai sebagai satu prompt image generation.
 6. Untuk setiap ID, gunakan hanya:
-   a. Kunci Konsistensi Global Prompt 3 PRO yang relevan;
+   a. Kunci Konsistensi Global yang relevan;
    b. ID + nama aset + nama file target;
-   c. PROMPT IMAGE GENERATION/PROMPT milik ID tersebut;
+   c. PROMPT milik ID tersebut;
    d. NEGATIVE PROMPT milik ID tersebut;
-   e. batasan teknis file/transparansi/resolusi milik ID tersebut.
+   e. batasan teknis ID tersebut: ukuran piksel eksak, transparansi, format WebP.
 7. Jangan menyertakan prompt ID lain di dalam request yang sedang digenerate.
-8. Jangan meringkas atau mengganti subjek utama. Nama aset dan subjek pada ID aktif harus menjadi objek utama hasil gambar.
-9. Elemen yang tidak diminta oleh ID aktif tidak boleh ditambahkan. Jika ID meminta satu karakter, hasil tidak boleh berubah menjadi kumpulan karakter/objek. Jika ID meminta satu ikon, hasil tidak boleh menjadi satu set ikon. Jika ID meminta satu ilustrasi materi, jangan menambahkan aset lain yang tidak diperlukan.
-10. Jika platform mendukung image reference/character reference/seed, gunakan hasil karakter dasar sebelumnya sebagai referensi untuk pose/state berikutnya, tanpa menggabungkan pose ke satu gambar.
+8. Jangan meringkas atau mengganti subjek utama. Nama aset dan subjek ID aktif harus menjadi objek utama hasil gambar.
+9. Elemen yang tidak diminta ID aktif tidak boleh ditambahkan. Satu karakter tetap satu karakter, satu ikon tetap satu ikon (bukan set ikon), satu ilustrasi materi tidak ditambahi aset lain.
+10. Jika platform mendukung image reference/character reference/seed, gunakan hasil karakter dasar sebelumnya sebagai referensi pose/state berikutnya, tanpa menggabungkan pose ke satu gambar.
 
 FORMAT INSTRUKSI YANG DIKIRIM KE IMAGE GENERATOR — WAJIB:
-PROJECT CONTEXT: salin singkat Kunci Konsistensi Global yang relevan dari Prompt 3 PRO.
-CURRENT ASSET: tulis ID produksi aktif dan nama aset persis seperti Prompt 3 PRO.
-TARGET FILE: tulis nama file target persis seperti Prompt 3 PRO.
-IMAGE PROMPT: gunakan prompt milik ID aktif sedekat mungkin dengan teks asli Prompt 3 PRO.
-NEGATIVE PROMPT: gunakan negative prompt milik ID aktif.
+PROJECT CONTEXT: salin singkat Kunci Konsistensi Global yang relevan.
+CURRENT ASSET: ID produksi aktif dan nama aset persis seperti Prompt 3 PRO.
+TARGET FILE: nama file target persis seperti Prompt 3 PRO.
+TARGET SIZE: lebar×tinggi piksel dan status transparansi persis seperti manifest.
+IMAGE PROMPT: prompt milik ID aktif sedekat mungkin dengan teks asli Prompt 3 PRO.
+NEGATIVE PROMPT: negative prompt milik ID aktif.
 HARD OUTPUT CONSTRAINT: exactly one image, exactly one requested asset/scene, no extra variants, no contact sheet, no collage, no sprite sheet, no grid, no unrelated objects.
 
-Jangan memasukkan daftar manifest penuh ke image-generation request. Manifest hanya untuk memilih ID berikutnya.
+Jangan memasukkan manifest penuh ke image-generation request. Manifest hanya untuk memilih ID berikutnya.
 
 URUTAN EKSEKUSI OTOMATIS:
 11. Mulai dari ID GENERATE pertama.
-12. Panggil image generator untuk ID itu saja.
-13. Setelah hasil tersedia, validasi hasil terhadap ID sumber sebelum berpindah.
-14. Jika hasil lulus, tandai SELESAI dan lanjut ke ID GENERATE berikutnya dengan image-generation call BARU yang terpisah.
-15. Jika hasil gagal, regenerate HANYA ID tersebut. Jangan melanjutkan sampai subjek/konteks utamanya benar.
-16. Jika platform tidak memungkinkan beberapa image-generation call terpisah dalam satu respons/turn, JANGAN menggabungkan ID. Generate hanya satu ID yang sedang aktif, lalu berhenti dan lanjutkan ID berikutnya pada turn berikutnya.
+12. Generate ID itu saja.
+13. Setelah hasil tersedia, validasi terhadap ID sumber sebelum berpindah.
+14. Jika lulus, tandai SELESAI dan lanjut ke ID GENERATE berikutnya dengan call BARU yang terpisah.
+15. Jika gagal, regenerate HANYA ID tersebut. Jangan lanjut sampai subjek/konteks utamanya benar.
+16. Jika platform tidak memungkinkan beberapa call terpisah dalam satu respons/turn, JANGAN menggabungkan ID. Generate hanya ID aktif, lalu berhenti dan lanjutkan ID berikutnya pada turn berikutnya.
 
 VALIDASI HASIL PER ID — WAJIB:
-17. Nama/subjek utama hasil harus sama dengan ID aktif dan sesuai proyek aktif.
-18. Pastikan hanya satu aset/scene utama sesuai prompt, pose/state benar, style dan palet sesuai, transparansi/background sesuai, dan tidak ada objek dari proyek lain.
-19. Pastikan tidak ada teks acak, watermark, multi-aset, collage, grid, sprite sheet, atau contact sheet.
-20. Untuk aset ilmiah/faktual, cek bahwa bentuk, anatomi, arah proses, alat, material, dan hubungan objek tidak menyesatkan.
-21. Jika hasil memuat tema yang tidak disebut dalam ID aktif — misalnya tanaman, alat kebun, kendaraan, karakter tambahan, atau objek lain yang berasal dari konteks berbeda — status otomatis PERLU ULANG dan generate ulang menggunakan prompt ID aktif yang sama.
-22. Jangan mengulang aset yang sudah benar.
+17. Nama/subjek utama hasil sama dengan ID aktif dan sesuai proyek aktif.
+18. Hanya satu aset/scene utama; pose/state benar; style dan palet sesuai; transparansi/background sesuai.
+19. Tidak ada teks acak, watermark, multi-aset, collage, grid, sprite sheet, atau contact sheet.
+20. Untuk aset ilmiah/faktual (KELAS-M), cek bahwa bentuk, anatomi, letak, urutan, arah proses, dan hubungan objek tidak menyesatkan.
+21. Ukuran piksel hasil sama dengan target manifest. Bila berbeda, status PERLU UKURAN ULANG. Jika hasil bukan WebP, status PERLU KONVERSI WEBP.
+22. Jika hasil memuat tema yang tidak disebut ID aktif (objek/karakter dari konteks lain), status PERLU ULANG dan generate ulang dengan prompt ID aktif yang sama.
+23. Jangan mengulang aset yang sudah benar.
 
 CHECKPOINT STATUS:
-Setelah maksimal 5–10 ID SELESAI, boleh tampilkan tabel administratif:
-ID | Nama File | Nama Aset | Status
-Status yang dipakai:
-- SELESAI
-- PERLU ULANG
-- PERLU KONVERSI WEBP
-- EXTERNAL-URL — TIDAK DIGENERATE
+Setelah maksimal 5–10 ID diproses, boleh tampilkan tabel administratif: ID | Nama File | Nama Aset | Status.
+Status yang dipakai: SELESAI; PERLU ULANG; PERLU KONVERSI WEBP; PERLU UKURAN ULANG; PERLU GENERATOR GAMBAR; DRAFT-KODE — PERLU DIGANTI; EXTERNAL-URL — TIDAK DIGENERATE.
 
-Checkpoint status tidak boleh menyebabkan beberapa ID digenerate dalam satu gambar.
-
-SETELAH SEMUA ID DIPROSES:
-Buat Manifest Aset Final berdasarkan ID Prompt 3 PRO dan pastikan tidak ada ID terlewat, duplikat, atau tertukar.
+PAKET AKHIR (ZIP) — SETELAH SEMUA ID DIPROSES:
+24. Verifikasi dulu: jumlah file gambar = jumlah ID berstatus GENERATE yang sudah berupa file; tidak ada ID terlewat, duplikat, atau tertukar; semua berekstensi .webp; nama file sama persis dengan manifest; ukuran dibaca dari file sebenarnya (bukan ditulis dari asumsi); file transparan memiliki alpha.
+25. Jika Kemas ZIP = Ya dan platform bisa membuat file: buat SATU ZIP bernama game_[slug-proyek]_[jumlah-file-gambar]_assets.zip, folder datar, berisi semua file WebP yang ada + manifest.csv + manifest.json. Hanya ID yang benar-benar sudah berupa file yang masuk ZIP; ID berstatus PERLU GENERATOR GAMBAR tidak dibuatkan file kosong.
+26. manifest.csv memakai header persis: ID,Nama File,Width,Height,Nama Aset,Kategori,Kelas Render,Transparan,Status,URL
+    manifest.json berupa array objek dengan kunci: id, file, width, height, name, category, render_class, transparent, status, url.
+    Empat kolom pertama sama dengan format paket aset sebelumnya agar kompatibel. Isi Width/Height dari file sebenarnya. Kolom URL hanya diisi untuk EXTERNAL-URL (Nama File dikosongkan untuk baris tersebut).
+27. Jika platform tidak bisa membuat ZIP, atau gambar hasil generate tidak dapat diakses oleh lingkungan kode: JANGAN mengaku ZIP sudah dibuat. Tampilkan tabel manifest final, isi manifest.csv dan manifest.json sebagai teks siap simpan, dan daftar nama file target yang harus diberi nama ulang/diunduh pengguna.
+28. Setelah ZIP/manifest selesai, laporkan singkat: nama ZIP (bila ada), jumlah file di ZIP, tabel manifest final, dan daftar ID yang BELUM final (PERLU ULANG, PERLU GENERATOR GAMBAR, DRAFT-KODE, dst.). Jangan menyebut "semua aset selesai" bila masih ada ID belum final.
 
 PENTING:
 - Jangan hanya menjelaskan cara membuat aset.
 - Jangan hanya menampilkan ulang Prompt 3 PRO.
-- Jangan membuat prompt aset baru.
-- Jangan membuat ulang inventaris.
-- Jangan mengubah style/spesifikasi Prompt 3 PRO.
+- Jangan membuat prompt aset baru, inventaris baru, atau mengubah style/spesifikasi Prompt 3 PRO.
 - Jika image generation tersedia, eksekusi prompt per-ID secara terpisah.
-- Jika image generation tidak tersedia, tampilkan prompt PER ID apa adanya dan tandai PERLU DIEKSEKUSI PADA GENERATOR ASET.
-- Prioritas utama adalah KETEPATAN KONTEKS per ID, bukan jumlah aset yang dibuat sekaligus.
+- Jika image generation tidak tersedia, ikuti JALUR B; jangan menggantinya diam-diam dengan gambar bentuk dasar.
+- Prioritas utama adalah KETEPATAN KONTEKS dan KUALITAS per ID, bukan jumlah aset yang dibuat sekaligus.
 
-Mulai dari ID GENERATE pertama pada Prompt 3 PRO dan gunakan SATU image-generation call khusus untuk ID tersebut saja.`
+Mulai dari ID GENERATE pertama pada Prompt 3 PRO: nyatakan hasil CEK KEMAMPUAN PLATFORM, lalu gunakan SATU call khusus untuk ID tersebut saja.`
       },
       {
         title: "Prompt 5 PRO Coding Game Edukasi Skill & Luck (Gabungkan Semua Aset ke Desain)",
