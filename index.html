@@ -675,6 +675,23 @@ select.form-control optgroup{font-weight:800}
 .model-custom-wrap{margin-top:8px;padding-top:8px;border-top:1px dashed color-mix(in srgb,var(--accent2) 25%,var(--border))}
 .model-custom-wrap[hidden]{display:none!important}
 @media(max-width:520px){.model-picker{grid-template-columns:1fr}}
+.model-option-wrap{position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px;align-items:stretch}
+.model-option-wrap .model-option{height:100%;margin:0}
+.model-info-btn{width:36px;min-width:36px;border:1px solid color-mix(in srgb,var(--accent2) 34%,var(--border));border-radius:11px;background:color-mix(in srgb,var(--accent2) 7%,var(--panel2));color:var(--accent2);font-weight:900;font-size:calc(15px * var(--font-scale));display:grid;place-items:center;transition:.15s ease}
+.model-info-btn:hover,.model-info-btn:focus-visible{border-color:color-mix(in srgb,var(--accent2) 62%,var(--border));background:color-mix(in srgb,var(--accent2) 13%,var(--panel2));transform:translateY(-1px)}
+.output-mode-guide{margin-top:9px;border:1px solid color-mix(in srgb,var(--accent2) 24%,var(--border));border-radius:15px;background:color-mix(in srgb,var(--accent2) 4%,var(--panel));overflow:hidden}
+.output-mode-guide-head{padding:11px 12px;border-bottom:1px solid var(--border);font-size:calc(9.8px * var(--font-scale));line-height:1.5;color:var(--muted)}
+.output-mode-guide-head strong{display:block;color:var(--text);font-size:calc(10.5px * var(--font-scale));margin-bottom:3px}
+.output-format-note{margin-top:7px;border-top:1px dashed color-mix(in srgb,var(--accent2) 28%,var(--border));padding-top:9px!important;background:color-mix(in srgb,var(--success) 5%,transparent)}
+.output-mode-sections{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0}
+.output-mode-section{padding:8px 10px;border-bottom:1px solid var(--border);font-size:calc(8.8px * var(--font-scale));line-height:1.4;color:var(--muted)}
+.output-mode-section:nth-child(odd){border-right:1px solid var(--border)}
+.output-mode-section b{color:var(--accent2);margin-right:4px}
+.output-mode-section strong{color:var(--text)}
+.output-mode-modes{padding:10px 12px;display:grid;gap:7px}
+.output-mode-item{font-size:calc(8.8px * var(--font-scale));line-height:1.45;color:var(--muted)}
+.output-mode-item strong{color:var(--text)}
+@media(max-width:620px){.output-mode-sections{grid-template-columns:1fr}.output-mode-section:nth-child(odd){border-right:0}.model-option-wrap{grid-template-columns:minmax(0,1fr) 40px}}
 .module-ai-note{grid-column:1/-1;border:1px solid color-mix(in srgb,var(--accent2) 28%,var(--border));background:color-mix(in srgb,var(--accent2) 7%,var(--panel));border-radius:14px;padding:11px 13px;font-size:calc(10px * var(--font-scale));line-height:1.55;color:var(--muted)}
 .module-ai-note strong{color:var(--text)}
 
@@ -894,6 +911,11 @@ select.form-control optgroup{font-weight:800}
 @media(max-width:720px){.generator-step-actions{grid-template-columns:1fr;align-items:stretch}.generator-step-buttons{display:grid;grid-template-columns:1fr}.generator-step-buttons #generatePromptBtn{min-width:0;width:100%;min-height:48px}.generator-step-buttons #openTemplateBankBtn{width:100%}}
 .enhancement-backdrop{position:fixed;inset:0;background:rgba(4,8,18,.58);z-index:430;backdrop-filter:blur(5px)}.enhancement-backdrop[hidden]{display:none!important}
 .teacher-preset-modal,.generator-preview-modal{position:fixed;z-index:440;left:50%;top:50%;transform:translate(-50%,-50%);width:min(760px,calc(100vw - 28px));max-height:min(82vh,760px);overflow:auto;border:1px solid var(--border);border-radius:22px;background:color-mix(in srgb,var(--panel-solid) 96%,transparent);box-shadow:0 28px 90px rgba(0,0,0,.34)}
+.model-info-backdrop{position:fixed;inset:0;background:rgba(4,8,18,.62);z-index:1680;backdrop-filter:blur(5px)}.model-info-backdrop[hidden]{display:none!important}
+.model-info-modal{position:fixed;z-index:1690;left:50%;top:50%;transform:translate(-50%,-50%);width:min(650px,calc(100vw - 28px));max-height:min(82vh,720px);overflow:auto;border:1px solid color-mix(in srgb,var(--accent2) 30%,var(--border));border-radius:22px;background:color-mix(in srgb,var(--panel-solid) 97%,transparent);box-shadow:0 30px 100px rgba(0,0,0,.38)}
+.model-info-modal[hidden]{display:none!important}.model-info-content{display:grid;gap:12px}.model-info-lead{padding:12px 13px;border:1px solid color-mix(in srgb,var(--accent2) 26%,var(--border));border-radius:14px;background:color-mix(in srgb,var(--accent2) 6%,var(--panel));font-size:calc(10px * var(--font-scale));line-height:1.6;color:var(--muted)}.model-info-lead strong{color:var(--text)}
+.model-info-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.model-info-card{padding:11px 12px;border:1px solid var(--border);border-radius:13px;background:var(--panel2)}.model-info-card strong{display:block;font-size:calc(9.5px * var(--font-scale));margin-bottom:4px;color:var(--text)}.model-info-card p{margin:0;font-size:calc(9px * var(--font-scale));line-height:1.55;color:var(--muted)}
+@media(max-width:650px){.model-info-modal{left:0;right:0;bottom:0;top:auto;transform:none;width:100%;max-height:88dvh;border-radius:22px 22px 0 0}.model-info-grid{grid-template-columns:1fr}}
 .teacher-preset-modal[hidden],.generator-preview-modal[hidden]{display:none!important}.enhancement-modal-head{position:sticky;top:0;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 18px;border-bottom:1px solid var(--border);background:color-mix(in srgb,var(--panel-solid) 96%,transparent)}.enhancement-modal-head div{display:grid;gap:3px}.enhancement-modal-head strong{font-size:calc(14px * var(--font-scale))}.enhancement-modal-head span{font-size:calc(9px * var(--font-scale));color:var(--muted)}.enhancement-modal-head button{min-width:34px;min-height:34px;border:1px solid var(--border);border-radius:11px;background:var(--panel2);color:var(--text)}
 .enhancement-modal-body{padding:17px 18px}.preset-privacy{padding:10px 12px;border:1px solid color-mix(in srgb,var(--success) 32%,var(--border));border-radius:13px;background:color-mix(in srgb,var(--success) 6%,var(--panel));font-size:calc(9px * var(--font-scale));line-height:1.5;color:var(--muted);margin-bottom:14px}.preset-privacy strong{color:var(--text)}
 .preset-form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.preset-form-grid .form-group{margin:0}.preset-form-grid .span-2{grid-column:1/-1}.preset-modal-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px;padding-top:14px;border-top:1px solid var(--border)}.preset-modal-actions .danger{border-color:color-mix(in srgb,var(--danger) 38%,var(--border));color:var(--danger)}
@@ -1140,6 +1162,11 @@ html.low-power .card:hover,html.low-power .portal-card:hover{transform:none!impo
       <div class="form-group"><label>Perangkat Target</label><input class="form-control" id="presetDevices" placeholder="Contoh: HP / laptop / IFP" /></div>
       <div class="form-group"><label>Bahasa Konten</label><input class="form-control" id="presetLanguage" placeholder="Contoh: Bahasa Indonesia" /></div>
     </div><div class="preset-modal-actions"><button class="btn-primary" id="presetSaveNew" type="button">Simpan Baru</button><button class="btn-secondary" id="presetUpdate" type="button">Perbarui Terpilih</button><button class="btn-secondary danger" id="presetDelete" type="button">Hapus</button><button class="btn-secondary" id="presetExport" type="button">Ekspor JSON</button><button class="btn-secondary" id="presetImport" type="button">Impor JSON</button><input id="presetImportFile" type="file" accept="application/json,.json" hidden /></div></div>
+  </section>
+  <div class="model-info-backdrop" id="modelInfoBackdrop" hidden></div>
+  <section class="model-info-modal" id="modelInfoModal" hidden role="dialog" aria-modal="true" aria-labelledby="modelInfoTitle">
+    <header class="enhancement-modal-head"><div><strong id="modelInfoTitle">Informasi Model Pembelajaran</strong><span id="modelInfoSubtitle">Ringkasan model, karakteristik, dan penggunaan yang sesuai.</span></div><button id="modelInfoClose" type="button" aria-label="Tutup informasi model">✕</button></header>
+    <div class="enhancement-modal-body"><div class="model-info-content" id="modelInfoBody"></div></div>
   </section>
   <div class="enhancement-backdrop" id="generatorPreviewBackdrop" hidden></div>
   <section class="generator-preview-modal" id="generatorPreviewModal" hidden role="dialog" aria-modal="true" aria-labelledby="generatorPreviewTitle">
@@ -7696,6 +7723,24 @@ Keluaran WAJIB berupa satu paket perangkat ajar lengkap, BUKAN sekadar ringkasan
 Jika panjang keluaran sangat besar, tetap prioritaskan kelengkapan isi dan padatkan redaksi naratif, BUKAN menghilangkan instrumen. Sajikan sebagai dokumen profesional yang natural dan siap digunakan. JANGAN menampilkan label internal generator pada judul maupun isi keluaran.
 
 =====================================================================
+PENTING — GUNAKAN DOKUMEN ACUAN AGAR HASIL LEBIH AKURAT DAN SESUAI
+=====================================================================
+Untuk memperoleh hasil yang paling akurat, kontekstual, dan sesuai kebutuhan sekolah, jalankan/tempelkan prompt ini pada percakapan AI yang SAMA bersama dokumen acuan yang tersedia. Sangat disarankan melampirkan, bila ada:
+- dokumen Capaian Pembelajaran (CP)/standar/silabus resmi yang berlaku;
+- ATP, TP, program semester/tahunan, atau dokumen kurikulum sekolah yang relevan;
+- buku teks, modul, handout, bahan ajar, artikel/sumber belajar, atau materi yang benar-benar digunakan guru;
+- contoh asesmen, rubrik, LKPD, proyek/praktikum, atau perangkat pembelajaran sebelumnya;
+- dokumen konteks sekolah, sarana, kebutuhan peserta didik, atau dokumen pendukung lain yang relevan.
+
+ATURAN PENGGUNAAN DOKUMEN:
+1. Jika dokumen dilampirkan, jadikan dokumen tersebut sebagai REFERENSI UTAMA untuk fakta, CP/standar, terminologi, urutan materi, ruang lingkup konten, dan ketentuan yang memang tercantum di dalamnya.
+2. Jangan mengarang kode CP/standar, kutipan, isi sumber belajar, data sekolah, atau ketentuan yang tidak didukung dokumen. Jika tidak tersedia, tandai sebagai USULAN/ASUMSI YANG PERLU DIVERIFIKASI GURU.
+3. Pertahankan istilah dan struktur penting dari dokumen sumber selama tidak bertentangan dengan instruksi eksplisit guru pada prompt ini.
+4. Jika beberapa dokumen saling bertentangan dan tidak jelas mana yang harus diprioritaskan, tampilkan catatan konflik secara singkat dan tandai bagian tersebut untuk verifikasi guru; jangan menyelesaikan konflik secara diam-diam.
+5. Jangan mengklaim telah membaca/menggunakan dokumen yang sebenarnya tidak tersedia pada percakapan.
+6. Pada hasil akhir, sertakan bagian singkat “Dokumen/Sumber Acuan yang Digunakan” dan hanya tuliskan dokumen/sumber yang benar-benar diberikan atau disebutkan guru.
+
+=====================================================================
 BAGIAN 1 — KONTEKS & VARIABEL INPUT (isi/ganti sesuai kebutuhan)
 =====================================================================
 TENTUKAN KONDISI SISWA TERLEBIH DAHULU sebelum menetapkan TP, KKTP, aktivitas, diferensiasi, dan asesmen:
@@ -7706,6 +7751,8 @@ TENTUKAN KONDISI SISWA TERLEBIH DAHULU sebelum menetapkan TP, KKTP, aktivitas, d
 
 Kemudian lengkapi konteks pembelajaran berikut:
 - Nama Sekolah                 : {{nama_sekolah}}
+- Nama Guru                    : {{nama_guru_modul}}
+- Nama Kepala Sekolah          : {{nama_kepala_sekolah}}
 - Kurikulum / Acuan            : {{kurikulum_acuan_modul}}
 - Jenjang                      : {{jenjang}}
 - Fase & Kelas                 : {{fase_kelas}}
@@ -7737,6 +7784,7 @@ Kemudian lengkapi konteks pembelajaran berikut:
 - Deskripsi Asesmen Tambahan   : {{deskripsi_asesmen}}
 - Arahan Remedial & Pengayaan (Opsional) : {{preferensi_remedial_pengayaan}}
 - Mode Keluaran Modul          : {{mode_keluaran_modul}}
+- Bagian Tanda Tangan Akhir (Opsional) : {{tanda_tangan_modul}}
 
 ATURAN PRIORITAS KURIKULUM / ACUAN:
 - Kurikulum/acuan yang dipilih guru adalah sumber struktur dan terminologi utama. Jangan mencampur framework secara diam-diam.
@@ -7753,6 +7801,8 @@ ATURAN PRIORITAS KURIKULUM / ACUAN:
 ATURAN DEFAULT INPUT:
 - Jika suatu input dibiarkan kosong, belum diketahui, atau masih bertanda "ditentukan AI", tentukan usulan yang paling masuk akal berdasarkan jenjang, fase/kelas, mata pelajaran, topik, CP, konteks sekolah, dan prinsip Pembelajaran Mendalam. Sebutkan asumsi yang Anda buat secara singkat di awal keluaran.
 - Untuk Nama Sekolah yang kosong, jangan mengarang nama sekolah nyata; gunakan identitas generik yang mudah diganti guru.
+- Untuk Nama Guru dan Nama Kepala Sekolah yang kosong, JANGAN mengarang nama orang. Pada identitas/tanda tangan gunakan garis titik atau ruang isian yang mudah dilengkapi kemudian.
+- Nama Guru harus muncul pada bagian Identitas Modul. Nama Kepala Sekolah dicantumkan pada identitas/pengesahan bila diisi guru dan digunakan kembali secara konsisten pada bagian tanda tangan.
 - Untuk Tujuan Pembelajaran yang kosong, susun otomatis 2–4 TP yang terukur, selaras dengan CP dan topik, serta WAJIB memakai Kata Kerja Operasional (KKO) yang terdapat pada REFERENSI KKO di bawah. Jika TP dari guru memakai kata kerja yang tidak ada dalam referensi, audit dan ganti dengan KKO terdekat yang tersedia. Contoh: "mencatat" tidak digunakan; gunakan "menuliskan" bila maknanya sesuai.
 - Untuk Komposisi/Kondisi Siswa:
   a. "Non inklusi" → gunakan TP, KKTP, aktivitas, dan level asesmen sesuai fase/kelas.
@@ -7804,7 +7854,7 @@ Panduan pengisian variabel:
 - Deskripsi Asesmen Tambahan: ketentuan khusus seperti durasi, bentuk stimulus, asesmen lisan, adaptasi siswa, atau aturan penskoran. Untuk pembagian jumlah soal per tipe, guru juga boleh menuliskannya di arahan asesmen kognitif bila tidak ingin mengisi angka satu per satu. Jika kosong, AI menentukan detail teknis yang wajar sesuai TP/KKTP.
 - Rencana Alternatif / Plan B: arahan cadangan bila sarana, internet, laboratorium, cuaca, atau kondisi lain tidak memungkinkan; jika kosong AI membuat alternatif untuk aktivitas yang memiliki dependency tersebut.
 - Arahan Remedial & Pengayaan: guru dapat menuliskan bentuk tindak lanjut yang diinginkan; jika kosong AI membuat paket siap pakai untuk siswa berdasarkan TP/KKTP yang belum atau sudah dikuasai.
-- Mode Keluaran Modul: Dokumen Lengkap Sekaligus / Modul Inti + Lampiran / Bertahap per Bagian. Semua mode tetap harus menghasilkan paket yang sama lengkapnya.
+- Mode Keluaran Modul: semua mode WAJIB menghasilkan paket utama A–N yang sama lengkapnya; bagian O (Pengesahan/Tanda Tangan) hanya ditambahkan jika diaktifkan guru. Dokumen Lengkap Sekaligus = A–N (+O bila aktif) dalam satu dokumen; Modul Inti + Lampiran = A–D sebagai modul inti, E–M sebagai lampiran/perangkat lengkap, N sebagai audit mutu, lalu O bila aktif; Bertahap per Bagian = Tahap 1 A–C, Tahap 2 D–E, Tahap 3 F–K, Tahap 4 L–N, kemudian O bila aktif.
 
 REFERENSI 8 DIMENSI PROFIL LULUSAN (DIGUNAKAN HANYA JIKA GURU TIDAK MEMILIH DIMENSI):
 1) Keimanan dan Ketakwaan terhadap Tuhan YME
@@ -7854,7 +7904,8 @@ menyebut angka atau nama kerangka khusus pada dokumen keluaran.
 Susun dengan urutan dan penanda berikut. Semua komponen paket di bawah harus ditulis lengkap; komponen yang memang bergantung pada pilihan guru diberi perlakuan kondisional sesuai konfigurasi, tanpa menampilkan label internal generator pada dokumen akhir:
 
 A. IDENTITAS / IDENTIFIKASI
-   - Sekolah, mapel, fase/kelas, semester, alokasi waktu, jumlah pertemuan
+   - Sekolah, Nama Guru, Nama Kepala Sekolah (jika diisi), mapel, fase/kelas, semester, alokasi waktu, jumlah pertemuan
+   - Nama Guru pada identitas WAJIB menggunakan {{nama_guru_modul}}; jangan mengganti dengan nama buatan. Nama Kepala Sekolah menggunakan {{nama_kepala_sekolah}} bila tersedia.
    - Capaian Pembelajaran (CP)
    - Dimensi Profil Lulusan yang relevan — gunakan {{dimensi_profil_lulusan}}. Jika input berisi pilihan guru, tampilkan dan gunakan HANYA dimensi yang dipilih tersebut; DILARANG menambah dimensi lain dan DILARANG melampirkan daftar 8 dimensi secara lengkap. Untuk setiap dimensi terpilih, sertakan elemen serta bukti nyata pencapaiannya dalam pembelajaran. Jika guru tidak memilih dimensi apa pun, pilihkan 2–4 dimensi paling relevan dari REFERENSI 8 DIMENSI PROFIL LULUSAN yang tercantum pada prompt ini.
    - Identifikasi kesiapan/karakteristik murid, pengetahuan/keterampilan prasyarat, serta miskonsepsi/kesulitan yang perlu diantisipasi.
@@ -8015,6 +8066,19 @@ N. AUDIT MUTU FINAL — WAJIB DILAKUKAN SEBELUM MENUTUP KELUARAN
    12. Aktivitas yang bergantung pada sarana/teknologi memiliki Plan B yang tetap mengukur TP yang sama.
    13. Paket remedial memiliki materi ulang, lembar tugas siswa, asesmen ulang, kunci/pedoman skor, dan kriteria keberhasilan; paket pengayaan memiliki tugas ekstensi yang lebih dalam beserta kriteria/rubriknya.
    14. Istilah/struktur kurikulum konsisten dengan acuan yang dipilih dan tidak mencampur framework secara tidak perlu.
+   15. Struktur visual dokumen mudah dipindai: heading konsisten, bagian A–N jelas terpisah, tidak ada blok teks panjang yang seharusnya dipecah.
+   16. Semua tabel mudah diedit: bukan gambar, tidak memakai merged cells/tabel bertingkat yang tidak perlu, kolom jelas, dan tabel yang terlalu lebar sudah dipecah menjadi tabel tematik.
+   17. Lembar untuk siswa terpisah secara jelas dari kunci/pedoman/catatan guru; penomoran soal/tugas konsisten dengan kisi-kisi dan pedoman skor.
+   18. Seluruh format tetap terbaca dan terstruktur saat disalin ke Word/Google Docs; tidak ada penggunaan code block atau format chat yang menghambat pengeditan.
+   19. Daftar isi/ringkasan struktur memudahkan navigasi ke asesmen, LKPD, rubrik, remedial, pengayaan, kunci, dan rekap nilai.
+   20. Istilah, skala, format tanggal/nilai, heading, dan penomoran digunakan konsisten di seluruh modul dan lampiran.
+
+O. PENGESAHAN / TANDA TANGAN — OPSIONAL DAN DILETAKKAN PALING AKHIR
+   - Terapkan {{tanda_tangan_modul}}. Jika dipilih "Ya — tampilkan bagian tanda tangan", letakkan blok ini SETELAH seluruh isi modul, lampiran, dan Audit Mutu Final sehingga benar-benar menjadi bagian penutup dokumen.
+   - Buat format pengesahan/tanda tangan dua pihak yang rapi dan siap cetak: "Mengetahui, Kepala Sekolah" dan "Guru Mata Pelajaran/Guru Kelas".
+   - Nama Guru harus menggunakan {{nama_guru_modul}} dan Nama Kepala Sekolah harus menggunakan {{nama_kepala_sekolah}}. DILARANG mengarang nama. Jika salah satu nama kosong, tampilkan garis titik/ruang isian yang dapat diisi manual.
+   - Sediakan ruang vertikal yang memadai untuk tanda tangan manual di antara jabatan dan nama. Jangan membuat atau meniru tanda tangan digital.
+   - Jika {{tanda_tangan_modul}} = "Tidak — tanpa bagian tanda tangan", hilangkan seluruh bagian O dari keluaran tanpa meninggalkan judul kosong.
 
 =====================================================================
 BAGIAN 3 — PENYESUAIAN JENJANG (SD s.d. SMA/SMK)
@@ -8070,17 +8134,87 @@ ATURAN UTAMA KETERKAITAN SOAL DENGAN TP:
 6. ATURAN PEMILIHAN RUBRIK — rubrik ASESMEN UTAMA harus mengikuti teknik yang dipilih guru dan dibuat terpisah untuk tiap teknik. Di luar itu, karena keluaran adalah paket modul ajar super lengkap, tetap WAJIB sediakan lembar observasi proses, rubrik keterampilan praktik/proyek, dan rubrik sikap sebagai alat monitoring formatif. Jika instrumen pendukung tersebut tidak dipilih sebagai komponen nilai, beri keterangan bahwa fungsinya monitoring/umpan balik dan tidak otomatis dihitung ke nilai akhir. Rubrik LKPD dibuat bila hasil LKPD dinilai; bila tidak, gunakan checklist penyelesaian/umpan balik singkat.
 
 =====================================================================
+STANDAR TAMPILAN, KETERBACAAN, DAN EDITABILITAS DOKUMEN — WAJIB
+=====================================================================
+Keluaran harus tidak hanya lengkap secara isi, tetapi juga MUDAH DIBACA, MUDAH DIPAHAMI, MUDAH DINAVIGASI, MUDAH DICETAK, dan MUDAH DIEDIT kembali oleh guru. Terapkan aturan berikut pada seluruh bagian A–N dan O bila digunakan:
+
+1. HIERARKI DOKUMEN YANG JELAS
+   - Gunakan judul utama, subjudul, dan sub-subjudul secara konsisten.
+   - Gunakan penomoran yang stabil dan jangan melompat-lompat.
+   - Pisahkan setiap bagian utama A, B, C, dan seterusnya dengan heading yang tegas serta ruang antarbagiannya yang cukup.
+   - Hindari blok teks sangat panjang; pecah menjadi paragraf singkat, poin, langkah, atau tabel bila memang lebih mudah dipahami.
+
+2. DESAIN INFORMASI YANG RINGKAS TETAPI TIDAK KEHILANGAN ISI
+   - Dahulukan informasi yang harus segera diketahui guru, kemudian detail pendukung.
+   - Gunakan kalimat langsung, bahasa profesional, dan istilah yang konsisten dari awal sampai akhir.
+   - Hindari pengulangan isi yang sama di banyak bagian. Jika perlu mengacu bagian lain, gunakan rujukan yang jelas, misalnya “lihat Rubrik Proyek pada Bagian G”.
+   - Gunakan bold secara selektif untuk label/kata kunci penting; jangan membuat seluruh paragraf tebal.
+
+3. ATURAN TABEL — WAJIB MUDAH DIEDIT
+   - Semua tabel harus berupa tabel teks/native yang dapat diedit, BUKAN gambar/screenshot tabel.
+   - Jika platform mendukung DOCX, Google Docs, atau editor dokumen, gunakan tabel native platform tersebut. Jika hanya teks/Markdown tersedia, gunakan tabel Markdown sederhana yang tetap mudah disalin dan diedit.
+   - Hindari merged cells, tabel di dalam tabel, struktur bertingkat yang rumit, atau format dekoratif yang menyulitkan pengeditan.
+   - Gunakan satu jenis informasi per kolom dengan judul kolom pendek, jelas, dan konsisten.
+   - Jangan memasukkan paragraf sangat panjang ke satu sel. Ringkas isi sel menjadi poin/kalimat pendek tanpa menghilangkan makna.
+   - Jika tabel menjadi terlalu lebar atau memiliki terlalu banyak kolom, PECAH menjadi dua atau lebih tabel tematik daripada memaksa satu tabel besar.
+   - Jika tabel sangat panjang, ulangi header secara logis pada bagian lanjutan bila platform mendukung.
+   - Untuk ruang yang akan diisi guru/siswa, sediakan kolom/ruang kosong yang cukup dan jelas.
+   - Jangan menggunakan tabel hanya untuk dekorasi; gunakan tabel jika memang membantu perbandingan, pencatatan, pemetaan, atau pengolahan data.
+
+4. KETERBACAAN LKPD, ASESMEN, DAN INSTRUMEN
+   - Setiap lembar siap pakai harus memiliki judul, tujuan singkat bila diperlukan, identitas/ruang nama jika relevan, instruksi, isi/tugas, dan ruang respons yang jelas.
+   - Nomor soal/tugas harus konsisten dan mudah dirujuk dari kisi-kisi serta kunci/pedoman skor.
+   - Pisahkan bagian “untuk siswa” dan “untuk guru” agar kunci jawaban, pedoman skor, atau catatan guru tidak bercampur dengan lembar yang dibagikan kepada siswa.
+   - Rubrik harus mudah dipindai: aspek pada baris, level/skor pada kolom, deskriptor singkat namun operasional.
+
+5. KESIAPAN CETAK DAN EDIT ULANG
+   - Hindari elemen yang hanya bekerja pada tampilan chat, seperti layout visual kompleks yang rusak ketika disalin ke Word/Docs.
+   - Jangan menggunakan code block untuk isi modul, tabel, LKPD, rubrik, atau instrumen kecuali benar-benar berupa kode.
+   - Gunakan format yang tetap masuk akal ketika dicopy-paste ke Word/Google Docs.
+   - Gunakan page break/section break secara konseptual pada pergantian bagian utama atau lampiran bila platform pembuatan dokumen mendukungnya.
+   - Jangan mengunci konten menjadi gambar/PDF datar jika tujuan pengguna adalah pengeditan; prioritaskan struktur yang editable terlebih dahulu.
+
+6. KONSISTENSI VISUAL DAN ISTILAH
+   - Gunakan gaya heading, penomoran, label, skala rubrik, istilah TP/KKTP, nama asesmen, dan nama aktivitas secara konsisten.
+   - Jika menggunakan singkatan, jelaskan pada kemunculan pertama.
+   - Hindari ornamen, emoji, atau simbol berlebihan pada dokumen formal; gunakan hanya bila membantu navigasi dan sesuai konteks.
+
+7. PRINSIP “SATU LIHAT, PAHAM STRUKTURNYA”
+   - Pada awal hasil, tampilkan daftar isi/ringkasan struktur A–N (dan O jika aktif) secara singkat agar guru langsung memahami susunan dokumen.
+   - Pada setiap bagian utama, gunakan pembuka singkat yang menjelaskan fungsi bagian tersebut bila fungsi tidak langsung jelas.
+   - Pastikan guru dapat menemukan asesmen, LKPD, rubrik, remedial, pengayaan, kunci, dan rekap nilai tanpa harus menelusuri paragraf panjang.
+
+=====================================================================
 BAGIAN 5 — FORMAT KELUARAN
 =====================================================================
-- Gunakan struktur A–N di atas secara berurutan, dengan sub-penomoran yang rapi.
-- Ikuti {{mode_keluaran_modul}}:
-  a. "Dokumen Lengkap Sekaligus" → tampilkan A–N dalam satu dokumen berurutan.
-  b. "Modul Inti + Lampiran" → tampilkan modul inti terlebih dahulu lalu lampiran instrumen lengkap; JANGAN meringkas/menghilangkan isi lampiran.
-  c. "Bertahap per Bagian" → bagi menjadi tahap yang logis (mis. Tahap 1 Modul Inti & Matriks; Tahap 2 Asesmen; Tahap 3 LKPD & Rubrik; Tahap 4 Remedial-Pengayaan & Lampiran). Pada tiap tahap tulis isi final, dan setelah tahap selesai nyatakan bagian berikutnya yang harus dilanjutkan. Jangan mengulang bagian yang sudah selesai.
+PETA BAGIAN KELUARAN — gunakan penanda ini secara konsisten agar guru mengetahui isi setiap bagian:
+- A. Identitas / Identifikasi — identitas sekolah/guru, CP, profil siswa, prasyarat, miskonsepsi, dan kondisi implementasi.
+- B. Desain Pembelajaran — TP, KKTP, materi esensial, pemahaman bermakna, model/kerangka pembelajaran, diferensiasi, proyek, dan matriks keterlacakan.
+- C. Langkah-Langkah Kegiatan Pembelajaran — kegiatan per pertemuan, pengalaman belajar, prinsip pembelajaran, audit waktu, realisme implementasi, dan Plan B.
+- D. Asesmen Pembelajaran — rancangan diagnostik/formatif/sumatif, domain kognitif/non-kognitif, adaptasi, bobot, teknik, dan tindak lanjut.
+- E. Paket Lembar Asesmen Lengkap — kisi-kisi, seluruh soal/tugas, stimulus, kunci/pedoman skor, rubrik per butir/teknik, dan versi adaptif bila diperlukan.
+- F. LKPD Praktik / Investigasi — lembar kerja praktik/observasi/simulasi/unjuk kerja lengkap beserta penilaiannya.
+- G. LKPD Proyek — tantangan proyek, tahapan, produk, monitoring progres, refleksi, dan rubrik proyek/produk.
+- H. Lembar Observasi, Keterampilan, dan Sikap — lembar observasi guru serta rubrik keterampilan dan sikap yang operasional.
+- I. Bahan Ajar Ringkas / Handout Siswa — materi esensial, contoh, konsep kunci, miskonsepsi, dan cek pemahaman.
+- J. Refleksi Siswa dan Penilaian Diri — refleksi metakognitif dan skala/indikator penilaian diri bila relevan.
+- K. Refleksi Guru dan Catatan Tindak Lanjut — evaluasi keterlaksanaan, respons siswa, ketercapaian TP, kendala, dan perbaikan.
+- L. Rencana Tindak Lanjut: Remedial & Pengayaan — paket remedial dan pengayaan siap dibagikan kepada siswa beserta instrumen cek ulang/tantangan.
+- M. Perangkat Administrasi & Lampiran Pendukung — sumber belajar, glosarium, alat/bahan, kunci terpusat, rekap nilai, dokumentasi, keselamatan/etika, Plan B, dan lampiran relevan.
+- N. Audit Mutu Final — checklist kelulusan mutu, keterlacakan, konsistensi jumlah soal/bobot/waktu, kelengkapan instrumen, diferensiasi, dan kesesuaian kurikulum.
+- O. Pengesahan / Tanda Tangan — OPSIONAL; hanya muncul bila {{tanda_tangan_modul}} diaktifkan, dan selalu diletakkan paling akhir.
+
+ATURAN MODE KELUARAN — {{mode_keluaran_modul}} hanya mengatur cara penyajian, bukan mengurangi isi:
+  a. "Dokumen Lengkap Sekaligus" → tampilkan paket utama A–N berurutan dalam satu dokumen; tambahkan O paling akhir hanya jika tanda tangan diaktifkan.
+  b. "Modul Inti + Lampiran" → tampilkan A–D sebagai MODUL INTI; lanjutkan E–M sebagai LAMPIRAN/PERANGKAT LENGKAP; tampilkan N sebagai AUDIT MUTU FINAL; tambahkan O paling akhir bila diaktifkan. Tidak boleh ada bagian lampiran yang diringkas atau dihilangkan.
+  c. "Bertahap per Bagian" → Tahap 1 = A–C (identitas, desain, kegiatan); Tahap 2 = D–E (rancangan asesmen + lembar asesmen lengkap); Tahap 3 = F–K (LKPD, observasi/rubrik, handout, refleksi siswa & guru); Tahap 4 = L–N (remedial-pengayaan, administrasi/lampiran, audit mutu); setelah Tahap 4 tambahkan O bila tanda tangan diaktifkan. Pada tiap tahap tulis isi final dan jangan mengulang bagian yang sudah selesai.
 - JANGAN mencantumkan label [WAJIB] atau [OPSIONAL] pada judul maupun sub-komponen. Gunakan judul natural dan profesional.
+- Pada bagian paling awal keluaran, tampilkan “Daftar Isi / Peta Dokumen” singkat yang memuat A–N dan O bila aktif, sehingga struktur keseluruhan dapat dipahami sebelum membaca detail.
+- Terapkan STANDAR TAMPILAN, KETERBACAAN, DAN EDITABILITAS DOKUMEN di atas pada seluruh keluaran. Kelengkapan isi tidak boleh menghasilkan dokumen yang padat, sulit dipindai, atau sulit diedit.
+- Jika suatu bagian memiliki banyak instrumen, berikan subjudul yang eksplisit, misalnya “Lembar untuk Siswa”, “Kunci & Pedoman Guru”, “Rubrik”, dan “Rekap/Administrasi”.
 - Gunakan tabel untuk: KKTP, matriks keterlacakan, diferensiasi, kisi-kisi soal, rubrik, lembar observasi, rekap skor, jadwal/progres proyek, keputusan remedial/pengayaan, dan audit mutu akhir.
 - SELURUH lembar/instrumen harus berisi konten final siap pakai. Jangan mengganti isi dengan instruksi meta seperti "guru membuat...", "tambahkan soal...", "sesuaikan rubrik...", atau placeholder kosong selain ruang yang memang harus diisi siswa/guru saat pembelajaran.
-- Pastikan minimal terdapat: modul inti; matriks keterlacakan; tabel diferensiasi; paket asesmen lengkap; kisi-kisi; soal dan kunci/pedoman skor; LKPD praktik/investigasi; LKPD proyek; lembar observasi; rubrik keterampilan; rubrik sikap; rubrik proyek/produk; bahan ajar ringkas; refleksi siswa; refleksi guru; paket remedial siswa; paket pengayaan siswa; rekap skor berbobot; Plan B; audit waktu; audit mutu akhir; dan lampiran sumber belajar.
+- Pastikan minimal terdapat: modul inti; matriks keterlacakan; tabel diferensiasi; paket asesmen lengkap; kisi-kisi; soal dan kunci/pedoman skor; LKPD praktik/investigasi; LKPD proyek; lembar observasi; rubrik keterampilan; rubrik sikap; rubrik proyek/produk; bahan ajar ringkas; refleksi siswa; refleksi guru; paket remedial siswa; paket pengayaan siswa; rekap skor berbobot; Plan B; audit waktu; audit mutu akhir; dan lampiran sumber belajar. Jika {{tanda_tangan_modul}} memilih Ya, tambahkan blok pengesahan/tanda tangan sebagai bagian paling akhir.
 - Sebelum finalisasi, lakukan audit keterlacakan TP → KKTP → kegiatan → LKPD → asesmen → nomor soal/rubrik; pastikan setiap instrumen memiliki tujuan yang jelas dan tidak ada soal yang berdiri sendiri tanpa TP.
 - Jangan menyebut angka/nama kerangka khusus untuk struktur Pembelajaran Mendalam; tampilkan prinsip-prinsipnya secara natural melalui isi modul.
 - Tulis dalam Bahasa Indonesia baku, sesuai jenjang pembaca (guru sebagai pengguna utama).
@@ -8477,7 +8611,7 @@ function renderGeneratorTemplate(){
     const isPresentation=ps[0]?.title==='Prompt Presentasi Pembelajaran';
     const isVideo=ps[0]?.title==='Prompt Video Pembelajaran';
     const isLKPD=ps[0]?.title==='Prompt LKPD';
-    const moduleNote=isModule?'<div class="module-ai-note"><strong>💡 Tidak harus mengisi semuanya.</strong> Setiap kolom yang dibiarkan kosong akan ditentukan AI berdasarkan data yang sudah tersedia. Semakin banyak konteks yang diberikan, semakin spesifik hasil Modul Ajar/RPM.</div>':(isPresentation?'<div class="module-ai-note"><strong>🖥️ Panduan Presentasi Pembelajaran.</strong> Isi data utama yang Anda ketahui. Jika memiliki modul ajar/RPP/silabus, unggah file tersebut saat menjalankan prompt di AI. Untuk <strong>Format Output B</strong>, AI harus menampilkan <strong>outline slide dulu</strong> dan baru membuat gambar setelah guru mengetik <strong>"Lanjut"</strong>.</div>':(isVideo?'<div class="module-ai-note"><strong>🎬 Panduan Video Pembelajaran.</strong> Isi data yang Anda ketahui; kolom kosong akan ditentukan AI dan ditandai otomatis. Alurnya wajib <strong>Storyboard dulu → konfirmasi guru → Prompt Karakter → Prompt Scene</strong>. Jika memakai karakter, gunakan tag @nama dan reference image secara konsisten.</div>':(isLKPD?'<div class="module-ai-note"><strong>📝 Panduan LKPD.</strong> Isi data yang Anda ketahui. Setiap input memiliki contoh/panduan. <strong>Format Output Akhir wajib dipilih</strong>; field lain yang kosong akan dilengkapi AI secara wajar berdasarkan TP, topik, dan jenjang.</div>':'')));
+    const moduleNote=isModule?'<div class="module-ai-note"><strong>💡 Tidak harus mengisi semuanya.</strong> Setiap kolom yang dibiarkan kosong akan ditentukan AI berdasarkan data yang sudah tersedia. Semakin banyak konteks yang diberikan, semakin spesifik hasil Modul Ajar/RPM.<br><br><strong>📎 Agar hasil lebih akurat dan sesuai:</strong> setelah Generate, tempelkan prompt pada percakapan AI yang sama sambil melampirkan <strong>dokumen CP/standar resmi, ATP/TP, sumber belajar (buku/modul/handout), contoh asesmen/LKPD, dan dokumen pendukung lain</strong> yang relevan. AI diarahkan untuk memprioritaskan dokumen tersebut dan tidak mengarang informasi yang tidak didukung sumber.</div>':(isPresentation?'<div class="module-ai-note"><strong>🖥️ Panduan Presentasi Pembelajaran.</strong> Isi data utama yang Anda ketahui. Jika memiliki modul ajar/RPP/silabus, unggah file tersebut saat menjalankan prompt di AI. Untuk <strong>Format Output B</strong>, AI harus menampilkan <strong>outline slide dulu</strong> dan baru membuat gambar setelah guru mengetik <strong>"Lanjut"</strong>.</div>':(isVideo?'<div class="module-ai-note"><strong>🎬 Panduan Video Pembelajaran.</strong> Isi data yang Anda ketahui; kolom kosong akan ditentukan AI dan ditandai otomatis. Alurnya wajib <strong>Storyboard dulu → konfirmasi guru → Prompt Karakter → Prompt Scene</strong>. Jika memakai karakter, gunakan tag @nama dan reference image secara konsisten.</div>':(isLKPD?'<div class="module-ai-note"><strong>📝 Panduan LKPD.</strong> Isi data yang Anda ketahui. Setiap input memiliki contoh/panduan. <strong>Format Output Akhir wajib dipilih</strong>; field lain yang kosong akan dilengkapi AI secara wajar berdasarkan TP, topik, dan jenjang.</div>':'')));
     let renderFields=prioritizeEducationLevelFields(fields);
     if(isModule){
       const priority=['{{komposisi_siswa}}','{{deskripsi_siswa_inklusi}}','{{karakteristik_kesiapan_murid}}','{{preferensi_diferensiasi}}','{{jenjang}}','{{fase_kelas}}','{{mata_pelajaran}}','{{kurikulum_acuan_modul}}','{{nama_sekolah}}'];
@@ -8509,6 +8643,8 @@ const CURRICULUM_OPTIONS=[
 const curriculumGeneratorFieldConfig={label:'Kurikulum / Acuan',type:'select',options:CURRICULUM_OPTIONS,help:'Pilih kurikulum/acuan utama. AI wajib menyesuaikan terminologi tujuan/standar, pedagogi, materi, dan asesmen dengan pilihan ini. Untuk Hybrid/Kustom, jelaskan detail pada Deskripsi/Catatan. Jika kosong, AI mengikuti file referensi atau konteks paling relevan.'};
 const moduleGeneratorFieldConfig={
   '{{nama_sekolah}}':{label:'Nama Sekolah',placeholder:'Contoh: SMP Negeri 3 Segedong',help:'Jika kosong, AI memakai identitas sekolah generik yang mudah diganti dan tidak mengarang nama sekolah nyata.',auto:'gunakan identitas sekolah generik yang mudah diganti'},
+  '{{nama_guru_modul}}':{label:'Nama Guru',placeholder:'Contoh: Rina Sari, S.Pd.',help:'Nama guru akan dicantumkan pada Identitas Modul dan, jika bagian tanda tangan diaktifkan, digunakan kembali pada tanda tangan guru di akhir modul. Jika kosong, AI tidak boleh mengarang nama.',auto:'jangan mengarang nama guru; gunakan garis titik/ruang isian yang mudah dilengkapi kemudian'},
+  '{{nama_kepala_sekolah}}':{label:'Nama Kepala Sekolah',placeholder:'Contoh: Drs. Ahmad Hidayat, M.Pd.',help:'Opsional. Digunakan pada identitas/pengesahan dan tanda tangan Kepala Sekolah jika bagian tanda tangan diaktifkan. Jika kosong, AI tidak boleh mengarang nama.',auto:'jangan mengarang nama kepala sekolah; gunakan garis titik/ruang isian jika diperlukan'},
   '{{kurikulum_acuan_modul}}':{label:'Kurikulum / Acuan',type:'select',options:CURRICULUM_OPTIONS,help:'Pilih kurikulum/acuan utama. Semua istilah, tujuan, pedagogi, dan asesmen harus menyesuaikan pilihan ini.',auto:'ikuti file referensi atau tentukan kurikulum/acuan yang paling relevan tanpa mengarang standar resmi'},
   '{{jenjang}}':{label:'Jenjang',type:'select',options:[['','— Biarkan AI menentukan —'],['SD','SD'],['SMP','SMP'],['SMA','SMA'],['SMK','SMK']],help:'Contoh: SMP. Jika kosong, AI menentukan jenjang yang paling konsisten dengan data fase/kelas atau konteks lain.',auto:'tentukan jenjang berdasarkan konteks yang tersedia'},
   '{{fase_kelas}}':{label:'Fase & Kelas',placeholder:'Contoh: Fase D / Kelas VIII',help:'Jika kosong, AI memetakan fase/kelas berdasarkan jenjang dan tingkat kompleksitas materi.',auto:'tentukan fase dan kelas yang sesuai'},
@@ -8518,7 +8654,7 @@ const moduleGeneratorFieldConfig={
   '{{prasyarat_pembelajaran}}':{label:'Pengetahuan / Keterampilan Prasyarat (Opsional)',type:'textarea',placeholder:'Contoh: siswa sudah memahami fungsi organ dan mampu membaca tabel sederhana',help:'Kemampuan yang seharusnya sudah dimiliki sebelum unit dimulai. Digunakan untuk diagnostik awal, scaffolding, dan penentuan remedial. Jika kosong, AI memetakan prasyarat yang logis dan menandainya sebagai asumsi.',auto:'identifikasi prasyarat pengetahuan/keterampilan yang paling relevan dan tandai sebagai asumsi untuk diverifikasi'},
   '{{miskonsepsi_kesulitan}}':{label:'Miskonsepsi / Kesulitan yang Diprediksi (Opsional)',type:'textarea',placeholder:'Contoh: siswa mengira paru-paru menarik udara sendiri; kesulitan membaca grafik frekuensi napas',help:'Tuliskan miskonsepsi atau kesulitan yang sering muncul. AI akan mengantisipasinya pada pemantik, materi, aktivitas, feedback, dan remedial. Jika kosong, AI mengidentifikasi miskonsepsi umum yang relevan.',auto:'identifikasi miskonsepsi/kesulitan umum yang relevan tanpa membuat diagnosis individual'},
   '{{subtopik}}':{label:'Subtopik',placeholder:'Contoh: Mekanisme inspirasi dan ekspirasi',help:'Opsional. Jika kosong, AI memilih subtopik yang paling mendukung ketercapaian tujuan.',auto:'pilih subtopik yang relevan bila diperlukan'},
-  '{{capaian_pembelajaran}}':{label:'Capaian Pembelajaran (CP)',placeholder:'Contoh: tempel CP resmi di sini, atau kosongkan',help:'Tempel CP resmi jika sudah tersedia. Jika kosong, AI menyusun/merujuk CP yang relevan dan menandainya sebagai usulan untuk diverifikasi guru.',auto:'susun/rujuk CP yang relevan sebagai usulan dan tandai agar diverifikasi guru'},
+  '{{capaian_pembelajaran}}':{label:'Capaian Pembelajaran (CP)',placeholder:'Contoh: tempel CP resmi di sini, atau kosongkan',help:'Untuk akurasi terbaik, tempel CP resmi di kolom ini ATAU lampirkan dokumen CP saat menjalankan prompt di AI. Disarankan juga melampirkan sumber belajar, ATP/TP, modul/buku, asesmen, dan dokumen pendukung lain yang relevan. Jika CP tidak tersedia, AI hanya boleh memberi usulan dan menandainya untuk diverifikasi guru.',auto:'susun/rujuk CP yang relevan sebagai usulan dan tandai agar diverifikasi guru'},
   '{{tujuan_pembelajaran}}':{label:'Tujuan Pembelajaran (TP)',placeholder:'Contoh: Peserta didik mampu menjelaskan mekanisme pernapasan dan mengaitkan perubahan frekuensi napas dengan aktivitas fisik',help:'Gunakan KKO dari referensi PDF Daftar KKO Revisi 2 saja. Contoh KKO valid: menuliskan, menjelaskan, menentukan, menggunakan, mengaitkan, menelaah, memvalidasi, merencanakan, menciptakan. Kata seperti “mencatat” tidak digunakan; gunakan “menuliskan” bila sesuai. Jika kosong, AI menyusun 2–4 TP terukur dari KKO referensi. Jika ada siswa inklusi, AI menurunkan level KKO secara proporsional.',auto:'susun 2–4 tujuan pembelajaran terukur dengan KKO yang hanya berasal dari referensi Daftar KKO Revisi 2, dan adaptasikan levelnya bila ada siswa inklusi'},
   '{{dimensi_profil_lulusan}}':{label:'8 Dimensi Profil Lulusan',type:'dimensions',help:'Centang dimensi yang ingin digunakan (disarankan 2–4). Jika Anda memilih, prompt final hanya akan memuat dimensi yang dicentang—AI tidak boleh menambah dimensi lain. Jika tidak ada yang dipilih, AI akan memilihkan 2–4 dimensi paling relevan.',auto:'pilih 2–4 Dimensi Profil Lulusan yang paling relevan dan sertakan bukti nyata pencapaiannya'},
   '{{semester_tahun_ajaran}}':{label:'Semester & Tahun Ajaran',placeholder:'Contoh: Ganjil, 2026/2027',help:'Jika kosong, AI memberikan usulan yang mudah diedit.',auto:'tentukan semester/tahun ajaran sebagai usulan yang mudah diedit'},
@@ -8543,7 +8679,8 @@ const moduleGeneratorFieldConfig={
   '{{bobot_penilaian}}':{label:'Bobot Penilaian (Opsional)',type:'assessmentWeights',help:'Isi persentase komponen yang masuk nilai akhir. Contoh: Kognitif 40%, Praktik/Keterampilan 25%, Proyek/Produk 25%, Sikap/Observasi 10%. Jika ada angka yang diisi, total harus 100%. Kosong = AI menentukan bobot proporsional.',auto:'tentukan bobot penilaian proporsional yang totalnya 100% dan bedakan komponen nilai akhir vs monitoring formatif'},
   '{{deskripsi_asesmen}}':{label:'Deskripsi Asesmen Tambahan',placeholder:'Contoh: formatif setelah praktikum; sumatif 20 soal; sediakan versi lisan untuk siswa tertentu; gunakan stimulus data lokal',help:'Opsional. Isi ketentuan asesmen yang belum tercakup. Jika kosong, AI menentukan detail teknis asesmen yang wajar berdasarkan TP, KKTP, jenjang, dan kondisi siswa.',auto:'tidak ada ketentuan tambahan; tentukan detail asesmen yang wajar berdasarkan TP, KKTP, jenjang, dan kondisi siswa'},
   '{{preferensi_remedial_pengayaan}}':{label:'Arahan Remedial & Pengayaan (Opsional)',type:'textarea',placeholder:'Contoh: remedial melalui tutorial kelompok kecil + latihan bertahap; pengayaan berupa mini-riset lingkungan dan presentasi singkat',help:'Guru dapat menentukan bentuk tindak lanjut. Hasil akhir tetap harus memuat paket remedial dan pengayaan siap diberikan kepada siswa, lengkap dengan lembar tugas dan instrumen penilaiannya.',auto:'buat paket remedial dan pengayaan siap dibagikan kepada siswa berdasarkan ketercapaian tiap TP/KKTP'},
-  '{{mode_keluaran_modul}}':{label:'Mode Keluaran Modul',type:'select',options:[['','— Ditentukan AI —'],['Dokumen Lengkap Sekaligus','Dokumen Lengkap Sekaligus — A–N dalam satu keluaran'],['Modul Inti + Lampiran','Modul Inti + Lampiran — isi inti lalu seluruh instrumen lampiran'],['Bertahap per Bagian','Bertahap per Bagian — keluarkan paket dalam beberapa tahap agar tidak terpotong']],help:'Mode hanya mengatur cara penyajian. Semua pilihan tetap wajib menghasilkan modul dan seluruh instrumen secara lengkap.',auto:'gunakan Modul Inti + Lampiran agar struktur terbaca tetapi semua instrumen tetap lengkap'}
+  '{{mode_keluaran_modul}}':{label:'Mode Keluaran Modul',type:'outputMode',options:[['','— Ditentukan AI —'],['Dokumen Lengkap Sekaligus','Dokumen Lengkap Sekaligus — A–N (+ O jika tanda tangan aktif) dalam satu dokumen'],['Modul Inti + Lampiran','Modul Inti + Lampiran — A–D inti, E–M lampiran, N audit, O opsional'],['Bertahap per Bagian','Bertahap per Bagian — Tahap 1 A–C, Tahap 2 D–E, Tahap 3 F–K, Tahap 4 L–N, O opsional']],help:'A–N adalah paket utama Modul Ajar dan wajib lengkap pada semua mode. O hanya bagian Pengesahan/Tanda Tangan opsional. Semua mode wajib menghasilkan tampilan yang mudah dibaca, pembagian bagian jelas, dan tabel sederhana yang mudah diedit. Lihat peta bagian di bawah pilihan.',auto:'gunakan Modul Inti + Lampiran agar struktur terbaca tetapi semua instrumen tetap lengkap'},
+  '{{tanda_tangan_modul}}':{label:'Bagian Tanda Tangan Akhir Modul (Opsional)',type:'select',options:[['Tidak — tanpa bagian tanda tangan','Tidak — tanpa bagian tanda tangan'],['Ya — tampilkan bagian tanda tangan','Ya — tampilkan bagian tanda tangan']],help:'Jika Ya, tambahkan blok pengesahan paling akhir untuk Guru dan Kepala Sekolah dengan ruang tanda tangan manual. Jika Tidak, blok tersebut tidak dibuat.',auto:'gunakan Tidak — tanpa bagian tanda tangan'}
  };
 const lkpdGeneratorFieldConfig={
   '{{nama_sekolah}}':{label:'Nama Sekolah',placeholder:'Contoh: SMP Negeri 3 Segedong',help:'Nama sekolah yang akan tampil di kop LKPD. Jika kosong, AI memakai identitas sekolah generik yang mudah diganti.',auto:'gunakan identitas sekolah generik yang mudah diganti'},
@@ -8777,10 +8914,10 @@ function initSpecialGeneratorFields(){
 function generatorProgressGroup(f,cfg,label){
   if(f?.group)return f.group;
   const token=f?.token||'';
-  if(['{{komposisi_siswa}}','{{deskripsi_siswa_inklusi}}','{{karakteristik_kesiapan_murid}}','{{preferensi_diferensiasi}}','{{nama_sekolah}}','{{kurikulum_acuan_modul}}','{{jenjang}}','{{fase_kelas}}','{{mata_pelajaran}}','{{semester_tahun_ajaran}}','{{jumlah_pertemuan_alokasi}}','{{jumlah_siswa}}','{{jumlah_kelompok}}','{{sarana_pembelajaran}}','{{keterbatasan_pembelajaran}}'].includes(token))return'identity';
+  if(['{{komposisi_siswa}}','{{deskripsi_siswa_inklusi}}','{{karakteristik_kesiapan_murid}}','{{preferensi_diferensiasi}}','{{nama_sekolah}}','{{nama_guru_modul}}','{{nama_kepala_sekolah}}','{{kurikulum_acuan_modul}}','{{jenjang}}','{{fase_kelas}}','{{mata_pelajaran}}','{{semester_tahun_ajaran}}','{{jumlah_pertemuan_alokasi}}','{{jumlah_siswa}}','{{jumlah_kelompok}}','{{sarana_pembelajaran}}','{{keterbatasan_pembelajaran}}'].includes(token))return'identity';
   if(['{{topik_materi}}','{{aktivitas_siswa}}','{{prasyarat_pembelajaran}}','{{miskonsepsi_kesulitan}}','{{subtopik}}','{{capaian_pembelajaran}}','{{tujuan_pembelajaran}}','{{dimensi_profil_lulusan}}','{{model_praktik_pedagogis}}','{{mode_produk_proyek}}','{{opsi_produk_proyek}}','{{konteks_lokal_sekolah}}'].includes(token))return'content';
   if(['{{konfigurasi_asesmen}}','{{bobot_penilaian}}','{{deskripsi_asesmen}}','{{preferensi_remedial_pengayaan}}','{{rencana_alternatif}}'].includes(token))return'settings';
-  if(['{{mode_keluaran_modul}}','{{pemanfaatan_digital}}','{{kemitraan_pembelajaran}}','{{deskripsi_tambahan}}'].includes(token))return'output';
+  if(['{{mode_keluaran_modul}}','{{tanda_tangan_modul}}','{{pemanfaatan_digital}}','{{kemitraan_pembelajaran}}','{{deskripsi_tambahan}}'].includes(token))return'output';
   const semantic=canonicalFieldKey(f?.sourceLabel||f?.label||label||'');
   if(['canva-sheet','akses-menu','cek-pemahaman','feedback-evaluasi','material-depth','mpi-evaluation','external-visual-links','jenis-game','jumlah-game','game-pembelajaran','engine-platform','platform-ai'].includes(semantic))return'settings';
   const t=normalize(`${f?.sourceLabel||''} ${f?.sourceToken||''} ${f?.token||''} ${label||''}`);
@@ -8790,6 +8927,109 @@ function generatorProgressGroup(f,cfg,label){
   if(/asesmen|bobot penilaian|remedial|pengayaan|rencana alternatif|plan b|mode keluaran|mode|genre|canva sheet|akses menu|cek pemahaman|feedback evaluasi|game pembelajaran|jenis game|jumlah game|jenis konten|kedalaman|tools video|jumlah latihan|tingkat kesulitan|format kertas|format file|navigasi|engine|platform tujuan/.test(t))return'settings';
   return'output';
 }
+const MODULE_MODEL_INFO={
+  'Problem Based Learning (PBL)':{
+    title:'Problem Based Learning (PBL)',
+    short:'Belajar dimulai dari masalah autentik yang perlu dipahami dan dipecahkan siswa melalui penyelidikan.',
+    characteristics:'Masalah kontekstual menjadi pemicu; siswa mengidentifikasi apa yang diketahui/perlu diketahui, mencari informasi, menguji solusi, lalu menyajikan dan mengevaluasi hasil.',
+    suitable:'Cocok untuk topik yang menuntut penalaran, analisis sebab-akibat, pengambilan keputusan, dan pemecahan masalah nyata.',
+    note:'Masalah harus benar-benar menggerakkan proses belajar, bukan sekadar soal cerita di akhir. Bedakan PBL dari PjBL: PBL berpusat pada pemecahan masalah; produk fisik tidak selalu wajib.'
+  },
+  'Project Based Learning (PjBL)':{
+    title:'Project Based Learning (PjBL)',
+    short:'Pembelajaran berpusat pada pengerjaan proyek yang menghasilkan produk/karya/solusi nyata sebagai bukti belajar.',
+    characteristics:'Ada pertanyaan/tantangan proyek, perencanaan, pembagian peran, pelaksanaan dan monitoring, pembuatan produk, presentasi/publikasi, serta refleksi/evaluasi.',
+    suitable:'Cocok untuk unit beberapa pertemuan yang membutuhkan integrasi konsep, kolaborasi, kreativitas, pengelolaan waktu, dan produk autentik.',
+    note:'Produk harus mengukur TP, bukan sekadar kerajinan. Gunakan bila waktu dan sarana memungkinkan; sediakan rubrik proses dan produk yang jelas.'
+  },
+  'Inquiry Learning':{
+    title:'Inquiry Learning',
+    short:'Siswa membangun pemahaman melalui pertanyaan, penyelidikan, pengumpulan bukti, analisis, dan penarikan kesimpulan.',
+    characteristics:'Pertanyaan investigatif, dugaan/hipotesis bila relevan, pengumpulan data, interpretasi bukti, argumentasi, kesimpulan, dan refleksi terhadap proses penyelidikan.',
+    suitable:'Sangat cocok untuk sains, sosial, literasi informasi, atau topik yang memungkinkan siswa menemukan jawaban dari bukti/data.',
+    note:'Tingkat keterbukaan inquiry harus disesuaikan kesiapan siswa. Untuk pemula, gunakan inquiry terbimbing agar beban kognitif tetap realistis.'
+  },
+  'Discovery Learning':{
+    title:'Discovery Learning',
+    short:'Guru menyiapkan stimulus, contoh, data, atau pola agar siswa menemukan konsep/prinsip melalui proses pengamatan dan pengolahan informasi.',
+    characteristics:'Stimulasi, identifikasi masalah/pertanyaan, pengumpulan dan pengolahan data, verifikasi temuan, kemudian generalisasi konsep.',
+    suitable:'Cocok untuk konsep yang dapat ditemukan dari pola, contoh-noncontoh, manipulasi objek, data sederhana, atau demonstrasi.',
+    note:'Berikan scaffolding yang cukup. Discovery bukan berarti guru sama sekali tidak memberi arahan atau membiarkan siswa menebak konsep tanpa bukti.'
+  },
+  'Direct Instruction':{
+    title:'Direct Instruction',
+    short:'Pembelajaran eksplisit dan terstruktur: guru menjelaskan atau memodelkan keterampilan/konsep, lalu siswa berlatih secara terbimbing hingga mandiri.',
+    characteristics:'Tujuan jelas, aktivasi prasyarat, pemodelan langkah, contoh, latihan terbimbing, pengecekan pemahaman, latihan mandiri, dan umpan balik segera.',
+    suitable:'Cocok untuk prosedur baru, keterampilan dasar, konsep fondasional, keselamatan praktikum, atau situasi ketika efisiensi dan kejelasan langkah sangat penting.',
+    note:'Tetap sertakan aktivitas siswa dan cek pemahaman. Direct Instruction tidak identik dengan ceramah panjang satu arah.'
+  },
+  'Contextual Teaching and Learning (CTL)':{
+    title:'Contextual Teaching and Learning (CTL)',
+    short:'Konsep dipelajari dengan menghubungkannya pada kehidupan nyata, lingkungan, pengalaman, budaya lokal, atau situasi yang dekat dengan siswa.',
+    characteristics:'Konteks autentik, pengalaman bermakna, keterhubungan konsep dengan aplikasi, diskusi/refleksi, dan tugas yang menunjukkan penggunaan pengetahuan.',
+    suitable:'Cocok untuk hampir semua mapel ketika guru ingin meningkatkan relevansi, transfer belajar, dan pemaknaan materi.',
+    note:'Konteks harus membantu memahami TP, bukan dekorasi cerita. Gunakan data/lingkungan lokal yang aman dan mudah diverifikasi bila tersedia.'
+  },
+  'Cooperative Learning':{
+    title:'Cooperative Learning',
+    short:'Siswa belajar dalam kelompok kecil yang terstruktur dengan tujuan bersama serta tanggung jawab individu yang jelas.',
+    characteristics:'Ketergantungan positif, peran/tugas anggota, interaksi tatap muka, akuntabilitas individu, keterampilan sosial, dan evaluasi proses kelompok.',
+    suitable:'Cocok untuk diskusi, latihan pemahaman, jigsaw, tutor sebaya, analisis sumber, pemecahan masalah, atau tugas yang membutuhkan kontribusi beragam.',
+    note:'Jangan hanya membagi siswa ke dalam kelompok. Pastikan setiap anggota memiliki peran dan bukti kontribusi agar tidak terjadi dominasi atau penumpang gratis.'
+  },
+  'Pembelajaran Berdiferensiasi':{
+    title:'Pembelajaran Berdiferensiasi',
+    short:'Pembelajaran disesuaikan berdasarkan kesiapan, kebutuhan dukungan, minat, dan/atau profil belajar tanpa menghilangkan esensi tujuan yang harus dicapai.',
+    characteristics:'Penyesuaian dapat terjadi pada konten, proses, produk/respons, scaffolding, grouping, tempo, media, dan asesmen.',
+    suitable:'Cocok untuk kelas heterogen, termasuk ketika sebagian siswa membutuhkan dukungan tambahan atau tantangan lebih tinggi.',
+    note:'Diferensiasi dapat digabung dengan PBL, PjBL, Inquiry, Cooperative Learning, dan model lain. Hindari membuat target seluruh kelas lebih rendah hanya karena sebagian siswa memerlukan adaptasi.'
+  },
+  'Experiential Learning':{
+    title:'Experiential Learning',
+    short:'Siswa belajar melalui pengalaman nyata/konkret yang diikuti refleksi, pembentukan konsep, dan penerapan pada situasi baru.',
+    characteristics:'Pengalaman konkret → refleksi terhadap pengalaman → abstraksi/konseptualisasi → eksperimen atau penerapan berikutnya.',
+    suitable:'Cocok untuk praktikum, simulasi, studi lapangan, role play, kegiatan kewirausahaan, keterampilan vokasional, atau pembelajaran berbasis pengalaman.',
+    note:'Pengalaman saja belum cukup; harus ada refleksi dan pengaitan kembali dengan konsep/TP agar pengalaman berubah menjadi pembelajaran.'
+  },
+  'Problem Solving':{
+    title:'Problem Solving',
+    short:'Siswa menggunakan langkah sistematis untuk memahami masalah, memilih strategi, menjalankan solusi, dan mengevaluasi hasil.',
+    characteristics:'Identifikasi masalah, analisis informasi, perumusan alternatif/strategi, pelaksanaan, pengecekan hasil, dan refleksi terhadap efektivitas solusi.',
+    suitable:'Cocok untuk matematika, sains, teknologi, ekonomi, maupun masalah kontekstual yang memiliki proses penyelesaian atau keputusan yang dapat diuji.',
+    note:'Berikan ruang bagi lebih dari satu strategi jika memungkinkan dan nilai proses berpikir, bukan hanya jawaban akhir.'
+  },
+  'Flipped Classroom':{
+    title:'Flipped Classroom',
+    short:'Paparan awal materi dipelajari sebelum sesi kelas, sedangkan waktu tatap muka digunakan untuk latihan, diskusi, praktik, pemecahan masalah, dan feedback.',
+    characteristics:'Materi pra-kelas yang ringkas, bukti kesiapan, aktivitas kelas yang aktif, pendampingan guru, dan tindak lanjut berdasarkan hasil belajar.',
+    suitable:'Cocok ketika siswa memiliki akses yang memadai terhadap bahan pra-kelas dan guru ingin memaksimalkan waktu kelas untuk aktivitas tingkat tinggi.',
+    note:'Wajib sediakan alternatif luring/akses setara bagi siswa yang terkendala perangkat atau internet. Materi pra-kelas jangan terlalu panjang.'
+  },
+  'Lainnya':{
+    title:'Model / Strategi Lainnya',
+    short:'Gunakan pilihan ini jika guru memiliki model, strategi, pendekatan, atau kombinasi tertentu yang belum tersedia pada daftar.',
+    characteristics:'Guru perlu menjelaskan nama pendekatan, tujuan penggunaannya, sintaks/langkah utama, peran guru-siswa, dan pertemuan/aktivitas tempat pendekatan itu digunakan.',
+    suitable:'Cocok untuk pendekatan sekolah, model khusus mata pelajaran, kombinasi beberapa strategi, station rotation, team-based learning, design thinking, dan lainnya.',
+    note:'AI harus mempertahankan deskripsi guru dan hanya melengkapinya secara wajar; jangan mengganti model pilihan guru dengan model lain tanpa alasan yang jelas.'
+  }
+};
+const MODULE_OUTPUT_SECTIONS=[
+  ['A','Identitas / Identifikasi','Identitas, CP, profil/kondisi siswa, prasyarat, miskonsepsi, kondisi implementasi.'],
+  ['B','Desain Pembelajaran','TP, KKTP, materi esensial, model/kerangka, diferensiasi, proyek, matriks keterlacakan.'],
+  ['C','Langkah Kegiatan','Kegiatan per pertemuan, pengalaman/prinsip belajar, audit waktu, realisme kelas, Plan B.'],
+  ['D','Asesmen Pembelajaran','Rancangan diagnostik/formatif/sumatif, teknik, domain, bobot, adaptasi, tindak lanjut.'],
+  ['E','Paket Lembar Asesmen','Kisi-kisi, soal/tugas lengkap, stimulus, kunci/pedoman skor, rubrik, versi adaptif.'],
+  ['F','LKPD Praktik / Investigasi','LKPD praktik/observasi/simulasi/unjuk kerja lengkap dan penilaiannya.'],
+  ['G','LKPD Proyek','Tantangan proyek, tahapan, produk, progres, refleksi, rubrik proyek/produk.'],
+  ['H','Observasi, Keterampilan & Sikap','Lembar observasi guru serta rubrik keterampilan dan sikap.'],
+  ['I','Bahan Ajar / Handout','Materi esensial, contoh, konsep kunci, miskonsepsi, cek pemahaman.'],
+  ['J','Refleksi Siswa','Refleksi metakognitif dan penilaian diri bila relevan.'],
+  ['K','Refleksi Guru','Evaluasi pelaksanaan, ketercapaian, kendala, siswa yang perlu dukungan, perbaikan.'],
+  ['L','Remedial & Pengayaan','Paket siap dibagikan ke siswa + asesmen ulang/tantangan dan pedoman.'],
+  ['M','Administrasi & Lampiran','Sumber, glosarium, alat/bahan, rekap nilai, kunci terpusat, dokumentasi, etika/Plan B.'],
+  ['N','Audit Mutu Final','Checklist keterlacakan, soal/bobot/waktu, kelengkapan, diferensiasi, konsistensi kurikulum.'],
+  ['O','Pengesahan / Tanda Tangan (Opsional)','Hanya muncul jika tanda tangan diaktifkan; selalu bagian paling akhir.']
+];
 function renderGeneratorField(f,id,disabled){
   const cfg=moduleFieldConfig(f);
   const label=cfg?.label||f.label;
@@ -8806,6 +9046,9 @@ function renderGeneratorField(f,id,disabled){
     control=`<div class="jp-input-wrap"><input class="form-control" type="number" min="1" max="100" step="1" inputmode="numeric" id="${id}" data-token="${escapeHtml(f.token)}" data-jp-input placeholder="${escapeHtml(ph)}" ${disabled?'disabled':''}/><span class="jp-input-suffix">JP</span></div>`;
   }else if(cfg?.type==='select'){
     control=`<select class="form-control" id="${id}" data-token="${escapeHtml(f.token)}" ${disabled?'disabled':''}>${cfg.options.map(([v,l])=>`<option value="${escapeHtml(v)}">${escapeHtml(l)}</option>`).join('')}</select>`;
+  }else if(cfg?.type==='outputMode'){
+    const sectionHtml=MODULE_OUTPUT_SECTIONS.map(([code,title,desc])=>`<div class="output-mode-section"><b>${code}.</b> <strong>${escapeHtml(title)}</strong><br>${escapeHtml(desc)}</div>`).join('');
+    control=`<select class="form-control" id="${id}" data-token="${escapeHtml(f.token)}" ${disabled?'disabled':''}>${cfg.options.map(([v,l])=>`<option value="${escapeHtml(v)}">${escapeHtml(l)}</option>`).join('')}</select><div class="output-mode-guide"><div class="output-mode-guide-head"><strong>Peta keluaran Modul Ajar</strong>A–N adalah paket utama dan selalu wajib lengkap. O hanya muncul bila bagian tanda tangan diaktifkan.</div><div class="output-mode-sections">${sectionHtml}</div><div class="output-mode-modes"><div class="output-mode-item"><strong>Dokumen Lengkap Sekaligus:</strong> A–N dalam satu dokumen, lalu O jika aktif.</div><div class="output-mode-item"><strong>Modul Inti + Lampiran:</strong> A–D = modul inti; E–M = lampiran/perangkat lengkap; N = audit mutu; O = pengesahan opsional.</div><div class="output-mode-item"><strong>Bertahap per Bagian:</strong> Tahap 1 A–C • Tahap 2 D–E • Tahap 3 F–K • Tahap 4 L–N • O setelah tahap akhir bila aktif.</div><div class="output-mode-item output-format-note"><strong>Standar tampilan semua mode:</strong> hasil harus mudah dipindai dan dipahami, memakai heading yang konsisten, paragraf ringkas, serta tabel native/teks sederhana yang mudah disalin dan diedit. Tabel tidak boleh berupa gambar, tidak memakai merge/tabel bertingkat yang rumit, dan tabel yang terlalu lebar harus dipecah.</div></div></div>`;
   }else if(cfg?.type==='inclusion'){
     const opts=[
       ['', 'Ditentukan AI', 'Pilih otomatis dari konteks yang tersedia'],
@@ -8866,20 +9109,21 @@ function renderGeneratorField(f,id,disabled){
       ['Flipped Classroom','Flipped Classroom'],
       ['Lainnya','Lainnya — guru mendeskripsikan sendiri']
     ];
-    control=`<input type="hidden" id="${id}" data-token="${escapeHtml(f.token)}" data-module-model-hidden value="" ${disabled?'disabled':''}/><div class="model-picker">${opts.map(([v,l])=>`<label class="model-option"><input type="checkbox" data-module-model-value value="${escapeHtml(v)}" ${disabled?'disabled':''}/><span>${escapeHtml(l)}</span></label>`).join('')}</div><div class="model-empty-note">Boleh memilih lebih dari satu model. Tidak mencentang apa pun = AI merekomendasikan model paling sesuai.</div><div class="model-custom-wrap" data-module-model-custom-wrap hidden><textarea class="form-control" data-module-model-custom placeholder="Deskripsikan model/strategi lain, mis. Team-Based Learning + station rotation pada pertemuan tertentu" disabled></textarea></div>`;
+    control=`<input type="hidden" id="${id}" data-token="${escapeHtml(f.token)}" data-module-model-hidden value="" ${disabled?'disabled':''}/><div class="model-picker">${opts.map(([v,l])=>`<div class="model-option-wrap"><label class="model-option"><input type="checkbox" data-module-model-value value="${escapeHtml(v)}" ${disabled?'disabled':''}/><span>${escapeHtml(l)}</span></label><button type="button" class="model-info-btn" data-model-info="${escapeHtml(v)}" title="Lihat keterangan ${escapeHtml(l)}" aria-label="Informasi ${escapeHtml(l)}">ⓘ</button></div>`).join('')}</div><div class="model-empty-note">Boleh memilih lebih dari satu model. Klik ikon ⓘ untuk melihat deskripsi, karakteristik, kapan model cocok digunakan, dan catatan implementasinya. Tidak mencentang apa pun = AI merekomendasikan model paling sesuai.</div><div class="model-custom-wrap" data-module-model-custom-wrap hidden><textarea class="form-control" data-module-model-custom placeholder="Deskripsikan model/strategi lain, mis. Team-Based Learning + station rotation pada pertemuan tertentu" disabled></textarea></div>`;
   }else{
     const ph=cfg?.placeholder||`Isi ${label.toLowerCase()}...`;
     control=long?`<textarea class="form-control" id="${id}" data-token="${escapeHtml(f.token)}" placeholder="${escapeHtml(ph)}" ${disabled?'disabled':''}></textarea>`:`<input class="form-control" id="${id}" data-token="${escapeHtml(f.token)}" placeholder="${escapeHtml(ph)}" ${disabled?'disabled':''}/>`;
   }
   const extra=f.token==='{{tujuan_pembelajaran}}'?`<div class="kko-note"><strong>Referensi KKO aktif:</strong> TP hanya boleh memakai KKO dari file “Daftar KKO Revisi 2”. Contoh: gunakan <em>menuliskan</em>, bukan “mencatat”.</div>`:'';
   const wrapAttrs=cfg?.type==='inclusionDetail'?' data-module-inclusion-detail-wrap hidden':'';
-  const fullWidth=long||cfg?.type==='inclusion'||cfg?.type==='inclusionDetail'||cfg?.type==='assessment'||cfg?.type==='assessmentWeights'||cfg?.type==='mpiEvaluation'||cfg?.type==='dimensions'||cfg?.type==='model'||cfg?.type==='videoCharactersToggle'||cfg?.type==='videoCharactersDetail';
+  const fullWidth=long||cfg?.type==='inclusion'||cfg?.type==='inclusionDetail'||cfg?.type==='assessment'||cfg?.type==='assessmentWeights'||cfg?.type==='mpiEvaluation'||cfg?.type==='dimensions'||cfg?.type==='model'||cfg?.type==='outputMode'||cfg?.type==='videoCharactersToggle'||cfg?.type==='videoCharactersDetail';
   const progressGroup=generatorProgressGroup(f,cfg,label);
   const semanticKey=fieldSemanticKey(f);const hint=f.supplemental?'Preferensi opsional — ditambahkan sebagai arahan tambahan pada prompt awal':(f.labeled?`Sumber Bank Prompt: ${f.sourceToken} • kosong = pertahankan placeholder template`:`Jika kosong: AI akan menentukan • ${f.token}`);
   return `<div class="form-group ${fullWidth?'span-2':''}" data-progress-group="${progressGroup}" data-semantic-key="${escapeHtml(semanticKey)}" ${f.supplemental?'data-supplemental="1"':''}${wrapAttrs}><label for="${id}">${escapeHtml(label)}</label>${control}${help}${extra}<span class="field-token">${escapeHtml(hint)}</span></div>`;
 }
 function referenceHintHtml(){
   if(!referenceHintTypes.has(state.generatorType))return '';
+  if(state.generatorType==='module')return `<div class="reference-ai-note"><strong>📎 Disarankan untuk akurasi Modul Ajar:</strong> setelah prompt selesai dibuat, <strong>lampirkan dokumen CP/standar resmi, ATP/TP, sumber belajar yang digunakan (buku/modul/handout), contoh asesmen/LKPD, serta dokumen pendukung lain yang relevan pada percakapan AI yang sama</strong>, lalu tempelkan prompt hasil Generate. Dokumen yang dilampirkan menjadi acuan utama; bagian yang tidak didukung sumber harus ditandai sebagai usulan/verifikasi, bukan dikarang.</div>`;
   return `<div class="reference-ai-note"><strong>📎 Punya file referensi?</strong>Jika Anda memiliki PDF, DOCX, PPTX, XLSX, gambar, atau file lain sebagai acuan, silakan unggah file tersebut langsung saat menjalankan prompt ini di AI yang akan digunakan (misalnya ChatGPT/Claude), lalu minta AI memakai file itu sebagai referensi utama.</div>`;
 }
 function renderPackageStageFields(ps){
@@ -9111,6 +9355,23 @@ function generateFromForm(){
   if(blockers||warnings){openQualityCheck(true);return;}openGeneratorPreview();
 }
 renderTeacherPresetSelect();
+let modelInfoReturnFocus=null;
+function openModelInfo(modelKey,trigger){
+  const info=MODULE_MODEL_INFO[modelKey]||MODULE_MODEL_INFO['Lainnya'];
+  const modal=$('#modelInfoModal'),back=$('#modelInfoBackdrop'),title=$('#modelInfoTitle'),sub=$('#modelInfoSubtitle'),body=$('#modelInfoBody');
+  if(!modal||!back||!body)return;
+  modelInfoReturnFocus=trigger||document.activeElement;
+  title.textContent=info.title;
+  sub.textContent='Deskripsi ringkas untuk membantu guru memilih model yang paling sesuai.';
+  body.innerHTML=`<div class="model-info-lead"><strong>Pengertian singkat</strong><br>${escapeHtml(info.short)}</div><div class="model-info-grid"><div class="model-info-card"><strong>Karakteristik utama</strong><p>${escapeHtml(info.characteristics)}</p></div><div class="model-info-card"><strong>Cocok digunakan ketika</strong><p>${escapeHtml(info.suitable)}</p></div><div class="model-info-card" style="grid-column:1/-1"><strong>Catatan implementasi</strong><p>${escapeHtml(info.note)}</p></div></div>`;
+  back.hidden=false;modal.hidden=false;setTimeout(()=>$('#modelInfoClose')?.focus(),40);
+}
+function closeModelInfo(){
+  const modal=$('#modelInfoModal'),back=$('#modelInfoBackdrop');if(!modal||modal.hidden)return;
+  modal.hidden=true;back.hidden=true;const target=modelInfoReturnFocus;modelInfoReturnFocus=null;if(target&&typeof target.focus==='function')setTimeout(()=>target.focus(),20);
+}
+document.addEventListener('click',e=>{const btn=e.target.closest?.('[data-model-info]');if(!btn)return;e.preventDefault();e.stopPropagation();openModelInfo(btn.dataset.modelInfo,btn);});
+$('#modelInfoClose')?.addEventListener('click',closeModelInfo);$('#modelInfoBackdrop')?.addEventListener('click',closeModelInfo);
 $('#teacherPresetSelect')?.addEventListener('change',e=>{setActiveTeacherPresetId(e.target.value);});$('#applyTeacherPresetBtn')?.addEventListener('click',applyTeacherPreset);$('#manageTeacherPresetBtn')?.addEventListener('click',openTeacherPresetModal);$('#teacherPresetClose')?.addEventListener('click',closeTeacherPresetModal);$('#teacherPresetBackdrop')?.addEventListener('click',closeTeacherPresetModal);$('#presetSaveNew')?.addEventListener('click',savePresetNew);$('#presetUpdate')?.addEventListener('click',updateSelectedPreset);$('#presetDelete')?.addEventListener('click',deleteSelectedPreset);$('#presetExport')?.addEventListener('click',exportTeacherPresets);$('#presetImport')?.addEventListener('click',()=>$('#presetImportFile')?.click());$('#presetImportFile')?.addEventListener('change',e=>{importTeacherPresetFile(e.target.files?.[0]);e.target.value='';});$('#generatorPreviewClose')?.addEventListener('click',closeGeneratorPreview);$('#generatorPreviewEdit')?.addEventListener('click',closeGeneratorPreview);$('#generatorPreviewBackdrop')?.addEventListener('click',closeGeneratorPreview);$('#generatorPreviewConfirm')?.addEventListener('click',()=>{closeGeneratorPreview();generatePromptNow();});$('#qualityCheckBtn')?.addEventListener('click',()=>openQualityCheck(false));$('#qualityCheckClose')?.addEventListener('click',closeQualityCheck);$('#qualityCheckBackdrop')?.addEventListener('click',closeQualityCheck);$('#qualityCheckFix')?.addEventListener('click',closeQualityCheck);$('#qualityCheckContinue')?.addEventListener('click',()=>{closeQualityCheck();openGeneratorPreview();});
 const GENERATOR_HISTORY_KEY='promptEduGeneratorHistoryV1';
 const GENERATOR_PROJECT_KEY='promptEduGeneratorProjectsV1';
@@ -9326,7 +9587,7 @@ document.querySelectorAll('.app-root [data-piko-guide]').forEach(el=>{el.title='
 if(pikoEls.launcher){const src=document.querySelector('.global-brand .mascot img')?.src||document.querySelector('.mascot img')?.src||'';pikoEls.launcherAvatar.src=src;pikoEls.chatAvatar.src=src;pikoEls.launcher.addEventListener('click',openHeraAssistant);pikoEls.close.addEventListener('click',closeHeraAssistant);pikoEls.backdrop.addEventListener('click',closeHeraAssistant);pikoEls.voice.addEventListener('click',()=>replayHeraGuide());pikoEls.composer.addEventListener('submit',e=>{e.preventDefault();const v=pikoEls.input.value;pikoEls.input.value='';pikoHandleMessage(v);});pikoEls.input.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();pikoEls.composer.requestSubmit();}});pikoEls.quick.addEventListener('click',e=>{const b=e.target.closest('[data-piko-action]');if(b)pikoQuickAction(b.dataset.pikoAction);});pikoEls.messages.addEventListener('click',e=>{const prod=e.target.closest('[data-piko-product]');if(prod){const data={product:prod.dataset.pikoProduct,raw:`Saya ingin membuat ${pikoProductLabel(prod.dataset.pikoProduct)}`};pikoState.pendingData=data;pikoOpenGenerator(data);return;}const fill=e.target.closest('[data-piko-fill-now]');if(fill){pikoOpenGenerator(pikoState.pendingData||{});return;}const search=e.target.closest('[data-piko-search-product]');if(search){pikoSearchReply(`Cari prompt ${pikoProductLabel(search.dataset.pikoSearchProduct)}`);return;}const open=e.target.closest('[data-piko-open-prompt]');if(open){const p=allPrompts.find(x=>x.key===open.dataset.pikoOpenPrompt);if(p){state.category=p.categoryId;state.favoritesOnly=false;state.query='';els.search.value='';switchView('bank');openPrompt(p.key);closeHeraAssistant();}return;}});pikoEls.copy.addEventListener('click',()=>copyText(pikoPreparedPrompt()));pikoEls.chatgpt.addEventListener('click',()=>pikoOpenAi('https://chatgpt.com/','ChatGPT'));pikoEls.claude.addEventListener('click',()=>pikoOpenAi('https://claude.ai/','Claude'));}
 
 /* ===== INIT ===== */
-$('#homeCatCount').textContent=`${promptCategories.length} kategori`;$('#homePromptCount').textContent=`${allPrompts.length} prompt`;document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeDrawer();closeSidebar();if(typeof closeAppSettings==='function')closeAppSettings();if(typeof closeHeraAssistant==='function')closeHeraAssistant();if(typeof closeTeacherPresetModal==='function')closeTeacherPresetModal();if(typeof closeGeneratorPreview==='function')closeGeneratorPreview();if(typeof closeProjectCenter==='function')closeProjectCenter();if(typeof closeQualityCheck==='function')closeQualityCheck();}});applyTheme();render();renderGeneratorTypes();refreshGeneratorTemplates();if(sessionStorage.getItem('promptaraAuth')==='1')setAuthenticated(true);else setAuthenticated(false);
+$('#homeCatCount').textContent=`${promptCategories.length} kategori`;$('#homePromptCount').textContent=`${allPrompts.length} prompt`;document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeDrawer();closeSidebar();if(typeof closeAppSettings==='function')closeAppSettings();if(typeof closeHeraAssistant==='function')closeHeraAssistant();if(typeof closeTeacherPresetModal==='function')closeTeacherPresetModal();if(typeof closeGeneratorPreview==='function')closeGeneratorPreview();if(typeof closeProjectCenter==='function')closeProjectCenter();if(typeof closeQualityCheck==='function')closeQualityCheck();if(typeof closeModelInfo==='function')closeModelInfo();}});applyTheme();render();renderGeneratorTypes();refreshGeneratorTemplates();if(sessionStorage.getItem('promptaraAuth')==='1')setAuthenticated(true);else setAuthenticated(false);
 
 </script>
 </body>
