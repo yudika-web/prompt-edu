@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="theme-color" content="#6d5dfc" />
 <title>Prompt EDU — AI Prompt Studio untuk Guru</title>
-<meta name="bank-prompt-build" content="2026-10-08-modul-ajar-visual-tertanam-v5" />
+<meta name="bank-prompt-build" content="2026-10-08-modul-ajar-validasi-ppi-privasi-visual-v5.1" />
 <style>
 :root{
   --bg:#f4f7fb;
@@ -7743,7 +7743,9 @@ Kebutuhan, rencana, dan kondisi pembelajaran:
 - Kebutuhan fungsional murid: {{deskripsi_siswa_inklusi}}
 - Dasar informasi kebutuhan murid: {{dasar_data_inklusi}}
 - Dukungan yang benar-benar tersedia: {{dukungan_inklusi_tersedia}}
-- Profil Murid/PPI yang disediakan: {{ppi_inklusi}}
+- PPI lengkap hanya di formulir (DIHAPUS DARI HASIL): {{ppi_inklusi}}
+- Ringkasan fungsional PPI tanpa identitas (hanya bila diberikan guru): {{ringkasan_ppi_aman_v51}}
+- Status PPI menurut guru (bukan verifikasi aplikasi): {{status_ppi_v51}}
 - Kesiapan dan karakteristik murid: {{karakteristik_kesiapan_murid}}
 - Pengetahuan/keterampilan prasyarat: {{prasyarat_pembelajaran}}
 - Kesulitan/miskonsepsi yang diprediksi: {{miskonsepsi_kesulitan}}
@@ -7780,6 +7782,7 @@ Asesmen, sumber, dan keluaran:
 - Ikuti dokumen resmi/kurikulum yang benar-benar diunggah atau dapat diverifikasi pada percakapan penyusunan; jangan mengaku telah membaca dokumen yang tidak tersedia. Pedomani Panduan Pembelajaran dan Asesmen Edisi Revisi 2025 dan Panduan Penyelenggaraan Pendidikan Inklusif Edisi Revisi 2026 jika tersedia atau memang menjadi acuan guru, tanpa mengarang ketentuan di luar dokumen.
 - Untuk Kurikulum Merdeka, CP diambil dari dokumen resmi yang sesuai mata pelajaran dan fase. Panduan Pembelajaran dan Asesmen 2025 menyebut Keputusan Kepala BSKAP No. 046/H/Kr/2025 sebagai salah satu rujukan saat penerbitannya; tetap periksa kecocokan/keberlakuan dengan sumber resmi yang tersedia. Jika CP tidak tersedia dan tidak dapat diverifikasi, nyatakan “CP resmi belum terverifikasi” di bagian CP; jangan menciptakan kutipan atau kode CP dan jangan mengklaim bahwa TP telah resmi diturunkan darinya. Minta verifikasi guru; jika diperlukan, beri contoh TP berlabel draf.
 - Pertahankan isi TP guru dan makna kompetensinya. Jika kurang terukur, beri saran perumusan secara transparan, bukan mengubah diam-diam. Jangan memaksakan satu TP hanya satu KKO; satu TP dapat memuat kinerja terpadu yang masuk akal. KKO adalah alat bantu, bukan daftar tertutup wajib. Koreksi ejaan dan gunakan kata kerja tepat sesuai mapel/jenjang.
+- KURIKULUM V5.1: kurikulum wajib dipilih secara eksplisit oleh guru sebelum prompt dibuat. Fase D/kelas VII, dimensi profil atau istilah CP saja bukan bukti cukup untuk menetapkan kurikulum. Jika Hybrid/Kustom, gunakan acuan prioritas yang ditulis guru dan nyatakan yang belum jelas; jangan mencampur atau mengasumsikan standar resmi.
 - Jika kurikulum bukan Merdeka, gunakan istilah tujuan, standar, pedagogi dan asesmen yang sesuai kurikulum tersebut; jangan otomatis memaksakan CP/TP/KKTP/RPM. Bedakan ketentuan resmi dari pilihan desain aplikasi. Jangan mengarang kode kurikulum, URL, sitasi, identitas, diagnosis, atau keadaan sekolah.
 
 3. PENALARAN PEDAGOGIS YANG HARUS DILAKUKAN
@@ -7801,6 +7804,8 @@ C. KEBERAGAMAN DAN AKOMODASI
 - Gunakan informasi fungsional dan data yang tersedia; status kelas heterogen atau kesulitan membaca TIDAK otomatis berarti diagnosis disabilitas maupun kebutuhan TP adaptif. Prioritaskan akses: instruksi 1–2 langkah, bahasa sederhana tanpa menyederhanakan tuntutan konsep, pembacaan netral, visual dengan alt-text/caption, pemecahan tugas, contoh cara mengisi tanpa membocorkan jawaban, waktu/pilihan respons, serta pembagian peran kelompok yang partisipatif.
 - Pada LKPD dan soal untuk murid dengan kebutuhan literasi, gunakan paragraf pendek, petunjuk konsisten, spasi nyaman, satu tugas per segmen, ruang jawaban memadai, dan opsi jawaban yang tidak bertele-tele. Jangan menjadikan hafalan perkalian sebagai kendala bagi unit yang tidak menggunakan operasi tersebut. Teks yang dibacakan atau jawaban lisan boleh digunakan sebagai cara akses bila kompetensi target bukan keterampilan membaca/menulis itu sendiri.
 - Untuk akomodasi, TP dan KKTP substansial tetap sama. Tuliskan penyesuaian hanya saat ada perbedaan pelaksanaan, bisa dalam satu kolom “Dukungan akses” atau tabel singkat; jangan menggandakan seluruh tabel KKTP, soal, LKPD atau memberi label yang menstigma pada lembar siswa. Jika bukti asesmen/Profil Murid/PPI memang membenarkan tujuan adaptif, tampilkan tujuan/KKTP/bukti adaptif secara jelas dan terpisah untuk kebutuhan administrasi guru; jangan menebak PPI atau diagnosis.
+- PEMETAAN PPI V5.1: bedakan (1) TP/KKTP mata pelajaran, (2) target PPI lintas bidang seperti membaca, numerasi, komunikasi, atau regulasi perhatian, dan (3) akomodasi untuk mengakses pembelajaran. Target membaca pada PPI BUKAN otomatis TP IPA/Matematika/Seni dan kriteria baca bukan otomatis KKTP mapel. Tujuan mapel adaptif hanya diusulkan jika tersedia bukti kemampuan aktual terkait mapel, relevansi dengan CP/standar, dan dasar keputusan tim sekolah yang jelas; tanpa data cukup, pertahankan TP dan akomodasi akses.
+- PRIVASI PPI V5.1: sumber PPI mentah dipakai guru sebagai dokumen internal, tidak dipindahkan ke prompt. Hanya ringkasan fungsional tanpa nama/nomor identitas/alamat/data kesehatan yang diperlukan boleh digunakan. Jangan salin PPI lengkap ke MODUL AJAR kelas, LKPD, soal, rekap umum, atau sumber publik. Bedakan PPI yang baru dilaporkan tersedia dari PPI yang telah dikonfirmasi sekolah; jangan mengklaim sudah disahkan jika belum ada informasi tersebut.
 - Jaga kerahasiaan, tampilkan kekuatan/potensi serta partisipasi murid; sebut dukungan GPK/ULD/alat bantu hanya apabila tersedia, atau tandai sebagai rekomendasi yang belum terverifikasi. Jika kelas tanpa kebutuhan dukungan khusus, jangan memunculkan subbagian inklusi yang kosong.
 
 D. ASESMEN YANG SESUAI TP DAN FUNGSI
@@ -7825,7 +7830,8 @@ E. REALISTIS TERHADAP WAKTU DAN PERANGKAT
 - GAMBAR PADA SOAL: visual harus menjadi STIMULUS yang perlu diamati/ditafsirkan untuk menjawab nomor soal tertentu. Tempatkan tepat sebelum atau bersama butir soal dan kaitkan pertanyaan dengan detail visual yang benar-benar terlihat. Pastikan satu gambar tidak memberi bocoran kunci jawaban secara tak sengaja, angka/label tidak terdistorsi, dan masih jelas saat dicetak hitam-putih. Soal juga harus memiliki versi deskripsi alternatif atau akses setara bagi murid yang tidak dapat mengakses visual, tanpa mengubah kompetensi yang dinilai.
 - SUMBER DAN PROSES: bila metode "URL eksternal", pilih hanya gambar dari sumber dengan izin/hak penggunaan yang dapat diterima dan URL yang bisa diverifikasi; unduh atau sematkan berkas yang sah alih-alih hanya menautkan halaman. Untuk metode otomatis/kombinasi cari sumber yang layak dulu lalu generate gambar orisinal jika diperlukan dan fasilitasnya ada. Bila "Generate sendiri", gunakan generator gambar sungguhan untuk membuat aset, bukan menyebut teks prompt gambar seolah berkas visual sudah tercipta. Pertahankan rasio gambar agar tidak terdistorsi; jangan crop yang menghilangkan konteks ilmiah. Hindari watermark dan gambar resolusi rendah.
 - ATURAN KEMAMPUAN: generator Prompt EDU hanya membuat PROMPT, bukan file gambar/DOCX. AI yang menjalankan prompt harus memeriksa apakah akses sumber, alat gambar, dan pembuatan DOCX/PDF memang tersedia. Jika tidak tersedia, laporkan bahwa gambar belum disisipkan dan tampilkan daftar kebutuhan/prompt per gambar untuk pengerjaan lanjutan; JANGAN mengaku dokumen bergambar siap pakai atau menampilkan placeholder seolah sudah final.
-- AUDIT GAMBAR SEBELUM FINAL (hanya jika benar-benar membuat dokumen): setiap gambar yang diminta harus ada sebagai file tertanam/embedded pada DOCX, berada di lokasi tepat (materi/soal), memiliki caption/alt-text atau deskripsi akses, sumber jika eksternal, ukuran memadai, dan tidak menutupi teks/terpotong pada hasil render. Periksa dokumen halaman demi halaman; bila gambar gagal dimasukkan, ungkapkan apa yang gagal secara spesifik, jangan beri status "lulus".
+- VERIFIKASI CAKUPAN VISUAL V5.1: buat daftar internal per bagian yang benar-benar dipilih (materi/handout, LKPD praktik/investigasi, asesmen awal, formatif, sumatif yang aktif). Untuk SETIAP bagian tandai: butuh/tidak, ID aset, lokasi halaman/nomor soal, fungsi terhadap TP, asal/izin, status file benar-benar tertanam, alt-text/keterangan, dan hasil inspeksi render. Satu gambar di handout TIDAK memenuhi gambar wajib di LKPD atau asesmen apabila lokasi tersebut juga dipilih. Aset boleh dipakai ulang jika relevan, tetapi harus disisipkan pada setiap lokasi yang diminta.
+- AUDIT GAMBAR SEBELUM FINAL (hanya jika benar-benar membuat dokumen): setiap gambar yang diminta harus ada sebagai file tertanam/embedded pada DOCX, berada di lokasi tepat (materi/soal), memiliki caption/alt-text atau deskripsi akses, sumber jika eksternal, ukuran memadai, dan tidak menutupi teks/terpotong pada hasil render. Periksa dokumen halaman demi halaman; bila gambar gagal dimasukkan atau ada bagian pilihan yang tidak terpenuhi, TANDAI HASIL BELUM FINAL dan ungkapkan bagian mana yang gagal, jangan beri status "lulus" atau "siap cetak".
 - STANDARD P1 FORMAT WORD: A4 Portrait (Landscape HANYA untuk tabel/diagram yang memang perlu); margin kira-kira 2–2,5 cm; font umum mudah dibaca (mis. Aptos/Calibri); judul utama 18–20 pt, heading bagian 15–16 pt, subheading 13–14 pt, ISI UTAMA 11,5–12 pt, PETUNJUK/LEMBAR SISWA 12–13 pt, TABEL sekitar 11 pt (hindari di bawah 10,5 pt), caption/catatan 10,5–11 pt, spasi 1,15–1,35. Jangan menerapkan gaya "Compact" <11 pt ke kegiatan/lembar siswa atau mengecilkan huruf untuk mengejar jumlah halaman; tambahan halaman diperbolehkan.
 - Semua tabel native EDITABLE; atur lebar sesuai area cetak dan padding sel nyaman. Tabel KKTP TIGA KOLOM maksimum tiga kolom dalam halaman Portrait; jika masih padat, pecah baris penjelasan/kelompok kriteria secara logis. Jangan membuat tabel raksasa dengan kolom "Belum Tercapai" dan "Tercapai" yang hanya berupa simbol centang.
 - Setelan DOCX wajib bila platform mendukung: setiap baris tabel memakai cantSplit/"do not split row across pages"; baris header memakai repeat table header; paragraf heading memakai keep-with-next; blok soal, pilihan jawaban, dan judul tugas tidak terpisah antardua halaman; LKPD/lembar soal dan bagian kunci guru dimulai di halaman baru. Bila satu tabel berpindah halaman, jangan memecahkan isi satu baris dan ulangi header.
@@ -8245,7 +8251,7 @@ function renderGeneratorTemplate(){
   renderPackageStageFields(ps);
 }
 const CURRICULUM_OPTIONS=[
-  ['', '— Ditentukan AI / ikuti file referensi —'],
+  ['', '— WAJIB pilih kurikulum/acuan —'],
   ['Kurikulum Merdeka','Kurikulum Merdeka — Indonesia'],
   ['Kurikulum Berbasis Cinta (Kemenag)','Kurikulum Berbasis Cinta (Kemenag) — insersi Panca Cinta'],
   ['Cambridge International','Cambridge International — Cambridge Pathway'],
@@ -8269,7 +8275,7 @@ const moduleGeneratorFieldConfig={
   '{{nama_sekolah}}':{label:'Nama Sekolah',placeholder:'Contoh: SMP Negeri 3 Segedong',help:'Jika kosong, AI memakai identitas sekolah generik yang mudah diganti dan tidak mengarang nama sekolah nyata.',auto:'gunakan identitas sekolah generik yang mudah diganti'},
   '{{nama_guru_modul}}':{label:'Nama Guru',placeholder:'Contoh: Rina Sari, S.Pd.',help:'Nama guru akan dicantumkan pada Identitas Modul dan, jika bagian tanda tangan diaktifkan, digunakan kembali pada tanda tangan guru di akhir modul. Jika kosong, AI tidak boleh mengarang nama.',auto:'jangan mengarang nama guru; gunakan garis titik/ruang isian yang mudah dilengkapi kemudian'},
   '{{nama_kepala_sekolah}}':{label:'Nama Kepala Sekolah',placeholder:'Contoh: Drs. Ahmad Hidayat, M.Pd.',help:'Opsional. Digunakan pada identitas/pengesahan dan tanda tangan Kepala Sekolah jika bagian tanda tangan diaktifkan. Jika kosong, AI tidak boleh mengarang nama.',auto:'jangan mengarang nama kepala sekolah; gunakan garis titik/ruang isian jika diperlukan'},
-  '{{kurikulum_acuan_modul}}':{label:'Kurikulum / Acuan',type:'select',options:CURRICULUM_OPTIONS,help:'Pilih kurikulum/acuan utama. Semua istilah, tujuan, pedagogi, dan asesmen harus menyesuaikan pilihan ini.',auto:'ikuti file referensi atau tentukan kurikulum/acuan yang paling relevan tanpa mengarang standar resmi'},
+  '{{kurikulum_acuan_modul}}':{label:'Kurikulum / Acuan',type:'select',options:CURRICULUM_OPTIONS,help:'WAJIB pilih acuan utama sebelum generate. Fase/kelas tidak otomatis membuktikan kurikulum tertentu. Jika Hybrid/Kustom, jelaskan acuan prioritas pada Deskripsi Tambahan.',auto:'minta guru menentukan kurikulum/acuan; tidak boleh menebak'},
   '{{jenjang}}':{label:'Jenjang',type:'select',options:[['','— Tentukan dari konteks —'],['PAUD/TK/RA','PAUD/TK/RA'],['SD/MI','SD/MI'],['SMP/MTs','SMP/MTs'],['SMA/MA','SMA/MA'],['SMK/MAK','SMK/MAK'],['SLB/Pendidikan Khusus','SLB/Pendidikan Khusus'],['Pendidikan Kesetaraan','Pendidikan Kesetaraan'],['Lainnya','Lainnya (jelaskan pada fase/kelas)']],help:'Contoh: SMP. Jika kosong, AI menentukan jenjang yang paling konsisten dengan data fase/kelas atau konteks lain.',auto:'tentukan jenjang berdasarkan konteks yang tersedia'},
   '{{fase_kelas}}':{label:'Fase & Kelas',placeholder:'Contoh: Fase D / Kelas VIII',help:'Jika kosong, AI memetakan fase/kelas berdasarkan jenjang dan tingkat kompleksitas materi.',auto:'tentukan fase dan kelas yang sesuai'},
   '{{mata_pelajaran}}':{label:'Mata Pelajaran',placeholder:'Contoh: IPA',help:'Contoh: IPA, Matematika, Bahasa Indonesia. Jika kosong, AI mengidentifikasi mapel paling relevan dari topik.',auto:'tentukan mata pelajaran paling relevan dari topik'},
@@ -8296,7 +8302,9 @@ const moduleGeneratorFieldConfig={
   '{{deskripsi_siswa_inklusi}}':{label:'Profil Fungsional / Kebutuhan Siswa Inklusi',type:'inclusionDetail',placeholder:'Contoh: kekuatan: visual dan praktik; mampu membaca teks pendek; kesulitan memahami instruksi panjang; lebih berhasil dengan gambar, langkah satu per satu, dan respons lisan; mandiri menggunakan alat sederhana',help:'Muncul saat memilih Siswa inklusi atau Campuran/heterogen. Tulis KEKUATAN/POTENSI, kemampuan akademik/fungsional saat ini, hambatan akses/partisipasi, komunikasi, literasi/numerasi, sosial-emosional/motorik bila relevan, kemandirian, serta kebutuhan belajar. Fokus pada fungsi di kelas; jangan mengarang diagnosis.',auto:'gunakan profil kebutuhan fungsional yang tersedia; bila data minim, gunakan akomodasi konservatif dan tandai hal yang perlu diverifikasi'},
   '{{dasar_data_inklusi}}':{label:'Dasar Data Inklusi (Opsional)',type:'inclusionDetail',placeholder:'Contoh: observasi guru; asesmen awal membaca; asesmen fungsional; Profil Murid; PPI; rekomendasi GPK/ULD; informasi orang tua',help:'Sebutkan sumber informasi yang benar-benar tersedia. Keputusan mengubah TP/KKTP harus bertumpu pada data kemampuan aktual, bukan label. Jika belum ada data formal, tulis “belum ada” dan AI tidak boleh mengarang hasil asesmen.',auto:'nyatakan data yang tersedia; jika belum ada, jangan mengarang dan gunakan akomodasi konservatif'},
   '{{dukungan_inklusi_tersedia}}':{label:'Dukungan / Akomodasi yang Tersedia (Opsional)',type:'inclusionDetail',placeholder:'Contoh: GPK hadir 2x/minggu; orang tua mendampingi; subtitle; area tenang; tempat duduk dekat guru; screen reader; waktu tambahan 20%',help:'Tuliskan dukungan nyata di sekolah/kelas: GPK, tutor sebaya, orang tua, ULD/pusat sumber, alat bantu, teknologi asistif, setting kelas, waktu tambahan, atau media adaptif. AI tidak boleh mengasumsikan alat/layanan tersedia tanpa menandainya sebagai rekomendasi.',auto:'gunakan hanya dukungan yang diketahui tersedia; rekomendasi tambahan harus ditandai sebagai rekomendasi'},
-  '{{ppi_inklusi}}':{label:'Profil Murid / PPI / Dokumen Individual (Opsional)',type:'inclusionDetail',placeholder:'Tempel ringkasan yang relevan: kekuatan, kebutuhan, target jangka pendek, akomodasi, penanggung jawab, evaluasi. Hindari data medis/pribadi yang tidak perlu.',help:'Jika Profil Murid/PPI tersedia, gunakan sebagai acuan dukungan unit. Jika belum ada, AI tidak boleh mengarang PPI resmi; AI hanya boleh memberi rekomendasi bahan diskusi yang perlu disepakati tim sekolah/orang tua.',auto:'jika tidak ada dokumen, jangan membuat PPI resmi; berikan hanya rekomendasi dukungan yang perlu diverifikasi'},
+  '{{ppi_inklusi}}':{label:'PPI lengkap (ruang kerja lokal — TIDAK disalin ke prompt)',type:'inclusionDetail',placeholder:'Opsional. Hindari menempel data identitas/medis jika tidak diperlukan. Teks lengkap hanya untuk referensi sementara di formulir; buat ringkasan tanpa identitas pada kolom berikut.',help:'PRIVASI V5.1: isi kolom ini TIDAK dimasukkan ke prompt akhir dan TIDAK disimpan pada riwayat/proyek baru. Salin sendiri fakta fungsional yang diperlukan pada Ringkasan PPI Aman. Jangan menyertakan nama/NISN/alamat/keterangan medis sensitif.',auto:'jangan salin PPI mentah ke prompt'},
+  '{{ringkasan_ppi_aman_v51}}':{label:'Ringkasan PPI untuk Prompt (tanpa identitas pribadi) — V5.1',type:'inclusionDetail',placeholder:'Contoh: kekuatan: komunikatif dan terbantu visual; hambatan: membaca teks panjang dan mudah terganggu keramaian; target PPI: literasi kata pendek (BUKAN otomatis TP IPA); dukungan: instruksi 1 langkah, kartu gambar, ruang lebih tenang (jika tersedia).',help:'Isi HANYA kekuatan, kebutuhan akses, target PPI menurut ranah (mis. literasi), bukti kemampuan yang relevan, dan dukungan. Jangan tulis nama murid, diagnosis medis, NISN, alamat, tanggal lahir, nomor kontak, atau informasi sensitif. Jika PPI lengkap diisi di kolom sebelumnya, ringkasan aman ini wajib diisi sebelum generate.',auto:'belum ada ringkasan PPI yang telah diperiksa guru — jangan mengarang target individual'},
+  '{{status_ppi_v51}}':{label:'Status Konfirmasi PPI (V5.1)',type:'select',options:[['','— Belum diinformasikan —'],['Ringkasan PPI tersedia; status persetujuan/keabsahan belum dikonfirmasi','Tersedia, belum dikonfirmasi'],['PPI sudah dikonfirmasi sekolah/tim yang berwenang (menurut guru)','Telah dikonfirmasi oleh tim sekolah (pernyataan guru)'],['Tidak ada PPI individual','Tidak ada PPI']],help:'Pilih berdasarkan informasi guru. Generator tidak dapat memeriksa tanda tangan/keabsahan PPI; jangan menyatakan terverifikasi hanya karena teksnya ditempel.',auto:'status PPI belum dikonfirmasi oleh guru'},
   '{{karakteristik_kesiapan_murid}}':{label:'Karakteristik / Kesiapan Murid',placeholder:'Contoh: kemampuan heterogen; sebagian perlu scaffolding literasi',help:'Opsional. Jika kosong, AI mengasumsikan kelas heterogen dan merancang diferensiasi yang wajar.',auto:'asumsikan kelas heterogen dan rancang diferensiasi yang wajar'},
   '{{preferensi_diferensiasi}}':{label:'Preferensi Diferensiasi (Opsional)',type:'textarea',placeholder:'Contoh: kelompok fleksibel; bacaan bertingkat; pilihan respons lisan/tertulis; challenge tambahan untuk siswa cepat',help:'Arahan tentang diferensiasi konten, proses, produk/respons, grouping, dan scaffolding. Jika kosong, AI tetap membuat tabel diferensiasi berdasarkan kesiapan dan kondisi siswa.',auto:'rancang diferensiasi konten, proses, produk/respons, grouping, dan scaffolding yang realistis'},
   '{{pemanfaatan_digital}}':{label:'Pemanfaatan Digital',placeholder:'Contoh: IFP, HP siswa, Google Workspace; atau luring penuh',help:'Jika kosong, AI memilih penggunaan digital seperlunya dan tetap menyediakan alternatif luring.',auto:'tentukan pemanfaatan digital seperlunya serta alternatif luring'},
@@ -8829,7 +8837,7 @@ function updateGeneratorActionButton(){
     if(copy)copy.innerHTML=`<strong>${groups.length>1?`Langkah ${groups.length} dari ${groups.length} — tahap terakhir.`:'Data siap diperiksa.'}</strong><span>Review akan menampilkan ringkasan sebelum prompt dibuat. Anda masih dapat kembali memperbaiki data bila diperlukan.</span>`;
   }
 }
-function substitutionMap(){const vals=new Map();vals.semantic=new Map();vals.supplemental=new Map();els.genFields.querySelectorAll('[data-token]').forEach(input=>{let val=input.value.trim();if(input.hasAttribute('data-jp-input')&&val)val=`${val} JP`;if(!val)return;const group=input.closest('.form-group');const semantic=group?.dataset.semanticKey||'';vals.set(input.dataset.token,val);if(semantic)vals.semantic.set(semantic,val);if(group?.dataset.supplemental==='1')vals.supplemental.set(input.dataset.token,val);});return vals;}
+function substitutionMap(){const vals=new Map();vals.semantic=new Map();vals.supplemental=new Map();els.genFields.querySelectorAll('[data-token]').forEach(input=>{if(input.dataset.token==='{{ppi_inklusi}}')return;let val=input.value.trim();if(input.hasAttribute('data-jp-input')&&val)val=`${val} JP`;if(!val)return;const group=input.closest('.form-group');const semantic=group?.dataset.semanticKey||'';vals.set(input.dataset.token,val);if(semantic)vals.semantic.set(semantic,val);if(group?.dataset.supplemental==='1')vals.supplemental.set(input.dataset.token,val);});return vals;}
 function applySubstitutions(text,vals){let out=text;vals.forEach((v,k)=>{if(k.startsWith(SUPPLEMENTAL_FIELD_PREFIX))return;if(k.startsWith(LABELED_FIELD_PREFIX)){const original=k.slice(LABELED_FIELD_PREFIX.length);const replaced=original.replace(/\[[^\]\n]+\]/,v);out=out.split(original).join(replaced);return;}out=out.split(k).join(v);});if(vals.semantic?.size){out=out.replace(/^([ \t]*[-•]?[ \t]*([^:\n]{2,110}?))[ \t]*:[ \t]*(\[[^\]\n]{1,900}\])[ \t]*$/gm,(full,prefix,label,token)=>{const normalizedLabel=normalize(friendlyLabel(label));let value='';if(/jenis.*jumlah.*game|jumlah.*jenis.*game/.test(normalizedLabel)){const jenis=vals.semantic.get('jenis-game')||'';const jumlah=vals.semantic.get('jumlah-game')||'';value=[jenis?`Jenis: ${jenis}`:'',jumlah?`Jumlah: ${jumlah}`:''].filter(Boolean).join('; ');}else value=vals.semantic.get(fieldSemanticKey(label))||'';return value?full.replace(token,value):full;});const engine=vals.semantic.get('engine-platform')||'';if(engine&&out.includes('[Canva Code/browser]'))out=out.split('[Canva Code/browser]').join(/canva code/i.test(engine)?'Canva Code':'browser');}return out;}
 function curriculumDirectiveBlock(prompt,vals){
   const curriculum=vals?.semantic?.get('kurikulum')||vals?.supplemental?.get('@@SUPPLEMENTAL@@curriculum')||'';
@@ -8854,6 +8862,7 @@ function finalizeGeneratedPrompt(prompt,text,vals){
   let out=text;
   if(state.generatorType==='mpi'&&/Prompt 0.*Ideasi MPI/i.test(prompt?.title||'')&&!vals?.semantic?.get('tujuan-pembelajaran')){out=out.replace(/^Tujuan Pembelajaran:\s*\[tujuan pembelajaran\]\s*$/m,'Tujuan Pembelajaran: (belum diisi guru — susun otomatis oleh AI sesuai kurikulum/acuan, jenjang/kelas, mata pelajaran, topik, kedalaman materi, dan estimasi waktu; tetapkan sebagai Tujuan Pembelajaran Final pada Prompt 0)');}
   if(prompt?.categoryId==='modul-ajar-rpm'){
+    out=out.replace(/^- PPI lengkap hanya di formulir \(DIHAPUS DARI HASIL\): .*\r?\n/gm,'');
     const selectedDims=vals?.get('{{dimensi_profil_lulusan}}')||'';if(selectedDims){out=out.replace(/REFERENSI 8 DIMENSI PROFIL LULUSAN \(DIGUNAKAN HANYA JIKA GURU TIDAK MEMILIH DIMENSI\):[\s\S]*?Jika guru sudah memilih satu atau beberapa dimensi pada input, ABAIKAN dan JANGAN tampilkan daftar referensi 8 dimensi ini pada keluaran\.\n\n/,'');}
     const defaults={
       '{{judul_dokumen_modul}}':'MODUL AJAR',
@@ -8863,7 +8872,8 @@ function finalizeGeneratedPrompt(prompt,text,vals){
       '{{konfigurasi_asesmen}}':'Formatif minimal, rinci instrumen menurut TP; sumatif belum diaktifkan',
       '{{bobot_penilaian}}':'tidak ditetapkan — jangan gunakan bobot nilai akhir tanpa asesmen sumatif',
       '{{jumlah_pertemuan_alokasi}}':'belum ditetapkan — minta konfirmasi durasi sebelum audit menit',
-      '{{ppi_inklusi}}':'tidak dilampirkan — jangan membuat PPI resmi',
+      '{{ringkasan_ppi_aman_v51}}':'belum diberikan — jangan membuat profil atau target PPI individual',
+      '{{status_ppi_v51}}':'belum dikonfirmasi — jangan mengklaim PPI resmi disahkan',
       '{{dukungan_inklusi_tersedia}}':'belum diinformasikan — usulan bantuan bukan sarana yang dipastikan ada',
       '{{tanda_tangan_modul}}':'Tidak — tanpa bagian tanda tangan',
       '{{metode_gambar_modul}}':'otomatis: cari sumber yang sah lalu generate bila perlu, hanya pada bagian yang relevan',
@@ -8974,8 +8984,8 @@ function updateSelectedPreset(){const id=$('#teacherPresetSelect')?.value;if(!id
 function deleteSelectedPreset(){const id=$('#teacherPresetSelect')?.value;if(!id){toast('Pilih preset yang ingin dihapus');return;}const list=loadTeacherPresets().filter(p=>p.id!==id);saveTeacherPresets(list);if(activeTeacherPresetId()===id)setActiveTeacherPresetId('');closeTeacherPresetModal();toast('Preset dihapus dari browser ini');}
 function exportTeacherPresets(){const data={version:1,exportedAt:new Date().toISOString(),presets:loadTeacherPresets()};downloadText('Prompt_EDU_Preset_Guru.json',JSON.stringify(data,null,2));}
 function importTeacherPresetFile(file){if(!file)return;const r=new FileReader();r.onload=()=>{try{const data=JSON.parse(r.result);const incoming=Array.isArray(data)?data:(Array.isArray(data.presets)?data.presets:[]);if(!incoming.length)throw new Error('empty');const current=loadTeacherPresets(),byId=new Map(current.map(p=>[p.id,p]));incoming.forEach((p,i)=>{const id=p.id&&!byId.has(p.id)?p.id:`import_${Date.now()}_${i}`;byId.set(id,{id,label:p.label||`Preset Impor ${i+1}`,teacherName:p.teacherName||'',school:p.school||'',level:p.level||'',classPhase:p.classPhase||'',subject:p.subject||'',semester:p.semester||'',time:p.time||'',curriculum:p.curriculum||'',devices:p.devices||'',language:p.language||''});});saveTeacherPresets([...byId.values()]);toast(`${incoming.length} preset berhasil diimpor`);}catch{toast('File preset JSON tidak valid');}};r.readAsText(file);}
-function generatorFieldSummary(){const rows=[];els.genFields.querySelectorAll('[data-token]').forEach(input=>{if(input.disabled)return;let val=(input.value||'').trim();if(!val)return;if(input.hasAttribute('data-jp-input'))val=`${val} JP`;const label=input.closest('.form-group')?.querySelector('label')?.textContent?.trim()||friendlyLabel(input.dataset.token||'Data');rows.push([label,val]);});return rows;}
-function openGeneratorPreview(){if(!validateModuleVisualV5()||!validateModuleTime()||!validateModuleAssessmentPercentages()||!validateModuleAssessmentWeights()||!validateMpiEvaluationConfig()||!validateLKPDOutput())return;const all=activeGeneratorPrompts();if(!all.length){toast('Pilih paket/template terlebih dahulu');return;}const rows=generatorFieldSummary(),vals=substitutionMap();const ps=(isPackageMode()&&all.length>1&&!state.generatorPrompt0Confirmed)?[all[0]]:all;const unresolved=ps.reduce((n,p)=>n+extractPromptFields(p,applySubstitutions(p.text,vals)).length,0);const preset=getSelectedTeacherPreset();const d=currentPackageDef();const title=isPackageMode()?(d?.label||all[0].categoryName):all[0].title;const phase=isPackageMode()&&all.length>1&&!state.generatorPrompt0Confirmed?'Prompt 0 saja':`${ps.length} bagian prompt`;const body=$('#generatorPreviewBody');body.innerHTML=`<div class="preview-hero"><div><strong>${escapeHtml(title)}</strong><p>${escapeHtml(phase)}${state.generatorVersion==='pro'?' • Versi PRO':''}${preset?` • Preset: ${escapeHtml(preset.label)}`:''}</p></div><span class="preview-badge">${rows.length} field diisi</span></div>${rows.length?`<div class="preview-grid">${rows.slice(0,16).map(([k,v])=>`<div class="preview-item"><span>${escapeHtml(k)}</span><strong>${escapeHtml(truncate(v.replace(/\s+/g,' '),150))}</strong></div>`).join('')}</div>`:'<div class="preview-empty">Belum ada field yang diisi. AI akan mengandalkan nilai default/asumsi dari template.</div>'}${rows.length>16?`<div class="preview-empty">+ ${rows.length-16} field lain sudah terisi dan tetap akan dimasukkan ke prompt.</div>`:''}<div class="preview-empty"><strong>Yang perlu diperiksa:</strong> ${unresolved?`${unresolved} placeholder masih belum diisi dan akan mengikuti aturan default/AI pada template.`:'semua placeholder yang terdeteksi sudah memiliki nilai.'} Preview ini tidak meringkas atau mengganti template prompt asli.</div>`;$('#generatorPreviewBackdrop').hidden=false;$('#generatorPreviewModal').hidden=false;}
+function generatorFieldSummary(){const rows=[];els.genFields.querySelectorAll('[data-token]').forEach(input=>{if(input.disabled||input.dataset.token==='{{ppi_inklusi}}')return;let val=(input.value||'').trim();if(!val)return;if(input.hasAttribute('data-jp-input'))val=`${val} JP`;const label=input.closest('.form-group')?.querySelector('label')?.textContent?.trim()||friendlyLabel(input.dataset.token||'Data');rows.push([label,val]);});return rows;}
+function openGeneratorPreview(){if(!validateModuleSourceAndPpiV51()||!validateModuleVisualV5()||!validateModuleTime()||!validateModuleAssessmentPercentages()||!validateModuleAssessmentWeights()||!validateMpiEvaluationConfig()||!validateLKPDOutput())return;const all=activeGeneratorPrompts();if(!all.length){toast('Pilih paket/template terlebih dahulu');return;}const rows=generatorFieldSummary(),vals=substitutionMap();const ps=(isPackageMode()&&all.length>1&&!state.generatorPrompt0Confirmed)?[all[0]]:all;const unresolved=ps.reduce((n,p)=>n+extractPromptFields(p,applySubstitutions(p.text,vals)).length,0);const preset=getSelectedTeacherPreset();const d=currentPackageDef();const title=isPackageMode()?(d?.label||all[0].categoryName):all[0].title;const phase=isPackageMode()&&all.length>1&&!state.generatorPrompt0Confirmed?'Prompt 0 saja':`${ps.length} bagian prompt`;const body=$('#generatorPreviewBody');body.innerHTML=`<div class="preview-hero"><div><strong>${escapeHtml(title)}</strong><p>${escapeHtml(phase)}${state.generatorVersion==='pro'?' • Versi PRO':''}${preset?` • Preset: ${escapeHtml(preset.label)}`:''}</p></div><span class="preview-badge">${rows.length} field diisi</span></div>${rows.length?`<div class="preview-grid">${rows.slice(0,16).map(([k,v])=>`<div class="preview-item"><span>${escapeHtml(k)}</span><strong>${escapeHtml(truncate(v.replace(/\s+/g,' '),150))}</strong></div>`).join('')}</div>`:'<div class="preview-empty">Belum ada field yang diisi. AI akan mengandalkan nilai default/asumsi dari template.</div>'}${rows.length>16?`<div class="preview-empty">+ ${rows.length-16} field lain sudah terisi dan tetap akan dimasukkan ke prompt.</div>`:''}<div class="preview-empty"><strong>Yang perlu diperiksa:</strong> ${unresolved?`${unresolved} placeholder masih belum diisi dan akan mengikuti aturan default/AI pada template.`:'semua placeholder yang terdeteksi sudah memiliki nilai.'} Preview ini tidak meringkas atau mengganti template prompt asli.</div>`;$('#generatorPreviewBackdrop').hidden=false;$('#generatorPreviewModal').hidden=false;}
 function closeGeneratorPreview(){$('#generatorPreviewBackdrop').hidden=true;$('#generatorPreviewModal').hidden=true;}
 function collectGeneratorQualityIssues(){
   const issues=[];const all=activeGeneratorPrompts();
@@ -8990,10 +9000,12 @@ function collectGeneratorQualityIssues(){
   if(p?.categoryId==='modul-ajar-rpm'){
     const incl=$('[data-module-inclusion-hidden]')?.value||'';const desc=$('[data-module-inclusion-detail]')?.value.trim()||'';
     const getInclToken=t=>[...els.genFields.querySelectorAll('[data-token]')].find(x=>x.dataset.token===t)?.value.trim()||'';
-    const inclBasis=getInclToken('{{dasar_data_inklusi}}'), inclSupport=getInclToken('{{dukungan_inklusi_tersedia}}'), inclPpi=getInclToken('{{ppi_inklusi}}');
+    const inclBasis=getInclToken('{{dasar_data_inklusi}}'), inclSupport=getInclToken('{{dukungan_inklusi_tersedia}}'), inclPpi=getInclToken('{{ppi_inklusi}}'), safePpi=getInclToken('{{ringkasan_ppi_aman_v51}}');
+    const curV51=getInclToken('{{kurikulum_acuan_modul}}');if(curV51)add('pass','Kurikulum telah dipilih secara eksplisit','Acuan utama dipakai untuk memilih terminologi tujuan, standar, dan penilaian.');
+    if(inclPpi)add('info','PPI lengkap dipisahkan dari prompt','Teks PPI mentah tidak disalin ke prompt maupun snapshot baru; hanya ringkasan fungsional yang telah ditinjau guru yang boleh digunakan.');
     if(/inklusi|campuran/i.test(incl)&&!desc)add('warning','Profil kebutuhan inklusi belum dijelaskan','Pilihan inklusi/heterogen sudah aktif tetapi profil fungsional/kebutuhan masih kosong. AI hanya boleh memakai akomodasi konservatif dan tidak boleh mengarang diagnosis/hasil asesmen.');
     if(/inklusi|campuran/i.test(incl)&&!inclBasis)add('info','Dasar data inklusi belum dicantumkan','Pertimbangkan mengisi sumber data seperti observasi, asesmen fungsional/diagnostik, Profil Murid, PPI, rekomendasi GPK/ULD, atau informasi orang tua agar penyesuaian TP/KKTP lebih dapat dipertanggungjawabkan.');
-    if(/inklusi|campuran/i.test(incl)&&(inclSupport||inclPpi))add('pass','Dukungan inklusi memiliki konteks','Dukungan/Profil Murid/PPI akan digunakan untuk menentukan akomodasi tujuan-materi-proses-asesmen secara lebih spesifik.');
+    if(/inklusi|campuran/i.test(incl)&&(inclSupport||safePpi))add('pass','Dukungan inklusi memiliki konteks','Dukungan/Profil Murid/PPI akan digunakan untuk menentukan akomodasi tujuan-materi-proses-asesmen secara lebih spesifik.');
     const model=$('[data-module-model-hidden]')?.value||'';const projectChosen=$$('[data-assessment-ntype]').some(x=>x.checked&&x.value==='Proyek');
     const modelOther=$$('[data-module-model-value]').some(x=>x.checked&&x.value==='Lainnya');const modelOtherDesc=$('[data-module-model-custom]')?.value.trim()||'';
     if(modelOther&&!modelOtherDesc)add('warning','Model Lainnya belum dideskripsikan','Pilihan Lainnya dicentang, tetapi deskripsi model/strategi guru masih kosong. Isi deskripsi agar prompt final mengikuti maksud guru.');
@@ -9028,7 +9040,7 @@ function collectGeneratorQualityIssues(){
 }
 let qualityContinueToPreview=false;
 function openQualityCheck(continueToPreview=false){
-  if(!validateModuleVisualV5()||!validateModuleAssessmentPercentages()||!validateModuleAssessmentWeights()||!validateMpiEvaluationConfig()||!validateLKPDOutput())return false;
+  if(!validateModuleSourceAndPpiV51()||!validateModuleVisualV5()||!validateModuleAssessmentPercentages()||!validateModuleAssessmentWeights()||!validateMpiEvaluationConfig()||!validateLKPDOutput())return false;
   const issues=collectGeneratorQualityIssues();qualityContinueToPreview=continueToPreview;
   const blockers=issues.filter(x=>x.severity==='blocker').length,warnings=issues.filter(x=>x.severity==='warning').length,passes=issues.filter(x=>x.severity==='pass').length;
   $('#qualityCheckSummary').innerHTML=`<span class="quality-pill">${blockers} blocker</span><span class="quality-pill">${warnings} peringatan</span><span class="quality-pill">${passes} lulus</span>`;
@@ -9037,7 +9049,7 @@ function openQualityCheck(continueToPreview=false){
 }
 function closeQualityCheck(){$('#qualityCheckBackdrop').hidden=true;$('#qualityCheckModal').hidden=true;qualityContinueToPreview=false;}
 function generateFromForm(){
-  if(!validateModuleVisualV5()||!validateModuleTime()||!validateModuleAssessmentPercentages()||!validateModuleAssessmentWeights()||!validateMpiEvaluationConfig()||!validateLKPDOutput())return;
+  if(!validateModuleSourceAndPpiV51()||!validateModuleVisualV5()||!validateModuleTime()||!validateModuleAssessmentPercentages()||!validateModuleAssessmentWeights()||!validateMpiEvaluationConfig()||!validateLKPDOutput())return;
   const issues=collectGeneratorQualityIssues();const blockers=issues.some(x=>x.severity==='blocker'),warnings=issues.some(x=>x.severity==='warning');
   if(blockers||warnings){openQualityCheck(true);return;}openGeneratorPreview();
 }
@@ -9063,13 +9075,43 @@ $('#teacherPresetSelect')?.addEventListener('change',e=>{setActiveTeacherPresetI
 const GENERATOR_HISTORY_KEY='promptEduGeneratorHistoryV1';
 const GENERATOR_PROJECT_KEY='promptEduGeneratorProjectsV1';
 let projectCenterTab='projects';
-function localList(key){try{const x=JSON.parse(localStorage.getItem(key)||'[]');return Array.isArray(x)?x:[];}catch{return[];}}
+// V5.1: arsip lama V5 mungkin menyimpan PPI lengkap; bersihkan saat dibaca.
+function scrubArchivedPpiV51(text){
+  return String(text||'').replace(/^([ \t]*- Profil Murid\/PPI yang disediakan:)[\s\S]*?(?=^[ \t]*- Kesiapan dan karakteristik murid:)/gm,'- Ringkasan PPI: [konten individual lama disembunyikan; masukkan ulang ringkasan aman melalui V5.1]\n');
+}
+function localList(key){
+ try{
+  const x=JSON.parse(localStorage.getItem(key)||'[]');if(!Array.isArray(x))return [];
+  if(key===GENERATOR_HISTORY_KEY||key===GENERATOR_PROJECT_KEY){
+    let changed=false;
+    for(const entry of x){
+      const before=entry.promptText||'';
+      const match=before.match(/^\s*- Profil Murid\/PPI yang disediakan:([^]*?)(?=^\s*- Kesiapan dan karakteristik murid:)/m);
+      const rawPpi=match?.[1]?.trim()||'';
+      const after=scrubArchivedPpiV51(before);
+      if(after!==before){entry.promptText=after;changed=true;}
+      for(const control of entry.snapshot?.controls||[]){
+        const value=String(control.value||'');
+        if(value&&((rawPpi&&value===rawPpi)||/PROGRAM PEMBELAJARAN INDIVIDUAL|\bNama Siswa\s*:|\bKekhususan Utama\s*:/i.test(value))){control.value='';changed=true;}
+      }
+    }
+    if(changed)localStorage.setItem(key,JSON.stringify(x));
+  }
+  return x;
+ }catch{return[];}
+}
 function saveLocalList(key,list){localStorage.setItem(key,JSON.stringify(list));}
 function generatorDisplayTitle(){const all=activeGeneratorPrompts();if(!all.length)return'Proyek Prompt EDU';const d=currentPackageDef();return isPackageMode()?(d?.label||all[0].categoryName):all[0].title;}
-function captureGeneratorSnapshot(){const controls=[...els.genFields.querySelectorAll('input,select,textarea')].map(el=>({tag:el.tagName,type:el.type||'',value:el.value||'',checked:!!el.checked}));return{generatorType:state.generatorType,generatorVersion:state.generatorVersion||'',generatorPackage:state.generatorPackage||'',generatorPrompt0Confirmed:!!state.generatorPrompt0Confirmed,generatorTemplateKey:state.generatorTemplateKey||'',presetId:activeTeacherPresetId(),controls,mode:localStorage.getItem('promptEduGeneratorFormModeV1')||'quick'};}
+function captureGeneratorSnapshot(){const controls=[...els.genFields.querySelectorAll('input,select,textarea')].map(el=>({tag:el.tagName,type:el.type||'',value:el.dataset.token==='{{ppi_inklusi}}'?'':(el.value||''),checked:!!el.checked}));return{generatorType:state.generatorType,generatorVersion:state.generatorVersion||'',generatorPackage:state.generatorPackage||'',generatorPrompt0Confirmed:!!state.generatorPrompt0Confirmed,generatorTemplateKey:state.generatorTemplateKey||'',presetId:activeTeacherPresetId(),controls,mode:localStorage.getItem('promptEduGeneratorFormModeV1')||'quick'};}
 function restoreGeneratorSnapshot(snap,promptText=''){
   if(!snap)return;state.generatorType=snap.generatorType||'all';state.generatorVersion=snap.generatorVersion||'';state.generatorPackage=snap.generatorPackage||'';state.generatorPrompt0Confirmed=!!snap.generatorPrompt0Confirmed;state.generatorTemplateKey=snap.generatorTemplateKey||null;if(snap.presetId)setActiveTeacherPresetId(snap.presetId);switchView('generator');
-  setTimeout(()=>{const controls=[...els.genFields.querySelectorAll('input,select,textarea')];(snap.controls||[]).forEach((v,i)=>{const el=controls[i];if(!el)return;if(el.type==='checkbox'||el.type==='radio')el.checked=!!v.checked;else el.value=v.value??'';});controls.forEach(el=>{el.dispatchEvent(new Event('input',{bubbles:true}));el.dispatchEvent(new Event('change',{bubbles:true}));});if(typeof applyGeneratorFormMode==='function')applyGeneratorFormMode(snap.mode||'full');if(promptText){els.genOutput.value=promptText;renderGeneratedSections([{heading:'HASIL TERSIMPAN',sourceTitle:generatorDisplayTitle(),text:promptText}]);els.genEmpty.hidden=true;els.genResult.hidden=false;}toast('Konfigurasi proyek dipulihkan');},80);closeProjectCenter();
+  setTimeout(()=>{const controls=[...els.genFields.querySelectorAll('input,select,textarea')];(snap.controls||[]).forEach((v,i)=>{
+    const el=controls[i];if(!el)return;
+    if(el.dataset.token==='{{ppi_inklusi}}') {el.value='';return;}
+    if(el.dataset.token==='{{ringkasan_ppi_aman_v51}}'&&modulePrivacyRiskV51(v.value||'')){el.value='';return;}
+    if(el.type==='checkbox'||el.type==='radio')el.checked=!!v.checked;
+    else el.value=v.value??'';
+  });controls.forEach(el=>{el.dispatchEvent(new Event('input',{bubbles:true}));el.dispatchEvent(new Event('change',{bubbles:true}));});if(typeof applyGeneratorFormMode==='function')applyGeneratorFormMode(snap.mode||'full');if(promptText){els.genOutput.value=promptText;renderGeneratedSections([{heading:'HASIL TERSIMPAN',sourceTitle:generatorDisplayTitle(),text:promptText}]);els.genEmpty.hidden=true;els.genResult.hidden=false;}toast('Konfigurasi proyek dipulihkan');},80);closeProjectCenter();
 }
 function addGeneratorHistory(promptText){if(!promptText)return;const list=localList(GENERATOR_HISTORY_KEY);list.unshift({id:`hist_${Date.now()}`,createdAt:new Date().toISOString(),title:generatorDisplayTitle(),promptText,snapshot:captureGeneratorSnapshot()});saveLocalList(GENERATOR_HISTORY_KEY,list.slice(0,20));}
 function saveCurrentProject(name){const title=(name||$('#projectNameInput')?.value||'').trim()||generatorDisplayTitle();const list=localList(GENERATOR_PROJECT_KEY);list.unshift({id:`proj_${Date.now()}`,updatedAt:new Date().toISOString(),title,promptText:els.genOutput?.value||'',snapshot:captureGeneratorSnapshot()});saveLocalList(GENERATOR_PROJECT_KEY,list.slice(0,50));if($('#projectNameInput'))$('#projectNameInput').value='';renderProjectCenter();toast('Proyek disimpan lokal');}
@@ -9083,6 +9125,43 @@ function deleteProjectItem(id){const key=projectCenterTab==='projects'?GENERATOR
 function duplicateProject(id){const x=projectItem(id);if(!x)return;const list=localList(GENERATOR_PROJECT_KEY);list.unshift({...x,id:`proj_${Date.now()}`,title:`Salinan — ${x.title}`,updatedAt:new Date().toISOString()});saveLocalList(GENERATOR_PROJECT_KEY,list.slice(0,50));projectCenterTab='projects';renderProjectCenter();toast('Proyek diduplikasi');}
 $('#projectCenterBtn')?.addEventListener('click',()=>openProjectCenter('projects'));$('#projectCenterClose')?.addEventListener('click',closeProjectCenter);$('#projectCenterBackdrop')?.addEventListener('click',closeProjectCenter);$('#projectSaveCurrent')?.addEventListener('click',()=>saveCurrentProject());$('#saveCurrentProjectBtn')?.addEventListener('click',()=>saveCurrentProject());$$('[data-project-tab]').forEach(b=>b.addEventListener('click',()=>{projectCenterTab=b.dataset.projectTab;renderProjectCenter();}));$('#projectCenterList')?.addEventListener('click',e=>{const open=e.target.closest('[data-project-open]');if(open){const x=projectItem(open.dataset.projectOpen);if(x)restoreGeneratorSnapshot(x.snapshot,x.promptText||'');return;}const copy=e.target.closest('[data-project-copy]');if(copy){const x=projectItem(copy.dataset.projectCopy);if(x?.promptText)copyText(x.promptText);return;}const dup=e.target.closest('[data-project-duplicate]');if(dup){duplicateProject(dup.dataset.projectDuplicate);return;}const del=e.target.closest('[data-project-delete]');if(del)deleteProjectItem(del.dataset.projectDelete);});
 
+function moduleTokenV51(token){return $('[data-token="'+token+'"]');}
+function modulePrivacyRiskV51(value){
+  return /\b(?:nama\s*(?:siswa|murid|anak)|nisn|nik|no\.?\s*(?:hp|telepon)|tanggal\s*lahir|alamat\s*(?:rumah|murid|siswa)?|diagnos(?:is|a)|kekhususan\s*utama)\s*:/i.test(value)||/(?:\b\d{10,16}\b|\b(?:tunagrahita|hambatan\s+intelektual|autisme|adhd|slow\s+learner)\b)/i.test(value);
+}
+function validateModuleSourceAndPpiV51(){
+  if(activeGeneratorPrompts()[0]?.categoryId!=='modul-ajar-rpm')return true;
+  const curriculum=moduleTokenV51('{{kurikulum_acuan_modul}}');
+  if(!curriculum?.value.trim()){
+    curriculum?.scrollIntoView({behavior:'smooth',block:'center'});
+    toast('V5.1: pilih Kurikulum / Acuan secara eksplisit sebelum membuat prompt.');return false;
+  }
+  const raw=moduleTokenV51('{{ppi_inklusi}}')?.value.trim()||'';
+  const safe=moduleTokenV51('{{ringkasan_ppi_aman_v51}}');
+  const status=moduleTokenV51('{{status_ppi_v51}}');
+  if(raw&&!safe?.value.trim()){
+    safe?.scrollIntoView({behavior:'smooth',block:'center'});
+    toast('V5.1: PPI lengkap tidak disalin. Isi dulu Ringkasan PPI tanpa identitas untuk prompt.');return false;
+  }
+  const general=moduleTokenV51('{{deskripsi_siswa_inklusi}}');
+  if(general?.value.trim()&&modulePrivacyRiskV51(general.value)){
+    general.scrollIntoView({behavior:'smooth',block:'center'});
+    toast('V5.1: profil fungsional memuat penanda identitas/diagnosis sensitif. Ubah menjadi kebutuhan belajar tanpa identitas.');return false;
+  }
+  if(safe?.value.trim()&&modulePrivacyRiskV51(safe.value)){
+    safe.scrollIntoView({behavior:'smooth',block:'center'});
+    toast('V5.1: ringkasan PPI mengandung label atau data sensitif. Hapus identitas/diagnosis/nomor sebelum membuat prompt.');return false;
+  }
+  if((raw||safe?.value.trim())&&!status?.value.trim()){
+    status?.scrollIntoView({behavior:'smooth',block:'center'});
+    toast('V5.1: pilih status konfirmasi PPI menurut guru.');return false;
+  }
+  if((raw||safe?.value.trim())&&status?.value==='Tidak ada PPI individual'){
+    status?.scrollIntoView({behavior:'smooth',block:'center'});
+    toast('V5.1: status PPI bertentangan dengan PPI/ringkasan yang diisi.');return false;
+  }
+  return true;
+}
 function validateModuleVisualV5(){
   if(activeGeneratorPrompts()[0]?.categoryId!=='modul-ajar-rpm')return true;
   const method=$('[data-token="{{metode_gambar_modul}}"]');
@@ -9169,7 +9248,7 @@ function validateMpiEvaluationConfig(){
 }
 function validateLKPDOutput(){const p=activeGeneratorPrompts()[0];if(p?.title!=='Prompt LKPD')return true;const sel=$('[data-lkpd-output-select]');if(sel&&!sel.value){sel.scrollIntoView({behavior:'smooth',block:'center'});toast('Pilih Format Output Akhir: DOCX, PDF, atau Gambar per Halaman');return false;}return true;}
 function generatePromptNow(){
-  if(!validateModuleVisualV5())return;
+  if(!validateModuleSourceAndPpiV51()||!validateModuleVisualV5())return;
   if(!validateModuleTime())return;
   if(!validateModuleAssessmentPercentages())return;
   if(!validateModuleAssessmentWeights())return;
