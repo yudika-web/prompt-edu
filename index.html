@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="theme-color" content="#6d5dfc" />
 <title>Prompt EDU — AI Prompt Studio untuk Guru</title>
-<meta name="bank-prompt-build" content="2026-10-08-modul-ajar-rpm-inklusif-lintas-mapel-v2" />
+<meta name="bank-prompt-build" content="2026-10-08-modul-ajar-validasi-kondisional-v3" />
 <style>
 :root{
   --bg:#f4f7fb;
@@ -7714,784 +7714,115 @@ const modulAjarCategories = [
       {
         title: "Prompt Modul Ajar / Rencana Pembelajaran Mendalam (RPM)",
         generatorCurlyOnly: true,
-        text: `Anda adalah pengembang kurikulum dan asesmen berpengalaman yang mampu menyusun perangkat pembelajaran lintas kurikulum nasional dan internasional.
-
-TUGAS ANDA
-Susun {{judul_dokumen_modul}} yang proporsional, akurat, mudah digunakan, dapat diedit, dan sesuai kebutuhan satu unit pembelajaran dengan mengikuti kurikulum/acuan yang dipilih guru. Untuk Kurikulum Merdeka dan konteks Indonesia yang relevan, gunakan pendekatan Pembelajaran Mendalam serta struktur RPM sesuai pedoman yang berlaku. Untuk kurikulum internasional atau pendekatan pendidikan lain, gunakan terminologi, struktur tujuan, pedagogi, dan asesmen yang native terhadap acuan tersebut; jangan memaksakan format RPP/RPM atau istilah Kurikulum Merdeka bila tidak sesuai.
-
-Keluaran berupa perangkat ajar yang cukup lengkap untuk melaksanakan aktivitas dan asesmen yang dipilih guru, BUKAN outline semata. Lengkapi hanya instrumen yang memang dipakai: soal/tugas, kisi-kisi bila diperlukan, kunci/pedoman skor atau rubrik, LKPD sesuai kegiatan, catatan observasi, refleksi, tindak lanjut dan lampiran pendukung. Jangan memaksakan LKPD praktikum, LKPD proyek, rubrik sikap, atau administrasi yang tidak dipakai. Lakukan keselarasan CP → TP → KKTP → kegiatan → asesmen sebagai AUDIT INTERNAL, tetapi JANGAN tampilkan matriks keterlacakan sebagai bagian modul. Jangan menulis placeholder seperti "buat 10 soal", "rubrik disesuaikan", "LKPD terlampir", "remedial sesuai kebutuhan", atau "dan seterusnya"; realisasikan isinya secara konkret.
-
-Jika keluaran terlalu panjang, dahulukan modul inti dan instrumen yang dipakai; jangan mengulang tabel, rubrik, atau uraian yang sama. Sajikan sebagai dokumen profesional yang natural dan siap digunakan. JANGAN menampilkan label internal generator pada judul maupun isi keluaran.
-
-ATURAN PEMBUKA DOKUMEN FINAL: gunakan tepat SATU judul utama berdasarkan {{judul_dokumen_modul}} ("MODUL AJAR" atau "RENCANA PEMBELAJARAN MENDALAM"), lalu mulai dengan "A. IDENTITAS". Jangan menulis judul gabungan. Jangan menampilkan catatan acuan, asumsi, daftar isi/peta dokumen, atau penjelasan proses penyusunan sebelum A. IDENTITAS.
-
-=====================================================================
-PENTING — GUNAKAN DOKUMEN ACUAN AGAR HASIL LEBIH AKURAT DAN SESUAI
-=====================================================================
-Untuk memperoleh hasil yang paling akurat, kontekstual, dan sesuai kebutuhan sekolah, jalankan/tempelkan prompt ini pada percakapan AI yang SAMA bersama dokumen acuan yang tersedia. Sangat disarankan melampirkan, bila ada:
-- dokumen Capaian Pembelajaran (CP)/standar/silabus resmi yang berlaku;
-- ATP, TP, program semester/tahunan, atau dokumen kurikulum sekolah yang relevan;
-- buku teks, modul, handout, bahan ajar, artikel/sumber belajar, atau materi yang benar-benar digunakan guru;
-- contoh asesmen, rubrik, LKPD, proyek/praktikum, atau perangkat pembelajaran sebelumnya;
-- dokumen konteks sekolah, sarana, kebutuhan peserta didik, atau dokumen pendukung lain yang relevan;
-- khusus kelas inklusif, bila tersedia lampirkan ringkasan Profil Murid, hasil asesmen fungsional/diagnostik, PPI, atau rekomendasi GPK/ULD yang relevan dengan pembelajaran; hindari data pribadi/medis yang tidak diperlukan.
-
-ATURAN PENGGUNAAN DOKUMEN:
-1. Jika dokumen dilampirkan, jadikan dokumen tersebut sebagai REFERENSI UTAMA untuk fakta, CP/standar, terminologi, urutan materi, ruang lingkup konten, dan ketentuan yang memang tercantum di dalamnya.
-2. Jangan mengarang kode CP/standar, kutipan, isi sumber belajar, data sekolah, atau ketentuan yang tidak didukung dokumen. Jika tidak tersedia, tandai sebagai USULAN/ASUMSI YANG PERLU DIVERIFIKASI GURU.
-3. Pertahankan istilah dan struktur penting dari dokumen sumber selama tidak bertentangan dengan instruksi eksplisit guru pada prompt ini.
-4. Jika beberapa dokumen saling bertentangan dan tidak jelas mana yang harus diprioritaskan, tampilkan catatan konflik secara singkat dan tandai bagian tersebut untuk verifikasi guru; jangan menyelesaikan konflik secara diam-diam.
-5. Jangan mengklaim telah membaca/menggunakan dokumen yang sebenarnya tidak tersedia pada percakapan.
-6. Jangan membuat bagian “Dokumen/Sumber Acuan yang Digunakan” di awal dokumen. Catat sumber yang BENAR-BENAR tersedia, diberikan guru, atau telah diverifikasi pada daftar pustaka/sumber belajar di akhir (judul, lembaga, tahun/nomor/tautan bila diketahui). Jangan mengklaim dokumen telah diverifikasi jika belum.
-7. Untuk Kurikulum Merdeka, gunakan prinsip Panduan Pembelajaran dan Asesmen Edisi Revisi 2025 dalam merumuskan KKTP: kriteria harus berupa bukti kompetensi yang dapat ditunjukkan murid; pendekatan dapat berupa deskripsi kriteria, rubrik, interval/persentase, atau pendekatan lain yang relevan. Jangan menyamakan KKTP dengan satu angka KKM.
-8. ATURAN VERIFIKASI CP: gunakan CP resmi yang diberikan guru dengan identitas sumbernya, atau cari CP resmi menurut kurikulum, mapel, jenjang/fase dan versi yang berlaku bila mempunyai akses sumber tepercaya. Panduan Pembelajaran dan Asesmen Edisi Revisi 2025 merujuk Keputusan Kepala BSKAP Nomor 046/H/Kr/2025; jadikan ini petunjuk penelusuran, BUKAN pengganti pengecekan CP yang cocok dan mutakhir. Tampilkan kutipan CP hanya bila benar-benar tersedia dan terverifikasi. Bila CP tidak ada dan akses verifikasi tidak tersedia, tulis 'CP resmi belum terverifikasi — mohon lampirkan sumber'; jangan mengarang kalimat, kode, atau kutipan CP. Jangan menyatakan TP/KKTP 'sesuai CP resmi' sebelum keterkaitan terverifikasi.
-9. PANDUAN BUKAN FORMAT BAKU: format daftar/tabel, jumlah KKTP, skala rubrik, persentase soal, desain visual, serta susunan bagian pada prompt ini adalah pilihan desain aplikasi, bukan ketentuan wajib pemerintah kecuali memang dikutip dari panduan. Prioritaskan fleksibilitas dan kejelasan perencanaan pembelajaran.
-
-
-=====================================================================
-BAGIAN 1 — KONTEKS & VARIABEL INPUT (isi/ganti sesuai kebutuhan)
-=====================================================================
-TENTUKAN KONDISI SISWA TERLEBIH DAHULU sebelum menetapkan rancangan aktivitas, diferensiasi, dukungan, dan asesmen. Kondisi siswa digunakan untuk menentukan akses, scaffolding, akomodasi, dan strategi belajar; JANGAN otomatis menurunkan TP/KKTP hanya karena terdapat siswa inklusi atau kelas heterogen:
-- Komposisi/Kondisi Siswa      : {{komposisi_siswa}}
-- Profil Fungsional/Kebutuhan Siswa Inklusi/Heterogen : {{deskripsi_siswa_inklusi}}
-- Dasar Data Inklusi (Opsional) : {{dasar_data_inklusi}}
-- Dukungan/Akomodasi yang Tersedia (Opsional) : {{dukungan_inklusi_tersedia}}
-- Profil Murid / PPI / Dokumen Individual (Opsional) : {{ppi_inklusi}}
-- Karakteristik/Kesiapan Murid : {{karakteristik_kesiapan_murid}}
-- Preferensi Diferensiasi (Opsional) : {{preferensi_diferensiasi}}
-
-Kemudian lengkapi konteks pembelajaran berikut:
-- Judul Dokumen                 : {{judul_dokumen_modul}}
-- Nama Sekolah                 : {{nama_sekolah}}
-- Nama Guru                    : {{nama_guru_modul}}
-- Nama Kepala Sekolah          : {{nama_kepala_sekolah}}
-- Kurikulum / Acuan            : {{kurikulum_acuan_modul}}
-- Jenjang                      : {{jenjang}}
-- Fase & Kelas                 : {{fase_kelas}}
-- Mata Pelajaran               : {{mata_pelajaran}}
-- Topik / Materi               : {{topik_materi}}
-- Deskripsi Aktivitas Siswa (Opsional) : {{aktivitas_siswa}}
-- Pengetahuan/Keterampilan Prasyarat (Opsional) : {{prasyarat_pembelajaran}}
-- Miskonsepsi/Kesulitan yang Diprediksi (Opsional) : {{miskonsepsi_kesulitan}}
-- Subtopik (jika ada)          : {{subtopik}}
-- Capaian Pembelajaran (CP)    : {{capaian_pembelajaran}}
-- Sumber CP / Rujukan Resmi     : {{sumber_cp_modul}}
-- Tujuan Pembelajaran (TP)     : {{tujuan_pembelajaran}}
-- Dimensi Profil Lulusan       : {{dimensi_profil_lulusan}}
-- Semester & Tahun Ajaran      : {{semester_tahun_ajaran}}
-- Jumlah Pertemuan & Alokasi   : {{jumlah_pertemuan_alokasi}}
-- Jumlah Siswa                 : {{jumlah_siswa}}
-- Jumlah Kelompok (Opsional)   : {{jumlah_kelompok}}
-- Sarana/Media yang Tersedia   : {{sarana_pembelajaran}}
-- Keterbatasan Implementasi    : {{keterbatasan_pembelajaran}}
-- Model/Pendekatan/Framework Pedagogis : {{model_praktik_pedagogis}}
-- Mode Produk/Proyek Siswa     : {{mode_produk_proyek}}
-- Opsi/Bentuk Produk-Proyek    : {{opsi_produk_proyek}}
-- Konteks Lokal/Sekolah        : {{konteks_lokal_sekolah}}
-- Pemanfaatan Digital          : {{pemanfaatan_digital}}
-- Kemitraan Pembelajaran       : {{kemitraan_pembelajaran}}
-- Mode Sumber Belajar Eksternal: {{mode_sumber_belajar}}
-- Sumber/Link dari Guru (Opsional) : {{sumber_belajar_guru}}
-- Metode Gambar/Visual Modul   : {{metode_gambar_modul}}
-- Bagian yang Diberi Gambar    : {{bagian_gambar_modul}}
-- URL/Referensi Gambar (Opsional) : {{url_gambar_modul}}
-- Rencana Alternatif / Plan B  : {{rencana_alternatif}}
-- Deskripsi Tambahan           : {{deskripsi_tambahan}}
-- Konfigurasi Asesmen          : {{konfigurasi_asesmen}}
-- Bobot Penilaian              : {{bobot_penilaian}}
-- Deskripsi Asesmen Tambahan   : {{deskripsi_asesmen}}
-- Arahan Remedial & Pengayaan (Opsional) : {{preferensi_remedial_pengayaan}}
-- Mode Keluaran Modul          : {{mode_keluaran_modul}}
-- Bagian Tanda Tangan Akhir (Opsional) : {{tanda_tangan_modul}}
-
-ATURAN PRIORITAS KURIKULUM / ACUAN:
-- Kurikulum/acuan yang dipilih guru adalah sumber struktur dan terminologi utama. Jangan mencampur framework secara diam-diam.
-- Jika Kurikulum Merdeka: gunakan CP/TP, KKTP/success criteria, Dimensi Profil Lulusan, Pembelajaran Mendalam, serta asesmen yang relevan dengan kebijakan Indonesia yang berlaku.
-- Jika Kurikulum Berbasis Cinta (Kemenag): perlakukan KBC sebagai insersi/kerangka nilai yang menguatkan kurikulum yang berlaku, integrasikan Panca Cinta secara kontekstual (Cinta Allah dan Rasul-Nya, Cinta Ilmu, Cinta Lingkungan, Cinta Diri dan Sesama, Cinta Tanah Air), dan jangan mengubahnya menjadi sekadar label dekoratif.
-- Jika Cambridge International: selaraskan dengan tahap Cambridge Pathway dan subject syllabus yang sesuai; gunakan learning objectives/skills/assessment yang relevan dan jangan mengarang kode syllabus atau standar resmi.
-- Jika International Baccalaureate (IB): tentukan konteks PYP/MYP/DP/CP sesuai usia/jenjang, gunakan pendekatan inquiry, conceptual understanding, keterampilan dan asesmen yang sesuai programme; jangan memaksakan CP/TP/KKTP.
-- Jika Singapore Curriculum: selaraskan dengan Singapore Curriculum Philosophy (SCP) dan subject syllabus MOE yang relevan; tekankan pembelajaran holistik, konstruksi pengetahuan aktif, thinking skills/dispositions, dan asesmen untuk menutup learning gaps.
-- Jika Montessori: prioritaskan prepared environment, aktivitas hands-on, pilihan/kemandirian peserta didik, observasi, penguasaan bertahap, dan kesesuaian tahap perkembangan; hindari struktur yang terlalu teacher-directed bila bertentangan dengan pendekatan Montessori.
-- Untuk Pearson Edexcel, National Curriculum for England, Australian Curriculum, Common Core/NGSS, IPC/IMYC, Reggio Emilia, Waldorf/Steiner, K13, Hybrid, atau acuan lain: gunakan terminology dan struktur resmi yang paling relevan. Jika standar/silabus resmi tidak dilampirkan dan detail spesifik tidak dapat dipastikan, jangan mengarang kode atau kutipan; tandai bagian yang perlu diverifikasi guru.
-- Jika guru memilih Hybrid/Kurikulum Sekolah, jelaskan pemetaan antaracuan secara eksplisit dan sebutkan acuan mana yang menjadi prioritas saat terjadi konflik.
-- Instruksi spesifik kurikulum mengalahkan istilah Kurikulum Merdeka yang mungkin muncul pada bagian template generik di bawah.
-
-ATURAN DEFAULT INPUT:
-- Jika input kosong, boleh membuat usulan pedagogis yang ditandai jelas berdasarkan konteks yang tersedia, tetapi DILARANG mengarang data faktual sekolah, jumlah murid, hasil asesmen, CP resmi, standar, atau sumber. Jika CP belum terverifikasi, beri catatan dan jangan klaim kesesuaian resmi. JANGAN membuat bagian "Asumsi" di awal dokumen; letakkan penanda singkat seperti "(perlu verifikasi guru)" hanya pada field/bagian yang memang memerlukan verifikasi.
-- Untuk Nama Sekolah yang kosong, jangan mengarang nama sekolah nyata; gunakan identitas generik yang mudah diganti guru.
-- Untuk Nama Guru dan Nama Kepala Sekolah yang kosong, JANGAN mengarang nama orang. Pada identitas/tanda tangan gunakan garis titik atau ruang isian yang mudah dilengkapi kemudian.
-- Nama Guru harus muncul pada bagian Identitas Modul. Nama Kepala Sekolah dicantumkan pada identitas/pengesahan bila diisi guru dan digunakan kembali secara konsisten pada bagian tanda tangan.
-- Untuk TP yang diberikan guru, PERTAHANKAN rumusan, kompetensi, dan cakupannya; evaluasi ketepatan KKO dan kejelasan hasil belajar, lalu beri SARAN pemecahan/perumusan ulang jika TP terlalu majemuk tanpa mengubah secara diam-diam. Satu TP boleh mencakup performa yang saling terkait dan dapat dibuktikan. Bila TP kosong tetapi CP resmi terverifikasi, usulkan sejumlah TP secukupnya sesuai unit (tanpa kuota wajib 2–4), berisi kompetensi yang dapat diamati. Bila CP belum terverifikasi, jangan mengklaim TP sebagai turunan resmi dari CP; minta/verifikasi CP dahulu, atau beri contoh berlabel DRAF untuk dikonfirmasi guru.
-- Untuk Komposisi/Kondisi Siswa:
-  a. "Non inklusi" → gunakan TP, KKTP, aktivitas, dan tuntutan asesmen sesuai fase/kelas.
-  b. Jika terdapat "Siswa inklusi" atau "Campuran/heterogen", HASIL MODUL WAJIB membedakan peruntukan dengan label yang konsisten dan mudah terlihat:
-     • [REGULER] = rancangan untuk siswa reguler/target kelas umum.
-     • [INKLUSI — AKOMODASI] = siswa inklusi yang mengejar kompetensi/TP yang sama tetapi membutuhkan penyesuaian akses, scaffolding, media, bahasa instruksi, bentuk respons, setting, alat bantu, atau waktu.
-     • [INKLUSI — TARGET ADAPTIF] = hanya digunakan bila hasil asesmen diagnostik yang sah, penetapan fase pendidikan khusus, PPI/dokumen individual, atau informasi guru yang cukup menunjukkan bahwa target belajar memang perlu berbeda.
-  c. Untuk [INKLUSI — AKOMODASI], pertahankan kompetensi inti, TP, dan KKTP yang sama; bedakan aktivitas, dukungan, cara menunjukkan bukti belajar, dan format asesmennya. Jangan menurunkan level kognitif hanya karena label inklusi.
-  d. Untuk [INKLUSI — TARGET ADAPTIF], susun TP Adaptif, KKTP Adaptif, aktivitas belajar adaptif, serta asesmen adaptif yang tetap mempertahankan esensi konsep namun disesuaikan dengan kemampuan aktual siswa. Nyatakan dasar penyesuaian secara singkat pada bagian kondisi siswa; jangan mengarang diagnosis.
-  e. Pada kelas Campuran/heterogen, tandai perbedaan dukungan/target secara eksplisit hanya di bagian yang memang perlu; jangan menggandakan TP, KKTP atau asesmen jika substansinya identik.
-  f. Jika "Siswa inklusi" atau "Campuran/heterogen" dipilih tetapi informasi kebutuhan siswa belum cukup, jangan mengarang diagnosis atau langsung menurunkan target. Gunakan [INKLUSI — AKOMODASI] konservatif dan tandai kebutuhan target adaptif sebagai hal yang perlu diverifikasi guru.
-- Untuk Dimensi Profil Lulusan: jika guru memilih satu atau beberapa dimensi, gunakan HANYA dimensi yang dipilih tersebut dan pastikan bukti pencapaiannya nyata dalam aktivitas/asesmen. DILARANG menambahkan dimensi lain di luar pilihan guru. Jika tidak ada dimensi yang dipilih, AI WAJIB memilihkan 2–4 dimensi yang paling relevan berdasarkan TP, materi, aktivitas, dan karakteristik murid.
-- Untuk Model/Pendekatan/Framework Pedagogis: guru dapat memilih SATU ATAU BEBERAPA pilihan melalui checkbox. Bedakan secara tepat antara model yang memiliki sintaks pembelajaran dan pendekatan/framework yang berfungsi sebagai kerangka integrasi. Gunakan seluruh pilihan secara koheren; jelaskan mana model utama, model/strategi pendukung, serta pendekatan/framework yang menaungi pembelajaran. Untuk model, tampilkan sintaks yang benar-benar dipakai; untuk pendekatan/framework seperti STEM, tampilkan elemen integrasi dan alur implementasinya tanpa memaksakan istilah "sintaks" bila tidak tepat. Jika guru memilih "Lainnya", ikuti deskripsi guru. Jika tidak ada pilihan, rekomendasikan kombinasi yang paling sesuai dengan karakter topik, TP, kondisi siswa, dan aktivitas belajar.
-- Jika STEM dipilih, perlakukan STEM secara netral sebagai pendekatan/framework integratif lintas disiplin (terminologi dapat berbeda menurut rujukan), BUKAN memaksa menyebutnya sebagai model pembelajaran. Tunjukkan secara eksplisit kontribusi Science, Technology, Engineering, dan Mathematics yang benar-benar relevan. Integrasi harus substantif: ada masalah/konteks autentik, penggunaan pengetahuan lintas bidang, proses merancang–menguji–memperbaiki solusi/produk bila unsur engineering relevan, serta bukti belajar yang menilai TP. Jangan memberi label STEM jika hanya ada satu disiplin atau jika unsur S-T-E-M sekadar disebut tanpa fungsi nyata.
-- Untuk Deskripsi Aktivitas Siswa: field ini OPSIONAL dan merupakan arahan langsung dari guru tentang apa yang diharapkan dilakukan siswa. Jika diisi, pertahankan maksud guru dan integrasikan aktivitas tersebut secara konkret ke skenario pembelajaran per pertemuan, LKPD praktik/investigasi, LKPD proyek bila relevan, asesmen, lembar observasi, serta rubrik keterampilan/sikap yang sesuai. Boleh menyempurnakan urutan atau detail agar aman, realistis, dan selaras dengan TP, tetapi jangan mengganti inti aktivitas tanpa alasan pedagogis yang jelas. Jika kosong, rancang aktivitas siswa secara otomatis berdasarkan TP, topik, model pembelajaran, kondisi siswa, konteks lokal, sarana, dan alokasi waktu.
-- Untuk Pengetahuan/Keterampilan Prasyarat: jika guru mengisi, gunakan sebagai dasar asesmen diagnostik awal dan scaffolding. Jika kosong, identifikasi prasyarat paling masuk akal dari TP/topik dan tandai sebagai asumsi untuk diverifikasi.
-- Untuk Miskonsepsi/Kesulitan yang Diprediksi: jika diisi, antisipasi secara eksplisit melalui pertanyaan pemantik, contoh-kontra contoh, kegiatan, feedback asesmen, dan remedial. Jika kosong, identifikasi miskonsepsi/kesulitan umum yang relevan tanpa mengarang diagnosis individual.
-- Untuk Preferensi Diferensiasi: jika guru memberi arahan, ikuti. Jika kosong, tetap buat diferensiasi yang realistis berdasarkan kesiapan, kebutuhan dukungan, minat/konteks, dan cara menunjukkan bukti belajar. Diferensiasi tidak boleh sekadar label; tuliskan penyesuaian konten, proses, produk/respons, scaffolding, dan asesmen bila relevan.
-- Untuk Jumlah Siswa, Jumlah Kelompok, Sarana, dan Keterbatasan Implementasi: gunakan data tersebut untuk memastikan pembagian kelompok, jumlah alat/bahan, rotasi/stasiun, durasi, ruang, dan aktivitas benar-benar dapat dilaksanakan. Jangan merancang aktivitas yang membutuhkan sumber daya melebihi yang tersedia tanpa menyediakan alternatif.
-- Untuk Mode Produk/Proyek: jika "Ditentukan guru", gunakan bentuk produk yang ditentukan. Jika "Pilihan siswa", sediakan beberapa pilihan produk yang setara dalam tuntutan TP dan dinilai dengan kriteria inti yang sama. Jika kosong/ditentukan AI, pilih bentuk produk paling autentik dan realistis.
-- Untuk Rencana Alternatif / Plan B: setiap aktivitas yang bergantung pada internet, perangkat, laboratorium, cuaca, lokasi, narasumber, atau bahan khusus WAJIB memiliki alternatif luring/sederhana yang tetap mengukur TP yang sama. Jika guru memberi Plan B, prioritaskan arahan tersebut.
-- Untuk Bobot Penilaian: bobot nilai akhir hanya diterapkan pada komponen penilaian yang memang berfungsi sebagai asesmen hasil belajar/sumatif (assessment of learning) sesuai kebijakan sekolah. Asesmen formatif dipakai untuk umpan balik dan perbaikan proses, bukan otomatis digabungkan ke nilai akhir. Jika guru mengisi bobot komponen nilai akhir, total wajib 100%. Komponen monitoring formatif diberi bobot 0%/tidak masuk nilai akhir. Jika kosong, AI menentukan bobot proporsional untuk komponen sumatif yang aktif dan menjelaskan rumusnya.
-- Untuk Arahan Remedial & Pengayaan: jika diisi, pertahankan maksud guru. Jika kosong, buat paket remedial dan pengayaan otomatis berdasarkan hasil asesmen per TP/KKTP, bukan hanya berdasarkan nilai total.
-- Untuk Mode Keluaran Modul: ikuti pilihan guru; mode mengubah cara penyajian, sementara lampiran kondisional hanya muncul jika dibutuhkan aktivitas/asesmen.
-- Deskripsi Tambahan bersifat arahan prioritas guru. Jika diisi (misalnya wajib ada praktikum, proyek, demonstrasi, studi lapangan, presentasi produk, pemanfaatan lingkungan sekitar, atau aktivitas tertentu), integrasikan arahan tersebut secara nyata ke langkah pembelajaran, LKPD, asesmen, dan rubrik yang relevan.
-- Konfigurasi Asesmen dari guru adalah instruksi WAJIB. Minimal harus ada Asesmen Formatif. Asesmen Formatif Awal dan Asesmen Sumatif hanya menjadi asesmen utama bila dipilih guru. Setiap asesmen yang dipilih dapat memuat Kognitif dan/atau Non-Kognitif/Kinerja & Sikap sesuai pilihan guru. Jika guru memilih tipe soal, jumlah soal total, jumlah soal per tipe, teknik penilaian, keterampilan/aspek yang dinilai, atau proporsi LOTS/MOTS/HOTS, ikuti konfigurasi yang valid dan selaras TP; jika ada konflik, tandai untuk konfirmasi. Jika hanya jumlah soal total yang diberikan, distribusikan ke tipe soal terpilih secara proporsional. Jika guru memberikan jumlah per tipe, gunakan pembagian tersebut; bila sebagian tipe belum diberi jumlah, alokasikan sisa secara wajar tanpa mengubah jumlah yang sudah ditetapkan guru. Rincian yang kosong dilengkapi AI berdasarkan TP, KKTP, aktivitas, jenjang, dan kondisi siswa. Rubrik asesmen utama WAJIB mengikuti teknik yang dipilih. Instrumen observasi, rubrik keterampilan, dan rubrik sikap hanya dibuat jika benar-benar diperlukan untuk mencatat bukti terkait aktivitas/TP, dan jelas dipisahkan dari nilai akhir.
-- Jika persentase LOTS/MOTS/HOTS diisi, total tiga kategori tersebut wajib 100%. AKM/PISA adalah konteks/format soal berbasis stimulus dan literasi, BUKAN kategori level keempat serta bukan komponen penjumlahan proporsi.
-- Untuk Mode Sumber Belajar Eksternal, ikuti pilihan guru. KECUALI guru memilih "Hanya sumber dari guru" atau "Tanpa sumber eksternal tambahan", jika AI memiliki akses web maka AI WAJIB melakukan pencarian sumber sebelum menyelesaikan modul dan WAJIB memasukkan tautan nyata ke dokumen final. Gunakan sumber eksternal kredibel secukupnya dan sesuai TP; video pembelajaran hanya bila relevan dan tersedia, tanpa memaksakan jumlah tertentu. Jangan mengarang judul, kanal, DOI, atau URL. Jika akses web tidak tersedia, nyatakan pada Bagian M bahwa tautan eksternal belum dapat diverifikasi dan jangan membuat tautan fiktif.
-- Untuk Gambar/Visual Modul, ikuti metode dan bagian yang dipilih guru. Jumlah gambar BOLEH lebih dari satu sesuai kebutuhan modul/unit, tetapi setiap gambar WAJIB memiliki fungsi pedagogis yang jelas dan spesifik. Gambar hanya digunakan bila benar-benar membantu pemahaman materi, observasi, pemodelan konsep, stimulus/data pada soal, atau instruksi kerja; jangan menambahkan visual dekoratif. Sebelum mencari atau menghasilkan gambar, WAJIB tentukan dulu daftar aset visual yang memang dibutuhkan, tujuan pedagogisnya, lokasi penempatan, bagian modul yang dituju, apakah aset itu berdiri sendiri atau satu set multi-gambar, rasio/ukuran sasaran, dan deskripsi isi. Untuk alur otomatis/kombinasi, CARI referensi/visual eksternal yang layak terlebih dahulu; hanya bila tidak ditemukan visual yang relevan, akurat, layak digunakan, dan dapat diverifikasi, barulah generate visual baru. Jika visual dipakai pada soal/asesmen, gambar harus menjadi bagian integral dari soal (misalnya infografis, tabel/grafik data, diagram proses, peta, foto observasi, atau stimulus visual lain yang memang diperlukan untuk menjawab), bukan tempelan dekoratif. Jika visual berkaitan dengan makhluk hidup, organ, sistem tubuh, tumbuhan, hewan, mikroorganisme, atau struktur biologis lain, pastikan akurasi ilmiah, proporsi/anatomi, dan detail pentingnya benar secara sains.
-
-Panduan pengisian variabel:
-- Jenjang: SD / SMP / SMA / SMK — pilih salah satu.
-- Fase & Kelas: contoh Fase D / Kelas VIII; lihat panduan pemetaan pada Bagian 3.
-- Capaian/Standar Pembelajaran: untuk Kurikulum Merdeka gunakan CP; untuk kurikulum lain gunakan learning standards/outcomes atau padanan resmi. Tempel standar resmi bila tersedia; jika kosong, berikan usulan yang ditandai untuk diverifikasi guru.
-- Tujuan Pembelajaran / Learning Objectives: gunakan TP untuk Kurikulum Merdeka atau istilah padanannya pada kurikulum lain. Jika kosong, susun tujuan terukur berdasarkan standar/outcome, topik, jenjang, dan alokasi waktu.
-- Dimensi Profil Lulusan: guru boleh memilih satu atau beberapa dari 8 dimensi. Jika ada pilihan guru, keluaran hanya boleh memuat dimensi yang dipilih itu saja. Jika kosong/tidak dipilih, AI memilih 2–4 dimensi yang paling relevan dan menjelaskan bukti pencapaiannya.
-- Semester & Tahun Ajaran: contoh Ganjil, 2025/2026; jika kosong AI memberi usulan yang mudah diedit.
-- Jumlah Pertemuan & Alokasi: contoh 3 pertemuan x 2 JP @40 menit; jika kosong AI menentukan alokasi yang wajar sesuai keluasan materi. Total menit kegiatan setiap pertemuan wajib diaudit agar sama dengan alokasi tersedia.
-- Jumlah Siswa & Kelompok: contoh 32 siswa, 8 kelompok; jika jumlah kelompok kosong AI membentuk kelompok realistis sesuai aktivitas dan sarana.
-- Sarana/Media yang Tersedia: tulis alat, ruang, perangkat, bahan, koneksi internet, atau sumber lain yang benar-benar tersedia. Jika kosong, AI memakai asumsi minimal dan menyediakan alternatif sederhana.
-- Keterbatasan Implementasi: contoh hanya 4 mikroskop, internet tidak stabil, ruang sempit, atau waktu praktikum terbatas; jika kosong AI tidak mengarang keterbatasan khusus.
-- Model/Pendekatan/Framework Pedagogis: guru dapat mencentang satu atau beberapa pilihan: Problem Based Learning (PBL), Project Based Learning (PjBL), Direct Instruction, Discovery Learning, Inquiry Learning, Contextual Teaching and Learning/Pembelajaran Kontekstual, Cooperative Learning/Pembelajaran Kooperatif, Pembelajaran Berdiferensiasi, Experiential Learning, Problem Solving, Flipped Classroom, STEM (Pendekatan/Framework Integratif), atau Lainnya. Jika beberapa pilihan digunakan, integrasikan secara logis lintas pertemuan. Jangan mencampur sintaks model secara acak dan jangan memaksakan "sintaks" pada pendekatan/framework yang tidak memilikinya. Untuk STEM, petakan peran S-T-E-M secara nyata dan jelaskan hubungan dengan aktivitas/produk/asesmen. Pilihan "Lainnya" berarti guru mendeskripsikan model, strategi, pendekatan, atau framework sendiri. Jika tidak ada yang dicentang, AI merekomendasikan yang paling sesuai dengan topik dan tujuan.
-- Pengetahuan/Keterampilan Prasyarat: kemampuan yang seharusnya sudah dimiliki sebelum unit dimulai; jika kosong AI memetakan prasyarat dan menggunakannya untuk diagnostik awal.
-- Miskonsepsi/Kesulitan yang Diprediksi: kesalahan konsep atau hambatan umum yang perlu diantisipasi; jika kosong AI mengidentifikasi yang paling relevan.
-- Preferensi Diferensiasi: arahan guru tentang dukungan, grouping, pilihan aktivitas, scaffolding, atau variasi produk/respons; jika kosong AI merancang diferensiasi yang wajar.
-- Mode Produk/Proyek: Ditentukan guru / Pilihan siswa / Ditentukan AI. Jika guru atau siswa memilih, bentuk produk harus tetap mengukur TP yang sama.
-- Opsi/Bentuk Produk-Proyek: contoh poster ilmiah, infografik, model, video singkat, laporan, presentasi, demonstrasi, atau prototipe; sesuaikan dengan mode produk/proyek.
-- Konteks Lokal/Sekolah: lingkungan, budaya lokal, sarana-prasarana yang tersedia; jika kosong AI menggunakan konteks umum yang relevan dan mudah disesuaikan.
-- Komposisi/Kondisi Siswa: pilih "Non inklusi", "Siswa inklusi", atau "Campuran/heterogen".
-- Profil Fungsional/Kebutuhan Siswa Inklusi/Heterogen: isi berdasarkan informasi nyata tentang KEKUATAN/POTENSI, kemampuan akademik/fungsional saat ini, hambatan akses/partisipasi, komunikasi, sensorik-motorik, sosial-emosional bila relevan, kemandirian, literasi/numerasi, cara belajar yang efektif, serta kebutuhan dukungan. Hindari menulis diagnosis yang tidak diberikan oleh tenaga berwenang. Fokus pada kebutuhan belajar dan fungsi di kelas, bukan label.
-- Dasar Data Inklusi: tuliskan sumber informasi yang tersedia, misalnya observasi guru, hasil asesmen awal, asesmen fungsional, asesmen diagnostik tenaga profesional, Profil Murid, PPI, rekomendasi GPK/ULD/tenaga ahli, atau informasi orang tua. Jika belum ada data formal, nyatakan apa adanya; AI tidak boleh mengarang hasil asesmen.
-- Dukungan/Akomodasi yang Tersedia: tuliskan dukungan nyata yang dapat digunakan, misalnya GPK, tutor sebaya, orang tua, ULD, pusat sumber/SLB, alat bantu dengar, screen reader, braille, subtitle, AAC, area tenang, tempat duduk strategis, waktu tambahan, bahan visual, atau teknologi asistif lain.
-- Profil Murid / PPI / Dokumen Individual: bila tersedia, tempel ringkasan bagian yang relevan dengan unit ini (kekuatan, kebutuhan, tujuan jangka pendek, akomodasi, penanggung jawab, evaluasi). Jangan menempel data medis/pribadi yang tidak diperlukan. Jika tidak ada PPI, AI tidak boleh membuat seolah-olah PPI resmi sudah tersedia.
-- Karakteristik/Kesiapan Murid: opsional; hasil asesmen awal sebelumnya, gaya belajar, kebutuhan diferensiasi, kesiapan akademik, dan informasi lain yang relevan.
-- Pemanfaatan Digital: opsional; alat/platform yang tersedia, mis. IFP, laptop, HP, Google Workspace, AI generatif, atau "tidak ada, luring penuh".
-- Kemitraan Pembelajaran: opsional; narasumber tamu, orang tua, dunia usaha, dll.; jika kosong AI menentukan apakah kemitraan memang perlu.
-- Mode Sumber Belajar Eksternal: pilih apakah AI mencari artikel/website dan YouTube yang relevan, hanya menggunakan sumber yang diberikan guru, atau menggabungkan keduanya. Setiap sumber eksternal yang digunakan WAJIB mencantumkan judul/nama sumber dan link aktif di dokumen.
-- Sumber/Link dari Guru: tempel URL artikel, video YouTube, buku digital, repositori, atau sumber lain yang ingin diprioritaskan. Jangan mengubah URL yang diberikan guru kecuali jelas rusak dan ada pengganti yang dapat diverifikasi.
-- Metode Gambar/Visual Modul: dapat berupa Generate sendiri, URL eksternal, kombinasi keduanya, atau tanpa gambar. Jika generator gambar tidak tersedia, jangan mengaku gambar sudah dibuat; berikan prompt gambar siap pakai + posisi penempatan/placeholder yang jelas.
-- Bagian yang Diberi Gambar: guru dapat memilih Ringkasan Materi/Handout, LKPD Praktik/Investigasi, LKPD Proyek, Asesmen Formatif Awal, Asesmen Formatif, dan/atau Asesmen Sumatif. Bila kosong dan metode gambar aktif, AI memilih hanya bagian yang benar-benar membutuhkan visual.
-- URL/Referensi Gambar: guru dapat menempel URL gambar atau halaman sumber. Jika metode URL eksternal dipilih tetapi URL kosong, AI hanya boleh mencari dan memakai gambar yang dapat diverifikasi bila memiliki akses web; jangan mengarang URL atau mengambil dari halaman pencarian seperti Google Images/Pinterest.
-- Deskripsi Tambahan: arahan khusus guru, misalnya "wajib ada praktikum pengamatan mikroskop", "buat proyek poster kampanye", "gunakan lingkungan sekolah sebagai sumber belajar", "ada presentasi kelompok", atau kebutuhan lain. Jika kosong AI melanjutkan tanpa persyaratan tambahan khusus.
-- Konfigurasi Asesmen: Asesmen Formatif adalah minimum WAJIB. Asesmen Formatif Awal dan Asesmen Sumatif opsional. Untuk tiap asesmen, guru dapat memilih Kognitif, Non-Kognitif/Kinerja & Sikap, atau keduanya; jumlah soal total; tipe soal; jumlah soal per tipe soal; teknik penilaian; keterampilan/aspek yang dinilai; dan proporsi LOTS/MOTS/HOTS/AKM-PISA. Jumlah per tipe bersifat opsional: guru boleh mengisi angka langsung untuk tiap tipe, atau menjelaskan pembagian/peruntukannya pada kolom arahan asesmen kognitif.
-- Bobot Penilaian: guru dapat mengisi persentase Kognitif, Praktik/Keterampilan, Proyek/Produk, dan Sikap/Observasi. Jika satu atau lebih diisi, total wajib 100%. Jika semuanya kosong, AI menentukan bobot proporsional dan menjelaskan komponen yang hanya menjadi monitoring formatif.
-- Deskripsi Asesmen Tambahan: ketentuan khusus seperti durasi, bentuk stimulus, asesmen lisan, adaptasi siswa, atau aturan penskoran. Untuk pembagian jumlah soal per tipe, guru juga boleh menuliskannya di arahan asesmen kognitif bila tidak ingin mengisi angka satu per satu. Jika kosong, AI menentukan detail teknis yang wajar sesuai TP/KKTP.
-- Rencana Alternatif / Plan B: arahan cadangan bila sarana, internet, laboratorium, cuaca, atau kondisi lain tidak memungkinkan; jika kosong AI membuat alternatif untuk aktivitas yang memiliki dependency tersebut.
-- Arahan Remedial & Pengayaan: guru dapat menuliskan bentuk tindak lanjut yang diinginkan; jika kosong AI membuat paket siap pakai untuk siswa berdasarkan TP/KKTP yang belum atau sudah dikuasai.
-- Mode Keluaran Modul: mode menentukan penyajian modul inti dan lampiran yang relevan; jangan mewajibkan semua instrumen F–M bila tidak dipakai; bagian O pengesahan hanya bila dipilih guru. Dokumen Lengkap Sekaligus = A–N (+O bila aktif) dalam satu dokumen; Modul Inti + Lampiran = A–D sebagai modul inti, E–M sebagai lampiran/perangkat lengkap, N sebagai audit mutu, lalu O bila aktif; Bertahap per Bagian = Tahap 1 A–C, Tahap 2 D–E, Tahap 3 F–K, Tahap 4 L–N, kemudian O bila aktif.
-
-=====================================================================
-ATURAN SUMBER BELAJAR, TAUTAN, DAN GAMBAR/VISUAL — WAJIB
-=====================================================================
-1. SUMBER BELAJAR EKSTERNAL — TAUTAN WAJIB MASUK KE DOKUMEN
-   - Terapkan {{mode_sumber_belajar}} dan prioritaskan {{sumber_belajar_guru}} bila guru memberikan sumber.
-   - KECUALI mode = "Hanya sumber dari guru" atau "Tanpa sumber eksternal tambahan", bila akses web tersedia lakukan PENCARIAN WEB SEBELUM MENYELESAIKAN MODUL. Jangan sekadar merekomendasikan kata kunci pencarian.
-   - Bila pencarian AI diizinkan, pilih sumber sebanyak yang dibutuhkan dan terbukti relevan; contoh: sumber pemerintah, universitas, jurnal atau media kredibel. Hindari jumlah minimal yang dipaksakan; utamakan artikel ilmiah, situs pemerintah/universitas/organisasi profesional, atau berita tepercaya bila isu aktual memang relevan; Video YouTube dapat ditambahkan bila mendukung TP dan benar-benar terverifikasi; tidak ada kuota minimal.
-   - Pisahkan kegunaan sumber bila perlu menjadi "Untuk Guru" dan "Untuk Siswa". Sumber untuk siswa harus sesuai jenjang dan tidak menggantikan sumber primer/ilmiah yang dibutuhkan guru.
-   - Untuk SETIAP sumber yang dipakai, tulis secara nyata di dokumen final: Judul/Nama Sumber | Jenis (Artikel ilmiah/Artikel edukatif/Berita/Website resmi/YouTube/dll.) | Penerbit/Jurnal/Kanal | Kegunaan singkat | URL LENGKAP yang dapat diklik/disalin. DOI boleh ditambahkan, tetapi tidak menggantikan URL ketika URL tersedia.
-   - Tautan tidak cukup hanya berada dalam sitasi internal AI. URL harus tampil sebagai teks/link di modul pada bagian kegiatan yang relevan dan direkap kembali pada Bagian M — Sumber Belajar Digital/Daftar Pustaka.
-   - Link harus benar-benar dapat diverifikasi. DILARANG mengarang URL, judul artikel, nama kanal, tanggal, DOI, atau identitas sumber. Jika link tidak dapat diverifikasi, jangan masukkan sebagai sumber final.
-   - Jangan menjadikan YouTube sebagai satu-satunya sumber konsep inti. Gunakan video sebagai penguat/visualisasi dan sandarkan materi utama pada sumber yang memadai.
-   - Jika akses web tidak tersedia, tulis secara jujur pada Bagian M: "Tautan eksternal belum diverifikasi karena akses web tidak tersedia" dan gunakan hanya sumber/link guru yang benar-benar diberikan. Jangan membuat URL contoh/fiktif.
-
-2. GAMBAR / VISUAL PEMBELAJARAN — INVENTARIS ASET DULU, BARU CARI/GENERATE
-   - Terapkan {{metode_gambar_modul}}, {{bagian_gambar_modul}}, dan {{url_gambar_modul}}.
-   - Gambar dapat digunakan pada Ringkasan Materi/Handout, LKPD Praktik/Investigasi, LKPD Proyek, Asesmen Formatif Awal, Asesmen Formatif, dan Asesmen Sumatif HANYA bila visual membantu memahami konsep, prosedur, objek, data, stimulus, atau konteks soal.
-   - LANGKAH 1 — INVENTARIS ASET: sebelum melakukan pencarian/generasi gambar, tentukan dahulu semua aset visual yang dibutuhkan. Untuk tiap aset tetapkan: ID aset | bagian tujuan | fungsi pedagogis | objek/isi wajib | jenis visual | target rasio/ukuran | teks/label yang boleh ada | kebutuhan aksesibilitas/alt text | prioritas sumber (eksternal/generate). Jangan generate satu pun gambar sebelum daftar aset ini selesai.
-   - LANGKAH 2 — CARI REFERENSI/VISUAL EKSTERNAL TERLEBIH DAHULU bila akses web tersedia, terutama untuk objek faktual, foto nyata, diagram resmi, peta, data, artefak, atau ilustrasi yang sudah tersedia secara legal dan akurat. Prioritaskan sumber resmi, Wikimedia Commons, situs lembaga/universitas/pemerintah, repositori pendidikan, atau sumber dengan hak penggunaan yang jelas.
-   - LANGKAH 3 — GENERATE HANYA ASET YANG BELUM TERPENUHI. Jika tidak ditemukan visual eksternal yang layak, akurat, cukup resolusinya, relevan, dan dapat diverifikasi, baru generate visual khusus untuk kebutuhan tersebut. Sebelum generate, tulis prompt per aset berdasarkan inventaris (satu aset = satu prompt/gambar), termasuk rasio/aspect ratio yang tepat agar tidak perlu dipotong setelahnya.
-   - PENGECUALIAN: jika guru secara eksplisit memilih "Generate sendiri", tetap buat inventaris aset lebih dulu. Untuk visual faktual/ilmiah, gunakan referensi eksternal yang kredibel sebagai VERIFIKASI AKURASI bila tersedia, tetapi hasil akhir harus berupa visual original yang digenerate dan bukan salinan/crop sumber.
-   - DILARANG CROP: jangan mengambil screenshot lalu memotong/crop bagian gambar, jangan memotong gambar dari PDF/artikel/web, dan jangan menempel potongan gambar ke soal, LKPD, handout, atau bagian lain. Gunakan gambar asli secara UTUH dengan rasio aspek dipertahankan. Jika gambar utuh tidak cocok, mengandung bagian yang membingungkan, watermark, label yang tidak sesuai, atau komposisinya tidak pas, cari visual lain atau generate visual baru dengan komposisi/rasio yang benar sejak awal.
-   - Jangan melakukan crop pada gambar hasil generate untuk menyesuaikan halaman/soal. Tentukan komposisi, ruang kosong, orientasi, dan rasio sasaran sebelum generasi sehingga gambar siap ditempatkan tanpa pemotongan.
-   - Jika metode = URL eksternal, gunakan URL yang diberikan guru atau hasil pencarian yang dapat diverifikasi. Jangan memakai URL hasil pencarian Google Images/Pinterest sebagai sumber final. Jika hak penggunaan/atribusi tidak jelas, lebih aman cari sumber lain atau generate visual original.
-   - Jika platform tidak mendukung pembuatan gambar, untuk aset yang perlu digenerate tuliskan PROMPT GAMBAR PER ASET + fungsi visual + target rasio/ukuran + posisi penempatan + alt text/caption; jangan mengaku gambar sudah dibuat.
-   - Jika visual eksternal digunakan, sertakan sumber/kredit dan link halaman asal di bawah gambar atau pada daftar sumber visual. Jangan menghapus atribusi yang disyaratkan.
-   - Jangan menggunakan gambar beresolusi buruk, watermark mengganggu, label bahasa asing yang membingungkan, atau visual yang tidak akurat secara konsep. Jika label visual berbahasa asing tidak dapat dihindari, berikan caption/padanan Bahasa Indonesia yang jelas.
-   - Setiap gambar harus memiliki caption singkat dan alt text/deskripsi fungsi visual agar tetap dapat dipahami ketika gambar tidak tampil.
-   - Inventaris aset dapat ditempatkan ringkas pada Bagian M sebagai "Daftar Aset Visual yang Digunakan/Direncanakan"; jangan mengganggu lembar siswa dengan tabel teknis aset.
-
-3. PRINSIP AKURASI
-   - Sumber dan gambar tidak boleh dipilih hanya karena menarik. Kesesuaian dengan TP, materi, usia siswa, dan akurasi konsep adalah prioritas utama.
-   - Jika sumber luar bertentangan dengan dokumen CP/sumber utama guru, prioritaskan dokumen resmi/rujukan utama guru dan beri catatan perbedaan bila relevan.
-
-REFERENSI 8 DIMENSI PROFIL LULUSAN (DIGUNAKAN HANYA JIKA GURU TIDAK MEMILIH DIMENSI):
-1) Keimanan dan Ketakwaan terhadap Tuhan YME
-2) Kewargaan
-3) Penalaran Kritis
-4) Kreativitas
-5) Kolaborasi
-6) Kemandirian
-7) Kesehatan
-8) Komunikasi
-Jika guru sudah memilih satu atau beberapa dimensi pada input, ABAIKAN dan JANGAN tampilkan daftar referensi 8 dimensi ini pada keluaran.
-
-=====================================================================
-CONTOH KATA KERJA OPERASIONAL — REFERENSI BANTU, BUKAN DAFTAR RESMI
-=====================================================================
-Daftar berikut adalah CONTOH untuk memeriksa keteramatan hasil belajar, bukan kutipan dokumen KKO resmi yang belum dilampirkan. Pertahankan kata kerja TP dari guru jika tepat, termasuk kata kerja di luar daftar ini. Pilih kata kerja yang paling akurat menurut mapel, fase, kompetensi, dan bukti yang akan dinilai. Jangan melakukan koreksi paksa hanya karena kata kerja tidak ada dalam contoh ini.
-
-RANAH KOGNITIF:
-- C1 Mengingat: Mengenali; Mengingat kembali; Membaca; Menyebutkan; Melafalkan/melafazkan; Menuliskan; Menghafal.
-- C2 Memahami: Menjelaskan; Mengartikan; Menginterpretasikan; Menceritakan; Menampilkan; Memberi contoh; Merangkum; Menyimpulkan; Membandingkan; Mengklasifikasikan; Menunjukkan; Menguraikan; Membedakan; Mengidentifikasikan.
-- C3 Menerapkan: Melaksanakan; Mengimplementasikan; Menggunakan; Mengonsepkan; Menentukan; Memproseskan.
-- C4 Menganalisis: Mendiferensiasikan; Mengorganisasikan; Mengatribusikan; Mendiagnosis; Memerinci; Menelaah; Mendeteksi; Mengaitkan; Memecahkan; Menguraikan.
-- C5 Mengevaluasi: Mengecek; Mengkritik; Membuktikan; Mempertahankan; Memvalidasi; Mendukung; Memproyeksikan.
-- C6 Menciptakan: Membangun; Merencanakan; Memproduksi; Mengombinasikan; Merancang; Merekonstruksi; Membuat; Menciptakan; Mengabstraksi.
-
-RANAH AFEKTIF — gunakan bila TP/indikator memang mengukur sikap/nilai:
-Mengikuti; Menganut; Mematuhi; Meminati; Mengompromikan; Menyenangi; Menyambut; Mendukung; Menyetujui; Menampilkan; Mengasumsikan; Meyakini; Meyakinkan; Memperjelas; Memprakarsai; Mengimani; Mengubah; Menata; Mengklasifikasikan; Mengombinasikan; Mempertahankan; Membangun; Membiasakan; Mengubah perilaku; Berakhlak mulia; Mempengaruhi; Mengkualifikasi; Melayani; Melaporkan; Memilih; Mengatakan; Memilah; Menolak; Menekankan; Menyumbang; Membentuk pendapat; Memadukan; Mengelola; Menegosiasi; Merembuk; Membuktikan; Memecahkan.
-
-RANAH PSIKOMOTOR — gunakan bila TP/indikator mengukur keterampilan/praktik:
-Menyalin; Mengikuti; Mereplikasi; Mengulangi; Mematuhi; Kembali membuat; Membangun; Melakukan; Melaksanakan; Menerapkan; Menunjukkan; Melengkapi; Menyempurnakan; Mengkalibrasi; Mengendalikan; Mengatasi; Menggabungkan; Koordinat; Mengintegrasikan; Beradaptasi; Mengembangkan; Merumuskan; Memodifikasi; Master; Mendesain; Menentukan; Mengelola; Menciptakan.
-
-ATURAN AUDIT KKO:
-1. Setiap TP hendaknya menunjukkan hasil belajar/kemampuan yang dapat dikenali dari bukti asesmen; tidak wajib memakai satu kata kerja dari daftar contoh.
-2. Jangan mengganti kata kerja yang tepat dari guru hanya untuk mencocokkan daftar; bila ambigu, beri catatan atau usulan perbaikan untuk disetujui guru.
-3. Jangan menurunkan KKO/kompetensi TP hanya karena siswa membutuhkan akomodasi. Jika target kompetensi sama, pertahankan TP/KKTP dan sesuaikan isi/penyajian materi, proses, media, lingkungan, bentuk respons, alat bantu, serta waktu.
-4. Penyesuaian KKO/target/lingkup kompetensi hanya dilakukan bila didukung hasil asesmen awal/fungsional/diagnostik, Profil Murid, PPI, rekomendasi GPK/ULD/tenaga profesional, atau data guru yang cukup tentang kemampuan aktual. Jika bukti belum cukup, gunakan akomodasi dan tandai kebutuhan penyesuaian target untuk diverifikasi.
-
-=====================================================================
-LANDASAN PENDIDIKAN INKLUSIF — WAJIB JIKA ADA SISWA INKLUSI/CAMPURAN
-=====================================================================
-Gunakan prinsip Panduan Penyelenggaraan Pendidikan Inklusif Edisi Revisi 2026 sebagai landasan penyusunan dukungan inklusi. Pendidikan inklusif berfokus pada kesetaraan akses, partisipasi aktif, kebutuhan individual, potensi/kekuatan murid, akomodasi yang layak, kolaborasi, serta lingkungan belajar yang aman, ramah, dan tidak diskriminatif.
-
-ALUR PENGAMBILAN KEPUTUSAN INKLUSI:
-1. IDENTIFIKASI → gunakan informasi guru/orang tua/dokumen yang tersedia untuk mengenali kebutuhan belajar; jangan melakukan atau mengarang diagnosis medis.
-2. ASESMEN → bila tersedia, gunakan hasil asesmen awal, asesmen fungsional, asesmen diagnostik profesional, atau data perkembangan/akademik sebagai dasar keputusan.
-3. PROFIL MURID → ringkas kekuatan/potensi, kemampuan saat ini, hambatan dalam konteks belajar, dan kebutuhan dukungan dari {{deskripsi_siswa_inklusi}}, {{dasar_data_inklusi}}, dan {{ppi_inklusi}}.
-4. PERENCANAAN → tentukan apakah siswa memerlukan:
-   a. [INKLUSI — AKOMODASI]: tujuan/kompetensi inti tetap sama, tetapi akses, penyajian materi, proses, respons, lingkungan, alat bantu, dan/atau waktu disesuaikan; atau
-   b. [INKLUSI — TARGET ADAPTIF]: tujuan/lingkup kompetensi perlu disesuaikan berdasarkan kemampuan aktual dan bukti asesmen/profil yang memadai.
-5. PELAKSANAAN → terapkan diferensiasi konten, proses, produk/respons, dan lingkungan; gunakan pendekatan multisensori/kontekstual, scaffolding, tutor sebaya, kelompok kecil, bimbingan individual, serta teknologi asistif HANYA jika relevan dengan profil kebutuhan.
-6. ASESMEN → berikan fleksibilitas media, cara respons, setting, pendampingan, atau waktu. Soal dapat sama dengan media/prosedur yang diakomodasi, atau dapat berbeda bila TP/materi siswa memang disesuaikan. Semua keputusan harus tetap merujuk TP dan KKTP yang berlaku untuk siswa tersebut.
-7. EVALUASI & TINDAK LANJUT → gunakan hasil asesmen untuk memperbarui dukungan, remedial, pengayaan, dan rekomendasi kolaborasi.
-
-EMPAT KOMPONEN YANG WAJIB DIPERIKSA UNTUK AKOMODASI/ADAPTASI:
-- TUJUAN: apakah TP sama atau perlu penyesuaian target/lingkup berdasarkan data asesmen?
-- ISI/MATERI: apakah materi perlu disederhanakan bahasanya, divisualisasikan, dipecah menjadi unit kecil, dibuat multisensori, atau dilengkapi media adaptif tanpa menghilangkan esensi kompetensi?
-- PROSES: apakah siswa memerlukan chunking instruksi, demonstrasi, kelompok kecil, tutor sebaya/GPK, waktu tambahan, tempat duduk strategis, area tenang, atau alat bantu/teknologi asistif?
-- ASESMEN: apakah diperlukan format lisan/tertulis/visual/taktil, pembaca/scribe, braille/screen reader, ruang/setting berbeda, waktu tambahan, atau instrumen berbeda karena TP adaptif?
-
-ATURAN PENTING:
-- Jangan menyimpulkan kebutuhan hanya dari label disabilitas. Pilih dukungan berdasarkan profil fungsional dan data yang benar-benar tersedia.
-- Fokus pada POTENSI dan partisipasi; jangan menggambarkan siswa inklusi hanya sebagai kumpulan kekurangan.
-- Akomodasi tidak boleh menurunkan kompetensi hanya demi mempermudah tugas. Jika target sama, kedalaman kompetensi dan KKTP substansial tetap sama.
-- Target/KKTP yang berbeda dimungkinkan bila hasil asesmen sebelum pembelajaran menunjukkan kebutuhan penyesuaian tujuan/lingkup. Jelaskan dasar penyesuaiannya secara singkat dan hindari target yang terlalu rendah atau tidak bermakna.
-- Jika data belum cukup untuk mengubah target, gunakan akomodasi konservatif dan tandai penyesuaian target sebagai HAL YANG PERLU DIVERIFIKASI GURU/GPK/ORANG TUA/ULD.
-- Bila PPI tersedia, gunakan PPI sebagai acuan dukungan unit ini. Bila PPI belum tersedia, jangan mengarang PPI resmi; hanya boleh memberi rekomendasi komponen/dukungan yang dapat dibahas oleh tim sekolah dan orang tua.
-- Jaga kerahasiaan. Pada modul kelas, tampilkan kebutuhan fungsional yang relevan untuk pembelajaran; jangan memuat data medis/pribadi yang tidak perlu.
-- Kolaborasi dapat melibatkan guru kelas/mapel, GPK, orang tua, ULD, tenaga profesional, pusat sumber/SLB, atau pihak lain sesuai kebutuhan dan ketersediaan {{dukungan_inklusi_tersedia}}.
-
-=====================================================================
-BAGIAN 2 — STRUKTUR MODUL AJAR YANG HARUS DIIKUTI
-=====================================================================
-Untuk konteks Kurikulum Merdeka yang relevan, tampilkan secara nyata Dimensi Profil Lulusan terpilih serta prinsip Pembelajaran Mendalam
-(Berkesadaran, Bermakna, Menggembirakan), pengalaman belajar Memahami → Mengaplikasi → Merefleksi,
-serta praktik pedagogis, kemitraan pembelajaran, lingkungan pembelajaran, dan pemanfaatan digital.
-Prinsip-prinsip tersebut harus tampak melalui rancangan kegiatan dan asesmen secara natural tanpa
-menyebut angka atau nama kerangka khusus pada dokumen keluaran.
-
-Susun modul inti dengan bagian A–E yang relevan, lalu tambahkan F–M hanya bila aktivitas/asesmen membutuhkan; N adalah daftar pemeriksaan untuk guru dan boleh dipisah dari modul siswa. Dalam keluaran, nomor/huruf bagian yang benar-benar tampil harus berurutan tanpa lompatan (judul komponen lebih penting daripada huruf contoh di bawah). Jangan menampilkan label internal generator:
-
-A. IDENTITAS
-   - Sekolah, Nama Guru, Nama Kepala Sekolah (jika diisi), mapel, fase/kelas, semester, alokasi waktu, jumlah pertemuan
-   - Nama Guru pada identitas WAJIB menggunakan {{nama_guru_modul}}; jangan mengganti dengan nama buatan. Nama Kepala Sekolah menggunakan {{nama_kepala_sekolah}} bila tersedia.
-   - Capaian Pembelajaran (CP)
-   - Dimensi Profil Lulusan yang relevan — gunakan {{dimensi_profil_lulusan}}. Jika input berisi pilihan guru, tampilkan dan gunakan HANYA dimensi yang dipilih tersebut; DILARANG menambah dimensi lain dan DILARANG melampirkan daftar 8 dimensi secara lengkap. Untuk setiap dimensi terpilih, sertakan elemen serta bukti nyata pencapaiannya dalam pembelajaran. Jika guru tidak memilih dimensi apa pun, pilihkan 2–4 dimensi paling relevan dari REFERENSI 8 DIMENSI PROFIL LULUSAN yang tercantum pada prompt ini.
-   - Identifikasi kesiapan/karakteristik murid, pengetahuan/keterampilan prasyarat, serta miskonsepsi/kesulitan yang perlu diantisipasi.
-   - Komposisi/kondisi siswa — nyatakan Non inklusi / Siswa inklusi / Campuran-heterogen. Jika ada siswa inklusi, tulis ringkasan FUNGSIONAL yang singkat: kekuatan/potensi, kemampuan saat ini, hambatan akses/partisipasi, kebutuhan belajar, serta dukungan yang diperlukan. Gunakan {{deskripsi_siswa_inklusi}}, {{dasar_data_inklusi}}, {{dukungan_inklusi_tersedia}}, dan {{ppi_inklusi}}; jangan menambahkan diagnosis yang tidak diberikan guru/tenaga berwenang.
-   - Nyatakan dasar keputusan inklusi secara ringkas: apakah dukungan berupa [INKLUSI — AKOMODASI] atau [INKLUSI — TARGET ADAPTIF]. Jika data belum cukup untuk target adaptif, jangan mengarang; gunakan akomodasi dan tandai untuk verifikasi.
-   - Kondisi implementasi kelas — jumlah siswa, rancangan jumlah kelompok, sarana/media tersedia, keterbatasan, serta implikasinya terhadap pembelajaran.
-
-B. DESAIN PEMBELAJARAN
-   0. Profil Dukungan Inklusi — HANYA jika ada siswa inklusi/campuran
-      - Sajikan ringkas dan mudah dipakai guru, bukan laporan medis. Gunakan tabel: "Aspek | Informasi Fungsional | Implikasi Pembelajaran".
-      - Minimal memuat: Kekuatan/Potensi; Kemampuan Akademik/Fungsional Saat Ini; Hambatan Akses/Partisipasi; Kebutuhan Komunikasi/Media/Alat Bantu; Dukungan yang Tersedia; Dasar Data; dan Status Profil Murid/PPI.
-      - Setelah tabel, tulis "Keputusan Dukungan": [INKLUSI — AKOMODASI] atau [INKLUSI — TARGET ADAPTIF] beserta alasan singkat berbasis data.
-      - Jangan menuliskan identitas pribadi/diagnosis sensitif yang tidak diperlukan untuk pelaksanaan pembelajaran.
-
-   1. Tujuan Pembelajaran (TP)
-       - Gunakan {{tujuan_pembelajaran}} sebagaimana diberikan guru. Jika kosong dan CP resmi telah diverifikasi, usulkan TP secukupnya dengan kompetensi dan bukti yang jelas.
-       - TP boleh terdiri atas kompetensi yang saling terkait. Jika dua performa independen berpotensi mengaburkan asesmen, sarankan pemisahan dan minta konfirmasi; jangan mengubah rumusan dari guru secara diam-diam.
-      - Formatkan TP secara bernomor: TP 1, TP 2, TP 3, dan seterusnya. Hindari kalimat majemuk yang mencampurkan dua tujuan berbeda.
-      - Jika ada siswa inklusi:
-        • tampilkan subbagian "TP [REGULER]" untuk target kelas umum;
-        • bila target kompetensi sama, tuliskan "TP [INKLUSI — AKOMODASI]: sama dengan TP reguler"; yang berubah adalah akses, materi pendukung, proses, media, respons, lingkungan, alat bantu, atau waktu—BUKAN kompetensi inti;
-        • bila data asesmen/profil menunjukkan kebutuhan penyesuaian target atau lingkup, tampilkan "TP [INKLUSI — TARGET ADAPTIF]" tepat setelah TP reguler. Setiap TP adaptif perlu memiliki target yang jelas dan bukti kompetensi yang bermakna, sesuai kemampuan aktual, dan menyebut dasar penyesuaian (mis. hasil asesmen fungsional/Profil Murid/PPI) tanpa membuka data sensitif;
-        • jangan menyamakan semua siswa inklusi. Jika ada beberapa profil kebutuhan yang berbeda, kelompokkan dukungan secara fungsional (mis. kebutuhan akses visual, komunikasi, regulasi atensi, motorik, atau target adaptif) tanpa membuat label diagnostik baru.
-
-   2. Kriteria Ketercapaian Tujuan Pembelajaran (KKTP)
-      - KKTP adalah PENJELASAN TENTANG KOMPETENSI/BUKTI yang perlu ditunjukkan murid sebagai evidence bahwa TP telah tercapai; bukan sekadar angka KKM dan bukan label taksonomi.
-       - Sajikan KKTP dalam tabel ringkas bila meningkatkan keterbacaan; boleh berupa deskripsi atau rubrik jika lebih sesuai dengan panduan dan kebutuhan TP.
-      ATURAN PENYUSUNAN KKTP:
-      a. Turunkan kriteria LANGSUNG dari setiap TP dengan mencermati KKO, konsep/konten utama, kondisi tugas, dan kualitas performa yang diharapkan.
-       b. Untuk setiap TP, rumuskan sejumlah kriteria yang benar-benar diperlukan (boleh satu atau lebih), konkret, spesifik, dapat diamati, dan mudah dipahami. Jumlah 2–5 bukan ketentuan wajib panduan. Jangan menggabungkan KKTP beberapa TP menjadi satu kriteria generik.
-      c. Gunakan tabel utama dengan struktur: "TP | Kriteria Ketercapaian yang Dapat Diamati | Bukti/Instrumen | Ketentuan Dinyatakan Tercapai".
-      d. Setiap TP harus muncul sebagai kelompok baris tersendiri sehingga hubungan TP dan kriterianya terlihat jelas.
-      e. Rubrik digunakan bila TP menuntut kualitas performa bertingkat seperti laporan, presentasi, praktik, proyek, atau produk. Deskriptor tiap level harus menggambarkan perbedaan performa nyata.
-      f. Interval/persentase boleh digunakan setelah kriteria substansial ditetapkan. Jangan menetapkan angka 75/80 atau batas lain secara arbitrer jika guru/sekolah tidak memberikannya.
-      g. Jangan menggunakan Taksonomi SOLO sebagai default. Gunakan hanya jika guru meminta atau benar-benar relevan, dan tetap petakan ke bukti kompetensi pada TP.
-      h. Tentukan keputusan "tercapai/belum tercapai" secara transparan, misalnya minimal 3 dari 4 kriteria tercapai atau seluruh aspek esensial minimal berada pada level yang ditentukan.
-      i. Untuk siswa inklusi, berikan tanda yang sangat jelas:
-         • "Tabel KKTP [REGULER]" untuk target kelas umum.
-          • Jika [INKLUSI — AKOMODASI], JANGAN menggandakan seluruh tabel KKTP bila target sama. Tambahkan kolom/catatan akomodasi pada kriteria yang relevan (misalnya respons lisan/visual/taktil, alat bantu, tambahan waktu), tanpa mengurangi kompetensi.
-         • Jika [INKLUSI — TARGET ADAPTIF], tampilkan "Tabel KKTP [INKLUSI — TARGET ADAPTIF]" yang diturunkan dari TP Adaptif dan berisi kriteria ketercapaian yang sesuai kemampuan aktual siswa. KKTP berbeda DIMUNGKINKAN karena ditetapkan berdasarkan hasil asesmen sebelum pembelajaran. Nyatakan dasar penyesuaian secara singkat (asesmen fungsional/diagnostik, Profil Murid, PPI, atau data guru yang memadai).
-         • Hindari KKTP yang hanya menyebut "lebih mudah" atau "lebih sederhana". Tuliskan bukti konkret yang harus dapat dilakukan/ditunjukkan siswa.
-      j. Jangan membuat satu baris KKTP yang memuat dua target berbeda. Setiap kriteria harus terkait jelas dengan satu TP.
-   3. Ringkasan Materi Esensial — rangkuman padat konsep inti yang perlu dikuasai
-      guru & murid, ditulis dalam bahasa yang sesuai jenjang. Jika Ringkasan Materi dipilih pada {{bagian_gambar_modul}}, sertakan SATU ATAU LEBIH visual yang relevan sesuai {{metode_gambar_modul}} beserta caption, alt text, dan sumber/link bila berasal dari luar. Setiap visual harus benar-benar membantu pemahaman konsep (misalnya gambar struktur, diagram proses, infografis, foto objek, peta, atau data visual), bukan hiasan semata. Jika terkait makhluk hidup/struktur biologis, akurasi ilmiah dan anatominya wajib benar.
-   4. Pemahaman Bermakna & Pertanyaan Pemantik
-   5. KERANGKA PEMBELAJARAN — tulis sebagai satu
-      kelompok, masing-masing dengan status:
-        a. Praktik Pedagogis / Model–Pendekatan–Framework — jelaskan model/pendekatan/framework yang dipakai per pertemuan dan alasannya. Jika STEM dipilih, nyatakan secara eksplisit posisi STEM sebagai pendekatan/framework integratif dan petakan kontribusi Science–Technology–Engineering–Mathematics yang benar-benar muncul; jangan sekadar menempel label STEM.
-        b. Kemitraan Pembelajaran — narasumber/kolaborasi internal-eksternal
-        c. Lingkungan Pembelajaran — budaya belajar, ruang fisik/virtual
-        d. Pemanfaatan Digital — alat/platform yang digunakan
-   6. Lintas Disiplin Ilmu — elemen tambahan, di luar 4 Kerangka Pembelajaran inti
-    7. Diferensiasi & Akomodasi Pembelajaran — gunakan tabel ringkas maksimal sekitar 4–6 kolom agar dapat dicetak; misalnya Kebutuhan & Kekuatan | Dukungan Konten/Proses | Produk/Respons | Lingkungan/Alat Bantu | Bukti Asesmen. Pisahkan tabel jika informasi memang banyak.
-      - Bedakan diferensiasi kelas heterogen umum dengan akomodasi/adaptasi khusus siswa inklusi.
-      - Untuk siswa inklusi, pilih hanya dukungan yang relevan dari profil: materi visual/audio/taktil, chunking, bahasa sederhana, kelompok kecil, tutor sebaya/GPK, bimbingan individual, waktu tambahan, tempat duduk strategis, area tenang, subtitle, braille, screen reader, AAC, alat input adaptif, atau teknologi asistif lain.
-      - Jangan memasukkan seluruh daftar akomodasi secara generik. Setiap dukungan harus memiliki alasan fungsional yang jelas dan tetap mendorong partisipasi aktif.
-    8. Rencana Produk/Proyek — HANYA bila kegiatan memerlukan produk/proyek; bila pilihan siswa, sediakan beberapa opsi yang setara pada tuntutan TP, waktu, dan kriteria penilaian.
-   AUDIT KESELARASAN INTERNAL — lakukan secara diam-diam sebelum menulis hasil akhir: pastikan CP/standar → TP → KKTP → aktivitas → bukti belajar → asesmen/instrumen → tindak lanjut saling selaras. JANGAN tampilkan matriks keterlacakan pada modul. Hubungan TP dengan soal/instrumen cukup terlihat pada kisi-kisi, rubrik, dan uraian asesmen yang memang dibutuhkan guru.
-
-C. LANGKAH-LANGKAH KEGIATAN PEMBELAJARAN — NARATIF TERSTRUKTUR, RAPI, DAN MUDAH DIIKUTI
-    - Gunakan naratif terstruktur atau tabel sederhana (jika lebih membantu). Hindari tabel dengan kolom terlalu banyak dan jangan mengulang isi.
-   - Susun PER PERTEMUAN dengan heading yang konsisten dan urutan yang mudah dipindai guru.
-   - Setiap pertemuan terdiri atas: Kegiatan Awal → Kegiatan Inti → Kegiatan Penutup, dengan durasi jelas pada setiap bagian.
-   - Pada Kegiatan Inti, ikuti sintaks model pembelajaran yang dipilih secara berurutan. Untuk pendekatan/framework seperti STEM, tampilkan alur integrasi/engineering-design/problem-solving yang relevan tanpa mengarang sintaks baku yang tidak dimiliki pendekatan tersebut. Integrasikan pengalaman belajar Memahami → Mengaplikasi → Merefleksi secara natural.
-   - Gunakan format naratif berpoin berikut agar ringkas tetapi operasional:
-
-     Pertemuan X — [Judul/Fokus] ([alokasi waktu])
-     1. Kegiatan Awal ([menit])
-        • Tujuan kegiatan/apersepsi/persiapan.
-        • Aktivitas Guru: tindakan konkret guru.
-        • Aktivitas Siswa [REGULER]: tindakan konkret siswa reguler dan bukti belajar yang dihasilkan.
-        • Aktivitas/Dukungan [INKLUSI — AKOMODASI]: tuliskan hanya jika ada siswa inklusi; jelaskan penyesuaian konten/penyajian, proses, produk/respons, lingkungan, scaffolding, media/alat bantu/teknologi asistif, dukungan GPK/tutor sebaya bila tersedia, dan/atau waktu tambahan TANPA mengubah target kompetensi. Pilih hanya yang relevan dengan profil.
-        • Aktivitas [INKLUSI — TARGET ADAPTIF]: tuliskan hanya jika target adaptif memang digunakan; jelaskan aktivitas bermakna yang sejalan dengan konteks kelas tetapi mengacu TP/KKTP Adaptif. Tetap libatkan siswa dalam aktivitas bersama kelas sejauh memungkinkan; hindari isolasi yang tidak diperlukan.
-
-     2. Kegiatan Inti ([menit])
-        Fase/Sintaks 1 — [nama sintaks]
-        • Tujuan fase / pengalaman belajar: [Memahami/Mengaplikasi/Merefleksi].
-        • Aktivitas Guru: ...
-        • Aktivitas Siswa [REGULER]: ...
-        • Aktivitas/Dukungan [INKLUSI — AKOMODASI]: uraikan penyesuaian konten/proses/produk-lingkungan, alat bantu, komunikasi, scaffolding, peran GPK/tutor sebaya, atau waktu sesuai profil kebutuhan.
-        • Aktivitas [INKLUSI — TARGET ADAPTIF]: uraikan aktivitas yang mengacu TP/KKTP Adaptif dan tetap memberi kesempatan berpartisipasi bersama kelompok/kelas sejauh memungkinkan.
-        • Bukti Belajar & Asesmen Formatif: ...
-        • Media/Sarana: ...
-        • Plan B: ... bila aktivitas bergantung pada internet, laboratorium, alat, cuaca, lokasi, atau narasumber.
-        Ulangi format ini untuk setiap fase/sintaks model yang diperlukan.
-
-     3. Kegiatan Penutup ([menit])
-        • Aktivitas Guru: penguatan, umpan balik, dan penutupan.
-        • Aktivitas Siswa [REGULER]: refleksi/kesimpulan/tindak lanjut.
-        • Aktivitas/Dukungan [INKLUSI]: bentuk refleksi atau respons yang diakomodasi/adaptif bila relevan.
-
-   - Aktivitas guru dan siswa harus spesifik dan dapat dilaksanakan. Hindari kalimat generik seperti "guru menjelaskan" atau "siswa berdiskusi" tanpa menjelaskan apa yang dipelajari, dianalisis, dibuat, dipresentasikan, atau direfleksikan.
-   - Utamakan aktivitas siswa dan bukti belajar yang nyata.
-   - Untuk kelas tanpa siswa inklusi, JANGAN tampilkan label inklusi agar dokumen tetap ringkas.
-   - Untuk kelas dengan siswa inklusi/campuran, label [REGULER] dan [INKLUSI] harus terlihat pada setiap bagian kegiatan yang membutuhkan perbedaan perlakuan sehingga guru langsung memahami peruntukannya.
-    - Jumlahkan durasi awal, inti, dan penutup agar sama dengan alokasi; tidak perlu mencetak baris audit matematika berulang jika tidak membantu guru. Jika terlalu padat, kurangi cakupan aktivitas, bukan menambah waktu diam-diam.
-
-D. ASESMEN PEMBELAJARAN — mengikuti {{konfigurasi_asesmen}}
-   ATURAN KETERKAITAN ASESMEN DENGAN TP: seluruh instrumen asesmen, khususnya setiap butir soal, WAJIB disusun berdasarkan Tujuan Pembelajaran (TP). Setiap butir harus dapat ditelusuri ke minimal satu TP dan indikator yang relevan. DILARANG membuat soal yang tidak mengukur TP.
-   PEMBEDAAN PERUNTUKAN:
-   - Jika ada siswa inklusi, tuliskan "Asesmen [REGULER]" dan "Asesmen [INKLUSI]" secara jelas.
-   - [INKLUSI — AKOMODASI]: kompetensi/TP/KKTP dan kedalaman berpikir tetap sama; sesuaikan bahasa instruksi, jumlah informasi per layar/halaman, ukuran teks/visual, bentuk respons (tertulis/lisan/menunjuk/memilih), alat bantu, setting, pendampingan, atau waktu. Jangan membuat soal menjadi lebih dangkal hanya karena akomodasi.
-   - [INKLUSI — TARGET ADAPTIF]: jika target adaptif sah digunakan, soal/tugas disusun berdasarkan TP Adaptif dan KKTP Adaptif. Buat lembar asesmen adaptif terpisah dan beri label jelas "UNTUK SISWA INKLUSI — TARGET ADAPTIF" agar tidak tertukar dengan lembar reguler.
-   - Untuk kelas tanpa siswa inklusi, jangan menampilkan label inklusi.
-
-   PRINSIP TIGA JENIS ASESMEN:
-    1. Asesmen Formatif Awal — laksanakan bila dibutuhkan untuk melihat kemampuan/kesiapan AWAL peserta didik sebelum pembelajaran. Kognitif digunakan untuk prasyarat/miskonsepsi; Non-Kognitif untuk kesiapan, minat, kondisi psikososial, kebiasaan belajar, atau kebutuhan dukungan secara proporsional. Hasilnya menjadi dasar diferensiasi/tindak lanjut, bukan nilai akhir.
-   2. Asesmen Formatif — minimal satu kali — dapat dilakukan di tengah pembelajaran dan/atau di akhir pembelajaran untuk memberi umpan balik, memantau perkembangan terhadap TP, dan menentukan tindak lanjut. Gunakan Kognitif dan/atau Non-Kognitif/Kinerja & Sikap sesuai konfigurasi guru.
-   3. Asesmen Sumatif — hanya jika dipilih guru — untuk mengukur ketercapaian TP/KKTP pada akhir unit/lingkup materi. Setiap butir/instrumen wajib memiliki keterlacakan ke TP dan KKTP.
-
-   DOMAIN ASESMEN — TERAPKAN HANYA JIKA DIPILIH DALAM {{konfigurasi_asesmen}}:
-   a. Kognitif — gunakan tipe soal yang dipilih guru: PG, PG Kompleks, Uraian, Isian Singkat, Menjodohkan, Mengurutkan, Benar-Salah, dan/atau SJT. Gunakan proporsi LOTS/MOTS/HOTS sesuai konfigurasi. Gaya soal AKM/PISA berbasis stimulus dapat dipilih secara terpisah, tidak dihitung sebagai level kognitif. Jika proporsi kosong, AI menentukan berdasarkan TP, jenjang, tujuan asesmen, dan kondisi siswa. Untuk siswa reguler, BEDAKAN level berdasarkan tuntutan proses berpikir nyata, bukan berdasarkan panjang soal atau bentuk soalnya; terapkan definisi dan audit kedalaman pada Bagian 4 secara ketat.
-   b. Non-Kognitif / Kinerja & Sikap — "keterampilan" adalah aspek/kompetensi yang dinilai, BUKAN teknik asesmen. Gunakan HANYA teknik penilaian yang dipilih guru: Unjuk Kerja/Praktik, Presentasi, Proyek, Produk, Portofolio, Observasi, Penilaian Diri, Penilaian Antarteman, dan/atau Lainnya. Nyatakan secara terpisah keterampilan/aspek yang dinilai (mis. penggunaan alat, komunikasi, kolaborasi, ketelitian, proses eksperimen, kreativitas produk, atau aspek sikap yang relevan). Sertakan instrumen/rubrik yang relevan dengan TP dan aktivitas.
-
-   ATURAN AKOMODASI/ADAPTASI ASESMEN INKLUSI [WAJIB jika ada siswa inklusi]:
-   - Jika target sama, pertahankan kompetensi, TP, KKTP substansial, dan kedalaman kognitif. Penyesuaian dapat berupa bahasa instruksi yang lebih jelas, chunking, dukungan visual/taktil/audio, braille/screen reader/subtitle/AAC bila relevan, pembaca/scribe, pilihan respons lisan/tertulis/menunjuk/menggunakan alat bantu, pengerjaan individual atau ruang lebih tenang, serta tambahan waktu.
-   - Soal dapat SAMA dengan media/prosedur yang diakomodasi. Jangan mengurangi tuntutan kompetensi hanya karena kebutuhan akses.
-   - Jika TP/materi siswa memang disesuaikan berdasarkan asesmen/profil, soal/tugas BOLEH berbeda dan wajib mengacu pada TP [INKLUSI — TARGET ADAPTIF] serta KKTP adaptif.
-   - Jelaskan bentuk akomodasi pada petunjuk guru, bukan dengan memberi label yang menstigma pada lembar siswa. Label peruntukan tetap jelas untuk guru pada header/administrasi dokumen.
-   - Pilih akomodasi yang relevan dengan profil; jangan menambahkan alat bantu atau layanan yang tidak tersedia pada {{dukungan_inklusi_tersedia}} tanpa menandainya sebagai rekomendasi.
-
-   ATURAN PENOMORAN & PEMISAHAN LEMBAR SOAL — WAJIB:
-   - Pada SETIAP lembar asesmen siswa, penomoran soal selalu dimulai dari 1 dan berlanjut 2, 3, 4, ... sesuai jumlah soal pada lembar tersebut.
-   - DILARANG memakai kode nomor seperti FA1, F1, S1, A1, atau kombinasi huruf-angka pada lembar yang dibaca siswa karena dapat membingungkan.
-   - Jika perlu membedakan asesmen pada kisi-kisi/administrasi guru, gunakan kolom terpisah “Jenis Asesmen” dan “No. Soal”; contoh: Jenis Asesmen = Formatif Awal, No. Soal = 1. Jangan menggabungkannya menjadi FA1.
-   - Asesmen Formatif Awal, Asesmen Formatif, dan Asesmen Sumatif masing-masing harus memiliki lembar siswa tersendiri dan DIMULAI PADA HALAMAN BARU/section break tersendiri agar mudah dicetak.
-   - Kunci jawaban, pembahasan, rubrik, dan pedoman skor guru harus dimulai pada halaman/section tersendiri setelah lembar siswa; jangan menempatkan kunci pada halaman yang sama dengan soal siswa.
-
-   KETENTUAN INSTRUMEN:
-   - Untuk setiap asesmen yang dipilih, jelaskan tujuan, waktu pelaksanaan, domain, bentuk instrumen, keterkaitan dengan TP/KKTP, cara penskoran, dan tindak lanjut.
-   - Terapkan Bobot Penilaian {{bobot_penilaian}} secara konsisten pada seluruh rubrik, rekap skor, dan rumus nilai akhir. Jika bobot ditentukan AI, nyatakan bobot yang dipilih dan alasannya. Jangan menghitung instrumen monitoring formatif ke nilai akhir bila bobotnya 0%/tidak ditetapkan sebagai komponen nilai.
-    - RUBRIK ASESMEN UTAMA sesuai teknik yang dinilai; gunakan kunci dan pedoman skor untuk soal objektif, rubrik deskriptif untuk kinerja/produk/uraian. Lembar observasi, keterampilan, atau sikap ditambahkan jika bukti kegiatan/TP membutuhkannya, bukan otomatis.
-   - Untuk PG/PG Kompleks/Benar-Salah/Menjodohkan/Isian objektif, gunakan kunci jawaban + pedoman skor; rubrik tidak wajib kecuali ada alasan khusus.
-   - Untuk Uraian/Esai atau SJT yang membutuhkan kualitas respons bertingkat, buat rubrik/pedoman skor analitik sesuai indikator dan TP yang diukur.
-   - Untuk Unjuk Kerja/Praktik, rubrik menilai aspek yang relevan seperti ketepatan prosedur, penggunaan alat/bahan, keselamatan, ketelitian hasil, dan kemandirian—sesuaikan dengan keterampilan yang dipilih.
-   - Untuk Presentasi, rubrik menilai penguasaan isi, ketepatan konsep/bukti, komunikasi, organisasi penyajian, respons terhadap pertanyaan, dan aspek lain yang relevan.
-   - Untuk Proyek, rubrik menilai perencanaan, proses/kolaborasi, kualitas produk/hasil, pengelolaan waktu, serta presentasi/komunikasi bila memang menjadi bagian proyek.
-   - Untuk Produk, rubrik menilai ketepatan terhadap kriteria, fungsi/kualitas, akurasi konsep, kerapian/ketuntasan, kreativitas bila relevan, dan aspek spesifik produk.
-   - Untuk Portofolio, rubrik menilai kelengkapan bukti, kualitas karya, perkembangan/progres, refleksi, dan keterkaitan bukti dengan TP.
-   - Untuk Observasi, gunakan lembar observasi/rubrik berbasis indikator perilaku/kinerja yang konkret dan dapat diamati.
-   - Untuk Penilaian Diri dan Penilaian Antarteman, gunakan skala/rubrik sederhana dengan indikator jelas, bukti/refleksi singkat, serta petunjuk agar penilaian tidak sekadar subjektif.
-   - Jika model = PjBL, LKPD proyek dan rubrik proyek wajib selaras dengan sintaks serta produk yang benar-benar dirancang. Jika teknik Proyek juga dipilih sebagai asesmen utama, gunakan rubrik tersebut sebagai bagian penskoran sesuai konfigurasi guru.
-   - Terapkan {{deskripsi_asesmen}} sebagai ketentuan tambahan.
-
-E. PAKET LEMBAR ASESMEN LENGKAP
-   - Tulis lembar asesmen peserta didik secara UTUH sesuai {{konfigurasi_asesmen}}, bukan sekadar deskripsi instrumen.
-   - Buat LEMBAR SISWA TERPISAH untuk Asesmen Formatif Awal, Asesmen Formatif, dan Asesmen Sumatif yang aktif. Setiap lembar dimulai pada halaman baru/section break baru, memiliki judul yang jelas, identitas Nama/Kelas/Tanggal bila relevan, petunjuk pengerjaan, dan ruang jawaban yang memadai.
-   - Nomor soal pada SETIAP lembar siswa wajib dimulai dari 1. Gunakan hanya 1, 2, 3, ...; jangan gunakan FA1/F1/S1/A1 atau kode huruf-angka lainnya.
-   - Untuk asesmen kognitif: tampilkan petunjuk, stimulus bila diperlukan, SELURUH butir soal sesuai jumlah yang ditetapkan, pilihan jawaban/kolom respons, dan ruang kerja/jawaban. Kunci jawaban, pembahasan, pedoman skor, dan pemetaan nomor soal ke TP ditempatkan pada bagian guru yang terpisah, bukan pada lembar siswa.
-   - Jika bagian asesmen terkait dipilih pada {{bagian_gambar_modul}}, gunakan satu atau lebih gambar/diagram/foto/data visual sebagai stimulus HANYA bila visual tersebut memang berfungsi sebagai bagian dari soal dan meningkatkan validitas serta pemahaman butir. Visual pada soal harus menjadi objek analisis/observasi/interpretasi (misalnya infografis, grafik, tabel data, diagram proses, peta, ilustrasi pengamatan, atau foto eksperimen), bukan ornamen. Terapkan {{metode_gambar_modul}} dan sertakan sumber/kredit bila visual berasal dari luar. Jika topik soal berkaitan dengan makhluk hidup, anatomi/struktur ilmiahnya harus akurat.
-   - Sertakan kisi-kisi lengkap sebelum/bersama paket guru. Pada kisi-kisi, pisahkan kolom “Jenis Asesmen” dan “No. Soal” agar nomor tetap sederhana.
-   - Jika ada uraian/SJT, sertakan rubrik atau pedoman skor per butir dengan indikator jawaban.
-   - Jika ada siswa inklusi, paket lembar asesmen WAJIB membedakan peruntukan secara visual dan tekstual:
-     • "LEMBAR ASESMEN [REGULER]" untuk siswa reguler.
-     • "LEMBAR ASESMEN [INKLUSI — AKOMODASI]" bila target sama; isi kompetensi/kedalaman tetap setara tetapi penyajian, respons, dukungan visual, setting, waktu, dan alat bantu diakomodasi.
-     • "LEMBAR ASESMEN [INKLUSI — TARGET ADAPTIF]" bila target adaptif sah digunakan; soal/tugas mengacu TP Adaptif dan KKTP Adaptif.
-     Jangan mencampur lembar reguler dan inklusi tanpa penanda yang jelas.
-
-F. LKPD PRAKTIK / INVESTIGASI — KONDISIONAL
-   - Buat jika unit memang membutuhkan praktik, eksperimen, demonstrasi, simulasi, observasi lapangan, latihan prosedural, atau unjuk kerja. Jika tidak ada tugas tersebut, jangan memaksakannya.
-   - Tulis siap pakai: identitas, judul, TP, tujuan kegiatan, konsep singkat, alat/bahan/sumber, keselamatan/aturan kerja bila relevan, pembagian peran, langkah kerja bernomor, tabel pengamatan/data, ruang analisis, pertanyaan pemantik/analisis, simpulan, dan refleksi singkat.
-   - Jika mata pelajaran tidak cocok dengan praktikum laboratorium, terjemahkan "praktik" menjadi aktivitas performatif/terapan yang otentik tanpa memaksakan alat laboratorium.
-   - Jika LKPD Praktik/Investigasi dipilih pada {{bagian_gambar_modul}}, sertakan visual prosedur/objek/diagram yang benar-benar membantu pelaksanaan; gunakan caption, alt text, dan sumber/link bila eksternal.
-   - Sertakan lembar penilaian/rubrik keterampilan praktik yang benar-benar sesuai langkah kerja.
-   - Jika ada siswa inklusi, buat petunjuk peruntukan yang jelas pada LKPD: [REGULER], [INKLUSI — AKOMODASI], atau [INKLUSI — TARGET ADAPTIF]. Untuk akomodasi, pertahankan tujuan/kompetensi dan ubah akses/langkah bantu/cara respons. Untuk target adaptif, sesuaikan langkah kerja dan bukti yang diminta terhadap TP/KKTP Adaptif.
-
-G. LKPD PROYEK — KONDISIONAL
-   - Buat hanya jika unit memang menggunakan proyek/produk/karya sebagai aktivitas atau asesmen yang mengukur TP. Jangan mengarang proyek hanya untuk memenuhi format.
-   - Ikuti {{mode_produk_proyek}} dan {{opsi_produk_proyek}}. Jika mode = Pilihan siswa, sediakan beberapa opsi produk yang setara secara akademik dan gunakan kriteria inti/rubrik yang adil lintas pilihan; tambahkan indikator khusus produk hanya jika memang diperlukan.
-   - Tulis LKPD proyek lengkap: tantangan/pertanyaan proyek, tujuan, produk akhir, kriteria keberhasilan, tahapan perencanaan–pelaksanaan–monitoring–finalisasi–presentasi/refleksi, pembagian peran, jadwal sederhana, sumber/bahan, lembar pencatatan progres, ruang bukti kerja, dan refleksi.
-   - Jika LKPD Proyek dipilih pada {{bagian_gambar_modul}}, sertakan visual referensi/contoh struktur/proses yang membantu tanpa membatasi kreativitas siswa; gunakan caption, alt text, dan sumber/link bila eksternal.
-   - Sertakan rubrik proyek/produk dengan aspek, bobot bila diperlukan, dan deskriptor skala yang konkret. Jika PjBL dipilih, pastikan tahapan proyek konsisten dengan sintaks PjBL.
-   - Jika ada siswa inklusi, jelaskan peran/proses proyek [REGULER] dan [INKLUSI] secara terpisah. Jika hanya akomodasi, kriteria inti produk tetap sama dan dukungan/format kontribusi yang disesuaikan. Jika target adaptif digunakan, sediakan produk/bukti adaptif yang tetap bermakna dan terhubung ke TP/KKTP Adaptif.
-
-H. LEMBAR OBSERVASI, KETERAMPILAN, DAN SIKAP — BILA RELEVAN
-   - Sediakan lembar observasi guru berbentuk tabel yang siap digunakan: Nama Siswa/Kelompok | Indikator | Bukti Teramati/Catatan | Skor/Kategori | Tindak Lanjut.
-   - Sediakan RUBRIK KETERAMPILAN hanya bila menilai keterampilan nyata dari aktivitas, dengan skala yang dinyatakan jelas dan deskriptor operasional.
-   - Jika sikap memang diamati terkait tujuan/kegiatan, sediakan RUBRIK SIKAP yang hanya memuat sikap yang benar-benar relevan dengan aktivitas (mis. tanggung jawab, kolaborasi, disiplin, ketelitian, kepedulian, integritas), lengkap dengan indikator perilaku teramati dan deskriptor tiap level.
-   - Jika teknik Observasi, Penilaian Diri, atau Penilaian Antarteman dipilih, buat instrumen yang sesuai. Jangan menambah rubrik tanpa bukti yang hendak dikumpulkan, dan jangan otomatis memasukkan monitoring formatif ke nilai akhir.
-   - Untuk siswa inklusi, tandai indikator yang sama dengan [INKLUSI — AKOMODASI] bila hanya cara observasi/komunikasi yang disesuaikan. Jika target adaptif digunakan, buat indikator observasi/keterampilan yang diturunkan dari TP/KKTP Adaptif dan beri label [INKLUSI — TARGET ADAPTIF].
-
-I. BAHAN AJAR RINGKAS / HANDOUT SISWA — BILA DIPERLUKAN
-   - Sajikan ringkasan materi esensial yang langsung mendukung aktivitas, menggunakan bahasa sesuai jenjang, contoh kontekstual, konsep/kosakata kunci, miskonsepsi umum, dan pertanyaan cek pemahaman singkat.
-   - Jika Ringkasan Materi/Handout dipilih pada {{bagian_gambar_modul}}, sisipkan visual edukatif yang relevan di dekat konsep yang dijelaskan, bukan dikumpulkan tanpa konteks. Setiap visual eksternal harus memiliki caption, alt text, serta sumber/link.
-
-J. LEMBAR REFLEKSI SISWA DAN PENILAIAN DIRI
-   - Pertanyaan reflektif metakognitif tentang pemahaman baru, strategi belajar, kontribusi, tantangan, bukti belajar, dan rencana tindak lanjut.
-   - Sertakan skala penilaian diri singkat bila relevan, dengan indikator yang jelas.
-
-K. LEMBAR REFLEKSI GURU DAN CATATAN TINDAK LANJUT
-   - Evaluasi keterlaksanaan, respons peserta didik, efektivitas model pembelajaran, ketercapaian TP, temuan observasi, siswa yang memerlukan dukungan/pengayaan, kendala sarana/waktu, dan rencana perbaikan.
-
-L. RENCANA TINDAK LANJUT: REMEDIAL & PENGAYAAN — SIAP DIBERIKAN KE SISWA
-   - Dasarkan tindak lanjut pada ketercapaian setiap TP/KKTP/kriteria, bukan hanya nilai total. Gunakan interval/kriteria ketercapaian yang sudah ditetapkan dalam modul. Jika guru belum menetapkan interval, buat usulan transparan yang mudah diedit dan tandai sebagai usulan.
-   - Buat tabel keputusan: TP/KKTP | Bukti/Hasil yang Diamati | Status Ketercapaian | Jenis Tindak Lanjut | Waktu | Instrumen Cek Ulang/Tantangan.
-
-   PAKET REMEDIAL SISWA — tulis lengkap dan dapat langsung dibagikan:
-   1. Tujuan remedial spesifik berdasarkan TP/kriteria yang belum dikuasai.
-   2. Ringkasan konsep ulang dengan bahasa lebih sederhana, contoh terarah, visual/analogi bila relevan, dan koreksi terhadap miskonsepsi {{miskonsepsi_kesulitan}}.
-   3. Langkah belajar ulang/scaffolding bertahap (contoh terbimbing → latihan dengan bantuan → latihan mandiri).
-   4. Lembar Aktivitas Remedial berisi instruksi siswa, materi/trigger singkat, soal/tugas latihan konkret, ruang jawaban, dan refleksi "bagian yang sekarang sudah saya pahami".
-   5. Instrumen asesmen ulang yang SETARA tetapi tidak identik dengan soal sebelumnya, lengkap dengan kunci/pedoman skor dan kriteria keberhasilan.
-   6. Jika ada siswa inklusi, remedial dibedakan jelas: [REGULER], [INKLUSI — AKOMODASI], atau [INKLUSI — TARGET ADAPTIF]. Untuk akomodasi gunakan TP/KKTP yang sama dengan dukungan komunikasi, waktu, scaffolding, alat bantu, dan bentuk respons yang sesuai. Untuk target adaptif, remedial mengacu pada TP/KKTP Adaptif.
-   7. Catatan guru: strategi pemberian feedback dan keputusan setelah asesmen ulang (tuntas / perlu dukungan lanjutan).
-
-   PAKET PENGAYAAN SISWA — tulis lengkap dan dapat langsung dibagikan:
-   1. Tujuan pengayaan yang memperdalam/memperluas TP tanpa sekadar menambah jumlah soal rutin.
-   2. Pilih aktivitas autentik seperti investigasi lanjutan, studi kasus, tantangan pemecahan masalah, mini-riset, desain/kreasi, analisis data, pengajaran sebaya, atau proyek ekstensi sesuai mata pelajaran.
-   3. Lembar Aktivitas Pengayaan berisi tantangan/pertanyaan, sumber/data yang diperlukan, langkah kerja, ruang produk/jawaban, dan pertanyaan refleksi tingkat lanjut.
-   4. Bila berbentuk proyek/produk, hubungkan dengan {{mode_produk_proyek}}/{{opsi_produk_proyek}} dan sediakan rubrik/kriteria keberhasilan yang konkret.
-   5. Sediakan pedoman jawaban/contoh respons atau indikator kualitas untuk guru serta cara memberi feedback.
-   6. Pastikan pengayaan tidak menjadi hukuman karena siswa lebih cepat; tingkatkan kedalaman, transfer, kreativitas, atau autentisitas tugas.
-
-   Terapkan arahan guru pada {{preferensi_remedial_pengayaan}}. Jika kosong, susun paket di atas secara otomatis berdasarkan hasil asesmen, prasyarat, miskonsepsi, TP, dan karakteristik siswa.
-
-M. PERANGKAT ADMINISTRASI & LAMPIRAN PENDUKUNG
-   - Daftar pustaka/sumber belajar. Sertakan sumber yang benar-benar digunakan. Bila {{mode_sumber_belajar}} mengizinkan pencarian AI dan akses web tersedia, bagian ini TIDAK BOLEH kosong dari link: cantumkan sumber kredibel relevan yang benar-benar digunakan dan telah diverifikasi, tanpa memaksakan jumlah atau jenis media. Untuk setiap sumber tampilkan judul, jenis sumber, penerbit/jurnal/kanal, kegunaan singkat, serta URL lengkap yang aktif dan dapat disalin/diklik.
-   - Buat subbagian "Sumber Belajar Digital yang Digunakan dalam Kegiatan" agar link artikel/YouTube yang dirujuk dalam langkah kegiatan dapat ditemukan guru dengan cepat. Jika sumber dipakai pada pertemuan tertentu, sebutkan pertemuannya.
-   - Daftar sumber visual/gambar bila ada: ID aset | bagian dokumen tempat gambar digunakan | deskripsi/fungsi visual | sumber/kredit | link asal atau status "Generated". Jangan mencantumkan sumber visual yang tidak benar-benar digunakan. Dilarang memakai potongan/crop gambar sumber.
-   - Glosarium istilah.
-   - Daftar alat, bahan, media, dan sumber digital/luring, lengkap dengan kebutuhan jumlah/rasio terhadap {{jumlah_siswa}} dan {{jumlah_kelompok}} bila relevan.
-   - Kunci jawaban dan pedoman penskoran terpusat untuk guru.
-   - Rekap nilai/format pengolahan skor yang menunjukkan skor mentah, konversi, {{bobot_penilaian}}, nilai akhir, ketercapaian per TP, serta rekomendasi remedial/pengayaan.
-   - Format dokumentasi hasil praktik/proyek atau portofolio bila relevan.
-   - Catatan keselamatan/etika penggunaan alat, data, internet, atau AI bila relevan.
-   - Ringkasan Plan B untuk keterbatasan sarana/teknologi/waktu sehingga guru dapat mengganti aktivitas tanpa kehilangan TP.
-   - Jika ada siswa inklusi, sertakan "Ringkasan Implementasi Dukungan Inklusi" untuk unit ini: kekuatan/potensi, kebutuhan fungsional, akomodasi/adaptasi tujuan-materi-proses-asesmen, media/alat bantu, peran guru/GPK/orang tua/ULD bila tersedia, serta cara memantau kemajuan.
-   - Jika {{ppi_inklusi}} menunjukkan PPI tersedia, tautkan dukungan unit dengan target jangka pendek PPI yang relevan tanpa menyalin data pribadi berlebihan. Jika PPI belum tersedia, JANGAN membuat PPI final; boleh sertakan "Rekomendasi Bahan Diskusi PPI" yang perlu dibahas dan disepakati tim multidisiplin/orang tua.
-   - Lampiran lain yang diperlukan agar guru dapat menjalankan modul tanpa harus membuat dokumen dasar tambahan dari nol.
-
-N. AUDIT MUTU FINAL — WAJIB DILAKUKAN SEBELUM MENUTUP KELUARAN
-   Tampilkan checklist audit akhir dengan status LULUS / PERLU REVISI dan perbaiki dahulu setiap item yang belum lulus:
-   1. Semua TP memiliki KKTP/kriteria keberhasilan yang terukur.
-   2. Keselarasan internal CP/standar → TP → KKTP → aktivitas → bukti belajar → asesmen → instrumen → tindak lanjut sudah diperiksa, tetapi matriks keterlacakan TIDAK ditampilkan dalam modul.
-   3. Setiap soal/tugas/rubrik mengukur minimal satu TP; tidak ada instrumen yatim.
-   4. Seluruh TP penting tercakup asesmen dan tidak ada TP yang hanya disebut tetapi tidak diajarkan/dinilai.
-   5. Jumlah soal total dan jumlah per tipe konsisten dengan konfigurasi guru.
-    6. Proporsi LOTS/MOTS/HOTS yang diisi guru berjumlah 100%; gaya soal AKM/PISA diverifikasi terpisah, dan diterapkan nyata; perbedaan level tampak pada tuntutan proses berpikir, bukan hanya pada label, panjang soal, atau bentuk soal.
-   7. Bobot penilaian berjumlah 100% bila ditetapkan, dan rumus nilai akhir konsisten dengan rekap skor.
-   8. Total waktu setiap pertemuan sama dengan alokasi; aktivitas realistis terhadap jumlah siswa, kelompok, sarana, dan keterbatasan.
-   9. Sintaks model pembelajaran tampak nyata dalam kegiatan, bukan hanya disebut pada identitas.
-   10. Diferensiasi dan adaptasi inklusi (jika ada) nyata pada aktivitas, produk/respons, scaffolding, dan asesmen.
-    11. Semua LKPD, observasi, rubrik, bahan ajar, remedial, pengayaan, serta kunci/pedoman skor yang MEMANG DIPERLUKAN telah berisi konten siap pakai tanpa placeholder meta.
-   12. Aktivitas yang bergantung pada sarana/teknologi memiliki Plan B yang tetap mengukur TP yang sama.
-   13. Paket remedial memiliki materi ulang, lembar tugas siswa, asesmen ulang, kunci/pedoman skor, dan kriteria keberhasilan; paket pengayaan memiliki tugas ekstensi yang lebih dalam beserta kriteria/rubriknya.
-   14. Istilah/struktur kurikulum konsisten dengan acuan yang dipilih dan tidak mencampur framework secara tidak perlu.
-    15. Struktur visual dokumen mudah dipindai, hanya bagian relevan yang tampil dengan huruf/nomor berurutan, tanpa pengulangan atau blok teks panjang.
-   16. Semua tabel mudah diedit: bukan gambar, tidak memakai merged cells/tabel bertingkat yang tidak perlu, kolom jelas, dan tabel yang terlalu lebar sudah dipecah menjadi tabel tematik.
-   17. Lembar untuk siswa terpisah secara jelas dari kunci/pedoman/catatan guru; penomoran soal/tugas konsisten dengan kisi-kisi dan pedoman skor.
-   18. Seluruh format tetap terbaca dan terstruktur saat disalin ke Word/Google Docs; tidak ada penggunaan code block atau format chat yang menghambat pengeditan.
-   19. Navigasi dokumen mudah dilakukan melalui heading dan subheading yang konsisten; tidak diperlukan daftar isi/peta dokumen di bagian awal.
-   20. Istilah, skala, format tanggal/nilai, heading, dan penomoran digunakan konsisten di seluruh modul dan lampiran.
-   21. Setiap lembar Asesmen Formatif Awal, Formatif, dan Sumatif yang aktif dimulai pada halaman baru; nomor soal pada masing-masing lembar dimulai dari 1 dan tidak memakai kode FA1/F1/S1 atau kode sejenis.
-   22. Kunci/pedoman guru tidak tercampur pada lembar soal siswa dan dimulai pada halaman/section terpisah.
-   23. Sumber belajar eksternal yang dicantumkan benar-benar relevan dan memiliki link yang dapat diverifikasi; tidak ada URL/judul/kanal yang dikarang.
-   24. Gambar/visual hanya muncul pada bagian yang dipilih atau benar-benar diperlukan, akurat secara konsep, memiliki caption/alt text, serta sumber/kredit/link bila eksternal.
-   25. Standar cetak terbaca: gunakan A4 sebagai default, margin wajar, teks isi sekitar 11–12 pt (lebih besar bila jenjang membutuhkan), teks tabel tidak diperkecil berlebihan, serta pecah tabel yang padat. Status uji cetak hanya boleh 'LULUS' setelah file DOCX/PDF nyata dirender dan seluruh halamannya diperiksa; jika belum diuji, tulis 'BELUM DIUJI SECARA VISUAL'.
-   26. Audit kedalaman kognitif lulus: LOTS benar-benar recall/pemahaman, MOTS benar-benar transfer/penerapan, HOTS benar-benar analisis/evaluasi/kreasi non-rutin; tidak ada pseudo-HOTS yang hanya berupa hafalan sulit, teks panjang, atau substitusi mekanis.
-   27. Untuk siswa reguler, standar kognitif sesuai fase/kelas tetap dipertahankan. Untuk [INKLUSI — AKOMODASI], kedalaman kognitif tetap sama; penurunan/penyesuaian target hanya boleh muncul pada [INKLUSI — TARGET ADAPTIF] yang memiliki dasar jelas dan tidak menurunkan paket reguler seluruh kelas.
-    28. Langkah kegiatan setiap pertemuan disajikan secara jelas (narasi terstruktur atau tabel sederhana yang terbaca), aktivitas guru-siswa konkret, sintaks model terlihat, label [REGULER]/[INKLUSI] jelas bila relevan, serta Audit Waktu sama persis dengan alokasi pertemuan.
-    29. Rumusan TP dari guru tidak diubah diam-diam; jika ada performa independen yang berpotensi ambigu, diberikan usulan dan alasan pemisahannya.
-   30. Jika terdapat siswa inklusi, TP/KKTP, kegiatan, LKPD, asesmen, observasi, remedial/pengayaan membedakan peruntukan [REGULER], [INKLUSI — AKOMODASI], dan/atau [INKLUSI — TARGET ADAPTIF] secara konsisten.
-   31. Keputusan akomodasi/target adaptif dapat ditelusuri ke data yang tersedia (asesmen awal/fungsional/diagnostik, Profil Murid, PPI, observasi guru, rekomendasi GPK/ULD/orang tua); tidak ada diagnosis atau hasil asesmen yang dikarang.
-   32. Dukungan inklusi mencakup komponen yang relevan dari TUJUAN, ISI/MATERI, PROSES, dan ASESMEN; tidak berhenti pada tambahan waktu atau penyederhanaan soal.
-   33. Diferensiasi inklusi mempertimbangkan konten, proses, produk/respons, lingkungan, pendekatan multisensori/kontekstual, dan teknologi asistif hanya sesuai kebutuhan serta ketersediaan.
-   34. Modul menonjolkan kekuatan/potensi dan partisipasi siswa inklusi, menjaga kerahasiaan, serta menjelaskan peran kolaborasi guru/GPK/orang tua/ULD bila tersedia.
-   35. Jika PPI/Profil Murid tersedia, dukungan unit selaras dengannya; jika tidak tersedia, modul tidak mengarang PPI resmi dan hanya memberikan rekomendasi yang perlu diverifikasi/disepakati.
-   36. Jika STEM dipilih, integrasi S-T-E-M nyata dan dapat ditelusuri pada kegiatan/bukti belajar; STEM tidak disebut sebagai label dekoratif dan tidak dipaksa menjadi "model" bila konteks lebih tepat menyebutnya pendekatan/framework.
-   37. Bila pencarian sumber eksternal diizinkan dan web tersedia, modul memuat URL nyata: sumber yang relevan sebanyak yang dibutuhkan, tanpa kuota minimal; semua link dapat diverifikasi dan muncul sebagai link teks di Bagian M serta pada kegiatan terkait bila digunakan.
-   38. Semua kebutuhan gambar telah ditentukan melalui inventaris aset SEBELUM generasi; jumlah gambar boleh lebih dari satu sesuai kebutuhan nyata pembelajaran, dan setiap aset memiliki fungsi pedagogis, lokasi penempatan, serta deskripsi isi yang jelas.
-   39. Visual eksternal dicari terlebih dahulu untuk alur otomatis/kombinasi, dan generasi hanya dilakukan untuk aset yang belum terpenuhi atau memerlukan visual khusus yang tidak tersedia dari sumber luar.
-   40. Tidak ada gambar yang berasal dari crop/screenshot potongan sumber. Semua visual ditempatkan utuh dengan aspect ratio dipertahankan; gambar hasil generate dibuat pada rasio yang tepat sejak awal sehingga tidak perlu dipotong.
-   41. Jika gambar dipakai untuk soal/asesmen, visual benar-benar menjadi bagian inti soal (mis. infografis, grafik, tabel/grafik data, peta, diagram proses, foto pengamatan, atau stimulus visual lain) dan bukan dekorasi.
-   42. Jika visual berkaitan dengan makhluk hidup, organ, sistem tubuh, hewan, tumbuhan, mikroorganisme, atau struktur biologis lain, akurasi ilmiah, anatomi, proporsi, letak bagian, dan relasi strukturnya harus benar.
-    43. Dukungan/target adaptif diberi label teks yang jelas; penggunaan warna hanya tambahan aksesibilitas, bukan kewajiban atau penanda tunggal.
-
-O. PENGESAHAN / TANDA TANGAN — OPSIONAL DAN DILETAKKAN PALING AKHIR
-   - Terapkan {{tanda_tangan_modul}}. Jika dipilih "Ya — tampilkan bagian tanda tangan", letakkan blok ini SETELAH seluruh isi modul, lampiran, dan Audit Mutu Final sehingga benar-benar menjadi bagian penutup dokumen.
-   - Buat format pengesahan/tanda tangan dua pihak yang rapi dan siap cetak: "Mengetahui, Kepala Sekolah" dan "Guru Mata Pelajaran/Guru Kelas".
-   - Nama Guru harus menggunakan {{nama_guru_modul}} dan Nama Kepala Sekolah harus menggunakan {{nama_kepala_sekolah}}. DILARANG mengarang nama. Jika salah satu nama kosong, tampilkan garis titik/ruang isian yang dapat diisi manual.
-   - Sediakan ruang vertikal yang memadai untuk tanda tangan manual di antara jabatan dan nama. Jangan membuat atau meniru tanda tangan digital.
-   - Jika {{tanda_tangan_modul}} = "Tidak — tanpa bagian tanda tangan", hilangkan seluruh bagian O dari keluaran tanpa meninggalkan judul kosong.
-
-=====================================================================
-BAGIAN 3 — PENYESUAIAN JENJANG DAN MATA PELAJARAN (SEMUA JENJANG)
-=====================================================================
-Sesuaikan bahasa, ragam bukti belajar, format asesmen, dan aktivitas dengan kurikulum, mapel, jenis satuan pendidikan, fase, kebutuhan murid, dan sarana nyata. Panduan fase berikut adalah CONTOH, bukan batas wajib tingkat kognitif:
-  - PAUD / Fase Fondasi: pengalaman bermain, observasi perkembangan, komunikasi, ekspresi, eksplorasi dan dokumentasi autentik; jangan memaksakan tes C1–C6 atau LKPD tertulis.
-  - MI/MTs/MA, pendidikan kesetaraan, pendidikan khusus/SLB: perhatikan acuan pembelajaran yang berlaku dan kebutuhan aktual; jangan otomatis menyalin contoh IPA.
-  - SMK/MAK: bukti performa dan rubrik kompetensi kejuruan sesuai bidang, keselamatan kerja jika relevan.
-  - Fase A (Kelas 1-2 SD)  : bahasa sangat sederhana, aktivitas bermain/konkret, LKPD
-    bergambar, soal mayoritas LOTS lisan/visual.
-  - Fase B (Kelas 3-4 SD)  : mulai literasi teks pendek, aktivitas eksploratif konkret,
-    campuran LOTS-MOTS.
-  - Fase C (Kelas 5-6 SD)  : penalaran sederhana, proyek kelompok ringan, LOTS-MOTS,
-    HOTS dasar mulai diperkenalkan.
-  - Fase D (Kelas 7-9 SMP) : eksperimen/investigasi, literasi & numerasi kontekstual,
-    LOTS-MOTS-HOTS mulai dibedakan secara tegas; MOTS wajib memuat transfer/penerapan dan HOTS wajib memuat analisis/inferensi/evaluasi yang tidak dapat dijawab dengan recall langsung; mulai kenalkan gaya soal AKM.
-  - Fase E (Kelas 10 SMA/SMK)   : analisis kontekstual lebih kompleks, proyek lintas
-    disiplin; soal reguler harus menunjukkan transfer konsep yang nyata pada MOTS serta analisis/evaluasi berbasis bukti pada HOTS; HOTS & AKM/PISA dapat diberi porsi lebih besar sesuai TP.
-  - Fase F (Kelas 11-12 SMA/SMK): analisis-evaluasi-kreasi tingkat lanjut, proyek nyata/
-    riset sederhana; HOTS reguler harus menuntut penalaran multi-langkah, evaluasi bukti/strategi, atau perancangan solusi pada konteks non-rutin, dengan soal bergaya AKM/PISA berbasis stimulus otentik bila relevan.
-Jika [Fase & Kelas] pada Bagian 1 sudah diisi, ikuti panduan fase tersebut secara otomatis.
-
-=====================================================================
-BAGIAN 4 — SPESIFIKASI DETAIL LEMBAR ASESMEN & RUBRIK
-=====================================================================
-ATURAN UTAMA KETERKAITAN SOAL DENGAN TP:
-- Mulai penyusunan soal dengan membaca dan memetakan TP terlebih dahulu.
-- Setiap soal WAJIB mengukur minimal satu TP; jangan membuat soal hanya karena sesuai materi tetapi tidak terkait TP.
-- Untuk setiap butir, tentukan TP yang diukur → indikator soal → level kognitif → bentuk soal → kunci/pedoman skor.
-- Distribusikan soal agar seluruh TP yang perlu dinilai mendapat cakupan yang memadai dan tidak ada TP penting yang terlewat.
-- Jika terdapat target belajar yang memang berbeda berdasarkan asesmen diagnostik/dokumen individual resmi, lakukan pemetaan soal ke target tersebut secara terpisah. Jangan membuat target adaptif hanya karena perbedaan kesiapan umum.
-- Setelah soal selesai, lakukan audit akhir: cek kembali setiap nomor soal terhadap TP dan hapus/revisi butir yang tidak memiliki hubungan langsung dengan TP.
-- Pada setiap lembar siswa, nomor soal WAJIB dimulai kembali dari 1 dan menggunakan angka biasa 1, 2, 3, ... tanpa awalan huruf/kode asesmen.
-- Formatif Awal, Formatif, dan Sumatif adalah lembar berbeda. Masing-masing dimulai pada halaman baru dan memiliki penomoran sendiri dari 1.
-- Jika visual asesmen diaktifkan pada {{bagian_gambar_modul}}, gambar harus menjadi stimulus yang relevan dan terbaca saat dicetak; caption/sumber jangan mengganggu fokus soal. Gunakan gambar secara UTUH—dilarang crop/screenshot-potong visual untuk dijadikan stimulus. Jika komposisi tidak cocok, cari visual lain atau generate aset khusus pada aspect ratio yang sesuai.
-
-1. VARIASI BENTUK SOAL — gunakan HANYA tipe soal Kognitif yang dipilih guru dalam {{konfigurasi_asesmen}}: PG • PG Kompleks • Uraian • Isian Singkat • Menjodohkan • Mengurutkan • Benar-Salah • SJT. Jika asesmen Kognitif aktif tetapi tipe soal tidak dipilih, AI menentukan kombinasi yang paling sesuai dengan TP dan jenjang. Untuk Non-Kognitif/Kinerja & Sikap, gunakan HANYA teknik yang dipilih guru: Unjuk Kerja/Praktik • Presentasi • Proyek • Produk • Portofolio • Observasi • Penilaian Diri • Penilaian Antarteman • atau Lainnya. Keterampilan/aspek yang dinilai ditulis terpisah dan harus selaras dengan TP serta aktivitas.
-
-2. VARIASI LEVEL KOGNITIF — WAJIB BENAR-BENAR BERBEDA DALAM TUNTUTAN BERPIKIR, BUKAN SEKADAR LABEL
-    Ikuti persentase LOTS/MOTS/HOTS yang ditetapkan guru pada masing-masing asesmen Kognitif; AKM/PISA merupakan gaya/konteks stimulus yang terpisah. Jika persentase kosong, AI menentukan komposisi proporsional berdasarkan TP, jenjang, tujuan asesmen, dan kebutuhan kelas. Akomodasi akses tidak boleh menjadi alasan otomatis untuk menurunkan level kognitif ketika TP yang diukur tetap sama.
-
-   ATURAN UTAMA UNTUK SISWA REGULER:
-   - Jangan menurunkan kedalaman soal hanya agar soal terasa mudah. Untuk seluruh siswa dengan target TP yang sama—termasuk pada kelas campuran/inklusi—pertahankan tuntutan kognitif sesuai fase/kelas dan TP. Kebutuhan akses ditangani melalui akomodasi format, respons, setting, alat bantu, scaffolding, atau waktu. Penurunan target hanya dilakukan bila ada dasar asesmen diagnostik/dokumen individual resmi.
-   - TINGKAT KESULITAN tidak sama dengan LEVEL KOGNITIF. Soal hafalan dengan istilah langka tetap LOTS; soal analisis dengan data sederhana tetap dapat menjadi HOTS. Klasifikasikan berdasarkan proses berpikir yang benar-benar dibutuhkan untuk memperoleh jawaban.
-   - Bentuk soal tidak menentukan level. PG dapat menjadi HOTS bila menuntut analisis/evaluasi, sedangkan uraian dapat tetap LOTS bila hanya meminta definisi.
-
-   KRITERIA WAJIB PER LEVEL:
-   A. LOTS (C1–C2) — Mengingat & Memahami
-      • Mengidentifikasi, menyebutkan, mengenali, mengklasifikasikan langsung, menjelaskan makna dasar, atau mengambil informasi eksplisit dari materi/stimulus.
-      • Konteks sangat familier; umumnya satu langkah berpikir; jawaban dapat diperoleh dari pengetahuan dasar atau pembacaan langsung.
-      • Tidak boleh diberi label MOTS/HOTS hanya karena kalimatnya panjang, opsinya menjebak, atau faktanya sulit diingat.
-
-   B. MOTS (C3) — Menerapkan
-      • Siswa harus MEMILIH dan MENGGUNAKAN konsep, aturan, prosedur, rumus, atau strategi pada situasi yang tidak identik dengan contoh latihan.
-      • Minimal ada transfer sederhana: menentukan prosedur yang tepat, menghubungkan dua informasi, melakukan 1–2 tahap penerapan, atau menggunakan konsep untuk menyelesaikan masalah rutin-kontekstual.
-      • Soal substitusi angka yang sama persis polanya dengan contoh, atau hanya menyalin informasi dari stimulus, tidak cukup kuat untuk disebut MOTS.
-
-   C. HOTS (C4–C6) — Menganalisis, Mengevaluasi, Mencipta
-      • Gunakan situasi non-rutin/baru yang tetap sesuai jenjang; siswa harus memecah informasi, menemukan hubungan/pola/sebab-akibat, membandingkan strategi, menarik inferensi, mendeteksi kesalahan/miskonsepsi, mengevaluasi klaim berdasarkan bukti, memilih solusi terbaik dengan alasan, atau merancang solusi/produk/strategi.
-      • HOTS harus membutuhkan penalaran multi-langkah dan/atau integrasi beberapa informasi/konsep. Jawaban tidak boleh dapat diperoleh hanya dengan menyalin satu kalimat dari stimulus atau menerapkan satu rumus secara mekanis.
-      • Jika menggunakan stimulus (teks, data, tabel, grafik, gambar, kasus, hasil eksperimen), pertanyaan HOTS harus memanfaatkan stimulus secara substantif. Jangan memakai stimulus panjang yang sebenarnya tidak diperlukan untuk menjawab soal.
-      • Distraktor PG HOTS sebaiknya merepresentasikan miskonsepsi/strategi yang masuk akal, bukan opsi absurd.
-      • Jika terdapat beberapa soal HOTS, variasikan prosesnya; jangan semua hanya "menganalisis" dengan pola yang sama. Gunakan evaluasi/justifikasi/perancangan bila sesuai TP dan bentuk soal.
-
-   D. AKM / STANDAR PISA — Penalaran Berbasis Stimulus Otentik
-      • Gunakan konteks nyata/otentik yang relevan dengan literasi membaca, numerasi, sains, atau pemecahan masalah sesuai mata pelajaran dan TP.
-      • Stimulus harus menyediakan informasi yang benar-benar perlu diinterpretasi/integrasikan: artikel pendek, data, tabel, grafik, infografik, diagram, peta, hasil pengamatan, atau skenario nyata.
-      • Pertanyaan harus menuntut interpretasi, integrasi informasi, penerapan pada konteks, inferensi, evaluasi bukti/klaim, atau pengambilan keputusan beralasan—bukan sekadar menemukan kata/angka yang tersurat.
-      • Jangan memberi label AKM/PISA hanya karena soal menggunakan cerita panjang atau gambar.
-
-   TANGGA KOGNITIF & AUDIT PER BUTIR:
-   - Bila memungkinkan, gunakan satu stimulus yang sama untuk membangun tangga berbeda: LOTS mengambil/memahami informasi dasar → MOTS menerapkan konsep pada informasi itu → HOTS menganalisis/evaluasi/menentukan keputusan berdasarkan bukti. Pertanyaan harus benar-benar berbeda tuntutan berpikirnya.
-   - Pada KISI-KISI/KUNCI GURU (BUKAN lembar siswa), tambahkan "Alasan Level Kognitif" singkat untuk setiap butir: jelaskan proses berpikir yang membuat butir tersebut LOTS/MOTS/HOTS, dan tandai karakter stimulus AKM/PISA pada kolom terpisah bila dipilih.
-   - Sebelum final, audit setiap butir: jika jawaban dapat diperoleh dengan hafalan langsung atau copy-paste stimulus, jangan labeli HOTS. Jika hanya mengikuti contoh/prosedur yang sama persis, jangan labeli HOTS dan evaluasi ulang apakah benar MOTS.
-
-3. KISI-KISI SOAL [WAJIB disertakan sebagai tabel] — kisi-kisi menjadi bukti keterlacakan antara soal dan TP. Setiap nomor soal WAJIB memiliki TP yang jelas. Gunakan kolom pokok (pecah bila lebar):
-   Jenis Asesmen | TP/KKTP | Indikator Soal | Level Kognitif (C1–C6 bila relevan) | Kesulitan (mudah/sedang/sulit bila digunakan) | Bentuk/Stimulus (termasuk gaya AKM/PISA bila dipilih) | No. Soal | Kunci/Pedoman Skor
-   - "Alasan Level Kognitif" cukup 1 kalimat ringkas yang menyebut proses berpikir nyata, misalnya "menerapkan konsep pada konteks baru" atau "mengevaluasi dua klaim menggunakan data pada grafik". Kolom ini hanya untuk guru dan tidak ditampilkan pada lembar siswa.
-   - Kolom “No. Soal” tetap memakai angka 1, 2, 3, ... sesuai lembar asesmennya. Jangan membuat kode gabungan seperti FA1/F1/S1.
-   - Level kognitif, tingkat kesulitan, dan format stimulus adalah DIMENSI BERBEDA. Jika tabel terlalu lebar, pecah menjadi dua tabel terkait daripada mengecilkan tulisan.
-
-4. PEDOMAN PENSKORAN & KATEGORI PREDIKAT — cantumkan skor mentah, cara konversi, bobot setiap komponen berdasarkan {{bobot_penilaian}}, rumus nilai akhir, ketercapaian per TP/KKTP, serta kategori/interval yang digunakan. Hindari hanya mengandalkan rata-rata nilai akhir untuk keputusan remedial; tunjukkan TP/kriteria mana yang belum dikuasai.
-
-5. RUBRIK & PEDOMAN SKOR SESUAI JENIS ASESMEN — jangan membuat rubrik yang tidak relevan. Untuk setiap asesmen aktif, tentukan otomatis bentuk penskoran yang tepat:
-   - Soal objektif (PG, PG Kompleks, Benar-Salah, Menjodohkan, Isian objektif): kunci jawaban + pedoman skor.
-   - Uraian/SJT: rubrik atau pedoman skor analitik berdasarkan indikator jawaban dan TP.
-   - Unjuk Kerja/Praktik: rubrik proses/kinerja sesuai keterampilan yang dinilai.
-   - Presentasi: rubrik presentasi sesuai tujuan dan indikator.
-   - Proyek: rubrik proyek sesuai tahap dan produk proyek.
-   - Produk: rubrik kualitas produk sesuai kriteria keberhasilan.
-   - Portofolio: rubrik portofolio sesuai bukti belajar dan progres.
-   - Observasi: lembar observasi/rubrik indikator teramati.
-   - Penilaian Diri/Antarteman: skala/rubrik reflektif sederhana dengan indikator jelas.
-   Format rubrik standar dapat menggunakan tabel: Aspek/Indikator | Skala 1 | Skala 2 | Skala 3 | Skala 4, tetapi NAMA ASPEK dan DESKRIPTOR tiap skala WAJIB disesuaikan dengan asesmen, keterampilan/aspek, TP, dan KKTP. Jika siswa mendapat akomodasi akses tetapi mengukur TP yang sama, gunakan rubrik/kriteria yang sama; jangan membuat rubrik lebih rendah hanya karena format respons atau dukungannya berbeda.
-
-6. ATURAN PEMILIHAN RUBRIK — rubrik ASESMEN UTAMA harus sesuai teknik yang dipilih guru, deskriptor tiap level nyata dan mudah dibedakan. Lembar observasi, rubrik keterampilan dan sikap dibuat HANYA bila kegiatan atau TP membutuhkan bukti tersebut. Jika digunakan hanya untuk formatif, pisahkan dari nilai akhir. Rubrik LKPD dibuat bila hasil LKPD dinilai; bila tidak, gunakan checklist penyelesaian/umpan balik singkat.
-
-=====================================================================
-STANDAR TAMPILAN, KETERBACAAN, DAN EDITABILITAS DOKUMEN — WAJIB
-=====================================================================
-Keluaran harus tidak hanya lengkap secara isi, tetapi juga MUDAH DIBACA, MUDAH DIPAHAMI, MUDAH DINAVIGASI, MUDAH DICETAK, dan MUDAH DIEDIT kembali oleh guru. Terapkan aturan berikut pada semua bagian yang memang digunakan:
-
-1. HIERARKI DOKUMEN YANG JELAS
-   - Gunakan judul utama, subjudul, dan sub-subjudul secara konsisten.
-   - Gunakan penomoran yang stabil dan jangan melompat-lompat.
-   - Pisahkan setiap bagian utama A, B, C, dan seterusnya dengan heading yang tegas serta ruang antarbagiannya yang cukup.
-   - Hindari blok teks sangat panjang; pecah menjadi paragraf singkat, poin, langkah, atau tabel bila memang lebih mudah dipahami.
-
-2. DESAIN INFORMASI YANG RINGKAS TETAPI TIDAK KEHILANGAN ISI
-   - Dahulukan informasi yang harus segera diketahui guru, kemudian detail pendukung.
-   - Gunakan kalimat langsung, bahasa profesional, dan istilah yang konsisten dari awal sampai akhir.
-   - Hindari pengulangan isi yang sama di banyak bagian. Jika perlu mengacu bagian lain, gunakan rujukan yang jelas, misalnya “lihat Rubrik Proyek pada Bagian G”.
-   - Gunakan bold secara selektif untuk label/kata kunci penting; jangan membuat seluruh paragraf tebal.
-
-3. ATURAN TABEL — WAJIB MUDAH DIEDIT
-   - Semua tabel harus berupa tabel teks/native yang dapat diedit, BUKAN gambar/screenshot tabel.
-   - Jika platform mendukung DOCX, Google Docs, atau editor dokumen, gunakan tabel native platform tersebut. Jika hanya teks/Markdown tersedia, gunakan tabel Markdown sederhana yang tetap mudah disalin dan diedit.
-   - Hindari merged cells, tabel di dalam tabel, struktur bertingkat yang rumit, atau format dekoratif yang menyulitkan pengeditan.
-   - Gunakan satu jenis informasi per kolom dengan judul kolom pendek, jelas, dan konsisten.
-   - Jangan memasukkan paragraf sangat panjang ke satu sel. Ringkas isi sel menjadi poin/kalimat pendek tanpa menghilangkan makna.
-   - Jika tabel menjadi terlalu lebar atau memiliki terlalu banyak kolom, PECAH menjadi dua atau lebih tabel tematik daripada memaksa satu tabel besar.
-   - Jika tabel sangat panjang, ulangi header secara logis pada bagian lanjutan bila platform mendukung.
-   - Untuk ruang yang akan diisi guru/siswa, sediakan kolom/ruang kosong yang cukup dan jelas.
-   - Jangan menggunakan tabel hanya untuk dekorasi; gunakan tabel jika memang membantu perbandingan, pencatatan, pemetaan, atau pengolahan data.
-
-4. KETERBACAAN LKPD, ASESMEN, DAN INSTRUMEN
-   - Setiap lembar siap pakai harus memiliki judul, tujuan singkat bila diperlukan, identitas/ruang nama jika relevan, instruksi, isi/tugas, dan ruang respons yang jelas.
-   - Nomor soal/tugas harus konsisten dan mudah dirujuk dari kisi-kisi serta kunci/pedoman skor.
-   - Pisahkan bagian “untuk siswa” dan “untuk guru” agar kunci jawaban, pedoman skor, atau catatan guru tidak bercampur dengan lembar yang dibagikan kepada siswa.
-   - Rubrik harus mudah dipindai: aspek pada baris, level/skor pada kolom, deskriptor singkat namun operasional.
-
-5. KESIAPAN CETAK DAN EDIT ULANG
-   - Hindari elemen yang hanya bekerja pada tampilan chat, seperti layout visual kompleks yang rusak ketika disalin ke Word/Docs.
-   - Jangan menggunakan code block untuk isi modul, tabel, LKPD, rubrik, atau instrumen kecuali benar-benar berupa kode.
-   - Gunakan format yang tetap masuk akal ketika dicopy-paste ke Word/Google Docs.
-   - Gunakan page break/section break pada lampiran atau lembar siswa bila platform mendukungnya. Lakukan export ke DOCX/PDF lalu render/pratinjau seluruh halaman untuk menguji halaman terpotong; bila tak ada akses ekspor/render, nyatakan pemeriksaan visual belum dilakukan.
-   - Jangan mengunci konten menjadi gambar/PDF datar jika tujuan pengguna adalah pengeditan; prioritaskan struktur yang editable terlebih dahulu.
-
-6. STANDAR HALAMAN, CETAK, DAN UKURAN TULISAN
-   - Gunakan orientasi Portrait A4 sebagai default untuk modul, lembar asesmen, dan LKPD, kecuali tabel/diagram tertentu benar-benar membutuhkan Landscape. Jika Landscape dipakai, batasi hanya pada halaman terkait.
-   - Gunakan margin sekitar 2–2,5 cm agar aman untuk pencetakan dan penjilidan.
-   - Ukuran teks isi utama disarankan 11–12 pt; untuk kelas awal/lembar siswa dengan kebutuhan keterbacaan tinggi gunakan 12–14 pt. Jangan mengecilkan teks hanya untuk memaksa tabel muat satu halaman.
-   - Judul bagian utama sekitar 15–18 pt, subjudul 13–15 pt, dan teks tabel minimal sekitar 10–11 pt. Jika tabel tidak muat pada ukuran terbaca, pecah tabel atau ubah orientasi halaman—jangan mengecilkan hingga sulit dibaca.
-   - Gunakan spasi baris sekitar 1,15–1,4 dan jarak antarbagian yang cukup. Hindari halaman yang terlalu padat.
-   - Setiap lembar asesmen siswa harus dimulai pada halaman baru; kunci/pedoman guru dipisahkan ke halaman berikutnya. LKPD utama juga sebaiknya dimulai pada halaman baru agar dapat dicetak sebagai lembar mandiri.
-   - Aktifkan keep-with-next untuk judul, keep-together untuk gambar/caption, cegah baris tabel terpecah tidak wajar, ulang header tabel lintas halaman bila platform mendukung. Jika belum ada mesin layout, jangan klaim telah memeriksa keterpotongan halaman.
-
-7. KONSISTENSI VISUAL, ISTILAH, DAN PENANDA INKLUSI
-   - Gunakan gaya heading, penomoran, label, skala rubrik, istilah TP/KKTP, nama asesmen, dan nama aktivitas secara konsisten.
-   - BAGIAN KHUSUS DUKUNGAN INKLUSI boleh diberi penanda visual kontras lembut dan konsisten; JANGAN menjadikan warna satu-satunya pembeda. Bila digunakan, pilih highlight kuning muda yang konsisten dan tetap terbaca saat dicetak: gunakan yellow highlight/shading lembut (mis. #FFF3B0 atau #FFF59D) dengan teks hitam untuk heading/blok/baris tabel bertanda [INKLUSI — AKOMODASI] dan [INKLUSI — TARGET ADAPTIF]. Jangan memberi highlight kuning yang sama pada [REGULER].
-   - Pada tabel, gunakan shading kuning muda pada baris/sel yang memang khusus inklusi; jangan mewarnai seluruh tabel jika hanya sebagian baris untuk inklusi.
-   - Jika format output tidak mendukung warna/highlight, gunakan fallback visual "🟨 [INKLUSI — ...]" pada awal heading/baris agar peruntukan tetap sangat jelas. Jika output DOCX/Google Docs/HTML mendukung warna, tetap gunakan highlight kuning asli dan tidak hanya emoji.
-   - Highlight tidak boleh mengurangi kontras, keterbacaan, atau aksesibilitas; hindari kuning neon/terlalu gelap dan jangan memakai warna sebagai satu-satunya penanda—label teks [INKLUSI — ...] tetap wajib.
-   - Jika menggunakan singkatan, jelaskan pada kemunculan pertama.
-   - Hindari ornamen, emoji, atau simbol berlebihan pada dokumen formal; pengecualian simbol 🟨 hanya sebagai fallback ketika platform tidak mendukung highlight warna.
-
-8. PRINSIP “SATU LIHAT, PAHAM STRUKTURNYA”
-   - Setelah judul modul, LANGSUNG mulai dengan A. IDENTITAS. Tidak perlu daftar isi/peta dokumen di bagian awal.
-   - Gunakan heading dan subheading yang konsisten; urutkan hanya bagian yang ditampilkan agar tidak ada huruf atau angka melompat.
-   - Pada setiap bagian utama, langsung masuk ke isi; gunakan kalimat pembuka hanya bila benar-benar diperlukan untuk kejelasan.
-   - Pastikan guru dapat menemukan asesmen, LKPD, rubrik, remedial, pengayaan, kunci, dan rekap nilai tanpa harus menelusuri paragraf panjang.
-
-=====================================================================
-BAGIAN 5 — FORMAT KELUARAN
-=====================================================================
-PETA BAGIAN KELUARAN — gunakan penanda ini secara konsisten agar guru mengetahui isi setiap bagian:
-- A. Identitas — identitas sekolah/guru, CP, profil/kondisi siswa, prasyarat, miskonsepsi, dan kondisi implementasi.
-- B. Desain Pembelajaran — TP, KKTP berbasis bukti ketercapaian, materi esensial, pemahaman bermakna, model/kerangka pembelajaran, diferensiasi, dan proyek. Keselarasan antarbagian diaudit secara internal tanpa menampilkan matriks keterlacakan.
-- C. Langkah-Langkah Kegiatan Pembelajaran — naratif terstruktur per pertemuan (bukan tabel), dengan pemisahan [REGULER] dan [INKLUSI] bila relevan, pengalaman belajar, audit waktu, dan Plan B.
-- D. Asesmen Pembelajaran — rancangan diagnostik/formatif/sumatif, domain kognitif/non-kognitif, adaptasi, bobot, teknik, dan tindak lanjut.
-- E. Paket Lembar Asesmen Lengkap — kisi-kisi, seluruh soal/tugas, stimulus, kunci/pedoman skor, rubrik per butir/teknik, serta akomodasi akses bila diperlukan tanpa menurunkan kompetensi yang diukur.
-- F. LKPD Praktik / Investigasi — lembar kerja praktik/observasi/simulasi/unjuk kerja lengkap beserta penilaiannya.
-- G. LKPD Proyek — tantangan proyek, tahapan, produk, monitoring progres, refleksi, dan rubrik proyek/produk.
-- H. Lembar Observasi, Keterampilan, dan Sikap — lembar observasi guru serta rubrik keterampilan dan sikap yang operasional.
-- I. Bahan Ajar Ringkas / Handout Siswa — materi esensial, contoh, konsep kunci, miskonsepsi, dan cek pemahaman.
-- J. Refleksi Siswa dan Penilaian Diri — refleksi metakognitif dan skala/indikator penilaian diri bila relevan.
-- K. Refleksi Guru dan Catatan Tindak Lanjut — evaluasi keterlaksanaan, respons siswa, ketercapaian TP, kendala, dan perbaikan.
-- L. Rencana Tindak Lanjut: Remedial & Pengayaan — paket remedial dan pengayaan siap dibagikan kepada siswa beserta instrumen cek ulang/tantangan.
-- M. Perangkat Administrasi & Lampiran Pendukung — sumber belajar, glosarium, alat/bahan, kunci terpusat, rekap nilai, dokumentasi, keselamatan/etika, Plan B, dan lampiran relevan.
-- N. Audit Mutu Final — checklist kelulusan mutu, keselarasan internal TP–KKTP–kegiatan–asesmen, konsistensi jumlah soal/bobot/waktu, kelengkapan instrumen, diferensiasi, dan kesesuaian kurikulum. Jangan tampilkan matriks keterlacakan.
-- O. Pengesahan / Tanda Tangan — OPSIONAL; hanya muncul bila {{tanda_tangan_modul}} diaktifkan, dan selalu diletakkan paling akhir.
-
-ATURAN MODE KELUARAN — {{mode_keluaran_modul}}:
-   a. "Dokumen Lengkap Sekaligus": modul inti dan lampiran yang relevan dalam satu keluaran.
-   b. "Modul Inti + Lampiran": tampilkan identitas, CP/TP/KKTP, desain dan kegiatan, serta rancangan asesmen sebagai inti; letakkan instrumen yang diperlukan di lampiran.
-   c. "Bertahap per Bagian": pecah keluaran berdasarkan tahapan kerja; jangan memotong soal, rubrik, atau LKPD di tengah.
-- Hasil akhir menggunakan tepat satu judul {{judul_dokumen_modul}}; setelah judul langsung A. IDENTITAS.
-- Semua judul bagian yang benar-benar muncul harus berurutan tanpa lompatan huruf/nomor. F–M pada peta di atas adalah OPSI komponen, bukan kewajiban semua mapel.
-- Tidak wajib ada LKPD praktik, LKPD proyek, rubrik sikap, atau angka interval jika tidak dituntut oleh TP, kegiatan, dan teknik asesmen yang dipilih.
-- Gunakan tabel hanya bila meningkatkan pemahaman. Tabel maksimum lebar halaman; jika terlalu banyak kolom, pisah menjadi tabel tematik yang terbaca.
-- Materi siswa, petunjuk siswa, dan rubrik/kunci untuk guru dipisah agar tidak terjadi kebocoran jawaban.
-- Bagian pemeriksaan kualitas adalah catatan kerja internal; tampilkan ringkasan status hanya jika berguna, jangan mengklaim uji halaman lulus tanpa benar-benar memeriksa render DOCX/PDF.
-- Bahasa Indonesia formal, lugas, sesuai mapel dan jenjang. Bullet untuk daftar setara; numbering untuk tahapan, soal, TP, dan instruksi yang berurutan. Hindari format terlalu padat dan ornamen berlebihan.
-
-=====================================================================
-CATATAN AKHIR UNTUK GURU — AGAR HASIL LEBIH MAKSIMAL DAN AKURAT
-=====================================================================
-Jika memungkinkan, saat menjalankan prompt ini pada AI yang akan digunakan untuk generate Modul Ajar, lampirkan BERSAMA PROMPT:
-- dokumen Capaian Pembelajaran (CP)/standar resmi yang berlaku;
-- bahan ajar yang benar-benar digunakan, seperti buku, modul, handout, artikel, slide, atau sumber belajar lain;
-- ATP/TP, LKPD, asesmen, rubrik, atau perangkat pembelajaran yang sudah tersedia;
-- dokumen pendukung lain yang relevan dengan mata pelajaran, kelas, kondisi siswa, sarana sekolah, dan konteks pembelajaran.
-
-Tujuannya agar AI dapat menyusun Modul Ajar berdasarkan sumber yang benar-benar digunakan guru, sehingga hasil lebih SELARAS, KONTEKSTUAL, MAKSIMAL, dan AKURAT. Tempelkan prompt dan unggah dokumen-dokumen tersebut dalam percakapan AI yang sama bila fitur unggah file tersedia. Jika dokumen tidak dapat dilampirkan, tempelkan bagian pentingnya bersama prompt. AI tidak boleh mengarang isi CP, bahan ajar, atau dokumen yang tidak tersedia.`
+        text: `Anda berperan sebagai perancang pembelajaran dan asesmen yang bekerja berbasis dokumen acuan serta kebutuhan murid. Susun satu {{judul_dokumen_modul}} yang akurat, operasional, proporsional, mudah diedit, dan sesuai kurikulum yang dipilih guru. Hindari paket administrasi berlebihan; perangkat yang benar-benar diperlukan harus diisi lengkap, bukan outline.
+
+1. DATA GURU — GUNAKAN SEBAGAIMANA DIBERIKAN
+Identitas:
+- Sekolah: {{nama_sekolah}}
+- Guru: {{nama_guru_modul}}
+- Kepala sekolah: {{nama_kepala_sekolah}}
+- Kurikulum/acuan: {{kurikulum_acuan_modul}}
+- Jenjang: {{jenjang}}
+- Fase dan kelas: {{fase_kelas}}
+- Mapel/bidang belajar: {{mata_pelajaran}}
+- Topik: {{topik_materi}}
+- Subtopik: {{subtopik}}
+- Semester/tahun ajaran: {{semester_tahun_ajaran}}
+- Pertemuan dan alokasi waktu: {{jumlah_pertemuan_alokasi}}
+- Jumlah murid: {{jumlah_siswa}}
+- Jumlah kelompok: {{jumlah_kelompok}}
+
+Dasar kurikulum dan tujuan:
+- CP/standar yang diberikan guru: {{capaian_pembelajaran}}
+- Identitas sumber resmi CP/standar: {{sumber_cp_modul}}
+- TP/tujuan belajar yang diberikan guru: {{tujuan_pembelajaran}}
+- Dimensi Profil Lulusan/kompetensi karakter terpilih: {{dimensi_profil_lulusan}}
+
+Kebutuhan, rencana, dan kondisi pembelajaran:
+- Komposisi kelas: {{komposisi_siswa}}
+- Kebutuhan fungsional murid: {{deskripsi_siswa_inklusi}}
+- Dasar informasi kebutuhan murid: {{dasar_data_inklusi}}
+- Dukungan yang benar-benar tersedia: {{dukungan_inklusi_tersedia}}
+- Profil Murid/PPI yang disediakan: {{ppi_inklusi}}
+- Kesiapan dan karakteristik murid: {{karakteristik_kesiapan_murid}}
+- Pengetahuan/keterampilan prasyarat: {{prasyarat_pembelajaran}}
+- Kesulitan/miskonsepsi yang diprediksi: {{miskonsepsi_kesulitan}}
+- Strategi diferensiasi pilihan guru: {{preferensi_diferensiasi}}
+- Aktivitas murid yang diinginkan guru: {{aktivitas_siswa}}
+- Model/pendekatan pembelajaran: {{model_praktik_pedagogis}}
+- Pilihan produk/proyek: {{mode_produk_proyek}}
+- Detail pilihan produk/proyek: {{opsi_produk_proyek}}
+- Konteks lokal: {{konteks_lokal_sekolah}}
+- Sarana nyata: {{sarana_pembelajaran}}
+- Keterbatasan nyata: {{keterbatasan_pembelajaran}}
+- Digital: {{pemanfaatan_digital}}
+- Kemitraan: {{kemitraan_pembelajaran}}
+- Alternatif/Plan B: {{rencana_alternatif}}
+
+Asesmen, sumber, dan keluaran:
+- Konfigurasi asesmen yang dipilih guru:
+{{konfigurasi_asesmen}}
+- Bobot komponen nilai akhir (HANYA untuk sumatif): {{bobot_penilaian}}
+- Arahan asesmen khusus: {{deskripsi_asesmen}}
+- Arahan pendampingan dan pengayaan: {{preferensi_remedial_pengayaan}}
+- Mode sumber belajar: {{mode_sumber_belajar}}
+- Sumber dan URL dari guru: {{sumber_belajar_guru}}
+- Metode visual: {{metode_gambar_modul}}
+- Bagian yang memerlukan visual: {{bagian_gambar_modul}}
+- URL/referensi visual: {{url_gambar_modul}}
+- Mode keluaran: {{mode_keluaran_modul}}
+- Pengesahan: {{tanda_tangan_modul}}
+- Ketentuan khusus guru: {{deskripsi_tambahan}}
+
+2. PRIORITAS KEBENARAN SUMBER
+- Ikuti dokumen resmi/kurikulum yang benar-benar diunggah atau dapat diverifikasi pada percakapan penyusunan; jangan mengaku telah membaca dokumen yang tidak tersedia. Pedomani Panduan Pembelajaran dan Asesmen Edisi Revisi 2025 dan Panduan Penyelenggaraan Pendidikan Inklusif Edisi Revisi 2026 jika tersedia atau memang menjadi acuan guru, tanpa mengarang ketentuan di luar dokumen.
+- Untuk Kurikulum Merdeka, CP diambil dari dokumen resmi yang sesuai mata pelajaran dan fase. Panduan Pembelajaran dan Asesmen 2025 menyebut Keputusan Kepala BSKAP No. 046/H/Kr/2025 sebagai salah satu rujukan saat penerbitannya; tetap periksa kecocokan/keberlakuan dengan sumber resmi yang tersedia. Jika CP tidak tersedia dan tidak dapat diverifikasi, nyatakan “CP resmi belum terverifikasi” di bagian CP; jangan menciptakan kutipan atau kode CP dan jangan mengklaim bahwa TP telah resmi diturunkan darinya. Minta verifikasi guru; jika diperlukan, beri contoh TP berlabel draf.
+- Pertahankan isi TP guru dan makna kompetensinya. Jika kurang terukur, beri saran perumusan secara transparan, bukan mengubah diam-diam. Jangan memaksakan satu TP hanya satu KKO; satu TP dapat memuat kinerja terpadu yang masuk akal. KKO adalah alat bantu, bukan daftar tertutup wajib. Koreksi ejaan dan gunakan kata kerja tepat sesuai mapel/jenjang.
+- Jika kurikulum bukan Merdeka, gunakan istilah tujuan, standar, pedagogi dan asesmen yang sesuai kurikulum tersebut; jangan otomatis memaksakan CP/TP/KKTP/RPM. Bedakan ketentuan resmi dari pilihan desain aplikasi. Jangan mengarang kode kurikulum, URL, sitasi, identitas, diagnosis, atau keadaan sekolah.
+
+3. PENALARAN PEDAGOGIS YANG HARUS DILAKUKAN
+A. TP DAN KKTP
+- Hubungkan standar/CP → tujuan → kriteria ketercapaian → aktivitas → bukti/asesmen → tindak lanjut. Cek keterkaitan secara internal, tetapi tidak perlu menampilkan matriks audit terpisah.
+- KKTP menunjukkan kemampuan apa yang dapat ditunjukkan murid beserta mutu/batas ketercapaian yang jelas, BUKAN satu angka KKM atau label C1–C6. Gunakan deskripsi, rubrik, interval atau pendekatan relevan. Banyak kriteria secukupnya sesuai sifat TP; jangan memaksakan angka kriteria atau angka batas kelulusan arbitrer. Tampilkan TP, bukti/KKTP, instrumen serta keputusan ketercapaian secara mudah dipahami guru.
+- Jika TP lebih luas daripada yang realistis untuk waktu pembelajaran, prioritaskan kompetensi yang dapat dilaksanakan atau minta penegasan; jangan diam-diam mengurangi CP/TP.
+
+B. PEMBELAJARAN MENDALAM
+- Pada konteks Pembelajaran Mendalam Indonesia, tunjukkan secara nyata prinsip berkesadaran, bermakna, menggembirakan dan pengalaman belajar memahami, mengaplikasi, merefleksi. Ketiganya dapat berlangsung melintasi pertemuan, bukan kotak wajib yang dipaksakan selesai pada satu jam.
+- Dalam langkah kegiatan, utamakan kata kerja tindakan MURID: mengamati apa, menyelidiki bagaimana, mengumpulkan bukti apa, menjelaskan/membuat apa, serta merefleksikan hasil apa. Cantumkan peran guru, bukti belajar, durasi (hanya bila alokasi diketahui), alat/sumber, dan Plan B pada ketergantungan sarana/cuaca/digital. Sesuaikan sintaks model yang memang dipilih, bukan memaksakan seluruh model atau proyek.
+- Dimensi profil hanya yang dipilih guru dan didukung aktivitas konkret. Kemitraan, digital, dan lintas disiplin ditulis hanya jika berfungsi nyata.
+
+C. KEBERAGAMAN DAN AKOMODASI
+- Gunakan informasi fungsional dan data yang tersedia; status kelas heterogen atau kesulitan membaca TIDAK otomatis berarti diagnosis disabilitas maupun kebutuhan TP adaptif. Prioritaskan akses: instruksi singkat, visual/audio, pemecahan tugas, contoh kerja, waktu/pilihan respons, dan penataan kelompok sesuai kebutuhan nyata.
+- Untuk akomodasi, TP dan KKTP substansial tetap sama. Tuliskan penyesuaian hanya saat ada perbedaan pelaksanaan, bisa dalam satu kolom “Dukungan akses” atau tabel singkat; jangan menggandakan seluruh tabel KKTP, soal, LKPD atau memberi label yang menstigma pada lembar siswa. Jika bukti asesmen/Profil Murid/PPI memang membenarkan tujuan adaptif, tampilkan tujuan/KKTP/bukti adaptif secara jelas dan terpisah untuk kebutuhan administrasi guru; jangan menebak PPI atau diagnosis.
+- Jaga kerahasiaan, tampilkan kekuatan/potensi serta partisipasi murid; sebut dukungan GPK/ULD/alat bantu hanya apabila tersedia, atau tandai sebagai rekomendasi yang belum terverifikasi. Jika kelas tanpa kebutuhan dukungan khusus, jangan memunculkan subbagian inklusi yang kosong.
+
+D. ASESMEN YANG SESUAI TP DAN FUNGSI
+- Hanya tampilkan jenis asesmen yang diaktifkan guru. Asesmen awal boleh memeriksa prasyarat untuk menyesuaikan pembelajaran, tidak harus semuanya mengukur TP akhir. Formatif memantau kemajuan dan memberi umpan balik; tidak otomatis menjadi nilai rapor. Sumatif mengukur ketercapaian hasil belajar jika dipilih. Jangan membuat nilai akhir atau menggunakan bobot akhir bila tidak ada komponen sumatif yang relevan.
+- Jika guru memasukkan jumlah soal, buat SELURUH butir soal dengan stimulus, opsi/jawaban sesuai bentuk, kisi-kisi yang merujuk ke prasyarat/TP/KKTP, kunci dan pedoman skor; tanpa butir tambahan yang tidak diminta. Jika ada perbedaan bentuk respons sebagai akomodasi, utamakan instrumen yang sama dengan petunjuk akses berbeda; pertahankan tuntutan kompetensi. Nomori 1, 2, 3… dari awal di setiap lembar; pisahkan kunci/pedoman guru dari lembar murid.
+- LOTS/MOTS/HOTS menunjukkan proses berpikir, bukan sekadar soal mudah/sedang/sulit. AKM/PISA adalah karakteristik konteks atau gaya stimulus, BUKAN level keempat. Proporsi level LOTS/MOTS/HOTS total 100% bila ditentukan. Jika jumlah soal menyebabkan pecahan kuota, gunakan pembagian bilangan bulat terdekat dengan jumlah total tetap, tuliskan jumlah soal aktual per level dalam kisi-kisi; jangan mengarang persentase tepat yang tidak mungkin dicapai. Jangan melebihi keterampilan/lingkup yang tercantum dalam TP.
+- Buat rubrik sesuai teknik yang DIPAKAI (praktik, karya, proyek, presentasi, uraian, observasi), dengan aspek dan deskriptor mutu teramati, bukan rubrik generik. Untuk tes objektif gunakan kunci serta pedoman skor. Sikap/karakter dicatat hanya bila relevan dengan aktivitas dan indikator yang tampak; tidak otomatis menjadi angka nilai akhir.
+
+E. REALISTIS TERHADAP WAKTU DAN PERANGKAT
+- Hormati alokasi waktu, jumlah murid/kelompok, alat yang diketahui ada, keterampilan prasyarat, dan pelaksanaan yang aman. Bila durasi belum diketahui, nyatakan perlu konfirmasi, jangan mengarang jam pelajaran seolah-olah dari guru.
+- LKPD observasi/praktik wajib lengkap hanya jika memang ada aktivitas tersebut. LKPD proyek hanya jika guru memilih kegiatan proyek atau produk yang secara substantif membutuhkan tugas proyek. Jangan memaksa proyek baru, presentasi, rubrik sikap, atau semua perangkat dalam satu pertemuan. Remedial/pengayaan berupa langkah/tugas nyata yang menindaklanjuti KKTP, proporsional dengan hasil asesmen.
+- Bahan ajar, media, rubrik, instrumen, dan lampiran tidak boleh mengulang isi yang sama; cukup rujuk bagian yang sudah tersedia.
+
+4. SUMBER, VISUAL, DAN KELAYAKAN TEKNIS
+- Bila diminta mencari sumber dan memiliki akses web, verifikasi sumber relevan yang benar-benar digunakan dan tuliskan judul, lembaga/penulis bila diketahui, serta URL nyata. Tidak ada kewajiban mengarang jumlah sumber atau video. Tanpa akses web, jangan mengklaim tautan telah diperiksa atau mengarang DOI/URL.
+- Gunakan visual hanya jika mendukung TP atau memudahkan akses murid, mengikuti bagian dan metode visual yang dipilih. Gambar faktual/ilmiah harus benar; prioritaskan sumber dengan hak penggunaan jelas dan cantumkan kredit/alt text. Jangan menempel potongan yang menghilangkan informasi penting, mengubah makna, atau melanggar hak penggunaan. Jika tidak dapat mengambil atau membuat gambar, beri deskripsi visual yang perlu disiapkan tanpa mengklaim gambar sudah tersedia.
+- Buat dokumen formal dengan hierarki judul rapi, bahasa sederhana sesuai jenjang, tabel native yang ringkas (pecah tabel lebih dari 5–6 kolom bila sulit dibaca), penomoran stabil, bullet hanya untuk butir tidak berurutan, langkah bernomor untuk prosedur. Format rekomendasi A4, margin memadai, font isi terbaca, kunci guru dan lembar murid terpisah. Jangan klaim dokumen bebas halaman terpotong sebelum DOCX/PDF benar-benar dibuat, dirender, dan diperiksa visual halaman demi halaman.
+
+5. SUSUNAN HASIL AKHIR — FLEKSIBEL, BUKAN PAKET A–N WAJIB
+Tulis tepat SATU judul utama sesuai pilihan guru: {{judul_dokumen_modul}}. Setelah judul langsung “A. IDENTITAS”. Berikut urutan dasar, boleh menggabungkan/menambah subbagian yang betul-betul diperlukan:
+A. IDENTITAS DAN KONTEKS — identitas faktual, sumber CP/standar (atau status belum terverifikasi), profil kesiapan dan kebutuhan dukungan secukupnya.
+B. TUJUAN, KRITERIA DAN DESAIN PEMBELAJARAN — TP/KKTP berbasis bukti, materi esensial, dimensi relevan, pemahaman bermakna, strategi, dan diferensiasi.
+C. LANGKAH PEMBELAJARAN — pertemuan, kegiatan awal–inti–penutup, tindakan guru/murid, pengalaman memahami–mengaplikasi–merefleksi, bukti dan waktu nyata, Plan B jika relevan. Langkah dalam poin bernomor/narasi terstruktur, bukan tabel raksasa.
+D. RENCANA ASESMEN DAN TINDAK LANJUT — formatif awal/proses, sumatif hanya bila diaktifkan, instrumen yang dipakai, rubrik/pedoman, keputusan per KKTP, dukungan dan pengayaan.
+E. SUMBER DAN LAMPIRAN RELEVAN — lembar siswa, soal, kisi-kisi, kunci terpisah, LKPD observasi/praktik, handout, rubrik, rekap atau materi pengayaan HANYA jika digunakan; setiap lampiran siap pakai, tidak berisi instruksi placeholder.
+F. PENGESAHAN — hanya bila guru mengaktifkan tanda tangan; gunakan nama yang diberikan, berikan ruang tanda tangan manual, jangan mengarang nama/tanda tangan.
+
+Jika mode “Modul Inti + Lampiran”, letakkan A–D di depan dan perangkat pendukung pada lampiran; jika mode “Bertahap”, hasilkan per tahap tanpa mengulang dan selesaikan instrumen sebelum lanjut. Jika mode “Dokumen Lengkap Sekaligus”, tampilkan satu dokumen dengan bagian yang relevan. Tidak perlu bab audit mutu internal pada dokumen untuk murid/guru. Jika ada konflik data penting (misalnya bobot nilai akhir tanpa sumatif, CP belum terverifikasi, waktu tidak lengkap), tandai pada bagian terkait dan jangan mengesahkan fakta atau hasil audit yang belum dapat dibuktikan. Terakhir, periksa secara internal kecocokan TP–KKTP–aktivitas–asesmen, jumlah butir, alokasi, kunci, keamanan, keterbacaan dan keberlakuan sumber.
+`
       }
     ]
   }
@@ -8932,7 +8263,7 @@ const moduleGeneratorFieldConfig={
   '{{tujuan_pembelajaran}}':{label:'Tujuan Pembelajaran (TP)',placeholder:'Contoh: TP 1. Murid dapat mengamati dan menjelaskan perubahan yang ditemukan di lingkungan sekitar.',help:'Pertahankan TP guru. Periksa konteks kompetensi/KKTP tanpa memaksakan satu KKO atau kuota 2–4 TP; usulkan pemecahan hanya bila penilaian menjadi ambigu. Jika CP belum terverifikasi, jangan klaim TP resmi sudah selaras.',auto:'bila CP resmi ada dan terverifikasi, usulkan TP seperlunya; jika tidak ada, jangan mengklaim keselarasan CP resmi'},
   '{{dimensi_profil_lulusan}}':{label:'8 Dimensi Profil Lulusan',type:'dimensions',help:'Centang dimensi yang ingin digunakan (disarankan 2–4). Jika Anda memilih, prompt final hanya akan memuat dimensi yang dicentang—AI tidak boleh menambah dimensi lain. Jika tidak ada yang dipilih, AI akan memilihkan 2–4 dimensi paling relevan.',auto:'pilih 2–4 Dimensi Profil Lulusan yang paling relevan dan sertakan bukti nyata pencapaiannya'},
   '{{semester_tahun_ajaran}}':{label:'Semester & Tahun Ajaran',placeholder:'Contoh: Ganjil, 2026/2027',help:'Jika kosong, AI memberikan usulan yang mudah diedit.',auto:'tentukan semester/tahun ajaran sebagai usulan yang mudah diedit'},
-  '{{jumlah_pertemuan_alokasi}}':{label:'Jumlah Pertemuan & Alokasi',placeholder:'Contoh: 3 pertemuan × 2 JP @40 menit',help:'Jika kosong, AI menentukan jumlah pertemuan dan alokasi waktu yang wajar. Prompt akan mengaudit agar total menit kegiatan sama dengan alokasi.',auto:'tentukan jumlah pertemuan dan alokasi waktu yang wajar lalu audit total menit setiap pertemuan'},
+  '{{jumlah_pertemuan_alokasi}}':{label:'Jumlah Pertemuan & Alokasi',placeholder:'Contoh: 3 pertemuan × 2 JP @40 menit',help:'Isi jumlah pertemuan BESERTA durasi JP/menit, misalnya 1 pertemuan × 2 JP @40 menit. Jika tidak diberikan, prompt meminta konfirmasi, tidak mengarang durasi.',auto:'tentukan jumlah pertemuan dan alokasi waktu yang wajar lalu audit total menit setiap pertemuan'},
   '{{jumlah_siswa}}':{label:'Jumlah Siswa',type:'number',min:1,max:100,placeholder:'Contoh: 32',help:'Digunakan untuk menentukan ukuran kelompok, rasio alat/bahan, rotasi, dan realisme aktivitas. Jika kosong, AI membuat asumsi kelas yang wajar dan menyebutkannya.',auto:'asumsikan jumlah siswa yang wajar dan nyatakan asumsi tersebut'},
   '{{jumlah_kelompok}}':{label:'Jumlah Kelompok (Opsional)',type:'number',min:1,max:50,placeholder:'Contoh: 8',help:'Jika kosong, AI menentukan jumlah kelompok berdasarkan jumlah siswa, aktivitas, serta sarana yang tersedia.',auto:'tentukan jumlah kelompok realistis berdasarkan jumlah siswa, aktivitas, dan sarana'},
   '{{sarana_pembelajaran}}':{label:'Sarana / Media yang Tersedia',type:'textarea',placeholder:'Contoh: 4 mikroskop, 1 IFP, 8 laptop kelompok, halaman sekolah, kertas A3; internet terbatas',help:'Tuliskan sumber daya yang benar-benar tersedia agar aktivitas tidak melebihi kondisi kelas. Jika kosong, AI menggunakan asumsi minimal dan menyediakan alternatif.',auto:'gunakan asumsi sarana minimal yang realistis dan sediakan alternatif sederhana'},
@@ -8961,7 +8292,7 @@ const moduleGeneratorFieldConfig={
   '{{bobot_penilaian}}':{label:'Bobot Penilaian Akhir (Opsional)',type:'assessmentWeights',help:'Isi bobot hanya untuk komponen yang memang digunakan sebagai penilaian hasil belajar/sumatif. Asesmen formatif berfungsi untuk umpan balik dan tidak otomatis masuk nilai akhir. Jika ada angka yang diisi, total komponen nilai akhir harus 100%. Kosong = AI menentukan bobot proporsional untuk asesmen sumatif yang aktif.',auto:'tentukan bobot komponen sumatif/nilai akhir yang totalnya 100%; asesmen formatif tetap untuk umpan balik dan tidak digabungkan ke nilai akhir'},
   '{{deskripsi_asesmen}}':{label:'Deskripsi Asesmen Tambahan',placeholder:'Contoh: formatif setelah praktikum; sumatif 20 soal; sediakan versi lisan untuk siswa tertentu; gunakan stimulus data lokal',help:'Opsional. Isi ketentuan asesmen yang belum tercakup. Jika kosong, AI menentukan detail teknis asesmen yang wajar berdasarkan TP, KKTP, jenjang, dan kondisi siswa.',auto:'tidak ada ketentuan tambahan; tentukan detail asesmen yang wajar berdasarkan TP, KKTP, jenjang, dan kondisi siswa'},
   '{{preferensi_remedial_pengayaan}}':{label:'Arahan Remedial & Pengayaan (Opsional)',type:'textarea',placeholder:'Contoh: remedial melalui tutorial kelompok kecil + latihan bertahap; pengayaan berupa mini-riset lingkungan dan presentasi singkat',help:'Guru dapat menentukan bentuk tindak lanjut. Hasil akhir tetap harus memuat paket remedial dan pengayaan siap diberikan kepada siswa, lengkap dengan lembar tugas dan instrumen penilaiannya.',auto:'buat paket remedial dan pengayaan siap dibagikan kepada siswa berdasarkan ketercapaian tiap TP/KKTP'},
-  '{{mode_keluaran_modul}}':{label:'Mode Keluaran Modul',type:'outputMode',options:[['','— Ditentukan AI —'],['Dokumen Lengkap Sekaligus','Dokumen Lengkap Sekaligus — modul inti dan lampiran relevan dalam satu dokumen'],['Modul Inti + Lampiran','Modul Inti + Lampiran — inti dan lampiran sesuai kebutuhan, pengesahan opsional'],['Bertahap per Bagian','Bertahap per Bagian — susun inti lalu asesmen dan lampiran relevan tanpa memotong instrumen']],help:'Mode keluaran menentukan penyajian; setiap unit memuat hanya modul inti dan lampiran yang digunakan, bukan semua jenis rubrik/proyek/praktikum. Format rapi, tabel editable, A4, dan nomor soal urut.',auto:'gunakan Modul Inti + Lampiran dengan instrumen relevan sesuai tujuan belajar'},
+  '{{mode_keluaran_modul}}':{label:'Mode Keluaran Modul',type:'outputMode',options:[['','— Ditentukan AI —'],['Dokumen Lengkap Sekaligus','Dokumen Lengkap Sekaligus — modul inti dan lampiran relevan dalam satu dokumen'],['Modul Inti + Lampiran','Modul Inti + Lampiran — inti dan lampiran sesuai kebutuhan, pengesahan opsional'],['Bertahap per Bagian','Bertahap per Bagian — susun inti lalu asesmen dan lampiran relevan tanpa memotong instrumen']],help:'Mode keluaran mengatur penyajian bagian inti dan lampiran yang sungguh diperlukan. Jangan memaksakan seluruh paket A–N dan asesmen sumatif yang tidak dipilih.',auto:'gunakan Modul Inti + Lampiran dengan instrumen relevan sesuai tujuan belajar'},
   '{{tanda_tangan_modul}}':{label:'Bagian Tanda Tangan Akhir Modul (Opsional)',type:'select',options:[['Tidak — tanpa bagian tanda tangan','Tidak — tanpa bagian tanda tangan'],['Ya — tampilkan bagian tanda tangan','Ya — tampilkan bagian tanda tangan']],help:'Jika Ya, tambahkan blok pengesahan paling akhir untuk Guru dan Kepala Sekolah dengan ruang tanda tangan manual. Jika Tidak, blok tersebut tidak dibuat.',auto:'gunakan Tidak — tanpa bagian tanda tangan'}
  };
 const lkpdGeneratorFieldConfig={
@@ -9377,7 +8708,7 @@ function renderGeneratorField(f,id,disabled){
     control=`<input type="hidden" id="${id}" data-token="${escapeHtml(f.token)}" data-assessment-hidden value="" ${disabled?'disabled':''}/><div class="assessment-config"><div class="assessment-intro"><strong>Atur asesmen sesuai kebutuhan.</strong> Asesmen Formatif wajib dan selalu aktif. Formatif Awal dan Sumatif opsional. Pada tiap jenis asesmen, pilih Kognitif, Non-Kognitif/Kinerja & Sikap, atau keduanya. Untuk asesmen kognitif, Anda dapat menentukan jumlah soal total dan secara opsional membagi jumlah per tipe soal. <strong>Level kognitif dibedakan dari proses berpikir:</strong> LOTS = recall/pemahaman, MOTS = penerapan/transfer, HOTS = analisis-evaluasi-kreasi non-rutin; soal panjang atau sulit belum tentu HOTS. Rubrik dibuat otomatis sesuai teknik yang dipilih.</div>${rows}<div class="assessment-note-final">Jika jumlah soal per tipe tidak diisi, AI membagi jumlah total ke tipe yang dipilih. Guru juga dapat mendeskripsikan peruntukan jumlah soal pada kolom arahan kognitif. Jika seluruh rincian kosong, AI menentukan instrumen dan jumlah yang sesuai TP/KKTP. Untuk siswa reguler, AI wajib menjaga perbedaan nyata LOTS–MOTS–HOTS dan tidak boleh sekadar mengganti kata kerja atau memberi label HOTS pada soal hafalan. Rubrik hanya dibuat untuk teknik asesmen yang membutuhkan dan dipilih.</div></div>`;
   }else if(cfg?.type==='assessmentWeights'){
     const weights=['Kognitif','Praktik/Keterampilan','Proyek/Produk','Sikap/Observasi'];
-    control=`<input type="hidden" id="${id}" data-token="${escapeHtml(f.token)}" data-assessment-weights-hidden value="" ${disabled?'disabled':''}/><div class="assessment-config"><div class="assessment-intro"><strong>Bobot nilai akhir.</strong> Isi hanya komponen yang ingin dibobotkan. Jika satu atau lebih angka diisi, total wajib 100%. Kosong = AI menentukan dan membedakan komponen nilai dengan monitoring formatif.</div><div class="assessment-level-grid">${weights.map(w=>`<label class="assessment-level">${w}<input type="number" min="0" max="100" step="1" inputmode="numeric" data-assessment-weight="${w}" placeholder="0" ${disabled?'disabled':''}/></label>`).join('')}</div><div class="assessment-level-total" data-assessment-weight-total>Kosong = AI menentukan • jika diisi total harus 100%</div></div>`;
+    control=`<input type="hidden" id="${id}" data-token="${escapeHtml(f.token)}" data-assessment-weights-hidden value="" ${disabled?'disabled':''}/><div class="assessment-config"><div class="assessment-intro"><strong>Bobot nilai akhir.</strong> Isi hanya komponen yang ingin dibobotkan. Jika satu atau lebih angka diisi, total wajib 100%. Isi hanya bila Sumatif diaktifkan; kosong = tidak ada bobot nilai akhir.</div><div class="assessment-level-grid">${weights.map(w=>`<label class="assessment-level">${w}<input type="number" min="0" max="100" step="1" inputmode="numeric" data-assessment-weight="${w}" placeholder="0" ${disabled?'disabled':''}/></label>`).join('')}</div><div class="assessment-level-total" data-assessment-weight-total>Kosong = AI menentukan • jika diisi total harus 100%</div></div>`;
   }else if(cfg?.type==='lkpdOutput'){
     const opts=[['','— Pilih format output —'],['Dokumen (DOCX)','Dokumen (DOCX) — mudah diedit'],['Dokumen (PDF)','Dokumen (PDF) — siap cetak'],['Gambar per Halaman','Gambar per Halaman — satu file gambar untuk tiap halaman']];
     control=`<select class="form-control" id="${id}" data-token="${escapeHtml(f.token)}" data-lkpd-output-select ${disabled?'disabled':''}>${opts.map(([v,l])=>`<option value="${escapeHtml(v)}">${escapeHtml(l)}</option>`).join('')}</select>`;
@@ -9502,7 +8833,26 @@ function finalizeGeneratedPrompt(prompt,text,vals){
   if(state.generatorType==='mpi'&&/Prompt 0.*Ideasi MPI/i.test(prompt?.title||'')&&!vals?.semantic?.get('tujuan-pembelajaran')){out=out.replace(/^Tujuan Pembelajaran:\s*\[tujuan pembelajaran\]\s*$/m,'Tujuan Pembelajaran: (belum diisi guru — susun otomatis oleh AI sesuai kurikulum/acuan, jenjang/kelas, mata pelajaran, topik, kedalaman materi, dan estimasi waktu; tetapkan sebagai Tujuan Pembelajaran Final pada Prompt 0)');}
   if(prompt?.categoryId==='modul-ajar-rpm'){
     const selectedDims=vals?.get('{{dimensi_profil_lulusan}}')||'';if(selectedDims){out=out.replace(/REFERENSI 8 DIMENSI PROFIL LULUSAN \(DIGUNAKAN HANYA JIKA GURU TIDAK MEMILIH DIMENSI\):[\s\S]*?Jika guru sudah memilih satu atau beberapa dimensi pada input, ABAIKAN dan JANGAN tampilkan daftar referensi 8 dimensi ini pada keluaran\.\n\n/,'');}
-    Object.entries(moduleGeneratorFieldConfig).forEach(([token,cfg])=>{if(out.includes(token))out=out.split(token).join(`[Ditentukan AI: ${cfg.auto}]`);});
+    const defaults={
+      '{{judul_dokumen_modul}}':'MODUL AJAR',
+      '{{capaian_pembelajaran}}':'belum diberikan — verifikasi CP resmi sesuai kurikulum/mapel/fase',
+      '{{sumber_cp_modul}}':'belum diberikan — jangan mengarang sumber CP',
+      '{{tujuan_pembelajaran}}':'belum diberikan — usulkan draf hanya setelah status CP diperiksa',
+      '{{konfigurasi_asesmen}}':'Formatif minimal, rinci instrumen menurut TP; sumatif belum diaktifkan',
+      '{{bobot_penilaian}}':'tidak ditetapkan — jangan gunakan bobot nilai akhir tanpa asesmen sumatif',
+      '{{jumlah_pertemuan_alokasi}}':'belum ditetapkan — minta konfirmasi durasi sebelum audit menit',
+      '{{ppi_inklusi}}':'tidak dilampirkan — jangan membuat PPI resmi',
+      '{{dukungan_inklusi_tersedia}}':'belum diinformasikan — usulan bantuan bukan sarana yang dipastikan ada',
+      '{{tanda_tangan_modul}}':'Tidak — tanpa bagian tanda tangan',
+      '{{metode_gambar_modul}}':'tanpa gambar baru kecuali diminta/relevan',
+      '{{mode_produk_proyek}}':'ditentukan kebutuhan TP dan kegiatan, tidak harus proyek',
+      '{{opsi_produk_proyek}}':'tidak ditentukan',
+      '{{mode_sumber_belajar}}':'gunakan sumber yang tersedia dan dapat diverifikasi',
+      '{{mode_keluaran_modul}}':'Dokumen Lengkap Sekaligus — bagian yang relevan saja'
+    };
+    Object.entries(moduleGeneratorFieldConfig).forEach(([token,cfg])=>{
+      if(out.includes(token))out=out.split(token).join(defaults[token]||'tidak diinformasikan oleh guru');
+    });
   }else if(prompt?.title==='Prompt LKPD'){
     const fmt=vals?.get('{{format_output}}')||'';if(fmt&&fmt!=='Gambar per Halaman'){out=out.replace(/14\. Jika output = Gambar per Halaman:\n    - Format Kertas & Orientasi : \{\{kertas_gambar\}\}\n    - Format File Gambar        : \{\{format_file_gambar\}\}\n/,'14. Pengaturan gambar per halaman tidak berlaku karena output yang dipilih adalah '+fmt+'.\n');}
     Object.entries(lkpdGeneratorFieldConfig).forEach(([token,cfg])=>{if(out.includes(token))out=out.split(token).join(`[Ditentukan AI: ${cfg.auto}]`);});
@@ -9601,7 +8951,7 @@ function deleteSelectedPreset(){const id=$('#teacherPresetSelect')?.value;if(!id
 function exportTeacherPresets(){const data={version:1,exportedAt:new Date().toISOString(),presets:loadTeacherPresets()};downloadText('Prompt_EDU_Preset_Guru.json',JSON.stringify(data,null,2));}
 function importTeacherPresetFile(file){if(!file)return;const r=new FileReader();r.onload=()=>{try{const data=JSON.parse(r.result);const incoming=Array.isArray(data)?data:(Array.isArray(data.presets)?data.presets:[]);if(!incoming.length)throw new Error('empty');const current=loadTeacherPresets(),byId=new Map(current.map(p=>[p.id,p]));incoming.forEach((p,i)=>{const id=p.id&&!byId.has(p.id)?p.id:`import_${Date.now()}_${i}`;byId.set(id,{id,label:p.label||`Preset Impor ${i+1}`,teacherName:p.teacherName||'',school:p.school||'',level:p.level||'',classPhase:p.classPhase||'',subject:p.subject||'',semester:p.semester||'',time:p.time||'',curriculum:p.curriculum||'',devices:p.devices||'',language:p.language||''});});saveTeacherPresets([...byId.values()]);toast(`${incoming.length} preset berhasil diimpor`);}catch{toast('File preset JSON tidak valid');}};r.readAsText(file);}
 function generatorFieldSummary(){const rows=[];els.genFields.querySelectorAll('[data-token]').forEach(input=>{if(input.disabled)return;let val=(input.value||'').trim();if(!val)return;if(input.hasAttribute('data-jp-input'))val=`${val} JP`;const label=input.closest('.form-group')?.querySelector('label')?.textContent?.trim()||friendlyLabel(input.dataset.token||'Data');rows.push([label,val]);});return rows;}
-function openGeneratorPreview(){if(!validateModuleAssessmentPercentages()||!validateModuleAssessmentWeights()||!validateMpiEvaluationConfig()||!validateLKPDOutput())return;const all=activeGeneratorPrompts();if(!all.length){toast('Pilih paket/template terlebih dahulu');return;}const rows=generatorFieldSummary(),vals=substitutionMap();const ps=(isPackageMode()&&all.length>1&&!state.generatorPrompt0Confirmed)?[all[0]]:all;const unresolved=ps.reduce((n,p)=>n+extractPromptFields(p,applySubstitutions(p.text,vals)).length,0);const preset=getSelectedTeacherPreset();const d=currentPackageDef();const title=isPackageMode()?(d?.label||all[0].categoryName):all[0].title;const phase=isPackageMode()&&all.length>1&&!state.generatorPrompt0Confirmed?'Prompt 0 saja':`${ps.length} bagian prompt`;const body=$('#generatorPreviewBody');body.innerHTML=`<div class="preview-hero"><div><strong>${escapeHtml(title)}</strong><p>${escapeHtml(phase)}${state.generatorVersion==='pro'?' • Versi PRO':''}${preset?` • Preset: ${escapeHtml(preset.label)}`:''}</p></div><span class="preview-badge">${rows.length} field diisi</span></div>${rows.length?`<div class="preview-grid">${rows.slice(0,16).map(([k,v])=>`<div class="preview-item"><span>${escapeHtml(k)}</span><strong>${escapeHtml(truncate(v.replace(/\s+/g,' '),150))}</strong></div>`).join('')}</div>`:'<div class="preview-empty">Belum ada field yang diisi. AI akan mengandalkan nilai default/asumsi dari template.</div>'}${rows.length>16?`<div class="preview-empty">+ ${rows.length-16} field lain sudah terisi dan tetap akan dimasukkan ke prompt.</div>`:''}<div class="preview-empty"><strong>Yang perlu diperiksa:</strong> ${unresolved?`${unresolved} placeholder masih belum diisi dan akan mengikuti aturan default/AI pada template.`:'semua placeholder yang terdeteksi sudah memiliki nilai.'} Preview ini tidak meringkas atau mengganti template prompt asli.</div>`;$('#generatorPreviewBackdrop').hidden=false;$('#generatorPreviewModal').hidden=false;}
+function openGeneratorPreview(){if(!validateModuleTime()||!validateModuleAssessmentPercentages()||!validateModuleAssessmentWeights()||!validateMpiEvaluationConfig()||!validateLKPDOutput())return;const all=activeGeneratorPrompts();if(!all.length){toast('Pilih paket/template terlebih dahulu');return;}const rows=generatorFieldSummary(),vals=substitutionMap();const ps=(isPackageMode()&&all.length>1&&!state.generatorPrompt0Confirmed)?[all[0]]:all;const unresolved=ps.reduce((n,p)=>n+extractPromptFields(p,applySubstitutions(p.text,vals)).length,0);const preset=getSelectedTeacherPreset();const d=currentPackageDef();const title=isPackageMode()?(d?.label||all[0].categoryName):all[0].title;const phase=isPackageMode()&&all.length>1&&!state.generatorPrompt0Confirmed?'Prompt 0 saja':`${ps.length} bagian prompt`;const body=$('#generatorPreviewBody');body.innerHTML=`<div class="preview-hero"><div><strong>${escapeHtml(title)}</strong><p>${escapeHtml(phase)}${state.generatorVersion==='pro'?' • Versi PRO':''}${preset?` • Preset: ${escapeHtml(preset.label)}`:''}</p></div><span class="preview-badge">${rows.length} field diisi</span></div>${rows.length?`<div class="preview-grid">${rows.slice(0,16).map(([k,v])=>`<div class="preview-item"><span>${escapeHtml(k)}</span><strong>${escapeHtml(truncate(v.replace(/\s+/g,' '),150))}</strong></div>`).join('')}</div>`:'<div class="preview-empty">Belum ada field yang diisi. AI akan mengandalkan nilai default/asumsi dari template.</div>'}${rows.length>16?`<div class="preview-empty">+ ${rows.length-16} field lain sudah terisi dan tetap akan dimasukkan ke prompt.</div>`:''}<div class="preview-empty"><strong>Yang perlu diperiksa:</strong> ${unresolved?`${unresolved} placeholder masih belum diisi dan akan mengikuti aturan default/AI pada template.`:'semua placeholder yang terdeteksi sudah memiliki nilai.'} Preview ini tidak meringkas atau mengganti template prompt asli.</div>`;$('#generatorPreviewBackdrop').hidden=false;$('#generatorPreviewModal').hidden=false;}
 function closeGeneratorPreview(){$('#generatorPreviewBackdrop').hidden=true;$('#generatorPreviewModal').hidden=true;}
 function collectGeneratorQualityIssues(){
   const issues=[];const all=activeGeneratorPrompts();
@@ -9660,7 +9010,7 @@ function openQualityCheck(continueToPreview=false){
 }
 function closeQualityCheck(){$('#qualityCheckBackdrop').hidden=true;$('#qualityCheckModal').hidden=true;qualityContinueToPreview=false;}
 function generateFromForm(){
-  if(!validateModuleAssessmentPercentages()||!validateModuleAssessmentWeights()||!validateMpiEvaluationConfig()||!validateLKPDOutput())return;
+  if(!validateModuleTime()||!validateModuleAssessmentPercentages()||!validateModuleAssessmentWeights()||!validateMpiEvaluationConfig()||!validateLKPDOutput())return;
   const issues=collectGeneratorQualityIssues();const blockers=issues.some(x=>x.severity==='blocker'),warnings=issues.some(x=>x.severity==='warning');
   if(blockers||warnings){openQualityCheck(true);return;}openGeneratorPreview();
 }
@@ -9706,6 +9056,16 @@ function deleteProjectItem(id){const key=projectCenterTab==='projects'?GENERATOR
 function duplicateProject(id){const x=projectItem(id);if(!x)return;const list=localList(GENERATOR_PROJECT_KEY);list.unshift({...x,id:`proj_${Date.now()}`,title:`Salinan — ${x.title}`,updatedAt:new Date().toISOString()});saveLocalList(GENERATOR_PROJECT_KEY,list.slice(0,50));projectCenterTab='projects';renderProjectCenter();toast('Proyek diduplikasi');}
 $('#projectCenterBtn')?.addEventListener('click',()=>openProjectCenter('projects'));$('#projectCenterClose')?.addEventListener('click',closeProjectCenter);$('#projectCenterBackdrop')?.addEventListener('click',closeProjectCenter);$('#projectSaveCurrent')?.addEventListener('click',()=>saveCurrentProject());$('#saveCurrentProjectBtn')?.addEventListener('click',()=>saveCurrentProject());$$('[data-project-tab]').forEach(b=>b.addEventListener('click',()=>{projectCenterTab=b.dataset.projectTab;renderProjectCenter();}));$('#projectCenterList')?.addEventListener('click',e=>{const open=e.target.closest('[data-project-open]');if(open){const x=projectItem(open.dataset.projectOpen);if(x)restoreGeneratorSnapshot(x.snapshot,x.promptText||'');return;}const copy=e.target.closest('[data-project-copy]');if(copy){const x=projectItem(copy.dataset.projectCopy);if(x?.promptText)copyText(x.promptText);return;}const dup=e.target.closest('[data-project-duplicate]');if(dup){duplicateProject(dup.dataset.projectDuplicate);return;}const del=e.target.closest('[data-project-delete]');if(del)deleteProjectItem(del.dataset.projectDelete);});
 
+function validateModuleTime(){
+  if(activeGeneratorPrompts()[0]?.categoryId!=='modul-ajar-rpm')return true;
+  const input=$('[data-token="{{jumlah_pertemuan_alokasi}}"]');
+  const v=(input?.value||'').trim();
+  if(v&&/\bpertemuan\b/i.test(v)&&!/(\bJP\b|\bmenit\b|\bjam\b|\bminute\b)/i.test(v)){
+    input?.scrollIntoView({behavior:'smooth',block:'center'});
+    toast('Alokasi belum lengkap. Contoh: 1 pertemuan × 2 JP @40 menit.');return false;
+  }
+  return true;
+}
 function validateModuleAssessmentPercentages(){
   if(!(activeGeneratorPrompts()[0]?.categoryId==='modul-ajar-rpm'||activeGeneratorPrompts()[0]?.title==='Prompt LKPD'))return true;
   for(const key of ['awal','formatif','sumatif']){
@@ -9728,6 +9088,7 @@ function validateModuleAssessmentWeights(){
   const filled=inputs.filter(x=>x.value.trim()!=='');
   for(const x of filled){const v=Number(x.value);if(!Number.isFinite(v)||v<0||v>100){x.scrollIntoView({behavior:'smooth',block:'center'});toast('Bobot penilaian harus berada pada rentang 0–100%');return false;}}
   if(!filled.length)return true;
+  if(!$('[data-assessment-enable="sumatif"]')?.checked){$('[data-assessment-weight-total]')?.scrollIntoView({behavior:'smooth',block:'center'});toast('Bobot nilai akhir hanya dapat diisi jika Asesmen Sumatif aktif. Aktifkan Sumatif atau kosongkan semua bobot.');return false;}
   const sum=inputs.reduce((t,x)=>t+(x.value.trim()===''?0:Number(x.value)),0);
   if(sum!==100){$('[data-assessment-weight-total]')?.scrollIntoView({behavior:'smooth',block:'center'});toast('Total bobot penilaian harus 100%');return false;}
   return true;
@@ -9746,6 +9107,7 @@ function validateMpiEvaluationConfig(){
 }
 function validateLKPDOutput(){const p=activeGeneratorPrompts()[0];if(p?.title!=='Prompt LKPD')return true;const sel=$('[data-lkpd-output-select]');if(sel&&!sel.value){sel.scrollIntoView({behavior:'smooth',block:'center'});toast('Pilih Format Output Akhir: DOCX, PDF, atau Gambar per Halaman');return false;}return true;}
 function generatePromptNow(){
+  if(!validateModuleTime())return;
   if(!validateModuleAssessmentPercentages())return;
   if(!validateModuleAssessmentWeights())return;
   if(!validateMpiEvaluationConfig())return;
