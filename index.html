@@ -9222,7 +9222,7 @@ function scrollToGeneratorOutput(){const panel=$('#generatorOutputPanel');if(!pa
 /* ===== GENERATOR ENHANCEMENTS — PRESET GURU, PROGRESSIVE FORM, PREVIEW ===== */
 const TEACHER_PRESET_KEY='promptEduTeacherPresetsV1';
 const TEACHER_PRESET_ACTIVE_KEY='promptEduTeacherPresetActiveV1';
-const progressGroupMeta={identity:['Identitas & Konteks','Data umum guru/kelas'],content:['Materi / Proyek','Isi utama & tujuan'],media:['Media / Visual','Tema, aset, warna, keterbacaan'],settings:['Pengaturan Lanjutan','Akses menu, mode, asesmen, game'],output:['Output & Tambahan','Catatan & hasil akhir']};
+const progressGroupMeta={identity:['Identitas & Konteks','Kondisi siswa • sekolah • nama guru • kepala sekolah • kelas • sarana'],content:['Materi / Proyek','Topik • aktivitas siswa • prasyarat • miskonsepsi • TP/CP • model • proyek'],media:['Media / Visual','Tema, aset, warna, keterbacaan'],settings:['Pengaturan Lanjutan','Asesmen • jumlah soal • bobot • remedial/pengayaan • Plan B'],output:['Output & Tambahan','Mode keluaran • sumber acuan • tanda tangan opsional • catatan akhir']};
 var generatorProgressIndex=0;var generatorProgressSignature='';
 function currentGeneratorSignature(){const ps=activeGeneratorPrompts();return`${state.generatorType}|${state.generatorVersion||''}|${state.generatorPackage||''}|${ps.map(p=>p.key).join(',')}|${state.generatorPrompt0Confirmed?'1':'0'}`;}
 function getGeneratorProgressContext(){
@@ -9265,9 +9265,14 @@ function initGeneratorProgressive(){
   apply();
 }
 function quickEssentialField(group,index){
-  const input=group.querySelector('[data-token]');const label=group.querySelector('label')?.textContent||'';const t=normalize(`${input?.dataset.token||''} ${label}`);
-  if(/nama guru|nama sekolah|kurikulum|acuan|jenjang|fase|kelas|mata pelajaran|\bmapel\b|topik|materi utama|tujuan pembelajaran|alokasi|durasi total|format output|mode pengerjaan|komposisi|kondisi siswa|jenis konten|kedalaman materi|tools video|butuh karakter|model.*pedagogis|deskripsi tambahan|akses menu|canva sheet|cek pemahaman|feedback evaluasi|game pembelajaran/.test(t))return true;
-  if(input?.hasAttribute('data-lkpd-output-select')||input?.hasAttribute('data-module-inclusion-hidden')||input?.hasAttribute('data-video-character-toggle')||input?.hasAttribute('data-mpi-evaluation-hidden'))return true;
+  const input=group.querySelector('[data-token]');const label=group.querySelector('label')?.textContent||'';const token=input?.dataset.token||'';const t=normalize(`${token} ${label}`);
+  // Modul Ajar adalah workflow profesional yang saling bergantung. Jangan sembunyikan
+  // field penting di Mode Cepat agar update kumulatif (identitas, asesmen, remedial,
+  // output, tanda tangan, dll.) selalu terlihat oleh guru.
+  const p=activeGeneratorPrompts?.()[0];
+  if(p?.categoryId==='modul-ajar-rpm' && moduleGeneratorFieldConfig?.[token])return true;
+  if(/nama guru|nama kepala sekolah|nama sekolah|kurikulum|acuan|jenjang|fase|kelas|mata pelajaran|\bmapel\b|topik|materi utama|aktivitas siswa|prasyarat|miskonsepsi|tujuan pembelajaran|capaian pembelajaran|alokasi|durasi total|jumlah siswa|jumlah kelompok|sarana|keterbatasan|format output|mode keluaran|mode pengerjaan|komposisi|kondisi siswa|diferensiasi|jenis konten|kedalaman materi|tools video|butuh karakter|model.*pedagogis|produk|proyek|asesmen|bobot penilaian|remedial|pengayaan|rencana alternatif|plan b|tanda tangan|deskripsi tambahan|akses menu|canva sheet|cek pemahaman|feedback evaluasi|game pembelajaran/.test(t))return true;
+  if(input?.hasAttribute('data-lkpd-output-select')||input?.hasAttribute('data-module-inclusion-hidden')||input?.hasAttribute('data-video-character-toggle')||input?.hasAttribute('data-mpi-evaluation-hidden')||input?.hasAttribute('data-assessment-hidden')||input?.hasAttribute('data-assessment-weights-hidden'))return true;
   return index<6;
 }
 function applyGeneratorFormMode(mode='full',rebuild=true){
