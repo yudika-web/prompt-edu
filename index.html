@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="theme-color" content="#6d5dfc" />
 <title>Prompt EDU — AI Prompt Studio untuk Guru</title>
-<meta name="bank-prompt-build" content="2026-10-08-modul-ajar-validasi-ppi-privasi-visual-v5.1" />
+<meta name="bank-prompt-build" content="2026-10-11-presentasi-animasi-canva-v5.2" />
 <style>
 :root{
   --bg:#f4f7fb;
@@ -5852,6 +5852,8 @@ Sebelum mulai membangun, jika ada bagian yang belum jelas (misalnya skema databa
       {
         title: "Prompt Presentasi Pembelajaran",
         generatorCurlyOnly: true,
+        generatorLabel: "Desain Presentasi Biasa",
+        generatorInfo: "Presentasi slide standar: draft ringkas untuk NotebookLM atau slide gambar (1 slide = 1 gambar). Pilih template ini untuk tampilan presentasi biasa.",
         text: `Kamu adalah asisten pembuat bahan ajar. Buatkan RANCANGAN PRESENTASI PEMBELAJARAN berdasarkan data berikut. Gunakan bahasa yang jelas, sesuai jenjang siswa, dan berbasis fakta ilmiah/kurikulum yang berlaku (jangan mengarang data, gambar, atau statistik).
 
 === DATA GURU & KELAS ===
@@ -7854,6 +7856,252 @@ Jika mode “Modul Inti + Lampiran”, letakkan A–D di depan dan perangkat pen
   }
 ];
 
+/* ===== PRESENTASI ANIMASI (ChatGPT → Canva): katalog pilihan tema & gaya.
+   Satu sumber data untuk Bank Prompt (teks referensi) dan Generator Prompt (pilihan dropdown). ===== */
+const PRES_ANIM_CATALOG={
+  tema:[
+    ['T1','Kerajaan fantasi','dunia kerajaan dengan kastil, hutan, sungai, desa, dan jembatan','hampir semua topik, terutama ekosistem dan lingkungan'],
+    ['T2','Kota di dalam tubuh','dunia mini berupa kota yang tiap distriknya adalah organ tubuh','sistem organ, pencernaan, peredaran darah'],
+    ['T3','Luar angkasa','planet, stasiun antariksa, dan galaksi','astronomi, gaya, energi'],
+    ['T4','Pulau tropis Nusantara','hutan hujan, sungai, pantai, desa adat, dan satwa lokal','ekologi, geografi, budaya'],
+    ['T5','Akademi sains ajaib','laboratorium sihir, menara eksperimen, dan ruang ramuan','kimia, fisika, eksperimen'],
+    ['T6','Kota masa depan hijau','kota ramah lingkungan dengan energi terbarukan dan kendaraan melayang','teknologi, energi, lingkungan'],
+    ['T7','Dunia bawah laut','terumbu karang, kapal karam, dan kota di dasar laut','ekosistem laut, tekanan, gelombang'],
+    ['T8','Zaman purba dan mesin waktu','hutan purba, gua, dan gunung api','evolusi, fosil, sejarah bumi'],
+    ['T9','Kerajaan kuno Nusantara','candi, pelabuhan, pasar tradisional, dan istana','sejarah, budaya, IPS'],
+    ['T10','Kota angka dan logika','menara teka-teki, jembatan puzzle, dan gerbang kode','matematika, informatika'],
+    ['T11','Perpustakaan ajaib','buku yang hidup, lorong dongeng, dan menara aksara','bahasa, literasi'],
+    ['T12','Kota dan desa sehari-hari','pasar, sekolah, pelabuhan, dan sawah','IPS, ekonomi, PPKn'],
+    ['T13','Dapur dan kebun ajaib','ladang, lumbung, dan dapur kerajaan','gizi, pertanian, pencernaan'],
+    ['T14','Pegunungan dan perut bumi','gunung api, gua kristal, dan lembah','geografi, geologi, kebencanaan'],
+    ['T15','Arena kejuaraan','stadion fantasi dengan lintasan, podium, dan penonton','PJOK, kerja sama tim']
+  ],
+  gaya:[
+    ['G1','Anime fantasi cerah','ilustrasi bergaya anime dengan cel-shading lembut, mata ekspresif, garis bersih, warna kaya dan cerah, latar penuh detail','SMP sampai SMA'],
+    ['G2','Cat air buku cerita','ilustrasi cat air lembut ala buku cerita anak, tekstur kertas halus, garis tipis, warna hangat','SD sampai SMP'],
+    ['G3','Pixel art 16-bit','pixel art retro 16-bit, palet terbatas, tepi tegas ala game klasik','SMP sampai SMA; teks dibuat besar agar tetap terbaca'],
+    ['G4','Animasi 3D kartun','render 3D ramah anak, bentuk membulat, tekstur halus, pencahayaan hangat','SD sampai SMP'],
+    ['G5','Flat vector modern','ilustrasi vektor datar, bentuk sederhana, warna solid, bersih, minim bayangan','semua jenjang; paling aman untuk teks'],
+    ['G6','Chibi imut','karakter chibi berkepala besar, proporsi mungil, ekspresi lucu, warna cerah seperti permen','SD sampai SMP'],
+    ['G7','Diorama kertas berlapis','papercut berlapis dengan kedalaman nyata dan bayangan lembut antarlapisan','semua jenjang; lapisan kedalaman jelas sehingga nyaman dianimasikan'],
+    ['G8','Plastisin 3D','tampilan tanah liat atau plastisin ala stop-motion, tekstur sidik jari halus, warna cerah','SD sampai SMP'],
+    ['G9','Komik tegas','gaya komik atau manga dengan garis tebal, bayangan halftone, komposisi dinamis','SMP sampai SMA'],
+    ['G10','Isometrik low-poly','peta isometrik 3D low-poly yang bersih seperti game strategi, warna lembut','SMP sampai SMA; bagus untuk slide peta'],
+    ['G11','Painterly sinematik','lukisan digital sinematik ala concept art, pencahayaan dramatis, detail realistis','SMA'],
+    ['G12','Ornamen Nusantara','ilustrasi dengan motif batik, wayang, atau ukiran, warna hangat, bingkai ornamen tradisional','tema budaya dan sejarah'],
+    ['G13','Neon futuristik','antarmuka holografik, garis cahaya neon, latar gelap bercahaya','SMP sampai SMA'],
+    ['G14','Gambar krayon','tampilan krayon dan pensil warna ala gambar tangan anak, hangat dan ceria','SD kelas bawah']
+  ],
+  palet:[
+    ['P1','Cerah ceria','siang cerah dengan biru langit, hijau daun, dan kuning emas',''],
+    ['P2','Senja hangat','cahaya golden hour dengan oranye, magenta, dan ungu lembut',''],
+    ['P3','Pastel lembut','peach, mint, lilac, dan krem untuk suasana tenang',''],
+    ['P4','Segar alam','hijau zamrud, krem, cokelat kayu, cahaya pagi dengan kabut tipis',''],
+    ['P5','Laut dalam','biru tosca, navy, aksen koral, cahaya menembus air',''],
+    ['P6','Kosmik','ungu tua, biru malam, aksen cyan dan emas, cahaya bintang',''],
+    ['P7','Retro hangat','mustard, terakota, krem, dan hijau zaitun',''],
+    ['P8','Neon malam','hitam kebiruan dengan aksen cyan dan magenta bercahaya',''],
+    ['P9','Nusantara hangat','merah bata, emas, hijau tua, dan cokelat tanah','']
+  ],
+  karakter:[
+    ['K1','Anak laki-laki petualang','usia tampak 12 sampai 14 tahun, berjaket atau berjubah, membawa ransel dan tongkat atau peta',''],
+    ['K2','Anak perempuan peneliti','usia tampak 12 sampai 14 tahun, bertopi petualang, membawa teropong dan buku catatan',''],
+    ['K3','Hewan pemandu berpakaian','rubah, burung hantu, atau kucing yang cerdas dan ramah',''],
+    ['K4','Robot kecil ramah','layar wajah ekspresif, lengan lipat, warna cerah',''],
+    ['K5','Penyihir atau guru bijak','berjubah, bertopi runcing atau bertongkat, bersikap tenang',''],
+    ['K6','Maskot bulat lucu','tubuh bulat melayang dengan wajah ekspresif','cocok untuk SD'],
+    ['K7','Pendamping peri atau roh kecil','melayang di samping karakter utama (dipakai sebagai pendamping, bukan karakter tunggal)',''],
+    ['K8','Dua sahabat','satu laki-laki dan satu perempuan','lebih sulit dijaga konsistensinya']
+  ],
+  ui:[
+    ['U1','Papan kayu dan gulungan perkamen','dihiasi daun dan tali',''],
+    ['U2','Panel kristal dan kaca bercahaya','tepi berkilau',''],
+    ['U3','Panel pixel','bingkai bergerigi ala game retro',''],
+    ['U4','Panel logam sci-fi atau hologram biru','garis cahaya tipis',''],
+    ['U5','Halaman buku catatan atau kertas lipat','tepi kertas dan stiker',''],
+    ['U6','Papan batu berukir','akar dan lumut di tepinya',''],
+    ['U7','Kartu permainan','bingkai bergaya kartu koleksi','']
+  ],
+  paket:[
+    ['Petualangan fantasi klasik','T1 + G1 + P1 + K1 + K7 + U1'],
+    ['Kota tubuh yang ceria','T2 + G4 + P3 + K6 + U2'],
+    ['Misi Nusantara','T4 + G2 + P4 + K3 + U6'],
+    ['Arena sains masa depan','T6 + G13 + P8 + K4 + U4'],
+    ['Diorama kerajaan kuno','T9 + G7 + P9 + K2 + U1'],
+    ['Perjalanan antariksa pixel','T3 + G3 + P6 + K4 + U3']
+  ]
+};
+function presAnimCatalogText(){
+  const sec=(title,key)=>`${title}\n`+PRES_ANIM_CATALOG[key].map(([c,n,d,f])=>`- ${c} ${n}: ${d}${f?` (cocok: ${f})`:''}`).join('\n');
+  return [
+    'REFERENSI PILIHAN TEMA & GAYA — PRESENTASI ANIMASI (ChatGPT → Canva)\nCara pakai: pilih satu atau beberapa pilihan, lalu SALIN DESKRIPSI setelah nama pilihan (bukan kodenya) ke kolom input pada Prompt 1 (Storyboard). AI tidak mengenal kode T/G/P/K/U. Pilihan boleh dicampur atau ditulis sendiri. Jika ingin dibantu, tulis "pilihkan untukku" pada kolom tersebut. Di Generator Prompt, semua pilihan ini sudah tersedia sebagai dropdown.',
+    sec('TEMA DUNIA (latar cerita dan peta)','tema'),
+    sec('GAYA VISUAL','gaya'),
+    sec('SUASANA, PENCAHAYAAN, DAN PALET WARNA','palet'),
+    sec('KARAKTER PEMANDU (satu karakter utama, boleh ditambah satu pendamping kecil)','karakter'),
+    sec('BENTUK ANTARMUKA (panel, tombol, banner)','ui'),
+    'PAKET KOMBINASI SIAP PAKAI\n'+PRES_ANIM_CATALOG.paket.map(([n,k],i)=>`${i+1}. ${n}: ${k}`).join('\n'),
+    'REKOMENDASI CEPAT MENURUT JENJANG\n- SD: G2, G4, G6, G14, K6, P3\n- SMP: G1, G4, G10, K1, K2\n- SMA: G9, G11, G13, K5'
+  ].join('\n\n');
+}
+
+const presentationAnimCategories = [
+  {
+    id: "presentasi-animasi",
+    name: "Presentasi Animasi (ChatGPT → Canva)",
+    icon: "🎞️",
+    keywords: "presentasi animasi bergerak slide peta petualangan storyboard visualisasi gambar canva ubah gambar jadi video tingkatkan resolusi prompt animasi tema gaya karakter pemandu",
+    prompts: [
+      {
+        title: "Prompt Presentasi Pembelajaran Animasi — Tahap 1: Storyboard Lengkap",
+        generatorCurlyOnly: true,
+        presentationAnim: true,
+        generatorLabel: "Desain Presentasi Animasi / Bergerak",
+        generatorHeading: "PROMPT 1 — STORYBOARD LENGKAP",
+        generatorInfo: "Rangkaian 2 prompt: (1) storyboard lengkap bergaya petualangan (peta, materi, ujian, reward) dan (2) visualisasi tiap slide menjadi gambar utuh disertai prompt animasi untuk Canva (Ubah gambar jadi video).",
+        generatorSequence: ["Prompt Presentasi Pembelajaran Animasi — Tahap 2: Visualisasi Slide & Prompt Animasi Canva"],
+        text: `Kamu adalah desainer pembelajaran sekaligus art director game edukasi. Buatkan STORYBOARD PRESENTASI ANIMASI BERGAYA PETUALANGAN (peta, misi, ujian, reward) yang SANGAT LENGKAP berdasarkan data berikut. Nanti setiap slide akan saya minta divisualisasikan menjadi SATU GAMBAR UTUH (karakter, latar, elemen, dan teks menyatu) di percakapan yang sama, lalu gambar tersebut diubah menjadi video pendek di Canva (Tingkatkan Resolusi Gambar, lalu Ubah gambar jadi video). Belum perlu membuat gambar pada tahap ini. Gunakan bahasa yang jelas, sesuai jenjang, dan berbasis fakta ilmiah/kurikulum yang berlaku (jangan mengarang data, istilah, atau statistik).
+
+=== DATA PRESENTASI ===
+- Topik/materi: {{topik_animasi}}
+- Jenjang & kelas: {{jenjang_kelas_animasi}}
+- Mata pelajaran: {{mata_pelajaran_animasi}}
+- Tujuan pembelajaran: {{tujuan_pembelajaran_animasi}}
+- Kurikulum/acuan: {{kurikulum_acuan_animasi}}
+- Jumlah MAP (bagian materi): {{jumlah_map_animasi}}
+- Jumlah soal per MAP: {{jumlah_soal_animasi}}
+- Bahasa prompt animasi: {{bahasa_prompt_animasi}}
+
+=== PILIHAN TEMA & GAYA ===
+- Tema dunia: {{tema_dunia_animasi}}
+- Gaya visual: {{gaya_visual_animasi}}
+- Suasana & palet warna: {{suasana_palet_animasi}}
+- Karakter pemandu: {{karakter_pemandu_animasi}}
+- Bentuk antarmuka (panel, tombol, banner): {{bentuk_antarmuka_animasi}}
+- Permintaan tema/gaya khusus (diprioritaskan jika diisi): {{kustom_tema_gaya_animasi}}
+- Catatan guru: {{deskripsi_tambahan_animasi}}
+Jika ada pilihan yang tertulis "[Ditentukan AI: ...]", pilih opsi terbaik untuk topik dan jenjang, lalu jelaskan alasannya dalam satu kalimat pada bagian A.
+Jika ada file modul ajar/RPP/silabus yang saya lampirkan, sesuaikan tujuan, urutan materi, dan istilah dengan file tersebut.
+
+=== ATURAN ISI ===
+1. Pecah materi menjadi MAP berurutan, satu sub-topik per MAP, dari konsep dasar sampai penerapan. MAP terakhir berisi penerapan atau ringkasan.
+2. Isi materi akurat, sesuai jenjang, ringkas (maks. 40 kata per panel), dan memuat satu contoh konkret dari kehidupan sehari-hari.
+3. Soal berupa skenario kontekstual dengan pilihan A, B, C. Satu jawaban benar. Pengecoh dibuat dari miskonsepsi yang umum.
+4. Slide "Belum Tepat" menjelaskan konsep lewat kotak "Ingat!", bukan sekadar menyalahkan.
+5. Setiap MAP diakhiri reward berupa benda bertema yang membuka MAP berikutnya.
+6. Karakter pemandu punya dialog singkat (maks. 20 kata) di setiap slide, dengan ekspresi yang sesuai suasana.
+7. Semua teks yang tampil di gambar harus pendek dan jelas, karena akan dirender di dalam gambar.
+8. Gambar/diagram ilmiah harus akurat secara keilmuan. Jika tidak yakin, tandai "[perlu verifikasi gambar referensi]" agar guru memeriksanya.
+
+=== STRUKTUR SLIDE ===
+- Cover
+- Prolog + Peta Awal
+- Untuk setiap MAP ke-N:
+   a. Peta MAP N (lokasi aktif, panel info, misi, tombol masuk)
+   b. Materi N.1 dan N.2
+   c. Ujian N.x (kartu pilihan A/B/C)
+   d. Belum Tepat N.x (umpan balik + "Ingat!" + tombol "Pelajari Lagi" dan "Coba Soal")
+   e. Reward N (benda reward, tulisan "MAP N+1 TERBUKA", tombol "Lanjut MAP N+1" dan "Kembali ke Peta")
+- Peta Akhir, Ringkasan, dan Refleksi
+
+=== FORMAT KELUARAN ===
+A. Premis cerita, nama dunia, dan KUNCI KARAKTER: deskripsi detail karakter pemandu (rambut, wajah, usia tampak, kostum, warna, aksesori, benda yang dibawa) yang akan ditempel utuh di setiap perintah gambar agar konsisten.
+B. BLOK GAYA satu paragraf yang memuat gaya visual, suasana dan pencahayaan, ketebalan garis, bentuk antarmuka, palet warna (kode HEX), serta gaya huruf pada gambar (tebal, besar, mudah dibaca).
+C. Peta alur: daftar nomor dan nama slide, serta slide tujuan tiap tombol atau pilihan jawaban.
+D. RINCIAN PER SLIDE dengan susunan tetap:
+   - Nomor dan nama slide
+   - Tujuan slide
+   - TEKS PADA GAMBAR (persis, per bagian: judul, isi panel, soal, label tombol, dll.)
+   - DIALOG KARAKTER (balon ucapan) dan ekspresi atau pose karakter
+   - DESKRIPSI VISUAL: latar, posisi tiap elemen (kiri/tengah/kanan, depan/belakang), isi ilustrasi pada panel atau kartu, ikon, tombol, dekorasi
+   - ARAHAN GERAK untuk video (hanya elemen non-teks, contoh: air mengalir, daun bergoyang, karakter berkedip, kilau pada ikon)
+   - ALUR: slide berikutnya
+E. Daftar periksa akurasi materi untuk guru (hal yang perlu diverifikasi).
+
+=== CARA MENJAWAB ===
+Respons pertama: A, B, C. Setelah itu, satu respons untuk setiap MAP (bagian D). Respons terakhir: E. Di akhir tiap respons tulis "Ketik LANJUT". Pakai bahasa Indonesia yang sesuai jenjang. Mulai dari bagian A, B, C.
+
+Setelah storyboard selesai, saya akan membaca dan merevisinya. Jangan membuat gambar sebelum saya menjalankan Prompt 2 (Visualisasi Slide).`
+      },
+      {
+        title: "Prompt Presentasi Pembelajaran Animasi — Tahap 2: Visualisasi Slide & Prompt Animasi Canva",
+        generatorCurlyOnly: true,
+        generatorHidden: true,
+        generatorNoDirectives: true,
+        presentationAnim: true,
+        generatorHeading: "PROMPT 2 — VISUALISASI SLIDE & PROMPT ANIMASI CANVA (kirim setelah storyboard final, di percakapan yang sama)",
+        text: `Sekarang visualisasikan storyboard menjadi gambar. Buat SATU GAMBAR UTUH untuk setiap slide (karakter, latar, elemen, dan teks menyatu), dimulai dari slide nomor 1. Satu slide per respons.
+
+DASAR GAMBAR
+- Ukuran 16:9 (1920x1080), landscape.
+- Ikuti RINCIAN slide dari storyboard: teks pada gambar, dialog dan ekspresi karakter, serta deskripsi visual. Jangan menambah atau mengubah isi.
+- Tempel KUNCI KARAKTER dan BLOK GAYA dari storyboard di setiap gambar agar wajah, kostum, gaya, dan palet identik di semua slide.
+
+TEKS DI DALAM GAMBAR
+- Tulis persis sesuai storyboard dengan ejaan Bahasa Indonesia yang benar, dan periksa ulang sebelum menampilkan gambar.
+- Huruf tebal, besar, kontras tinggi, di atas permukaan polos (papan, gulungan, pita, kartu). Tidak melengkung, miring, atau tertutup objek.
+- Jangan menambah teks lain, logo, atau watermark.
+
+AGAR HASIL BAGUS SAAT DI-UPSCALE DAN DIUBAH JADI VIDEO
+- Susun lapisan kedalaman yang jelas (depan, tengah, belakang).
+- Elemen yang akan bergerak (air, daun, awan, kilau, rambut, jubah) digambar jelas dan tidak berdekatan dengan teks.
+- Karakter utuh, wajah jelas, tangan dan jari wajar, tidak terpotong tepi gambar dan tidak menutupi panel teks.
+- Tepi objek tegas, tanpa blur, kabut tebal, atau bayangan besar yang menutupi teks.
+
+SETELAH SETIAP GAMBAR, TULIS (urut):
+1. Nomor dan nama slide.
+2. Kotak kode berjudul "PROMPT ANIMASI CANVA - Slide [nomor]" berisi 40-70 kata, bahasa sesuai pilihan saya di storyboard, dengan 3 bagian:
+   - GERAK: elemen yang bergerak, disebut sesuai posisinya di gambar (contoh: "peri biru di kiri atas"), beserta jenis gerak dan kecepatan (selalu pelan dan halus).
+   - KAMERA: satu gerakan lembut saja (zoom-in perlahan, geser pelan, atau diam).
+   - TETAP DIAM: seluruh teks, judul, tombol, ikon, serta wajah dan kostum karakter tidak berubah bentuk.
+   Dasarkan pada elemen yang BENAR-BENAR tampak di gambar yang baru dibuat dan baris ARAHAN GERAK slide tersebut. Jangan menambah objek baru atau mengganti adegan. Durasi sekitar 5 detik.
+3. Kalimat penutup: "Ketik LANJUT untuk slide nomor [berikutnya]".
+
+Mulai dari slide nomor 1.`
+      },
+      {
+        title: "Prompt Presentasi Pembelajaran Animasi — Revisi & Perintah Pendukung",
+        generatorCurlyOnly: true,
+        generatorHidden: true,
+        presentationAnim: true,
+        text: `PERINTAH PENDUKUNG PRESENTASI ANIMASI (dipakai di percakapan ChatGPT yang sama, saat diperlukan). Ganti bagian dalam kurung siku sesuai kebutuhan.
+
+A. REVISI SATU GAMBAR
+Revisi gambar tadi: [sebutkan perubahan, contoh: tulisan tombol salah, seharusnya "LANJUT MAP 3"; wajah karakter berbeda]. Pertahankan komposisi, gaya, dan elemen lain persis sama. Perbarui juga PROMPT ANIMASI CANVA bila ada elemen yang berubah.
+
+B. ULANG SLIDE TERTENTU
+Kembali ke slide nomor [N] dan buat ulang dengan perbaikan: [catatan]. Sertakan PROMPT ANIMASI CANVA yang baru.
+
+C. KARAKTER MULAI BERUBAH (lampirkan gambar slide 1)
+Pertahankan karakter dan gaya persis seperti gambar terlampir, lalu buat slide nomor [N].
+
+D. PROMPT ANIMASI UNTUK SLIDE YANG SUDAH JADI (lampirkan gambarnya)
+Buatkan PROMPT ANIMASI CANVA untuk gambar terlampir (Slide [N]) dengan aturan: 40-70 kata, 3 bagian (GERAK, KAMERA, TETAP DIAM), gerakan pelan, teks dan wajah karakter tidak berubah, durasi sekitar 5 detik.
+
+E. TERJEMAHKAN PROMPT ANIMASI
+Terjemahkan prompt animasi slide [N] ke bahasa Inggris, singkat dan jelas.
+
+F. MENGGANTI GAYA DI TENGAH JALAN (sebaiknya hanya sebelum slide 2 dibuat)
+Ubah BLOK GAYA menjadi: [salin gaya baru dari katalog]. Terapkan mulai slide nomor [N] dan perbarui KUNCI KARAKTER agar tetap sesuai.
+
+LANGKAH DI CANVA
+1. Buat desain 16:9 dan tempel satu gambar per halaman, urut sesuai nomor slide.
+2. Pilih gambar, lalu Tingkatkan Resolusi Gambar.
+3. Pilih Ubah gambar jadi video, lalu tempel PROMPT ANIMASI CANVA slide tersebut (jika fitur menyediakan kolom prompt).
+4. Cek klip. Jika teks bergoyang, perkuat bagian TETAP DIAM atau kecilkan gerakannya, lalu ulangi hanya untuk klip itu.
+5. Susun klip berurutan, atur durasi, tambahkan transisi dan musik, lalu Share, Download, MP4 Video (1080p).`
+      },
+      {
+        title: "Referensi — Katalog Tema, Gaya, Palet, Karakter & Antarmuka (Presentasi Animasi)",
+        generatorCurlyOnly: true,
+        generatorHidden: true,
+        presentationAnim: true,
+        text: presAnimCatalogText()
+      }
+    ]
+  }
+];
+
 const promptCategories = [
   ...modulAjarCategories,
   ...biasaCategories,
@@ -7862,6 +8110,7 @@ const promptCategories = [
   ...pro2026Categories,
   ...universalCategories,
   ...teacherContentCategories,
+  ...presentationAnimCategories,
   ...extraCategories,
   ...advancedCategories,
   ...coreCategories
@@ -8123,7 +8372,7 @@ function currentPackageDefs(){return generatorPackageDefs[state.generatorType]?.
 function currentPackageDef(){const defs=currentPackageDefs();return defs.find(d=>d.id===state.generatorPackage)||defs[0]||null;}
 function currentPackagePrompts(){const d=currentPackageDef();return d?d.get().slice().sort((a,b)=>promptSequenceOrder(a)-promptSequenceOrder(b)):[];}
 function renderGeneratorTypes(){els.generatorTypeGrid.innerHTML=generatorTypes.map(t=>`<button class="gen-type ${state.generatorType===t.id?'active':''}" data-gtype="${t.id}"><span class="gi">${t.icon}</span><span class="gn">${escapeHtml(t.name)}</span></button>`).join('');els.generatorTypeGrid.querySelectorAll('[data-gtype]').forEach(b=>b.addEventListener('click',()=>{state.generatorType=b.dataset.gtype;state.generatorTemplateKey=null;state.generatorPackage='';state.generatorPrompt0Confirmed=false;state.generatorVersion=packageTypes.has(state.generatorType)?'':state.generatorVersion;clearGeneratorResult();renderGeneratorTypes();refreshGeneratorTemplates();}));}
-function generatorTemplateList(){const type=generatorTypes.find(t=>t.id===state.generatorType)||generatorTypes[0];const q=normalize(els.genSearch.value.trim());return allPrompts.filter(p=>type.match(p)).filter(p=>!q||normalize(`${p.title} ${p.categoryName} ${p.text}`).includes(q));}
+function generatorTemplateList(){const type=generatorTypes.find(t=>t.id===state.generatorType)||generatorTypes[0];const q=normalize(els.genSearch.value.trim());return allPrompts.filter(p=>type.match(p)).filter(p=>!p.generatorHidden).filter(p=>!p.presentationAnim||type.id==='all'||type.id==='presentation').filter(p=>!q||normalize(`${p.title} ${p.categoryName} ${p.text}`).includes(q));}
 function renderPackageSelectors(){
   const special=isPackageMode();elsGen.packageMode.hidden=!special;elsGen.singleMode.hidden=special;
   if(!special)return;
@@ -8137,7 +8386,7 @@ function refreshGeneratorTemplates(){
   if(isPackageMode()){
     const ps=currentPackagePrompts();state.generatorTemplateKey=ps[0]?.key||null;renderGeneratorTemplate();return;
   }
-  const list=generatorTemplateList();const prev=state.generatorTemplateKey;els.genSelect.innerHTML=list.length?list.map(p=>`<option value="${escapeHtml(p.key)}">${escapeHtml(p.title)} — ${escapeHtml(p.categoryName)}</option>`).join(''):'<option value="">Tidak ada template yang cocok</option>';
+  const list=generatorTemplateList();const prev=state.generatorTemplateKey;els.genSelect.innerHTML=list.length?list.map(p=>`<option value="${escapeHtml(p.key)}">${escapeHtml(p.generatorLabel||(p.title+' — '+p.categoryName))}</option>`).join(''):'<option value="">Tidak ada template yang cocok</option>';
   if(prev&&list.some(p=>p.key===prev))els.genSelect.value=prev;state.generatorTemplateKey=els.genSelect.value||null;renderGeneratorTemplate();
 }
 function friendlyLabel(raw){
@@ -8220,7 +8469,7 @@ function extractPromptFields(prompt,text=prompt?.text||''){
   return extractPlaceholders(text);
 }
 function isLongField(label){return /deskripsi|cerita|catatan|materi|tujuan|soal|data|daftar|teks|naskah|silabus|modul|konten|prompt|bank|fenomena|konsep/i.test(label);}
-function activeGeneratorPrompts(){if(isPackageMode())return currentPackagePrompts();const p=allPrompts.find(x=>x.key===state.generatorTemplateKey);return p?[p]:[];}
+function activeGeneratorPrompts(){if(isPackageMode())return currentPackagePrompts();const p=allPrompts.find(x=>x.key===state.generatorTemplateKey);if(!p)return[];const extra=(p.generatorSequence||[]).map(t=>allPrompts.find(x=>x.title===t)).filter(Boolean);return[p,...extra];}
 function prioritizeEducationLevelFields(fields=[]){
   const rank={'label:komposisi-kondisi-siswa':0,'label:deskripsi-kondisi-siswa-inklusi-heterogen':1,'label:karakteristik-kesiapan-murid':2,'jenjang':3,'jenjang-kelas':4};
   return fields.map((f,i)=>({f,i,r:Object.prototype.hasOwnProperty.call(rank,fieldSemanticKey(f))?rank[fieldSemanticKey(f)]:10}))
@@ -8231,13 +8480,14 @@ function renderGeneratorTemplate(){
   if(isPackageMode()){
     const d=currentPackageDef();const first=ps[0],last=ps[ps.length-1];const mpiInfo=state.generatorType==='mpi'?` Isi <strong>Prompt 0</strong> terlebih dahulu dan jalankan di AI. Setelah dikonfirmasi, <strong>Nomor Ide Pilihan di Prompt 1 bersifat opsional saat menyiapkan prompt</strong>; perubahan isi/struktur dilakukan langsung pada teks Prompt 1 yang sudah disalin, bukan lewat form Generator Prompt.`:` Isi <strong>Prompt 0</strong> terlebih dahulu, jalankan di AI, lalu konfirmasi untuk membuka isian <strong>Prompt 1 dan data lanjutan</strong>.`;els.genInfo.innerHTML=`<strong>${first.icon} ${escapeHtml(d?.label||first.categoryName)}</strong><p>${ps.length} prompt tersedia sebagai rangkaian bertahap.${mpiInfo} Setelah dikonfirmasi, Panel 4 dapat menampilkan seluruh rangkaian sampai <strong>${escapeHtml(last.title)}</strong>.</p><div class="package-sequence"><strong>Urutan:</strong> ${ps.map((p,i)=>`${i===ps.length-1?'Prompt Akhir':`Prompt ${promptSequenceOrder(p)}`}`).join(' → ')}</div>`;
   }else{
-    const p=ps[0];els.genInfo.innerHTML=`<strong>${p.icon} ${escapeHtml(p.title)}</strong><p>${escapeHtml(p.categoryName)} • ${escapeHtml(truncate(p.text.replace(/\s+/g,' '),180))}</p>`;
+    const p=ps[0];els.genInfo.innerHTML=`<strong>${p.icon} ${escapeHtml(p.generatorLabel||p.title)}</strong><p>${p.generatorInfo?escapeHtml(p.generatorInfo):`${escapeHtml(p.categoryName)} • ${escapeHtml(truncate(p.text.replace(/\s+/g,' '),180))}`}</p>`;
   }
   if(!isPackageMode()){
     const fields=[];const seen=new Set();ps.forEach(p=>extractPromptFields(p).forEach(f=>{if(!seen.has(f.token)){seen.add(f.token);fields.push(f);}}));supplementalGeneratorFields(fields).forEach(f=>{if(!seen.has(f.token)){seen.add(f.token);fields.push(f);}});
     if(!fields.length){els.genFields.innerHTML='<div class="no-fields span-2">Rangkaian ini tidak memiliki placeholder yang terdeteksi. Klik Generate untuk menampilkan prompt apa adanya.</div>'+referenceHintHtml();initSpecialGeneratorFields();updateGeneratorActionButton();return;}
     const isModule=ps[0]?.categoryId==='modul-ajar-rpm';
     const isPresentation=ps[0]?.title==='Prompt Presentasi Pembelajaran';
+    const isPresentationAnim=isPresentationAnimPrompt(ps[0]);
     const isVideo=ps[0]?.title==='Prompt Video Pembelajaran';
     const isLKPD=ps[0]?.title==='Prompt LKPD';
     const moduleNote=isModule?'<div class="module-ai-note"><strong>💡 Tidak harus mengisi semuanya.</strong> Setiap kolom yang dibiarkan kosong akan ditentukan AI berdasarkan data yang sudah tersedia. Semakin banyak konteks yang diberikan, semakin spesifik hasil Modul Ajar/RPM.<br><br><strong>📎 Agar hasil lebih akurat dan sesuai:</strong> setelah Generate, tempelkan prompt pada percakapan AI yang sama sambil melampirkan <strong>dokumen CP/standar resmi, ATP/TP, sumber belajar (buku/modul/handout), contoh asesmen/LKPD, dan dokumen pendukung lain</strong> yang relevan. AI diarahkan untuk memprioritaskan dokumen tersebut dan tidak mengarang informasi yang tidak didukung sumber.</div>':(isPresentation?'<div class="module-ai-note"><strong>🖥️ Panduan Presentasi Pembelajaran.</strong> Isi data utama yang Anda ketahui. Jika memiliki modul ajar/RPP/silabus, unggah file tersebut saat menjalankan prompt di AI. Untuk <strong>Format Output B</strong>, AI harus menampilkan <strong>outline slide dulu</strong> dan baru membuat gambar setelah guru mengetik <strong>"Lanjut"</strong>.</div>':(isVideo?'<div class="module-ai-note"><strong>🎬 Panduan Video Pembelajaran.</strong> Isi data yang Anda ketahui; kolom kosong akan ditentukan AI dan ditandai otomatis. Alurnya wajib <strong>Storyboard dulu → konfirmasi guru → Prompt Karakter → Prompt Scene</strong>. Jika memakai karakter, gunakan tag @nama dan reference image secara konsisten.</div>':(isLKPD?'<div class="module-ai-note"><strong>📝 Panduan LKPD.</strong> Isi data yang Anda ketahui. Setiap input memiliki contoh/panduan. <strong>Format Output Akhir wajib dipilih</strong>; field lain yang kosong akan dilengkapi AI secara wajar berdasarkan TP, topik, dan jenjang.</div>':'')));
@@ -8246,7 +8496,7 @@ function renderGeneratorTemplate(){
       const priority=['{{komposisi_siswa}}','{{deskripsi_siswa_inklusi}}','{{dasar_data_inklusi}}','{{dukungan_inklusi_tersedia}}','{{ppi_inklusi}}','{{karakteristik_kesiapan_murid}}','{{preferensi_diferensiasi}}','{{jenjang}}','{{fase_kelas}}','{{mata_pelajaran}}','{{kurikulum_acuan_modul}}','{{nama_sekolah}}'];
       renderFields=[...priority.map(t=>fields.find(f=>f.token===t)).filter(Boolean),...fields.filter(f=>!priority.includes(f.token))];
     }
-    els.genFields.innerHTML=moduleNote+renderFields.map((f,i)=>renderGeneratorField(f,`gf${i}`,false)).join('')+referenceHintHtml();initSpecialGeneratorFields();updateGeneratorActionButton();return;
+    els.genFields.innerHTML=(isPresentationAnim?presAnimNoteHtml:moduleNote)+renderFields.map((f,i)=>renderGeneratorField(f,`gf${i}`,false)).join('')+referenceHintHtml();initSpecialGeneratorFields();updateGeneratorActionButton();return;
   }
   renderPackageStageFields(ps);
 }
@@ -8363,6 +8613,26 @@ const presentationGeneratorFieldConfig={
   '{{deskripsi_tambahan_presentasi}}':{label:'Deskripsi Tambahan / Permintaan Khusus',placeholder:'Contoh: batasi maksimal 10 slide; gunakan bahasa semi formal; ada penyesuaian untuk siswa low vision',help:'Gunakan untuk hal khusus seperti jumlah slide, gaya bahasa, integrasi teknologi, muatan lokal, kebutuhan siswa inklusif, atau penekanan tertentu.',auto:'tidak ada permintaan khusus tambahan'},
   '{{format_output_presentasi}}':{label:'Format Output',type:'select',options:[['','— Pilih format output —'],['A. Draft ringkas untuk NotebookLM','A. Draft ringkas untuk NotebookLM'],['B. Draft presentasi siap pakai untuk generator gambar','B. Draft presentasi siap pakai untuk generator gambar']],help:'Pilih apakah hasil akhirnya berupa draft ringkas untuk NotebookLM atau outline/generate slide gambar satu per satu.',auto:'pilih format output yang paling sesuai dengan kebutuhan guru'}
 };
+const isPresentationAnimPrompt=p=>Boolean(p&&p.presentationAnim);
+const presAnimOptions=(key,blank)=>[['',blank],...PRES_ANIM_CATALOG[key].map(([c,n,d,f])=>[`${n} — ${d}`,`${c} ${n}${f?` — ${f}`:''}`])];
+const presAnimNoteHtml='<div class="module-ai-note"><strong>🎞️ Panduan Presentasi Animasi / Bergerak.</strong> Hasilnya <strong>2 prompt berurutan</strong>: (1) <strong>Storyboard lengkap</strong> — baca dan revisi dulu di ChatGPT; (2) <strong>Visualisasi slide</strong> menjadi gambar utuh satu per satu, disertai <strong>prompt animasi kecil</strong> untuk Canva. Jalankan keduanya di <strong>percakapan yang sama</strong>. Di Canva: tempel gambar → Tingkatkan Resolusi Gambar → Ubah gambar jadi video → tempel prompt animasi. Pilihan tema dan gaya yang dikosongkan akan dipilihkan AI.</div>';
+const presentationAnimGeneratorFieldConfig={
+  '{{topik_animasi}}':{label:'Topik / Materi',group:'content',placeholder:'Contoh: Sistem Pencernaan Manusia',help:'Materi utama yang akan dipecah menjadi beberapa MAP (bagian). Semakin spesifik, semakin tepat isi materi dan soalnya.',auto:'tentukan topik dari konteks atau file yang dilampirkan'},
+  '{{jenjang_kelas_animasi}}':{label:'Jenjang & Kelas',group:'identity',placeholder:'Contoh: SMP Kelas VIII',help:'Menentukan kedalaman materi, bahasa, tingkat soal, dan gaya visual yang cocok.',auto:'tentukan jenjang/kelas yang paling konsisten dengan topik'},
+  '{{mata_pelajaran_animasi}}':{label:'Mata Pelajaran',group:'identity',placeholder:'Contoh: IPA',help:'Mapel utama presentasi. Jika kosong, AI menentukan dari topik.',auto:'tentukan mata pelajaran dari topik'},
+  '{{tujuan_pembelajaran_animasi}}':{label:'Tujuan Pembelajaran',type:'textarea',group:'content',placeholder:'Contoh: Peserta didik mampu menjelaskan urutan organ pencernaan dan fungsinya',help:'Tujuan menjadi dasar pembagian MAP dan soal. Jika kosong, AI menyusun tujuan yang wajar dari topik dan jenjang.',auto:'susun tujuan pembelajaran yang sesuai topik dan jenjang'},
+  '{{kurikulum_acuan_animasi}}':{label:'Kurikulum / Acuan',type:'select',group:'identity',options:CURRICULUM_OPTIONS,help:'Dipakai bila tidak ada file referensi yang dilampirkan ke AI. Pilih acuan agar istilah, tujuan, dan soal selaras.',auto:'pilih acuan yang paling umum dipakai untuk jenjang tersebut dan nyatakan asumsinya'},
+  '{{jumlah_map_animasi}}':{label:'Jumlah MAP (Bagian Materi)',type:'select',group:'settings',options:[['','— Ditentukan AI (5 MAP) —'],['3','3 MAP'],['4','4 MAP'],['5','5 MAP'],['6','6 MAP'],['7','7 MAP'],['8','8 MAP']],help:'Satu MAP = satu sub-materi yang dibuka bertahap. Perkiraan jumlah slide: 5 MAP dengan 1 soal sekitar 35 slide; dengan 2 soal sekitar 45 slide. Untuk percobaan, pilih 3 MAP.',auto:'gunakan 5 MAP'},
+  '{{jumlah_soal_animasi}}':{label:'Jumlah Soal per MAP',type:'select',group:'settings',options:[['','— Ditentukan AI (1 soal) —'],['1','1 soal per MAP'],['2','2 soal per MAP']],help:'Setiap soal menambah 2 slide (Ujian dan Belum Tepat). Pilih 1 soal agar jumlah gambar lebih ringkas.',auto:'gunakan 1 soal per MAP'},
+  '{{bahasa_prompt_animasi}}':{label:'Bahasa Prompt Animasi Canva',type:'select',group:'settings',options:[['','— Indonesia (bawaan) —'],['Indonesia','Indonesia'],['Inggris','Inggris']],help:'Bahasa untuk prompt kecil yang ditempel ke Canva. Pilih Inggris jika hasil video di Canva kurang sesuai dengan prompt berbahasa Indonesia.',auto:'gunakan bahasa Indonesia'},
+  '{{tema_dunia_animasi}}':{label:'Tema Dunia (Latar Cerita & Peta)',type:'select',group:'media',options:presAnimOptions('tema','— Pilihkan untukku (AI memilih yang terbaik) —'),help:'Pilih dunia petualangan yang cocok dengan mapel/topik. Deskripsi lengkap pilihan akan ditulis ke prompt. Untuk tema sendiri, kosongkan dan isi kolom Permintaan Tema/Gaya Khusus.',auto:'pilihkan tema dunia terbaik untuk topik dan jenjang'},
+  '{{gaya_visual_animasi}}':{label:'Gaya Visual Ilustrasi',type:'select',group:'media',options:presAnimOptions('gaya','— Pilihkan untukku (AI memilih yang terbaik) —'),help:'Gaya gambar seluruh slide. SD: G2, G4, G6, G14. SMP: G1, G4, G10. SMA: G9, G11, G13. Gaya berlapis (G7) dan isometrik (G10) biasanya nyaman dianimasikan.',auto:'pilihkan gaya visual terbaik untuk jenjang dan tema'},
+  '{{suasana_palet_animasi}}':{label:'Suasana, Pencahayaan & Palet Warna',type:'select',group:'media',options:presAnimOptions('palet','— Pilihkan untukku (AI memilih yang terbaik) —'),help:'Menentukan suasana dan warna dominan. AI akan menurunkannya menjadi kode HEX pada Blok Gaya.',auto:'pilihkan suasana dan palet yang selaras dengan tema dan gaya'},
+  '{{karakter_pemandu_animasi}}':{label:'Karakter Pemandu',type:'select',group:'media',options:presAnimOptions('karakter','— Pilihkan untukku (AI memilih yang terbaik) —'),help:'Pilih satu karakter utama; boleh ditambah satu pendamping kecil (K7). Jangan lebih dari dua agar wajah dan kostum tetap konsisten.',auto:'pilihkan karakter pemandu yang sesuai tema dan jenjang'},
+  '{{bentuk_antarmuka_animasi}}':{label:'Bentuk Antarmuka Visual (Panel, Tombol, Banner)',type:'select',group:'media',options:presAnimOptions('ui','— Pilihkan untukku (AI memilih yang terbaik) —'),help:'Bentuk panel info, kartu pilihan, tombol, dan banner judul. Permukaan polos (U1 atau U5) membuat teks lebih mudah terbaca saat dijadikan video.',auto:'pilihkan bentuk antarmuka yang selaras dengan tema dan gaya'},
+  '{{kustom_tema_gaya_animasi}}':{label:'Permintaan Tema/Gaya Khusus (Opsional)',type:'textarea',group:'media',placeholder:'Contoh: dunia pesisir Kalimantan dengan rumah panggung, gaya cat air, karakter anak berbaju adat sederhana',help:'Isi jika ingin tema, gaya, atau karakter di luar pilihan. Jika diisi, AI memprioritaskan permintaan ini.',auto:'tidak ada permintaan tema/gaya khusus di luar pilihan'},
+  '{{deskripsi_tambahan_animasi}}':{label:'Deskripsi Tambahan / Permintaan Khusus',type:'textarea',group:'output',placeholder:'Contoh: batasi maksimal 20 slide; gunakan bahasa semi formal; tambahkan nilai karakter tertentu; sesuaikan untuk siswa low vision',help:'Untuk jumlah slide, gaya bahasa, muatan lokal, kebutuhan siswa inklusif, atau penekanan tertentu.',auto:'tidak ada permintaan khusus tambahan'}
+};
 const videoGeneratorFieldConfig={
   '{{nama_guru_video}}':{label:'Nama Guru',placeholder:'Contoh: Pak Andi, S.Pd.',help:'Nama guru/pengajar. Jika kosong, AI menggunakan identitas guru generik dan menandainya otomatis.',auto:'gunakan identitas guru generik yang mudah diganti'},
   '{{jenjang_kelas_video}}':{label:'Jenjang & Kelas',placeholder:'Contoh: SMP Kelas VIII',help:'Menentukan bahasa, kedalaman materi, karakter, dan keamanan visual. Jika kosong, AI menentukan berdasarkan konteks.',auto:'tentukan jenjang dan kelas paling sesuai dengan topik'},
@@ -8429,6 +8699,7 @@ function currentGeneratorFieldConfig(tokenOrField){
   let cfg=null;
   if(p?.categoryId==='modul-ajar-rpm')cfg=moduleGeneratorFieldConfig[token]||null;
   else if(p?.title==='Prompt Presentasi Pembelajaran')cfg=presentationGeneratorFieldConfig[token]||null;
+  else if(isPresentationAnimPrompt(p))cfg=presentationAnimGeneratorFieldConfig[token]||null;
   else if(p?.title==='Prompt Video Pembelajaran')cfg=videoGeneratorFieldConfig[token]||null;
   else if(p?.title==='Prompt LKPD')cfg=lkpdGeneratorFieldConfig[token]||null;
   else if(state.generatorType==='mpi'&&f){const key=fieldSemanticKey(f);cfg=(state.generatorVersion==='pro'?mpiProGeneratorFieldConfig[key]:null)||mpiGeneratorFieldConfig[key]||null;}
@@ -8563,6 +8834,7 @@ function initSpecialGeneratorFields(){
 }
 function generatorProgressGroup(f,cfg,label){
   if(f?.group)return f.group;
+  if(cfg?.group)return cfg.group;
   const token=f?.token||'';
   if(['{{komposisi_siswa}}','{{deskripsi_siswa_inklusi}}','{{dasar_data_inklusi}}','{{dukungan_inklusi_tersedia}}','{{ppi_inklusi}}','{{karakteristik_kesiapan_murid}}','{{preferensi_diferensiasi}}','{{nama_sekolah}}','{{nama_guru_modul}}','{{nama_kepala_sekolah}}','{{kurikulum_acuan_modul}}','{{jenjang}}','{{fase_kelas}}','{{mata_pelajaran}}','{{semester_tahun_ajaran}}','{{jumlah_pertemuan_alokasi}}','{{jumlah_siswa}}','{{jumlah_kelompok}}','{{sarana_pembelajaran}}','{{keterbatasan_pembelajaran}}'].includes(token))return'identity';
   if(['{{topik_materi}}','{{aktivitas_siswa}}','{{prasyarat_pembelajaran}}','{{miskonsepsi_kesulitan}}','{{subtopik}}','{{capaian_pembelajaran}}','{{tujuan_pembelajaran}}','{{dimensi_profil_lulusan}}','{{model_praktik_pedagogis}}','{{mode_produk_proyek}}','{{opsi_produk_proyek}}','{{konteks_lokal_sekolah}}','{{mode_sumber_belajar}}','{{sumber_belajar_guru}}','{{metode_gambar_modul}}','{{bagian_gambar_modul}}','{{url_gambar_modul}}'].includes(token))return'content';
@@ -8892,10 +9164,13 @@ function finalizeGeneratedPrompt(prompt,text,vals){
     Object.entries(lkpdGeneratorFieldConfig).forEach(([token,cfg])=>{if(out.includes(token))out=out.split(token).join(`[Ditentukan AI: ${cfg.auto}]`);});
   }else if(prompt?.title==='Prompt Presentasi Pembelajaran'){
     Object.entries(presentationGeneratorFieldConfig).forEach(([token,cfg])=>{if(out.includes(token))out=out.split(token).join(`[Ditentukan AI: ${cfg.auto}]`);});
+  }else if(isPresentationAnimPrompt(prompt)){
+    Object.entries(presentationAnimGeneratorFieldConfig).forEach(([token,cfg])=>{if(out.includes(token))out=out.split(token).join(`[Ditentukan AI: ${cfg.auto}]`);});
   }else if(prompt?.title==='Prompt Video Pembelajaran'){
     const needChar=vals?.get('{{butuh_karakter_video}}')||'';if(needChar==='Tidak'&&out.includes('{{deskripsi_karakter_video}}'))out=out.split('{{deskripsi_karakter_video}}').join('Tidak berlaku — video dipilih tanpa karakter.');
     Object.entries(videoGeneratorFieldConfig).forEach(([token,cfg])=>{if(out.includes(token))out=out.split(token).join(`(otomatis oleh AI: ${cfg.auto})`);});
   }
+  if(prompt?.generatorNoDirectives)return out;
   return out+curriculumDirectiveBlock(prompt,vals)+supplementalDirectiveBlock(prompt,vals);
 }
 function renderGeneratedSections(items){
@@ -8955,6 +9230,7 @@ function quickEssentialField(group,index){
   // field penting di Mode Cepat agar update kumulatif (identitas, asesmen, remedial,
   // output, tanda tangan, dll.) selalu terlihat oleh guru.
   const p=activeGeneratorPrompts?.()[0];
+  if(p?.presentationAnim)return true;
   if(p?.categoryId==='modul-ajar-rpm' && moduleGeneratorFieldConfig?.[token])return true;
   if(/nama guru|nama kepala sekolah|nama sekolah|kurikulum|acuan|jenjang|fase|kelas|mata pelajaran|\bmapel\b|topik|materi utama|aktivitas siswa|prasyarat|miskonsepsi|tujuan pembelajaran|capaian pembelajaran|alokasi|durasi total|jumlah siswa|jumlah kelompok|sarana|keterbatasan|format output|mode keluaran|mode pengerjaan|komposisi|kondisi siswa|diferensiasi|jenis konten|kedalaman materi|tools video|butuh karakter|model.*pedagogis|produk|proyek|sumber belajar|artikel|youtube|gambar|visual|url gambar|asesmen|bobot penilaian|remedial|pengayaan|rencana alternatif|plan b|tanda tangan|deskripsi tambahan|akses menu|canva sheet|cek pemahaman|feedback evaluasi|game pembelajaran/.test(t))return true;
   if(input?.hasAttribute('data-lkpd-output-select')||input?.hasAttribute('data-module-inclusion-hidden')||input?.hasAttribute('data-video-character-toggle')||input?.hasAttribute('data-mpi-evaluation-hidden')||input?.hasAttribute('data-assessment-hidden')||input?.hasAttribute('data-assessment-weights-hidden'))return true;
@@ -9101,7 +9377,7 @@ function localList(key){
  }catch{return[];}
 }
 function saveLocalList(key,list){localStorage.setItem(key,JSON.stringify(list));}
-function generatorDisplayTitle(){const all=activeGeneratorPrompts();if(!all.length)return'Proyek Prompt EDU';const d=currentPackageDef();return isPackageMode()?(d?.label||all[0].categoryName):all[0].title;}
+function generatorDisplayTitle(){const all=activeGeneratorPrompts();if(!all.length)return'Proyek Prompt EDU';const d=currentPackageDef();return isPackageMode()?(d?.label||all[0].categoryName):(all[0].generatorLabel||all[0].title);}
 function captureGeneratorSnapshot(){const controls=[...els.genFields.querySelectorAll('input,select,textarea')].map(el=>({tag:el.tagName,type:el.type||'',value:el.dataset.token==='{{ppi_inklusi}}'?'':(el.value||''),checked:!!el.checked}));return{generatorType:state.generatorType,generatorVersion:state.generatorVersion||'',generatorPackage:state.generatorPackage||'',generatorPrompt0Confirmed:!!state.generatorPrompt0Confirmed,generatorTemplateKey:state.generatorTemplateKey||'',presetId:activeTeacherPresetId(),controls,mode:localStorage.getItem('promptEduGeneratorFormModeV1')||'quick'};}
 function restoreGeneratorSnapshot(snap,promptText=''){
   if(!snap)return;state.generatorType=snap.generatorType||'all';state.generatorVersion=snap.generatorVersion||'';state.generatorPackage=snap.generatorPackage||'';state.generatorPrompt0Confirmed=!!snap.generatorPrompt0Confirmed;state.generatorTemplateKey=snap.generatorTemplateKey||null;if(snap.presetId)setActiveTeacherPresetId(snap.presetId);switchView('generator');
@@ -9256,7 +9532,7 @@ function generatePromptNow(){
   if(!validateLKPDOutput())return;
   const all=activeGeneratorPrompts();if(!all.length){toast('Pilih paket/template terlebih dahulu');return;}const vals=substitutionMap();let filled=vals.size;
   const ps=(isPackageMode()&&all.length>1&&!state.generatorPrompt0Confirmed)?[all[0]]:all;
-  const items=ps.map((p,i)=>{const isFull=ps.length===all.length;const originalIndex=all.indexOf(p);const last=originalIndex===all.length-1;return{sourceTitle:p.title,heading:isPackageMode()?(last?`BAGIAN AKHIR — ${p.title}`:`BAGIAN ${originalIndex+1} — ${p.title}`):p.title,text:finalizeGeneratedPrompt(p,applySubstitutions(p.text,vals),vals)};});
+  const items=ps.map((p,i)=>{const isFull=ps.length===all.length;const originalIndex=all.indexOf(p);const last=originalIndex===all.length-1;return{sourceTitle:p.title,heading:isPackageMode()?(last?`BAGIAN AKHIR — ${p.title}`:`BAGIAN ${originalIndex+1} — ${p.title}`):(p.generatorHeading||p.title),text:finalizeGeneratedPrompt(p,applySubstitutions(p.text,vals),vals)};});
   renderGeneratedSections(items);
   const combined=items.map(it=>`${'='.repeat(72)}\n${it.heading}\n${'='.repeat(72)}\n\n${it.text}`).join('\n\n\n');els.genOutput.value=combined;if(typeof pikoState!=='undefined')pikoState.lastPreparedPrompt=combined;els.genEmpty.hidden=true;els.genResult.hidden=false;scrollToGeneratorOutput();addGeneratorHistory(combined);
   const unresolved=ps.reduce((n,p)=>n+extractPromptFields(p,applySubstitutions(p.text,vals)).length,0);
