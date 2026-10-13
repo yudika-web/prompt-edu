@@ -4,7 +4,9 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="theme-color" content="#6d5dfc" />
-<title>Prompt EDU V5.10.1 — AI Prompt Studio untuk Guru</title>
+<title>Prompt EDU V5.10.3 — AI Prompt Studio untuk Guru</title>
+<!-- PATCH V5.10.3: MPI biasa/PRO mendukung checkbox kompatibilitas IFP, Laptop, HP. -->
+<!-- PATCH V5.10.2: Genre checkbox dan rekomendasi model Game biasa/PRO. -->
 <!-- PATCH V5.10.1: Adaptasi jenjang/mapel dan pemeriksaan visual sesuai detail TP. -->
 <!-- PATCH V5.10.0: Modul Ajar enam tahap, bahan sebelum LKPD, langkah naratif, perangkat terpisah dan ekspor bersih setelah pemeriksaan. -->
 <!-- PATCH V5.9.2: highlight judul, LKPD bertahap, label Indonesia dan tata halaman proporsional. -->
@@ -16,7 +18,7 @@
 <!-- PATCH V5.7: visual ilmiah, audit gambar–data–soal dan bukti per anggota. -->
 <!-- PATCH V5.6: CP–TP, asesmen dan generator; changelog aplikasi. -->
 <!-- PATCH V5.5: Modul Ajar/RPM — keputusan target dan evaluasi dukungan inklusif. -->
-<meta name="bank-prompt-build" content="2026-10-13-modul-ajar-v5.10.1" />
+<meta name="bank-prompt-build" content="2026-10-14-mpi-devices-v5.10.3" />
 <style>
 :root{
   --bg:#f4f7fb;
@@ -1232,6 +1234,21 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 .module-stage-hint{margin:8px 0;font-size:13px;line-height:1.5}
 .module-stage-card[hidden]{display:none!important}
 @media(max-width:700px){.module-stage-tabs{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* V5.10.2: approachable game genre/model recommendations. */
+.game-picker-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.game-picker-option{display:flex;align-items:flex-start;gap:10px;padding:12px;border:1px solid var(--border);border-radius:12px;cursor:pointer;background:var(--panel-solid)}
+.game-picker-option input{flex:none;margin-top:4px;accent-color:var(--accent)}
+.game-picker-option span{min-width:0}.game-picker-option strong{display:block;font-size:14px}
+.game-picker-option small{display:block;font-size:12px;line-height:1.6;opacity:.8;margin-top:4px}
+.game-picker-option:has(input:checked){border-color:var(--accent);background:color-mix(in srgb,var(--accent) 9%,var(--panel-solid))}
+.game-picker-option:focus-within{outline:2px solid var(--accent);outline-offset:2px}
+.game-model-panel{padding:14px;border:1px solid var(--border);border-radius:14px;margin-bottom:12px}
+.game-model-panel h4{margin:0 0 12px;font-size:15px}.game-model-panel p{font-size:13px;line-height:1.65}
+.game-model-panel [data-game-model-custom-wrap]{margin-top:12px}
+.game-model-empty{padding:14px;border:1px dashed var(--border);border-radius:12px;font-size:13px;line-height:1.65}
+.game-model-panel[hidden],.game-model-empty[hidden],[data-game-model-custom-wrap][hidden]{display:none!important}
+@media(max-width:640px){.game-picker-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body class="auth-locked">
@@ -1279,8 +1296,20 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
     <section class="home-howto" aria-labelledby="homeHowtoTitle"><h3 id="homeHowtoTitle">Baru pertama kali? Mulai dari sini.</h3><ol class="home-steps"><li><span class="home-step-number">1</span><div><strong>Pilih kebutuhan</strong><small>Modul ajar, LKPD, kuis, atau media.</small></div></li><li><span class="home-step-number">2</span><div><strong>Isi data kelas</strong><small>Sesuaikan materi dan kebutuhan murid.</small></div></li><li><span class="home-step-number">3</span><div><strong>Buat prompt</strong><small>Periksa kembali hasilnya.</small></div></li><li><span class="home-step-number">4</span><div><strong>Salin ke AI</strong><small>Tempel di ChatGPT atau AI pilihan Anda.</small></div></li></ol></section>
     <section class="home-section app-changelog" aria-labelledby="appChangelogTitle">
       <details id="appChangelog">
-        <summary><span id="appChangelogTitle">Changelog aplikasi</span><span class="changelog-version">V5.10.1</span></summary>
+        <summary><span id="appChangelogTitle">Changelog aplikasi</span><span class="changelog-version">V5.10.3</span></summary>
         <div class="changelog-body">
+          <h4>V5.10.3 — 14 Oktober 2026</h4>
+          <p>Kompatibilitas perangkat MPI biasa dan PRO memakai checkbox IFP, Laptop, dan HP. Semua perangkat terpilih diteruskan ke Prompt 0 serta diwariskan ke rancangan dan tahap lanjutan. Pilihan kosong memakai ketiga perangkat sebagai sasaran bawaan; preset dan proyek tersimpan tetap dapat digunakan.</p>
+
+          <h4>V5.10.2 — 14 Oktober 2026</h4>
+          <p>Prompt 0 GAME biasa dan PRO membantu guru memilih genre serta contoh model permainan tanpa perlu memahami istilah game.</p>
+          <ul>
+            <li>Genre berupa checkbox; rekomendasi model muncul sesuai genre yang dicentang pada varian Sederhana, Critical Thinking, dan Skill &amp; Luck.</li>
+            <li>Balap: mobil, motor, karung, pesawat, perahu. Petualangan: platformer 2D, labirin, peta/pulau, escape room, detektif. Papan: catur, ular tangga, monopoli, ludo, halma/dam.</li>
+            <li>Tersedia model lain per genre dan kolom ide di luar daftar yang dapat diisi tanpa memilih genre. Semua pilihan kosong berarti AI menyesuaikan ide secara otomatis.</li>
+            <li>Beberapa pilihan menjadi alternatif ide; setelah satu ide dipilih, mekaniknya diwariskan ke tahap lanjutan. Game papan/kartu/strategi dapat memakai giliran.</li>
+          </ul>
+
           <h4>V5.10.1 — 13 Oktober 2026</h4>
           <p>Adaptasi jenjang dan kinerja mapel ditambahkan ke enam tahap Modul Ajar; pemeriksaan aset diperketat agar gambar sederhana tidak menggantikan objek ilmiah yang diperlukan.</p>
           <ul>
@@ -2750,6 +2779,13 @@ Tujuan Pembelajaran: [tujuan pembelajaran]
 Kurikulum / Acuan: [Kurikulum Merdeka / Kurikulum Berbasis Cinta (Kemenag) / Cambridge International / International Baccalaureate (IB) / Singapore Curriculum (SCP) / Montessori / lainnya]
 Aturan kurikulum: sesuaikan istilah capaian/tujuan, pedagogi, materi, dan asesmen dengan acuan yang dipilih; jangan memaksakan istilah Kurikulum Merdeka pada kurikulum internasional.
 Perangkat: [HP/laptop/IFP]
+
+KOMPATIBILITAS PERANGKAT — PILIHAN JAMAK:
+- Perangkat dapat berisi lebih dari satu pilihan. Semua perangkat yang dicantumkan adalah sasaran wajib; jangan mengurangi pilihan menjadi satu perangkat atau meminta guru memilih ulang.
+- Jika perangkat belum dipilih/masih berupa placeholder, gunakan IFP, Laptop, dan HP sebagai sasaran bawaan tanpa meminta pengisian tambahan.
+- Wariskan daftar perangkat ke ide terpilih, rancangan, aset, implementasi, dan pemeriksaan akhir. Adaptasikan layout dan kontrol untuk setiap perangkat terpilih: IFP memakai tombol sentuh besar dan teks terbaca dari jarak kelas; Laptop mendukung mouse/keyboard; HP memakai layout responsif potret/landscape dan kontrol sentuh tanpa bergantung pada hover.
+- Semua fungsi inti dan navigasi harus dapat digunakan pada setiap perangkat terpilih. Jelaskan penyesuaian tiap perangkat secara ringkas; pengujian viewport bukan bukti telah menguji perangkat fisik. Laporkan hanya pengujian yang benar-benar dilakukan.
+
 Estimasi waktu penggunaan: [jumlah JP]
 Simpan hasil belajar secara lokal di browser: [Ya / Tidak]
 Platform PRO: gunakan aplikasi web standar berbasis HTML/CSS/JavaScript dan/atau tool AI/coding yang tercantum pada prompt tahap berikutnya; jangan menambahkan ketergantungan pada platform desain visual tertutup atau layanan proprietary yang tidak disebutkan.
@@ -3361,7 +3397,20 @@ Jika saya belum memilih, berhenti setelah laporan Final Check dan pilihan konver
         text: `Saya guru [jenjang dan kelas]. Saya ingin membuat game edukasi sederhana untuk materi [tulis materi].
 
 Mode Permainan: [pemain tunggal/dua pemain/banyak pemain/bergiliran]
-Genre: [Aksi, RPG, Strategi, Simulasi, Adventure, Arcade, Puzzle, Sports, Racing, dsb]
+Genre: {{genre_game_v5102}}
+Model game yang diminati: {{model_game_v5102}}
+Ide game lain / di luar daftar: {{ide_game_lain_v5102}}
+
+ATURAN PILIHAN GENRE DAN MODEL — UNTUK IDEASI DAN TAHAP LANJUTAN:
+- Semua pilihan bersifat opsional. Jika tidak ada genre, model, atau ide lain, tentukan sendiri genre dan model berdasarkan materi, jenjang, tujuan belajar, serta perangkat; jangan meminta guru mengisi pilihan kosong. Berikan minimal 5 ide yang bervariasi dan jelaskan alasan kecocokannya.
+- Jika guru hanya memilih genre, usulkan variasi model di dalam genre terpilih. Jika model dipilih, jadikan model-model itu dasar ide; setiap model terpilih harus mendapat setidaknya satu ide. Tetap berikan minimal 5 ide; tambah jumlahnya bila diperlukan untuk mencakup seluruh pilihan.
+- Beberapa genre/model berarti kumpulan alternatif, bukan kewajiban menggabungkan semuanya dalam satu game. Kombinasikan hanya bila masuk akal untuk tujuan belajar, dan jelaskan alasannya. Jangan mengganti pilihan guru diam-diam atau menambahkan genre di luar pilihan kecuali guru meminta ide lain/alternatif.
+- Ide di luar daftar sah dan dapat diberikan tanpa memilih genre. Petakan ke genre yang paling cocok sambil mempertahankan cara bermain yang dimaksud guru; bila ide tambahan tidak ada, tidak perlu meminta isian baru. Pilihan Lainnya tanpa rincian berarti AI mengusulkan alternatif yang relevan.
+- Tulis setiap ide dengan label Genre dan Model Game, gambaran cara bermain dalam bahasa sehari-hari, alasan sesuai materi/jenjang, serta kendali dan aturan menang/kalah. Istilah seperti platformer dijelaskan, misalnya karakter bergerak dan melompat melewati rintangan.
+- Nama seperti Mario, catur, atau monopoli adalah rujukan cara bermain. Gunakan judul, karakter, cerita, dan aset orisinal; jelaskan aturan/adaptasi edukatif sehingga guru dapat memahami bentuk game tanpa mengenal rujukannya.
+- Mekanik mengikuti model: balap/aksi/platformer memakai kendali gerak dan waktu; game papan/kartu/strategi boleh berbasis giliran dengan pilihan langkah, posisi, sumber daya, atau konsekuensi nyata; puzzle boleh tanpa timer dengan penyusunan/pemecahan masalah. Jangan memaksa catur, ular tangga, atau monopoli menjadi balap real-time. Soal terintegrasi dengan mekanik, tanpa menghilangkan identitas game.
+- Setelah guru memilih satu ide pada Prompt 1, wariskan genre, model, mekanik, serta aturan bermain ide tersebut ke desain, aset, kode, dan pengujian. Pilihan alternatif pada Prompt 0 tidak berarti semua model harus dibuat. Pengujian mengikuti mekanik terpilih, termasuk giliran dan langkah sah bila relevan.
+
 Perangkat: [HP/laptop/IFP]
 
 Buatkan minimal 5 ide game edukasi yang menarik, sederhana, ramah anak, dan bisa dimainkan di perangkat di atas.
@@ -3679,7 +3728,7 @@ TAHAP 4 — UJI KONTEN & ASET:
 16. Pastikan tidak ada teks placeholder, lorem ipsum, gibberish, data dummy yang seharusnya dihapus, atau kredensial rahasia yang tertanam di kode produksi.
 
 VALIDASI KHUSUS GAME:
-- Uji mekanik inti real-time, kontrol, collision/drag/gerak, obstacle, level/checkpoint, nyawa/timer/streak bila ada, dan kondisi menang/kalah.
+- Uji mekanik inti sesuai genre/model terpilih: real-time menguji kontrol, collision/drag/gerak, obstacle dan checkpoint; berbasis giliran menguji pergantian pemain, langkah sah, posisi bidak/kartu, sumber daya serta konsekuensi. Uji nyawa/timer/streak bila ada dan kondisi menang/kalah; jangan mengubah model untuk memenuhi uji real-time.
 - Uji integrasi soal dengan mekanik game, kunci jawaban, feedback, skor, progress, reward, restart, dan hasil akhir.
 - Pastikan game tidak berubah menjadi kuis biasa jika konsep awal memang menuntut mekanik permainan.
 - Pastikan aset/lingkungan/objek permainan sesuai konteks materi dan tidak menyesatkan fakta.
@@ -3728,7 +3777,22 @@ Jika saya belum memilih, berhenti setelah laporan Final Check dan pilihan konver
 
 Saya guru [jenjang dan kelas]. Saya ingin membuat game edukasi untuk materi [tulis materi], yang melatih berpikir kritis siswa.
 
-Mode Permainan: [...]  Genre: [...]  Perangkat: [HP/laptop/IFP]
+Mode Permainan: [pemain tunggal/dua pemain/banyak pemain/bergiliran]
+Genre: {{genre_game_v5102}}
+Model game yang diminati: {{model_game_v5102}}
+Ide game lain / di luar daftar: {{ide_game_lain_v5102}}
+
+ATURAN PILIHAN GENRE DAN MODEL — UNTUK IDEASI DAN TAHAP LANJUTAN:
+- Semua pilihan bersifat opsional. Jika tidak ada genre, model, atau ide lain, tentukan sendiri genre dan model berdasarkan materi, jenjang, tujuan belajar, serta perangkat; jangan meminta guru mengisi pilihan kosong. Berikan minimal 5 ide yang bervariasi dan jelaskan alasan kecocokannya.
+- Jika guru hanya memilih genre, usulkan variasi model di dalam genre terpilih. Jika model dipilih, jadikan model-model itu dasar ide; setiap model terpilih harus mendapat setidaknya satu ide. Tetap berikan minimal 5 ide; tambah jumlahnya bila diperlukan untuk mencakup seluruh pilihan.
+- Beberapa genre/model berarti kumpulan alternatif, bukan kewajiban menggabungkan semuanya dalam satu game. Kombinasikan hanya bila masuk akal untuk tujuan belajar, dan jelaskan alasannya. Jangan mengganti pilihan guru diam-diam atau menambahkan genre di luar pilihan kecuali guru meminta ide lain/alternatif.
+- Ide di luar daftar sah dan dapat diberikan tanpa memilih genre. Petakan ke genre yang paling cocok sambil mempertahankan cara bermain yang dimaksud guru; bila ide tambahan tidak ada, tidak perlu meminta isian baru. Pilihan Lainnya tanpa rincian berarti AI mengusulkan alternatif yang relevan.
+- Tulis setiap ide dengan label Genre dan Model Game, gambaran cara bermain dalam bahasa sehari-hari, alasan sesuai materi/jenjang, serta kendali dan aturan menang/kalah. Istilah seperti platformer dijelaskan, misalnya karakter bergerak dan melompat melewati rintangan.
+- Nama seperti Mario, catur, atau monopoli adalah rujukan cara bermain. Gunakan judul, karakter, cerita, dan aset orisinal; jelaskan aturan/adaptasi edukatif sehingga guru dapat memahami bentuk game tanpa mengenal rujukannya.
+- Mekanik mengikuti model: balap/aksi/platformer memakai kendali gerak dan waktu; game papan/kartu/strategi boleh berbasis giliran dengan pilihan langkah, posisi, sumber daya, atau konsekuensi nyata; puzzle boleh tanpa timer dengan penyusunan/pemecahan masalah. Jangan memaksa catur, ular tangga, atau monopoli menjadi balap real-time. Soal terintegrasi dengan mekanik, tanpa menghilangkan identitas game.
+- Setelah guru memilih satu ide pada Prompt 1, wariskan genre, model, mekanik, serta aturan bermain ide tersebut ke desain, aset, kode, dan pengujian. Pilihan alternatif pada Prompt 0 tidak berarti semua model harus dibuat. Pengujian mengikuti mekanik terpilih, termasuk giliran dan langkah sah bila relevan.
+
+Perangkat: [HP/laptop/IFP]
 
 Buatkan minimal 5 ide game edukasi yang menarik, sederhana, ramah anak, bisa dimainkan di perangkat di atas.
 
@@ -4024,7 +4088,7 @@ TAHAP 4 — UJI KONTEN & ASET:
 16. Pastikan tidak ada teks placeholder, lorem ipsum, gibberish, data dummy yang seharusnya dihapus, atau kredensial rahasia yang tertanam di kode produksi.
 
 VALIDASI KHUSUS GAME:
-- Uji mekanik inti real-time, kontrol, collision/drag/gerak, obstacle, level/checkpoint, nyawa/timer/streak bila ada, dan kondisi menang/kalah.
+- Uji mekanik inti sesuai genre/model terpilih: real-time menguji kontrol, collision/drag/gerak, obstacle dan checkpoint; berbasis giliran menguji pergantian pemain, langkah sah, posisi bidak/kartu, sumber daya serta konsekuensi. Uji nyawa/timer/streak bila ada dan kondisi menang/kalah; jangan mengubah model untuk memenuhi uji real-time.
 - Uji integrasi soal dengan mekanik game, kunci jawaban, feedback, skor, progress, reward, restart, dan hasil akhir.
 - Pastikan game tidak berubah menjadi kuis biasa jika konsep awal memang menuntut mekanik permainan.
 - Pastikan aset/lingkungan/objek permainan sesuai konteks materi dan tidak menyesatkan fakta.
@@ -4072,7 +4136,22 @@ Jika saya belum memilih, berhenti setelah laporan Final Check dan pilihan konver
         text: `Ciri khas varian ini: memadukan kemampuan siswa menjawab (skill) dengan elemen keberuntungan (dadu/spin wheel/kartu acak) — namun NILAI ASESMEN tetap murni dari skill; luck hanya memengaruhi keseruan permainan, bukan nilai.
 
 Saya guru [jenjang dan kelas]. Saya ingin membuat game edukasi untuk materi [tulis materi], dengan keseimbangan 50% skill dan 50% luck.
-Mode Permainan: [...]  Genre: [...]  Perangkat: [HP/laptop/IFP]
+Mode Permainan: [pemain tunggal/dua pemain/banyak pemain/bergiliran]
+Genre: {{genre_game_v5102}}
+Model game yang diminati: {{model_game_v5102}}
+Ide game lain / di luar daftar: {{ide_game_lain_v5102}}
+
+ATURAN PILIHAN GENRE DAN MODEL — UNTUK IDEASI DAN TAHAP LANJUTAN:
+- Semua pilihan bersifat opsional. Jika tidak ada genre, model, atau ide lain, tentukan sendiri genre dan model berdasarkan materi, jenjang, tujuan belajar, serta perangkat; jangan meminta guru mengisi pilihan kosong. Berikan minimal 5 ide yang bervariasi dan jelaskan alasan kecocokannya.
+- Jika guru hanya memilih genre, usulkan variasi model di dalam genre terpilih. Jika model dipilih, jadikan model-model itu dasar ide; setiap model terpilih harus mendapat setidaknya satu ide. Tetap berikan minimal 5 ide; tambah jumlahnya bila diperlukan untuk mencakup seluruh pilihan.
+- Beberapa genre/model berarti kumpulan alternatif, bukan kewajiban menggabungkan semuanya dalam satu game. Kombinasikan hanya bila masuk akal untuk tujuan belajar, dan jelaskan alasannya. Jangan mengganti pilihan guru diam-diam atau menambahkan genre di luar pilihan kecuali guru meminta ide lain/alternatif.
+- Ide di luar daftar sah dan dapat diberikan tanpa memilih genre. Petakan ke genre yang paling cocok sambil mempertahankan cara bermain yang dimaksud guru; bila ide tambahan tidak ada, tidak perlu meminta isian baru. Pilihan Lainnya tanpa rincian berarti AI mengusulkan alternatif yang relevan.
+- Tulis setiap ide dengan label Genre dan Model Game, gambaran cara bermain dalam bahasa sehari-hari, alasan sesuai materi/jenjang, serta kendali dan aturan menang/kalah. Istilah seperti platformer dijelaskan, misalnya karakter bergerak dan melompat melewati rintangan.
+- Nama seperti Mario, catur, atau monopoli adalah rujukan cara bermain. Gunakan judul, karakter, cerita, dan aset orisinal; jelaskan aturan/adaptasi edukatif sehingga guru dapat memahami bentuk game tanpa mengenal rujukannya.
+- Mekanik mengikuti model: balap/aksi/platformer memakai kendali gerak dan waktu; game papan/kartu/strategi boleh berbasis giliran dengan pilihan langkah, posisi, sumber daya, atau konsekuensi nyata; puzzle boleh tanpa timer dengan penyusunan/pemecahan masalah. Jangan memaksa catur, ular tangga, atau monopoli menjadi balap real-time. Soal terintegrasi dengan mekanik, tanpa menghilangkan identitas game.
+- Setelah guru memilih satu ide pada Prompt 1, wariskan genre, model, mekanik, serta aturan bermain ide tersebut ke desain, aset, kode, dan pengujian. Pilihan alternatif pada Prompt 0 tidak berarti semua model harus dibuat. Pengujian mengikuti mekanik terpilih, termasuk giliran dan langkah sah bila relevan.
+
+Perangkat: [HP/laptop/IFP]
 
 Ketentuan penting:
 - Skill 50%: kemampuan siswa menjawab soal, menganalisis kasus, memberi alasan, mengambil keputusan, berpikir kritis.
@@ -4395,7 +4474,7 @@ TAHAP 4 — UJI KONTEN & ASET:
 16. Pastikan tidak ada teks placeholder, lorem ipsum, gibberish, data dummy yang seharusnya dihapus, atau kredensial rahasia yang tertanam di kode produksi.
 
 VALIDASI KHUSUS GAME:
-- Uji mekanik inti real-time, kontrol, collision/drag/gerak, obstacle, level/checkpoint, nyawa/timer/streak bila ada, dan kondisi menang/kalah.
+- Uji mekanik inti sesuai genre/model terpilih: real-time menguji kontrol, collision/drag/gerak, obstacle dan checkpoint; berbasis giliran menguji pergantian pemain, langkah sah, posisi bidak/kartu, sumber daya serta konsekuensi. Uji nyawa/timer/streak bila ada dan kondisi menang/kalah; jangan mengubah model untuk memenuhi uji real-time.
 - Uji integrasi soal dengan mekanik game, kunci jawaban, feedback, skor, progress, reward, restart, dan hasil akhir.
 - Pastikan game tidak berubah menjadi kuis biasa jika konsep awal memang menuntut mekanik permainan.
 - Pastikan aset/lingkungan/objek permainan sesuai konteks materi dan tidak menyesatkan fakta.
@@ -4551,6 +4630,13 @@ Tujuan Pembelajaran: [tujuan pembelajaran]
 Kurikulum / Acuan: [Kurikulum Merdeka / Kurikulum Berbasis Cinta (Kemenag) / Cambridge International / International Baccalaureate (IB) / Singapore Curriculum (SCP) / Montessori / lainnya]
 Aturan kurikulum: sesuaikan istilah capaian/tujuan, pedagogi, materi, dan asesmen dengan acuan yang dipilih; jangan memaksakan istilah Kurikulum Merdeka pada kurikulum internasional.
 Perangkat: [HP/laptop/IFP]
+
+KOMPATIBILITAS PERANGKAT — PILIHAN JAMAK:
+- Perangkat dapat berisi lebih dari satu pilihan. Semua perangkat yang dicantumkan adalah sasaran wajib; jangan mengurangi pilihan menjadi satu perangkat atau meminta guru memilih ulang.
+- Jika perangkat belum dipilih/masih berupa placeholder, gunakan IFP, Laptop, dan HP sebagai sasaran bawaan tanpa meminta pengisian tambahan.
+- Wariskan daftar perangkat ke ide terpilih, rancangan, aset, implementasi, dan pemeriksaan akhir. Adaptasikan layout dan kontrol untuk setiap perangkat terpilih: IFP memakai tombol sentuh besar dan teks terbaca dari jarak kelas; Laptop mendukung mouse/keyboard; HP memakai layout responsif potret/landscape dan kontrol sentuh tanpa bergantung pada hover.
+- Semua fungsi inti dan navigasi harus dapat digunakan pada setiap perangkat terpilih. Jelaskan penyesuaian tiap perangkat secara ringkas; pengujian viewport bukan bukti telah menguji perangkat fisik. Laporkan hanya pengujian yang benar-benar dilakukan.
+
 Estimasi waktu penggunaan: [jumlah JP]
 Bahasa Konten: [Bahasa Indonesia saja / Bahasa Indonesia + Inggris (mapel Bahasa Inggris) / Bahasa Indonesia + Arab untuk ayat Al-Qur'an (mapel PAI/Tahfiz/Bahasa Arab)]
 Tautkan Canva Sheet untuk mencatat hasil belajar: [Ya / Tidak]
@@ -4829,23 +4915,37 @@ Setelah aplikasi/MPI selesai dibuat di Canva, JANGAN langsung menyatakan pekerja
 Buatkan minimal 5 ide game edukasi yang menarik, sederhana, ramah anak, dan bisa dimainkan di [HP/laptop/IFP].
 
 Mode Permainan: [pemain tunggal/dua pemain/banyak pemain/bergiliran]
-Genre: [Aksi, RPG, Strategi, Simulasi, Edukasi, Adventure, Arcade, Puzzle, Sports, Racing]
+Genre: {{genre_game_v5102}}
+Model game yang diminati: {{model_game_v5102}}
+Ide game lain / di luar daftar: {{ide_game_lain_v5102}}
+
+ATURAN PILIHAN GENRE DAN MODEL — UNTUK IDEASI DAN TAHAP LANJUTAN:
+- Semua pilihan bersifat opsional. Jika tidak ada genre, model, atau ide lain, tentukan sendiri genre dan model berdasarkan materi, jenjang, tujuan belajar, serta perangkat; jangan meminta guru mengisi pilihan kosong. Berikan minimal 5 ide yang bervariasi dan jelaskan alasan kecocokannya.
+- Jika guru hanya memilih genre, usulkan variasi model di dalam genre terpilih. Jika model dipilih, jadikan model-model itu dasar ide; setiap model terpilih harus mendapat setidaknya satu ide. Tetap berikan minimal 5 ide; tambah jumlahnya bila diperlukan untuk mencakup seluruh pilihan.
+- Beberapa genre/model berarti kumpulan alternatif, bukan kewajiban menggabungkan semuanya dalam satu game. Kombinasikan hanya bila masuk akal untuk tujuan belajar, dan jelaskan alasannya. Jangan mengganti pilihan guru diam-diam atau menambahkan genre di luar pilihan kecuali guru meminta ide lain/alternatif.
+- Ide di luar daftar sah dan dapat diberikan tanpa memilih genre. Petakan ke genre yang paling cocok sambil mempertahankan cara bermain yang dimaksud guru; bila ide tambahan tidak ada, tidak perlu meminta isian baru. Pilihan Lainnya tanpa rincian berarti AI mengusulkan alternatif yang relevan.
+- Tulis setiap ide dengan label Genre dan Model Game, gambaran cara bermain dalam bahasa sehari-hari, alasan sesuai materi/jenjang, serta kendali dan aturan menang/kalah. Istilah seperti platformer dijelaskan, misalnya karakter bergerak dan melompat melewati rintangan.
+- Nama seperti Mario, catur, atau monopoli adalah rujukan cara bermain. Gunakan judul, karakter, cerita, dan aset orisinal; jelaskan aturan/adaptasi edukatif sehingga guru dapat memahami bentuk game tanpa mengenal rujukannya.
+- Mekanik mengikuti model: balap/aksi/platformer memakai kendali gerak dan waktu; game papan/kartu/strategi boleh berbasis giliran dengan pilihan langkah, posisi, sumber daya, atau konsekuensi nyata; puzzle boleh tanpa timer dengan penyusunan/pemecahan masalah. Jangan memaksa catur, ular tangga, atau monopoli menjadi balap real-time. Soal terintegrasi dengan mekanik, tanpa menghilangkan identitas game.
+- Setelah guru memilih satu ide pada Prompt 1, wariskan genre, model, mekanik, serta aturan bermain ide tersebut ke desain, aset, kode, dan pengujian. Pilihan alternatif pada Prompt 0 tidak berarti semua model harus dibuat. Pengujian mengikuti mekanik terpilih, termasuk giliran dan langkah sah bila relevan.
+
 
 ATURAN WAJIB — GAME, BUKAN KUIS BERKEDOK GAME:
-Setiap ide WAJIB memiliki mekanik inti yang aktif dan dikendalikan pemain secara real-time (bergerak, menghindar, mengumpulkan, menyusun, melempar, dsb) — BUKAN sekadar “pilih level → jawab soal → lanjut ke level berikutnya”.
-DITOLAK, contoh: game adventure yang hanya berisi pilih level lalu jawab soal lalu lanjut level, tanpa ruang gerak menuju pintu/tujuan atau menghindari musuh seperti pada game platform 2D; game balap mobil yang hanya berisi jawab soal lalu mobil otomatis melaju lurus, tanpa mekanik kiri-kanan untuk menghindari halangan atau mobil lain.
+Setiap ide WAJIB memiliki mekanik inti yang aktif dan dikendalikan pemain sesuai model: real-time untuk aksi/balap/platformer, atau giliran, langkah sah, pengelolaan sumber daya, dan penyusunan untuk papan/kartu/strategi/puzzle — BUKAN sekadar “pilih level → jawab soal → lanjut ke level berikutnya”.
+DITOLAK, contoh: game platformer yang hanya berisi pilih level lalu jawab soal lalu lanjut level, tanpa gerak/lompatan menuju tujuan atau menghindari rintangan; game balap mobil yang hanya berisi jawab soal lalu mobil otomatis melaju lurus, tanpa mekanik kiri-kanan untuk menghindari halangan atau mobil lain.
 Ketentuan mekanik per genre (pilih dan sesuaikan dengan genre yang dipakai):
-- Adventure/Petualangan/Platformer: karakter digerakkan pemain (kiri/kanan, lompat) menuju pintu/checkpoint sambil melompati atau menghindari rintangan/musuh; soal muncul sebagai gerbang, peti, atau NPC yang harus ditaklukkan untuk bisa lanjut.
-- Racing/Balap: kendaraan melaju otomatis ke depan, pemain mengendalikan arah kiri-kanan (atau berpindah jalur) untuk menghindari halangan/kendaraan lain; soal muncul di checkpoint tanpa menghentikan laju kendaraan sepenuhnya.
-- Arcade/Puzzle/Sports/Strategi/genre lain: tetap wajib ada aksi fisik atau tantangan ruang-dan-waktu (menangkap, menyusun, melempar, mengatur waktu/posisi, dsb) yang berdiri sendiri di luar soal, bukan hanya klik jawaban.
-Soal/tantangan pembelajaran WAJIB terintegrasi ke DALAM mekanik inti tersebut (sebagai gerbang, rintangan, atau pemicu event) — bukan menggantikannya. Jika sebuah ide hanya bisa dimainkan dengan klik “lanjut” berulang tanpa kendali gerak/posisi/waktu dari pemain, ide tersebut WAJIB ditolak dan diganti ide lain.
+- Platformer 2D: karakter digerakkan pemain (kiri/kanan, lompat) menuju pintu/checkpoint sambil melompati atau menghindari rintangan/musuh; soal muncul sebagai gerbang, peti, atau NPC yang harus ditaklukkan untuk bisa lanjut.
+- Adventure/Petualangan selain platformer: gunakan jelajah lokasi, interaksi objek, petunjuk, inventori, atau keputusan bercabang sesuai model (labirin, escape room, detektif, peta/pulau); jangan memaksa semua petualangan memakai lompatan.
+- Racing/Balap: sesuaikan kendali dengan model. Mobil/motor memakai arah/jalur, pesawat/perahu memakai navigasi rintangan, balap karung memakai waktu/ritme lompatan. Pemain harus mengendalikan aksi lomba; tantangan pembelajaran muncul pada checkpoint atau event yang jelas.
+- Arcade/Sports/Aksi: gunakan kendali gerak, arah, atau ketepatan waktu. Game Papan/Kartu/Strategi: gunakan giliran, langkah sah, posisi, sumber daya, serta konsekuensi keputusan. Puzzle: gunakan penyusunan atau pemecahan pola; timer tidak wajib. Mekanik tersebut harus berjalan di luar sekadar klik jawaban.
+Soal/tantangan pembelajaran WAJIB terintegrasi ke DALAM mekanik inti tersebut (sebagai gerbang, rintangan, atau pemicu event) — bukan menggantikannya. Jika sebuah ide hanya bisa dimainkan dengan klik “lanjut” berulang tanpa kendali gerak, posisi, waktu, langkah, susunan, atau keputusan strategis dari pemain, ide tersebut WAJIB ditolak dan diganti ide lain.
 
 Berikan setiap ide dengan format:
 1. Judul Game — menarik dan sesuai materi
 2. Model Game — contoh: board game, ular tangga, kartu misi, balap mobil, petualangan, spin wheel, dadu tantangan, puzzle map, dan lainnya
 3. Misi Utama Pemain
 4. Aturan Bermain Singkat — mudah dipahami siswa
-5. Mekanisme Permainan — jelaskan secara terpisah: (a) Mekanik Inti (real-time) — kontrol yang dipegang pemain (tombol/gesture, arah gerak, kecepatan, tabrakan/hindar, dsb) sesuai Aturan Wajib di atas; (b) Integrasi Soal — kapan & di mana soal muncul di dalam mekanik inti (gerbang, checkpoint, tabrakan dengan objek, dsb), dan apa yang terjadi terhadap mekanik inti setelah jawaban benar/salah (pintu terbuka/tertutup, kendaraan melaju/melambat, dsb). Jelaskan juga bagaimana pemain lanjut, skor berubah, progress berubah, reward diberikan, dan game selesai. Sertakan elemen visual spesifik (grid, jalur, rintangan, panel, kartu, dadu, dsb) agar terasa hidup, bukan kuis biasa. Ikuti Aturan Lock Konsep Genre pada Modul D3.
+5. Mekanisme Permainan — jelaskan secara terpisah: (a) Mekanik Inti (real-time atau berbasis giliran sesuai model) — kontrol yang dipegang pemain (tombol/gesture, arah gerak, kecepatan, tabrakan/hindar, dsb) sesuai Aturan Wajib di atas; (b) Integrasi Soal — kapan & di mana soal muncul di dalam mekanik inti (gerbang, checkpoint, tabrakan dengan objek, dsb), dan apa yang terjadi terhadap mekanik inti setelah jawaban benar/salah (pintu terbuka/tertutup, kendaraan melaju/melambat, dsb). Jelaskan juga bagaimana pemain lanjut, skor berubah, progress berubah, reward diberikan, dan game selesai. Sertakan elemen visual spesifik (grid, jalur, rintangan, panel, kartu, dadu, dsb) agar terasa hidup, bukan kuis biasa. Ikuti Aturan Lock Konsep Genre pada Modul D3.
 6. Contoh 3 Tantangan/Soal — sesuai materi
 7. Bentuk Soal — variasikan: pilihan ganda, menjodohkan, mengurutkan, isian singkat, benar/salah, analisis kasus, pilihan bercabang
 8. Jawaban Benar
@@ -4874,14 +4974,14 @@ Buatkan rancangan dengan format berikut:
 3. Misi Utama Pemain
 4. Tujuan Pembelajaran — 2-3 tujuan yang jelas dan sesuai materi
 5. Aturan Bermain — singkat dan mudah dipahami siswa
-6. Mekanisme Permainan — jelaskan terpisah: (a) Mekanik Inti (real-time): kontrol pemain (tombol arah/gesture/tap), gerak/kecepatan, cara menghindari atau mengenai rintangan/objek; (b) Integrasi Soal: momen dan cara soal muncul di dalam mekanik inti (gerbang, checkpoint, tabrakan objek, dsb) serta efeknya ke mekanik inti setelah jawaban benar/salah. WAJIB sesuai Aturan Wajib Mekanik Game pada Prompt 0 — bukan sekadar pilih level, jawab, lanjut.
+6. Mekanisme Permainan — jelaskan terpisah: (a) Mekanik Inti (real-time atau berbasis giliran sesuai model): kontrol pemain dan konsekuensinya: tombol arah/gesture untuk gerak, atau pilih bidak/petak/kartu, langkah sah, giliran, dan pengelolaan sumber daya sesuai model; (b) Integrasi Soal: momen dan cara soal muncul di dalam mekanik inti (gerbang, checkpoint, tabrakan objek, dsb) serta efeknya ke mekanik inti setelah jawaban benar/salah. WAJIB sesuai Aturan Wajib Mekanik Game pada Prompt 0 — bukan sekadar pilih level, jawab, lanjut.
 7. Tampilan Permainan — background, panel, grid, dan item-item dalam game
-8. Alur Halaman Game: Cover → Petunjuk bermain (termasuk kontrol: tombol arah/gesture) → Cerita/misi → Area Bermain 1 (mekanik inti aktif, soal muncul di dalamnya) → Feedback 1 → Area Bermain 2 → Feedback 2 → Area Bermain 3 → Feedback 3 → Reward akhir. Catatan: “Area Bermain” adalah layar interaktif tempat pemain benar-benar bergerak/mengendalikan sampai bertemu tantangan, bukan layar statis berisi soal saja.
+8. Alur Halaman Game: Cover → Petunjuk bermain (termasuk kontrol sesuai model: tombol arah/gesture atau pilih bidak/petak/kartu) → Cerita/misi → Area Bermain 1 (mekanik inti aktif, soal muncul di dalamnya) → Feedback 1 → Area Bermain 2 → Feedback 2 → Area Bermain 3 → Feedback 3 → Reward akhir. Catatan: “Area Bermain” adalah layar interaktif tempat pemain benar-benar mengendalikan aksi atau mengambil langkah/keputusan sampai bertemu tantangan, bukan layar statis berisi soal saja.
 9. Database Tantangan/Soal — minimal [3/5] tantangan, tiap tantangan berisi: level, pertanyaan/kasus, bentuk soal, pilihan jawaban (jika perlu), jawaban benar, hint/petunjuk, feedback benar, feedback salah
 10. Sistem Skor — jawaban benar +10 poin, jawaban salah 0 poin (boleh coba lagi), skor maksimal, kategori skor akhir
 11. Reward Akhir — 3 badge (skor rendah/sedang/tinggi)
 12. Arahan Visual Canva — tema background, warna utama, karakter/maskot, ikon pendukung, gaya tombol, animasi ringan, efek suara jika perlu
-13. Checklist Kualitas Game — punya misi jelas; soal sesuai materi; punya mekanik inti gerak/kendali nyata (bukan sekadar pilih level → jawab → lanjut); tidak hanya fun tapi membuat siswa berpikir; feedback membantu belajar; bisa dimainkan di HP/laptop/IFP; cocok dibuat di Canva Code
+13. Checklist Kualitas Game — punya misi jelas; soal sesuai materi; punya mekanik inti dengan aksi, langkah, atau keputusan nyata sesuai model (bukan sekadar pilih level → jawab → lanjut); tidak hanya fun tapi membuat siswa berpikir; feedback membantu belajar; bisa dimainkan di HP/laptop/IFP; cocok dibuat di Canva Code
 
 Pastikan hasilnya rapi, mudah dipahami guru pemula, dan siap dilanjutkan menjadi prompt Canva Code.
 
@@ -4893,16 +4993,16 @@ Pastikan hasilnya rapi, mudah dipahami guru pemula, dan siap dilanjutkan menjadi
         text: `Ubah rancangan game di atas menjadi prompt game interaktif yang bisa langsung dijalankan di Canva Code. Jelaskan mekanisme dan tampilan game secara sangat detail.
 Tugas: buat prompt untuk game edukasi dalam satu file HTML lengkap (HTML, CSS, JavaScript).
 
-Ketentuan umum: (1) langsung bisa dijalankan di Canva Code; (2) jangan gunakan library eksternal; (3) jangan gunakan database eksternal; (4) semua teks berbahasa Indonesia; (5) tampilan responsif HP/laptop/IFP; (6) tombol besar, jelas, mudah diklik; (7) kode rapi dan diberi komentar singkat; (8) satu layar game dinamis, bukan banyak file terpisah; (9) mekanik inti WAJIB real-time — gunakan requestAnimationFrame atau setInterval untuk animasi/gerak, keydown/keyup atau tombol on-screen (touch-friendly) untuk kontrol, dan deteksi tabrakan sederhana (bounding box) antar elemen.
+Ketentuan umum: (1) langsung bisa dijalankan di Canva Code; (2) jangan gunakan library eksternal; (3) jangan gunakan database eksternal; (4) semua teks berbahasa Indonesia; (5) tampilan responsif HP/laptop/IFP; (6) tombol besar, jelas, mudah diklik; (7) kode rapi dan diberi komentar singkat; (8) satu layar game dinamis, bukan banyak file terpisah; (9) implementasikan mekanik inti sesuai genre/model yang dipilih pada Prompt 1: real-time memakai requestAnimationFrame atau setInterval, kontrol keydown/keyup/tombol layar, dan deteksi tabrakan bila relevan; berbasis giliran memakai state giliran, validasi langkah sah, perpindahan bidak/petak/kartu, dan konsekuensi keputusan. Timer/gerak real-time tidak wajib untuk papan/kartu/strategi/puzzle.
 
 Struktur game: cover, petunjuk bermain (jelaskan kontrol), misi/cerita pembuka, area bermain (mekanik inti aktif, tempat tantangan/soal muncul), feedback benar/salah, skor akhir dan reward, tombol “Main Lagi”.
 
-Fitur game: kontrol gerak real-time (tombol arah/gesture sesuai genre), deteksi tabrakan/interaksi dengan objek tantangan, animasi gerak sederhana, skor otomatis, progress bar, tombol hint/petunjuk, feedback benar, feedback salah, reward/badge akhir, tombol lanjut dan coba lagi.
+Fitur game: kontrol sesuai model (gerak real-time atau langkah/keputusan berbasis giliran), deteksi tabrakan bila relevan atau validasi langkah/interaksi objek, animasi yang sesuai, skor otomatis, progress bar, tombol hint/petunjuk, feedback benar, feedback salah, reward/badge akhir, tombol lanjut dan coba lagi.
 
 Implementasi mekanik per genre (WAJIB, pilih sesuai genre rancangan):
-- Adventure/Platformer: render karakter yang bisa digerakkan kiri/kanan (dan lompat bila perlu) memakai tombol on-screen atau keyboard (arrow keys); gunakan requestAnimationFrame atau CSS transform untuk animasi gerak; tempatkan rintangan/musuh/pintu sebagai elemen yang harus dicapai atau dihindari; jalankan deteksi tabrakan sederhana saat karakter menyentuh gerbang/NPC/peti untuk memunculkan soal.
-- Racing: render jalur/track dengan efek gerak (misalnya garis jalan bergeser untuk ilusi kecepatan); mobil pemain bisa digeser kiri-kanan lewat tombol on-screen/drag/keyboard; munculkan halangan/mobil lain yang bergerak ke arah pemain dan harus dihindari lewat deteksi tabrakan; soal muncul di checkpoint dengan mobil melambat, bukan berhenti total.
-- Genre lain (Arcade/Puzzle/Sports/Strategi): tetap wajib ada mekanik fisik/spasial-waktu yang dikendalikan pemain secara real-time (menangkap, menyusun, melempar, mengatur waktu/posisi), diimplementasikan dengan event listener (klik/drag/keydown) dan animasi sederhana, sebelum atau berdampingan dengan soal.
+- Platformer 2D: implementasikan gerak kiri/kanan dan lompat sesuai rancangan, kontrol keyboard/tombol layar, rintangan, dan interaksi checkpoint. Petualangan lain: implementasikan navigasi lokasi, petunjuk, inventori, interaksi objek, atau keputusan bercabang yang sesuai ide terpilih; escape room/detektif tidak wajib memakai mekanik platformer.
+- Racing/Balap: implementasikan lintasan, kemajuan lomba, kendali pemain dan rintangan sesuai model terpilih. Mobil/motor mengendalikan arah/jalur; pesawat/perahu mengendalikan navigasi; balap karung mengatur waktu/ritme lompatan. Gunakan kontrol keyboard/tombol layar/gesture sesuai perangkat dan integrasikan soal pada checkpoint/event; jangan mengganti model terpilih dengan balap mobil.
+- Arcade/Sports/Aksi: implementasikan kendali fisik/spasial-waktu (menangkap, melempar, mengatur posisi). Game Papan/Kartu/Strategi/Puzzle: implementasikan giliran bila relevan, validasi langkah, pengelolaan sumber daya atau penyusunan melalui klik/drag; pertahankan mekanik asli, jangan wajibkan gerak real-time. Pada catur jelaskan dan implementasikan aturan bidak; pada ular tangga jalankan dadu, posisi, ular/tangga; pada monopoli edukatif jalankan petak, transaksi, dan sumber daya sesuai rancangan.
 
 Jika ada bentuk soal: pilihan ganda → tombol pilihan; benar/salah → tombol Benar/Salah; mengurutkan → pilihan yang bisa disusun; menjodohkan → pasangan yang dicocokkan; isian singkat → kolom input.
 
@@ -4937,20 +5037,35 @@ Setelah aplikasi/MPI/game/simulasi/lab maya selesai dibuat di Canva, JANGAN lang
 Saya guru [jenjang dan kelas]. Saya ingin membuat game edukasi di Canva untuk materi [tulis materi], yang melatih berpikir kritis siswa.
 Buatkan minimal 5 ide game edukasi yang menarik, sederhana, ramah anak, bisa dimainkan di [HP/laptop/IFP].
 
-Mode Permainan: [...]   Genre: [...]
+Mode Permainan: [pemain tunggal/dua pemain/banyak pemain/bergiliran]
+Genre: {{genre_game_v5102}}
+Model game yang diminati: {{model_game_v5102}}
+Ide game lain / di luar daftar: {{ide_game_lain_v5102}}
+
+ATURAN PILIHAN GENRE DAN MODEL — UNTUK IDEASI DAN TAHAP LANJUTAN:
+- Semua pilihan bersifat opsional. Jika tidak ada genre, model, atau ide lain, tentukan sendiri genre dan model berdasarkan materi, jenjang, tujuan belajar, serta perangkat; jangan meminta guru mengisi pilihan kosong. Berikan minimal 5 ide yang bervariasi dan jelaskan alasan kecocokannya.
+- Jika guru hanya memilih genre, usulkan variasi model di dalam genre terpilih. Jika model dipilih, jadikan model-model itu dasar ide; setiap model terpilih harus mendapat setidaknya satu ide. Tetap berikan minimal 5 ide; tambah jumlahnya bila diperlukan untuk mencakup seluruh pilihan.
+- Beberapa genre/model berarti kumpulan alternatif, bukan kewajiban menggabungkan semuanya dalam satu game. Kombinasikan hanya bila masuk akal untuk tujuan belajar, dan jelaskan alasannya. Jangan mengganti pilihan guru diam-diam atau menambahkan genre di luar pilihan kecuali guru meminta ide lain/alternatif.
+- Ide di luar daftar sah dan dapat diberikan tanpa memilih genre. Petakan ke genre yang paling cocok sambil mempertahankan cara bermain yang dimaksud guru; bila ide tambahan tidak ada, tidak perlu meminta isian baru. Pilihan Lainnya tanpa rincian berarti AI mengusulkan alternatif yang relevan.
+- Tulis setiap ide dengan label Genre dan Model Game, gambaran cara bermain dalam bahasa sehari-hari, alasan sesuai materi/jenjang, serta kendali dan aturan menang/kalah. Istilah seperti platformer dijelaskan, misalnya karakter bergerak dan melompat melewati rintangan.
+- Nama seperti Mario, catur, atau monopoli adalah rujukan cara bermain. Gunakan judul, karakter, cerita, dan aset orisinal; jelaskan aturan/adaptasi edukatif sehingga guru dapat memahami bentuk game tanpa mengenal rujukannya.
+- Mekanik mengikuti model: balap/aksi/platformer memakai kendali gerak dan waktu; game papan/kartu/strategi boleh berbasis giliran dengan pilihan langkah, posisi, sumber daya, atau konsekuensi nyata; puzzle boleh tanpa timer dengan penyusunan/pemecahan masalah. Jangan memaksa catur, ular tangga, atau monopoli menjadi balap real-time. Soal terintegrasi dengan mekanik, tanpa menghilangkan identitas game.
+- Setelah guru memilih satu ide pada Prompt 1, wariskan genre, model, mekanik, serta aturan bermain ide tersebut ke desain, aset, kode, dan pengujian. Pilihan alternatif pada Prompt 0 tidak berarti semua model harus dibuat. Pengujian mengikuti mekanik terpilih, termasuk giliran dan langkah sah bila relevan.
+
 
 ATURAN WAJIB — GAME, BUKAN KUIS BERKEDOK GAME:
-Setiap ide WAJIB memiliki mekanik inti yang aktif dan dikendalikan pemain secara real-time (bergerak, menghindar, mengumpulkan, menyusun, melempar, dsb) — BUKAN sekadar “pilih level → jawab soal → lanjut ke level berikutnya”.
-DITOLAK, contoh: game adventure yang hanya berisi pilih level lalu jawab soal lalu lanjut level, tanpa ruang gerak menuju pintu/tujuan atau menghindari musuh seperti pada game platform 2D; game balap mobil yang hanya berisi jawab soal lalu mobil otomatis melaju lurus, tanpa mekanik kiri-kanan untuk menghindari halangan atau mobil lain.
+Setiap ide WAJIB memiliki mekanik inti yang aktif dan dikendalikan pemain sesuai model: real-time untuk aksi/balap/platformer, atau giliran, langkah sah, pengelolaan sumber daya, dan penyusunan untuk papan/kartu/strategi/puzzle — BUKAN sekadar “pilih level → jawab soal → lanjut ke level berikutnya”.
+DITOLAK, contoh: game platformer yang hanya berisi pilih level lalu jawab soal lalu lanjut level, tanpa gerak/lompatan menuju tujuan atau menghindari rintangan; game balap mobil yang hanya berisi jawab soal lalu mobil otomatis melaju lurus, tanpa mekanik kiri-kanan untuk menghindari halangan atau mobil lain.
 Ketentuan mekanik per genre (pilih dan sesuaikan dengan genre yang dipakai):
-- Adventure/Petualangan/Platformer: karakter digerakkan pemain (kiri/kanan, lompat) menuju pintu/checkpoint sambil melompati atau menghindari rintangan/musuh; soal muncul sebagai gerbang, peti, atau NPC yang harus ditaklukkan untuk bisa lanjut.
-- Racing/Balap: kendaraan melaju otomatis ke depan, pemain mengendalikan arah kiri-kanan (atau berpindah jalur) untuk menghindari halangan/kendaraan lain; soal muncul di checkpoint tanpa menghentikan laju kendaraan sepenuhnya.
-- Arcade/Puzzle/Sports/Strategi/genre lain: tetap wajib ada aksi fisik atau tantangan ruang-dan-waktu (menangkap, menyusun, melempar, mengatur waktu/posisi, dsb) yang berdiri sendiri di luar soal, bukan hanya klik jawaban.
-Soal/tantangan pembelajaran WAJIB terintegrasi ke DALAM mekanik inti tersebut (sebagai gerbang, rintangan, atau pemicu event) — bukan menggantikannya. Jika sebuah ide hanya bisa dimainkan dengan klik “lanjut” berulang tanpa kendali gerak/posisi/waktu dari pemain, ide tersebut WAJIB ditolak dan diganti ide lain.
+- Platformer 2D: karakter digerakkan pemain (kiri/kanan, lompat) menuju pintu/checkpoint sambil melompati atau menghindari rintangan/musuh; soal muncul sebagai gerbang, peti, atau NPC yang harus ditaklukkan untuk bisa lanjut.
+- Adventure/Petualangan selain platformer: gunakan jelajah lokasi, interaksi objek, petunjuk, inventori, atau keputusan bercabang sesuai model (labirin, escape room, detektif, peta/pulau); jangan memaksa semua petualangan memakai lompatan.
+- Racing/Balap: sesuaikan kendali dengan model. Mobil/motor memakai arah/jalur, pesawat/perahu memakai navigasi rintangan, balap karung memakai waktu/ritme lompatan. Pemain harus mengendalikan aksi lomba; tantangan pembelajaran muncul pada checkpoint atau event yang jelas.
+- Arcade/Sports/Aksi: gunakan kendali gerak, arah, atau ketepatan waktu. Game Papan/Kartu/Strategi: gunakan giliran, langkah sah, posisi, sumber daya, serta konsekuensi keputusan. Puzzle: gunakan penyusunan atau pemecahan pola; timer tidak wajib. Mekanik tersebut harus berjalan di luar sekadar klik jawaban.
+Soal/tantangan pembelajaran WAJIB terintegrasi ke DALAM mekanik inti tersebut (sebagai gerbang, rintangan, atau pemicu event) — bukan menggantikannya. Jika sebuah ide hanya bisa dimainkan dengan klik “lanjut” berulang tanpa kendali gerak, posisi, waktu, langkah, susunan, atau keputusan strategis dari pemain, ide tersebut WAJIB ditolak dan diganti ide lain.
 
 Berikan setiap ide dengan format:
 1. Judul Game   2. Model Game   3. Misi Utama Pemain   4. Aturan Bermain Singkat
-5. Mekanisme Permainan — sama seperti varian Sederhana: WAJIB mengikuti Aturan Wajib Mekanik Game di atas (mekanik inti real-time + integrasi soal), bukan sekadar pilih-jawab-lanjut. Ikuti juga Aturan Lock Konsep Genre pada Modul D3.
+5. Mekanisme Permainan — sama seperti varian Sederhana: WAJIB mengikuti Aturan Wajib Mekanik Game di atas (mekanik inti sesuai model (real-time atau berbasis giliran) + integrasi soal), bukan sekadar pilih-jawab-lanjut. Ikuti juga Aturan Lock Konsep Genre pada Modul D3.
 6. Contoh 3 Tantangan/Soal
 7. Bentuk Soal — variasikan pilihan ganda, menjodohkan, mengurutkan, isian singkat, benar/salah, analisis kasus, pilihan bercabang
 8. Jawaban Benar
@@ -4976,7 +5091,7 @@ Data game: (sama seperti varian Sederhana — jenjang, mapel, materi, perangkat,
 Buatkan rancangan dengan format berikut:
 1. Judul Game   2. Cerita Pembuka   3. Misi Utama Pemain   4. Tujuan Pembelajaran
 5. Indikator Critical Thinking — siswa mampu: mengidentifikasi masalah, menganalisis informasi, membuat kesimpulan, memberi alasan logis, memprediksi akibat keputusan, memilih solusi terbaik berdasarkan data
-6. Aturan Bermain   7. Mekanisme Permainan (sama seperti varian Sederhana: mekanik inti real-time + integrasi soal, WAJIB bukan sekadar pilih-jawab-lanjut)   8. Tampilan Permainan
+6. Aturan Bermain   7. Mekanisme Permainan (sama seperti varian Sederhana: mekanik inti sesuai model (real-time atau berbasis giliran) + integrasi soal, WAJIB bukan sekadar pilih-jawab-lanjut)   8. Tampilan Permainan
 9. Alur Halaman Game — sama seperti varian Sederhana
 10. Database Tantangan/Soal — tiap tantangan berisi: situasi/kasus singkat, data/petunjuk yang harus dianalisis, pertanyaan utama, bentuk soal, pilihan jawaban, jawaban benar, alasan jawaban benar, mengapa pilihan lain kurang tepat, hint bertahap (1: umum, 2: spesifik, 3: arah jawaban), feedback benar, feedback salah, pertanyaan refleksi, dampak/konsekuensi pilihan. Gunakan minimal 3 tipe soal berpikir kritis: analisis sebab-akibat, prediksi dampak, menentukan solusi terbaik, membandingkan dua pilihan, mengurutkan proses secara logis, mendeteksi kesalahan konsep, atau mengambil keputusan berdasarkan data.
 11. Sistem Skor & Skor Berpikir Kritis — jawaban benar +10; alasan logis +5 (opsional); pakai data/petunjuk tepat +5; benar tapi alasan kurang tepat +10 saja; salah tapi alasan logis +3; pakai hint -2
@@ -5030,7 +5145,21 @@ Setelah aplikasi/MPI/game/simulasi/lab maya selesai dibuat di Canva, JANGAN lang
 
 Saya guru [jenjang dan kelas]. Saya ingin membuat game edukasi di Canva untuk materi [tulis materi], dengan keseimbangan 50% skill dan 50% luck.
 
-Mode Permainan: [...]   Genre: [...]
+Mode Permainan: [pemain tunggal/dua pemain/banyak pemain/bergiliran]
+Genre: {{genre_game_v5102}}
+Model game yang diminati: {{model_game_v5102}}
+Ide game lain / di luar daftar: {{ide_game_lain_v5102}}
+
+ATURAN PILIHAN GENRE DAN MODEL — UNTUK IDEASI DAN TAHAP LANJUTAN:
+- Semua pilihan bersifat opsional. Jika tidak ada genre, model, atau ide lain, tentukan sendiri genre dan model berdasarkan materi, jenjang, tujuan belajar, serta perangkat; jangan meminta guru mengisi pilihan kosong. Berikan minimal 5 ide yang bervariasi dan jelaskan alasan kecocokannya.
+- Jika guru hanya memilih genre, usulkan variasi model di dalam genre terpilih. Jika model dipilih, jadikan model-model itu dasar ide; setiap model terpilih harus mendapat setidaknya satu ide. Tetap berikan minimal 5 ide; tambah jumlahnya bila diperlukan untuk mencakup seluruh pilihan.
+- Beberapa genre/model berarti kumpulan alternatif, bukan kewajiban menggabungkan semuanya dalam satu game. Kombinasikan hanya bila masuk akal untuk tujuan belajar, dan jelaskan alasannya. Jangan mengganti pilihan guru diam-diam atau menambahkan genre di luar pilihan kecuali guru meminta ide lain/alternatif.
+- Ide di luar daftar sah dan dapat diberikan tanpa memilih genre. Petakan ke genre yang paling cocok sambil mempertahankan cara bermain yang dimaksud guru; bila ide tambahan tidak ada, tidak perlu meminta isian baru. Pilihan Lainnya tanpa rincian berarti AI mengusulkan alternatif yang relevan.
+- Tulis setiap ide dengan label Genre dan Model Game, gambaran cara bermain dalam bahasa sehari-hari, alasan sesuai materi/jenjang, serta kendali dan aturan menang/kalah. Istilah seperti platformer dijelaskan, misalnya karakter bergerak dan melompat melewati rintangan.
+- Nama seperti Mario, catur, atau monopoli adalah rujukan cara bermain. Gunakan judul, karakter, cerita, dan aset orisinal; jelaskan aturan/adaptasi edukatif sehingga guru dapat memahami bentuk game tanpa mengenal rujukannya.
+- Mekanik mengikuti model: balap/aksi/platformer memakai kendali gerak dan waktu; game papan/kartu/strategi boleh berbasis giliran dengan pilihan langkah, posisi, sumber daya, atau konsekuensi nyata; puzzle boleh tanpa timer dengan penyusunan/pemecahan masalah. Jangan memaksa catur, ular tangga, atau monopoli menjadi balap real-time. Soal terintegrasi dengan mekanik, tanpa menghilangkan identitas game.
+- Setelah guru memilih satu ide pada Prompt 1, wariskan genre, model, mekanik, serta aturan bermain ide tersebut ke desain, aset, kode, dan pengujian. Pilihan alternatif pada Prompt 0 tidak berarti semua model harus dibuat. Pengujian mengikuti mekanik terpilih, termasuk giliran dan langkah sah bila relevan.
+
 
 Ketentuan penting:
 - Skill 50%: kemampuan siswa menjawab soal, menganalisis kasus, memberi alasan, mengambil keputusan, berpikir kritis.
@@ -5038,17 +5167,18 @@ Ketentuan penting:
 - Luck tidak boleh menggantikan pemahaman materi — jawaban benar tetap ditentukan skill siswa.
 
 ATURAN WAJIB — GAME, BUKAN KUIS BERKEDOK GAME:
-Setiap ide WAJIB memiliki mekanik inti yang aktif dan dikendalikan pemain secara real-time (bergerak, menghindar, mengumpulkan, menyusun, melempar, dsb) — BUKAN sekadar “pilih level → jawab soal → lanjut ke level berikutnya”.
-DITOLAK, contoh: game adventure yang hanya berisi pilih level lalu jawab soal lalu lanjut level, tanpa ruang gerak menuju pintu/tujuan atau menghindari musuh seperti pada game platform 2D; game balap mobil yang hanya berisi jawab soal lalu mobil otomatis melaju lurus, tanpa mekanik kiri-kanan untuk menghindari halangan atau mobil lain.
+Setiap ide WAJIB memiliki mekanik inti yang aktif dan dikendalikan pemain sesuai model: real-time untuk aksi/balap/platformer, atau giliran, langkah sah, pengelolaan sumber daya, dan penyusunan untuk papan/kartu/strategi/puzzle — BUKAN sekadar “pilih level → jawab soal → lanjut ke level berikutnya”.
+DITOLAK, contoh: game platformer yang hanya berisi pilih level lalu jawab soal lalu lanjut level, tanpa gerak/lompatan menuju tujuan atau menghindari rintangan; game balap mobil yang hanya berisi jawab soal lalu mobil otomatis melaju lurus, tanpa mekanik kiri-kanan untuk menghindari halangan atau mobil lain.
 Ketentuan mekanik per genre (pilih dan sesuaikan dengan genre yang dipakai):
-- Adventure/Petualangan/Platformer: karakter digerakkan pemain (kiri/kanan, lompat) menuju pintu/checkpoint sambil melompati atau menghindari rintangan/musuh; soal muncul sebagai gerbang, peti, atau NPC yang harus ditaklukkan untuk bisa lanjut.
-- Racing/Balap: kendaraan melaju otomatis ke depan, pemain mengendalikan arah kiri-kanan (atau berpindah jalur) untuk menghindari halangan/kendaraan lain; soal muncul di checkpoint tanpa menghentikan laju kendaraan sepenuhnya.
-- Arcade/Puzzle/Sports/Strategi/genre lain: tetap wajib ada aksi fisik atau tantangan ruang-dan-waktu (menangkap, menyusun, melempar, mengatur waktu/posisi, dsb) yang berdiri sendiri di luar soal, bukan hanya klik jawaban.
-Soal/tantangan pembelajaran WAJIB terintegrasi ke DALAM mekanik inti tersebut (sebagai gerbang, rintangan, atau pemicu event) — bukan menggantikannya. Jika sebuah ide hanya bisa dimainkan dengan klik “lanjut” berulang tanpa kendali gerak/posisi/waktu dari pemain, ide tersebut WAJIB ditolak dan diganti ide lain.
+- Platformer 2D: karakter digerakkan pemain (kiri/kanan, lompat) menuju pintu/checkpoint sambil melompati atau menghindari rintangan/musuh; soal muncul sebagai gerbang, peti, atau NPC yang harus ditaklukkan untuk bisa lanjut.
+- Adventure/Petualangan selain platformer: gunakan jelajah lokasi, interaksi objek, petunjuk, inventori, atau keputusan bercabang sesuai model (labirin, escape room, detektif, peta/pulau); jangan memaksa semua petualangan memakai lompatan.
+- Racing/Balap: sesuaikan kendali dengan model. Mobil/motor memakai arah/jalur, pesawat/perahu memakai navigasi rintangan, balap karung memakai waktu/ritme lompatan. Pemain harus mengendalikan aksi lomba; tantangan pembelajaran muncul pada checkpoint atau event yang jelas.
+- Arcade/Sports/Aksi: gunakan kendali gerak, arah, atau ketepatan waktu. Game Papan/Kartu/Strategi: gunakan giliran, langkah sah, posisi, sumber daya, serta konsekuensi keputusan. Puzzle: gunakan penyusunan atau pemecahan pola; timer tidak wajib. Mekanik tersebut harus berjalan di luar sekadar klik jawaban.
+Soal/tantangan pembelajaran WAJIB terintegrasi ke DALAM mekanik inti tersebut (sebagai gerbang, rintangan, atau pemicu event) — bukan menggantikannya. Jika sebuah ide hanya bisa dimainkan dengan klik “lanjut” berulang tanpa kendali gerak, posisi, waktu, langkah, susunan, atau keputusan strategis dari pemain, ide tersebut WAJIB ditolak dan diganti ide lain.
 
 Berikan setiap ide dengan format:
 1. Judul Game   2. Model Game   3. Misi Utama Pemain   4. Aturan Bermain Singkat
-5. Mekanisme Permainan — detail seperti varian lain: WAJIB ada mekanik inti real-time sesuai Aturan Wajib Mekanik Game di atas. Efek luck (dadu/spin wheel/kartu) muncul di sela-sela mekanik inti (misalnya setelah checkpoint atau rintangan terlewati), bukan menggantikan kendali gerak pemain. Ikuti juga Aturan Lock Konsep Genre pada Modul D3.
+5. Mekanisme Permainan — detail seperti varian lain: WAJIB ada mekanik inti sesuai model pada Aturan Wajib Mekanik Game di atas. Efek luck (dadu/spin wheel/kartu) dapat menentukan langkah/kejadian dalam game papan atau muncul pada checkpoint dalam game real-time; keputusan pemain tetap bermakna dan nilai asesmen tetap murni dari skill. Ikuti juga Aturan Lock Konsep Genre pada Modul D3.
 6. Sistem Skill 50% — bagian game yang menuntut kemampuan siswa
 7. Sistem Luck 50% — dadu langkah, spin wheel, kartu keberuntungan, kartu tantangan, bonus/penalti acak, kesempatan kedua, jalan pintas, rintangan tak terduga
 8. Contoh 3 Tantangan/Soal   9. Bentuk Soal   10. Jawaban Benar
@@ -5149,7 +5279,7 @@ Aturan wajib memuat:
 • Pemain menang berdasarkan gabungan skor skill dan efek luck.
 
 Mekanisme Permainan
-Mengikuti mekanisme permainan (mekanik inti real-time + integrasi soal) yang dipilih pada ide permainan sebelumnya, sesuai Aturan Wajib Mekanik Game pada Prompt 0. Efek luck (dadu/spin wheel/kartu) muncul di sela-sela mekanik inti (misalnya setelah checkpoint atau saat menghindari rintangan) dan ditampilkan sebagai animasi nyata (dadu berputar, roda spin berputar, kartu terbalik), bukan hanya teks acak.
+Mengikuti mekanisme permainan (mekanik inti sesuai model (real-time atau berbasis giliran) + integrasi soal) yang dipilih pada ide permainan sebelumnya, sesuai Aturan Wajib Mekanik Game pada Prompt 0. Efek luck (dadu/spin wheel/kartu) menentukan langkah/kejadian papan atau muncul pada checkpoint sesuai model dan ditampilkan sebagai animasi nyata (dadu berputar, roda spin berputar, kartu terbalik), bukan hanya teks acak.
 
 Alur Halaman Game
 Susun alur halaman seperti ini:
@@ -16601,6 +16731,8 @@ const videoGeneratorFieldConfig={
   '{{deskripsi_tambahan_video}}':{label:'Deskripsi Tambahan / Permintaan Khusus',placeholder:'Contoh: narator perempuan Bahasa Indonesia; subtitle aktif; BGM ceria lembut; tanpa dialog; gaya semi-realistis',help:'Untuk gaya bahasa narator, musik/BGM, voice over, bahasa video, subtitle, gaya visual, tempo, kebutuhan inklusi, atau ketentuan lainnya.',auto:'tentukan bahasa, narasi, audio, subtitle, dan gaya visual yang paling sesuai'}
 };
 const mpiGeneratorFieldConfig={
+  'perangkat':{label:'Kompatibilitas Perangkat (boleh lebih dari satu)',type:'multiCheck',mpiDevices:true,group:'identity',options:[['IFP','IFP — layar interaktif kelas'],['Laptop','Laptop — komputer/laptop'],['HP','HP — ponsel']],help:'Centang seluruh perangkat yang akan digunakan. Semua pilihan diteruskan ke Prompt 0 dan diwariskan ke tahap berikutnya.',note:'Boleh memilih IFP, Laptop, dan HP sekaligus. Kosong = kompatibel dengan IFP, Laptop, dan HP.'},
+
   'tujuan-pembelajaran':{label:'Tujuan Pembelajaran (Opsional)',type:'textarea',placeholder:'Contoh: Peserta didik mampu menganalisis hubungan gaya dan gerak melalui contoh kontekstual.',help:'Isi jika sudah memiliki Tujuan Pembelajaran. Jika kosong, AI menyusun otomatis sesuai kurikulum/acuan, jenjang/kelas, mata pelajaran, topik, kedalaman materi, dan estimasi waktu. TP final diputuskan di Prompt 0 dan tidak diminta lagi pada Prompt 1.'},
   'idea-choice':{label:'Nomor Ide Pilihan (Opsional)',type:'ideaNumber',help:'Boleh dikosongkan saat menyiapkan prompt. Isi nomor ide setelah Prompt 0 menghasilkan pilihan, atau sesuaikan langsung nanti pada teks Prompt 1 sebelum dijalankan. Modifikasi isi/struktur tetap dapat dilakukan pada teks hasil salin.'},
   'local-storage':{label:'Penyimpanan Hasil Lokal',type:'select',options:[['','— Pilih Ya atau Tidak —'],['Ya','Ya — simpan hasil/progres secara lokal di browser'],['Tidak','Tidak — hasil hanya selama sesi aktif']],help:'Khusus alur MPI PRO. Pilihan ini diwariskan konsisten ke Prompt 2 dan Prompt Coding meskipun teks template memakai variasi label “Simpan hasil belajar secara lokal di browser” atau “Penyimpanan Hasil Lokal”.'},
@@ -16619,6 +16751,78 @@ const mpiGeneratorFieldConfig={
 const mpiProGeneratorFieldConfig={
   'external-visual-links':{label:'Sisipkan Gambar/Visual dari Link Eksternal',type:'select',options:[['','— Pilih Ya atau Tidak —'],['Ya','Ya — ChatGPT carikan URL gambar siap Web/HTML'],['Tidak','Tidak — tanpa gambar/visual eksternal']],help:'Jika Ya, ChatGPT/AI yang menerima prompt wajib mencari web dan menyiapkan URL HTTPS langsung yang publik, stabil, relevan, dan siap dipakai pada atribut src di aplikasi Web/HTML. Utamakan referensi Indonesia dan gambar yang judul/label/legenda/nama bagiannya memakai Bahasa Indonesia. Jika tidak tersedia, pilih visual Indonesia tanpa teks lalu visual internasional yang netral tanpa teks; visual berlabel bahasa asing hanya sebagai pilihan terakhir. Pencarian aset dilakukan oleh ChatGPT/AI pada tahap prompt, bukan dibebankan kepada tool coding. Prioritaskan PNG, JPG/JPEG, WEBP, SVG, atau GIF bila relevan; jangan mengarang link yang belum diverifikasi.'}
 };
+// V5.10.2 — shared recommendations for all six Game Prompt 0 templates.
+const GAME_GENRE_CATALOG_V5102=[
+  {id:'racing',label:'Racing / Balap',help:'Berlomba menuju garis finis sambil mengendalikan gerak atau jalur.',models:[['Balap mobil','Kendalikan mobil dan hindari rintangan.'],['Balap motor','Pilih jalur dan atur laju motor.'],['Balap karung','Atur waktu lompatan menuju finis.'],['Balap pesawat','Kendalikan pesawat melewati gerbang dan rintangan.'],['Balap perahu','Arahkan perahu mengikuti lintasan.']]},
+  {id:'adventure',label:'Adventure / Petualangan',help:'Menjelajah, menemukan petunjuk, dan menyelesaikan misi.',models:[['Platformer 2D','Seperti cara bermain Mario: bergerak dan melompat; gunakan karakter orisinal.'],['Jelajah labirin','Cari jalan keluar dan kumpulkan petunjuk.'],['Petualangan peta / pulau','Jelajahi lokasi untuk menyelesaikan misi.'],['Escape room / ruang teka-teki','Pecahkan petunjuk untuk membuka jalan keluar.'],['Petualangan detektif','Kumpulkan bukti dan simpulkan penyelesaian kasus.']]},
+  {id:'board',label:'Game Papan / Board Game',help:'Bermain di papan dengan pion, aturan langkah, dan giliran.',models:[['Catur edukatif','Strategi langkah bidak dengan aturan yang dijelaskan.'],['Ular tangga','Lempar dadu, gerakkan pion, gunakan tangga dan ular.'],['Monopoli edukatif','Kelola sumber daya dan keputusan pada petak papan.'],['Ludo','Gerakkan pion bergiliran menuju tujuan.'],['Halma / dam','Rencanakan perpindahan atau lompatan bidak.']]},
+  {id:'puzzle',label:'Puzzle / Teka-teki',help:'Memecahkan masalah dengan menyusun, mencocokkan, atau mencari pola.',models:[['Jigsaw / puzzle gambar','Susun potongan menjadi gambar utuh.'],['Susun urutan','Atur langkah, peristiwa, atau proses.'],['Teka-teki silang','Isi kata berdasarkan petunjuk.'],['Cari kata','Temukan kata dalam kisi huruf.'],['Puzzle logika','Pecahkan pola atau aturan dari petunjuk.']]},
+  {id:'arcade',label:'Arcade / Ketangkasan',help:'Aksi singkat dengan koordinasi gerak dan waktu.',models:[['Tangkap benda','Gerakkan keranjang untuk menangkap objek yang sesuai.'],['Endless runner / lari rintangan','Berlari sambil menghindar dan mengumpulkan objek.'],['Pecahkan balon','Pilih sasaran bergerak yang sesuai tantangan.'],['Pantulkan bola','Arahkan pemantul untuk mencapai target.']]},
+  {id:'action',label:'Aksi',help:'Mengendalikan karakter untuk menghadapi rintangan dan menjalankan misi.',models:[['Misi penyelamatan','Hindari rintangan untuk menolong karakter.'],['Lempar ke target','Atur arah dan waktu lemparan.'],['Pertahanan dari rintangan','Lindungi tujuan dengan aksi yang ramah anak.']]},
+  {id:'rpg',label:'RPG / Bermain Peran',help:'Menjadi tokoh, menjalankan tugas, dan mengembangkan kemampuan.',models:[['Misi tokoh / quest','Selesaikan tugas tokoh dan kumpulkan bekal.'],['Penjelajah sains','Jalankan peran peneliti dalam dunia permainan.'],['Peran profesi','Jalankan tugas dokter, arkeolog, atau profesi lain.'],['Cerita pilihan bercabang','Pilih tindakan yang mengubah cerita.']]},
+  {id:'strategy',label:'Strategi',help:'Merencanakan keputusan untuk mencapai tujuan dengan sumber daya terbatas.',models:[['Bangun kota / desa','Atur fasilitas dan kebutuhan warga.'],['Kelola sumber daya','Tentukan penggunaan bahan, energi, atau anggaran.'],['Tower defense edukatif','Tempatkan pertahanan pada posisi yang tepat.'],['Strategi ekosistem','Jaga keseimbangan melalui keputusan berbasis data.']]},
+  {id:'simulation',label:'Simulasi',help:'Meniru kegiatan nyata dengan tujuan, keputusan, dan konsekuensi.',models:[['Toko / pasar','Kelola transaksi dan persediaan.'],['Kebun / pertanian','Atur tanaman, air, dan waktu panen.'],['Laboratorium virtual bermisi','Gunakan alat dan variabel untuk mencapai tujuan.'],['Pengelolaan lingkungan','Ambil keputusan untuk mengurangi dampak lingkungan.']]},
+  {id:'sports',label:'Sports / Olahraga',help:'Mencapai target melalui gerak, arah, atau ketepatan waktu.',models:[['Sepak bola / penalti','Atur arah dan kekuatan tendangan.'],['Basket','Arahkan lemparan ke ring.'],['Bowling','Atur lemparan untuk menjatuhkan pin.'],['Panahan','Bidik sasaran dengan ketepatan.'],['Lomba atletik','Atur waktu gerak untuk menyelesaikan lintasan.']]},
+  {id:'cards',label:'Kartu / Memory',help:'Menggunakan kartu untuk mencocokkan, mengingat, atau memilih strategi.',models:[['Memory / pasangan kartu','Ingat posisi dan buka pasangan yang tepat.'],['Kartu misi','Pilih dan selesaikan misi dari kartu.'],['Kartu strategi','Kelola kartu untuk mencapai tujuan.'],['Domino konsep','Sambungkan kartu dengan hubungan konsep yang benar.']]},
+  {id:'party',label:'Permainan Kelompok / Party',help:'Tantangan singkat yang dimainkan bersama atau bergiliran.',models:[['Estafet tantangan','Tim menyelesaikan misi secara bergantian.'],['Roda tantangan','Putar roda untuk menentukan misi atau bonus.'],['Bingo edukatif','Tandai petak sesuai petunjuk hingga membentuk pola.'],['Tebak gerak / kata','Gunakan petunjuk untuk menemukan jawaban tim.']]},
+  {id:'other',label:'Lainnya / belum ada di daftar',help:'Punya genre atau model lain? Tulis pada kolom Ide Game Lain di bawah.',models:[]}
+];
+const gameGeneratorFieldConfigV5102={
+  '{{genre_game_v5102}}':{label:'Genre Game (Opsional — boleh lebih dari satu)',type:'gameGenres',group:'settings',help:'Centang genre untuk membuka rekomendasi modelnya. Pilihan ganda menghasilkan alternatif ide; tidak otomatis mencampur semua genre. Kosong = AI memilih sesuai materi, jenjang, dan perangkat.'},
+  '{{model_game_v5102}}':{label:'Rekomendasi Model Game (Opsional)',type:'gameModels',group:'settings',help:'Pilih satu atau beberapa contoh yang Anda sukai. Jika hanya genre dipilih, AI menentukan model dalam genre tersebut. Nama game terkenal hanya contoh cara bermain, bukan permintaan menyalin karakter atau aset.'},
+  '{{ide_game_lain_v5102}}':{label:'Ide Game Lain / Belum Ada di Daftar (Opsional)',type:'textarea',group:'settings',placeholder:'Contoh: congklak; permainan ritme musik; balap sepeda; game seperti Minecraft dengan karakter orisinal. Boleh diisi tanpa memilih genre.',help:'Tulis model, genre, atau cara bermain dengan bahasa sehari-hari. AI memetakan ide ini ke genre yang sesuai dan mempertahankan maksud Anda.'}
+};
+function renderGameGenresV5102(f,id,disabled){
+  return `<input type="hidden" id="${id}" data-token="${escapeHtml(f.token)}" data-game-genres-hidden ${disabled?'disabled':''}/><div class="game-picker-grid">${GAME_GENRE_CATALOG_V5102.map(g=>`<label class="game-picker-option"><input type="checkbox" data-game-genre="${g.id}" value="${escapeHtml(g.label)}" ${disabled?'disabled':''}/><span><strong>${escapeHtml(g.label)}</strong><small>${escapeHtml(g.help)}</small></span></label>`).join('')}</div><div class="dimension-empty-note">Tidak perlu memahami istilah game. Mulai dari contoh cara bermain yang Anda sukai, atau biarkan AI memilihkan.</div>`;
+}
+function renderGameModelsV5102(f,id,disabled){
+  return `<input type="hidden" id="${id}" data-token="${escapeHtml(f.token)}" data-game-models-hidden ${disabled?'disabled':''}/><div class="game-model-empty" data-game-model-empty role="status">Centang genre di atas untuk melihat contoh model game. Anda juga bisa mengisi Ide Game Lain atau membiarkan seluruh pilihan kosong.</div>${GAME_GENRE_CATALOG_V5102.map(g=>`<section class="game-model-panel" data-game-model-panel="${g.id}" hidden><h4>${escapeHtml(g.label)}</h4>${g.models.length?`<div class="game-picker-grid">${g.models.map(([name,help])=>`<label class="game-picker-option"><input type="checkbox" data-game-model="${g.id}" value="${escapeHtml(name)}" disabled/><span><strong>${escapeHtml(name)}</strong><small>${escapeHtml(help)}</small></span></label>`).join('')}<label class="game-picker-option"><input type="checkbox" data-game-model-other="${g.id}" value="Lainnya" disabled/><span><strong>Model lainnya dalam genre ini</strong><small>Tulis contoh atau gambaran cara bermain sendiri.</small></span></label></div><div data-game-model-custom-wrap="${g.id}" hidden><label for="${id}_${g.id}_custom">Model lain untuk ${escapeHtml(g.label)}</label><textarea class="form-control" id="${id}_${g.id}_custom" data-game-model-custom="${g.id}" placeholder="Contoh model atau cara bermain yang Anda inginkan" disabled></textarea></div>`:'<p>Isi kolom <strong>Ide Game Lain / Belum Ada di Daftar</strong>. Jika dikosongkan, AI mengusulkan genre dan model lain yang sesuai.</p>'}</section>`).join('')}`;
+}
+function initGamePickerV5102(){
+  const genreHidden=els.genFields.querySelector('[data-game-genres-hidden]');
+  const modelHidden=els.genFields.querySelector('[data-game-models-hidden]');
+  if(!genreHidden||!modelHidden)return;
+  const genreChecks=[...els.genFields.querySelectorAll('[data-game-genre]')];
+  const sync=()=>{
+    const selected=genreChecks.filter(x=>x.checked&&!x.disabled);
+    genreHidden.value=selected.map(x=>x.value).join('; ');
+    const active=new Set(selected.map(x=>x.dataset.gameGenre));
+    const models=[];
+    for(const g of GAME_GENRE_CATALOG_V5102){
+      const panel=els.genFields.querySelector(`[data-game-model-panel="${g.id}"]`);
+      if(!panel)continue;
+      const show=active.has(g.id);panel.hidden=!show;
+      const checks=[...panel.querySelectorAll('[data-game-model],[data-game-model-other]')];
+      checks.forEach(x=>{x.disabled=!show||modelHidden.disabled;if(!show)x.checked=false;});
+      const other=panel.querySelector('[data-game-model-other]');
+      const custom=panel.querySelector('[data-game-model-custom]');
+      const wrap=panel.querySelector('[data-game-model-custom-wrap]');
+      const customOn=show&&!!other?.checked;
+      if(wrap)wrap.hidden=!customOn;
+      if(custom){custom.disabled=!customOn||modelHidden.disabled;if(!customOn)custom.value='';}
+      if(!show)continue;
+      const names=checks.filter(x=>x.checked&&!x.disabled&&x.hasAttribute('data-game-model')).map(x=>x.value);
+      if(customOn)names.push(custom?.value.trim()?`Model lain: ${custom.value.trim()}`:'Model lain: AI usulkan alternatif dalam genre ini');
+      if(names.length)models.push(`${g.label}: ${names.join(', ')}`);
+    }
+    modelHidden.value=models.join('; ');
+    const empty=els.genFields.querySelector('[data-game-model-empty]');if(empty)empty.hidden=active.size>0;
+  };
+  genreChecks.forEach(x=>x.addEventListener('change',sync));
+  els.genFields.querySelectorAll('[data-game-model],[data-game-model-other]').forEach(x=>x.addEventListener('change',sync));
+  els.genFields.querySelectorAll('[data-game-model-custom]').forEach(x=>x.addEventListener('input',sync));
+  sync();
+}
+function finalizeGamePrompt0V5102(text){
+  const defaults={
+    '{{genre_game_v5102}}':'AI memilih genre yang paling sesuai dengan materi, jenjang, tujuan belajar, dan perangkat',
+    '{{model_game_v5102}}':'AI merekomendasikan model dalam genre terpilih; jika genre kosong, usulkan model dan genre yang relevan',
+    '{{ide_game_lain_v5102}}':'Tidak ada ide tambahan dari guru'
+  };
+  for(const [token,value] of Object.entries(defaults))text=text.split(token).join(value);
+  return text;
+}
+
 const generalGeneratorFieldConfig={
   'jenjang-kelas':{label:'Jenjang / Kelas Sasaran',placeholder:'Contoh: SMP / Kelas VIII',help:'Isi jenjang dan kelas sasaran agar bahasa, kedalaman materi, aktivitas, visual, dan asesmen tepat. Contoh: SD / Kelas V; SMP / Kelas VIII; SMA / Kelas XI. Jika fase juga diketahui, boleh tulis: SMP / Kelas VIII / Fase D.'},
   'jenjang':{label:'Jenjang',placeholder:'Contoh: SMP',help:'Isi jenjang pendidikan sasaran, misalnya SD, SMP, SMA, SMK, atau jenjang ekuivalen pada kurikulum internasional.'}
@@ -16732,6 +16936,7 @@ function finalizeHtmlPresentationPrompt(prompt,text){
 function currentGeneratorFieldConfig(tokenOrField){
   const f=typeof tokenOrField==='object'?tokenOrField:null;const token=f?.token||tokenOrField;
   const htmlPrompt=activeGeneratorPrompts()[0];if(htmlPrompt?.htmlLayered)return htmlPrompt.htmlFieldConfig?.[token]||inferredGeneratorFieldConfig(f);
+  if(gameGeneratorFieldConfigV5102[token])return gameGeneratorFieldConfigV5102[token];
   if(supplementalGeneratorFieldConfig[token])return supplementalGeneratorFieldConfig[token];
   if(fieldSemanticKey(f||token)==='kurikulum')return curriculumGeneratorFieldConfig;
   const p=activeGeneratorPrompts()[0];
@@ -16777,6 +16982,17 @@ function initSpecialGeneratorFields(){
     const syncMulti=()=>{hidden.value=checks.filter(c=>c.checked).map(c=>c.value).join('; ');};
     checks.forEach(c=>c.addEventListener('change',syncMulti));
     syncMulti();
+  });
+
+  // V5.10.3: hydrate MPI device checkboxes after preset/archive updates.
+  els.genFields.querySelectorAll('[data-mpi-devices-hidden]').forEach(hidden=>{
+    const checks=[...hidden.closest('.form-group').querySelectorAll('[data-multicheck-value]')];
+    const hydrate=()=>{
+      const value=hidden.value;
+      checks.forEach(c=>{c.checked=c.value==='IFP'?/\bIFP\b|interactive flat panel/i.test(value):c.value==='Laptop'?/laptop|komputer|desktop|computer/i.test(value):/\bHP\b|ponsel|handphone|smartphone|mobile/i.test(value);});
+      hidden.value=checks.filter(c=>c.checked).map(c=>c.value).join('; ');
+    };
+    hidden.addEventListener('input',hydrate);hidden.addEventListener('change',hydrate);
   });
   initModuleSupportProfilesV55();
   initModuleGeneratorV56();
@@ -16880,6 +17096,7 @@ function initSpecialGeneratorFields(){
   }
   initClassroomQuizFields();
   initHtmlPresentationFields();
+  initGamePickerV5102();
   if(typeof applyGeneratorFormMode==='function')applyGeneratorFormMode(localStorage.getItem('promptEduGeneratorFormModeV1')||'quick',false);
   initGeneratorProgressive();
 }
@@ -17005,7 +17222,11 @@ function renderGeneratorField(f,id,disabled){
   const long=cfg?(cfg.type==='textarea'||['{{capaian_pembelajaran}}','{{tujuan_pembelajaran}}','{{konteks_lokal_sekolah}}','{{deskripsi_siswa_inklusi}}','{{karakteristik_kesiapan_murid}}','{{pemanfaatan_digital}}','{{kemitraan_pembelajaran}}','{{deskripsi_tambahan}}','{{deskripsi_asesmen}}','{{aktivitas_siswa}}','{{prasyarat_pembelajaran}}','{{miskonsepsi_kesulitan}}','{{sarana_pembelajaran}}','{{keterbatasan_pembelajaran}}','{{opsi_produk_proyek}}','{{preferensi_diferensiasi}}','{{rencana_alternatif}}','{{preferensi_remedial_pengayaan}}','{{tujuan}}','{{deskripsi_asesmen_lkpd}}','{{catatan}}','{{tujuan_pembelajaran_presentasi}}','{{referensi_tambahan_presentasi}}','{{aktivitas_siswa_presentasi}}','{{kebutuhan_visual_presentasi}}','{{tema_lainnya_presentasi}}','{{deskripsi_tambahan_presentasi}}','{{subtopik_video}}','{{konsep_kunci_video}}','{{miskonsepsi_video}}','{{deskripsi_karakter_video}}','{{deskripsi_tambahan_video}}'].includes(f.token)):isLongField(label);
   const help=cfg?.help?`<span class="generator-field-help"><strong>Contoh/panduan:</strong> ${escapeHtml(cfg.help)}</span>`:'';
   let control='';
-  if(cfg?.type==='ideaNumber'){
+  if(cfg?.type==='gameGenres'){
+    control=renderGameGenresV5102(f,id,disabled);
+  }else if(cfg?.type==='gameModels'){
+    control=renderGameModelsV5102(f,id,disabled);
+  }else if(cfg?.type==='ideaNumber'){
     control=`<input class="form-control" type="number" min="1" max="9" step="1" inputmode="numeric" id="${id}" data-token="${escapeHtml(f.token)}" data-mpi-idea-number placeholder="Contoh: 1" ${disabled?'disabled':''}/>`;
   }else if(cfg?.type==='moduleTime'){
     control=renderModuleTimeV56(f,id,disabled);
@@ -17066,7 +17287,7 @@ function renderGeneratorField(f,id,disabled){
     control=`<select class="form-control" id="${id}" data-token="${escapeHtml(f.token)}" data-lkpd-image-option disabled>${opts.map(([v,l])=>`<option value="${escapeHtml(v)}">${escapeHtml(l)}</option>`).join('')}</select>`;
   }else if(cfg?.type==='multiCheck'){
     const opts=cfg.options||[];
-    control=`<input type="hidden" id="${id}" data-token="${escapeHtml(f.token)}" data-multicheck-hidden${cfg.inclusionGate?' data-module-inclusion-detail':''} value="" ${disabled?'disabled':''}/><div class="assessment-choice-grid">${opts.map(([v,l,tag])=>`<label class="assessment-choice"><input type="checkbox" data-multicheck-value${tag==='ppi'?' data-ppi-trigger':''} value="${escapeHtml(v)}" ${disabled?'disabled':''}/>${escapeHtml(l)}</label>`).join('')}</div><div class="dimension-empty-note">${escapeHtml(cfg.note||'Boleh memilih lebih dari satu. Tidak memilih apa pun = AI menentukan secara selektif sesuai kebutuhan.')}</div>`;
+    control=`<input type="hidden" id="${id}" data-token="${escapeHtml(f.token)}" data-multicheck-hidden${cfg.mpiDevices?' data-mpi-devices-hidden':''}${cfg.inclusionGate?' data-module-inclusion-detail':''} value="" ${disabled?'disabled':''}/><div class="assessment-choice-grid">${opts.map(([v,l,tag])=>`<label class="assessment-choice"><input type="checkbox" data-multicheck-value${tag==='ppi'?' data-ppi-trigger':''} value="${escapeHtml(v)}" ${disabled?'disabled':''}/>${escapeHtml(l)}</label>`).join('')}</div><div class="dimension-empty-note">${escapeHtml(cfg.note||'Boleh memilih lebih dari satu. Tidak memilih apa pun = AI menentukan secara selektif sesuai kebutuhan.')}</div>`;
   }else if(cfg?.type==='dimensions'){
     const dims=['Keimanan dan Ketakwaan terhadap Tuhan YME','Kewargaan','Penalaran Kritis','Kreativitas','Kolaborasi','Kemandirian','Kesehatan','Komunikasi'];
     control=`<input type="hidden" id="${id}" data-token="${escapeHtml(f.token)}" data-dimension-hidden value="" ${disabled?'disabled':''}/><div class="dimension-picker">${dims.map((d,idx)=>`<label class="dimension-option"><input type="checkbox" data-dimension-value value="${escapeHtml(d)}" ${disabled?'disabled':''}/><span>${idx+1}. ${escapeHtml(d)}</span></label>`).join('')}</div><div class="dimension-empty-note">Disarankan memilih 2–4 dimensi. Jika dicentang, hanya dimensi terpilih yang dimasukkan ke prompt. Tidak mencentang apa pun = AI memilihkan 2–4 dimensi yang paling relevan.</div>`;
@@ -17094,9 +17315,9 @@ function renderGeneratorField(f,id,disabled){
   const extra=f.token==='{{tujuan_pembelajaran}}'?`<div class="kko-note"><strong>Aturan TP & KKTP:</strong> TP dari guru dipertahankan. Gunakan rumusan kompetensi yang dapat diamati, dengan satu atau beberapa KKO yang memang relevan; KKTP adalah bukti ketercapaian, bukan angka atau kata kerja yang dipaksakan. Untuk inklusi, keputusan harus berdasar identifikasi/asesmen/profil murid: target sama = akomodasi; target berbeda hanya bila kemampuan aktual/data mendukung.</div>`:'';
   const wrapAttrs=((cfg?.type==='inclusionDetail'||cfg?.inclusionGate||cfg?.ppiGate)?' data-module-inclusion-detail-wrap hidden':'')+(cfg?.ppiGate?' data-module-ppi-wrap':'');
   const inclusionInputClass=(cfg?.type==='inclusion'||cfg?.type==='inclusionDetail'||cfg?.inclusionGate||cfg?.ppiGate)?' inclusion-input-highlight':'';
-  const fullWidth=cfg?.type==='moduleTime'||cfg?.type==='supportProfiles'||long||cfg?.type==='inclusion'||cfg?.type==='inclusionDetail'||cfg?.type==='assessment'||cfg?.type==='assessmentWeights'||cfg?.type==='mpiEvaluation'||cfg?.type==='dimensions'||cfg?.type==='multiCheck'||cfg?.type==='model'||cfg?.type==='outputMode'||cfg?.type==='videoCharactersToggle'||cfg?.type==='videoCharactersDetail';
+  const fullWidth=cfg?.type==='gameGenres'||cfg?.type==='gameModels'||cfg?.type==='moduleTime'||cfg?.type==='supportProfiles'||long||cfg?.type==='inclusion'||cfg?.type==='inclusionDetail'||cfg?.type==='assessment'||cfg?.type==='assessmentWeights'||cfg?.type==='mpiEvaluation'||cfg?.type==='dimensions'||cfg?.type==='multiCheck'||cfg?.type==='model'||cfg?.type==='outputMode'||cfg?.type==='videoCharactersToggle'||cfg?.type==='videoCharactersDetail';
   const progressGroup=generatorProgressGroup(f,cfg,label);
-  const semanticKey=fieldSemanticKey(f);const hint=(activeGeneratorPrompts()[0]?.classroomQuiz||activeGeneratorPrompts()[0]?.htmlLayered)?'Kolom opsional — nilai otomatis mengikuti template':f.supplemental?'Preferensi opsional — ditambahkan sebagai arahan tambahan pada prompt awal':(f.labeled?`Sumber Bank Prompt: ${f.sourceToken} • kosong = pertahankan placeholder template`:`Jika kosong: AI akan menentukan • ${f.token}`);
+  const semanticKey=fieldSemanticKey(f);const hint=cfg?.mpiDevices?'Pilih satu atau beberapa perangkat • kosong = IFP, Laptop, HP':gameGeneratorFieldConfigV5102[f.token]?'Pilihan opsional — AI menyesuaikan jika kosong':(activeGeneratorPrompts()[0]?.classroomQuiz||activeGeneratorPrompts()[0]?.htmlLayered)?'Kolom opsional — nilai otomatis mengikuti template':f.supplemental?'Preferensi opsional — ditambahkan sebagai arahan tambahan pada prompt awal':(f.labeled?`Sumber Bank Prompt: ${f.sourceToken} • kosong = pertahankan placeholder template`:`Jika kosong: AI akan menentukan • ${f.token}`);
   return `<div class="form-group ${fullWidth?'span-2':''}${inclusionInputClass}" data-progress-group="${progressGroup}" data-semantic-key="${escapeHtml(semanticKey)}" ${f.supplemental?'data-supplemental="1"':''}${wrapAttrs}><label for="${id}">${escapeHtml(label)}</label>${control}${help}${extra}<span class="field-token">${escapeHtml(hint)}</span></div>`;
 }
 function referenceHintHtml(){
@@ -17154,7 +17375,7 @@ function updateGeneratorActionButton(){
   }
 }
 function substitutionMap(){const vals=new Map();vals.semantic=new Map();vals.supplemental=new Map();els.genFields.querySelectorAll('[data-token]').forEach(input=>{if(input.disabled&&(activeGeneratorPrompts()[0]?.classroomQuiz||activeGeneratorPrompts()[0]?.htmlLayered))return;if(input.dataset.token==='{{ppi_inklusi}}')return;let val=input.value.trim();if(input.hasAttribute('data-jp-input')&&val)val=`${val} JP`;if(!val)return;const group=input.closest('.form-group');if(state.generatorType==='module'&&group?.hidden)return;const semantic=group?.dataset.semanticKey||'';vals.set(input.dataset.token,val);if(semantic)vals.semantic.set(semantic,val);if(group?.dataset.supplemental==='1')vals.supplemental.set(input.dataset.token,val);});return vals;}
-function applySubstitutions(text,vals){let out=text;vals.forEach((v,k)=>{if(k.startsWith(SUPPLEMENTAL_FIELD_PREFIX))return;if(k.startsWith(LABELED_FIELD_PREFIX)){const original=k.slice(LABELED_FIELD_PREFIX.length);const replaced=original.replace(/\[[^\]\n]+\]/,v);out=out.split(original).join(replaced);return;}out=out.split(k).join(v);});if(vals.semantic?.size){out=out.replace(/^([ \t]*[-•]?[ \t]*([^:\n]{2,110}?))[ \t]*:[ \t]*(\[[^\]\n]{1,900}\])[ \t]*$/gm,(full,prefix,label,token)=>{const normalizedLabel=normalize(friendlyLabel(label));let value='';if(/jenis.*jumlah.*game|jumlah.*jenis.*game/.test(normalizedLabel)){const jenis=vals.semantic.get('jenis-game')||'';const jumlah=vals.semantic.get('jumlah-game')||'';value=[jenis?`Jenis: ${jenis}`:'',jumlah?`Jumlah: ${jumlah}`:''].filter(Boolean).join('; ');}else value=vals.semantic.get(fieldSemanticKey(label))||'';return value?full.replace(token,value):full;});const engine=vals.semantic.get('engine-platform')||'';if(engine&&out.includes('[Canva Code/browser]'))out=out.split('[Canva Code/browser]').join(/canva code/i.test(engine)?'Canva Code':'browser');}return out;}
+function applySubstitutions(text,vals){let out=text;vals.forEach((v,k)=>{if(k.startsWith(SUPPLEMENTAL_FIELD_PREFIX))return;if(k.startsWith(LABELED_FIELD_PREFIX)){const original=k.slice(LABELED_FIELD_PREFIX.length);const replaced=original.replace(/\[[^\]\n]+\]/,v);out=out.split(original).join(replaced);return;}out=out.split(k).join(v);});if(vals.semantic?.size){out=out.replace(/^([ \t]*[-•]?[ \t]*([^:\n]{2,110}?))[ \t]*:[ \t]*(\[[^\]\n]{1,900}\])[ \t]*$/gm,(full,prefix,label,token)=>{const normalizedLabel=normalize(friendlyLabel(label));let value='';if(/jenis.*jumlah.*game|jumlah.*jenis.*game/.test(normalizedLabel)){const jenis=vals.semantic.get('jenis-game')||'';const jumlah=vals.semantic.get('jumlah-game')||'';value=[jenis?`Jenis: ${jenis}`:'',jumlah?`Jumlah: ${jumlah}`:''].filter(Boolean).join('; ');}else value=vals.semantic.get(fieldSemanticKey(label))||'';return value?full.replace(token,value):full;});const engine=vals.semantic.get('engine-platform')||'';if(engine&&out.includes('[Canva Code/browser]'))out=out.split('[Canva Code/browser]').join(/canva code/i.test(engine)?'Canva Code':'browser');}return finalizeGamePrompt0V5102(out);}
 function curriculumDirectiveBlock(prompt,vals){
   const curriculum=vals?.semantic?.get('kurikulum')||vals?.supplemental?.get('@@SUPPLEMENTAL@@curriculum')||'';
   if(!curriculum)return'';
@@ -17382,6 +17603,7 @@ function finalizeModuleStageV5100(prompt,text,vals){
 
 function finalizeGeneratedPrompt(prompt,text,vals){
   let out=finalizeHtmlPresentationPrompt(prompt,finalizeClassroomQuizPrompt(prompt,text));
+  if(/Prompt 0.*Ideasi MPI/i.test(prompt?.title||'')&&!vals?.semantic?.get('perangkat'))out=out.replace(/^Perangkat: \[HP\/laptop\/IFP\]$/m,'Perangkat: IFP; Laptop; HP');
   if(state.generatorType==='mpi'&&/Prompt 0.*Ideasi MPI/i.test(prompt?.title||'')&&!vals?.semantic?.get('tujuan-pembelajaran')){out=out.replace(/^Tujuan Pembelajaran:\s*\[tujuan pembelajaran\]\s*$/m,'Tujuan Pembelajaran: (belum diisi guru — susun otomatis oleh AI sesuai kurikulum/acuan, jenjang/kelas, mata pelajaran, topik, kedalaman materi, dan estimasi waktu; tetapkan sebagai Tujuan Pembelajaran Final pada Prompt 0)');}
   if(prompt?.categoryId==='modul-ajar-rpm'){
     out=finalizeModuleStageV5100(prompt,out,vals);
@@ -17482,6 +17704,7 @@ function quickEssentialField(group,index){
   // field penting di Mode Cepat agar update kumulatif (identitas, asesmen, remedial,
   // output, tanda tangan, dll.) selalu terlihat oleh guru.
   const p=activeGeneratorPrompts?.()[0];
+  if(gameGeneratorFieldConfigV5102[token])return true;
   if(p?.htmlLayered)return p.htmlFieldConfig?.[token]?.quick!==false;
   if(p?.classroomQuiz)return p.classroomFieldConfig?.[token]?.quick!==false;
   if(p?.presentationAnim)return true;
@@ -17665,8 +17888,8 @@ function restoreGeneratorSnapshot(snap,promptText=''){
     let restored=true;
     if(snap.generatorType==='module'||snap.modulePipeline)restored=restoreModuleControlsV56(snap);
     else{
-      const entries=generatorControlEntriesV56();(snap.controls||[]).forEach((v,i)=>{
-        const el=entries[i]?.el;if(!el)return;
+      const entries=generatorControlEntriesV56(),byKey=new Map(entries.map(x=>[x.key,x.el]));(snap.controls||[]).forEach((v,i)=>{
+        const el=v.key?byKey.get(v.key):entries[i]?.el;if(!el)return;
         if(el.dataset.token==='{{ppi_inklusi}}')return;
         if(['checkbox','radio'].includes(el.type))el.checked=!!v.checked;else el.value=v.value??'';
       });
