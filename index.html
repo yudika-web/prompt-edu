@@ -4,7 +4,8 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="theme-color" content="#6d5dfc" />
-<title>Prompt EDU V5.18 — AI Prompt Studio untuk Guru</title>
+<title>Prompt EDU V5.19 — AI Prompt Studio untuk Guru</title>
+<!-- PATCH V5.19: Tambah Master Prompt Balap Cerdas 3D, model pembalap bebas, dan kartu Prompt Baru. -->
 <!-- PATCH V5.18: Atlas ilustrasi menu tertanam, layout kategori lapang, ikon kontrol adaptif serta tema terang/gelap. -->
 <!-- PATCH V5.17: Target aplikasi, dokumen terformat kondisional, cabang Canva/HTML dan keterangan Aplikasi PRO tanpa kewajiban AI Pro. -->
 <!-- PATCH V5.16: Aplikasi Biasa/PRO P0-P2, cetak dan ekspor opsional, urutan menu dan filter kuis. -->
@@ -1441,8 +1442,10 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
     <section class="home-howto" aria-labelledby="homeHowtoTitle"><h3 id="homeHowtoTitle">Baru pertama kali? Mulai dari sini.</h3><ol class="home-steps"><li><span class="home-step-number">1</span><div><strong>Pilih kebutuhan</strong><small>Modul ajar, LKPD, kuis, atau media.</small></div></li><li><span class="home-step-number">2</span><div><strong>Isi data kelas</strong><small>Sesuaikan materi dan kebutuhan murid.</small></div></li><li><span class="home-step-number">3</span><div><strong>Buat prompt</strong><small>Periksa kembali hasilnya.</small></div></li><li><span class="home-step-number">4</span><div><strong>Salin ke AI</strong><small>Tempel di ChatGPT atau AI pilihan Anda.</small></div></li></ol></section>
     <section class="home-section app-changelog" aria-labelledby="appChangelogTitle">
       <details id="appChangelog">
-        <summary><span id="appChangelogTitle">Changelog aplikasi</span><span class="changelog-version">V5.18</span></summary>
+        <summary><span id="appChangelogTitle">Changelog aplikasi</span><span class="changelog-version">V5.19</span></summary>
         <div class="changelog-body">
+          <h4>V5.19 — 19 Oktober 2026</h4>
+          <ul><li>Master Prompt Game Balap Cerdas 3D masuk Daftar Prompt Baru dan Bank Prompt, serta tersedia di Generator Game Edukasi versi Biasa.</li><li>Jenis pembalap dapat diubah menjadi ayam, bebek, kucing, kelinci, manusia, mobil, motor, sepeda, robot, dinosaurus atau pilihan kustom; tema arena, animasi, judul dan suara otomatis mengikuti tipe.</li><li>Form tambahan untuk jenjang, mapel, topik, jumlah soal, kesulitan, bahasa, karakter, warna, tema lintasan dan jarak.</li></ul>
           <h4>V5.18 — 16 Oktober 2026</h4>
           <ul><li>16 ilustrasi menu baru bergaya 3D lembut, tertanam dalam HTML dan dipakai konsisten pada Generator, kategori Bank Prompt serta kartu beranda.</li><li>Panel kategori selebar halaman, label lebih lega, status aktif dengan border dan tanda centang, serta fokus keyboard jelas.</li><li>Warna permukaan, teks, latar ikon dan kontrol disesuaikan untuk mode terang/gelap. Ikon utilitas memakai simbol sederhana yang mengikuti warna tema.</li><li>Isi prompt, urutan menu, pilihan dokumen Aplikasi dan alur konversi offline tetap dipertahankan.</li></ul>
           <h4>V5.17 — 16 Oktober 2026</h4>
@@ -16747,6 +16750,296 @@ const appProCategoriesV516=[
   }
 ];
 
+/* ===== V5.19: game balapan edukasi 3D dengan karakter/kendaraan yang dapat dipilih ===== */
+const race3dCategoriesV519 = [
+  {
+    "id": "game-balapan-3d",
+    "name": "Game Balapan Edukasi 3D",
+    "icon": "🏎️",
+    "keywords": "game balap ayam bebek kucing mobil motor manusia orang sepeda dino quiz three.js 3d karakter kendaraan pilih custom",
+    "prompts": [
+      {
+        "title": "Prompt 0 — Master Game Balap Cerdas 3D (Karakter & Kendaraan Bebas)",
+        "generatorLabel": "Game Balap Cerdas 3D — Ganti Karakter / Kendaraan",
+        "generatorInfo": "Generator kuis balapan 3D satu HTML. Pilih ayam, bebek, kucing, manusia, mobil, motor, sepeda, robot, atau karakter lainnya; soal dan arena disesuaikan.",
+        "generatorCurlyOnly": true,
+        "race3d": true,
+        "raceFieldConfig": {
+          "{{balap_judul}}": {
+            "label": "Judul Game",
+            "placeholder": "BALAP CERDAS 3D",
+            "auto": "BALAP CERDAS 3D",
+            "help": "Judul bebas, misalnya Balap Pahlawan, Balap Mobil Sains, atau Kucing Berpacu."
+          },
+          "{{balap_jenjang}}": {
+            "label": "Jenjang / Kelas",
+            "type": "select",
+            "options": [
+              [
+                "",
+                "— Tentukan jenjang/kelas —"
+              ],
+              [
+                "PAUD Kelompok B",
+                "PAUD Kelompok B"
+              ],
+              [
+                "SD Kelas 1",
+                "SD Kelas 1"
+              ],
+              [
+                "SD Kelas 2",
+                "SD Kelas 2"
+              ],
+              [
+                "SD Kelas 3",
+                "SD Kelas 3"
+              ],
+              [
+                "SD Kelas 4",
+                "SD Kelas 4"
+              ],
+              [
+                "SD Kelas 5",
+                "SD Kelas 5"
+              ],
+              [
+                "SD Kelas 6",
+                "SD Kelas 6"
+              ],
+              [
+                "SMP Kelas 7",
+                "SMP Kelas 7"
+              ],
+              [
+                "SMP Kelas 8",
+                "SMP Kelas 8"
+              ],
+              [
+                "SMP Kelas 9",
+                "SMP Kelas 9"
+              ],
+              [
+                "SMA Kelas 10",
+                "SMA Kelas 10"
+              ],
+              [
+                "SMA Kelas 11",
+                "SMA Kelas 11"
+              ],
+              [
+                "SMA Kelas 12",
+                "SMA Kelas 12"
+              ],
+              [
+                "Lainnya (jelaskan pada materi)",
+                "Lainnya (jelaskan pada materi)"
+              ]
+            ],
+            "auto": "SD Kelas 3"
+          },
+          "{{balap_mapel}}": {
+            "label": "Mata Pelajaran",
+            "placeholder": "Contoh: IPAS / IPA / Bahasa Indonesia",
+            "auto": "IPAS"
+          },
+          "{{balap_materi}}": {
+            "label": "Topik / Materi",
+            "placeholder": "Contoh: Panca Indra atau Tekanan Zat",
+            "auto": "Panca Indra"
+          },
+          "{{balap_jumlah_soal}}": {
+            "label": "Jumlah Soal (5–50)",
+            "type": "number",
+            "min": 1,
+            "max": 100,
+            "placeholder": "5",
+            "auto": "5",
+            "help": "Jumlah soal benar menentukan banyak langkah dan posisi finish."
+          },
+          "{{balap_kesulitan}}": {
+            "label": "Tingkat Kesulitan",
+            "type": "select",
+            "options": [
+              [
+                "",
+                "— Campuran (bawaan) —"
+              ],
+              [
+                "Mudah",
+                "Mudah"
+              ],
+              [
+                "Sedang",
+                "Sedang"
+              ],
+              [
+                "Sulit",
+                "Sulit"
+              ],
+              [
+                "Campuran (Mudah, Sedang, Sulit)",
+                "Campuran (Mudah, Sedang, Sulit)"
+              ]
+            ],
+            "auto": "Campuran (Mudah, Sedang, Sulit)"
+          },
+          "{{balap_bahasa}}": {
+            "label": "Bahasa Pengantar",
+            "type": "select",
+            "options": [
+              [
+                "",
+                "— Bahasa Indonesia (bawaan) —"
+              ],
+              [
+                "Bahasa Indonesia",
+                "Bahasa Indonesia"
+              ],
+              [
+                "Bahasa Melayu",
+                "Bahasa Melayu"
+              ],
+              [
+                "English",
+                "English"
+              ],
+              [
+                "Bilingual Indonesia–Inggris",
+                "Bilingual Indonesia–Inggris"
+              ],
+              [
+                "Bahasa daerah sesuai materi",
+                "Bahasa daerah (jelaskan)"
+              ]
+            ],
+            "auto": "Bahasa Indonesia"
+          },
+          "{{balap_jenis_pembalap}}": {
+            "label": "Pilihan Karakter / Kendaraan",
+            "type": "select",
+            "options": [
+              [
+                "",
+                "— Ayam (bawaan, dapat diganti) —"
+              ],
+              [
+                "Ayam",
+                "🐔 Ayam"
+              ],
+              [
+                "Bebek",
+                "🦆 Bebek"
+              ],
+              [
+                "Kucing",
+                "🐱 Kucing"
+              ],
+              [
+                "Kelinci",
+                "🐰 Kelinci"
+              ],
+              [
+                "Manusia / Pelari",
+                "🏃 Manusia / Pelari"
+              ],
+              [
+                "Mobil",
+                "🚗 Mobil"
+              ],
+              [
+                "Motor",
+                "🏍️ Motor"
+              ],
+              [
+                "Sepeda",
+                "🚲 Sepeda"
+              ],
+              [
+                "Robot",
+                "🤖 Robot"
+              ],
+              [
+                "Dinosaurus",
+                "🦖 Dinosaurus"
+              ],
+              [
+                "Karakter / Kendaraan lain",
+                "✨ Karakter / kendaraan lain (isi detail)"
+              ]
+            ],
+            "auto": "Ayam",
+            "help": "Bentuk 3D, suara, gerakan, dan ikon akan menyesuaikan pilihan. Untuk tipe lain, isi model khusus di bawah."
+          },
+          "{{balap_karakter_khusus}}": {
+            "label": "Nama / Deskripsi Karakter Khusus (Opsional)",
+            "placeholder": "Contoh: pesawat jet biru; kapibara memakai helm; becak motor",
+            "auto": "Tidak ada karakter khusus; gunakan jenis yang dipilih."
+          },
+          "{{balap_warna}}": {
+            "label": "Warna dan Gaya Karakter",
+            "placeholder": "Contoh: putih lucu, biru metalik, merah balap",
+            "auto": "Warna alami/cerah sesuai tipe, gaya low-poly ramah anak"
+          },
+          "{{balap_lintasan}}": {
+            "label": "Tema Lintasan / Lokasi",
+            "type": "select",
+            "options": [
+              [
+                "",
+                "— Sesuaikan jenis pembalap —"
+              ],
+              [
+                "Otomatis sesuai pembalap",
+                "Otomatis sesuai jenis pembalap"
+              ],
+              [
+                "Peternakan",
+                "🌾 Peternakan"
+              ],
+              [
+                "Perkotaan",
+                "🏙️ Perkotaan"
+              ],
+              [
+                "Pantai",
+                "🏖️ Pantai"
+              ],
+              [
+                "Hutan",
+                "🌲 Hutan"
+              ],
+              [
+                "Pegunungan",
+                "⛰️ Pegunungan"
+              ],
+              [
+                "Futuristik",
+                "🚀 Futuristik"
+              ],
+              [
+                "Tema khusus sesuai deskripsi karakter",
+                "Tema khusus (jelaskan di karakter)"
+              ]
+            ],
+            "auto": "Otomatis sesuai pembalap"
+          },
+          "{{balap_jarak}}": {
+            "label": "Panjang Lintasan 3D",
+            "type": "number",
+            "min": 10,
+            "max": 1000,
+            "placeholder": "100",
+            "auto": "100",
+            "help": "Satuan dunia 3D. Otomatis dibagi merata sesuai jumlah soal."
+          }
+        },
+        "text": "# MASTER PROMPT — GENERATOR GAME EDUKASI 3D “BALAP CERDAS 3D”\n\nPANDUAN PENGGUNA\nIsi pengaturan lewat Generator Prompt. Prompt ini mengembangkan game kuis balapan 3D yang dapat mengganti pembalap antara hewan, manusia, atau kendaraan. Jangan terpaku pada ayam. Bangun permainan yang benar-benar dapat dimainkan, bukan hanya mockup/tampilan statis.\n\n[TETAPAN PENGGUNA]\n- Nama / judul game: {{balap_judul}}\n- Jenjang / kelas: {{balap_jenjang}}\n- Mata pelajaran: {{balap_mapel}}\n- Topik / materi: {{balap_materi}}\n- Jumlah soal: {{balap_jumlah_soal}}\n- Tingkat kesulitan: {{balap_kesulitan}}\n- Bahasa pengantar: {{balap_bahasa}}\n- Jenis pembalap utama: {{balap_jenis_pembalap}}\n- Nama model/karakter khusus (opsional): {{balap_karakter_khusus}}\n- Warna / gaya pembalap: {{balap_warna}}\n- Tema lintasan / lokasi: {{balap_lintasan}}\n- Panjang lintasan (satuan dunia 3D): {{balap_jarak}}\n\nPERAN DAN MISI\nBertindaklah sebagai pengembang web game HTML5/CSS3/JavaScript/Three.js, 3D artist low-poly, UI/UX designer, dan instructional designer. Buat game kuis pendidikan 3D dalam satu file HTML lengkap dengan CSS/JS tertanam dan Three.js melalui CDN resmi/tepercaya. Gunakan data konfigurasi pengguna. Jika isian kosong, gunakan default wajar sesuai konteks yang tertera dalam [TETAPAN PENGGUNA]; jangan tampilkan token konfigurasi mentah kepada pemain. Judul, ikon, panel identitas, warna, model, gerakan, sfx, dan tema visual HARUS mengikuti pilihan, bukan selalu ayam/ladang.\n\n1. KONTEN EDUKASI DAN DATA SOAL\n- Buat tepat N soal pilihan ganda, masing-masing empat opsi dan satu jawaban yang benar; sesuai kelas, mapel, materi, bahasa dan sebaran tingkat kesulitan (mudah/sedang/sulit/campuran). Soal akurat, bervariasi, kontekstual, tidak ambigu, dan tidak mengarang materi yang tidak diketahui.\n- Tempatkan soal sebagai JavaScript Array of Objects yang mudah diedit di awal script: id, level, question, options (4), correctIndex (0–3), explanation (singkat). Validasi panjang daftar dan semua indeks jawaban; jumlah soal di panel dan panjang lintasan merujuk ke array yang benar-benar dipakai.\n- Acak pilihan hanya bila indeks jawaban benar diperbarui sesuai hasil pengacakan; bila diaktifkan, jangan ubah jawaban benar secara tidak sengaja. Umpan balik kesalahan tidak membocorkan jawaban benar jika percobaan ulang masih aktif.\n\n2. PEMBALAP 3D DINAMIS — BUKAN HANYA AYAM\n- Bangun fungsi createRacer(config), updateRacerAnimation(state,dt), setRacerColor(color), dan cleanupRacer() secara modular. Pilihan default: ayam, bebek, kucing, kelinci, manusia/pelari, mobil, motor, sepeda, robot, dinosaurus; boleh objek lain sesuai deskripsi khusus. Untuk pilihan tidak dikenal, tampilkan model low-poly generik dengan label pilihan dan sampaikan fallback—jangan diam-diam kembali menjadi ayam.\n- Tiap model harus dikenali siluetnya dan berbeda nyata. Contoh: ayam—balung merah/paruh/kaki; bebek—paruh pipih/sayap; kucing—telinga/ekor/empat kaki; manusia—kepala/torso/tangan/kaki; mobil—bodi/kaca/empat roda; motor—dua roda/stang/pengendara; sepeda—roda/rangka/pengendara. Untuk karakter khusus, sesuaikan bentuk, proporsi, warna, animasi dan nama; hindari label yang tidak sesuai objeknya.\n- Perbedakan animasi berdasarkan kategori: hewan berlari/melompat; manusia berlari/mengangkat tangan; mobil/motor/sepeda melaju dengan putaran roda, body bounce dan kemudi lembut (tanpa mobil meloncat seperti ayam); robot bergerak mekanis. Semua bergerak ke arah garis finis dengan posisi dunia dan kamera sinkron.\n- Salah menjawab: TIDAK menambah jarak. Untuk hewan/manusia: animasi limbung 1,5 detik dan bintang kuning berputar di sekitar kepala; untuk mobil/motor/sepeda: bodi bergoyang/ban tersendat, efek bintang/percikan kartun di atas kendaraan tanpa memaksa animasi kepala. Tidak ada fisika berbahaya atau kecelakaan realistis.\n- Menang: hewan/manusia merayakan dengan lompat/pose, kendaraan melakukan animasi selebrasi sesuai kategorinya (mis. roda berputar, lampu berkedip, konfeti); semua melintasi finish secara nyata sebelum pop-up kemenangan.\n\n3. LINTASAN DAN DUNIA LOW-POLY (THREE.JS)\n- Gunakan kamera third-person dari belakang dengan offset tinggi/jarak disesuaikan ukuran pembalap serta smooth-follow; tampilkan model penuh dan lintasan di depan; tidak menutup kartu soal.\n- Lintasan tengah, penanda garis putus-putus, batas aman, gerbang FINISH berpola kotak hitam-putih dengan teks terbaca, langit dan awan low-poly. Jadikan tema adaptif: Peternakan (ladang, rumput, pagar kayu, kandang/bangsal merah, jerami dan pepohonan); Perkotaan (jalan aspal, marka, gedung/taman); Pantai (jalan tepi pantai, pasir/laut); Hutan (pepohonan); Pegunungan; Futuristik; atau tema khusus. Hewan boleh memakai tanah/arena ramah hewan; kendaraan memakai permukaan lintasan dan skala jalan yang sesuai. Jangan memaksakan ladang/jerami ke mode mobil/motor bertema kota.\n- Gunakan geometri/material low-poly, bayangan ringan, pencahayaan ambient/directional dan optimasi mesh; game tidak boleh sekadar gambar 2D berlapis. Kamera, karakter dan finish harus ada di scene Three.js.\n- Jadikan jarakTotal konstanta positif; posisiAwal dan posisiFinish ditetapkan dari nilai itu. Jarak tiap jawaban benar = jarakTotal/N; gunakan target absolut (i/N)*jarakTotal agar soal terakhir pasti melewati garis FINISH walaupun ada galat floating-point. Cegah maju dua kali karena klik ganda.\n\n4. ANTARMUKA PENGGUNA DAN HUD\n- HEADER: kiri judul yang mengikuti nama game dan ikon pembalap; tengah identitas “Jenjang • Mapel • Materi” dan lencana kesulitan; kanan tombol Musik/Suara, Fullscreen dan Pause. Jangan tulis “BALAP AYAM” atau ikon ayam secara tetap jika karakter lain dipilih.\n- SUBHEADER: kiri “Pemain 1 • [jenis/nama] • [warna]”; kanan label “LATIHAN”.\n- PANEL KIRI: judul “SOAL”; lingkaran 1..N dihasilkan dinamis, nomor yang benar menjadi hijau dan bertanda ✔. Panel harus dapat menyusut/di-scroll untuk N besar tanpa menimpa area permainan.\n- KARTU SOAL: overlay putih semi-transparan dengan sudut membulat di area atas yang aman, menunjukkan “Soal i/N”, tingkat kesulitan, teks soal tebal, empat tombol jawaban dalam grid 2x2 (menjadi 1 kolom di layar sempit), dan petunjuk “Sentuh jawabanmu!”. Pastikan kontras tinggi, teks panjang membungkus rapi dan semua pilihan dapat di-tap.\n- BAWAH KIRI: kotak “BELAKANG”. Bila memungkinkan, render kamera belakang sesungguhnya menggunakan renderer/scissor yang hemat performa. Jika fitur dipangkas untuk perangkat lemah, ganti dengan informasi arah/kamera yang benar; jangan beri label “pratinjau” pada kotak kosong.\n- BAWAH KANAN: sisa soal secara dinamis “[N-i] soal lagi”; tambah indikator progres jarak bila tidak menghalangi UI.\n- Responsif untuk laptop, tablet, HP serta IFP/papan interaktif; hit target ramah sentuh, scrollbar aman, z-index jelas, petunjuk fokus keyboard, dan aksesibilitas reduced-motion. Jangan mengunci game di orientasi/ukuran khusus.\n\n5. STATE MACHINE DAN MEKANISME KUIS\n- Gunakan status jelas: READY, QUESTION_ACTIVE, WRONG_FEEDBACK, MOVING, PAUSED, FINISHED. Hanya terima jawaban pada QUESTION_ACTIVE dan tampilkan tepat satu soal aktif. Tombol di-lock selama animasi. Pause harus menghentikan pergerakan, waktu permainan dan antrean transisi; resume melanjutkan dengan aman.\n- Benar: pilihan hijau; mainkan SFX positif; tambah jumlah benar tepat sekali; animasikan perpindahan pembalap menuju target berikut; setelah animasi selesai beri tanda ✔, perbarui sisa soal dan munculkan soal berikutnya. Posisi, kamera, progress dan nomor soal harus sejalan.\n- Salah: pilihan merah + getar ringan (perhatikan reduced-motion); gerakan limbung/tersendat + bintang selama 1,5 detik; jangan mengubah progres/nomor soal; hitung percobaan salah; beri kesempatan memilih jawaban lain sesudah feedback dan jangan menghapus soal yang belum benar.\n- Setelah jawaban N benar, animasi melewati finish dan selebrasi dahulu, baru modal “Selamat!” yang menampilkan judul, karakter terpilih, N/N soal terjawab, banyak percobaan salah dan waktu aktif, plus tombol “Main Lagi” yang mengatur ulang semua state/animasi secara konsisten.\n- Tidak ada musuh atau mode multipemain wajib. Jangan menambahkan hasil palsu, ranking online, database, atau API tanpa diminta.\n\n6. AUDIO DAN TEKNIK OUTPUT\n- Gunakan Web Audio API untuk efek jawaban benar, salah/pening/tersendat, gerakan yang sesuai karakter (langkah untuk hewan/manusia, roda/mesin ringan untuk kendaraan), serta jingle kemenangan; tidak butuh berkas audio eksternal. Audio diaktifkan setelah interaksi pengguna dan punya tombol mute; jangan mengandalkan autoplay.\n- Satu dokumen HTML penuh dengan CSS dan JavaScript internal, modul/pustaka Three.js dimuat dari CDN (pastikan versi valid). Jangan memerlukan build step, framework lain, atau aset berkas terpisah; model dibangun dari geometri primitif Three.js. JELASKAN bahwa HTML ini memerlukan koneksi internet saat memuat Three.js dari CDN dan tidak benar-benar offline penuh. Jika ingin offline penuh, Three.js perlu dibundel/ditanamkan secara sah pada tahap konversi terpisah.\n- Pastikan tidak ada syntax error, variabel tak terdefinisi, overlay bertumpuk, model yang menghilang, tombol yang tidak merespons atau kamera melompat. Sertakan fallback di layar jika WebGL tidak didukung atau pustaka gagal dimuat, tanpa membiarkan halaman putih.\n- Keluarkan kode HTML/CSS/JS lengkap dalam SATU blok kode HTML (tanpa elipsis, pseudo-code, atau fungsi TODO) yang bisa disimpan sebagai index.html. Di luar blok kode cukup petunjuk singkat menjalankan dan catatan kebutuhan koneksi CDN.\n\n7. UJI PENERIMAAN SEBELUM MENYERAHKAN KODE\nUji minimal: (a) N=5 dan N=20, panel soal dan jarak selalu tepat; (b) karakter ayam, bebek, kucing, manusia, mobil, motor dan satu tipe khusus berbeda tampil/bergerak sesuai bentuknya; (c) satu kesalahan tidak menambah jarak dan masih bisa menjawab ulang; (d) klik cepat tidak melompati soal; (e) tombol Pause/Resume, Musik, Fullscreen dan Main Lagi aktif; (f) finish tepat setelah N jawaban benar; (g) HP/laptop/IFP tidak menutupi pertanyaan; (h) suara tetap boleh dimatikan; (i) koneksi CDN gagal memberi pesan jelas; (j) tidak ada “ayam” tertinggal pada judul/label/animasi saat tipe lain dipilih.\n"
+      }
+    ]
+  }
+];
+
 const promptCategories = [
   ...offlineCategoriesV515,
   ...htmlPresentationCategories,
@@ -16764,7 +17057,8 @@ const promptCategories = [
   ...advancedCategories,
   ...coreCategories,
   ...documentConversionCategoriesV5106,
-  ...questionBankCategoriesV5109
+  ...questionBankCategoriesV5109,
+  ...race3dCategoriesV519
 ];
 
 /* ===== V5.18: embedded generated menu atlas ===== */
@@ -17042,7 +17336,8 @@ const generatorPackageDefs={
     biasa:[
       {id:'simple',label:'Game Edukasi Sederhana — Versi Biasa',get:()=>allPrompts.filter(p=>p.categoryId==='biasa-game'&&/Game Sederhana/i.test(p.title))},
       {id:'critical',label:'Game Critical Thinking — Versi Biasa',get:()=>allPrompts.filter(p=>p.categoryId==='biasa-game'&&/Game Critical Thinking/i.test(p.title))},
-      {id:'skill',label:'Game Skill & Luck — Versi Biasa',get:()=>allPrompts.filter(p=>p.categoryId==='biasa-game'&&/Game (Luck\s*&\s*Skill|Luck dan Skill)/i.test(p.title))}
+      {id:'skill',label:'Game Skill & Luck — Versi Biasa',get:()=>allPrompts.filter(p=>p.categoryId==='biasa-game'&&/Game (Luck\s*&\s*Skill|Luck dan Skill)/i.test(p.title))},
+      {id:'race3d',label:'Balap Cerdas 3D — Karakter & Kendaraan Bebas',get:()=>allPrompts.filter(p=>p.categoryId==='game-balapan-3d')}
     ],
     pro:[
       {id:'simple',label:'Game Edukasi Sederhana — Paket PRO',get:()=>allPrompts.filter(p=>p.categoryId==='paket-pro-sederhana')},
@@ -17164,7 +17459,7 @@ function prioritizeEducationLevelFields(fields=[]){
 function renderGeneratorTemplate(){
   const ps=activeGeneratorPrompts();if(!ps.length){els.genInfo.innerHTML=isPackageMode()&&!state.generatorVersion?'<strong>Pilih Versi Biasa atau PRO.</strong><p>Pilihan versi wajib sebelum data proyek dan rangkaian prompt ditampilkan.</p>':'<strong>Belum ada template.</strong><p>Pilih jenis/versi lain atau hapus kata pencarian.</p>';els.genFields.innerHTML='<div class="no-fields">Pilih versi/paket terlebih dahulu untuk menampilkan form data.</div>';updateGeneratorActionButton();return;}
   if(isPackageMode()){
-    const d=currentPackageDef();const first=ps[0],last=ps[ps.length-1];const mpiInfo=state.generatorType==='mpi'?` Isi <strong>Prompt 0</strong>, jalankan di AI, lalu klik <strong>Sudah ditempel</strong> untuk membuka <strong>Prompt 1</strong>. <strong>Nomor Ide Pilihan</strong> diisi pada langkah Prompt 1 dan bersifat opsional; perubahan isi/struktur dapat dilakukan langsung pada kotak teks Prompt 1.`:` Isi <strong>Prompt 0</strong>, jalankan di AI, lalu klik <strong>Sudah ditempel</strong>; Prompt 1 dan seterusnya muncul satu per satu beserta datanya.`;els.genInfo.innerHTML=`<strong class="template-art-title">${menuArtHtmlV518(menuKindV518(first))}<span>${escapeHtml(d?.label||first.categoryName)}</span></strong><p>${ps.length} prompt tersedia sebagai rangkaian bertahap.${mpiInfo} Setelah dikonfirmasi, Panel 4 dapat menampilkan seluruh rangkaian sampai <strong>${escapeHtml(last.title)}</strong>.</p><div class="package-sequence"><strong>Urutan:</strong> ${ps.map((p,i)=>`${i===ps.length-1?'Prompt Akhir':`Prompt ${promptSequenceOrder(p)}`}`).join(' → ')}</div>`;
+    const d=currentPackageDef();const first=ps[0],last=ps[ps.length-1];const mpiInfo=first?.race3d?' Ini adalah satu Master Prompt lengkap. Isi konfigurasi, klik Generate, lalu salin hasilnya untuk membuat HTML game di AI pilihan Anda.':state.generatorType==='mpi'?` Isi <strong>Prompt 0</strong>, jalankan di AI, lalu klik <strong>Sudah ditempel</strong> untuk membuka <strong>Prompt 1</strong>. <strong>Nomor Ide Pilihan</strong> diisi pada langkah Prompt 1 dan bersifat opsional; perubahan isi/struktur dapat dilakukan langsung pada kotak teks Prompt 1.`:` Isi <strong>Prompt 0</strong>, jalankan di AI, lalu klik <strong>Sudah ditempel</strong>; Prompt 1 dan seterusnya muncul satu per satu beserta datanya.`;els.genInfo.innerHTML=`<strong class="template-art-title">${menuArtHtmlV518(menuKindV518(first))}<span>${escapeHtml(d?.label||first.categoryName)}</span></strong><p>${first?.race3d?'Satu master prompt siap disesuaikan.':' '+ps.length+' prompt tersedia sebagai rangkaian bertahap.'}${mpiInfo}${first?.race3d?'':' Setelah dikonfirmasi, Panel 4 dapat menampilkan seluruh rangkaian sampai <strong>'+escapeHtml(last.title)+'</strong>.'}</p><div class="package-sequence"><strong>Urutan:</strong> ${first?.race3d?'Master Prompt Tunggal':ps.map((p,i)=>`${i===ps.length-1?'Prompt Akhir':`Prompt ${promptSequenceOrder(p)}`}`).join(' → ')}</div>`;
   }else{
     const p=ps[0];els.genInfo.innerHTML=`<strong class="template-art-title">${menuArtHtmlV518(menuKindV518(p))}<span>${escapeHtml(p.generatorLabel||p.title)}</span></strong><p>${p.generatorInfo?escapeHtml(p.generatorInfo):`${escapeHtml(p.categoryName)} • ${escapeHtml(truncate(p.text.replace(/\s+/g,' '),180))}`}</p>`;
   }
@@ -17868,6 +18163,7 @@ function finalizeHtmlPresentationPrompt(prompt,text){
 
 function currentGeneratorFieldConfig(tokenOrField){
   const f=typeof tokenOrField==='object'?tokenOrField:null;const token=f?.token||tokenOrField;
+  const racePrompt=activeGeneratorPrompts()[0];if(racePrompt?.race3d&&racePrompt.raceFieldConfig?.[token])return racePrompt.raceFieldConfig[token];
   const htmlPrompt=activeGeneratorPrompts()[0];if(htmlPrompt?.htmlLayered)return htmlPrompt.htmlFieldConfig?.[token]||inferredGeneratorFieldConfig(f);
   if(gameGeneratorFieldConfigV5102[token])return gameGeneratorFieldConfigV5102[token];
   if(supplementalGeneratorFieldConfig[token])return supplementalGeneratorFieldConfig[token];
@@ -18517,7 +18813,7 @@ function renderPackageStageFields(ps){
   const stepFields=ps.map((p,i)=>{if(i===0)return[];const list=[];extractPromptFields(p).forEach(f=>{const key=fieldDedupKey(f);if(!seen.has(key)){seen.add(key);list.push(f);}});return prioritizeEducationLevelFields(list);});
   const n=ps.length,isMpiFlow=state.generatorType==='mpi';
   const firstHtml=firstFields.length?firstFields.map((f,i)=>renderGeneratorField(f,`gp0_${i}`,false)).join(''):'<div class="no-fields span-2">Prompt 0 tidak memiliki placeholder yang terdeteksi.</div>';
-  const mpiNote=isMpiFlow?' Nomor Ide Pilihan diisi pada langkah Prompt 1 dan bersifat opsional; untuk memodifikasi struktur/isi ide, edit bagian MODIFIKASI OPSIONAL langsung pada kotak Prompt 1.':'';
+  const mpiNote=ps[0]?.race3d?' Game disusun dari satu Master Prompt. Pilih karakter/kendaraan dan isi data sekali, lalu salin kode HTML yang dihasilkan AI.':isMpiFlow?' Nomor Ide Pilihan diisi pada langkah Prompt 1 dan bersifat opsional; untuk memodifikasi struktur/isi ide, edit bagian MODIFIKASI OPSIONAL langsung pada kotak Prompt 1.':'';
   const panes=ps.map((p,i)=>{
     const fieldsHtml=stepFields[i].map((f,k)=>renderGeneratorField(f,`gp${i}_${k}`,false)).join('');
     const desc=i===0?'Salin prompt ini, tempel ke ChatGPT/Claude, lalu jalankan.':`Tempel di percakapan AI yang sama dengan prompt sebelumnya. Isi data di bawah bila ada; prompt ikut diperbarui.`;
@@ -18889,6 +19185,7 @@ function migrateAppSnapshotV516(snap){
 function finalizeGeneratedPrompt(prompt,text,vals){
   let out=finalizeMpiMiniGamesV51010(prompt,finalizeHtmlPresentationPrompt(prompt,finalizeClassroomQuizPrompt(prompt,text)),vals);
   out=finalizeAppPromptV516(prompt,out,vals);
+  if(prompt?.race3d){for(const [token,cfg] of Object.entries(prompt.raceFieldConfig||{})){if(out.includes(token))out=out.split(token).join(cfg.auto||'Menyesuaikan pilihan pengguna');}}
   if(/Prompt 0.*Ideasi MPI/i.test(prompt?.title||'')&&!vals?.semantic?.get('perangkat'))out=out.replace(/^Perangkat: \[HP\/laptop\/IFP\]$/m,'Perangkat: IFP; Laptop; HP');
   if(state.generatorType==='mpi'&&/Prompt 0.*Ideasi MPI/i.test(prompt?.title||'')&&!vals?.semantic?.get('tujuan-pembelajaran')){out=out.replace(/^Tujuan Pembelajaran:\s*\[tujuan pembelajaran\]\s*$/m,'Tujuan Pembelajaran: (belum diisi guru — susun otomatis oleh AI sesuai kurikulum/acuan, jenjang/kelas, mata pelajaran, topik, kedalaman materi, dan estimasi waktu; tetapkan sebagai Tujuan Pembelajaran Final pada Prompt 0)');}
   if(prompt?.categoryId==='modul-ajar-rpm'){
@@ -19742,6 +20039,7 @@ if(pikoEls.launcher){const src=document.querySelector('.global-brand .mascot img
 /* Curated collection highlights, not fabricated publication dates. */
 const homeSpotlights={
   latest:[
+    {category:'game-balapan-3d',title:race3dCategoriesV519[0].prompts[0].title,label:'Balap Cerdas 3D — Karakter dan Kendaraan Bebas',description:'Game kuis 3D dengan pembalap ayam, bebek, kucing, manusia, mobil, motor, sepeda atau karakter pilihan sendiri. Sesuaikan materi, jumlah soal, arena, dan animasi.',icon:'game',badge:'Baru • 3D interaktif'},
     {category:'aplikasi-offline',title:offlineCategoriesV515[0].prompts[0].title,label:'Konversi App/MPI/Game ke Offline',description:'Dua versi: HTML tanpa Python atau server Python/LAN. Pilih penyimpanan, ikuti tutorial Canva Code, lalu jalankan offline.',icon:'offline',badge:'Baru • 2 versi'},
     {category:'presentasi-html-interaktif',title:htmlPresentationCategories[0].prompts[0].title,label:'Presentasi HTML Interaktif — Ilustrasi Berlapis dan Karakter Bergerak',description:htmlPresentationCategories[0].description,icon:'htmlpresentation',badge:'Baru • 6 tahap'},
     ...classroomQuizCategories[0].prompts.slice(0,6).map(p=>({category:'kuis-kelas-interaktif',title:p.title,label:p.generatorLabel,description:p.classroomDescription,icon:p.classroomIcon,badge:'Template baru'}))
@@ -19785,7 +20083,7 @@ function openSpotlightChoice(key,bankOnly=false){
   const route=resolveSpotlightRoute(p,bankOnly);spotlightSelection={prompt:p,route};
   $('#promptChoiceCategory').textContent=p.categoryName;
   $('#promptChoiceTitle').textContent=p.generatorLabel||p.title;
-  $('#promptChoiceDescription').textContent=p.offlineMode?'Konversi file HTML aplikasi yang sudah jadi atau kode dari Canva Code menjadi offline. Di Generator pilih Biasa atau Server Python, lalu tentukan penyimpanan Ya/Tidak. Tutorial lengkap tersedia di dalam Generator.':p.htmlLayered?p.htmlDescription+' '+p.htmlDetails+' Pilih cara menggunakan template ini.':p.classroomQuiz?p.classroomDescription+' '+p.classroomDetails+' Pilih cara menggunakan template ini.':'Bagaimana Anda ingin menggunakan prompt ini?';
+  $('#promptChoiceDescription').textContent=p.offlineMode?'Konversi file HTML aplikasi yang sudah jadi atau kode dari Canva Code menjadi offline. Di Generator pilih Biasa atau Server Python, lalu tentukan penyimpanan Ya/Tidak. Tutorial lengkap tersedia di dalam Generator.':p.htmlLayered?p.htmlDescription+' '+p.htmlDetails+' Pilih cara menggunakan template ini.':p.classroomQuiz?p.classroomDescription+' '+p.classroomDetails+' Pilih cara menggunakan template ini.':p.race3d?'Pilih jenis pembalap (hewan, manusia, kendaraan, atau custom), kelas, materi, dan arena. Semua animasi dan tampilan menyesuaikan jenis pembalap.':'Bagaimana Anda ingin menggunakan prompt ini?';
   $('#promptChoiceGenerator').hidden=!route;
   $('#promptChoiceGeneratorInfo').textContent=p.offlineMode?'Pilih versi offline, atur penyimpanan, lalu buat prompt siap ditempel bersama kode dan aset di AI tujuan.':p.htmlLayered?'Siapkan enam prompt berurutan. Isi data dan pilih tema; jalankan satu tahap pada satu waktu.':route?.isPackage?'Buka paket yang sesuai dan mulai dari Prompt 0. Isi data melalui form bertahap.':route?.isSequence?'Isi data melalui form untuk menyiapkan rangkaian prompt dari tahap pertama.':'Template ini langsung dipilih. Isi data kelas dan materi melalui form.';
   $('#promptChoiceHint').textContent=p.offlineMode?'Biasa: data di browser perangkat ini. Server Python: isian perangkat lain masuk ke laptop server. Tidak: data sesi sementara.':p.htmlLayered?'Template baru berbasis HTML dengan aset gambar terpisah. Generator menyiapkan enam tahap; Bank Prompt membuka teks Tahap 0.':route?.isPackage?'Prompt ini merupakan bagian dari satu paket. Generator dimulai dari tahap awal; Bank Prompt membuka teks yang Anda pilih.':route?'Pilih Generator untuk menyesuaikan data, atau Bank Prompt untuk membaca dan menyalin teks template.':'Prompt ini digunakan untuk proyek yang sudah ada. Buka Bank Prompt, lalu salin instruksinya ke percakapan AI proyek Anda.';
