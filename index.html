@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="theme-color" content="#6d5dfc" />
-<title>Prompt EDU V5.19 — AI Prompt Studio untuk Guru</title>
+<title>Prompt EDU V5.20 — AI Prompt Studio untuk Guru</title>
 <!-- PATCH V5.19: Tambah Master Prompt Balap Cerdas 3D, model pembalap bebas, dan kartu Prompt Baru. -->
 <!-- PATCH V5.18: Atlas ilustrasi menu tertanam, layout kategori lapang, ikon kontrol adaptif serta tema terang/gelap. -->
 <!-- PATCH V5.17: Target aplikasi, dokumen terformat kondisional, cabang Canva/HTML dan keterangan Aplikasi PRO tanpa kewajiban AI Pro. -->
@@ -1442,8 +1442,9 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
     <section class="home-howto" aria-labelledby="homeHowtoTitle"><h3 id="homeHowtoTitle">Baru pertama kali? Mulai dari sini.</h3><ol class="home-steps"><li><span class="home-step-number">1</span><div><strong>Pilih kebutuhan</strong><small>Modul ajar, LKPD, kuis, atau media.</small></div></li><li><span class="home-step-number">2</span><div><strong>Isi data kelas</strong><small>Sesuaikan materi dan kebutuhan murid.</small></div></li><li><span class="home-step-number">3</span><div><strong>Buat prompt</strong><small>Periksa kembali hasilnya.</small></div></li><li><span class="home-step-number">4</span><div><strong>Salin ke AI</strong><small>Tempel di ChatGPT atau AI pilihan Anda.</small></div></li></ol></section>
     <section class="home-section app-changelog" aria-labelledby="appChangelogTitle">
       <details id="appChangelog">
-        <summary><span id="appChangelogTitle">Changelog aplikasi</span><span class="changelog-version">V5.19</span></summary>
+        <summary><span id="appChangelogTitle">Changelog aplikasi</span><span class="changelog-version">V5.20</span></summary>
         <div class="changelog-body">
+          <h4>V5.20 — 20 Oktober 2026</h4><ul><li>Critical Thinking biasa dan PRO: satu model/kombinasi, pendamping, fokus, integrasi dan tempo.</li><li>Rekomendasi seluruh genre, pewarisan rancangan–coding–QA dan penilaian bukti/alasan yang dapat ditinjau.</li></ul>
           <h4>V5.19 — 19 Oktober 2026</h4>
           <ul><li>Master Prompt Game Balap Cerdas 3D masuk Daftar Prompt Baru dan Bank Prompt, serta tersedia di Generator Game Edukasi versi Biasa.</li><li>Jenis pembalap dapat diubah menjadi ayam, bebek, kucing, kelinci, manusia, mobil, motor, sepeda, robot, dinosaurus atau pilihan kustom; tema arena, animasi, judul dan suara otomatis mengikuti tipe.</li><li>Form tambahan untuk jenjang, mapel, topik, jumlah soal, kesulitan, bahasa, karakter, warna, tema lintasan dan jarak.</li></ul>
           <h4>V5.18 — 16 Oktober 2026</h4>
@@ -4004,7 +4005,41 @@ Jika saya belum memilih, berhenti setelah laporan Final Check dan pilihan konver
     prompts: [
       {
         title: "Prompt 0 PRO Ideasi Game Edukasi Critical Thinking",
-        text: `Ciri khas varian ini dibanding Sederhana: setiap tantangan dilengkapi kasus/data untuk dianalisis, pertanyaan alasan ("mengapa kamu memilih itu?"), dan konsekuensi berbeda tiap pilihan jawaban — bukan sekadar benar/salah.
+        text: `
+
+ATURAN KOMBINASI CRITICAL THINKING V5.20 — berlaku pada seluruh tahap:
+- Satu model = pertahankan satu mekanik utama, integrasikan penalaran di dalamnya; model pendamping hanya referensi, bukan kewajiban penggabungan. Kombinasi dua model = tetapkan satu model utama dan satu pendamping dengan peran jelas. AI menentukan = pilih satu/dua model berdasarkan materi, tujuan, jenjang dan perangkat; jelaskan alasan. Maksimal dua model secara default; jika guru eksplisit meminta lebih, jelaskan kompleksitasnya.
+- Beberapa genre/model yang dicentang tetap merupakan alternatif ide. Hanya mode kombinasi atau permintaan eksplisit guru yang meminta penggabungan; dua model boleh berasal dari genre sama atau berbeda. Jika hanya satu genre dipilih, jangan menambah genre lain tanpa permintaan; gunakan pendamping dalam genre tersebut. Jika pasangan eksplisit berasal dari genre lain, permintaan pasangan tersebut mengizinkan genre itu. Jika tidak cocok, jelaskan keterbatasan dan tawarkan alternatif, jangan mengganti pilihan diam-diam.
+- Ideasi tetap minimal 5 alternatif; untuk setiap ide tulis genre, model utama, pendamping (atau tidak ada), alasan kecocokan materi, tujuan belajar, siklus bermain, kendali/giliran, aturan menang/kalah dan kelayakan perangkat. Jangan membuat semua alternatif menjadi satu game.
+- Setiap ide wajib menjelaskan informasi/bukti yang dianalisis, keputusan pemain, konsekuensi yang dapat diamati, dan kesempatan mengevaluasi atau memperbaiki keputusan. Terapkan fokus terpilih; gunakan data dan model ilmiah yang akurat sesuai jenjang.
+- Pertahankan identitas genre: gerak/waktu untuk aksi, balap, olahraga dan arcade; jelajah/interaksi untuk petualangan/RPG; langkah sah/giliran untuk papan; susunan/kendala untuk puzzle; sumber daya untuk strategi; variabel untuk simulasi; hubungan kartu untuk kartu; kontribusi peserta untuk party. Jangan menganggap hafalan, refleks, dadu atau hadiah jawaban sebagai bukti berpikir kritis.
+- Konsep pelajaran harus memengaruhi tindakan dan hasil, bukan hanya soal selingan untuk mendapat nitro/peluru. Pertanyaan alasan boleh pilihan terstruktur, pasangan bukti atau uraian pendek; tampilkan pada titik keputusan yang bermakna, tidak harus pop-up setelah setiap gerakan. Untuk mode aksi dengan jeda analisis, hentikan timer, gerak dan bahaya saat membaca/menjawab; lanjutkan tanpa lompatan waktu setelah panel ditutup. Tanpa batas waktu = tanpa hitung mundur; waktu terbatas harus wajar dan skor penalaran terpisah dari kecepatan.
+- Pisahkan skor keputusan, bukti dan alasan dari skor aksi/keberuntungan. Penilaian otomatis hanya memakai kunci atau rubrik terstruktur yang eksplisit; jangan menilai uraian hanya karena terisi atau memakai kata tertentu. Uraian disimpan sebagai Belum dinilai untuk tinjauan guru, bukan diberi skor logika palsu. Ganti contoh skor lama bila bertentangan; hindari penghitungan ganda. Pada dilema yang memiliki beberapa solusi masuk akal, gunakan kriteria/rubrik dan dampak, bukan satu jawaban benar yang dipaksakan.
+- Setelah satu ide dipilih, wariskan bentuk, genre, kedua model, fokus, integrasi, tempo, aturan dan konsekuensi ke rancangan, aset, coding dan QA. Jika tahap sebelumnya tersedia, gunakan keputusan tersebut tanpa meminta isian ulang. Jika belum tersedia, minta rancangan/ide terpilih, jangan mengarang kesepakatan.
+
+REKOMENDASI KOMBINASI SELURUH GENRE (panduan, bukan kewajiban menggabungkan):
+- Racing / Balap: Rekayasa kendaraan; simulasi sebab–akibat; strategi rute. Contoh: bandingkan medan, pilih rancangan, uji hasil dan perbaiki.
+- Adventure / Petualangan: Investigasi; puzzle logika; cerita bercabang. Contoh: jelajahi lokasi, hubungkan bukti, pilih tindakan dan amati dampaknya.
+- Game Papan: Pengelolaan sumber daya; dilema keputusan; kartu bukti. Contoh: pilih langkah sah berdasarkan biaya, manfaat dan bukti; dadu tidak menentukan skor penalaran.
+- Puzzle: Diagnosis kesalahan; eksperimen; investigasi. Contoh: temukan sistem yang salah, uji dugaan dan susun perbaikan; susun gambar/kata saja belum cukup.
+- Arcade: Investigasi; klasifikasi berbasis bukti; sebab–akibat. Contoh: tangkap objek berdasarkan beberapa petunjuk dan evaluasi perubahan kondisi.
+- Aksi: Misi penyelamatan; strategi prioritas; rekayasa alat. Contoh: analisis bahaya, pilih alat dan urutan tindakan, lalu jalankan misi ramah anak.
+- RPG: Investigasi profesi; argumentasi; cerita bercabang. Contoh: jalankan peran peneliti, bandingkan informasi dan pertanggungjawabkan keputusan.
+- Strategi: Simulasi sistem; prediksi dampak; pengelolaan sumber daya. Contoh: rencanakan tindakan, pantau data dan revisi strategi antargiliran.
+- Simulasi: Eksperimen; rekayasa; diagnosis. Contoh: prediksi, ubah satu variabel, amati hasil dan perbaiki solusi.
+- Sports / Olahraga: Analisis data; eksperimen gerak; strategi tim. Contoh: bandingkan percobaan arah/kekuatan, prediksi hasil dan tentukan strategi berikutnya.
+- Kartu / Memory: Klaim–bukti–alasan; deduksi; strategi sumber daya. Contoh: pasangkan klaim dengan bukti dan jelaskan hubungan; hafalan posisi saja belum cukup.
+- Permainan Kelompok / Party: Investigasi kolaboratif; debat bukti; estafet pemecahan masalah. Contoh: bagikan petunjuk berbeda lalu gabungkan bukti; roda hanya memilih misi.
+- Lainnya: Pertahankan ide guru; usulkan pasangan sesuai tujuan dan perangkat. Contoh: congklak dengan perencanaan sumber daya atau ritme dengan analisis pola.
+
+PENERAPAN PAKET PRO — Web/HTML:
+- Prompt 1: rancang core loop, state machine, tabel transisi tindakan→kondisi→konsekuensi, data tantangan, rubrik, UI bukti, jeda analisis, hasil dan review. Atur batas sumber daya/cabang serta kondisi menang/kalah yang dapat diuji.
+- Prompt 2–4: inventaris dan aset mengikuti kedua model yang benar-benar dipilih serta tampilan bukti/data; pertahankan ID/nama aset konsisten. Teks, tabel, grafik data dan kontrol tetap elemen native terbaca; aset dekorasi tidak menggantikan bukti atau logika game. Jangan membuat aset untuk alternatif ide yang tidak dipilih.
+- Prompt 5: implementasikan transisi, konsekuensi nyata, input, jeda/lanjut, reset, review dan skor terpisah; hindari timer/listener berulang. Simpan jawaban terstruktur dan uraian sesuai rancangan tanpa mengklaim penilaian AI offline.
+- Prompt 6: uji jalur alternatif, batas sumber daya, cabang buntu, langkah sah/giliran, konsekuensi tiap pilihan, skor/rubrik, jeda/lanjut tanpa lompatan waktu, reset berulang dan perangkat sasaran. Cocokkan dengan rancangan dan aset; laporkan LULUS/GAGAL/BELUM DIUJI berdasarkan eksekusi nyata, perbaiki temuan dan uji ulang.
+
+
+Ciri khas varian ini dibanding Sederhana: setiap tantangan dilengkapi kasus/data untuk dianalisis, pertanyaan alasan ("mengapa kamu memilih itu?"), dan konsekuensi berbeda tiap pilihan jawaban — bukan sekadar benar/salah.
 
 Saya guru [jenjang dan kelas]. Saya ingin membuat game edukasi untuk materi [tulis materi], yang melatih berpikir kritis siswa.
 
@@ -4013,10 +4048,17 @@ Genre: {{genre_game_v5102}}
 Model game yang diminati: {{model_game_v5102}}
 Ide game lain / di luar daftar: {{ide_game_lain_v5102}}
 
+PENGATURAN CRITICAL THINKING:
+Bentuk Permainan: {{ct_bentuk_v520}}
+Model Pendamping / Ide Kombinasi: {{ct_pendamping_v520}}
+Fokus Berpikir Kritis: {{ct_fokus_v520}}
+Pola Integrasi: {{ct_integrasi_v520}}
+Tempo Permainan: {{ct_tempo_v520}}
+
 ATURAN PILIHAN GENRE DAN MODEL — UNTUK IDEASI DAN TAHAP LANJUTAN:
 - Semua pilihan bersifat opsional. Jika tidak ada genre, model, atau ide lain, tentukan sendiri genre dan model berdasarkan materi, jenjang, tujuan belajar, serta perangkat; jangan meminta guru mengisi pilihan kosong. Berikan minimal 5 ide yang bervariasi dan jelaskan alasan kecocokannya.
 - Jika guru hanya memilih genre, usulkan variasi model di dalam genre terpilih. Jika model dipilih, jadikan model-model itu dasar ide; setiap model terpilih harus mendapat setidaknya satu ide. Tetap berikan minimal 5 ide; tambah jumlahnya bila diperlukan untuk mencakup seluruh pilihan.
-- Beberapa genre/model berarti kumpulan alternatif, bukan kewajiban menggabungkan semuanya dalam satu game. Kombinasikan hanya bila masuk akal untuk tujuan belajar, dan jelaskan alasannya. Jangan mengganti pilihan guru diam-diam atau menambahkan genre di luar pilihan kecuali guru meminta ide lain/alternatif.
+- Beberapa genre/model berarti kumpulan alternatif. Penggabungan mengikuti Bentuk Permainan dan aturan kombinasi V5.20 di bawah. Jangan mengganti pilihan guru diam-diam atau menambahkan genre di luar pilihan kecuali guru meminta ide lain/alternatif.
 - Ide di luar daftar sah dan dapat diberikan tanpa memilih genre. Petakan ke genre yang paling cocok sambil mempertahankan cara bermain yang dimaksud guru; bila ide tambahan tidak ada, tidak perlu meminta isian baru. Pilihan Lainnya tanpa rincian berarti AI mengusulkan alternatif yang relevan.
 - Tulis setiap ide dengan label Genre dan Model Game, gambaran cara bermain dalam bahasa sehari-hari, alasan sesuai materi/jenjang, serta kendali dan aturan menang/kalah. Istilah seperti platformer dijelaskan, misalnya karakter bergerak dan melompat melewati rintangan.
 - Nama seperti Mario, catur, atau monopoli adalah rujukan cara bermain. Gunakan judul, karakter, cerita, dan aset orisinal; jelaskan aturan/adaptasi edukatif sehingga guru dapat memahami bentuk game tanpa mengenal rujukannya.
@@ -4036,7 +4078,7 @@ Berikan setiap ide dengan format:
 6. Opsi Feedback Benar & Salah — jelaskan alasan ilmiah/letak miskonsepsi (opsional — bisa dihapus/diubah jadi hanya skor, cocok untuk evaluasi/asesmen yang lebih serius tanpa feedback langsung)
 7. Reward Akhir
 8. Sistem Skill Critical Thinking — bagian game yang menuntut: menjawab soal, menganalisis kasus, membaca data/gambar/tabel, membandingkan pilihan, menentukan solusi terbaik, memberi alasan logis, menyusun strategi
-9. Pertanyaan Alasan — tiap tantangan wajib punya pertanyaan tambahan: "Mengapa kamu memilih jawaban tersebut?"
+9. Pertanyaan Alasan — tiap keputusan penting menyediakan pertanyaan: "Mengapa kamu memilih jawaban tersebut?"
 10. Konsekuensi Pilihan — tiap pilihan jawaban idealnya berdampak berbeda terhadap jalannya game
 
 Gaya game: sederhana, ramah anak, bisa dimainkan di perangkat di atas, dan membuat siswa berpikir, bukan hanya fun.
@@ -4045,7 +4087,27 @@ Gaya game: sederhana, ramah anak, bisa dimainkan di perangkat di atas, dan membu
       },
       {
         title: "Prompt 1 PRO Desain Game Edukasi Critical Thinking (Game Flow/Storyboard + Visual UI)",
-        text: `Pilihan ide (opsional saat menyiapkan prompt): nomor [tulis nomor] dengan judul "[tulis judul game]". Jika belum dipilih, biarkan placeholder dan sesuaikan nanti sebelum Prompt 1 dijalankan.
+        text: `
+
+ATURAN KOMBINASI CRITICAL THINKING V5.20 — berlaku pada seluruh tahap:
+- Satu model = pertahankan satu mekanik utama, integrasikan penalaran di dalamnya; model pendamping hanya referensi, bukan kewajiban penggabungan. Kombinasi dua model = tetapkan satu model utama dan satu pendamping dengan peran jelas. AI menentukan = pilih satu/dua model berdasarkan materi, tujuan, jenjang dan perangkat; jelaskan alasan. Maksimal dua model secara default; jika guru eksplisit meminta lebih, jelaskan kompleksitasnya.
+- Beberapa genre/model yang dicentang tetap merupakan alternatif ide. Hanya mode kombinasi atau permintaan eksplisit guru yang meminta penggabungan; dua model boleh berasal dari genre sama atau berbeda. Jika hanya satu genre dipilih, jangan menambah genre lain tanpa permintaan; gunakan pendamping dalam genre tersebut. Jika pasangan eksplisit berasal dari genre lain, permintaan pasangan tersebut mengizinkan genre itu. Jika tidak cocok, jelaskan keterbatasan dan tawarkan alternatif, jangan mengganti pilihan diam-diam.
+- Ideasi tetap minimal 5 alternatif; untuk setiap ide tulis genre, model utama, pendamping (atau tidak ada), alasan kecocokan materi, tujuan belajar, siklus bermain, kendali/giliran, aturan menang/kalah dan kelayakan perangkat. Jangan membuat semua alternatif menjadi satu game.
+- Setiap ide wajib menjelaskan informasi/bukti yang dianalisis, keputusan pemain, konsekuensi yang dapat diamati, dan kesempatan mengevaluasi atau memperbaiki keputusan. Terapkan fokus terpilih; gunakan data dan model ilmiah yang akurat sesuai jenjang.
+- Pertahankan identitas genre: gerak/waktu untuk aksi, balap, olahraga dan arcade; jelajah/interaksi untuk petualangan/RPG; langkah sah/giliran untuk papan; susunan/kendala untuk puzzle; sumber daya untuk strategi; variabel untuk simulasi; hubungan kartu untuk kartu; kontribusi peserta untuk party. Jangan menganggap hafalan, refleks, dadu atau hadiah jawaban sebagai bukti berpikir kritis.
+- Konsep pelajaran harus memengaruhi tindakan dan hasil, bukan hanya soal selingan untuk mendapat nitro/peluru. Pertanyaan alasan boleh pilihan terstruktur, pasangan bukti atau uraian pendek; tampilkan pada titik keputusan yang bermakna, tidak harus pop-up setelah setiap gerakan. Untuk mode aksi dengan jeda analisis, hentikan timer, gerak dan bahaya saat membaca/menjawab; lanjutkan tanpa lompatan waktu setelah panel ditutup. Tanpa batas waktu = tanpa hitung mundur; waktu terbatas harus wajar dan skor penalaran terpisah dari kecepatan.
+- Pisahkan skor keputusan, bukti dan alasan dari skor aksi/keberuntungan. Penilaian otomatis hanya memakai kunci atau rubrik terstruktur yang eksplisit; jangan menilai uraian hanya karena terisi atau memakai kata tertentu. Uraian disimpan sebagai Belum dinilai untuk tinjauan guru, bukan diberi skor logika palsu. Ganti contoh skor lama bila bertentangan; hindari penghitungan ganda. Pada dilema yang memiliki beberapa solusi masuk akal, gunakan kriteria/rubrik dan dampak, bukan satu jawaban benar yang dipaksakan.
+- Setelah satu ide dipilih, wariskan bentuk, genre, kedua model, fokus, integrasi, tempo, aturan dan konsekuensi ke rancangan, aset, coding dan QA. Jika tahap sebelumnya tersedia, gunakan keputusan tersebut tanpa meminta isian ulang. Jika belum tersedia, minta rancangan/ide terpilih, jangan mengarang kesepakatan.
+
+
+PENERAPAN PAKET PRO — Web/HTML:
+- Prompt 1: rancang core loop, state machine, tabel transisi tindakan→kondisi→konsekuensi, data tantangan, rubrik, UI bukti, jeda analisis, hasil dan review. Atur batas sumber daya/cabang serta kondisi menang/kalah yang dapat diuji.
+- Prompt 2–4: inventaris dan aset mengikuti kedua model yang benar-benar dipilih serta tampilan bukti/data; pertahankan ID/nama aset konsisten. Teks, tabel, grafik data dan kontrol tetap elemen native terbaca; aset dekorasi tidak menggantikan bukti atau logika game. Jangan membuat aset untuk alternatif ide yang tidak dipilih.
+- Prompt 5: implementasikan transisi, konsekuensi nyata, input, jeda/lanjut, reset, review dan skor terpisah; hindari timer/listener berulang. Simpan jawaban terstruktur dan uraian sesuai rancangan tanpa mengklaim penilaian AI offline.
+- Prompt 6: uji jalur alternatif, batas sumber daya, cabang buntu, langkah sah/giliran, konsekuensi tiap pilihan, skor/rubrik, jeda/lanjut tanpa lompatan waktu, reset berulang dan perangkat sasaran. Cocokkan dengan rancangan dan aset; laporkan LULUS/GAGAL/BELUM DIUJI berdasarkan eksekusi nyata, perbaiki temuan dan uji ulang.
+
+
+Pilihan ide (opsional saat menyiapkan prompt): nomor [tulis nomor] dengan judul "[tulis judul game]". Jika belum dipilih, biarkan placeholder dan sesuaikan nanti sebelum Prompt 1 dijalankan.
 Kembangkan ide tersebut menjadi rancangan (desain) lengkap dengan penekanan berpikir kritis, mencakup storyboard alur halaman DAN desain visual/UI.
 
 Data game: (sama seperti varian Sederhana — jenjang, mapel, materi, perangkat, jumlah tantangan)
@@ -4054,7 +4116,7 @@ Buatkan rancangan dengan format berikut:
 1. Judul Game  N. Cerita Pembuka  N. Misi Utama Pemain  N. Tujuan Pembelajaran
 2. Indikator Critical Thinking — siswa mampu: mengidentifikasi masalah, menganalisis informasi, membuat kesimpulan, memberi alasan logis, memprediksi akibat keputusan, memilih solusi terbaik berdasarkan data
 3. Aturan Bermain  N. Mekanisme Permainan
-4. Storyboard/Alur Halaman Game — sama seperti varian Sederhana, tambahkan halaman "Pertanyaan Alasan" setelah tiap tantangan
+4. Storyboard/Alur Halaman Game — sama seperti varian Sederhana, sediakan panel alasan/bukti pada titik keputusan sesuai pola integrasi
 5. Database Tantangan/Soal — tiap tantangan berisi: situasi/kasus singkat, data/petunjuk yang harus dianalisis, pertanyaan utama, bentuk soal, pilihan jawaban, jawaban benar, alasan jawaban benar, mengapa pilihan lain kurang tepat, hint bertahap (1: umum, 2: spesifik, 3: arah jawaban), Opsi Feedback Benar & Salah (opsional — bisa dihapus/diubah jadi hanya skor, cocok untuk evaluasi/asesmen yang lebih serius tanpa feedback langsung), pertanyaan refleksi, dampak/konsekuensi pilihan. Gunakan minimal 3 tipe soal berpikir kritis: analisis sebab-akibat, prediksi dampak, menentukan solusi terbaik, membandingkan dua pilihan, mengurutkan proses secara logis, mendeteksi kesalahan konsep, atau mengambil keputusan berdasarkan data.
 6. Sistem Skor & Skor Berpikir Kritis — jawaban benar +10; alasan logis +5 (opsional); pakai data/petunjuk tepat +5; benar tapi alasan kurang tepat +10 saja; salah tapi alasan logis +3; pakai hint -2
 7. Reward Akhir  N. Desain Visual/UI — [kerangka umum: palet warna+HEX, tipografi, gaya komponen, layout tiap halaman, karakter/maskot, mood visual] ditambah gaya tampilan kartu data/tabel/grafik kecil
@@ -4066,7 +4128,27 @@ Pastikan hasilnya rapi dan detail, siap dilanjutkan ke tahap aset.
       },
       {
         title: "Prompt 2 PRO Asset Inventory Game Edukasi Critical Thinking",
-        text: `Berdasarkan rancangan desain game di atas (Prompt 1 PRO), buatkan Daftar Inventaris Aset khusus untuk game critical thinking ini.
+        text: `
+
+ATURAN KOMBINASI CRITICAL THINKING V5.20 — berlaku pada seluruh tahap:
+- Satu model = pertahankan satu mekanik utama, integrasikan penalaran di dalamnya; model pendamping hanya referensi, bukan kewajiban penggabungan. Kombinasi dua model = tetapkan satu model utama dan satu pendamping dengan peran jelas. AI menentukan = pilih satu/dua model berdasarkan materi, tujuan, jenjang dan perangkat; jelaskan alasan. Maksimal dua model secara default; jika guru eksplisit meminta lebih, jelaskan kompleksitasnya.
+- Beberapa genre/model yang dicentang tetap merupakan alternatif ide. Hanya mode kombinasi atau permintaan eksplisit guru yang meminta penggabungan; dua model boleh berasal dari genre sama atau berbeda. Jika hanya satu genre dipilih, jangan menambah genre lain tanpa permintaan; gunakan pendamping dalam genre tersebut. Jika pasangan eksplisit berasal dari genre lain, permintaan pasangan tersebut mengizinkan genre itu. Jika tidak cocok, jelaskan keterbatasan dan tawarkan alternatif, jangan mengganti pilihan diam-diam.
+- Ideasi tetap minimal 5 alternatif; untuk setiap ide tulis genre, model utama, pendamping (atau tidak ada), alasan kecocokan materi, tujuan belajar, siklus bermain, kendali/giliran, aturan menang/kalah dan kelayakan perangkat. Jangan membuat semua alternatif menjadi satu game.
+- Setiap ide wajib menjelaskan informasi/bukti yang dianalisis, keputusan pemain, konsekuensi yang dapat diamati, dan kesempatan mengevaluasi atau memperbaiki keputusan. Terapkan fokus terpilih; gunakan data dan model ilmiah yang akurat sesuai jenjang.
+- Pertahankan identitas genre: gerak/waktu untuk aksi, balap, olahraga dan arcade; jelajah/interaksi untuk petualangan/RPG; langkah sah/giliran untuk papan; susunan/kendala untuk puzzle; sumber daya untuk strategi; variabel untuk simulasi; hubungan kartu untuk kartu; kontribusi peserta untuk party. Jangan menganggap hafalan, refleks, dadu atau hadiah jawaban sebagai bukti berpikir kritis.
+- Konsep pelajaran harus memengaruhi tindakan dan hasil, bukan hanya soal selingan untuk mendapat nitro/peluru. Pertanyaan alasan boleh pilihan terstruktur, pasangan bukti atau uraian pendek; tampilkan pada titik keputusan yang bermakna, tidak harus pop-up setelah setiap gerakan. Untuk mode aksi dengan jeda analisis, hentikan timer, gerak dan bahaya saat membaca/menjawab; lanjutkan tanpa lompatan waktu setelah panel ditutup. Tanpa batas waktu = tanpa hitung mundur; waktu terbatas harus wajar dan skor penalaran terpisah dari kecepatan.
+- Pisahkan skor keputusan, bukti dan alasan dari skor aksi/keberuntungan. Penilaian otomatis hanya memakai kunci atau rubrik terstruktur yang eksplisit; jangan menilai uraian hanya karena terisi atau memakai kata tertentu. Uraian disimpan sebagai Belum dinilai untuk tinjauan guru, bukan diberi skor logika palsu. Ganti contoh skor lama bila bertentangan; hindari penghitungan ganda. Pada dilema yang memiliki beberapa solusi masuk akal, gunakan kriteria/rubrik dan dampak, bukan satu jawaban benar yang dipaksakan.
+- Setelah satu ide dipilih, wariskan bentuk, genre, kedua model, fokus, integrasi, tempo, aturan dan konsekuensi ke rancangan, aset, coding dan QA. Jika tahap sebelumnya tersedia, gunakan keputusan tersebut tanpa meminta isian ulang. Jika belum tersedia, minta rancangan/ide terpilih, jangan mengarang kesepakatan.
+
+
+PENERAPAN PAKET PRO — Web/HTML:
+- Prompt 1: rancang core loop, state machine, tabel transisi tindakan→kondisi→konsekuensi, data tantangan, rubrik, UI bukti, jeda analisis, hasil dan review. Atur batas sumber daya/cabang serta kondisi menang/kalah yang dapat diuji.
+- Prompt 2–4: inventaris dan aset mengikuti kedua model yang benar-benar dipilih serta tampilan bukti/data; pertahankan ID/nama aset konsisten. Teks, tabel, grafik data dan kontrol tetap elemen native terbaca; aset dekorasi tidak menggantikan bukti atau logika game. Jangan membuat aset untuk alternatif ide yang tidak dipilih.
+- Prompt 5: implementasikan transisi, konsekuensi nyata, input, jeda/lanjut, reset, review dan skor terpisah; hindari timer/listener berulang. Simpan jawaban terstruktur dan uraian sesuai rancangan tanpa mengklaim penilaian AI offline.
+- Prompt 6: uji jalur alternatif, batas sumber daya, cabang buntu, langkah sah/giliran, konsekuensi tiap pilihan, skor/rubrik, jeda/lanjut tanpa lompatan waktu, reset berulang dan perangkat sasaran. Cocokkan dengan rancangan dan aset; laporkan LULUS/GAGAL/BELUM DIUJI berdasarkan eksekusi nyata, perbaiki temuan dan uji ulang.
+
+
+Berdasarkan rancangan desain game di atas (Prompt 1 PRO), buatkan Daftar Inventaris Aset khusus untuk game critical thinking ini.
 
 Kelompokkan aset berdasarkan kategori:
 1. Karakter/Avatar Pemain
@@ -4088,7 +4170,27 @@ ATURAN INVENTARIS FILE GAMBAR — WAJIB:
       },
       {
         title: "Prompt 3 PRO Generate Prompt Aset Game Edukasi Critical Thinking",
-        text: `Berdasarkan Daftar Inventaris Aset (Prompt 2 PRO), buatkan kumpulan prompt siap pakai untuk menghasilkan SETIAP aset proyek Game Edukasi Critical Thinking menggunakan AI image/audio generator (misalnya ChatGPT, Gemini, Midjourney, Ideogram, Adobe Firefly, atau Claude yang benar-benar memiliki tool image generation). Hasil tahap ini akan dieksekusi satu per satu oleh Prompt 4 PRO, lalu dikemas menjadi SATU paket ZIP berisi file WebP terpisah + manifest.
+        text: `
+
+ATURAN KOMBINASI CRITICAL THINKING V5.20 — berlaku pada seluruh tahap:
+- Satu model = pertahankan satu mekanik utama, integrasikan penalaran di dalamnya; model pendamping hanya referensi, bukan kewajiban penggabungan. Kombinasi dua model = tetapkan satu model utama dan satu pendamping dengan peran jelas. AI menentukan = pilih satu/dua model berdasarkan materi, tujuan, jenjang dan perangkat; jelaskan alasan. Maksimal dua model secara default; jika guru eksplisit meminta lebih, jelaskan kompleksitasnya.
+- Beberapa genre/model yang dicentang tetap merupakan alternatif ide. Hanya mode kombinasi atau permintaan eksplisit guru yang meminta penggabungan; dua model boleh berasal dari genre sama atau berbeda. Jika hanya satu genre dipilih, jangan menambah genre lain tanpa permintaan; gunakan pendamping dalam genre tersebut. Jika pasangan eksplisit berasal dari genre lain, permintaan pasangan tersebut mengizinkan genre itu. Jika tidak cocok, jelaskan keterbatasan dan tawarkan alternatif, jangan mengganti pilihan diam-diam.
+- Ideasi tetap minimal 5 alternatif; untuk setiap ide tulis genre, model utama, pendamping (atau tidak ada), alasan kecocokan materi, tujuan belajar, siklus bermain, kendali/giliran, aturan menang/kalah dan kelayakan perangkat. Jangan membuat semua alternatif menjadi satu game.
+- Setiap ide wajib menjelaskan informasi/bukti yang dianalisis, keputusan pemain, konsekuensi yang dapat diamati, dan kesempatan mengevaluasi atau memperbaiki keputusan. Terapkan fokus terpilih; gunakan data dan model ilmiah yang akurat sesuai jenjang.
+- Pertahankan identitas genre: gerak/waktu untuk aksi, balap, olahraga dan arcade; jelajah/interaksi untuk petualangan/RPG; langkah sah/giliran untuk papan; susunan/kendala untuk puzzle; sumber daya untuk strategi; variabel untuk simulasi; hubungan kartu untuk kartu; kontribusi peserta untuk party. Jangan menganggap hafalan, refleks, dadu atau hadiah jawaban sebagai bukti berpikir kritis.
+- Konsep pelajaran harus memengaruhi tindakan dan hasil, bukan hanya soal selingan untuk mendapat nitro/peluru. Pertanyaan alasan boleh pilihan terstruktur, pasangan bukti atau uraian pendek; tampilkan pada titik keputusan yang bermakna, tidak harus pop-up setelah setiap gerakan. Untuk mode aksi dengan jeda analisis, hentikan timer, gerak dan bahaya saat membaca/menjawab; lanjutkan tanpa lompatan waktu setelah panel ditutup. Tanpa batas waktu = tanpa hitung mundur; waktu terbatas harus wajar dan skor penalaran terpisah dari kecepatan.
+- Pisahkan skor keputusan, bukti dan alasan dari skor aksi/keberuntungan. Penilaian otomatis hanya memakai kunci atau rubrik terstruktur yang eksplisit; jangan menilai uraian hanya karena terisi atau memakai kata tertentu. Uraian disimpan sebagai Belum dinilai untuk tinjauan guru, bukan diberi skor logika palsu. Ganti contoh skor lama bila bertentangan; hindari penghitungan ganda. Pada dilema yang memiliki beberapa solusi masuk akal, gunakan kriteria/rubrik dan dampak, bukan satu jawaban benar yang dipaksakan.
+- Setelah satu ide dipilih, wariskan bentuk, genre, kedua model, fokus, integrasi, tempo, aturan dan konsekuensi ke rancangan, aset, coding dan QA. Jika tahap sebelumnya tersedia, gunakan keputusan tersebut tanpa meminta isian ulang. Jika belum tersedia, minta rancangan/ide terpilih, jangan mengarang kesepakatan.
+
+
+PENERAPAN PAKET PRO — Web/HTML:
+- Prompt 1: rancang core loop, state machine, tabel transisi tindakan→kondisi→konsekuensi, data tantangan, rubrik, UI bukti, jeda analisis, hasil dan review. Atur batas sumber daya/cabang serta kondisi menang/kalah yang dapat diuji.
+- Prompt 2–4: inventaris dan aset mengikuti kedua model yang benar-benar dipilih serta tampilan bukti/data; pertahankan ID/nama aset konsisten. Teks, tabel, grafik data dan kontrol tetap elemen native terbaca; aset dekorasi tidak menggantikan bukti atau logika game. Jangan membuat aset untuk alternatif ide yang tidak dipilih.
+- Prompt 5: implementasikan transisi, konsekuensi nyata, input, jeda/lanjut, reset, review dan skor terpisah; hindari timer/listener berulang. Simpan jawaban terstruktur dan uraian sesuai rancangan tanpa mengklaim penilaian AI offline.
+- Prompt 6: uji jalur alternatif, batas sumber daya, cabang buntu, langkah sah/giliran, konsekuensi tiap pilihan, skor/rubrik, jeda/lanjut tanpa lompatan waktu, reset berulang dan perangkat sasaran. Cocokkan dengan rancangan dan aset; laporkan LULUS/GAGAL/BELUM DIUJI berdasarkan eksekusi nyata, perbaiki temuan dan uji ulang.
+
+
+Berdasarkan Daftar Inventaris Aset (Prompt 2 PRO), buatkan kumpulan prompt siap pakai untuk menghasilkan SETIAP aset proyek Game Edukasi Critical Thinking menggunakan AI image/audio generator (misalnya ChatGPT, Gemini, Midjourney, Ideogram, Adobe Firefly, atau Claude yang benar-benar memiliki tool image generation). Hasil tahap ini akan dieksekusi satu per satu oleh Prompt 4 PRO, lalu dikemas menjadi SATU paket ZIP berisi file WebP terpisah + manifest.
 
 ID PRODUKSI — WAJIB:
 - Beri setiap prompt aset satu ID produksi unik dan berurutan: A001, A002, A003, dan seterusnya.
@@ -4159,7 +4261,27 @@ Output akhir: bagian A, B, C (dan D bila ada) secara lengkap dan tidak terpotong
       },
       {
         title: "Prompt 4 PRO Generate Semua Aset Otomatis Game Critical Thinking di ChatGPT/Claude",
-        text: `Gunakan HANYA Prompt 3 PRO TERAKHIR yang tersedia lengkap di percakapan aktif ini sebagai instruksi final untuk melakukan generate aset proyek Game Edukasi Critical Thinking, lalu kemas hasilnya menjadi paket ZIP.
+        text: `
+
+ATURAN KOMBINASI CRITICAL THINKING V5.20 — berlaku pada seluruh tahap:
+- Satu model = pertahankan satu mekanik utama, integrasikan penalaran di dalamnya; model pendamping hanya referensi, bukan kewajiban penggabungan. Kombinasi dua model = tetapkan satu model utama dan satu pendamping dengan peran jelas. AI menentukan = pilih satu/dua model berdasarkan materi, tujuan, jenjang dan perangkat; jelaskan alasan. Maksimal dua model secara default; jika guru eksplisit meminta lebih, jelaskan kompleksitasnya.
+- Beberapa genre/model yang dicentang tetap merupakan alternatif ide. Hanya mode kombinasi atau permintaan eksplisit guru yang meminta penggabungan; dua model boleh berasal dari genre sama atau berbeda. Jika hanya satu genre dipilih, jangan menambah genre lain tanpa permintaan; gunakan pendamping dalam genre tersebut. Jika pasangan eksplisit berasal dari genre lain, permintaan pasangan tersebut mengizinkan genre itu. Jika tidak cocok, jelaskan keterbatasan dan tawarkan alternatif, jangan mengganti pilihan diam-diam.
+- Ideasi tetap minimal 5 alternatif; untuk setiap ide tulis genre, model utama, pendamping (atau tidak ada), alasan kecocokan materi, tujuan belajar, siklus bermain, kendali/giliran, aturan menang/kalah dan kelayakan perangkat. Jangan membuat semua alternatif menjadi satu game.
+- Setiap ide wajib menjelaskan informasi/bukti yang dianalisis, keputusan pemain, konsekuensi yang dapat diamati, dan kesempatan mengevaluasi atau memperbaiki keputusan. Terapkan fokus terpilih; gunakan data dan model ilmiah yang akurat sesuai jenjang.
+- Pertahankan identitas genre: gerak/waktu untuk aksi, balap, olahraga dan arcade; jelajah/interaksi untuk petualangan/RPG; langkah sah/giliran untuk papan; susunan/kendala untuk puzzle; sumber daya untuk strategi; variabel untuk simulasi; hubungan kartu untuk kartu; kontribusi peserta untuk party. Jangan menganggap hafalan, refleks, dadu atau hadiah jawaban sebagai bukti berpikir kritis.
+- Konsep pelajaran harus memengaruhi tindakan dan hasil, bukan hanya soal selingan untuk mendapat nitro/peluru. Pertanyaan alasan boleh pilihan terstruktur, pasangan bukti atau uraian pendek; tampilkan pada titik keputusan yang bermakna, tidak harus pop-up setelah setiap gerakan. Untuk mode aksi dengan jeda analisis, hentikan timer, gerak dan bahaya saat membaca/menjawab; lanjutkan tanpa lompatan waktu setelah panel ditutup. Tanpa batas waktu = tanpa hitung mundur; waktu terbatas harus wajar dan skor penalaran terpisah dari kecepatan.
+- Pisahkan skor keputusan, bukti dan alasan dari skor aksi/keberuntungan. Penilaian otomatis hanya memakai kunci atau rubrik terstruktur yang eksplisit; jangan menilai uraian hanya karena terisi atau memakai kata tertentu. Uraian disimpan sebagai Belum dinilai untuk tinjauan guru, bukan diberi skor logika palsu. Ganti contoh skor lama bila bertentangan; hindari penghitungan ganda. Pada dilema yang memiliki beberapa solusi masuk akal, gunakan kriteria/rubrik dan dampak, bukan satu jawaban benar yang dipaksakan.
+- Setelah satu ide dipilih, wariskan bentuk, genre, kedua model, fokus, integrasi, tempo, aturan dan konsekuensi ke rancangan, aset, coding dan QA. Jika tahap sebelumnya tersedia, gunakan keputusan tersebut tanpa meminta isian ulang. Jika belum tersedia, minta rancangan/ide terpilih, jangan mengarang kesepakatan.
+
+
+PENERAPAN PAKET PRO — Web/HTML:
+- Prompt 1: rancang core loop, state machine, tabel transisi tindakan→kondisi→konsekuensi, data tantangan, rubrik, UI bukti, jeda analisis, hasil dan review. Atur batas sumber daya/cabang serta kondisi menang/kalah yang dapat diuji.
+- Prompt 2–4: inventaris dan aset mengikuti kedua model yang benar-benar dipilih serta tampilan bukti/data; pertahankan ID/nama aset konsisten. Teks, tabel, grafik data dan kontrol tetap elemen native terbaca; aset dekorasi tidak menggantikan bukti atau logika game. Jangan membuat aset untuk alternatif ide yang tidak dipilih.
+- Prompt 5: implementasikan transisi, konsekuensi nyata, input, jeda/lanjut, reset, review dan skor terpisah; hindari timer/listener berulang. Simpan jawaban terstruktur dan uraian sesuai rancangan tanpa mengklaim penilaian AI offline.
+- Prompt 6: uji jalur alternatif, batas sumber daya, cabang buntu, langkah sah/giliran, konsekuensi tiap pilihan, skor/rubrik, jeda/lanjut tanpa lompatan waktu, reset berulang dan perangkat sasaran. Cocokkan dengan rancangan dan aset; laporkan LULUS/GAGAL/BELUM DIUJI berdasarkan eksekusi nyata, perbaiki temuan dan uji ulang.
+
+
+Gunakan HANYA Prompt 3 PRO TERAKHIR yang tersedia lengkap di percakapan aktif ini sebagai instruksi final untuk melakukan generate aset proyek Game Edukasi Critical Thinking, lalu kemas hasilnya menjadi paket ZIP.
 
 Tugas tahap ini adalah MENGEKSEKUSI aset satu per satu. Jangan merancang ulang aset, jangan membuat inventaris baru, jangan menulis ulang prompt, dan jangan mengambil konteks proyek lain.
 
@@ -4265,7 +4387,27 @@ Mulai dari ID GENERATE pertama pada Prompt 3 PRO: nyatakan hasil CEK KEMAMPUAN P
       },
       {
         title: "Prompt 5 PRO Coding Game Edukasi Critical Thinking (Gabungkan Semua Aset ke Desain)",
-        text: `Ubah rancangan desain game (Prompt 1 PRO) dan aset yang sudah dibuat/digenerate (hasil Prompt 4 PRO; mengacu Prompt 2-3 PRO) menjadi kode game interaktif dalam satu file HTML lengkap. Jelaskan mekanisme dan tampilan game secara sangat detail.
+        text: `
+
+ATURAN KOMBINASI CRITICAL THINKING V5.20 — berlaku pada seluruh tahap:
+- Satu model = pertahankan satu mekanik utama, integrasikan penalaran di dalamnya; model pendamping hanya referensi, bukan kewajiban penggabungan. Kombinasi dua model = tetapkan satu model utama dan satu pendamping dengan peran jelas. AI menentukan = pilih satu/dua model berdasarkan materi, tujuan, jenjang dan perangkat; jelaskan alasan. Maksimal dua model secara default; jika guru eksplisit meminta lebih, jelaskan kompleksitasnya.
+- Beberapa genre/model yang dicentang tetap merupakan alternatif ide. Hanya mode kombinasi atau permintaan eksplisit guru yang meminta penggabungan; dua model boleh berasal dari genre sama atau berbeda. Jika hanya satu genre dipilih, jangan menambah genre lain tanpa permintaan; gunakan pendamping dalam genre tersebut. Jika pasangan eksplisit berasal dari genre lain, permintaan pasangan tersebut mengizinkan genre itu. Jika tidak cocok, jelaskan keterbatasan dan tawarkan alternatif, jangan mengganti pilihan diam-diam.
+- Ideasi tetap minimal 5 alternatif; untuk setiap ide tulis genre, model utama, pendamping (atau tidak ada), alasan kecocokan materi, tujuan belajar, siklus bermain, kendali/giliran, aturan menang/kalah dan kelayakan perangkat. Jangan membuat semua alternatif menjadi satu game.
+- Setiap ide wajib menjelaskan informasi/bukti yang dianalisis, keputusan pemain, konsekuensi yang dapat diamati, dan kesempatan mengevaluasi atau memperbaiki keputusan. Terapkan fokus terpilih; gunakan data dan model ilmiah yang akurat sesuai jenjang.
+- Pertahankan identitas genre: gerak/waktu untuk aksi, balap, olahraga dan arcade; jelajah/interaksi untuk petualangan/RPG; langkah sah/giliran untuk papan; susunan/kendala untuk puzzle; sumber daya untuk strategi; variabel untuk simulasi; hubungan kartu untuk kartu; kontribusi peserta untuk party. Jangan menganggap hafalan, refleks, dadu atau hadiah jawaban sebagai bukti berpikir kritis.
+- Konsep pelajaran harus memengaruhi tindakan dan hasil, bukan hanya soal selingan untuk mendapat nitro/peluru. Pertanyaan alasan boleh pilihan terstruktur, pasangan bukti atau uraian pendek; tampilkan pada titik keputusan yang bermakna, tidak harus pop-up setelah setiap gerakan. Untuk mode aksi dengan jeda analisis, hentikan timer, gerak dan bahaya saat membaca/menjawab; lanjutkan tanpa lompatan waktu setelah panel ditutup. Tanpa batas waktu = tanpa hitung mundur; waktu terbatas harus wajar dan skor penalaran terpisah dari kecepatan.
+- Pisahkan skor keputusan, bukti dan alasan dari skor aksi/keberuntungan. Penilaian otomatis hanya memakai kunci atau rubrik terstruktur yang eksplisit; jangan menilai uraian hanya karena terisi atau memakai kata tertentu. Uraian disimpan sebagai Belum dinilai untuk tinjauan guru, bukan diberi skor logika palsu. Ganti contoh skor lama bila bertentangan; hindari penghitungan ganda. Pada dilema yang memiliki beberapa solusi masuk akal, gunakan kriteria/rubrik dan dampak, bukan satu jawaban benar yang dipaksakan.
+- Setelah satu ide dipilih, wariskan bentuk, genre, kedua model, fokus, integrasi, tempo, aturan dan konsekuensi ke rancangan, aset, coding dan QA. Jika tahap sebelumnya tersedia, gunakan keputusan tersebut tanpa meminta isian ulang. Jika belum tersedia, minta rancangan/ide terpilih, jangan mengarang kesepakatan.
+
+
+PENERAPAN PAKET PRO — Web/HTML:
+- Prompt 1: rancang core loop, state machine, tabel transisi tindakan→kondisi→konsekuensi, data tantangan, rubrik, UI bukti, jeda analisis, hasil dan review. Atur batas sumber daya/cabang serta kondisi menang/kalah yang dapat diuji.
+- Prompt 2–4: inventaris dan aset mengikuti kedua model yang benar-benar dipilih serta tampilan bukti/data; pertahankan ID/nama aset konsisten. Teks, tabel, grafik data dan kontrol tetap elemen native terbaca; aset dekorasi tidak menggantikan bukti atau logika game. Jangan membuat aset untuk alternatif ide yang tidak dipilih.
+- Prompt 5: implementasikan transisi, konsekuensi nyata, input, jeda/lanjut, reset, review dan skor terpisah; hindari timer/listener berulang. Simpan jawaban terstruktur dan uraian sesuai rancangan tanpa mengklaim penilaian AI offline.
+- Prompt 6: uji jalur alternatif, batas sumber daya, cabang buntu, langkah sah/giliran, konsekuensi tiap pilihan, skor/rubrik, jeda/lanjut tanpa lompatan waktu, reset berulang dan perangkat sasaran. Cocokkan dengan rancangan dan aset; laporkan LULUS/GAGAL/BELUM DIUJI berdasarkan eksekusi nyata, perbaiki temuan dan uji ulang.
+
+
+Ubah rancangan desain game (Prompt 1 PRO) dan aset yang sudah dibuat/digenerate (hasil Prompt 4 PRO; mengacu Prompt 2-3 PRO) menjadi kode game interaktif dalam satu file HTML lengkap. Jelaskan mekanisme dan tampilan game secara sangat detail.
 
 Engine/Platform tujuan: [pilih satu — HTML/CSS/JavaScript di browser / Claude Code / ChatGPT / Gemini / v0 / bolt.new / Cursor / Replit AI / Lovable]
 
@@ -4274,7 +4416,7 @@ Ketentuan umum, struktur, fitur, sistem soal, dan sistem skor: sama seperti Prom
 Tambahan khusus critical thinking:
 1. Tiap soal diawali kasus/skenario singkat.
 2. Jika ada data, tampilkan sebagai kartu data / tabel kecil / grafik sederhana / indikator.
-3. Setelah pemain memilih jawaban, tampilkan pertanyaan "Apa alasanmu?" dengan kolom input singkat.
+3. Pada titik keputusan penting, tampilkan pilihan alasan/bukti atau kolom uraian sesuai rancangan; jeda aksi bila diperlukan.
 4. Game tetap lanjut meski alasan tidak dinilai otomatis, tapi alasan tersimpan dan ditampilkan di halaman review akhir.
 5. Opsi Feedback benar menjelaskan alasan ilmiah/logis, feedback salah menjelaskan miskonsepsi (opsional — bisa dihapus/diubah jadi hanya skor, cocok untuk evaluasi/asesmen yang lebih serius tanpa feedback langsung)
 6. Hint bertahap: Hint 1 (umum) → Hint 2 (spesifik) → Hint 3 (arah jawaban).
@@ -4292,7 +4434,27 @@ Output: Prompt/kode siap copy.`
       },
       {
         title: "Prompt 6 PRO Final Check Game Edukasi Critical Thinking",
-        text: `Aplikasi Game Edukasi Critical Thinking sudah selesai dibuat dari Prompt 0–5 PRO. Sekarang lakukan FINAL CHECK menyeluruh sebagai QA engineer, instructional designer, dan penguji aplikasi edukasi. Jangan langsung menulis ulang aplikasi dari nol. Audit versi yang ada, uji fungsi, temukan masalah, lalu PERBAIKI masalah yang benar-benar ditemukan tanpa merusak fitur yang sudah benar.
+        text: `
+
+ATURAN KOMBINASI CRITICAL THINKING V5.20 — berlaku pada seluruh tahap:
+- Satu model = pertahankan satu mekanik utama, integrasikan penalaran di dalamnya; model pendamping hanya referensi, bukan kewajiban penggabungan. Kombinasi dua model = tetapkan satu model utama dan satu pendamping dengan peran jelas. AI menentukan = pilih satu/dua model berdasarkan materi, tujuan, jenjang dan perangkat; jelaskan alasan. Maksimal dua model secara default; jika guru eksplisit meminta lebih, jelaskan kompleksitasnya.
+- Beberapa genre/model yang dicentang tetap merupakan alternatif ide. Hanya mode kombinasi atau permintaan eksplisit guru yang meminta penggabungan; dua model boleh berasal dari genre sama atau berbeda. Jika hanya satu genre dipilih, jangan menambah genre lain tanpa permintaan; gunakan pendamping dalam genre tersebut. Jika pasangan eksplisit berasal dari genre lain, permintaan pasangan tersebut mengizinkan genre itu. Jika tidak cocok, jelaskan keterbatasan dan tawarkan alternatif, jangan mengganti pilihan diam-diam.
+- Ideasi tetap minimal 5 alternatif; untuk setiap ide tulis genre, model utama, pendamping (atau tidak ada), alasan kecocokan materi, tujuan belajar, siklus bermain, kendali/giliran, aturan menang/kalah dan kelayakan perangkat. Jangan membuat semua alternatif menjadi satu game.
+- Setiap ide wajib menjelaskan informasi/bukti yang dianalisis, keputusan pemain, konsekuensi yang dapat diamati, dan kesempatan mengevaluasi atau memperbaiki keputusan. Terapkan fokus terpilih; gunakan data dan model ilmiah yang akurat sesuai jenjang.
+- Pertahankan identitas genre: gerak/waktu untuk aksi, balap, olahraga dan arcade; jelajah/interaksi untuk petualangan/RPG; langkah sah/giliran untuk papan; susunan/kendala untuk puzzle; sumber daya untuk strategi; variabel untuk simulasi; hubungan kartu untuk kartu; kontribusi peserta untuk party. Jangan menganggap hafalan, refleks, dadu atau hadiah jawaban sebagai bukti berpikir kritis.
+- Konsep pelajaran harus memengaruhi tindakan dan hasil, bukan hanya soal selingan untuk mendapat nitro/peluru. Pertanyaan alasan boleh pilihan terstruktur, pasangan bukti atau uraian pendek; tampilkan pada titik keputusan yang bermakna, tidak harus pop-up setelah setiap gerakan. Untuk mode aksi dengan jeda analisis, hentikan timer, gerak dan bahaya saat membaca/menjawab; lanjutkan tanpa lompatan waktu setelah panel ditutup. Tanpa batas waktu = tanpa hitung mundur; waktu terbatas harus wajar dan skor penalaran terpisah dari kecepatan.
+- Pisahkan skor keputusan, bukti dan alasan dari skor aksi/keberuntungan. Penilaian otomatis hanya memakai kunci atau rubrik terstruktur yang eksplisit; jangan menilai uraian hanya karena terisi atau memakai kata tertentu. Uraian disimpan sebagai Belum dinilai untuk tinjauan guru, bukan diberi skor logika palsu. Ganti contoh skor lama bila bertentangan; hindari penghitungan ganda. Pada dilema yang memiliki beberapa solusi masuk akal, gunakan kriteria/rubrik dan dampak, bukan satu jawaban benar yang dipaksakan.
+- Setelah satu ide dipilih, wariskan bentuk, genre, kedua model, fokus, integrasi, tempo, aturan dan konsekuensi ke rancangan, aset, coding dan QA. Jika tahap sebelumnya tersedia, gunakan keputusan tersebut tanpa meminta isian ulang. Jika belum tersedia, minta rancangan/ide terpilih, jangan mengarang kesepakatan.
+
+
+PENERAPAN PAKET PRO — Web/HTML:
+- Prompt 1: rancang core loop, state machine, tabel transisi tindakan→kondisi→konsekuensi, data tantangan, rubrik, UI bukti, jeda analisis, hasil dan review. Atur batas sumber daya/cabang serta kondisi menang/kalah yang dapat diuji.
+- Prompt 2–4: inventaris dan aset mengikuti kedua model yang benar-benar dipilih serta tampilan bukti/data; pertahankan ID/nama aset konsisten. Teks, tabel, grafik data dan kontrol tetap elemen native terbaca; aset dekorasi tidak menggantikan bukti atau logika game. Jangan membuat aset untuk alternatif ide yang tidak dipilih.
+- Prompt 5: implementasikan transisi, konsekuensi nyata, input, jeda/lanjut, reset, review dan skor terpisah; hindari timer/listener berulang. Simpan jawaban terstruktur dan uraian sesuai rancangan tanpa mengklaim penilaian AI offline.
+- Prompt 6: uji jalur alternatif, batas sumber daya, cabang buntu, langkah sah/giliran, konsekuensi tiap pilihan, skor/rubrik, jeda/lanjut tanpa lompatan waktu, reset berulang dan perangkat sasaran. Cocokkan dengan rancangan dan aset; laporkan LULUS/GAGAL/BELUM DIUJI berdasarkan eksekusi nyata, perbaiki temuan dan uji ulang.
+
+
+Aplikasi Game Edukasi Critical Thinking sudah selesai dibuat dari Prompt 0–5 PRO. Sekarang lakukan FINAL CHECK menyeluruh sebagai QA engineer, instructional designer, dan penguji aplikasi edukasi. Jangan langsung menulis ulang aplikasi dari nol. Audit versi yang ada, uji fungsi, temukan masalah, lalu PERBAIKI masalah yang benar-benar ditemukan tanpa merusak fitur yang sudah benar.
 
 TAHAP 1 — INVENTARIS & PETA UJI:
 1. Ringkas struktur aplikasi: halaman/menu, fitur inti, data/state, aset, evaluasi, penyimpanan/integrasi, dan alur pengguna.
@@ -5272,7 +5434,40 @@ Setelah aplikasi/MPI/game/simulasi/lab maya selesai dibuat di Canva, JANGAN lang
       {
         title: "Prompt 0 — Ideasi Game Critical Thinking",
         updatedAt: "15 September 2026",
-        text: `Ciri khas varian ini dibanding Sederhana: setiap tantangan dilengkapi kasus/data untuk dianalisis, pertanyaan alasan ("mengapa kamu memilih itu?"), dan konsekuensi berbeda tiap pilihan jawaban — bukan sekadar benar/salah.
+        text: `
+
+ATURAN KOMBINASI CRITICAL THINKING V5.20 — berlaku pada seluruh tahap:
+- Satu model = pertahankan satu mekanik utama, integrasikan penalaran di dalamnya; model pendamping hanya referensi, bukan kewajiban penggabungan. Kombinasi dua model = tetapkan satu model utama dan satu pendamping dengan peran jelas. AI menentukan = pilih satu/dua model berdasarkan materi, tujuan, jenjang dan perangkat; jelaskan alasan. Maksimal dua model secara default; jika guru eksplisit meminta lebih, jelaskan kompleksitasnya.
+- Beberapa genre/model yang dicentang tetap merupakan alternatif ide. Hanya mode kombinasi atau permintaan eksplisit guru yang meminta penggabungan; dua model boleh berasal dari genre sama atau berbeda. Jika hanya satu genre dipilih, jangan menambah genre lain tanpa permintaan; gunakan pendamping dalam genre tersebut. Jika pasangan eksplisit berasal dari genre lain, permintaan pasangan tersebut mengizinkan genre itu. Jika tidak cocok, jelaskan keterbatasan dan tawarkan alternatif, jangan mengganti pilihan diam-diam.
+- Ideasi tetap minimal 5 alternatif; untuk setiap ide tulis genre, model utama, pendamping (atau tidak ada), alasan kecocokan materi, tujuan belajar, siklus bermain, kendali/giliran, aturan menang/kalah dan kelayakan perangkat. Jangan membuat semua alternatif menjadi satu game.
+- Setiap ide wajib menjelaskan informasi/bukti yang dianalisis, keputusan pemain, konsekuensi yang dapat diamati, dan kesempatan mengevaluasi atau memperbaiki keputusan. Terapkan fokus terpilih; gunakan data dan model ilmiah yang akurat sesuai jenjang.
+- Pertahankan identitas genre: gerak/waktu untuk aksi, balap, olahraga dan arcade; jelajah/interaksi untuk petualangan/RPG; langkah sah/giliran untuk papan; susunan/kendala untuk puzzle; sumber daya untuk strategi; variabel untuk simulasi; hubungan kartu untuk kartu; kontribusi peserta untuk party. Jangan menganggap hafalan, refleks, dadu atau hadiah jawaban sebagai bukti berpikir kritis.
+- Konsep pelajaran harus memengaruhi tindakan dan hasil, bukan hanya soal selingan untuk mendapat nitro/peluru. Pertanyaan alasan boleh pilihan terstruktur, pasangan bukti atau uraian pendek; tampilkan pada titik keputusan yang bermakna, tidak harus pop-up setelah setiap gerakan. Untuk mode aksi dengan jeda analisis, hentikan timer, gerak dan bahaya saat membaca/menjawab; lanjutkan tanpa lompatan waktu setelah panel ditutup. Tanpa batas waktu = tanpa hitung mundur; waktu terbatas harus wajar dan skor penalaran terpisah dari kecepatan.
+- Pisahkan skor keputusan, bukti dan alasan dari skor aksi/keberuntungan. Penilaian otomatis hanya memakai kunci atau rubrik terstruktur yang eksplisit; jangan menilai uraian hanya karena terisi atau memakai kata tertentu. Uraian disimpan sebagai Belum dinilai untuk tinjauan guru, bukan diberi skor logika palsu. Ganti contoh skor lama bila bertentangan; hindari penghitungan ganda. Pada dilema yang memiliki beberapa solusi masuk akal, gunakan kriteria/rubrik dan dampak, bukan satu jawaban benar yang dipaksakan.
+- Setelah satu ide dipilih, wariskan bentuk, genre, kedua model, fokus, integrasi, tempo, aturan dan konsekuensi ke rancangan, aset, coding dan QA. Jika tahap sebelumnya tersedia, gunakan keputusan tersebut tanpa meminta isian ulang. Jika belum tersedia, minta rancangan/ide terpilih, jangan mengarang kesepakatan.
+
+REKOMENDASI KOMBINASI SELURUH GENRE (panduan, bukan kewajiban menggabungkan):
+- Racing / Balap: Rekayasa kendaraan; simulasi sebab–akibat; strategi rute. Contoh: bandingkan medan, pilih rancangan, uji hasil dan perbaiki.
+- Adventure / Petualangan: Investigasi; puzzle logika; cerita bercabang. Contoh: jelajahi lokasi, hubungkan bukti, pilih tindakan dan amati dampaknya.
+- Game Papan: Pengelolaan sumber daya; dilema keputusan; kartu bukti. Contoh: pilih langkah sah berdasarkan biaya, manfaat dan bukti; dadu tidak menentukan skor penalaran.
+- Puzzle: Diagnosis kesalahan; eksperimen; investigasi. Contoh: temukan sistem yang salah, uji dugaan dan susun perbaikan; susun gambar/kata saja belum cukup.
+- Arcade: Investigasi; klasifikasi berbasis bukti; sebab–akibat. Contoh: tangkap objek berdasarkan beberapa petunjuk dan evaluasi perubahan kondisi.
+- Aksi: Misi penyelamatan; strategi prioritas; rekayasa alat. Contoh: analisis bahaya, pilih alat dan urutan tindakan, lalu jalankan misi ramah anak.
+- RPG: Investigasi profesi; argumentasi; cerita bercabang. Contoh: jalankan peran peneliti, bandingkan informasi dan pertanggungjawabkan keputusan.
+- Strategi: Simulasi sistem; prediksi dampak; pengelolaan sumber daya. Contoh: rencanakan tindakan, pantau data dan revisi strategi antargiliran.
+- Simulasi: Eksperimen; rekayasa; diagnosis. Contoh: prediksi, ubah satu variabel, amati hasil dan perbaiki solusi.
+- Sports / Olahraga: Analisis data; eksperimen gerak; strategi tim. Contoh: bandingkan percobaan arah/kekuatan, prediksi hasil dan tentukan strategi berikutnya.
+- Kartu / Memory: Klaim–bukti–alasan; deduksi; strategi sumber daya. Contoh: pasangkan klaim dengan bukti dan jelaskan hubungan; hafalan posisi saja belum cukup.
+- Permainan Kelompok / Party: Investigasi kolaboratif; debat bukti; estafet pemecahan masalah. Contoh: bagikan petunjuk berbeda lalu gabungkan bukti; roda hanya memilih misi.
+- Lainnya: Pertahankan ide guru; usulkan pasangan sesuai tujuan dan perangkat. Contoh: congklak dengan perencanaan sumber daya atau ritme dengan analisis pola.
+
+PENERAPAN VERSI BIASA — Canva Code:
+- Gunakan mekanik ringan 2D, jumlah state/cabang terbatas dan kontrol sentuh/keyboard sesuai perangkat. Rancang satu siklus lengkap yang dapat dimainkan; untuk dua model buat integrasi ringkas, bukan dua game besar terpisah. Jangan menambahkan server, layanan AI eksternal atau aset berat sebagai syarat.
+- Rancangan menjelaskan state awal, tindakan, bukti, kondisi perubahan dan akhir. Coding menerapkan state tersebut, jeda/lanjut, reset dan review jawaban/bukti/alasan. Jangan hanya memindahkan indikator kosmetik.
+- Uji satu sesi lengkap, keputusan alternatif beserta dampaknya, skor, reset, jeda/lanjut dan kontrol HP/laptop/IFP yang ditargetkan. Laporkan hanya pengujian nyata; tulis BELUM DIUJI beserta langkah bila Canva/browser tidak tersedia.
+
+
+Ciri khas varian ini dibanding Sederhana: setiap tantangan dilengkapi kasus/data untuk dianalisis, pertanyaan alasan ("mengapa kamu memilih itu?"), dan konsekuensi berbeda tiap pilihan jawaban — bukan sekadar benar/salah.
 
 Saya guru [jenjang dan kelas]. Saya ingin membuat game edukasi di Canva untuk materi [tulis materi], yang melatih berpikir kritis siswa.
 Buatkan minimal 5 ide game edukasi yang menarik, sederhana, ramah anak, bisa dimainkan di [HP/laptop/IFP].
@@ -5282,10 +5477,17 @@ Genre: {{genre_game_v5102}}
 Model game yang diminati: {{model_game_v5102}}
 Ide game lain / di luar daftar: {{ide_game_lain_v5102}}
 
+PENGATURAN CRITICAL THINKING:
+Bentuk Permainan: {{ct_bentuk_v520}}
+Model Pendamping / Ide Kombinasi: {{ct_pendamping_v520}}
+Fokus Berpikir Kritis: {{ct_fokus_v520}}
+Pola Integrasi: {{ct_integrasi_v520}}
+Tempo Permainan: {{ct_tempo_v520}}
+
 ATURAN PILIHAN GENRE DAN MODEL — UNTUK IDEASI DAN TAHAP LANJUTAN:
 - Semua pilihan bersifat opsional. Jika tidak ada genre, model, atau ide lain, tentukan sendiri genre dan model berdasarkan materi, jenjang, tujuan belajar, serta perangkat; jangan meminta guru mengisi pilihan kosong. Berikan minimal 5 ide yang bervariasi dan jelaskan alasan kecocokannya.
 - Jika guru hanya memilih genre, usulkan variasi model di dalam genre terpilih. Jika model dipilih, jadikan model-model itu dasar ide; setiap model terpilih harus mendapat setidaknya satu ide. Tetap berikan minimal 5 ide; tambah jumlahnya bila diperlukan untuk mencakup seluruh pilihan.
-- Beberapa genre/model berarti kumpulan alternatif, bukan kewajiban menggabungkan semuanya dalam satu game. Kombinasikan hanya bila masuk akal untuk tujuan belajar, dan jelaskan alasannya. Jangan mengganti pilihan guru diam-diam atau menambahkan genre di luar pilihan kecuali guru meminta ide lain/alternatif.
+- Beberapa genre/model berarti kumpulan alternatif. Penggabungan mengikuti Bentuk Permainan dan aturan kombinasi V5.20 di bawah. Jangan mengganti pilihan guru diam-diam atau menambahkan genre di luar pilihan kecuali guru meminta ide lain/alternatif.
 - Ide di luar daftar sah dan dapat diberikan tanpa memilih genre. Petakan ke genre yang paling cocok sambil mempertahankan cara bermain yang dimaksud guru; bila ide tambahan tidak ada, tidak perlu meminta isian baru. Pilihan Lainnya tanpa rincian berarti AI mengusulkan alternatif yang relevan.
 - Tulis setiap ide dengan label Genre dan Model Game, gambaran cara bermain dalam bahasa sehari-hari, alasan sesuai materi/jenjang, serta kendali dan aturan menang/kalah. Istilah seperti platformer dijelaskan, misalnya karakter bergerak dan melompat melewati rintangan.
 - Nama seperti Mario, catur, atau monopoli adalah rujukan cara bermain. Gunakan judul, karakter, cerita, dan aset orisinal; jelaskan aturan/adaptasi edukatif sehingga guru dapat memahami bentuk game tanpa mengenal rujukannya.
@@ -5313,7 +5515,7 @@ Berikan setiap ide dengan format:
 10. Feedback Salah — jelaskan letak miskonsepsi/kesalahan berpikir
 11. Reward Akhir
 12. Sistem Skill Critical Thinking — bagian game yang menuntut: menjawab soal, menganalisis kasus, membaca data/gambar/tabel, membandingkan pilihan, menentukan solusi terbaik, memberi alasan logis, menyusun strategi
-13. Pertanyaan Alasan — tiap tantangan wajib punya pertanyaan tambahan: "Mengapa kamu memilih jawaban tersebut?"
+13. Pertanyaan Alasan — tiap keputusan penting menyediakan pertanyaan: "Mengapa kamu memilih jawaban tersebut?"
 14. Konsekuensi Pilihan — tiap pilihan jawaban idealnya berdampak berbeda terhadap jalannya game
 
 Gaya game: sederhana, ramah anak, bisa dimainkan di [HP/laptop/IFP], dan membuat siswa berpikir, bukan hanya fun.
@@ -5323,7 +5525,26 @@ Gaya game: sederhana, ramah anak, bisa dimainkan di [HP/laptop/IFP], dan membuat
       {
         title: "Prompt 1 — Rancangan Lengkap Game Critical Thinking",
         updatedAt: "15 September 2026",
-        text: `Pilihan ide game (opsional saat menyiapkan prompt): nomor [tulis nomor] dengan judul "[tulis judul game]". Jika belum dipilih, biarkan placeholder dan sesuaikan nanti sebelum Prompt 1 dijalankan.
+        text: `
+
+ATURAN KOMBINASI CRITICAL THINKING V5.20 — berlaku pada seluruh tahap:
+- Satu model = pertahankan satu mekanik utama, integrasikan penalaran di dalamnya; model pendamping hanya referensi, bukan kewajiban penggabungan. Kombinasi dua model = tetapkan satu model utama dan satu pendamping dengan peran jelas. AI menentukan = pilih satu/dua model berdasarkan materi, tujuan, jenjang dan perangkat; jelaskan alasan. Maksimal dua model secara default; jika guru eksplisit meminta lebih, jelaskan kompleksitasnya.
+- Beberapa genre/model yang dicentang tetap merupakan alternatif ide. Hanya mode kombinasi atau permintaan eksplisit guru yang meminta penggabungan; dua model boleh berasal dari genre sama atau berbeda. Jika hanya satu genre dipilih, jangan menambah genre lain tanpa permintaan; gunakan pendamping dalam genre tersebut. Jika pasangan eksplisit berasal dari genre lain, permintaan pasangan tersebut mengizinkan genre itu. Jika tidak cocok, jelaskan keterbatasan dan tawarkan alternatif, jangan mengganti pilihan diam-diam.
+- Ideasi tetap minimal 5 alternatif; untuk setiap ide tulis genre, model utama, pendamping (atau tidak ada), alasan kecocokan materi, tujuan belajar, siklus bermain, kendali/giliran, aturan menang/kalah dan kelayakan perangkat. Jangan membuat semua alternatif menjadi satu game.
+- Setiap ide wajib menjelaskan informasi/bukti yang dianalisis, keputusan pemain, konsekuensi yang dapat diamati, dan kesempatan mengevaluasi atau memperbaiki keputusan. Terapkan fokus terpilih; gunakan data dan model ilmiah yang akurat sesuai jenjang.
+- Pertahankan identitas genre: gerak/waktu untuk aksi, balap, olahraga dan arcade; jelajah/interaksi untuk petualangan/RPG; langkah sah/giliran untuk papan; susunan/kendala untuk puzzle; sumber daya untuk strategi; variabel untuk simulasi; hubungan kartu untuk kartu; kontribusi peserta untuk party. Jangan menganggap hafalan, refleks, dadu atau hadiah jawaban sebagai bukti berpikir kritis.
+- Konsep pelajaran harus memengaruhi tindakan dan hasil, bukan hanya soal selingan untuk mendapat nitro/peluru. Pertanyaan alasan boleh pilihan terstruktur, pasangan bukti atau uraian pendek; tampilkan pada titik keputusan yang bermakna, tidak harus pop-up setelah setiap gerakan. Untuk mode aksi dengan jeda analisis, hentikan timer, gerak dan bahaya saat membaca/menjawab; lanjutkan tanpa lompatan waktu setelah panel ditutup. Tanpa batas waktu = tanpa hitung mundur; waktu terbatas harus wajar dan skor penalaran terpisah dari kecepatan.
+- Pisahkan skor keputusan, bukti dan alasan dari skor aksi/keberuntungan. Penilaian otomatis hanya memakai kunci atau rubrik terstruktur yang eksplisit; jangan menilai uraian hanya karena terisi atau memakai kata tertentu. Uraian disimpan sebagai Belum dinilai untuk tinjauan guru, bukan diberi skor logika palsu. Ganti contoh skor lama bila bertentangan; hindari penghitungan ganda. Pada dilema yang memiliki beberapa solusi masuk akal, gunakan kriteria/rubrik dan dampak, bukan satu jawaban benar yang dipaksakan.
+- Setelah satu ide dipilih, wariskan bentuk, genre, kedua model, fokus, integrasi, tempo, aturan dan konsekuensi ke rancangan, aset, coding dan QA. Jika tahap sebelumnya tersedia, gunakan keputusan tersebut tanpa meminta isian ulang. Jika belum tersedia, minta rancangan/ide terpilih, jangan mengarang kesepakatan.
+
+
+PENERAPAN VERSI BIASA — Canva Code:
+- Gunakan mekanik ringan 2D, jumlah state/cabang terbatas dan kontrol sentuh/keyboard sesuai perangkat. Rancang satu siklus lengkap yang dapat dimainkan; untuk dua model buat integrasi ringkas, bukan dua game besar terpisah. Jangan menambahkan server, layanan AI eksternal atau aset berat sebagai syarat.
+- Rancangan menjelaskan state awal, tindakan, bukti, kondisi perubahan dan akhir. Coding menerapkan state tersebut, jeda/lanjut, reset dan review jawaban/bukti/alasan. Jangan hanya memindahkan indikator kosmetik.
+- Uji satu sesi lengkap, keputusan alternatif beserta dampaknya, skor, reset, jeda/lanjut dan kontrol HP/laptop/IFP yang ditargetkan. Laporkan hanya pengujian nyata; tulis BELUM DIUJI beserta langkah bila Canva/browser tidak tersedia.
+
+
+Pilihan ide game (opsional saat menyiapkan prompt): nomor [tulis nomor] dengan judul "[tulis judul game]". Jika belum dipilih, biarkan placeholder dan sesuaikan nanti sebelum Prompt 1 dijalankan.
 Kembangkan ide tersebut menjadi rancangan game edukasi lengkap dengan penekanan berpikir kritis, siap dibuat di Canva Code.
 
 Data game: (sama seperti varian Sederhana — jenjang, mapel, materi, perangkat, jumlah tantangan)
@@ -5345,12 +5566,31 @@ Pastikan hasilnya rapi, mudah dipahami guru pemula, dan siap dilanjutkan menjadi
       {
         title: "Prompt 2 — Kode Canva Code Game Critical Thinking",
         updatedAt: "15 September 2026",
-        text: `Ketentuan umum, struktur, fitur, sistem soal, dan sistem skor: sama seperti Prompt 2 varian Sederhana.
+        text: `
+
+ATURAN KOMBINASI CRITICAL THINKING V5.20 — berlaku pada seluruh tahap:
+- Satu model = pertahankan satu mekanik utama, integrasikan penalaran di dalamnya; model pendamping hanya referensi, bukan kewajiban penggabungan. Kombinasi dua model = tetapkan satu model utama dan satu pendamping dengan peran jelas. AI menentukan = pilih satu/dua model berdasarkan materi, tujuan, jenjang dan perangkat; jelaskan alasan. Maksimal dua model secara default; jika guru eksplisit meminta lebih, jelaskan kompleksitasnya.
+- Beberapa genre/model yang dicentang tetap merupakan alternatif ide. Hanya mode kombinasi atau permintaan eksplisit guru yang meminta penggabungan; dua model boleh berasal dari genre sama atau berbeda. Jika hanya satu genre dipilih, jangan menambah genre lain tanpa permintaan; gunakan pendamping dalam genre tersebut. Jika pasangan eksplisit berasal dari genre lain, permintaan pasangan tersebut mengizinkan genre itu. Jika tidak cocok, jelaskan keterbatasan dan tawarkan alternatif, jangan mengganti pilihan diam-diam.
+- Ideasi tetap minimal 5 alternatif; untuk setiap ide tulis genre, model utama, pendamping (atau tidak ada), alasan kecocokan materi, tujuan belajar, siklus bermain, kendali/giliran, aturan menang/kalah dan kelayakan perangkat. Jangan membuat semua alternatif menjadi satu game.
+- Setiap ide wajib menjelaskan informasi/bukti yang dianalisis, keputusan pemain, konsekuensi yang dapat diamati, dan kesempatan mengevaluasi atau memperbaiki keputusan. Terapkan fokus terpilih; gunakan data dan model ilmiah yang akurat sesuai jenjang.
+- Pertahankan identitas genre: gerak/waktu untuk aksi, balap, olahraga dan arcade; jelajah/interaksi untuk petualangan/RPG; langkah sah/giliran untuk papan; susunan/kendala untuk puzzle; sumber daya untuk strategi; variabel untuk simulasi; hubungan kartu untuk kartu; kontribusi peserta untuk party. Jangan menganggap hafalan, refleks, dadu atau hadiah jawaban sebagai bukti berpikir kritis.
+- Konsep pelajaran harus memengaruhi tindakan dan hasil, bukan hanya soal selingan untuk mendapat nitro/peluru. Pertanyaan alasan boleh pilihan terstruktur, pasangan bukti atau uraian pendek; tampilkan pada titik keputusan yang bermakna, tidak harus pop-up setelah setiap gerakan. Untuk mode aksi dengan jeda analisis, hentikan timer, gerak dan bahaya saat membaca/menjawab; lanjutkan tanpa lompatan waktu setelah panel ditutup. Tanpa batas waktu = tanpa hitung mundur; waktu terbatas harus wajar dan skor penalaran terpisah dari kecepatan.
+- Pisahkan skor keputusan, bukti dan alasan dari skor aksi/keberuntungan. Penilaian otomatis hanya memakai kunci atau rubrik terstruktur yang eksplisit; jangan menilai uraian hanya karena terisi atau memakai kata tertentu. Uraian disimpan sebagai Belum dinilai untuk tinjauan guru, bukan diberi skor logika palsu. Ganti contoh skor lama bila bertentangan; hindari penghitungan ganda. Pada dilema yang memiliki beberapa solusi masuk akal, gunakan kriteria/rubrik dan dampak, bukan satu jawaban benar yang dipaksakan.
+- Setelah satu ide dipilih, wariskan bentuk, genre, kedua model, fokus, integrasi, tempo, aturan dan konsekuensi ke rancangan, aset, coding dan QA. Jika tahap sebelumnya tersedia, gunakan keputusan tersebut tanpa meminta isian ulang. Jika belum tersedia, minta rancangan/ide terpilih, jangan mengarang kesepakatan.
+
+
+PENERAPAN VERSI BIASA — Canva Code:
+- Gunakan mekanik ringan 2D, jumlah state/cabang terbatas dan kontrol sentuh/keyboard sesuai perangkat. Rancang satu siklus lengkap yang dapat dimainkan; untuk dua model buat integrasi ringkas, bukan dua game besar terpisah. Jangan menambahkan server, layanan AI eksternal atau aset berat sebagai syarat.
+- Rancangan menjelaskan state awal, tindakan, bukti, kondisi perubahan dan akhir. Coding menerapkan state tersebut, jeda/lanjut, reset dan review jawaban/bukti/alasan. Jangan hanya memindahkan indikator kosmetik.
+- Uji satu sesi lengkap, keputusan alternatif beserta dampaknya, skor, reset, jeda/lanjut dan kontrol HP/laptop/IFP yang ditargetkan. Laporkan hanya pengujian nyata; tulis BELUM DIUJI beserta langkah bila Canva/browser tidak tersedia.
+
+
+Ketentuan umum, struktur, fitur, sistem soal, dan sistem skor: sama seperti Prompt 2 varian Sederhana.
 
 Tambahan khusus critical thinking:
 1. Tiap soal diawali kasus/skenario singkat.
 2. Jika ada data, tampilkan sebagai kartu data / tabel kecil / grafik sederhana / indikator.
-3. Setelah pemain memilih jawaban, tampilkan pertanyaan "Apa alasanmu?" dengan kolom input singkat.
+3. Pada titik keputusan penting, tampilkan pilihan alasan/bukti atau kolom uraian sesuai rancangan; jeda aksi bila diperlukan.
 4. Game tetap lanjut meski alasan tidak dinilai otomatis, tapi alasan tersimpan dan ditampilkan di halaman review akhir.
 5. Feedback benar menjelaskan alasan ilmiah/logis, bukan sekadar "benar".
 6. Feedback salah menjelaskan miskonsepsi dan memberi petunjuk berpikir ulang.
@@ -17735,6 +17975,12 @@ const GAME_GENRE_CATALOG_V5102=[
   {id:'other',label:'Lainnya / belum ada di daftar',help:'Punya genre atau model lain? Tulis pada kolom Ide Game Lain di bawah.',models:[]}
 ];
 const gameGeneratorFieldConfigV5102={
+  "{{ct_bentuk_v520}}":{"label": "Bentuk Permainan", "type": "select", "group": "settings", "help": "Opsional. Rekomendasi per genre tersedia pada pilihan model. Kosong = AI menyesuaikan; keputusan diwariskan ke tahap berikutnya.", "options": [["AI menentukan", "AI menentukan berdasarkan materi"], ["Satu model", "Satu model"], ["Kombinasi dua model", "Kombinasi dua model"]]},
+  "{{ct_pendamping_v520}}":{"label": "Model Pendamping / Ide Kombinasi", "type": "textarea", "group": "settings", "help": "Isi model pendamping atau pasangan lengkap. Dipakai sebagai pasangan hanya pada mode kombinasi/AI; pada satu model menjadi referensi. Boleh diisi tanpa mencentang genre.", "placeholder": "Contoh: arcade + investigasi; kartu bukti; atau AI memilih pasangan dalam genre terpilih."},
+  "{{ct_fokus_v520}}":{"label": "Fokus Berpikir Kritis", "type": "select", "group": "settings", "help": "Opsional. Rekomendasi per genre tersedia pada pilihan model. Kosong = AI menyesuaikan; keputusan diwariskan ke tahap berikutnya.", "options": [["AI menyesuaikan", "AI menyesuaikan"], ["Analisis bukti", "Analisis bukti"], ["Sebab–akibat", "Sebab–akibat"], ["Prediksi dampak", "Prediksi dampak"], ["Evaluasi solusi", "Evaluasi solusi"], ["Argumentasi", "Argumentasi"], ["Perbaikan rancangan", "Perbaikan rancangan"]]},
+  "{{ct_integrasi_v520}}":{"label": "Pola Integrasi", "type": "select", "group": "settings", "help": "Opsional. Rekomendasi per genre tersedia pada pilihan model. Kosong = AI menyesuaikan; keputusan diwariskan ke tahap berikutnya.", "options": [["AI menyesuaikan", "AI menyesuaikan"], ["Menyatu dalam mekanik permainan", "Menyatu dalam mekanik permainan"], ["Bergantian aksi dan analisis", "Bergantian aksi dan analisis"]]},
+  "{{ct_tempo_v520}}":{"label": "Tempo Permainan", "type": "select", "group": "settings", "help": "Opsional. Rekomendasi per genre tersedia pada pilihan model. Kosong = AI menyesuaikan; keputusan diwariskan ke tahap berikutnya.", "options": [["AI menyesuaikan", "AI menyesuaikan"], ["Tanpa batas waktu", "Tanpa batas waktu"], ["Aksi dengan jeda analisis", "Aksi dengan jeda analisis"], ["Waktu terbatas", "Waktu terbatas"]]},
+
   '{{genre_game_v5102}}':{label:'Genre Game (Opsional — boleh lebih dari satu)',type:'gameGenres',group:'settings',help:'Centang genre untuk membuka rekomendasi modelnya. Pilihan ganda menghasilkan alternatif ide; tidak otomatis mencampur semua genre. Kosong = AI memilih sesuai materi, jenjang, dan perangkat.'},
   '{{model_game_v5102}}':{label:'Rekomendasi Model Game (Opsional)',type:'gameModels',group:'settings',help:'Pilih satu atau beberapa contoh yang Anda sukai. Jika hanya genre dipilih, AI menentukan model dalam genre tersebut. Nama game terkenal hanya contoh cara bermain, bukan permintaan menyalin karakter atau aset.'},
   '{{ide_game_lain_v5102}}':{label:'Ide Game Lain / Belum Ada di Daftar (Opsional)',type:'textarea',group:'settings',placeholder:'Contoh: congklak; permainan ritme musik; balap sepeda; game seperti Minecraft dengan karakter orisinal. Boleh diisi tanpa memilih genre.',help:'Tulis model, genre, atau cara bermain dengan bahasa sehari-hari. AI memetakan ide ini ke genre yang sesuai dan mempertahankan maksud Anda.'}
@@ -17742,8 +17988,13 @@ const gameGeneratorFieldConfigV5102={
 function renderGameGenresV5102(f,id,disabled){
   return `<input type="hidden" id="${id}" data-token="${escapeHtml(f.token)}" data-game-genres-hidden ${disabled?'disabled':''}/><div class="game-picker-grid">${GAME_GENRE_CATALOG_V5102.map(g=>`<label class="game-picker-option"><input type="checkbox" data-game-genre="${g.id}" value="${escapeHtml(g.label)}" ${disabled?'disabled':''}/><span><strong>${escapeHtml(g.label)}</strong><small>${escapeHtml(g.help)}</small></span></label>`).join('')}</div><div class="dimension-empty-note">Tidak perlu memahami istilah game. Mulai dari contoh cara bermain yang Anda sukai, atau biarkan AI memilihkan.</div>`;
 }
+const CT_GENRE_RECOMMENDATIONS_V520={"racing": "Rekayasa kendaraan; simulasi sebab–akibat; strategi rute. Contoh: bandingkan medan, pilih rancangan, uji hasil dan perbaiki.", "adventure": "Investigasi; puzzle logika; cerita bercabang. Contoh: jelajahi lokasi, hubungkan bukti, pilih tindakan dan amati dampaknya.", "board": "Pengelolaan sumber daya; dilema keputusan; kartu bukti. Contoh: pilih langkah sah berdasarkan biaya, manfaat dan bukti; dadu tidak menentukan skor penalaran.", "puzzle": "Diagnosis kesalahan; eksperimen; investigasi. Contoh: temukan sistem yang salah, uji dugaan dan susun perbaikan; susun gambar/kata saja belum cukup.", "arcade": "Investigasi; klasifikasi berbasis bukti; sebab–akibat. Contoh: tangkap objek berdasarkan beberapa petunjuk dan evaluasi perubahan kondisi.", "action": "Misi penyelamatan; strategi prioritas; rekayasa alat. Contoh: analisis bahaya, pilih alat dan urutan tindakan, lalu jalankan misi ramah anak.", "rpg": "Investigasi profesi; argumentasi; cerita bercabang. Contoh: jalankan peran peneliti, bandingkan informasi dan pertanggungjawabkan keputusan.", "strategy": "Simulasi sistem; prediksi dampak; pengelolaan sumber daya. Contoh: rencanakan tindakan, pantau data dan revisi strategi antargiliran.", "simulation": "Eksperimen; rekayasa; diagnosis. Contoh: prediksi, ubah satu variabel, amati hasil dan perbaiki solusi.", "sports": "Analisis data; eksperimen gerak; strategi tim. Contoh: bandingkan percobaan arah/kekuatan, prediksi hasil dan tentukan strategi berikutnya.", "cards": "Klaim–bukti–alasan; deduksi; strategi sumber daya. Contoh: pasangkan klaim dengan bukti dan jelaskan hubungan; hafalan posisi saja belum cukup.", "party": "Investigasi kolaboratif; debat bukti; estafet pemecahan masalah. Contoh: bagikan petunjuk berbeda lalu gabungkan bukti; roda hanya memilih misi.", "other": "Pertahankan ide guru; usulkan pasangan sesuai tujuan dan perangkat. Contoh: congklak dengan perencanaan sumber daya atau ritme dengan analisis pola."};
+function ctGenreRecommendationV520(g){
+  if(!activeGeneratorPrompts().some(p=>/Critical Thinking/i.test(p.title)))return "";
+  return `<p class="dimension-empty-note"><strong>Kombinasi Critical Thinking:</strong> ${escapeHtml(CT_GENRE_RECOMMENDATIONS_V520[g.id]||"")}</p>`;
+}
 function renderGameModelsV5102(f,id,disabled){
-  return `<input type="hidden" id="${id}" data-token="${escapeHtml(f.token)}" data-game-models-hidden ${disabled?'disabled':''}/><div class="game-model-empty" data-game-model-empty role="status">Centang genre di atas untuk melihat contoh model game. Anda juga bisa mengisi Ide Game Lain atau membiarkan seluruh pilihan kosong.</div>${GAME_GENRE_CATALOG_V5102.map(g=>`<section class="game-model-panel" data-game-model-panel="${g.id}" hidden><h4>${escapeHtml(g.label)}</h4>${g.models.length?`<div class="game-picker-grid">${g.models.map(([name,help])=>`<label class="game-picker-option"><input type="checkbox" data-game-model="${g.id}" value="${escapeHtml(name)}" disabled/><span><strong>${escapeHtml(name)}</strong><small>${escapeHtml(help)}</small></span></label>`).join('')}<label class="game-picker-option"><input type="checkbox" data-game-model-other="${g.id}" value="Lainnya" disabled/><span><strong>Model lainnya dalam genre ini</strong><small>Tulis contoh atau gambaran cara bermain sendiri.</small></span></label></div><div data-game-model-custom-wrap="${g.id}" hidden><label for="${id}_${g.id}_custom">Model lain untuk ${escapeHtml(g.label)}</label><textarea class="form-control" id="${id}_${g.id}_custom" data-game-model-custom="${g.id}" placeholder="Contoh model atau cara bermain yang Anda inginkan" disabled></textarea></div>`:'<p>Isi kolom <strong>Ide Game Lain / Belum Ada di Daftar</strong>. Jika dikosongkan, AI mengusulkan genre dan model lain yang sesuai.</p>'}</section>`).join('')}`;
+  return `<input type="hidden" id="${id}" data-token="${escapeHtml(f.token)}" data-game-models-hidden ${disabled?'disabled':''}/><div class="game-model-empty" data-game-model-empty role="status">Centang genre di atas untuk melihat contoh model game. Anda juga bisa mengisi Ide Game Lain atau membiarkan seluruh pilihan kosong.</div>${GAME_GENRE_CATALOG_V5102.map(g=>`<section class="game-model-panel" data-game-model-panel="${g.id}" hidden><h4>${escapeHtml(g.label)}</h4>${ctGenreRecommendationV520(g)}${g.models.length?`<div class="game-picker-grid">${g.models.map(([name,help])=>`<label class="game-picker-option"><input type="checkbox" data-game-model="${g.id}" value="${escapeHtml(name)}" disabled/><span><strong>${escapeHtml(name)}</strong><small>${escapeHtml(help)}</small></span></label>`).join('')}<label class="game-picker-option"><input type="checkbox" data-game-model-other="${g.id}" value="Lainnya" disabled/><span><strong>Model lainnya dalam genre ini</strong><small>Tulis contoh atau gambaran cara bermain sendiri.</small></span></label></div><div data-game-model-custom-wrap="${g.id}" hidden><label for="${id}_${g.id}_custom">Model lain untuk ${escapeHtml(g.label)}</label><textarea class="form-control" id="${id}_${g.id}_custom" data-game-model-custom="${g.id}" placeholder="Contoh model atau cara bermain yang Anda inginkan" disabled></textarea></div>`:'<p>Isi kolom <strong>Ide Game Lain / Belum Ada di Daftar</strong>. Jika dikosongkan, AI mengusulkan genre dan model lain yang sesuai.</p>'}</section>`).join('')}`;
 }
 function initGamePickerV5102(){
   const genreHidden=els.genFields.querySelector('[data-game-genres-hidden]');
@@ -17784,7 +18035,12 @@ function finalizeGamePrompt0V5102(text){
   const defaults={
     '{{genre_game_v5102}}':'AI memilih genre yang paling sesuai dengan materi, jenjang, tujuan belajar, dan perangkat',
     '{{model_game_v5102}}':'AI merekomendasikan model dalam genre terpilih; jika genre kosong, usulkan model dan genre yang relevan',
-    '{{ide_game_lain_v5102}}':'Tidak ada ide tambahan dari guru'
+    '{{ide_game_lain_v5102}}':'Tidak ada ide tambahan dari guru',
+    "{{ct_bentuk_v520}}":"AI menentukan",
+    "{{ct_pendamping_v520}}":"AI memilih pendamping yang relevan dalam genre terpilih",
+    "{{ct_fokus_v520}}":"AI menyesuaikan",
+    "{{ct_integrasi_v520}}":"AI menyesuaikan",
+    "{{ct_tempo_v520}}":"AI menyesuaikan"
   };
   for(const [token,value] of Object.entries(defaults))text=text.split(token).join(value);
   return text;
